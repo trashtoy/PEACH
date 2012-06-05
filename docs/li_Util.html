@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>汎用モジュール群 Util</title>
+    <link rel="stylesheet" type="text/css" href="media/style.css">
+    <!--[if lt IE 9]>
+    <script src="media/html5.js"></script>  
+    <![endif]-->
+</head>
+<body>
+<header>
+    <h1>Util</h1>
+    <nav>
+        <h1>グローバルナビゲーション</h1>
+        <ul>
+            <li><a href="classtrees_Util.html">class tree: Util</a></li>
+            <li><a href="elementindex_Util.html">index: Util</a></li>
+            <li><a href="elementindex.html">all elements</a></li>
+            <li><a href="./">API home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="menu">
+    <h1>メニュー</h1>
+    <p id="todolist"><a href="todolist.html">Todo List</a></p>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="Util/tutorial_Util.pkg.html">汎用モジュール群 Util</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="Util/Util_Comparable.html">Util_Comparable</a></li>
+            <li><a href="Util/Util_Comparator.html">Util_Comparator</a></li>
+            <li><a href="Util/Util_Equator.html">Util_Equator</a></li>
+            <li><a href="Util/Util_Map.html">Util_Map</a></li>
+            <li><a href="Util/Util_MapEntry.html">Util_MapEntry</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="Util/Util_AbstractMapEntry.html">Util_AbstractMapEntry</a></li>
+            <li><a href="Util/Util_ArrayMap.html">Util_ArrayMap</a></li>
+            <li><a href="Util/Util_ArrayMapEntry.html">Util_ArrayMapEntry</a></li>
+            <li><a href="Util/Util_Arrays.html">Util_Arrays</a></li>
+            <li><a href="Util/Util_DefaultComparator.html">Util_DefaultComparator</a></li>
+            <li><a href="Util/Util_DefaultEquator.html">Util_DefaultEquator</a></li>
+            <li><a href="Util/Util_HashMap.html">Util_HashMap</a></li>
+            <li><a href="Util/Util_HashMapEntry.html">Util_HashMapEntry</a></li>
+            <li><a href="Util/Util_ReverseComparator.html">Util_ReverseComparator</a></li>
+            <li><a href="Util/Util_Strings.html">Util_Strings</a></li>
+            <li><a href="Util/Util_Values.html">Util_Values</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="Util/_AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="Util/_ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="Util/_ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="Util/_Arrays.php.html">Arrays.php</a></li>
+            <li><a href="Util/_Comparable.php.html">Comparable.php</a></li>
+            <li><a href="Util/_Comparator.php.html">Comparator.php</a></li>
+            <li><a href="Util/_DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="Util/_DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="Util/_Equator.php.html">Equator.php</a></li>
+            <li><a href="Util/_HashMap.php.html">HashMap.php</a></li>
+            <li><a href="Util/_HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="Util/_Map.php.html">Map.php</a></li>
+            <li><a href="Util/_MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="Util/_ReverseComparator.php.html">ReverseComparator.php</a></li>
+            <li><a href="Util/_Strings.php.html">Strings.php</a></li>
+            <li><a href="Util/_Values.php.html">Values.php</a></li>
+        </ul>
+    </section>
+</nav>
+<section id="main">
+<h1 class="symbol">汎用モジュール群 Util</h1>
+  <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+  <section id="toc">
+    <h1>Table of Contents</h1>
+    <ul>
+        <li><a href="Util/tutorial_Util.pkg.html#intro">汎用モジュール群 Util</a></li>
+        <li><a href="Util/tutorial_Util.pkg.html#map">Map インタフェースの導入</a></li>
+        <li><a href="Util/tutorial_Util.pkg.html#arrays">配列操作用ユーティリティクラス Arrays</a></li>
+        <li><a href="Util/tutorial_Util.pkg.html#etc">その他のユーティリティクラス</a></li>
+    </ul>
+</section>
+
+  <!-- refsect1 --><section class="tutorial" id="intro"><h1>汎用モジュール群 Util</h1><p>パッケージ Util は, プログラム内で汎用的に用いられる機能を集めたものです.
+    各種ユーティリティクラスなどが揃っています.</p></section><!-- /refsect1 -->
+  <!-- refsect1 --><section class="tutorial" id="map"><h1>Map インタフェースの導入</h1><p>このモジュール内に存在する各種 Map インタフェースのコンセプトは,
+    PHP の配列操作を簡潔なコードに置き換えることです.</p>
+    <p>PHP で配列を連想配列として利用する際, 以下のようなコーディングをする必要がありました.</p>
+    <ol class="src"><li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$bar&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+</ol>
+    <p>あるいは, コーディング規約で三項演算子が禁止されているようなプロジェクトでは</p>
+    <ol class="src"><li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol>
+    <p>ここまで冗長なコードを書かなければなりません.
+    このモジュールで定義されている <a href="Util/Util_ArrayMap.html">Util_ArrayMap</a> クラスを利用すると, 
+    このコードを以下のように表現することが出来ます.</p>
+    <ol class="src"><li><div class="src-line"><span class="src-var">$map&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="Util/Util_ArrayMap.html">Util_ArrayMap</a></span><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol>
+    <p>配列を使った操作では, キーが存在しない場合の代替処理を三項演算子や if 文で行う必要がありますが, 
+    Map を利用すればこれらの代替処理がすべて get() メソッドに吸収されるため, 非常にシンプルな記述となります.</p>
+    <p>詳しくは <a href="Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a> を参照してください.</p></section><!-- /refsect1 -->
+  <!-- refsect1 --><section class="tutorial" id="arrays"><h1>配列操作用ユーティリティクラス Arrays</h1><p><a href="Util/Util_Arrays.html">Util_Arrays</a> は, Java のコレクション・フレームワークのようなオブジェクト指向的な配列のソートや, 
+    その他様々な配列操作を行うためのユーティリティクラスです.</p>
+    <p>詳しくは <a href="Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a> を参照してください.</p></section><!-- /refsect1 -->
+  <!-- refsect1 --><section class="tutorial" id="etc"><h1>その他のユーティリティクラス</h1><p>上記に挙げた以外で, ちょっとした処理を簡単に実現するための
+    <a href="Util/Util_Values.html">Util_Values</a>, <a href="Util/Util_Strings.html">Util_Strings</a> などのユーティリティクラスがあります.
+    詳しくは各クラスの詳細ページを参照してください.</p></section><!-- /refsect1 -->
+<ul class="direction">
+    <li class="prev">Prev</li>
+    <li class="next"><a href="Util/tutorial_Util.Map.pkg.html">Next</a></li>
+</ul>
+<ul class="direction">
+    <li class="prev"></li>
+    <li class="next">Map (連想配列)</li>
+</ul>
+</section>
+<footer>
+    Documentation generated on Tue, 05 Jun 2012 21:37:48 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+</footer>
+</body>
+</html>

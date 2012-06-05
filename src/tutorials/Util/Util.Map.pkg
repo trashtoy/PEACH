@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Util.Map}">
+  <refnamediv>
+    <refname>Map (連想配列)</refname>
+  </refnamediv>
+  <refsynopsisdiv>
+    Author : <author>trashtoy</author>
+  </refsynopsisdiv>
+  {@toc}
+  <refsect1 id="{@id Util.Map.summary}">
+    <title>Map インタフェースの概要</title>
+    <para>{@link Util_Map} は, PHP の配列機能をオブジェクト指向化した, 連想配列 (キー・バリュー形式) のインタフェースです.
+    Java の コレクションフレームワークの一部
+    ({@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html java.util.Map} 等)
+    の API を取り入れつつ, 独自の付加機能を付け加えています.
+    ある程度 Java プログラミングに慣れているユーザーはすんなり使いこなせるでしょう.</para>
+    
+    <para>既に用意されている実装クラスとして {@link Util_ArrayMap} と {@link Util_HashMap} があります.
+    既存の PHP の配列と同様のデータを扱う場合は {@link Util_ArrayMap},
+    キーにオブジェクトを利用したい場合は {@link Util_HashMap} を使用してください.</para>
+    
+    <para>Java の Map インタフェースと以下の相違点があります.</para>
+    <itemizedlist>
+      <listitem>キーが存在しない場合に返すデフォルト値の指定が出来る.</listitem>
+      <listitem>({@link Util_HashMap} について) put または get を行う際にキーの等価条件を独自に定義できる ({@link Util_Equator} を参照)</listitem>
+      <listitem>capacity 値の動的な変更はサポートせず, 負荷係数などの概念が存在しない. (今後のバージョンでサポートする可能性はある)</listitem>
+    </itemizedlist>
+    <para>SPL をインストールしていない PHP5.2 以前の環境に対応するため, 
+    これらのクラスは Iterator などのインタフェースを実装していません.</para>
+  </refsect1>
+  
+  <refsect1 id="{@id Util.Map.get}">
+     <title>代替値を指定して値を取得</title>
+     <para>「もしも $arr["NAME"] があれば, $userName にその値を代入する. 
+     なければ代替値として $userName に "anonymous" を代入する」という場合を考えてみます. 通常なら</para>
+     <programlisting role="php">
+     <![CDATA[
+if (isset($arr["NAME"])) {
+    $userName = $arr["NAME"];
+} else {
+    $userName = "anonymous";
+}
+     ]]>
+     </programlisting>
+     <para>となりますが, Map を利用する場合は</para>
+     <programlisting role="php">
+     <![CDATA[
+$userName = $map->get("NAME", "anonymous");
+     ]]>
+     </programlisting>
+     <para>のように, 第二引数に代替値を指定して get メソッドを実行することで, 同等のことができます.</para>
+   </refsect1>
+   
+   <refsect1 id="{@id Util.Map.usearray}">
+     <title>既存の配列を Map に変換する</title>
+     <para>既存のソースコードで配列を使っている箇所を Map に対応させることは簡単にできます.</para>
+     <programlisting role="php">
+     <![CDATA[
+$arr = array("key1" => "AAAA", "key2" => "BBBB", "key3" => "CCCC");
+$map = new Util_ArrayMap($arr); // 指定された配列をそのままマッピングする
+$map->get("key2"); // => "BBBB"
+$map->get("key4"); // => NULL
+     ]]>
+     </programlisting>
+     <para>既存の配列を元にして新しい Map を作成する場合, Map に対する操作は元の配列に影響しないので,
+     安全に使うことができます.</para>
+     <para>$_GET や $_POST をそのまま使う代わりに {@link Util_ArrayMap} に変換してから利用すれば,
+     ずっと扱いやすくなるでしょう.</para>
+     <para>もしも, Map オブジェクトを配列に変換したい場合は {@link Util_ArrayMap::asArray()}
+     などを使います. 
+     HashMap の場合は {@link Util_HashMap::entryList()} を使ってください.</para>
+   </refsect1>
+   
+   <refsect1 id="{@id Util.Map.equator}">
+     <title>HashMap と Equator の利用</title>
+     <para>{@link Util_HashMap} は、オブジェクトをキーとして利用することが出来ます.
+     以下に利用例を挙げます.</para>
+     <programlisting role="php">
+     <![CDATA[
+class TestKey {
+    private $id;
+    private $name;
+
+    public function __construct($id, $name) {
+        $this->id   = $id;
+        $this->name = $name;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+}
+
+$k1  = new TestKey(1, "foo");
+$k2  = new TestKey(2, "bar");
+$map = new Util_HashMap();
+$map->put($k1, 100);
+$map->put($k2, 200);
+
+echo $map->get(new TestKey(1, "foo"), "undef"); // 100
+echo $map->get(new TestKey(2, "bar"), "undef"); // 200
+echo $map->get(new TestKey(2, "xxx"), "undef"); // "undef"
+     ]]>
+     </programlisting>
+     <para>上のような使い方でも問題はありませんが, パフォーマンスと安全性のために,
+     HashMap を利用する際には必ずコンストラクタの引数に
+     Equator オブジェクトを設定することを強く推奨します.</para>
+     <para>以下に, 独自に作成した Equator の例を示します.</para>
+     <programlisting role="php">
+     <![CDATA[
+class TestKeyEquator implements Util_Equator {
+    /**
+     * 2つの TestKey オブジェクトの id, name がそれぞれ等しい場合に TRUE を返します.
+     */
+    public function equate($var1, $var2) {
+        return ($var1->getId() === $var2->getId() && $var1->getName() === $var2->getName());
+    }
+    
+    public function hashCode($var) {
+        return intval($var->getId());
+    }
+}
+     ]]>
+     </programlisting>
+     <para>
+      独自の Equator を定義するもう一つの利点として, 
+      「必要に応じて等価条件を切り替えることが出来る」という点が挙げられます.
+      例えば、上に挙げた TestKeyEquator は id と name の両方を比較していましたが,
+      「name の値に関わらず, id が等しければ同じキーとみなす」ような HashMap 
+      が新たに欲しくなった場合は, 以下のように Equator を新しく定義すれば実現することができます.
+      </para>
+     <programlisting role="php">
+     <![CDATA[
+class TestKeyEquator2 implements Util_Equator {
+    /**
+     * 2つの TestKey オブジェクトの id がそれぞれ等しい場合に TRUE を返します.
+     */
+    public function equate($var1, $var2) {
+        return ($var1->getId() === $var2->getId());
+    }
+    
+    public function hashCode($var) {
+        return intval($var->getId());
+    }
+}
+     ]]>
+     </programlisting>
+     <para>異なる Equator を持つ複数の HashMap を利用したコードの例を以下に挙げます.</para>
+     <programlisting role="php">
+     <![CDATA[
+$e1 = new TestKeyEquator();
+$e2 = new TestKeyEquator2();
+
+$k1 = new TestKey(1, "John Smith");
+$k2 = new TestKey(2, "Emily Smith");
+$k3 = new TestKey(2, "Emily Johns");
+
+$map1 = new Util_HashMap(NULL, $e1);
+$map2 = new Util_HashMap(NULL, $e2);
+
+$map1->put($k1, "foo");
+$map1->put($k2, "bar");
+$map1->put($k3, "baz");
+$map2->put($k1, "foo");
+$map2->put($k2, "bar");
+$map2->put($k3, "baz"); // $k2 と $k3 が同一視されるので, ここで $k2 <=> "bar" のマッピングが "baz" に上書きされます
+
+echo $map1->size(); // => 3
+echo $map2->size(); // => 2
+
+echo $map1->get($k2); // => "bar"
+echo $map2->get($k2); // => "baz"
+     ]]>
+     </programlisting>
+  </refsect1>
+</refentry>
