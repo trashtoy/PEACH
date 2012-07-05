@@ -79,7 +79,13 @@ class DT_Timestamp extends DT_Datetime {
         $c = parent::compareFields($time);
         if (!isset($c) || $c != 0) return $c;
         $className = __CLASS__;
-        return ($time instanceof $className) ? $this->second - $time->second : 0;
+        if ($time instanceof $className) {
+            return $this->second - $time->second;
+        }
+        else {
+            $s = $time->get("second");
+            return ($s !== $this->second) ? $this->second - $s : 0;
+        }
     }
     
     /**

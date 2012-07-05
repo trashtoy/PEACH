@@ -124,6 +124,13 @@ class DT_Datetime extends DT_Date {
     /**
      * この時間と指定された時間を比較します.
      * 
+     * この型の時間フィールドと引数の型の時間フィールドのうち、
+     * 共通しているフィールド同士を比較します.
+     * 
+     * 引数がこのクラスを継承したオブジェクトではない場合, 
+     * 引数のオブジェクトに対して get("date"), get("month"), get("date")
+     * を呼び出した結果を比較対象のフィールドとします.
+     * 
      * @param  Util_Time 比較対象の時間
      * @return int       この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
      * @ignore
@@ -137,6 +144,10 @@ class DT_Datetime extends DT_Date {
             if ($this->min  !== $time->min)  return $this->min  - $time->min;
         }
         else {
+            $h = $time->get("hour");
+            $m = $time->get("minute");
+            if ($this->hour   !== $h) return (isset($h) ? $this->hour   - $h : 0);
+            if ($this->minute !== $m) return (isset($m) ? $this->minute - $m : 0);
             return 0;
         }
     }

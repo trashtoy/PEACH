@@ -236,6 +236,9 @@ class DT_Date extends DT_Time {
      * この型の時間フィールドと引数の型の時間フィールドのうち、
      * 共通しているフィールド同士を比較します.
      * 
+     * 引数が DT_Date を継承したオブジェクトではない場合, 
+     * 引数のオブジェクトに対して get("date"), get("month"), get("date") の返り値を比較対象のフィールドとします.
+     * 
      * @param  DT_Time 比較対象の時間
      * @return int     この時間のほうが過去の場合は負の値, 未来の場合は正の値, 等しい場合は 0
      * @ignore
@@ -246,8 +249,15 @@ class DT_Date extends DT_Time {
             if ($this->year  !== $time->year)  return $this->year  - $time->year;
             if ($this->month !== $time->month) return $this->month - $time->month;
             if ($this->date  !== $time->date)  return $this->date  - $time->date;
+            return 0;
         }
         else {
+            $y = $time->get("year");
+            $m = $time->get("month");           
+            $d = $time->get("date");
+            if ($this->year  !== $y) return (isset($y) ? $this->year  - $y : 0);
+            if ($this->month !== $m) return (isset($m) ? $this->month - $m : 0);
+            if ($this->date  !== $d) return (isset($d) ? $this->date  - $d : 0);
             return 0;
         }
     }
