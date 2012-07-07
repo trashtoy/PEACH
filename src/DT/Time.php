@@ -386,11 +386,12 @@ abstract class DT_Time implements Util_Comparable {
      * @param  string フィールド名
      * @return int    インデックス
      * 
-     * @see    DT_Time::YEAR
-     * @see    DT_Time::MONTH
-     * @see    DT_Time::DATE
-     * @see    DT_Time::DATETIME
-     * @see    DT_Time::TIMESTAMP
+     * @see    DT_Time::$YEAR
+     * @see    DT_Time::$MONTH
+     * @see    DT_Time::$DATE
+     * @see    DT_Time::$HOUR
+     * @see    DT_Time::$MINUTE
+     * @see    DT_Time::$SECOND
      */
     private function getFieldIndex($field) {
         static $mapping;

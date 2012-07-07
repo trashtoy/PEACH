@@ -2,6 +2,7 @@
 /** @package DT */
 /** */
 require_once("DT/Format.php");
+require_once("Util/FormatException.php");
 
 /**
  * {@link http://www.w3.org/TR/NOTE-datetime W3CDTF} と時間オブジェクトの相互変換を行うフォーマットです.
