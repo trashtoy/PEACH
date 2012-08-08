@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Docs For Class DT_W3CDatetimeFormat</title>
+    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <!--[if lt IE 9]>
+    <script src="../media/html5.js"></script>  
+    <![endif]-->
+</head>
+<body>
+<header>
+    <h1>DT</h1>
+    <nav>
+        <h1>グローバルナビゲーション</h1>
+        <ul>
+            <li><a href="../classtrees_DT.html">class tree: DT</a></li>
+            <li><a href="../elementindex_DT.html">index: DT</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="menu">
+    <h1>メニュー</h1>
+    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DT/DT_Format.html">DT_Format</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DT/DT_Date.html">DT_Date</a></li>
+            <li><a href="../DT/DT_Datetime.html">DT_Datetime</a></li>
+            <li><a href="../DT/DT_Time.html">DT_Time</a></li>
+            <li><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></li>
+            <li><a href="../DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a></li>
+            <li><a href="../DT/DT_W3CDatetimeFormat.html">DT_W3CDatetimeFormat</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DT/_DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_DT---W3CDatetimeFormat.php.html">W3CDatetimeFormat.php</a></li>
+        </ul>
+    </section>
+</nav>
+<section id="main">
+<h1 class="symbol">クラス: DT_W3CDatetimeFormat</h1>
+<p class="src_location">定義: <code>/DT/W3CDatetimeFormat.php</code></p>
+<div class="docblock"><p><a href="http://www.w3.org/TR/NOTE-datetime">W3CDTF</a> と時間オブジェクトの相互変換を行うフォーマットです.</p><p>本来の W3CDTF は日付と時刻の間に &quot;T&quot; が入りますが (例: &quot;YYYY-MM-DDThh:mm:ss&quot;)  このモジュールでは SQL などで用いられる慣用表現 (例: &quot;YYYY-MM-DD hh:mm:ss&quot;) も受理します.</p></div>
+
+
+
+<section id="implements_interfaces">
+    <h1>すべての実装されたインタフェース</h1>
+    <ul class="enums">
+        <li><a href="../DT/DT_Format.html">DT_Format</a></li>
+    </ul>
+</section>
+
+<section id="methods">
+    <h1><a href="#class_methods">メソッド</a></h1>
+    <ul class="enums">
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#method__construct">__construct</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodformatDate">formatDate</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodformatDatetime">formatDatetime</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodformatTimestamp">formatTimestamp</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodgetDefault">getDefault</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodparseDate">parseDate</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodparseDatetime">parseDatetime</a></li>
+        <li><a href="../DT/DT_W3CDatetimeFormat.html#methodparseTimestamp">parseTimestamp</a></li>
+    </ul>
+</section>
+
+
+<section class="class_fields" id="class_methods">
+<h1>メソッド 詳細</h1>
+<section id="methodgetDefault">
+    <h1 class="symbol">static <b>getDefault</b> <span class="smalllinenumber">[line 41]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>
+                static <a href="../DT/DT_W3CDatetimeFormat.html">DT_W3CDatetimeFormat</a> getDefault()
+            </code>
+        </div>
+        <div class="docblock"><p>デフォルトのフォーマットを返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+<section id="method__construct">
+    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 32]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>DT_W3CDatetimeFormat __construct([int $tz = NULL])</code>
+        </div>
+        <div class="docblock"><p>新しいオブジェクトを構築します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">int</td>
+                    <td class="varname">$tz</td>
+                    <td>タイムゾーンの値(単位は時間). 指定しない場合はタイムゾーンは扱わない.</td>
+                </tr>
+            </table>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodformatDate">
+    <h1 class="symbol"><b>formatDate</b> <span class="smalllinenumber">[line 110]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string formatDate(<a href="../DT/DT_Date.html">DT_Date</a> $d)</code>
+        </div>
+        <div class="docblock"><p>&quot;YYYY-MM-DD&quot; 形式の文字列を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>see : <a href="../DT/DT_Format.html#methodformatDate">DT_Format::formatDate()</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Date.html">DT_Date</a></td>
+                    <td class="varname">$d</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <section class="tags">
+            <h1>定義</h1>
+            <ul>
+                <li><a href="../DT/DT_Format.html#methodformatDate">DT_Format::formatDate()</a> (指定された Date オブジェクトを書式化します.)</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodformatDatetime">
+    <h1 class="symbol"><b>formatDatetime</b> <span class="smalllinenumber">[line 119]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string formatDatetime(<a href="../DT/DT_Datetime.html">DT_Datetime</a> $d)</code>
+        </div>
+        <div class="docblock"><p>&quot;YYYY-MM-DDThh:mm&quot; 形式の文字列を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>see : <a href="../DT/DT_Format.html#methodformatDatetime">DT_Format::formatDatetime()</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Datetime.html">DT_Datetime</a></td>
+                    <td class="varname">$d</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <section class="tags">
+            <h1>定義</h1>
+            <ul>
+                <li><a href="../DT/DT_Format.html#methodformatDatetime">DT_Format::formatDatetime()</a> (指定された Datetime オブジェクトを書式化します.)</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodformatTimestamp">
+    <h1 class="symbol"><b>formatTimestamp</b> <span class="smalllinenumber">[line 128]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string formatTimestamp(<a href="../DT/DT_Timestamp.html">DT_Timestamp</a> $d)</code>
+        </div>
+        <div class="docblock"><p>&quot;YYYY-MM-DDThh:mm:ss&quot; 形式の文字列を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>see : <a href="../DT/DT_Format.html#methodformatTimestamp">DT_Format::formatTimestamp()</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></td>
+                    <td class="varname">$d</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <section class="tags">
+            <h1>定義</h1>
+            <ul>
+                <li><a href="../DT/DT_Format.html#methodformatTimestamp">DT_Format::formatTimestamp()</a> (指定された Timestamp オブジェクトを書式化します.)</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+
+<section id="methodparseDate">
+    <h1 class="symbol"><b>parseDate</b> <span class="smalllinenumber">[line 54]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Date.html">DT_Date</a> parseDate( $format)</code>
+        </div>
+        <div class="docblock"><p>&quot;YYYY-MM-DD&quot; 形式の文字列をパースします.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>see : <a href="../DT/DT_Format.html#methodparseDate">DT_Format::parseDate()</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"></td>
+                    <td class="varname">$format</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <section class="tags">
+            <h1>定義</h1>
+            <ul>
+                <li><a href="../DT/DT_Format.html#methodparseDate">DT_Format::parseDate()</a> (指定された文字列を解析して Date オブジェクトに変換します.)</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodparseDatetime">
+    <h1 class="symbol"><b>parseDatetime</b> <span class="smalllinenumber">[line 71]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Datetime.html">DT_Datetime</a> parseDatetime( $format)</code>
+        </div>
+        <div class="docblock"><p>&quot;YYYY-MM-DDThh:mm&quot; 形式の文字列をパースします.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>see : <a href="../DT/DT_Format.html#methodparseDatetime">DT_Format::parseDatetime()</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"></td>
+                    <td class="varname">$format</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <section class="tags">
+            <h1>定義</h1>
+            <ul>
+                <li><a href="../DT/DT_Format.html#methodparseDatetime">DT_Format::parseDatetime()</a> (指定された文字列を解析して Datetime オブジェクトに変換します.)</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodparseTimestamp">
+    <h1 class="symbol"><b>parseTimestamp</b> <span class="smalllinenumber">[line 90]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Timestamp.html">DT_Timestamp</a> parseTimestamp( $format)</code>
+        </div>
+        <div class="docblock"><p>&quot;YYYY-MM-DDThh:mm:ss&quot; 形式の文字列をパースします.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>see : <a href="../DT/DT_Format.html#methodparseTimestamp">DT_Format::parseTimestamp()</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"></td>
+                    <td class="varname">$format</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <section class="tags">
+            <h1>定義</h1>
+            <ul>
+                <li><a href="../DT/DT_Format.html#methodparseTimestamp">DT_Format::parseTimestamp()</a> (指定された文字列を解析して Timestamp オブジェクトに変換します.)</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+</section>
+
+</section>
+<footer>
+    Documentation generated on Tue, 17 Jul 2012 19:13:47 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+</footer>
+</body>
+</html>

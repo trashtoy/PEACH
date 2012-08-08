@@ -4,7 +4,8 @@
  * @ignore
  */
 /** */
-require_once('Util/AbstractMapEntry.php');
+require_once(dirname(__FILE__) . "/AbstractMapEntry.php");
+
 /**
  * {@link ArrayMap} の entryList() から生成されるオブジェクトです.
  * 

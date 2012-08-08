@@ -1,9 +1,7 @@
 <?php
 /** @package DT */
 /** */
-require_once('DT/Time.php');
-require_once('DT/FieldAdjuster.php');
-require_once('DT/W3CDatetimeFormat.php');
+require_once(dirname(__FILE__) . "/Time.php");
 /**
  * 年月日をあらわすクラスです.
  * @package DT

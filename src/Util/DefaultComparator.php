@@ -1,10 +1,7 @@
 <?php
 /** @package Util */
 /** */
-require_once("Util/Comparator.php");
-require_once("Util/Comparable.php");
-require_once("Util/Values.php");
-
+require_once(dirname(__FILE__) . "/Comparator.php");
 /**
  * デフォルトのコンパレータです.
  * {@link Arrays::sort()} などのメソッドで, 

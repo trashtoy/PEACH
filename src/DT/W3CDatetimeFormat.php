@@ -2,7 +2,6 @@
 /** @package DT */
 /** */
 require_once("DT/Format.php");
-require_once("Util/FormatException.php");
 
 /**
  * {@link http://www.w3.org/TR/NOTE-datetime W3CDTF} と時間オブジェクトの相互変換を行うフォーマットです.
@@ -59,7 +58,7 @@ class DT_W3CDatetimeFormat implements DT_Format {
             return new DT_Date($year, $month, $date);
         }
         else {
-            throw new Util_FormatException($format, "YYYY-MM-DD");
+            $this->throwFormatException($format, "YYYY-MM-DD");
         }
     }
     
@@ -78,7 +77,7 @@ class DT_W3CDatetimeFormat implements DT_Format {
             return new DT_Datetime($year, $month, $date, $hour, $min);
         }
         else {
-            throw new Util_FormatException($format, "YYYY-MM-DD hh:mm");
+            $this->throwFormatException($format, "YYYY-MM-DD hh:mm");
         }
     }
     
@@ -98,7 +97,7 @@ class DT_W3CDatetimeFormat implements DT_Format {
             return new DT_Timestamp($year, $month, $date, $hour, $min, $sec);
         }
         else {
-            throw new Util_FormatException($format, "YYYY-MM-DD hh:mm:ss");
+            $this->throwFormatException($format, "YYYY-MM-DD hh:mm:ss");
         }
     }
     
@@ -129,6 +128,10 @@ class DT_W3CDatetimeFormat implements DT_Format {
         return $this->formatDatetime($d);
     }
     
+    private function throwFormatException($format, $expected) {
+        throw new Exception("Illegal format({$format}). Expected: {$expected}");
+    }
+    
     /**
      * タイムゾーンを書式化します.
      */
@@ -147,3 +150,4 @@ class DT_W3CDatetimeFormat implements DT_Format {
         return $format;
     }
 }
+?>

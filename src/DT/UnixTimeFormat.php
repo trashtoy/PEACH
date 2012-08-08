@@ -1,6 +1,6 @@
 <?php
 /** @package DT */
-/** @ignore */
+/** */
 require_once('DT/Format.php');
 /**
  * Unix time ({@link time() time()} の返り値や {@link date() date()} の引数として使用される整数) 

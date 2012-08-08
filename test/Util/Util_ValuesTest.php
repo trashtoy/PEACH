@@ -1,5 +1,5 @@
 <?php
-require_once 'Util/Values.php';
+require_once 'Util/load.php';
 
 class Util_ValuesTest extends PHPUnit_Framework_TestCase {
     /**

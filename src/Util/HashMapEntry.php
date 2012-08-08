@@ -4,8 +4,8 @@
  * @ignore
  */
 /** */
-require_once("Util/AbstractMapEntry.php");
-require_once("Util/Equator.php");
+require_once(dirname(__FILE__) . "/AbstractMapEntry.php");
+
 /** 
  * {@link Util_HashMap} の内部で使われる MapEntry です.
  * 

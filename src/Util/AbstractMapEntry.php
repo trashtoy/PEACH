@@ -1,8 +1,7 @@
 <?php
 /** @package Util */
 /** */
-require_once('Util/MapEntry.php');
-
+require_once(dirname(__FILE__) . "/MapEntry.php");
 /**
  * デフォルトの {@link Util_MapEntry} の実装です.
  * このクラスでは getKey(), getValue() のみ実装されています.

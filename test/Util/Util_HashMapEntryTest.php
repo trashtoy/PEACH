@@ -1,7 +1,6 @@
 <?php
 
-require_once "Util/HashMapEntry.php";
-require_once "Util/HashMap.php";
+require_once "Util/load.php";
 
 class Util_HashMapEntryTest extends PHPUnit_Framework_TestCase {
     /**

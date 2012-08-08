@@ -1,6 +1,5 @@
 <?php
-
-require_once 'DT/Time.php';
+require_once 'DT/load.php';
 
 /**
  * Test class for DT_Time.

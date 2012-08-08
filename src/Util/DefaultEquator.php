@@ -1,7 +1,7 @@
 <?php
 /** @package Util */
 /** */
-require_once("Util/Equator.php");
+require_once(dirname(__FILE__) . "/Equator.php");
 
 /**
  * デフォルトの Equator です.

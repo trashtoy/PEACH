@@ -1,8 +1,7 @@
 <?php
 /** @package DT */
-/** @ignore */
-require_once('DT/Date.php');
-require_once('DT/W3CDatetimeFormat.php');
+/** */
+require_once(dirname(__FILE__) . "/Date.php");
 /**
  * 時刻を表すクラスです.
  * @package DT

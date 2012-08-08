@@ -1,7 +1,5 @@
 <?php
 /** @package Util */
-/** */
-require_once("Util/Values.php");
 /**
  * 文字列処理に関するユーティリティクラスです
  * 
@@ -203,10 +201,9 @@ class Util_Strings {
         }
         $template = Util_Values::stringValue($template);
         $replaces = array();
-        for ($i = 0; $i < count($args); $i ++) {
-            $from = "{" . $i . "}";
-            $to   = $args[$i];
-            $replaces[$from] = $to;
+        foreach ($args as $key => $value) {
+            $from = "{" . $key . "}";
+            $replaces[$from] = $value;
         }
         return strtr($template, $replaces);
     }

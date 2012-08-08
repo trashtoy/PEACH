@@ -1,6 +1,5 @@
 <?php
-
-require_once 'DT/Time.php';
+require_once 'DT/load.php';
 
 /**
  * Test class for DT_Time.
@@ -28,10 +27,7 @@ class DT_TimeTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testOldest().
      */
     public function testOldest() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        
     }
 
     /**

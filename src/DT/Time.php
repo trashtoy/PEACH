@@ -1,10 +1,7 @@
 <?php
 /** @package DT */
 /** */
-require_once('Util/Arrays.php');
-require_once('Util/ArrayMap.php');
-require_once('Util/Strings.php');
-require_once('Util/Comparable.php');
+require_once('Util/load.php');
 /**
  * 時間を表す抽象基底クラスです.
  * 

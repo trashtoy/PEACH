@@ -1,7 +1,7 @@
 <?php
 /** @package Util */
 /** */
-require_once("Util/Comparator.php");
+require_once(dirname(__FILE__) . "/Comparator.php");
 
 /**
  * 基底の Comparator の比較結果を逆にするための Comparator です.
