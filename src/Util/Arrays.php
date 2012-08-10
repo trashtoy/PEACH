@@ -1,10 +1,5 @@
 <?php
 /** @package Util */
-/** */
-require_once("Util/Comparable.php");
-require_once("Util/Comparator.php");
-require_once("Util/DefaultComparator.php");
-require_once("Util/Values.php");
 /**
  * 配列に関する操作を行うユーティリティクラスです.
  * @package Util

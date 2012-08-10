@@ -1,7 +1,5 @@
 <?php
 /** @package Util */
-/** */
-require_once("Util/Values.php");
 /**
  * 文字列処理に関するユーティリティクラスです
  * 

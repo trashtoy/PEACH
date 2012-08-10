@@ -1,5 +1,5 @@
 <?php
-require_once 'Util/ArrayMap.php';
+require_once 'Util/load.php';
 
 class Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase {
     /**

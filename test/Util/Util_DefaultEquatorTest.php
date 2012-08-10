@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Util/DefaultEquator.php';
+require_once 'Util/load.php';
 
 class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase {
     private $e;

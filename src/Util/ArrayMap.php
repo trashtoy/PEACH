@@ -1,9 +1,7 @@
 <?php
 /** @package Util */
 /** */
-require_once("Util/Map.php");
-require_once("Util/ArrayMapEntry.php");
-require_once("Util/Values.php");
+require_once(dirname(__FILE__) . "/Map.php");
 /**
  * PHP の配列機能を使った Map の実装です.
  * このマップはキーに整数または文字列しか使えないという制限があります.

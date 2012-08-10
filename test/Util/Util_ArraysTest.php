@@ -1,7 +1,6 @@
 <?php
 
-require_once "Util/Arrays.php";
-require_once "Util/Comparable.php";
+require_once "Util/load.php";
 
 class Util_ArraysTest extends PHPUnit_Framework_TestCase {
     private static $fp;

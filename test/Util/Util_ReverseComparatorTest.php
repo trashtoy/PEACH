@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Util/ReverseComparator.php';
+require_once 'Util/load.php';
 
 /**
  * Test class for Util_ReverseComparator.

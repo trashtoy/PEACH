@@ -1,9 +1,8 @@
 <?php 
 /** @package Util */
 /** */
-require_once("Util/Map.php");
-require_once("Util/HashMapEntry.php");
-require_once("Util/DefaultEquator.php");
+require_once(dirname(__FILE__) . "/Map.php");
+
 /**
  * 任意の値やオブジェクトをキーに指定することが出来る Map です. 格納のアルゴリズムは
  * {@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html java.util.Map}
