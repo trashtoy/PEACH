@@ -60,6 +60,14 @@ class DT_Timestamp extends DT_Datetime {
     }
     
     /**
+     * このオブジェクトの型 {@link DT_Time::TYPE_TIMESTAMP} を返します.
+     * @return int
+     */
+    public function getType() {
+        return self::TYPE_TIMESTAMP;
+    }
+    
+    /**
      * @ignore
      */
     protected function init(Util_Map $fields) {

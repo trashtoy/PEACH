@@ -107,6 +107,11 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $test = "First:{0},Second:{1}";
         $arr  = array("{1}", "{0}");
         $this->assertSame($exp, Util_Strings::template($test, $arr));
+        
+        $exp  = "I am John, 20 years old.";
+        $test = "I am {name}, {age} years old.";
+        $arr = array("name" => "John", "age" => 20);
+        $this->assertSame($exp, Util_Strings::template($test, $arr));
     }
 }
 

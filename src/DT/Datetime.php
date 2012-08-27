@@ -66,6 +66,14 @@ class DT_Datetime extends DT_Date {
     }
     
     /**
+     * このオブジェクトの型 {@link DT_Time::TYPE_DATETIME} を返します.
+     * @return int
+     */
+    public function getType() {
+        return self::TYPE_DATETIME;
+    }
+    
+    /**
      * @ignore
      */
     protected function init(Util_Map $fields) {
@@ -127,7 +135,7 @@ class DT_Datetime extends DT_Date {
      * 共通しているフィールド同士を比較します.
      * 
      * 引数がこのクラスを継承したオブジェクトではない場合, 
-     * 引数のオブジェクトに対して get("date"), get("month"), get("date")
+     * 引数のオブジェクトに対して get("year"), get("month"), get("date"), get("hour"), get("minute")
      * を呼び出した結果を比較対象のフィールドとします.
      * 
      * @param  Util_Time 比較対象の時間
@@ -139,8 +147,9 @@ class DT_Datetime extends DT_Date {
         if ($c !== 0) return $c;
         $className = __CLASS__;
         if ($time instanceof $className) {
-            if ($this->hour !== $time->hour) return $this->hour - $time->hour;
-            if ($this->min  !== $time->min)  return $this->min  - $time->min;
+            if ($this->hour   !== $time->hour)   return $this->hour - $time->hour;
+            if ($this->minute !== $time->minute) return $this->min  - $time->min;
+            return 0;
         }
         else {
             $h = $time->get("hour");

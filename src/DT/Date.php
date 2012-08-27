@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . "/Time.php");
  * 年月日をあらわすクラスです.
  * @package DT
  */
-class DT_Date extends DT_Time {
+class DT_Date extends DT_AbstractTime {
     /**
      * 日曜日をあらわす定数です.
      * @var int
@@ -109,6 +109,14 @@ class DT_Date extends DT_Time {
         $fields->put(self::$MONTH, intval($month));
         $fields->put(self::$DATE,  intval($date));
         $this->init($fields);
+    }
+    
+    /**
+     * このオブジェクトの型 {@link DT_Time::TYPE_DATE} を返します.
+     * @return int TYPE_DATE
+     */
+    public function getType() {
+        return self::TYPE_DATE;
     }
     
     /**
@@ -235,7 +243,7 @@ class DT_Date extends DT_Time {
      * 共通しているフィールド同士を比較します.
      * 
      * 引数が DT_Date を継承したオブジェクトではない場合, 
-     * 引数のオブジェクトに対して get("date"), get("month"), get("date") の返り値を比較対象のフィールドとします.
+     * 引数のオブジェクトに対して get("year"), get("month"), get("date") の返り値を比較対象のフィールドとします.
      * 
      * @param  DT_Time 比較対象の時間
      * @return int     この時間のほうが過去の場合は負の値, 未来の場合は正の値, 等しい場合は 0
