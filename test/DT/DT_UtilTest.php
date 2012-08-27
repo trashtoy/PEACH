@@ -1,17 +1,9 @@
 <?php
 require_once 'DT/load.php';
-
 /**
- * Test class for DT_Time.
+ * Test class for DT_Util.
  */
 class DT_UtilTest extends PHPUnit_Framework_TestCase {
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown() {
-    }
-    
     private function getTestArray() {
         $d   = array();
         $d[] = new DT_Date(     2012, 3,  29);
@@ -87,23 +79,31 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @todo Implement testOldest().
+     * 以下を確認します.
+     * 
+     * - 配列を引数にして実行できること
+     * - 引数を羅列して実行できること
+     * - 引数に不正な型を含む場合でも正常に動作すること
      */
     public function testOldest() {
         $d = $this->getTestArray();
         $this->assertSame($d[0], DT_Util::oldest($d));
         $this->assertSame($d[1], DT_Util::oldest($d[4], $d[1], $d[3], $d[5], $d[8]));
+        $this->assertSame($d[2], DT_Util::oldest($d[5], NULL, $d[2], 128, $d[3]));
     }
 
     /**
-     * @todo Implement testLatest().
+     * 以下を確認します.
+     * 
+     * - 配列を引数にして実行できること
+     * - 引数を羅列して実行できること
+     * - 引数に不正な型を含む場合でも正常に動作すること
      */
     public function testLatest() {
         $d = $this->getTestArray();
         $this->assertSame($d[8], DT_Util::latest($d));
         $this->assertSame($d[6], DT_Util::latest($d[4], $d[2], $d[6], $d[0], $d[5]));
+        $this->assertSame($d[7], DT_Util::latest($d[1], 256, $d[7], FALSE, $d[3]));
     }
-
 }
-
 ?>

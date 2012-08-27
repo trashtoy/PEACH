@@ -6,46 +6,23 @@ require_once 'DT_AbstractTimeTest.php';
  */
 class DT_DateTest extends DT_AbstractTimeTest {
     /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
+     * 以下の確認を行います.
+     * 
+     * - フィールドの加減が正常に出来ること.
+     * - 不正なフィールド名を指定した場合に無視されること.
      */
-    protected function setUp() {
-    }
-    
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown() {
+    public function testAdd() {
+        $d1 = new DT_Date(2012, 5, 21);
+        $this->assertEquals(new DT_Date(2015, 5,  21),  $d1->add("year",   3));
+        $this->assertEquals(new DT_Date(2009, 5,  21),  $d1->add("year",  -3));
+        $this->assertEquals(new DT_Date(2012, 10, 21),  $d1->add("month",  5));
+        $this->assertEquals(new DT_Date(2011, 12, 21),  $d1->add("month", -5));
+        $this->assertEquals(new DT_Date(2012, 6,  10),  $d1->add("date",  20));
+        $this->assertEquals(new DT_Date(2012, 4,  21),  $d1->add("date", -30));
         
-    }
-
-    /**
-     * オブジェクトの各フィールドが現在時刻のそれに等しいかどうかを調べます.
-     * このメソッドは, テストを開始するタイミングによって極稀に失敗する可能性があるため,
-     * 失敗した場合は再度テストしてください.
-     */
-    public function testNow() {
-        $d = DT_Date::now();
-        $this->assertEquals($d->get("year"),  date("Y"));
-        $this->assertEquals($d->get("month"), date("n"));
-        $this->assertEquals($d->get("date"),  date("j"));
-    }
-    
-    /**
-     * parse に成功した場合に DT_Date オブジェクト,
-     * 失敗した場合に Exception をスローすることを確認します.
-     */
-    public function testParse() {
-        $d = DT_Date::parse("2011-05-21");
-        $this->assertTrue($d instanceof DT_Date);
-        try {
-            $d = DT_Date::parse("Illegal Format");
-            $this->fail(); // Exception が発生しなかった場合は FAIL
-        }
-        catch (Exception $e) {
-            $this->assertTrue($e instanceof Exception);
-        }
+        $this->assertEquals(new DT_Date(2012, 5,  21),  $d1->add("min",   10));
+        $this->assertEquals(new DT_Date(2012, 5,  21),  $d1->add("sec",  -10));
+        $this->assertEquals(new DT_Date(2012, 5,  21),  $d1->add("asdf",  20));
     }
     
     /**
@@ -66,54 +43,6 @@ class DT_DateTest extends DT_AbstractTimeTest {
         for ($i = 0; $i < 3; $i ++) {
             $this->assertEquals($d[$i]->__toString(), $f[$i]);
         }
-    }
-    
-    /**
-     * Date から Date へのキャストをテストします.
-     * 生成されたオブジェクトが, 元のオブジェクトのクローンであることを確認します.
-     * すなわち, == による比較が TRUE, === による比較が FALSE となります.
-     */
-    public function testToDate() {
-        $d1 = new DT_Date(2011, 5, 21);
-        $d2 = $d1->toDate();
-        $this->assertEquals($d1, $d2);
-        $this->assertNotSame($d1, $d2);
-    }
-    
-    /**
-     * Date から Datetime へのキャストをテストします.
-     * 生成されたオブジェクトについて, 以下の点を確認します.
-     * 
-     * - 年・月・日のフィールドが元のオブジェクトのものと等しい
-     * - 時・分のフィールドが 0 になっている
-     */
-    public function testToDatetime() {
-        $d1 = new DT_Date(2011, 5, 21);
-        $d2 = $d1->toDatetime();
-        $this->assertSame($d2->get("year"),  2011);
-        $this->assertsame($d2->get("month"), 5);
-        $this->assertSame($d2->get("date"),  21);
-        $this->assertSame($d2->get("hour"),  0);
-        $this->assertSame($d2->get("min"),   0);
-        $this->assertNull($d2->get("sec"));
-    }
-    
-    /**
-     * Date から Timestamp へのキャストをテストします.
-     * 生成されたオブジェクトについて, 以下の点を確認します.
-     * 
-     * - 年・月・日のフィールドが元のオブジェクトのものと等しい
-     * - 時・分・秒のフィールドが 0 になっている
-     */
-    public function testToTimestamp() {
-        $d1 = new DT_Date(2011, 5, 21);
-        $d2 = $d1->toTimestamp();
-        $this->assertSame($d2->get("year"),  2011);
-        $this->assertsame($d2->get("month"), 5);
-        $this->assertSame($d2->get("date"),  21);
-        $this->assertSame($d2->get("hour"),  0);
-        $this->assertSame($d2->get("min"),   0);
-        $this->assertSame($d2->get("sec"),   0);
     }
     
     /**
@@ -170,26 +99,6 @@ class DT_DateTest extends DT_AbstractTimeTest {
         $this->assertSame($d2->getDateCount(), 30);
         $this->assertSame($d3->getDateCount(), 28);
         $this->assertSame($d4->getDateCount(), 29);
-    }
-    
-    /**
-     * 以下の確認を行います.
-     * 
-     * - フィールドの加減が正常に出来ること.
-     * - 不正なフィールド名を指定した場合に無視されること.
-     */
-    public function testAdd() {
-        $d1 = new DT_Date(2012, 5, 21);
-        $this->assertEquals(new DT_Date(2015, 5,  21),  $d1->add("year",   3));
-        $this->assertEquals(new DT_Date(2009, 5,  21),  $d1->add("year",  -3));
-        $this->assertEquals(new DT_Date(2012, 10, 21),  $d1->add("month",  5));
-        $this->assertEquals(new DT_Date(2011, 12, 21),  $d1->add("month", -5));
-        $this->assertEquals(new DT_Date(2012, 6,  10),  $d1->add("date",  20));
-        $this->assertEquals(new DT_Date(2012, 4,  21),  $d1->add("date", -30));
-        
-        $this->assertEquals(new DT_Date(2012, 5,  21),  $d1->add("min",   10));
-        $this->assertEquals(new DT_Date(2012, 5,  21),  $d1->add("sec",  -10));
-        $this->assertEquals(new DT_Date(2012, 5,  21),  $d1->add("hoge",  20));
     }
     
     /**
@@ -261,11 +170,6 @@ class DT_DateTest extends DT_AbstractTimeTest {
         $d = new DT_Date(2012, 5, 21);
         $this->assertSame("2012-05-21", $d->format());
         $this->assertSame("2012-05-21", $d->format(DT_W3CDatetimeFormat::getDefault()));
-    }
-    
-    public function testFormatTime() {
-        $d = new DT_Date(2012, 5, 21);
-        $this->assertSame("", $d->formatTime());
     }
     
     public function testGet() {
@@ -360,6 +264,98 @@ class DT_DateTest extends DT_AbstractTimeTest {
             $this->fail();
         }
         catch (Exception $e) {}
+    }
+        
+    /**
+     * オブジェクトの各フィールドが現在時刻のそれに等しいかどうかを調べます.
+     * このメソッドは, テストを開始するタイミングによって極稀に失敗する可能性があるため,
+     * 失敗した場合は再度テストしてください.
+     */
+    public function testNow() {
+        $d = DT_Date::now();
+        $this->assertSame(intval(date("Y")), $d->get("year"));
+        $this->assertSame(intval(date("n")), $d->get("month"));
+        $this->assertSame(intval(date("j")), $d->get("date"));
+    }
+    
+    /**
+     * parse に成功した場合に DT_Date オブジェクト,
+     * 失敗した場合に Exception をスローすることを確認します.
+     */
+    public function testParse() {
+        $d = DT_Date::parse("2011-05-21");
+        $this->assertEquals(new DT_Date(2011, 5, 21), $d);
+        try {
+            $d = DT_Date::parse("Illegal Format");
+            $this->fail(); // Exception が発生しなかった場合は FAIL
+        }
+        catch (Exception $e) {
+            $this->assertTrue($e instanceof Exception);
+        }
+    }
+    
+    /**
+     * {@link DT_Time::TYPE_DATE} を返すことを確認します.
+     */
+    public function testGetType() {
+        $d = new DT_Date(2012, 5, 21);
+        $this->assertSame(DT_Time::TYPE_DATE, $d->getType());
+    }
+    
+    /**
+     * 空文字列を返すことを確認します.
+     */
+    public function testFormatTime() {
+        $d = new DT_Date(2012, 5, 21);
+        $this->assertSame("", $d->formatTime());
+    }
+    
+    /**
+     * Date から Date へのキャストをテストします.
+     * 生成されたオブジェクトが, 元のオブジェクトのクローンであることを確認します.
+     * すなわち, == による比較が TRUE, === による比較が FALSE となります.
+     */
+    public function testToDate() {
+        $d1 = new DT_Date(2011, 5, 21);
+        $d2 = $d1->toDate();
+        $this->assertEquals($d1, $d2);
+        $this->assertNotSame($d1, $d2);
+    }
+    
+    /**
+     * Date から Datetime へのキャストをテストします.
+     * 生成されたオブジェクトについて, 以下の点を確認します.
+     * 
+     * - 年・月・日のフィールドが元のオブジェクトのものと等しい
+     * - 時・分のフィールドが 0 になっている
+     */
+    public function testToDatetime() {
+        $d1 = new DT_Date(2011, 5, 21);
+        $d2 = $d1->toDatetime();
+        $this->assertSame($d2->get("year"),  2011);
+        $this->assertsame($d2->get("month"), 5);
+        $this->assertSame($d2->get("date"),  21);
+        $this->assertSame($d2->get("hour"),  0);
+        $this->assertSame($d2->get("min"),   0);
+        $this->assertNull($d2->get("sec"));
+    }
+    
+    /**
+     * Date から Timestamp へのキャストをテストします.
+     * 生成されたオブジェクトについて, 以下の点を確認します.
+     * 
+     * - 年・月・日のフィールドが元のオブジェクトのものと等しい
+     * - 時・分・秒のフィールドが 0 になっている
+     */
+    public function testToTimestamp() {
+        $d1 = new DT_Date(2011, 5, 21);
+        $d2 = $d1->toTimestamp();
+        $this->assertSame($d2->get("year"),  2011);
+        $this->assertsame($d2->get("month"), 5);
+        $this->assertSame($d2->get("date"),  21);
+        $this->assertSame($d2->get("hour"),  0);
+        $this->assertSame($d2->get("min"),   0);
+        $this->assertSame($d2->get("sec"),   0);
     }
 }
 ?>
