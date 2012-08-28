@@ -30,39 +30,95 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
         $this->assertEquals(new DT_Datetime(2012, 5,  21,  7, 30),  $d1->add("asdf",  20));
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 比較が正常に出来る
+     * - 同じオブジェクトの場合は FALSE を返す
+     * - 異なる型との比較で, 共通のフィールドが全て等しい場合は, フィールドが多いほうが「後」
+     */
     public function testAfter() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d1 = new DT_Datetime(2012, 5, 21, 7, 30);
+        
+        // 比較が正常にできる
+        $this->assertTrue($d1->after(new DT_Datetime(2012, 5, 21, 5, 59)));
+        $this->assertFalse($d1->after(new DT_Datetime(2012, 6, 6, 23, 0)));
+        
+        // 同じオブジェクトの場合は FALSE を返す
+        $this->assertFalse($d1->after(new DT_Datetime(2012, 5, 21, 7, 30)));
+        
+        // 異なる型との比較で, 共通のフィールドが全て等しい場合は, フィールドが多いほうが「後」
+        $this->assertTrue($d1->after(new DT_Date(2012, 5, 21)));
+        $this->assertFalse($d1->after(new DT_Timestamp(2012, 5, 21, 7, 30, 0)));
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 比較が正常に出来る
+     * - 同じオブジェクトの場合は FALSE を返す
+     * - 異なる型との比較で, 共通のフィールドが全て等しい場合は, フィールドが少ないほうが「前」
+     * - DT_Time 以外のオブジェクトと比較した場合は FALSE を返す
+     */
     public function testBefore() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d1 = new DT_Datetime(2012, 5, 21, 7, 30);
+        
+        // 比較が正常にできる
+        $this->assertFalse($d1->before(new DT_Datetime(2011, 12, 31, 23, 59)));
+        $this->assertTrue($d1->before(new DT_Datetime(2012, 5, 21, 12, 0)));
+        
+        // 同じオブジェクトの場合は FALSE を返す
+        $this->assertFalse($d1->before(new DT_Datetime(2012, 5, 21, 7, 30)));
+        
+        // 異なる型との比較で, 共通のフィールドが全て等しい場合は, フィールドが少ないほうが「前」
+        $this->assertFalse($d1->before(new DT_Date(2012, 5, 21)));
+        $this->assertTrue($d1->before(new DT_Timestamp(2012, 5, 21, 7, 30, 0)));
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 比較が正常に出来る
+     */
     public function testCompareTo() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $d = array(
+            new DT_Datetime(2012, 3, 12, 23, 59),
+            new DT_Datetime(2012, 5, 21,  7, 30),
+            new DT_Datetime(2013, 1, 23,  1, 23),
         );
+        $this->assertGreaterThan(0, $d[1]->compareTo($d[0]));
+        $this->assertLessThan(0, $d[1]->compareTo($d[2]));
+        $this->assertSame(0, $d[1]->compareTo($d[1]));
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 同じ型で, 全てのフィールドの値が等しいオブジェクトの場合は TRUE
+     * - 同じ型で, 一つ以上のフィールドの値が異なるオブジェクトの場合は FALSE
+     * - 型が異なる場合は FALSE
+     */
     public function testEquals() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d1 = new DT_Datetime(2012, 5, 21, 7, 30);
+        $d2 = new DT_Datetime(2012, 5, 21, 1, 23);
+        $d3 = new DT_Timestamp(2012, 5, 21, 7, 30, 0);
+        $w  = new DT_TimeWrapper($d1);
+        $this->assertTrue($d1->equals($d1));
+        $this->assertFalse($d1->equals($d2));
+        $this->assertFalse($d1->equals($d3));
+        $this->assertFalse($d1->equals($w));
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 指定された Format オブジェクトの formatDatetime() メソッドを使って書式化されること
+     * - 引数を省略した場合はデフォルトで DT_W3CDatetimeFormat が使用されること
+     */
     public function testFormat() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = new DT_Date(2012, 5, 21);
+        $this->assertSame("2012-05-21", $d->format());
+        $this->assertSame("2012-05-21", $d->format(DT_W3CDatetimeFormat::getDefault()));
     }
     
     public function testGet() {
