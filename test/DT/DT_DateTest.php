@@ -117,6 +117,86 @@ class DT_DateTest extends DT_AbstractTimeTest {
     }
     
     /**
+     * 以下の確認を行います.
+     * 
+     * - 年・月・日のフィールドの取得が出来る
+     * - 不正な引数を指定した場合は NULL を返す
+     */
+    public function testGet() {
+        $time        = new DT_Date(2012, 5, 21);
+        $valid       = array();
+        $valid[2012] = array('y', 'Y', 'year', 'YEAR', 'young', 'Yacht'); // any string which starts with "Y" or "y" is OK.
+        $valid[5]    = array('MO', 'mo', 'Month', 'month', 'monkey');     // any string which starts with "mo" is OK.
+        $valid[21]   = array('d', 'D', 'DATE', 'dog');                    // any string which starts with "d" is OK.
+        $invalid = array("m", "hour", "min", "sec", NULL, "foo");
+        foreach ($valid as $expected => $v) {
+            foreach ($v as $key) {
+                $this->assertEquals($time->get($key), $expected);
+            }
+        }
+        foreach ($invalid as $key) {
+            $this->assertNull($time->get($key));
+        };
+    }
+    
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 年・月・日のフィールドの設定が出来る
+     * - 不正な引数を指定した場合は同じオブジェクトを返す
+     */
+    public function testSet() {
+        $time = new DT_Date(2012, 5, 21);
+        $this->assertEquals(
+            array(
+                new DT_Date(2013, 5, 21),
+                new DT_Date(0,    5, 21),
+                new DT_Date(999,  5, 21),
+                new DT_Date(9999, 5, 21)
+            ),
+            array(
+                $time->set("y", 2013),
+                $time->set("y", 10000),
+                $time->set("y", 999),
+                $time->set("y", -1)
+            )
+        );
+        $this->assertEquals(
+            array(
+                new DT_Date(2012, 10, 21),
+                new DT_Date(2013,  1, 21),
+                new DT_Date(2014,  2, 21),
+                new DT_Date(2011, 12, 21),
+                new DT_Date(2010, 11, 21)
+            ),
+            array(
+                $time->set("mo", 10),
+                $time->set("mo", 13),
+                $time->set("mo", 26),
+                $time->set("mo", 0),
+                $time->set("mo", -13)
+            )
+        );
+        $this->assertEquals(
+            array(
+                new DT_Date(2012, 6, 1),
+                new DT_Date(2012, 4, 30),
+                new DT_Date(2012, 4, 1),
+                new DT_Date(2012, 7, 3),
+                new DT_Date(2012, 3, 2)
+            ),
+            array(
+                $time->set("d", 32),
+                $time->set("d", 0),
+                $time->set("d", -29),
+                $time->set("d", 64),
+                $time->set("d", -59)
+            )
+        );
+        $this->assertEquals($time, $time->set("foobar", 10));
+    }
+    
+    /**
      * 形式が "YYYY-MM-DD" になっていることを確認します.
      * 特にフィールドが1桁の場合に '0' が付加されていることを確認します.
      */
@@ -190,75 +270,6 @@ class DT_DateTest extends DT_AbstractTimeTest {
         $this->assertSame($d2->getDateCount(), 30);
         $this->assertSame($d3->getDateCount(), 28);
         $this->assertSame($d4->getDateCount(), 29);
-    }
-    
-    public function testGet() {
-        $time        = new DT_Date(2012, 5, 21);
-        $valid       = array();
-        $valid[2012] = array('y', 'Y', 'year', 'YEAR', 'young', 'Yacht'); // any string which starts with "Y" or "y" is OK.
-        $valid[5]    = array('MO', 'mo', 'Month', 'month', 'monkey');     // any string which starts with "mo" is OK.
-        $valid[21]   = array('d', 'D', 'DATE', 'dog');                    // any string which starts with "d" is OK.
-        $invalid = array("m", "hour", "min", "sec", NULL, "foo");
-        foreach ($valid as $expected => $v) {
-            foreach ($v as $key) {
-                $this->assertEquals($time->get($key), $expected);
-            }
-        }
-        foreach ($invalid as $key) {
-            $this->assertNull($time->get($key));
-        };
-    }
-    
-    public function testSet() {
-        $time = new DT_Date(2012, 5, 21);
-        $y    = array();
-        $y[]  = $time->set("y", 2013);
-        $y[]  = $time->set("y", 10000);
-        $y[]  = $time->set("y", 999);
-        $y[]  = $time->set("y", -1);
-        $exY  = array(
-            new DT_Date(2013, 5, 21),
-            new DT_Date(0,    5, 21),
-            new DT_Date(999,  5, 21),
-            new DT_Date(9999, 5, 21)
-        );
-        for ($i = 0; $i < 4; $i ++) {
-            $this->assertEquals($exY[$i], $y[$i]);
-        }
-        
-        $m    = array();
-        $m[]  = $time->set("mo", 10);
-        $m[]  = $time->set("mo", 13);  // 2012-13 => 2013-01
-        $m[]  = $time->set("mo", 26);  // 2012-26 => 2013-14 => 2014-02
-        $m[]  = $time->set("mo", 0);   // 2012-00 => 2011-12
-        $m[]  = $time->set("mo", -13); // 2010-11
-        $exM  = array(
-            new DT_Date(2012, 10, 21),
-            new DT_Date(2013,  1, 21),
-            new DT_Date(2014,  2, 21),
-            new DT_Date(2011, 12, 21),
-            new DT_Date(2010, 11, 21)
-        );
-        for ($i = 0; $i < 5; $i ++) {
-            $this->assertEquals($exM[$i], $m[$i]);
-        }
-        
-        $d   = array();
-        $d[] = $time->set("d", 32);
-        $d[] = $time->set("d", 0);
-        $d[] = $time->set("d", -29);
-        $d[] = $time->set("d", 64);
-        $d[] = $time->set("d", -59);
-        $exD = array(
-            new DT_Date(2012, 6, 1),
-            new DT_Date(2012, 4, 30),
-            new DT_Date(2012, 4, 1),
-            new DT_Date(2012, 7, 3),
-            new DT_Date(2012, 3, 2)
-        );
-        for ($i = 0; $i < 5; $i ++) {
-            $this->assertEquals($exD[$i], $d[$i]);
-        }
     }
     
     /**

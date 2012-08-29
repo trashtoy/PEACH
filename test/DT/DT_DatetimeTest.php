@@ -121,18 +121,61 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
         $this->assertSame("2012-05-21", $d->format(DT_W3CDatetimeFormat::getDefault()));
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 年・月・日・時・分のフィールドの取得が出来る
+     * - 不正な引数を指定した場合は NULL を返す
+     */
     public function testGet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $time        = new DT_Datetime(2012, 5, 21, 7, 30);
+        $valid       = array();
+        $valid[7]    = array("h", "H", "HOUR", "hour", "heaven"); // any string which starts with "h" is OK.
+        $valid[30]   = array("M", "m", "Min", "min", "mushroom"); // any string which starts with "m" (except "mo") is OK.
+        $invalid = array("sec", NULL, "bar");
+        foreach ($valid as $expected => $v) {
+            foreach ($v as $key) {
+                $this->assertEquals($time->get($key), $expected);
+            }
+        }
+        foreach ($invalid as $key) {
+            $this->assertNull($time->get($key));
+        };
     }
     
+    /**
+     * 以下の確認を行います.
+     * 
+     * - 時・分のフィールドの設定が出来る
+     * - 不正な引数を指定した場合は同じオブジェクトを返す
+     */
     public function testSet() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $time = new DT_Datetime(2012, 5, 21, 7, 30);
+        $this->assertEquals(
+            array(
+                new DT_Datetime(2012, 5, 21, 10, 30),
+                new DT_Datetime(2012, 5, 20, 23, 30),
+                new DT_Datetime(2012, 5, 22,  0, 30),
+            ),
+            array(
+                $time->set("h", 10),
+                $time->set("h", -1),
+                $time->set("h", 24),
+            )
         );
+        $this->assertEquals(
+            array(
+                new DT_Datetime(2012, 5, 21, 7, 45),
+                new DT_Datetime(2012, 5, 21, 8,  5),
+                new DT_Datetime(2012, 5, 21, 6, 55),
+            ),
+            array(
+                $time->set("m", 45),
+                $time->set("m", 65),
+                $time->set("m", -5),
+            )
+        );
+        $this->assertEquals($time, $time->set("foobar", 10));
     }
     
     public function testSetAll() {
