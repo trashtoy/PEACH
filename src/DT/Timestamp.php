@@ -102,7 +102,7 @@ class DT_Timestamp extends DT_Datetime {
     protected function adjust(Util_Map $fields) {
         parent::adjust($fields);
         $adjuster = $this->getAdjuster();
-        $second = $fields->get("second");
+        $second   = $fields->get(self::$SECOND);
         if ($second < 0) {
             $adjuster->moveDown($fields);
         }

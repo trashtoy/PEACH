@@ -147,8 +147,8 @@ class DT_Datetime extends DT_Date {
         if ($c !== 0) return $c;
         $className = __CLASS__;
         if ($time instanceof $className) {
-            if ($this->hour   !== $time->hour)   return $this->hour - $time->hour;
-            if ($this->minute !== $time->minute) return $this->min  - $time->min;
+            if ($this->hour   !== $time->hour)   return $this->hour   - $time->hour;
+            if ($this->minute !== $time->minute) return $this->minute - $time->minute;
             return 0;
         }
         else {

@@ -116,7 +116,7 @@ class DT_W3CDatetimeFormat implements DT_Format {
      * @see    DT_Format::formatDatetime()
      */
     public function formatDatetime(DT_Datetime $d) {
-        return $this->formatDate($d) . "T" . $d->formatTime() . $this->formatTimezone();
+        return $this->formatDate($d->toDate()) . "T" . $d->formatTime() . $this->formatTimezone();
     }
     
     /**

@@ -210,9 +210,9 @@ abstract class DT_AbstractTime implements DT_Time {
     }
     
     /**
-     * このオブジェクトの文字列表現を返します.
+     * このオブジェクトが指す時刻を, SQL などで使われる慣用表現に変換して返します.
      *
-     * @return string W3CDTF に則った文字列表現
+     * @return string このオブジェクトの文字列表現 ("YYYY-MM-DD", "YYYY-MM-DD hh:mm" など)
      */
     public function __toString() {
         return (string) $this;

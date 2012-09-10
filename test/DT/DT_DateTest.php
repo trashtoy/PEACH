@@ -108,7 +108,7 @@ class DT_DateTest extends DT_AbstractTimeTest {
      * 以下の確認を行います.
      * 
      * - 指定された Format オブジェクトの formatDate() メソッドを使って書式化されること
-     * - 引数を省略した場合はデフォルトで DT_W3CDatetimeFormat が使用されること
+     * - 引数を省略した場合は __toString と同じ結果を返すこと
      */
     public function testFormat() {
         $d = new DT_Date(2012, 5, 21);
@@ -197,6 +197,35 @@ class DT_DateTest extends DT_AbstractTimeTest {
     }
     
     /**
+     * 以下を確認します.
+     * 
+     * - 配列を引数にして日付の設定が出来ること
+     * - Util_Map を引数にして日付の設定が出来ること
+     * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
+     * - 配列・Map 以外の型を指定した場合に例外をスローすること
+     */
+    public function testSetAll() {
+        $d    = new DT_Date(2012, 5, 21);
+        $test = $d->setAll(array("year" => 2015, "date" => 10));
+        $this->assertEquals(new DT_Date(2015, 5, 10), $test);
+        
+        $map  = new Util_ArrayMap();
+        $map->put("month", 12);
+        $map->put("date",  31);
+        $test = $d->setAll($map);
+        $this->assertEquals(new DT_Date(2012, 12, 31), $test);
+        
+        // 2011-14-31 => 2012-02-31 => 2012-03-02
+        $this->assertEquals(new DT_Date(2012, 3, 2), $d->setAll(array("year" => 2011, "month" => 14, "date" => 31)));
+        
+        try {
+            $test = $d->setAll("hoge");
+            $this->fail();
+        }
+        catch (Exception $e) {}
+    }
+    
+    /**
      * 形式が "YYYY-MM-DD" になっていることを確認します.
      * 特にフィールドが1桁の場合に '0' が付加されていることを確認します.
      */
@@ -271,32 +300,7 @@ class DT_DateTest extends DT_AbstractTimeTest {
         $this->assertSame($d3->getDateCount(), 28);
         $this->assertSame($d4->getDateCount(), 29);
     }
-    
-    /**
-     * 以下を確認します.
-     * 
-     * - 配列を引数にして日付の設定が出来ること
-     * - Util_Map を引数にして日付の設定が出来ること
-     * - 配列・Map 以外の型を指定した場合に例外をスローすること
-     */
-    public function testSetAll() {
-        $d    = new DT_Date(2012, 5, 21);
-        $test = $d->setAll(array("year" => 2015, "date" => 10));
-        $this->assertEquals(new DT_Date(2015, 5, 10), $test);
-        
-        $map  = new Util_ArrayMap();
-        $map->put("month", 12);
-        $map->put("date",  31);
-        $test = $d->setAll($map);
-        $this->assertEquals(new DT_Date(2012, 12, 31), $test);
-        
-        try {
-            $test = $d->setAll("hoge");
-            $this->fail();
-        }
-        catch (Exception $e) {}
-    }
-        
+     
     /**
      * オブジェクトの各フィールドが現在時刻のそれに等しいかどうかを調べます.
      * このメソッドは, テストを開始するタイミングによって極稀に失敗する可能性があるため,
@@ -347,7 +351,7 @@ class DT_DateTest extends DT_AbstractTimeTest {
      * すなわち, == による比較が TRUE, === による比較が FALSE となります.
      */
     public function testToDate() {
-        $d1 = new DT_Date(2011, 5, 21);
+        $d1 = new DT_Date(2012, 5, 21);
         $d2 = $d1->toDate();
         $this->assertEquals($d1, $d2);
         $this->assertNotSame($d1, $d2);
@@ -361,14 +365,8 @@ class DT_DateTest extends DT_AbstractTimeTest {
      * - 時・分のフィールドが 0 になっている
      */
     public function testToDatetime() {
-        $d1 = new DT_Date(2011, 5, 21);
-        $d2 = $d1->toDatetime();
-        $this->assertSame($d2->get("year"),  2011);
-        $this->assertsame($d2->get("month"), 5);
-        $this->assertSame($d2->get("date"),  21);
-        $this->assertSame($d2->get("hour"),  0);
-        $this->assertSame($d2->get("min"),   0);
-        $this->assertNull($d2->get("sec"));
+        $d1 = new DT_Date(2012, 5, 21);
+        $this->assertEquals(new DT_Datetime(2012, 5, 21, 0, 0), $d1->toDatetime());
     }
     
     /**
@@ -379,14 +377,8 @@ class DT_DateTest extends DT_AbstractTimeTest {
      * - 時・分・秒のフィールドが 0 になっている
      */
     public function testToTimestamp() {
-        $d1 = new DT_Date(2011, 5, 21);
-        $d2 = $d1->toTimestamp();
-        $this->assertSame($d2->get("year"),  2011);
-        $this->assertsame($d2->get("month"), 5);
-        $this->assertSame($d2->get("date"),  21);
-        $this->assertSame($d2->get("hour"),  0);
-        $this->assertSame($d2->get("min"),   0);
-        $this->assertSame($d2->get("sec"),   0);
+        $d1 = new DT_Date(2012, 5, 21);
+        $this->assertEquals(new DT_Timestamp(2012, 5, 21, 0, 0, 0), $d1->toTimestamp());
     }
 }
 ?>

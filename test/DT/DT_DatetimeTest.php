@@ -113,12 +113,12 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
      * 以下の確認を行います.
      * 
      * - 指定された Format オブジェクトの formatDatetime() メソッドを使って書式化されること
-     * - 引数を省略した場合はデフォルトで DT_W3CDatetimeFormat が使用されること
+     * - 引数を省略した場合は __toString と同じ結果を返すこと
      */
     public function testFormat() {
-        $d = new DT_Date(2012, 5, 21);
-        $this->assertSame("2012-05-21", $d->format());
-        $this->assertSame("2012-05-21", $d->format(DT_W3CDatetimeFormat::getDefault()));
+        $d = new DT_Datetime(2012, 5, 21, 7, 30);
+        $this->assertSame("2012-05-21 07:30", $d->format());
+        $this->assertSame("2012-05-21T07:30", $d->format(DT_W3CDatetimeFormat::getDefault()));
     }
     
     /**
@@ -178,11 +178,33 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
         $this->assertEquals($time, $time->set("foobar", 10));
     }
     
+    /**
+     * 以下を確認します.
+     * 
+     * - 配列を引数にして日付の設定が出来ること
+     * - Util_Map を引数にして日付の設定が出来ること
+     * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
+     * - 配列・Map 以外の型を指定した場合に例外をスローすること
+     */
     public function testSetAll() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d    = new DT_Datetime(2012, 5, 21, 7, 30);
+        $test = $d->setAll(array("min" => 34, "hour" => 18));
+        $this->assertEquals(new DT_Datetime(2012, 5, 21, 18, 34), $test);
+        
+        $map  = new Util_ArrayMap();
+        $map->put("mon", 10);
+        $map->put("min", 55);
+        $test = $d->setAll($map);
+        $this->assertEquals(new DT_Datetime(2012, 10, 21, 7, 55), $test);
+        
+        // 2012-05-21T36:-72 => 2012-05-22T12:-72 => 2012-05-22T10:48
+        $this->assertEquals(new DT_Datetime(2012, 5, 22, 10, 48), $d->setAll(array("hour" => 36, "min" => -72)));
+        
+        try {
+            $test = $d->setAll("hoge");
+            $this->fail();
+        }
+        catch (Exception $e) {}
     }
     
     /**
@@ -241,6 +263,14 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
     }
     
     /**
+     * Datetime から Date へのキャストをテストします.
+     */
+    public function testToDate() {
+        $d1 = new DT_Datetime(2012, 5, 21, 0, 0);
+        $this->assertEquals(new DT_Date(2012, 5, 21), $d1->toDate());
+    }
+    
+    /**
      * Datetime から Datetime へのキャストをテストします.
      * 生成されたオブジェクトが, 元のオブジェクトのクローンであることを確認します.
      * すなわち, == による比較が TRUE, === による比較が FALSE となります.
@@ -256,10 +286,8 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
      * @todo Implement testToTimestamp().
      */
     public function testToTimestamp() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new DT_Datetime(2012, 5, 21, 7, 30);
+        $this->assertEquals(new DT_Timestamp(2012, 5, 21, 7, 30, 0), $test->toTimestamp());
     }
 
 }
