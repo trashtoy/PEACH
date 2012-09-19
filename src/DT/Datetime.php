@@ -11,13 +11,13 @@ class DT_Datetime extends DT_Date {
      * 時を表す整数(0～23)です.
      * @var int
      */
-    private $hour = 0;
+    protected $hour = 0;
     
     /**
      * 分を表す整数(0～59)です.
      * @var int
      */
-    private $minute = 0;
+    protected $minute = 0;
     
     /**
      * 現在時刻の DT_Datetime オブジェクトを返します.

@@ -197,53 +197,78 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
     }
     
     /**
-     * @todo Implement testNow().
+     * オブジェクトの各フィールドが現在時刻のそれに等しいかどうかを調べます.
+     * このメソッドは, テストを開始するタイミングによって極稀に失敗する可能性があるため,
+     * 失敗した場合は再度テストしてください.
      */
     public function testNow() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = DT_Timestamp::now();
+        $this->assertSame(intval(date("Y")), $d->get("year"));
+        $this->assertSame(intval(date("n")), $d->get("month"));
+        $this->assertSame(intval(date("j")), $d->get("date"));
+        $this->assertSame(intval(date("G")), $d->get("hour"));
+        $this->assertSame(intval(date("i")), $d->get("min"));
+        $this->assertSame(intval(date("s")), $d->get("sec"));
     }
 
     /**
-     * @todo Implement testParse().
+     * parse に成功した場合に DT_Timestamp オブジェクト,
+     * 失敗した場合に Exception をスローすることを確認します.
      */
     public function testParse() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = DT_Timestamp::parse("2011-05-21 07:30:15");
+        $this->assertEquals(new DT_Timestamp(2011, 5, 21, 7, 30, 15), $d);
+        try {
+            $d = DT_Timestamp::parse("Illegal Format");
+            $this->fail(); // Exception が発生しなかった場合は FAIL
+        }
+        catch (Exception $e) {
+            $this->assertTrue($e instanceof Exception);
+        }
     }
 
     /**
-     * @todo Implement testGetType().
+     * {@link DT_Time::TYPE_TIMESTAMP} を返すことを確認します.
      */
     public function testGetType() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertSame(DT_Time::TYPE_TIMESTAMP, $d->getType());
     }
 
     /**
-     * @todo Implement testFormatTime().
+     * "hh:mm:ss" 形式の文字列を返すことを確認します.
      */
     public function testFormatTime() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertSame("07:30:15", $d->formatTime());
     }
-
+    
     /**
-     * @todo Implement testToTimestamp().
+     * DT_Timestamp から DT_Date へのキャストをテストします.
+     */
+    public function testToDate() {
+        $d1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertEquals(new DT_Date(2012, 5, 21), $d1->toDate());
+    }
+    
+    /**
+     * DT_Timestamp から DT_Datetime へのキャストをテストします.
+     */
+    public function testToDatetime() {
+        $t1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertEquals(new DT_Datetime(2012, 5, 21, 7, 30), $t1->toDatetime());
+    }
+    
+    /**
+     * DT_Timestamp から DT_Timestamp へのキャストをテストします.
+     * 生成されたオブジェクトが, 元のオブジェクトのクローンであることを確認します.
+     * すなわち, == による比較が TRUE, === による比較が FALSE となります.
      */
     public function testToTimestamp() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $t1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $t2 = $t1->toTimestamp();
+        $this->assertEquals($t1, $t2);
+        $this->assertNotSame($t1, $t2);
     }
 }
 ?>

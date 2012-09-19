@@ -11,7 +11,7 @@ class DT_Timestamp extends DT_Datetime {
      * 秒を表す整数です.
      * @var int
      */
-    private $second = 0;
+    protected $second = 0;
     
     /**
      * 実行時の DT_Timestamp オブジェクトを返します.
@@ -155,7 +155,7 @@ class DT_Timestamp extends DT_Datetime {
      * @return DT_Timestamp このオブジェクトの Timestamp 表現
      */
     public function toTimestamp() {
-        return new DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->min, $this->sec);
+        return new DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->minute, $this->second);
     }
     
     private function getAdjuster() {

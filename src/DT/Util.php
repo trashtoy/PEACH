@@ -33,7 +33,7 @@ class DT_Util {
      * 
      * @param array|DT_Time $time...
      * @return DT_Time      引数の中で最も古い DT_Time オブジェクト. 
-     *                       引数が空か, DT_Time オブジェクトが含まれていない場合は NULL
+     *                      引数が空か, DT_Time オブジェクトが含まれていない場合は NULL
      */
     public static function oldest() {
         $args = func_get_args();
@@ -50,7 +50,7 @@ class DT_Util {
      * 
      * @param  array|DT_Time $time...
      * @return DT_Time       引数の中で最新の DT_Time オブジェクト. 
-     *                        引数が空か, DT_Time オブジェクトが含まれていないの場合は NULL
+     *                       引数が空か, DT_Time オブジェクトが含まれていないの場合は NULL
      */
     public static function latest() {
         $args = func_get_args();

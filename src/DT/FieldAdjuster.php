@@ -39,13 +39,13 @@ class DT_FieldAdjuster {
      * 新しい FieldAdjuster を構築します.
      * 
      * @param int $key
-     * @param int $uppderKey
+     * @param int $upperKey
      * @param int $min
      * @param int $max
      */
-    public function __construct($key, $uppderKey, $min, $max) {
+    public function __construct($key, $upperKey, $min, $max) {
         $this->key      = $key;
-        $this->upperKey = $uppderKey;
+        $this->upperKey = $upperKey;
         $this->min      = $min;
         $this->max      = $max;
     }

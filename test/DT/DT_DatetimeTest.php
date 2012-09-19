@@ -246,7 +246,7 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
     }
 
     /**
-     * "mm:dd" 形式の文字列を返すことを確認します.
+     * "hh:mm" 形式の文字列を返すことを確認します.
      */
     public function testFormatTime() {
         $d = new DT_Datetime(2012, 5, 21, 7, 30);
@@ -283,7 +283,11 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
     }
 
     /**
-     * @todo Implement testToTimestamp().
+     * Datetime から Timestamp へのキャストをテストします.
+     * 生成されたオブジェクトについて, 以下の点を確認します.
+     * 
+     * - 年・月・日・時・分のフィールドが元のオブジェクトのものと等しい
+     * - 秒のフィールドが 0 になっている
      */
     public function testToTimestamp() {
         $test = new DT_Datetime(2012, 5, 21, 7, 30);
