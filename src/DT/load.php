@@ -4,6 +4,7 @@
  * @package DT
  */
 if (!function_exists("loadDT")) {
+    /** @ignore */
     function loadDT() {
         $base        = dirname(__FILE__);
         $dir         = dir($base);

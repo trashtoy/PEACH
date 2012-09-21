@@ -1,5 +1,8 @@
 <?php
 /** @package DT */
+/** */
+require_once(dirname(__FILE__) . "/Time.php");
+
 /**
  * 既存の時間オブジェクトを機能拡張するためのラッパークラスです.
  * このクラスは Decorator パターンで設計されています.
@@ -134,12 +137,15 @@ class DT_TimeWrapper implements DT_Time {
     }
     
     /**
-     * ラップ対象のオブジェクトの equals メソッドを実行します.
-     * @param  mixed $obj
-     * @return bool
+     * 指定されたオブジェクトとこのオブジェクトを比較します.
+     * compareTo による比較結果が 0 を返し, かつクラスが同じ場合に TRUE を返します.
+     *
+     * @param  mixed   $obj 比較対象のオブジェクト
+     * @return boolean      二つのオブジェクトが等しい場合に TRUE, それ以外は FALSE
      */
     public function equals($obj) {
-        return $this->original->equals($obj);
+        if (get_class($this) != get_class($obj)) return FALSE;
+        return $this->compareTo($obj) === 0;
     }
     
     /**

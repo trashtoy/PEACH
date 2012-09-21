@@ -6,7 +6,10 @@ require_once("DT/Format.php");
 /**
  * {@link http://www.w3.org/TR/NOTE-datetime W3CDTF} と時間オブジェクトの相互変換を行うフォーマットです.
  * 本来の W3CDTF は日付と時刻の間に "T" が入りますが (例: "YYYY-MM-DDThh:mm:ss") 
- * このモジュールでは SQL などで用いられる慣用表現 (例: "YYYY-MM-DD hh:mm:ss") も受理します.
+ * このクラスは SQL などで用いられる慣用表現 (例: "YYYY-MM-DD hh:mm:ss") のパースもできます.
+ * 
+ * このクラスはタイムゾーンを扱うことが出来ますが, 影響するのは format 系メソッドのみです.
+ * parse ではタイムゾーンの情報を一切無視して, "YYYY-MM-DD" および "hh:mm:ss" の文字列だけを扱います.
  * 
  * @package DT
  */
