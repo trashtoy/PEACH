@@ -33,7 +33,7 @@ class DT_Timestamp extends DT_Datetime {
      */
     public static function parse($text, DT_Format $format = NULL) {
         if (!isset($format)) {
-            $format = DT_W3CDatetimeFormat::getDefault();
+            $format = DT_W3cDatetimeFormat::getDefault();
         }
         return $format->parseTimestamp($text);
     }

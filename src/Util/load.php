@@ -4,6 +4,7 @@
  * @package Util
  */
 if (!function_exists("loadUtil")) {
+    /** @ignore */
     function loadUtil() {
         $base        = dirname(__FILE__);
         $dir         = dir($base);

@@ -1,6 +1,5 @@
 <?php
-
-require_once 'DT/load.php';
+require_once dirname(__FILE__) . '/../../src/DT/load.php';
 
 /**
  * Test class for DT_W3CDatetimeFormat.
@@ -49,6 +48,7 @@ class DT_W3CDatetimeFormatTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expect, $this->object2->parseDate($format));
         try {
             $this->object1->parseDate("foobar");
+            $this->fail();
         }
         catch (Exception $e) {}
     }
@@ -72,6 +72,7 @@ class DT_W3CDatetimeFormatTest extends PHPUnit_Framework_TestCase {
         }
         try {
             $this->object1->parseDate("foobar");
+            $this->fail();
         }
         catch (Exception $e) {}
     }
@@ -95,40 +96,39 @@ class DT_W3CDatetimeFormatTest extends PHPUnit_Framework_TestCase {
         }
         try {
             $this->object1->parseDate("foobar");
+            $this->fail();
         }
         catch (Exception $e) {}
     }
 
     /**
-     * @todo Implement testFormatDate().
+     * タイムゾーンの設定に関係なく、常に "YYYY-MM-DD" 形式の文字列を出力することを確認します.
      */
     public function testFormatDate() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = new DT_Date(2012, 5, 21);
+        $f = "2012-05-21";
+        $this->assertSame($f, $this->object1->formatDate($d));
+        $this->assertSame($f, $this->object2->formatDate($d));
     }
 
     /**
-     * @todo Implement testFormatDatetime().
+     * "YYYY-MM-DDThh:mm" 形式の文字列を生成することを確認します.
+     * タイムゾーンの設定がある場合は "YYYY-MM-DDThh:mm+9:00" のような文字列を生成します.
      */
     public function testFormatDatetime() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = new DT_Datetime(2012, 5, 21, 7, 30);
+        $this->assertSame("2012-05-21T07:30",       $this->object1->formatDatetime($d));
+        $this->assertSame("2012-05-21T07:30+09:00", $this->object2->formatDatetime($d));
     }
 
     /**
-     * @todo Implement testFormatTimestamp().
+     * "YYYY-MM-DDThh:mm:ss" 形式の文字列を生成することを確認します.
+     * タイムゾーンの設定がある場合は "YYYY-MM-DDThh:mm:ss+9:00" のような文字列を生成します.
      */
     public function testFormatTimestamp() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $d = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertSame("2012-05-21T07:30:15",       $this->object1->formatDatetime($d));
+        $this->assertSame("2012-05-21T07:30:15+09:00", $this->object2->formatDatetime($d));
     }
-
 }
-
 ?>

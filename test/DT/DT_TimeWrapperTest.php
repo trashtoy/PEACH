@@ -1,6 +1,7 @@
 <?php
-require_once 'DT/load.php';
+require_once dirname(__FILE__) . '/../../src/DT/load.php';
 require_once 'DT_AbstractTimeTest.php';
+
 /**
  * Test class for DT_TimeWrapper.
  */

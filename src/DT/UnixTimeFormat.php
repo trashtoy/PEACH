@@ -1,7 +1,8 @@
 <?php
 /** @package DT */
 /** */
-require_once('DT/Format.php');
+require_once(dirname(__FILE__) . "/Format.php");
+
 /**
  * Unix time ({@link time() time()} の返り値や {@link date() date()} の引数として使用される整数) 
  * と時間オブジェクトの相互変換を行うクラスです.
@@ -18,7 +19,7 @@ class DT_UnixTimeFormat implements DT_Format {
      * @return DT_UnixTimeFormat
      */
     public static function getInstance() {
-        static $instance;
+        static $instance = NULL;
         if (!isset($instance)) {
             $instance = new self();
         }

@@ -41,7 +41,7 @@ class DT_Datetime extends DT_Date {
      */
     public static function parse($text, DT_Format $format = NULL) {
         if (!isset($format)) {
-            $format = DT_W3CDatetimeFormat::getDefault();
+            $format = DT_W3cDatetimeFormat::getDefault();
         }
         return $format->parseDatetime($text);
     }

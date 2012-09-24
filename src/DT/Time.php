@@ -1,7 +1,7 @@
 <?php
 /** @package DT */
 /** */
-require_once('Util/load.php');
+require_once(dirname(__FILE__) . "/../Util/load.php");
 
 /**
  * ある特定の日付または時刻を表すインタフェースです.

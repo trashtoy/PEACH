@@ -83,7 +83,7 @@ class DT_Date extends DT_AbstractTime {
     
     /**
      * 指定された文字列を DT_Date オブジェクトに変換します.
-     * $format が指定されていない場合は {@link DT_W3CDatetimeFormat} を使ってパースを行います.
+     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat} を使ってパースを行います.
      * 
      * @param  string    変換対象の文字列
      * @param  DT_Format 変換に使用するフォーマット
@@ -91,7 +91,7 @@ class DT_Date extends DT_AbstractTime {
      */
     public static function parse($text, DT_Format $format = NULL) {
         if (!isset($format)) {
-            $format = DT_W3CDatetimeFormat::getDefault();
+            $format = DT_W3cDatetimeFormat::getDefault();
         }
         return $format->parseDate($text);
     }
