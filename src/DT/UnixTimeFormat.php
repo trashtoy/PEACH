@@ -6,6 +6,10 @@ require_once(dirname(__FILE__) . "/Format.php");
 /**
  * Unix time ({@link time() time()} の返り値や {@link date() date()} の引数として使用される整数) 
  * と時間オブジェクトの相互変換を行うクラスです.
+ * 
+ * このクラスはシングルトンです. {@link DT_HttpDateFormat::getInstance() getInstance()}
+ * からオブジェクトを取得してください.
+ * 
  * @package DT
  */
 class DT_UnixTimeFormat implements DT_Format {
@@ -27,9 +31,10 @@ class DT_UnixTimeFormat implements DT_Format {
     }
     
     /**
-     * @see DT_Format::parseDate()
-     * @param  string $format
-     * @return DT_Date
+     * 指定されたタイムスタンプを DT_Date に変換します.
+     * 
+     * @param  string  タイムスタンプ
+     * @return DT_Date 変換結果
      */
     public function parseDate($format) {
         $time  = intval($format);
@@ -40,9 +45,10 @@ class DT_UnixTimeFormat implements DT_Format {
     }
     
     /**
-     * @see DT_Format::parseDatetime()
-     * @param  string $format
-     * @return DT_Datetime
+     * 指定されたタイムスタンプを DT_Datetime に変換します.
+     * 
+     * @param  string      タイムスタンプ
+     * @return DT_Datetime 変換結果
      */
     public function parseDatetime($format) {
         $time  = intval($format);
@@ -55,9 +61,9 @@ class DT_UnixTimeFormat implements DT_Format {
     }
     
     /**
-     * @see DT_Format::parseTimestamp()
-     * @param  string $format
-     * @return DT_Timestamp
+     * 指定されたタイムスタンプを DT_Timestamp に変換します.
+     * @param  string       タイムスタンプ
+     * @return DT_Timestamp 変換結果
      */
     public function parseTimestamp($format) {
         $time  = intval($format);
@@ -72,11 +78,11 @@ class DT_UnixTimeFormat implements DT_Format {
     
     /**
      * 指定されたオブジェクトを DT_Timestamp 型にキャストして
-     * formatTimestamp() を実行した結果を返します.
+     * {@link DT_HttpDateFormat::formatTimestamp() formatTimestamp()}
+     * を実行した結果を返します.
      * 
      * @param  DT_Date $d
-     * @return string
-     * @see DT_UnixTimeFormat::formatTimestamp()
+     * @return string  指定された日付の 0 時 0 分 0 秒のタイムスタンプ
      */
     public function formatDate(DT_Date $d) {
         return $this->formatTimestamp($d->toTimestamp());
@@ -84,24 +90,27 @@ class DT_UnixTimeFormat implements DT_Format {
     
     /**
      * 指定されたオブジェクトを DT_Timestamp 型にキャストして
-     * formatTimestamp() を実行した結果を返します.
+     * {@link DT_HttpDateFormat::formatTimestamp() formatTimestamp()}
+     * を実行した結果を返します.
      * 
      * @param  DT_Datetime $d
-     * @return string
-     * @see DT_UnixTimeFormat::formatTimestamp()
+     * @return string      指定された時刻の 0 秒のタイムスタンプ
      */
     public function formatDatetime(DT_Datetime $d) {
         return $this->formatTimestamp($d->toTimestamp());
     }
     
     /**
-     * 指定されたタイムスタンプを書式化します.
-     * このメソッドは、引数の Timestamp が持つ各フィールド (年月日・時分秒) の値から {@link mktime() mktime()} を行い, 
-     * その int 値を結果とします.
+     * 指定された時刻をタイムスタンプに変換します.
+     * 
+     * このメソッドは、引数の DT_Timestamp オブジェクトが持つ各フィールド
+     * (年月日・時分秒) の値から {@link mktime() mktime()} を行い, 
+     * その結果を返り値とします.
+     * 
      * ただし, 返り値が string 型となることに注意してください.
      * 
      * @param  DT_Timestamp $d
-     * @return string
+     * @return string       指定された時刻のタイムスタンプ
      */
     public function formatTimestamp(DT_Timestamp $d) {
         $hour  = $d->get('hour');

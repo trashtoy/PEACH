@@ -2,6 +2,7 @@
 /** @package DT */
 /** */
 require_once(dirname(__FILE__) . "/Date.php");
+
 /**
  * 時刻を表すクラスです.
  * @package DT
@@ -161,7 +162,7 @@ class DT_Datetime extends DT_Date {
     }
     
     /**
-	 * @ignore
+     * @ignore
      */
     protected function handleFormat(DT_Format $format) {
         return $format->formatDatetime($this);

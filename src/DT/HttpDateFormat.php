@@ -5,6 +5,21 @@ require_once(dirname(__FILE__) . "/Format.php");
 
 /**
  * HTTP-Date の書式を扱うクラスです.
+ * parse 系メソッドは, 以下の 3 種類のフォーマットを解釈することが出来ます.
+ * 
+ * <code>"Fri, 13 Feb 2009 23:31:30 GMT"  # RFC 822, updated by RFC 1123</code>
+ * <code>"Friday, 13-Feb-09 23:31:30 GMT" # RFC 850, obsoleted by RFC 1036</code>
+ * <code>"Fri Feb 13 23:31:30 2009"       # ANSI C's asctime() format</code>
+ * 
+ * format 系メソッドは, RFC 1123 形式のフォーマットで文字列を生成します.
+ * 
+ * このインタフェースの各メソッドは, 時刻を GMT とみなして書式化します.
+ * タイムゾーンに応じた時刻の自動調整などは行わないため,
+ * 必要に応じて {@link DT_Time::add() add()} メソッドなどを使うようにしてください.
+ * 
+ * このクラスはシングルトンです. {@link DT_HttpDateFormat::getInstance() getInstance()}
+ * からオブジェクトを取得してください.
+ * 
  * 参考文献:
  * {@link http://www.arielworks.net/articles/2004/0125a モジュール版PHPで「If-Modified-Since」に対応する}
  * 
@@ -30,7 +45,10 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * {@link DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を DT_Date にキャストします.
-     * @return DT_Date
+     * 
+     * @param  string       HTTP-date 形式の文字列
+     * @return DT_Date      変換結果
+     * @throws Exception    フォーマットが不正な場合
      */
     public function parseDate($format) {
         return $this->parseTimestamp($format)->toDate();
@@ -38,7 +56,10 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * {@link DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を DT_Datetime にキャストします.
-     * @return DT_Datetime
+     * 
+     * @param  string       HTTP-date 形式の文字列
+     * @return DT_Datetime  変換結果
+     * @throws Exception    フォーマットが不正な場合
      */
     public function parseDatetime($format) {
         return $this->parseTimestamp($format)->toDatetime();
@@ -46,8 +67,10 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * HTTP-date 形式のフォーマットを DT_Timestamp に変換します.
+     * 
      * @param  string       HTTP-date 形式の文字列
      * @return DT_Timestamp 変換結果
+     * @throws Exception    フォーマットが不正な場合
      */
     public function parseTimestamp($format) {
         $temp_date = array();
@@ -86,6 +109,7 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * この時間オブジェクトを DT_Datetime にキャストして Http-date を書式化します.
+     * 
      * @param  DT_Date
      * @return string
      */
@@ -95,9 +119,6 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * この時刻の Http-date 表現を返します.
-     * このメソッドは, 引数の時刻を GMT とみなして書式化します.
-     * タイムゾーンに応じた自動変換などは行わないため,
-     * 必要に応じて {@link DT_Time::add() add} メソッドなどで時刻を調整してください.
      * 
      * @param  DT_Datetime
      * @return string
@@ -115,11 +136,20 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * この時刻の Http-date 表現を返します.
+     * 
+     * @param  DT_Timestamp
+     * @return string
      */
     public function formatTimestamp(DT_Timestamp $d) {
         return $this->formatDatetime($d);
     }
     
+    /**
+     * parse に失敗した場合に呼び出されます.
+     * 
+     * @param  string $format
+     * @throws Exception
+     */
     private function throwFormatException($format) {
         throw new Exception("Illegal format({$format}). HTTP-date format required.");
     }

@@ -2,6 +2,7 @@
 /** @package DT */
 /** */
 require_once(dirname(__FILE__) . "/AbstractTime.php");
+
 /**
  * 年月日をあらわすクラスです.
  * @package DT

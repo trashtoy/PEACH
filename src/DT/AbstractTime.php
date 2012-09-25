@@ -129,6 +129,7 @@ abstract class DT_AbstractTime implements DT_Time {
      * このメソッドは, 自身と引数の時間オブジェクトが共通で持っているフィールドについて比較を行います.
      * 比較の結果すべてのフィールドの値が等しかった場合, 
      * より多くの時間フィールドを持つほうが「後」となります.
+     * 
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      * 
      * @param  mixed  比較対象のオブジェクト
@@ -173,6 +174,7 @@ abstract class DT_AbstractTime implements DT_Time {
      * もしもこのオブジェクトが持つ時間フィールドすべてが
      * 引数のオブジェクトの時間フィールドと一致した場合, 
      * より多くの時間フィールドを持つほうが「後」となります.
+     * 
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      *
      * @param  DT_Time $time 比較対象の時間
@@ -189,6 +191,7 @@ abstract class DT_AbstractTime implements DT_Time {
      * もしもこのオブジェクトが持つ時間フィールドすべてが
      * 引数のオブジェクトの時間フィールドと一致した場合, 
      * より多くの時間フィールドを持つほうが「後」となります.
+     * 
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      *
      * @param  DT_Time $time 比較対象の時間
@@ -217,7 +220,7 @@ abstract class DT_AbstractTime implements DT_Time {
     public function __toString() {
         return (string) $this;
     }
-
+    
     
     /**
      * 指定されたフィールドを使ってこの時間オブジェクトを初期化します.
@@ -297,7 +300,7 @@ abstract class DT_AbstractTime implements DT_Time {
     protected static function getDayOf($y, $m, $d) {
         static $m_sub = array(0, 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4);
         if ($m < 3) $y --;
-        return ($y + intval($y / 4) - intval($y / 100) + intval($y / 400) + $m_sub[$m] + $d) % 7;        
+        return ($y + intval($y / 4) - intval($y / 100) + intval($y / 400) + $m_sub[$m] + $d) % 7;
     }
     
     /**

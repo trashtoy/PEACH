@@ -8,7 +8,7 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * Java の
  * {@link http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html SimpleDateFormat}
  * と同じような使い勝手で, ユーザー定義の書式を扱うことができるクラスです.
- * 日付・時刻のパターンは {@link date() date} の一部を採用しています.
+ * 日付・時刻のパターンは {@link date() date()} の一部を採用しています.
  * 
  * - Y: 年 (4桁)
  * - m: 月 (2桁固定)
@@ -25,15 +25,23 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * - f: 分 (1～2桁)
  * - b: 秒 (1～2桁)
  * 
- * パターン文字列を繋げて記述する場合は (例: "Ymd_His" など)
+ * パターンを繋げて記述する場合は (例: "Ymd_His" など)
  * 必ず固定長のパターンを使用してください.
- * 可変長 (n, j, G など) のパターンをパースする際に最短一致で計算するため,
- * パースに失敗する可能性があります.
+ * 可変長 (n, j, G など) のパターンは常に最長一致でマッチングするため,
+ * 繋げて記述した際にパースに失敗する可能性があります.
  * 
- * パースする際に書式内に必要なパターンが含まれていなかった場合,
+ * パースまたは書式化を行う際, 必要な情報が足りない場合はデフォルト値が指定されます.
  * 年・月・日については現在の日付, 時・分・秒については 0 が適用されます.
+ * 具体的には, 以下のような状況が相当します.
  * 
- * PHP の date 関数の実装と同様に, 
+ * - パースする際, オブジェクトを構成するために必要な情報をパターン文字列が網羅していなかった場合
+ *   (例: "Y-m" というパターンをパースした場合. 「日」の情報がパターン文字列に含まれていない.)
+ * - 時間オブジェクトを書式化する際に, パターン文字列に含まれるフィールドを
+ *   そのオブジェクトが持っていなかった場合.
+ *   (例: "Y/m/d H:i:s" というパターンで DT_Date オブジェクトを書式化しようとした場合.
+ *    DT_Date オブジェクトは, 時・分・秒のフィールドを持っていないため, そのまま書式化できない.)
+ * 
+ * PHP の date() 関数の実装と同様に, 
  * バックスラッシュをつけることでパターン文字列が展開されるのを抑制することができます.
  * 
  * このクラスはイミュータブルです. 一つのオブジェクトを複数の箇所で使いまわすことが出来ます.
@@ -42,11 +50,14 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  */
 class DT_SimpleFormat implements DT_Format {
     /**
+     * parse または format に使うパターン文字列です.
      * @var string
      */
     private $format;
     
     /**
+     * パターン文字列を分解した結果をあらわします.
+     * 
      * @var array
      */
     private $context;
@@ -57,6 +68,10 @@ class DT_SimpleFormat implements DT_Format {
         $this->context = $this->createContext($format);
     }
     
+    /**
+     * このオブジェクトのパターン文字列を返します.
+     * @return string パターン文字列
+     */
     public function getFormat() {
         return $this->format;
     }
