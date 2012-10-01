@@ -6,7 +6,7 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
 /**
  * ある特定の日付または時刻を表すインタフェースです.
  * 
- * このクラスは {@link Util_Comparable} を実装しているため, {@link Util_Arrays::sort()} でソートすることが出来ます. 
+ * このクラスは {@link Util_Comparable} を実装しているため, {@link Util_Arrays::sort()} でソートすることが出来ます.
  * 
  * @package DT
  */
@@ -79,7 +79,8 @@ interface DT_Time extends Util_Comparable {
      * 指定されたフォーマットを使ってこの時間オブジェクトを書式化します.
      * フォーマットを指定しない場合はデフォルトの方法 (SQL などで使われる慣用表現) で書式化を行ないます.
      * @param  DT_Format $format
-     * @return string
+     * @return string            このオブジェクトの書式化.
+     *                           引数を指定しない場合は "YYYY-MM-DD" あるいは "YYYY-MM-DD hh:mm:ss" などの文字列
      */
     public function format(DT_Format $format = NULL);
     
@@ -98,6 +99,7 @@ interface DT_Time extends Util_Comparable {
      * もしもこのオブジェクトが持つ時間フィールドすべてが
      * 引数のオブジェクトの時間フィールドと一致した場合, 
      * より多くの時間フィールドを持つほうが「後」となります.
+     * 
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      *
      * @param  DT_Time $time 比較対象の時間
@@ -111,13 +113,13 @@ interface DT_Time extends Util_Comparable {
      * もしもこのオブジェクトが持つ時間フィールドすべてが
      * 引数のオブジェクトの時間フィールドと一致した場合, 
      * より多くの時間フィールドを持つほうが「後」となります.
+     * 
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      *
      * @param  DT_Time $time 比較対象の時間
      * @return boolean   この時間のほうが未来である場合は TRUE, それ以外は FALSE
      */
     public function after(DT_Time $time);
-    
     
     /**
      * このオブジェクトを {@link DT_Date} 型にキャストします.
@@ -147,7 +149,5 @@ interface DT_Time extends Util_Comparable {
      * @return string "hh:mm:ss" 形式の文字列. このオブジェクトが時刻をサポートしない場合は空文字列.
      */
     public function formatTime();
-    
-    
 }
 ?>

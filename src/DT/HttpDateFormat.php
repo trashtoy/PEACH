@@ -7,11 +7,11 @@ require_once(dirname(__FILE__) . "/Format.php");
  * HTTP-Date の書式を扱うクラスです.
  * parse 系メソッドは, 以下の 3 種類のフォーマットを解釈することが出来ます.
  * 
- * <code>"Fri, 13 Feb 2009 23:31:30 GMT"  # RFC 822, updated by RFC 1123</code>
- * <code>"Friday, 13-Feb-09 23:31:30 GMT" # RFC 850, obsoleted by RFC 1036</code>
- * <code>"Fri Feb 13 23:31:30 2009"       # ANSI C's asctime() format</code>
+ * <code>"Fri, 13 Feb 2009 23:31:30 GMT"   #RFC 822, updated by RFC 1123</code>
+ * <code>"Friday, 13-Feb-09 23:31:30 GMT"  #RFC 850, obsoleted by RFC 1036</code>
+ * <code>"Fri Feb 13 23:31:30 2009"        #ANSI C's asctime() format</code>
  * 
- * format 系メソッドは, RFC 1123 形式のフォーマットで文字列を生成します.
+ * format 系メソッドは, 一番上の RFC 1123 形式のフォーマットで文字列を生成します.
  * 
  * このインタフェースの各メソッドは, 時刻を GMT とみなして書式化します.
  * タイムゾーンに応じた時刻の自動調整などは行わないため,

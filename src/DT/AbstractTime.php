@@ -5,8 +5,8 @@ require_once(dirname(__FILE__) . "/Time.php");
 
 /**
  * 時間を表す抽象基底クラスです.
- * 
- * このクラスは {@link Util_Comparable} を実装しているため, {@link Util_Arrays::sort()} でソートすることが出来ます. 
+ * {@link DT_Date}, {@link DT_Datetime}, {@link DT_Timestamp}
+ * の共通部分の実装です.
  * 
  * @package DT
  */
