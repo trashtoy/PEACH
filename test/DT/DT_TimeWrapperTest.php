@@ -59,7 +59,7 @@ class DT_TimeWrapperTest extends DT_AbstractTimeTest {
         $d1 = new DT_TimeWrapper(new DT_Timestamp(2012, 5, 21, 7, 30, 15));
         $d2 = $d1->add("hour", 18);
         $this->assertEquals(new DT_Timestamp(2012, 5, 22, 1, 30, 15), $d2->toTimestamp());
-        $this->assertType("DT_TimeWrapper", $d2);
+        $this->assertInstanceOf("DT_TimeWrapper", $d2);
     }
 
     /**
@@ -72,7 +72,7 @@ class DT_TimeWrapperTest extends DT_AbstractTimeTest {
         $d1 = new DT_TimeWrapper(new DT_Timestamp(2012, 5, 21, 7, 30, 15));
         $d2 = $d1->set("min", 80);
         $this->assertEquals(new DT_Timestamp(2012, 5, 21, 8, 20, 15), $d2->toTimestamp());
-        $this->assertType("DT_TimeWrapper", $d2);
+        $this->assertInstanceOf("DT_TimeWrapper", $d2);
     }
 
     /**
@@ -85,7 +85,7 @@ class DT_TimeWrapperTest extends DT_AbstractTimeTest {
         $d1 = new DT_TimeWrapper(new DT_Timestamp(2012, 5, 21, 7, 30, 15));
         $d2 = $d1->setAll(array("year" => 2013, "month" => -1, "date" => 32, "sec" => 87));
         $this->assertEquals(new DT_Timestamp(2012, 12, 2, 7, 31, 27), $d2->toTimestamp());
-        $this->assertType("DT_TimeWrapper", $d2);
+        $this->assertInstanceOf("DT_TimeWrapper", $d2);
     }
 
     /**

@@ -37,7 +37,7 @@ class DT_UnixTimeFormatTest extends PHPUnit_Framework_TestCase {
     public function testGetInstance() {
         $f1 = DT_UnixTimeFormat::getInstance();
         $f2 = DT_UnixTimeFormat::getInstance();
-        $this->assertType("DT_UnixTimeFormat", $f1);
+        $this->assertInstanceOf("DT_UnixTimeFormat", $f1);
         $this->assertSame($f1, $f2);
     }
 

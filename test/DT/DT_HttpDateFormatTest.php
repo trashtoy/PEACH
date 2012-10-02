@@ -42,7 +42,7 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
     public function testGetInstance() {
         $f1 = DT_HttpDateFormat::getInstance();
         $f2 = DT_HttpDateFormat::getInstance();
-        $this->assertType("DT_HttpDateFormat", $f1);
+        $this->assertInstanceOf("DT_HttpDateFormat", $f1);
         $this->assertSame($f1, $f2);
     }
     
