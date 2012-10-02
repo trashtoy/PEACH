@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DT.init}">
+  <refnamediv>
+    <refname>オブジェクトの生成方法</refname>
+  </refnamediv>
+  <refsynopsisdiv>
+    Author : <author>trashtoy</author>
+  </refsynopsisdiv>
+  {@toc}
+  <refsect1 id="{@id DT.init.summary}">
+    <title>オブジェクトの生成方法</title>
+  </refsect1>
+</refentry>

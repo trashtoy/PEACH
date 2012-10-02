@@ -106,5 +106,24 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($d[6], DT_Util::latest($d[4], $d[2], $d[6], $d[0], $d[5]));
         $this->assertSame($d[7], DT_Util::latest($d[1], 256, $d[7], FALSE, $d[3]));
     }
+    
+    /**
+     * 年・月・日・時・分・秒 のそれぞれについて,
+     * 妥当な場合と妥当でない場合の返り値を確認します.
+     * 
+     * 引数に文字列が含まれていた場合は, 数字文字列 (is_numeric() が TRUE を返す)
+     * の場合のみ OK とします.
+     */
+    public function testValidate() {
+        $this->assertTrue(DT_Util::validate(2012, 2, 29));
+        $this->assertTrue(DT_Util::validate(2012, 5, 21, 18, 30));
+        $this->assertTrue(DT_Util::validate(2012, 3,  1, 23,  0, 30));
+        $this->assertTrue(DT_Util::validate(2012, 5, 21,  7, 30, "1"));
+        $this->assertFalse(DT_Util::validate(2011, 2, 29));
+        $this->assertFalse(DT_Util::validate(2012, -1, 1));
+        $this->assertFalse(DT_Util::validate(2012, 5, 21, 25, 0, 30));
+        $this->assertFalse(DT_Util::validate(2012, 5, 21, 1, 0, -1));
+        $this->assertFalse(DT_Util::validate(2012, 5, 21, 7, 30, "hoge"));
+    }
 }
 ?>

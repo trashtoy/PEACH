@@ -60,5 +60,31 @@ class DT_Util {
         }
         return Util_Arrays::max(Util_Arrays::pickup($args, "DT_Time"));
     }
+    
+    /**
+     * 引数に指定された年・月・日 (オプションで時・分・秒) の妥当性を検証します.
+     * 妥当な組み合わせの場合は TRUE, それ以外は FALSE を返します.
+     * 引数に数値以外の型が含まれていた場合, それが数値文字列
+     * ({@link is_numeric() is_numeric()} が TRUE を返す)
+     * の場合のみ妥当とみなします.
+     * 
+     * @param int $year   年
+     * @param int $month  月
+     * @param int $date   日
+     * @param int $hour   時
+     * @param int $minute 分
+     * @param int $second 秒
+     * @return bool 組み合わせが妥当な場合に TRUE, それ以外は FALSE
+     */
+    public static function validate($year, $month, $date, $hour = 0, $minute = 0, $second = 0) {
+        $test   = array("year" => $year, "month" => $month, "date" => $date, "hour" => $hour, "minute" => $minute, "second" => $second);       
+        $d      = new DT_Timestamp($year, $month, $date, $hour, $minute, $second);
+        foreach ($test as $key => $value) {
+            if (!is_numeric($value) || $d->get($key) !== intval($value)) {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
 }
 ?>
