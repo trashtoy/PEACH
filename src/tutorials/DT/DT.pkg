@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DT}">
+  <refnamediv>
+    <refname>時間操作モジュール群 DT</refname>
+  </refnamediv>
+  <refsynopsisdiv>
+    Author : <author>trashtoy</author>
+  </refsynopsisdiv>
+  {@toc}
+  <refsect1 id="{@id intro}">
+    <title>時間操作モジュール DT</title>
+    <para>
+      パッケージ DT は, 時間操作のためのライブラリです.
+      PHP にはもともと {@link http://www.php.net/manual/ja/ref.datetime.php 日付・時刻関数} が用意されていますが,
+      このモジュールは標準の API と比較して, よりオブジェクト指向な設計となっています.
+    </para>
+    <para>具体的には以下の特徴があります.</para>
+    <itemizedlist>
+      <listitem>イミュータブルなクラス設計. すべてのクラスが不変なので, 副作用によるバグの心配がありません.</listitem>
+      <listitem>
+        スコープによるクラスの使い分け. 日付だけを扱いたい場合は {@link DT_Date}, 日付に加えて時刻も扱いたい場合は {@link DT_Datetime}
+        といった具合に, 用途に応じて使うクラスを選ぶことが出来ます.
+      </listitem>
+      <listitem>
+        時間操作の API と書式関連の API を完全に分離.
+        書式関連 (parse や format) のロジックは全て {@link DT_Format} に移譲しているため,
+        全体的にシンプルな構造となっています.
+      </listitem>
+      <para>
+        このライブラリでは, タイムゾーンに応じた時刻の自動変換機能はサポートしません.
+        必要に応じて {@link DT_Time::add() add()} メソッドを用いて時間の調整を行う必要があります.
+      </para>
+    </itemizedlist>
+  </refsect1>
+  <refsect1 id="{@id init}">
+    <title>時間オブジェクトの生成方法</title>
+    <para>時間オブジェクトは以下のようにして生成します.</para>
+    <programlisting role="php">
+    <![CDATA[
+$time = new DT_Date(2012, 5, 21);     // 2012-05-21
+$time = DT_Date::parse("2012-05-21"); // 2012-05-21
+$time = DT_Date::now();               // 現在の日付
+    ]]>
+    </programlisting>
+    <para>詳しくは {@tutorial DT.init.pkg} を参照してください.</para>
+  </refsect1>
+</refentry>

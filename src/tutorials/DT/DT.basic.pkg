@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DT.basic}">
+  <refnamediv>
+    <refname>基本的な使用方法</refname>
+  </refnamediv>
+  <refsynopsisdiv>
+    Author : <author>trashtoy</author>
+  </refsynopsisdiv>
+  {@toc}
+  <refsect1 id="{@id DT.basic.summary}">
+    <title>基本的な使用方法</title>
+  </refsect1>
+</refentry>
