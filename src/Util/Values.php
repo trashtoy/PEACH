@@ -171,5 +171,17 @@ class Util_Values {
     private static function handleBoolValue($value, $defaultValue = NULL) {
         return (isset($defaultValue) ? (bool) $defaultValue : (bool) $value);
     }
+    
+    /**
+     * 指定された値の型を返します.
+     * 内部関数の {@link gettype() gettype()} とほぼ同じ動作をしますが,
+     * 引数にオブジェクトを指定した場合に文字列 "object"
+     * ではなくその値のクラス名を返すところが異なります.
+     * 
+     * @param mixed $var 検査対象の値
+     */
+    public static function getType($var) {
+        return is_object($var) ? get_class($var) : gettype($var);
+    }
 }
 ?>
