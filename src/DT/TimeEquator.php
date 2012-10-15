@@ -20,11 +20,11 @@ class DT_TimeEquator implements Util_Equator {
      * 比較対象のフィールドを指定して, 新しい DT_TimeEquator オブジェクトを作成します.
      * 引数の指定方法には以下の方法があります.
      * 
-     * -未指定, または空の配列 ({@link DT_Time::equals()} を使って比較を行います)
-     * -比較対象のフィールドの配列 (例: array("hour", "minute", "second") など)
-     * -{@link DT_Time::TYPE_DATE} … array("year", "month", "date") と等価です
-     * -{@link DT_Time::TYPE_DATETIME} … array("year", "month", "date", "hour", "minute") と等価です
-     * -{@link DT_Time::TYPE_TIMESTAMP} … array("year", "month", "date", "hour", "minute", "second") と等価です
+     * - 未指定, または空の配列 ({@link DT_Time::equals()} を使って比較を行います)
+     * - 比較対象のフィールドの配列 (例: array("hour", "minute", "second") など)
+     * - {@link DT_Time::TYPE_DATE} … array("year", "month", "date") と等価です
+     * - {@link DT_Time::TYPE_DATETIME} … array("year", "month", "date", "hour", "minute") と等価です
+     * - {@link DT_Time::TYPE_TIMESTAMP} … array("year", "month", "date", "hour", "minute", "second") と等価です
      * 
      * @param mixed $fields 比較対象のフィールド一覧
      */

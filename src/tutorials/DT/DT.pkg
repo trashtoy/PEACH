@@ -22,30 +22,49 @@
       </para>
       <programlisting role="php">
         <![CDATA[
+// 既存の方法
 $d = new DateTime("2012-05-21");
-$d->
-$time = new DT_Date(2012, 5, 21);     // 2012-05-21
-$time = DT_Date::parse("2012-05-21"); // 2012-05-21
-$time = DT_Date::now();               // 現在の日付
+echo $d->format("Y-m-d"); // 2012-05-21
+$d->modify("+1 day");
+echo $d->format("Y-m-d"); // 2012-05-22
+$d->modiry("-2 day");
+echo $d->format("Y-m-d"); // 2012-05-20
+
+// DT モジュール
+$today     = new DT_Date(2012, 5, 21);
+$tomorrow  = $today->add("date", 1);
+$yesterday = $today->add("date", -1);
+echo $today;     // 2012-05-21
+echo $tomorrow;  // 2012-05-22
+echo $yesterday; // 2012-05-20
         ]]>
       </programlisting>
+      <para>
+        このプログラムは特定の日付とその前後の日付を出力するだけのものですが,
+        直感的に分かりやすいコードになっています.
+        {@link DateTime::modify()} がオブジェクト内部状態を変更しているのに対して,
+        {@link DT_Date::add()} は常に新しいオブジェクトを生成しているので,
+        変数 $today の内部状態が変更されることはありません.
+      </para>
     </refsect2>
-    <itemizedlist>
-      <listitem>イミュータブルなクラス設計. すべてのクラスが不変なので, 副作用によるバグの心配がありません.</listitem>
-      <listitem>
-        スコープによるクラスの使い分け. 日付だけを扱いたい場合は {@link DT_Date}, 日付に加えて時刻も扱いたい場合は {@link DT_Datetime}
+    <refsect2 id="{@id class_variation}">
+      <title>スコープによるクラスの使い分け</title>
+      <para>
+        日付だけを扱いたい場合は {@link DT_Date}, 日付に加えて時刻も扱いたい場合は {@link DT_Datetime}
         といった具合に, 用途に応じて使うクラスを選ぶことが出来ます.
-      </listitem>
-      <listitem>
-        時間操作の API と書式関連の API を完全に分離.
+      </para>
+    </refsect2>
+    <refsect2 id="{@id architecture}">
+      <title>時間操作の API と書式関連の API を完全に分離</title>
+      <para>
         書式関連 (parse や format) のロジックは全て {@link DT_Format} に移譲しているため,
         全体的にシンプルな構造となっています.
-      </listitem>
-      <para>
-        このライブラリでは, タイムゾーンに応じた時刻の自動変換機能はサポートしません.
-        必要に応じて {@link DT_Time::add() add()} メソッドを用いて時間の調整を行う必要があります.
       </para>
-    </itemizedlist>
+    </refsect2>
+    <para>
+      このライブラリでは, タイムゾーンに応じた時刻の自動変換機能はサポートしません.
+      必要に応じて {@link DT_Time::add() add()} メソッドを用いて時間の調整を行う必要があります.
+    </para>
   </refsect1>
   <refsect1 id="{@id init}">
     <title>時間オブジェクトの生成方法</title>
