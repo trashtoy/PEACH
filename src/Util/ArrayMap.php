@@ -60,7 +60,7 @@ class Util_ArrayMap implements Util_Map {
      * この実装では, 内部に保存されている配列に対して
      * <code>$arr[$key] = $value;</code> を実行するのと同等の操作を行います.
      * もしも $key に非スカラー値 (オブジェクトや配列など) が指定された場合は, 
-     * string 型に変換したものをキーとします.
+     * {@link Util_Values::stringValue()} で string 型に変換した結果をキーとします.
      * 
      * @param  string $key   キー名
      * @param  mixed  $value 指定されたキーに関連づける値
