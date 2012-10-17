@@ -1,16 +1,16 @@
 <?xml version="1.0" ?>
 <refentry id="{@id DT}">
   <refnamediv>
-    <refname>時間操作モジュール群 DT</refname>
+    <refname>時間管理モジュール DT</refname>
   </refnamediv>
   <refsynopsisdiv>
     Author : <author>trashtoy</author>
   </refsynopsisdiv>
   {@toc}
   <refsect1 id="{@id intro}">
-    <title>時間操作モジュール DT</title>
+    <title>時間管理モジュール DT</title>
     <para>
-      パッケージ DT は, 時間操作のためのライブラリです.
+      パッケージ DT は, 時間操作・入出力のためのライブラリです.
       PHP にはもともと {@link http://www.php.net/manual/ja/ref.datetime.php 日付・時刻関数} が用意されていますが,
       このモジュールは標準の API と比較して, よりオブジェクト指向な設計となっています.
     </para>
@@ -19,6 +19,7 @@
       <title>イミュータブルなクラス設計</title>
       <para>
         すべてのクラスが不変なので, 副作用によるバグの心配がありません. サンプルコードを以下に挙げます.
+        このプログラムは, 特定の日付とその前後の日付を出力します.
       </para>
       <programlisting role="php">
         <![CDATA[
@@ -40,9 +41,8 @@ echo $yesterday; // 2012-05-20
         ]]>
       </programlisting>
       <para>
-        このプログラムは特定の日付とその前後の日付を出力するだけのものですが,
-        直感的に分かりやすいコードになっています.
-        {@link DateTime::modify()} がオブジェクト内部状態を変更しているのに対して,
+        既存の方法と DT モジュールの API を比較すると, 後者のほうが直感的に分かりやすいコードになっています.
+        また, {@link DateTime::modify()} がオブジェクト内部状態を変更しているのに対して,
         {@link DT_Date::add()} は常に新しいオブジェクトを生成しているので,
         変数 $today の内部状態が変更されることはありません.
       </para>
@@ -60,11 +60,11 @@ echo $yesterday; // 2012-05-20
         書式関連 (parse や format) のロジックは全て {@link DT_Format} に移譲しているため,
         全体的にシンプルな構造となっています.
       </para>
+      <para>
+        このライブラリでは, タイムゾーンに応じた時刻の自動変換機能はサポートしません.
+        必要に応じて {@link DT_Time::add() add()} メソッドを用いて時間の調整を行う必要があります.
+      </para>
     </refsect2>
-    <para>
-      このライブラリでは, タイムゾーンに応じた時刻の自動変換機能はサポートしません.
-      必要に応じて {@link DT_Time::add() add()} メソッドを用いて時間の調整を行う必要があります.
-    </para>
   </refsect1>
   <refsect1 id="{@id init}">
     <title>時間オブジェクトの生成方法</title>
