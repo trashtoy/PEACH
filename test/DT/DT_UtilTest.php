@@ -5,6 +5,9 @@ require_once dirname(__FILE__) . '/../../src/DT/load.php';
  * Test class for DT_Util.
  */
 class DT_UtilTest extends PHPUnit_Framework_TestCase {
+    /**
+     * @return array
+     */
     private function getTestArray() {
         $d   = array();
         $d[] = new DT_Date(     2012, 3,  29);
@@ -17,6 +20,19 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
         $d[] = new DT_Datetime( 2012, 10,  5, 19,  0);
         $d[] = new DT_Timestamp(2012, 10,  5, 19,  0, 30);
         return $d;
+    }
+    
+    /**
+     * Sets up the fixture, for example, opens a network connection.
+     * This method is called before a test is executed.
+     */
+    protected function setUp() {
+        $this->defaultTZ = date_default_timezone_get();
+        date_default_timezone_set("Asia/Tokyo");
+    }
+    
+    protected function tearDown() {
+        date_default_timezone_set($this->defaultTZ);
     }
     
     /**
@@ -124,6 +140,29 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse(DT_Util::validate(2012, 5, 21, 25, 0, 30));
         $this->assertFalse(DT_Util::validate(2012, 5, 21, 1, 0, -1));
         $this->assertFalse(DT_Util::validate(2012, 5, 21, 7, 30, "hoge"));
+    }
+    
+    /**
+     * システムの時差を分単位で取得することを確認します.
+     */
+    public function testGetTimeZoneOffset() {
+        $this->assertSame(-540, DT_Util::getTimeZoneOffset());
+    }
+    
+    /**
+     * cleanTimeZoneOffset() のテストです. 以下を確認します.
+     * 
+     * - 基本的に, 指定された整数をそのまま返す.
+     * - 1410 より大きい値 (-23:30 以前) は 1410 に丸める
+     * - -1410 より小さい値 (+23:30 以降) は -1410 に丸める
+     * - 数値以外の値は整数に変換する
+     */
+    public function testCleanTimeZoneOffset() {
+        $expected = array(300, -540, 1410, -1410, 0);
+        $test     = array(300, NULL, 1500, -1800, "asdf");
+        for ($i = 0; $i < 5; $i ++) {
+            $this->assertSame($expected[$i], DT_Util::cleanTimeZoneOffset($test[$i]));
+        }
     }
 }
 ?>

@@ -22,7 +22,7 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = DT_HttpDateFormat::getInstance();
+        $this->object = new DT_HttpDateFormat(-540);
     }
 
     /**
@@ -30,27 +30,23 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
     }
     
     /**
-     * 以下を確認します.
-     * 
-     * - DT_HttpDateFormat オブジェクトを返す
-     * - 複数回実行した際に同一のオブジェクトを返す
+     * コンストラクタのテストです. 
+     * 引数を省略した場合, DT_Util::getTimeZoneOffset()
+     * を引数にするのと同じ結果になることを確認します.
      */
-    public function testGetInstance() {
-        $f1 = DT_HttpDateFormat::getInstance();
-        $f2 = DT_HttpDateFormat::getInstance();
-        $this->assertInstanceOf("DT_HttpDateFormat", $f1);
-        $this->assertSame($f1, $f2);
+    public function test__construct() {
+        $offset = DT_Util::getTimeZoneOffset();
+        $this->assertEquals(new DT_HttpDateFormat($offset), new DT_HttpDateFormat());
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-13 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14 に変換されることを確認します.
      */
     public function testParseDate() {
-        $expected = new DT_Date(2009, 2, 13);
+        $expected = new DT_Date(2009, 2, 14);
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseDate($f));
         }
@@ -62,10 +58,10 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * どのテスト用フォーマットも 2009-02-13T23:31 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14T08:31 に変換されることを確認します.
      */
     public function testParseDatetime() {
-        $expected = new DT_Datetime(2009, 2, 13, 23, 31);
+        $expected = new DT_Datetime(2009, 2, 14, 8, 31);
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseDatetime($f));
         }
@@ -77,10 +73,10 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * どのテスト用フォーマットも 2009-02-13T23:31:30 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14T08:31:30 に変換されることを確認します.
      */
     public function testParseTimestamp() {
-        $expected = new DT_Timestamp(2009, 2, 13, 23, 31, 30);
+        $expected = new DT_Timestamp(2009, 2, 14, 8, 31, 30);
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseTimestamp($f));
         }
@@ -92,18 +88,18 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * その日の0時0分の時刻で書式化されることを確認します.
+     * その日の0時0分の時刻を GMT に変換した結果を返します.
      */
     public function testFormatDate() {
-        $d = new DT_Date(2009, 2, 13);
-        $this->assertSame("Fri, 13 Feb 2009 00:00 GMT", $this->object->formatDate($d));
+        $d = new DT_Date(2009, 2, 14);
+        $this->assertSame("Fri, 13 Feb 2009 15:00 GMT", $this->object->formatDate($d));
     }
 
     /**
      * その時刻の HTTP-date で書式化されることを確認します.
      */
     public function testFormatDatetime() {
-        $d = new DT_Datetime(2009, 2, 13, 23, 31);
+        $d = new DT_Datetime(2009, 2, 14, 8, 31);
         $this->assertSame("Fri, 13 Feb 2009 23:31 GMT", $this->object->formatDatetime($d));
     }
 
@@ -111,7 +107,7 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
      * その時刻の HTTP-date で書式化されることを確認します.
      */
     public function testFormatTimestamp() {
-        $d = new DT_Timestamp(2009, 2, 13, 23, 31, 30);
+        $d = new DT_Timestamp(2009, 2, 14, 8, 31, 30);
         $this->assertSame("Fri, 13 Feb 2009 23:31:30 GMT", $this->object->formatTimestamp($d));
     }
 }

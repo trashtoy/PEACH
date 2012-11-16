@@ -36,7 +36,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
     private $usingTz;
     
     /**
-     * 時間オブジェクトの時差です (単位は分)
+     * システム時刻の時差です (単位は分)
      * @var int
      */
     private $internalOffset;
@@ -110,8 +110,8 @@ class DT_W3cDatetimeFormat implements DT_Format {
         }
         else {
             $this->usingTz        = TRUE;
-            $this->externalOffset = $this->initOffset($externalOffset);
-            $this->internalOffset = $this->initOffset($internalOffset);
+            $this->externalOffset = DT_Util::cleanTimeZoneOffset($externalOffset);
+            $this->internalOffset = DT_Util::cleanTimeZoneOffset($internalOffset);
         }
     }
     

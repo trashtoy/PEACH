@@ -86,5 +86,39 @@ class DT_Util {
         }
         return TRUE;
     }
+    
+    /**
+     * システム時刻と GMT との時差を, 分単位で返します.
+     * 
+     * システム時刻が GMT よりも未来の場合 (UTC + 1 以上) は負の値,
+     * システム時刻が GMT よりも過去の場合 (UTF - 1 以下) は正の値を返します.
+     * 例えばタイムゾーンが "Asia/Tokyo" (+09:00) の場合,
+     * 返り値は -540 となります.
+     * 
+     * @return int
+     */
+    public static function getTimeZoneOffset() {
+        $local = mktime(0, 0, 0, 1, 1, 1970);
+        $gmt   = gmmktime(0, 0, 0, 1, 1, 1970);
+        return ($local - $gmt) / 60;
+    }
+    
+    /**
+     * 指定された時差 (分単位) の値が妥当かどうかを調べ, 必要に応じて値を丸めた結果を返します.
+     * 現在世界で使用されているタイムゾーンは UTC-12 から UTC+14 ですが,
+     * このメソッドでは -23:30 から +23:30 を妥当なタイムゾーンとみなします.
+     * もしも -23:30 以前の時差が指定された場合は -23:30 (1410), 
+     * +23:30 以降の時差が指定された場合は +23:30 (-1410) を返します.
+     * 
+     * もしも NULL が指定された場合は {@link DT_Util::getTimeZoneOffset()} の結果を返します.
+     * それ以外の数値以外の値が指定された場合は, 整数にキャストした値を使用します.
+     * 
+     * @param type $offset
+     */
+    public static function cleanTimeZoneOffset($offset) {
+        return isset($offset) ? 
+            Util_Values::intValue($offset, -1410, 1410) : // -23:30 から +23:30 まで
+            DT_Util::getTimeZoneOffset();
+    }
 }
 ?>

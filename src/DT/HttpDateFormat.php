@@ -13,12 +13,7 @@ require_once(dirname(__FILE__) . "/Format.php");
  * 
  * format 系メソッドは, 一番上の RFC 1123 形式のフォーマットで文字列を生成します.
  * 
- * このインタフェースの各メソッドは, 時刻を GMT とみなして書式化します.
- * タイムゾーンに応じた時刻の自動調整などは行わないため,
- * 必要に応じて {@link DT_Time::add() add()} メソッドなどを使うようにしてください.
- * 
- * このクラスはシングルトンです. {@link DT_HttpDateFormat::getInstance() getInstance()}
- * からオブジェクトを取得してください.
+ * このクラスは, システム時刻と GMT の自動変換を行います.
  * 
  * 参考文献:
  * {@link http://www.arielworks.net/articles/2004/0125a モジュール版PHPで「If-Modified-Since」に対応する}
@@ -27,9 +22,22 @@ require_once(dirname(__FILE__) . "/Format.php");
  */
 class DT_HttpDateFormat implements DT_Format {
     /**
-     * このクラスは getInstance() からインスタンス化します.
+     * システム時刻の時差です (単位は分)
+     * @var int
      */
-    private function __construct() {}
+    private $internalOffset;
+    
+    /**
+     * 新しいフォーマットを生成します.
+     * 引数に $internalOffset を指定して, 入出力時の時間オブジェクトの時差を設定します.
+     * デフォルトでは, システム時刻の時差 ({@link DT_Util::getTimeZoneOffset()} の返り値と等価)
+     * を使用します.
+     * 
+     * @param $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
+     */
+    public function __construct($offset = NULL) {
+        $this->internalOffset = DT_Util::cleanTimeZoneOffset($offset);
+    }
     
     /**
      * このクラスのインスタンスを取得します.
@@ -104,11 +112,14 @@ class DT_HttpDateFormat implements DT_Format {
             $this->throwFormatException($format);
         }
         
-        return new DT_Timestamp($date["year"], $date["month"], $date["day"], $date["hour"], $date["minute"], $date["second"]);
+        $parsed = new DT_Timestamp($date["year"], $date["month"], $date["day"], $date["hour"], $date["minute"], $date["second"]);
+        return $parsed->add("minute", - $this->internalOffset);
     }
     
     /**
-     * この時間オブジェクトを DT_Datetime にキャストして Http-date を書式化します.
+     * この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.
+     * 例えばこのフォーマットに指定された時差が UTC+9 だった場合,
+     * 前日の 15:00 の HTTP-date 表現となります.
      * 
      * @param  DT_Date
      * @return string
@@ -124,6 +135,8 @@ class DT_HttpDateFormat implements DT_Format {
      * @return string
      */
     public function formatDatetime(DT_Datetime $d) {
+        $d = $d->add("minute", $this->internalOffset);
+        
         $format  = '';
         $format .= $this->getDayDescription($d->getDay()).', ';
         $format .= str_pad($d->get('date'), 2, '0', STR_PAD_LEFT) . ' ';
