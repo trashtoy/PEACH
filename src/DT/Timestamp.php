@@ -3,7 +3,9 @@
 /** */
 require_once(dirname(__FILE__) . "/Datetime.php");
 /**
- * 時刻を表すクラスです.
+ * TIMESTAMP 型の時間オブジェクトです.
+ * このクラスは年・月・日・時・分・秒のフィールドをサポートします.
+ * 
  * @package DT
  */
 class DT_Timestamp extends DT_Datetime {

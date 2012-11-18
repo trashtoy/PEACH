@@ -4,7 +4,9 @@
 require_once(dirname(__FILE__) . "/Date.php");
 
 /**
- * 時刻を表すクラスです.
+ * DATETIME 型の時間オブジェクトです.
+ * このクラスは年・月・日・時・分のフィールドをサポートします.
+ * 
  * @package DT
  */
 class DT_Datetime extends DT_Date {

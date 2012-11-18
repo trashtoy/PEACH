@@ -128,7 +128,31 @@ class DT_TimeWrapperTest extends DT_AbstractTimeTest {
         $this->assertFalse($d1->equals($d3));
         $this->assertTrue($d1->equals($d4));
     }
-
+    
+    /**
+     * ラップ対象のオブジェクトと同じ結果を返すことを確認します.
+     */
+    public function testGetDay() {
+        $d = new DT_TimeWrapper(new DT_Timestamp(2012, 5, 21, 7, 30, 15));
+        $this->assertSame(1, $d->getDay());
+    }
+    
+    /**
+     * ラップ対象のオブジェクトと同じ結果を返すことを確認します.
+     */
+    public function testGetDateCount() {
+        $d = new DT_TimeWrapper(new DT_Timestamp(2012, 5, 21, 7, 30, 15));
+        $this->assertSame(31, $d->getDateCount());
+    }
+    
+    /**
+     * ラップ対象のオブジェクトと同じ結果を返すことを確認します.
+     */
+    public function testIsLeapYear() {
+        $d = new DT_TimeWrapper(new DT_Timestamp(2012, 5, 21, 7, 30, 15));
+        $this->assertTrue($d->isLeapYear());
+    }
+    
     /**
      * ラップ対象のオブジェクトと同じ結果を返すことを確認します.
      */

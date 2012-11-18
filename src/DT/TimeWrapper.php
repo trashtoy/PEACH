@@ -149,6 +149,30 @@ class DT_TimeWrapper implements DT_Time {
     }
     
     /**
+     * ラップ対象のオブジェクトの getDateCount メソッドを実行します.
+     * @return int
+     */
+    public function getDateCount() {
+        return $this->original->getDateCount();
+    }
+    
+    /**
+     * ラップ対象のオブジェクトの getDay メソッドを実行します.
+     * @return int
+     */
+    public function getDay() {
+        return $this->original->getDay();
+    }
+    
+    /**
+     * ラップ対象のオブジェクトの isLeapYear メソッドを実行します.
+     * @return bool
+     */
+    public function isLeapYear() {
+        return $this->original->isLeapYear();
+    }
+    
+    /**
      * ラップ対象のオブジェクトの toDate メソッドを実行します.
      * @return DT_Date
      */

@@ -4,52 +4,12 @@
 require_once(dirname(__FILE__) . "/AbstractTime.php");
 
 /**
- * 年月日をあらわすクラスです.
+ * DATE 型の時間オブジェクトです.
+ * このクラスは年・月・日のフィールドをサポートします.
+ * 
  * @package DT
  */
 class DT_Date extends DT_AbstractTime {
-    /**
-     * 日曜日をあらわす定数です.
-     * @var int
-     */
-    const SUNDAY    = 0;
-    
-    /**
-     * 月曜日をあらわす定数です
-     * @var int
-     */
-    const MONDAY    = 1;
-    
-    /**
-     * 火曜日をあらわす定数です
-     * @var int
-     */
-    const TUESDAY   = 2;
-    
-    /**
-     * 水曜日をあらわす定数です
-     * @var int
-     */
-    const WEDNESDAY = 3;
-    
-    /**
-     * 木曜日をあらわす定数です
-     * @var int
-     */
-    const THURSDAY  = 4;
-    
-    /**
-     * 金曜日をあらわす定数です
-     * @var int
-     */
-    const FRIDAY    = 5;
-    
-    /**
-     * 土曜日をあらわす定数です
-     * @var int
-     */
-    const SATURDAY  = 6;
-    
     /**
      * 年の値です.
      * @var int
