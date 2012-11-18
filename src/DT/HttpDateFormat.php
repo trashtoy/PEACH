@@ -13,7 +13,7 @@ require_once(dirname(__FILE__) . "/Format.php");
  * 
  * format 系メソッドは, 一番上の RFC 1123 形式のフォーマットで文字列を生成します.
  * 
- * このクラスは, システム時刻と GMT の自動変換を行います.
+ * このクラスは parse および format を行う際に, 内部時刻と GMT の自動変換を行います.
  * 
  * 参考文献:
  * {@link http://www.arielworks.net/articles/2004/0125a モジュール版PHPで「If-Modified-Since」に対応する}
@@ -29,26 +29,15 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * 新しいフォーマットを生成します.
-     * 引数に $internalOffset を指定して, 入出力時の時間オブジェクトの時差を設定します.
+     * 引数 $offset を指定することで, 時間オブジェクトとフォーマットの時差を設定することが出来ます.
      * デフォルトでは, システム時刻の時差 ({@link DT_Util::getTimeZoneOffset()} の返り値と等価)
      * を使用します.
+     * もしも時差に応じた自動変換が必要ない場合は $offset に 0 を指定してください.
      * 
-     * @param $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
+     * @param int $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
     public function __construct($offset = NULL) {
         $this->internalOffset = DT_Util::cleanTimeZoneOffset($offset);
-    }
-    
-    /**
-     * このクラスのインスタンスを取得します.
-     * @return DT_HttpDateFormat
-     */
-    public static function getInstance() {
-        static $instance = NULL;
-        if (!isset($instance)) {
-            $instance = new self();
-        }
-        return $instance;
     }
     
     /**
@@ -118,8 +107,7 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.
-     * 例えばこのフォーマットに指定された時差が UTC+9 だった場合,
-     * 前日の 15:00 の HTTP-date 表現となります.
+     * 例えばシステム時刻の時差が UTC+9 だった場合, 前日の 15:00 の HTTP-date 表現を返り値とします.
      * 
      * @param  DT_Date
      * @return string
