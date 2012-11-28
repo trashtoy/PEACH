@@ -35,7 +35,7 @@ class DT_FormatWrapper implements DT_Format {
      * @param  DT_Date $d
      * @return string
      */
-    public function formatDate(DT_date $d) {
+    public function formatDate(DT_Date $d) {
         return $this->original->formatDate($d);
     }
     
@@ -60,7 +60,7 @@ class DT_FormatWrapper implements DT_Format {
     /**
      * ラップ対象のオブジェクトの parseDate メソッドを実行します.
      * @param  string $format
-     * @return DT_Date
+     * @return DT_Time オリジナルの parseDate の結果
      */
     public function parseDate($format) {
         return $this->original->parseDate($format);
@@ -69,7 +69,7 @@ class DT_FormatWrapper implements DT_Format {
     /**
      * ラップ対象のオブジェクトの parseDatetime メソッドを実行します.
      * @param  string $format
-     * @return DT_Datetime
+     * @return DT_Time オリジナルの parseDatetime の結果
      */
     public function parseDatetime($format) {
         return $this->original->parseDatetime($format);
@@ -78,7 +78,7 @@ class DT_FormatWrapper implements DT_Format {
     /**
      * ラップ対象のオブジェクトの parseTimestamp メソッドを実行します.
      * @param  string $format
-     * @return DT_Timestamp
+     * @return DT_Time オリジナルの parseTimestamp の結果
      */
     public function parseTimestamp($format) {
         return $this->original->parseTimestamp($format);

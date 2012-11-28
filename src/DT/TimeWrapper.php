@@ -174,7 +174,7 @@ class DT_TimeWrapper implements DT_Time {
     
     /**
      * ラップ対象のオブジェクトの toDate メソッドを実行します.
-     * @return DT_Date
+     * @return DT_Time
      */
     public function toDate() {
         return $this->original->toDate();
@@ -182,7 +182,7 @@ class DT_TimeWrapper implements DT_Time {
     
     /**
      * ラップ対象のオブジェクトの toDatetime メソッドを実行します.
-     * @return DT_Datetime
+     * @return DT_Time
      */
     public function toDatetime() {
         return $this->original->toDatetime();
@@ -190,7 +190,7 @@ class DT_TimeWrapper implements DT_Time {
     
     /**
      * ラップ対象のオブジェクトの toTimestamp メソッドを実行します.
-     * @return DT_Timestamp
+     * @return DT_Time
      */
     public function toTimestamp() {
         return $this->original->toTimestamp();

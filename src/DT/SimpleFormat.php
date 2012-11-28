@@ -10,7 +10,7 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * と同じような使い勝手で, ユーザー定義の書式を扱うことができるクラスです.
  * 日付・時刻のパターンは {@link date() date()} の一部を採用しています.
  * 
- * - Y: 年 (4桁)
+ * - Y: 年 (4桁固定)
  * - m: 月 (2桁固定)
  * - n: 月 (1～2桁)
  * - d: 日 (2桁固定)
@@ -34,14 +34,13 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * 年・月・日については現在の日付, 時・分・秒については 0 が適用されます.
  * 具体的には, 以下のような状況が相当します.
  * 
- * 1. パースする際, オブジェクトを構成するために必要な情報をパターン文字列が網羅していなかった場合
- *   (例: "Y-m" というパターンをパースした場合. 「日」の情報がパターン文字列に含まれていない.)
+ * 1. パースする際, オブジェクトを構成するために必要な情報をパターン文字列が網羅していなかった.
+ *    (例: "m-d" というパターンをパースした場合, 
+ *   「年」の情報がパターン文字列に含まれていないため, 現在の年が適用されます)
  * 2. 時間オブジェクトを書式化する際に, パターン文字列に含まれるフィールドを
- *   そのオブジェクトが持っていなかった場合.
- * 
- * 二番目は, 例えば "Y/m/d H:i:s" というパターンで DT_Date オブジェクトを書式化しようとした場合になります.
- * DT_Date は, 時・分・秒のフィールドを持っていないため, 
- * "2012-05-21 00:00:00" のように時刻を 0 で埋めた結果を返します.
+ *    そのオブジェクトが持っていなかった.
+ *    (例: "Y/m/d H:i:s" というパターンで DT_Date オブジェクトを書式化した場合,
+ *    DT_Date は時刻の情報を持たないため, 時刻部分は 00:00:00 となります.)
  * 
  * PHP の date() 関数の実装と同様に, 
  * バックスラッシュをつけることでパターン文字列が展開されるのを抑制することができます.
@@ -64,8 +63,13 @@ class DT_SimpleFormat implements DT_Format {
      */
     private $context;
     
-    public function __construct($format) {
-        $format        = strval($format);
+    /**
+     * 指定されたパターン文字列で SimpleFormat を初期化します.
+     * 
+     * @param string $pattern パターン文字列
+     */
+    public function __construct($pattern) {
+        $format        = strval($pattern);
         $this->format  = $format;
         $this->context = $this->createContext($format);
     }
@@ -78,29 +82,59 @@ class DT_SimpleFormat implements DT_Format {
         return $this->format;
     }
     
+    /**
+     * 指定された文字列を解析し, DT_Date に変換します.
+     * @param  string $format
+     * @return DT_Date
+     */
     public function parseDate($format) {
         $d = DT_Date::now();
         return $d->setAll($this->interpret($format));
     }
     
+    /**
+     * 指定された文字列を解析し, DT_Datetime に変換します.
+     * @param  string $format
+     * @return DT_Datetime
+     */
     public function parseDatetime($format) {
         $d = DT_Date::now();
         return $d->toDatetime()->setAll($this->interpret($format));
     }
     
+    /**
+     * 指定された文字列を解析し, DT_Timestamp に変換します.
+     * @param  string $format
+     * @return DT_Date
+     */
     public function parseTimestamp($format) {
         $d = DT_Date::now();
         return $d->toTimestamp()->setAll($this->interpret($format));
     }
     
-    public function formatDate(DT_date $d) {
+    /**
+     * 指定された DT_Date オブジェクトを書式化します.
+     * @param  DT_Date $d 
+     * @return string
+     */
+    public function formatDate(DT_Date $d) {
         return $this->formatTimestamp($d->toTimestamp());
     }
     
+    /**
+     * 指定された DT_Datetime オブジェクトを書式化します.
+     * @param  DT_Datetime $d
+     * @return string
+     */
     public function formatDatetime(DT_Datetime $d) {
         return $this->formatTimestamp($d->toTimestamp());
     }
     
+    /**
+     * 指定された DT_Timestamp オブジェクトを書式化します.
+     * @param  DT_Timestamp $d
+     * @return string
+     */
     public function formatTimestamp(DT_Timestamp $d) {
         $patternList = $this->getPatternList();
         $result      = "";
@@ -227,6 +261,11 @@ class DT_SimpleFormat implements DT_Format {
         return $result;
     }
     
+    /**
+     * 
+     * @param  string $input
+     * @return array
+     */
     private function interpret($input) {
         $patternList = $this->getPatternList();
         $result      = array();
@@ -256,6 +295,12 @@ class DT_SimpleFormat implements DT_Format {
         return $result;
     }
     
+    /**
+     * 
+     * @param  string $format
+     * @param  string $expected
+     * @throws Exception
+     */
     private function throwFormatException($format, $expected) {
         throw new Exception("Illegal format({$format}). Expected: {$expected}");
     }

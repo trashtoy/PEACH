@@ -43,8 +43,10 @@ class DT_Date extends DT_AbstractTime {
     }
     
     /**
-     * 指定された文字列を DT_Date オブジェクトに変換します.
-     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat} を使ってパースを行います.
+     * 指定された文字列を解析して DT_Date オブジェクトに変換します.
+     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getDefault()}
+     * を使ってパースを行います.
+     * ("YYYY-MM-DD" 形式の文字列を受理します.)
      * 
      * @param  string    変換対象の文字列
      * @param  DT_Format 変換に使用するフォーマット
@@ -74,7 +76,7 @@ class DT_Date extends DT_AbstractTime {
     
     /**
      * このオブジェクトの型 {@link DT_Time::TYPE_DATE} を返します.
-     * @return int TYPE_DATE
+     * @return int DT_Time::TYPE_DATE
      */
     public function getType() {
         return self::TYPE_DATE;

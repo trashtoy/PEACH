@@ -5,6 +5,8 @@
  */
 /**
  * 日時の値調整を行うクラスです.
+ * このクラスは DT_Date, DT_Datetime, DT_Timestamp の初期化処理のみで使用されることを
+ * 想定しています.
  * 
  * @package DT
  * @ignore

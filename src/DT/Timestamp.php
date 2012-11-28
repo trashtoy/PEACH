@@ -30,8 +30,15 @@ class DT_Timestamp extends DT_Datetime {
     }
     
     /**
-     * @param string
-     * @param DT_Format
+     * 指定されたテキストを解析して DT_Timestamp オブジェクトに変換します.
+     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getDefault()}
+     * を使ってパースを行います.
+     * ("YYYY-MM-DD hh:mm:ss" 形式の文字列を受理します. 
+     * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
+     * 
+     * @param  string       変換対象の文字列
+     * @param  DT_Format    変換に使用するフォーマット
+     * @return DT_Timestamp 変換結果
      */
     public static function parse($text, DT_Format $format = NULL) {
         if (!isset($format)) {
@@ -141,8 +148,8 @@ class DT_Timestamp extends DT_Datetime {
     }
     
     /**
-     * (non-PHPdoc)
-     * @see DT/DT_Datetime#formatTime()
+     * このオブジェクトの時刻部分の文字列を "hh:mm:ss" 形式で返します.
+     * @return string "hh:mm:ss" 形式の文字列
      */
     public function formatTime() {
         $format = parent::formatTime();

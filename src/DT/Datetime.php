@@ -13,12 +13,14 @@ class DT_Datetime extends DT_Date {
     /**
      * 時を表す整数(0～23)です.
      * @var int
+     * @ignore
      */
     protected $hour = 0;
     
     /**
      * 分を表す整数(0～59)です.
      * @var int
+     * @ignore
      */
     protected $minute = 0;
     
@@ -37,7 +39,12 @@ class DT_Datetime extends DT_Date {
     }
     
     /**
-     * 指定されたテキストをパースして DT_Datetime オブジェクトに変換します.
+     * 指定されたテキストを解析して DT_Datetime オブジェクトに変換します.
+     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getDefault()}
+     * を使ってパースを行います.
+     * ("YYYY-MM-DD hh:mm" 形式の文字列を受理します.
+     * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
+     * 
      * @param  string      変換対象の文字列
      * @param  DT_Format   変換に使用するフォーマット
      * @return DT_Datetime 変換結果
@@ -70,7 +77,7 @@ class DT_Datetime extends DT_Date {
     
     /**
      * このオブジェクトの型 {@link DT_Time::TYPE_DATETIME} を返します.
-     * @return int
+     * @return int DT_Time::TYPE_DATETIME
      */
     public function getType() {
         return self::TYPE_DATETIME;
@@ -119,7 +126,7 @@ class DT_Datetime extends DT_Date {
      * (non-PHPdoc)
      * 
      * @return DT_Datetime
-     * @see DT/DT_Time#newInstance($fields)
+     * @see DT_AbstractTime::newInstance()
      * @ignore
      */
     protected function newInstance(Util_Map $fields) {
@@ -171,9 +178,9 @@ class DT_Datetime extends DT_Date {
     }
     
     /**
-     * "hh:mm" 形式の文字列を返します.
+     * このオブジェクトの時刻部分の文字列を "hh:mm" 形式で返します.
      * 
-     * @return string このオブジェクトの時刻表現
+     * @return string "hh:mm" 形式の文字列
      */
     public function formatTime() {
         $hour = str_pad($this->hour,   2, '0', STR_PAD_LEFT);

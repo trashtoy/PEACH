@@ -14,9 +14,8 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * parseDate, parseDatetime, parseTimestamp のすべてのメソッドで受け付けますが,
  * "2012-05-21" のような文字列は parseDate だけしか受け付けません.
  * 
- * このクラスはタイムゾーンを扱うことが出来ます.
- * タイムゾーン付きの時間文字列を parse した場合は, 
- * 時間オブジェクトに変換する際に内部のタイムゾーンに合わせて時刻を調整します.
+ * このクラスはタイムゾーンを適切に扱うことが出来ます.
+ * parse 系メソッドでは, 時間オブジェクトに変換する際に内部のタイムゾーンに合わせて時刻を調整します.
  * 例えばシステム時刻が UTC+9 として, GMT の時間文字列 "2012-05-20T22:30Z" を parse した場合
  * 9 時間進ませた時間オブジェクト (new DT_Datetime(2012, 5, 21, 7, 30) に等価) を生成します.
  * 
@@ -72,9 +71,17 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * タイムゾーンを扱わない場合は, コンストラクタの代わりに
      * {@link DT_W3cDatetimeFormat::getDefault()} を使って下さい.
      * 
-     * 引数 $externalOffset を指定することで, 書式化する際のタイムゾーンの値を設定することが出来ます.
+     * 引数 $externalOffset を指定することで, 
+     * 書式化する際のタイムゾーンの値を設定することが出来ます.
      * (デフォルトはシステム時刻のタイムゾーンとなります)
-     * さらに $internalOffset を指定することで時間オブジェクトのタイムゾーンを指定することも出来ます.
+     * さらに $internalOffset を指定することで,
+     * システム時刻のタイムゾーンとして任意の値を指定することも出来ます.
+     * 
+     * $externalOffset と $internalOffset を省略した場合, デフォルト値としてシステム時刻の設定
+     * ({@link DT_Util::getTimeZoneOffset()}) と同じ値が指定されます.
+     * UTC+1 以上の時差を設定する場合は負の値,
+     * UTC-1 以下の時差を設定する場合は正の値を指定してください.
+     * 
      * 以下に, $externalOffset と $internalOffset の組み合わせによる動作例を示します.
      * 
      * <code>
@@ -94,13 +101,8 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * var_dump($d->format($f3)); // "2012-05-21T16:30+09:00" (GMT の時刻を UTC+9 として書式化)
      * </code>
      * 
-     * $externalOffset と $internalOffset を省略した場合, デフォルト値としてシステム時刻の設定
-     * ({@link DT_Util::getTimeZoneOffset()}) と同じ値が指定されます.
-     * UTC+1 以上の時差を設定する場合は負の値,
-     * UTC-1 以下の時差を設定する場合は正の値を指定してください.
-     * 
      * @param int  $externalOffset フォーマットの時差 (単位は分, 省略した場合はシステム設定の値を使用)
-     * @param int  $internalOffset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
+     * @param int  $internalOffset システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
     public function __construct($externalOffset = NULL, $internalOffset = NULL) {
         if ($externalOffset === FALSE) {
