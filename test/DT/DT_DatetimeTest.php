@@ -117,7 +117,7 @@ class DT_DatetimeTest extends DT_AbstractTimeTest {
     public function testFormat() {
         $d = new DT_Datetime(2012, 5, 21, 7, 30);
         $this->assertSame("2012-05-21 07:30", $d->format());
-        $this->assertSame("2012-05-21T07:30", $d->format(DT_W3CDatetimeFormat::getDefault()));
+        $this->assertSame("2012-05-21T07:30", $d->format(DT_W3CDatetimeFormat::getInstance()));
     }
     
     /**

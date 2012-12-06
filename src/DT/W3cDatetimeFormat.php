@@ -69,7 +69,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
     /**
      * 指定されたタイムゾーンの条件で, 新しいフォーマットを構築します.
      * タイムゾーンを扱わない場合は, コンストラクタの代わりに
-     * {@link DT_W3cDatetimeFormat::getDefault()} を使って下さい.
+     * {@link DT_W3cDatetimeFormat::getInstance()} を使って下さい.
      * 
      * 引数 $externalOffset を指定することで, 
      * 書式化する際のタイムゾーンの値を設定することが出来ます.
@@ -139,7 +139,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * 
      * @return DT_W3cDatetimeFormat タイムゾーンに対応しないインスタンス
      */
-    public static function getDefault() {
+    public static function getInstance() {
         static $instance;
         if (!isset($instance)) {
             $instance = new self(FALSE);

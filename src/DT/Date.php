@@ -44,8 +44,8 @@ class DT_Date extends DT_AbstractTime {
     
     /**
      * 指定された文字列を解析して DT_Date オブジェクトに変換します.
-     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getDefault()}
-     * を使ってパースを行います.
+     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getInstance()}
+     * を使って解析を行います.
      * ("YYYY-MM-DD" 形式の文字列を受理します.)
      * 
      * @param  string    変換対象の文字列
@@ -54,7 +54,7 @@ class DT_Date extends DT_AbstractTime {
      */
     public static function parse($text, DT_Format $format = NULL) {
         if (!isset($format)) {
-            $format = DT_W3cDatetimeFormat::getDefault();
+            $format = DT_W3cDatetimeFormat::getInstance();
         }
         return $format->parseDate($text);
     }

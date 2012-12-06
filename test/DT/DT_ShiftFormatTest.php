@@ -42,7 +42,7 @@ class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
      * 第二引数を省略した場合に, システム時刻の時差が設定されることを確認します.
      */
     public function test__construct() {
-        $f        = DT_W3cDatetimeFormat::getDefault();
+        $f        = DT_W3cDatetimeFormat::getInstance();
         $test     = new DT_ShiftFormat($f, 300);
         $expected = new DT_ShiftFormat($f, 300, -540);
         $this->assertEquals($expected, $test);

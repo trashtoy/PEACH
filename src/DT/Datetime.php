@@ -40,8 +40,8 @@ class DT_Datetime extends DT_Date {
     
     /**
      * 指定されたテキストを解析して DT_Datetime オブジェクトに変換します.
-     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getDefault()}
-     * を使ってパースを行います.
+     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getInstance()}
+     * を使って解析を行います.
      * ("YYYY-MM-DD hh:mm" 形式の文字列を受理します.
      * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
      * 
@@ -51,7 +51,7 @@ class DT_Datetime extends DT_Date {
      */
     public static function parse($text, DT_Format $format = NULL) {
         if (!isset($format)) {
-            $format = DT_W3cDatetimeFormat::getDefault();
+            $format = DT_W3cDatetimeFormat::getInstance();
         }
         return $format->parseDatetime($text);
     }

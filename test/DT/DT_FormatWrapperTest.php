@@ -15,7 +15,7 @@ class DT_FormatWrapperTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $original     = DT_W3cDatetimeFormat::getDefault();
+        $original     = DT_W3cDatetimeFormat::getInstance();
         $f            = new DT_FormatWrapper($original);
         $this->object = $f;
     }

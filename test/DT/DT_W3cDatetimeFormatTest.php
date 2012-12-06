@@ -45,13 +45,13 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
-     * getDefault() のテストです. 以下を確認します.
+     * getInstance() のテストです. 以下を確認します.
      * 
      * - parse 時にタイムゾーン文字列をすべて無視する
      * - format 時にタイムゾーン文字列を付与しない
      */
-    public function testGetDefault() {
-        $obj = DT_W3cDatetimeFormat::getDefault();
+    public function testGetInstance() {
+        $obj = DT_W3cDatetimeFormat::getInstance();
         $this->assertEquals(new DT_Datetime(2012, 5, 21, 7, 30), $obj->parseDatetime("2012-05-21T07:30+05:00"));
         $this->assertEquals(new DT_Timestamp(2012, 5, 21, 7, 30, 45), $obj->parseTimestamp("2012-05-21T07:30:45-06:30"));
         $this->assertSame("2012-05-21T07:30",    $obj->formatDatetime(new DT_Datetime(2012, 5, 21, 7, 30)));
