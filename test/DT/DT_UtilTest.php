@@ -153,12 +153,12 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * cleanTimeZoneOffset() のテストです. 以下を確認します.
      * 
      * - 基本的に, 指定された整数をそのまま返す.
-     * - 1410 より大きい値 (-23:30 以前) は 1410 に丸める
-     * - -1410 より小さい値 (+23:30 以降) は -1410 に丸める
+     * - 1425 より大きい値 (-23:45 以前) は 1425 に丸める
+     * - -1425 より小さい値 (+23:45 以降) は -1425 に丸める
      * - 数値以外の値は整数に変換する
      */
     public function testCleanTimeZoneOffset() {
-        $expected = array(300, -540, 1410, -1410, 0);
+        $expected = array(300, -540, 1425, -1425, 0);
         $test     = array(300, NULL, 1500, -1800, "asdf");
         for ($i = 0; $i < 5; $i ++) {
             $this->assertSame($expected[$i], DT_Util::cleanTimeZoneOffset($test[$i]));
