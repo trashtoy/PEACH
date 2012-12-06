@@ -29,15 +29,37 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * 新しいフォーマットを生成します.
-     * 引数 $offset を指定することで, 時間オブジェクトとフォーマットの時差を設定することが出来ます.
-     * デフォルトでは, システム時刻の時差 ({@link DT_Util::getTimeZoneOffset()} の返り値と等価)
-     * を使用します.
+     * 引数 $offset を指定した場合, parse または format を行った際に,
+     * 指定された時差の量だけ時刻に補正がかかります.
      * もしも時差に応じた自動変換が必要ない場合は $offset に 0 を指定してください.
+     * 
+     * 引数を省略した場合は, システム時刻の時差 ({@link DT_Util::getTimeZoneOffset()} の返り値と等価)
+     * を使用します. 特に必要がなければ引数なしのコンストラクタを使う代わりに
+     * {@link DT_HttpDateFormat::getInstance() getInstance()} を使ってください.
      * 
      * @param int $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
     public function __construct($offset = NULL) {
         $this->internalOffset = DT_Util::cleanTimeZoneOffset($offset);
+    }
+    
+    /**
+     * デフォルトのインスタンスを返します.
+     * このメソッドは引数なしでコンストラクタを呼び出した場合と同じ結果を返しますが,
+     * 返り値がキャッシュされるため, 複数の場所で同じインスタンスを使いまわすことができます.
+     * 
+     * システムのタイムゾーン設定を動的に変更した場合は, 変更前のキャッシュを破棄する必要があるため,
+     * 引数 $clearCache に TRUE を指定して実行してください.
+     * 
+     * @param  bool $clearCache  キャッシュを破棄してインスタンスを再生成する場合は TRUE
+     * @return DT_HttpDateFormat デフォルトのインスタンス
+     */
+    public static function getInstance($clearCache = FALSE) {
+        static $instance = NULL;
+        if (!isset($instance) || $clearCache) {
+            $instance = new self();
+        }
+        return $instance;
     }
     
     /**

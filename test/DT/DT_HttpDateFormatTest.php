@@ -43,6 +43,26 @@ class DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase {
     }
     
     /**
+     * getInstance のテストです. 以下を確認します.
+     * 
+     * - 引数なしのコンストラクタと同じ結果を返すこと
+     * - 複数回実行した場合に同じインスタンスを返すこと
+     * - 引数 $clearCache を指定した場合に新しいインスタンスを生成すること
+     */
+    public function testGetInstance() {
+        $f1 = new DT_HttpDateFormat();
+        $f2 = DT_HttpDateFormat::getInstance();
+        $f3 = DT_HttpDateFormat::getInstance();
+        $f4 = DT_HttpDateFormat::getInstance(TRUE);
+        $f5 = DT_HttpDateFormat::getInstance();
+        
+        $this->assertEquals($f1, $f2);
+        $this->assertSame($f2, $f3);
+        $this->assertSame($f4, $f5);
+        $this->assertNotSame($f3, $f4);
+    }
+    
+    /**
      * どのテスト用フォーマットも 2009-02-14 に変換されることを確認します.
      */
     public function testParseDate() {
