@@ -1,13 +1,87 @@
 <?xml version="1.0" ?>
 <refentry id="{@id DT.init}">
-  <refnamediv>
-    <refname>オブジェクトの生成方法</refname>
-  </refnamediv>
-  <refsynopsisdiv>
-    Author : <author>trashtoy</author>
-  </refsynopsisdiv>
-  {@toc}
-  <refsect1 id="{@id DT.init.summary}">
-    <title>オブジェクトの生成方法</title>
-  </refsect1>
+    <refnamediv>
+        <refname>オブジェクトの生成方法</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <para>
+        時間オブジェクトの生成方法には, 主に以下の種類があります.
+        それぞれについて簡単に説明します.
+    </para>
+    <refsect1 id="{@id DT.init.constructor}">
+        <title>コンストラクタから</title>
+        <para>
+            時間オブジェクトの最も基本的な生成方法は, コンストラクタを使用したものです.
+            以下に例を示します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = new DT_Date(2012, 5, 21);                 
+$d2 = new DT_Datetime(2012, 5, 21, 7, 30);      
+$d3 = new DT_Timestamp(2012, 5, 21, 7, 30, 45);
+echo $d1; // 2012-05-21
+echo $d2; // 2012-05-21 07:30
+echo $d3; // 2012-05-21 07:30:45
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id DT.init.now}">
+        <title>クラスメソッド now</title>
+        <para>
+            {@link DT_Date}, {@link DT_Datetime}, {@link DT_Timestamp}
+            はそれぞれ now() というクラスメソッドを持っています.
+            現在時刻を取得するには now() メソッドを使ってください.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = DT_Date::now();
+$d2 = DT_Datetime::now();
+$d3 = DT_Timestamp::now();
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id DT.init.parse}">
+        <title>クラスメソッド parse</title>
+        <para>
+            {@link DT_Date}, {@link DT_Datetime}, {@link DT_Timestamp}
+            それぞれに定義されている parse() というクラスメソッドを使うことで,
+            文字列を時間オブジェクトに変換することができます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = DT_Date::parse("2012-05-21");
+$d2 = DT_Datetime::parse("2012-05-21 07:30");
+$d3 = DT_Timestamp::parse("2012-05-21 07:30:45");
+
+// フォーマットを指定する場合
+$f  = new DT_SimpleFormat("Ymd_His");
+$d1 = DT_Date::parse("20120521_073045", $f);
+$d2 = DT_Datetime::parse("20120521_073045", $f);
+$d3 = DT_Timestamp::parse("20120521_073045", $f);
+echo $d1; // "2012-05-21"
+echo $d2; // "2012-05-21 07:30"
+echo $d3; // "2012-05-21 07:30:45"
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id DT.init.cast}">
+        <title>キャスト用メソッド</title>
+        <para>
+            各種キャスト用メソッド (toDate, toDatetime, toTimestamp)
+            を使い, とある時間オブジェクトを別の型に変換することができます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = new DT_Date(2012, 5, 21);
+$d2 = $d1->toDatetime();
+$d3 = $d1->toTimestamp();
+echo $d1; // "2012-05-21"
+echo $d2; // "2012-05-21 00:00"
+echo $d3; // "2012-05-21 00:00:00"
+            ]]>
+        </programlisting>
+    </refsect1>
 </refentry>
