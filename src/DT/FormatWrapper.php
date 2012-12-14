@@ -53,7 +53,7 @@ class DT_FormatWrapper implements DT_Format {
     
     /**
      * ラップ対象のオブジェクトの formatDate メソッドを実行します.
-     * @param  DT_Date $d
+     * @param  DT_Date $d 書式化対象の時間オブジェクト
      * @return string オリジナルの formatDate の結果
      */
     public function formatDate(DT_Date $d) {
@@ -62,7 +62,7 @@ class DT_FormatWrapper implements DT_Format {
     
     /**
      * ラップ対象のオブジェクトの formatDatetime メソッドを実行します.
-     * @param  DT_Datetime $d
+     * @param  DT_Datetime $d 書式化対象の時間オブジェクト
      * @return string オリジナルの formatDatetime の結果
      */
     public function formatDatetime(DT_Datetime $d) {
@@ -71,7 +71,7 @@ class DT_FormatWrapper implements DT_Format {
     
     /**
      * ラップ対象のオブジェクトの formatTimestamp メソッドを実行します.
-     * @param  DT_Timestamp $d
+     * @param  DT_Timestamp $d 書式化対象の時間オブジェクト
      * @return string オリジナルの formatTimestamp の結果
      */
     public function formatTimestamp(DT_Timestamp $d) {
@@ -80,7 +80,7 @@ class DT_FormatWrapper implements DT_Format {
     
     /**
      * ラップ対象のオブジェクトの parseDate メソッドを実行します.
-     * @param  string $format
+     * @param  string $format 解析対象の文字列
      * @return DT_Time オリジナルの parseDate の結果
      */
     public function parseDate($format) {
@@ -89,7 +89,7 @@ class DT_FormatWrapper implements DT_Format {
     
     /**
      * ラップ対象のオブジェクトの parseDatetime メソッドを実行します.
-     * @param  string $format
+     * @param  string $format 解析対象の文字列
      * @return DT_Time オリジナルの parseDatetime の結果
      */
     public function parseDatetime($format) {
@@ -98,7 +98,7 @@ class DT_FormatWrapper implements DT_Format {
     
     /**
      * ラップ対象のオブジェクトの parseTimestamp メソッドを実行します.
-     * @param  string $format
+     * @param  string $format 解析対象の文字列
      * @return DT_Time オリジナルの parseTimestamp の結果
      */
     public function parseTimestamp($format) {

@@ -169,7 +169,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * "YYYY-MM-DD" 形式の文字列をパースします.
+     * "YYYY-MM-DD" 形式の文字列を解析します.
      * 
      * @return DT_Date
      * @see DT_Format::parseDate()
@@ -188,10 +188,10 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * "YYYY-MM-DDThh:mm" 形式の文字列をパースします.
+     * "YYYY-MM-DDThh:mm" 形式の文字列を解析します.
      * 文字列の末尾にタイムゾーン (+hh:mm や -hh:mm など) を含む場合は, システム時刻への変換を行います.
      * 
-     * @return DT_Datetime
+     * @return DT_Datetime 解析結果
      * @see DT_Format::parseDatetime()
      */
     public function parseDatetime($format) {
@@ -212,8 +212,8 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * "YYYY-MM-DDThh:mm:ss" 形式の文字列をパースします.
-     * @return DT_Timestamp
+     * "YYYY-MM-DDThh:mm:ss" 形式の文字列を解析します.
+     * @return DT_Timestamp 解析結果
      * @see DT_Format::parseTimestamp()
      */
     public function parseTimestamp($format) {
@@ -235,8 +235,8 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * "YYYY-MM-DD" 形式の文字列を返します.
-     * @return string
+     * 指定された時間オブジェクトを "YYYY-MM-DD" 形式の文字列に変換します.
+     * @return string "YYYY-MM-DD" 形式の文字列
      * @see    DT_Format::formatDate()
      */
     public function formatDate(DT_Date $d) {
@@ -244,8 +244,10 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * "YYYY-MM-DDThh:mm" 形式の文字列を返します.
-     * @return string
+     * 指定された時間オブジェクトを "YYYY-MM-DDThh:mm" 形式の文字列に変換します.
+     * このインスタンスがタイムゾーンに対応している場合, 末尾にタイムゾーン文字列も付加します.
+     * 
+     * @return string "YYYY-MM-DDThh:mm" 形式の文字列
      * @see    DT_Format::formatDatetime()
      */
     public function formatDatetime(DT_Datetime $d) {
@@ -254,8 +256,10 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * "YYYY-MM-DDThh:mm:ss" 形式の文字列を返します.
-     * @return string
+     * 指定された時間オブジェクトを "YYYY-MM-DDThh:mm:ss" 形式の文字列に変換します.
+     * このインスタンスがタイムゾーンに対応している場合, 末尾にタイムゾーン文字列も付加します.
+     * 
+     * @return string "YYYY-MM-DDThh:mm:ss" 形式の文字列
      * @see    DT_Format::formatTimestamp()
      */
     public function formatTimestamp(DT_Timestamp $d) {

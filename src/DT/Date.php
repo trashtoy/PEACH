@@ -309,13 +309,13 @@ class DT_Date extends DT_AbstractTime {
      * 
      * @return int 曜日 (0 以上 6 以下の整数)
      * 
-     * @see    DT_Date::SUNDAY
-     * @see    DT_Date::MONDAY
-     * @see    DT_Date::TUESDAY
-     * @see    DT_Date::WEDNESDAY
-     * @see    DT_Date::THURSDAY
-     * @see    DT_Date::FRIDAY
-     * @see    DT_Date::SATURDAY
+     * @see    DT_Time::SUNDAY
+     * @see    DT_Time::MONDAY
+     * @see    DT_Time::TUESDAY
+     * @see    DT_Time::WEDNESDAY
+     * @see    DT_Time::THURSDAY
+     * @see    DT_Time::FRIDAY
+     * @see    DT_Time::SATURDAY
      */
     public function getDay() {
         return self::getDayOf($this->year, $this->month, $this->date);

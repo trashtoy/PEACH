@@ -152,18 +152,18 @@ class DT_HttpDateFormat implements DT_Format {
      * この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.
      * 例えばシステム時刻の時差が UTC+9 だった場合, 前日の 15:00 の HTTP-date 表現を返り値とします.
      * 
-     * @param  DT_Date
-     * @return string
+     * @param  DT_Date 書式化対象の時間オブジェクト
+     * @return string この日付の HTTP-date 表現
      */
     public function formatDate(DT_Date $d) {
         return $this->formatDatetime($d->toDatetime());
     }
     
     /**
-     * この時刻の Http-date 表現を返します.
+     * この時刻の HTTP-date 表現を返します.
      * 
-     * @param  DT_Datetime
-     * @return string
+     * @param  DT_Datetime 書式化対象の時間オブジェクト
+     * @return string この時刻の HTTP-date 表現
      */
     public function formatDatetime(DT_Datetime $d) {
         $d = $d->add("minute", $this->internalOffset);
@@ -179,10 +179,10 @@ class DT_HttpDateFormat implements DT_Format {
     }
     
     /**
-     * この時刻の Http-date 表現を返します.
+     * この時刻の HTTP-date 表現を返します.
      * 
-     * @param  DT_Timestamp
-     * @return string
+     * @param  DT_Timestamp 書式化対象の時間オブジェクト
+     * @return string この時刻の HTTP-date 表現
      */
     public function formatTimestamp(DT_Timestamp $d) {
         return $this->formatDatetime($d);
@@ -191,7 +191,7 @@ class DT_HttpDateFormat implements DT_Format {
     /**
      * parse に失敗した場合に呼び出されます.
      * 
-     * @param  string $format
+     * @param  string $format parse に失敗した文字列
      * @throws Exception
      */
     private function throwFormatException($format) {
@@ -200,7 +200,7 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * 月の略称一覧です
-     * @return array
+     * @return array "Jan" から "Dec" までの月の略称を持つ配列
      */
     private function getMonthMapping() {
         static $mapping = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
@@ -209,7 +209,8 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * 月の略称を書式化します.
-     * @return string
+     * @param  int    月
+     * @return string 引数の月の略称
      */
     private function getMonthDescription($month) {
         $mapping = $this->getMonthMapping();
@@ -218,8 +219,8 @@ class DT_HttpDateFormat implements DT_Format {
     
     /**
      * 月の略称を月に変換します.
-     * @param  string $mon
-     * @return int
+     * @param  string $mon 月の略称
+     * @return int 引数の略称の数値表現 (1 から 12)
      */
     private function parseMonthDescription($mon) {
         $mapping = $this->getMonthMapping();

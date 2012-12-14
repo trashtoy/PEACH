@@ -182,7 +182,7 @@ abstract class DT_AbstractTime implements DT_Time {
      * compareTo による比較結果が 0 を返し, かつクラスが同じ場合に TRUE を返します.
      *
      * @param  mixed   $obj 比較対象のオブジェクト
-     * @return boolean      二つのオブジェクトが等しい場合に TRUE, それ以外は FALSE
+     * @return bool         二つのオブジェクトが等しい場合に TRUE, それ以外は FALSE
      */
     public function equals($obj) {
         if (get_class($this) != get_class($obj)) return FALSE;
@@ -199,7 +199,7 @@ abstract class DT_AbstractTime implements DT_Time {
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      *
      * @param  DT_Time $time 比較対象の時間
-     * @return boolean         この時間のほうが過去である場合は TRUE, それ以外は FALSE
+     * @return bool          この時間のほうが過去である場合は TRUE, それ以外は FALSE
      */
     public final function before(DT_Time $time) {
         $c = $this->compareTo($time);
@@ -216,7 +216,7 @@ abstract class DT_AbstractTime implements DT_Time {
      * 例: 2012-05-21 (DT_Date) < 2012-05-21T00:00 (DT_Datetime) < 2012-05-21T00:00:00 (DT_Timestamp)
      *
      * @param  DT_Time $time 比較対象の時間
-     * @return boolean   この時間のほうが未来である場合は TRUE, それ以外は FALSE
+     * @return bool          この時間のほうが未来である場合は TRUE, それ以外は FALSE
      */
     public final function after(DT_Time $time) {
         $c = $this->compareTo($time);
