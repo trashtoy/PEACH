@@ -139,21 +139,6 @@ class DT_W3cDatetimeFormat implements DT_Format {
     }
     
     /**
-     * 時差の設定値を調整して返します.
-     * もしも -23:30 以前の時差が設定された場合は -23:30 に切り上げられます.
-     * もしも +23:30 以後の時差が設定された場合は +23:30 に切り下げられます.
-     * NULL が指定された場合はシステム時刻の時差を設定します.
-     * 
-     * @param  int $offset
-     * @return int
-     */
-    private function initOffset($offset) {
-        return isset($offset) ? 
-            Util_Values::intValue($offset, -1410, 1410) : // -23:30 から +23:30 まで
-            DT_Util::getTimeZoneOffset();
-    }
-    
-    /**
      * デフォルトのインスタンスを返します.
      * このメソッドから生成されたオブジェクトは, parse の際にタイムゾーンを一切考慮しません.
      * また, 書式化する際にタイムゾーン文字列を付与しません.
