@@ -28,6 +28,7 @@
     <section>
         <h1>パッケージ</h1>
         <ul>
+            <li><a href="../li_DT.html">DT</a></li>
             <li><a href="../li_Util.html">Util</a></li>
         </ul>
     </section>
@@ -54,7 +55,8 @@
             <li><a href="../Util/Util_Equator.html">Util_Equator</a></li>
             <li><a href="../Util/Util_Map.html">Util_Map</a></li>
             <li><a href="../Util/Util_MapEntry.html">Util_MapEntry</a></li>
-        </ul>
+        </ul>
+
     </section>
     <section>
         <h1>クラス</h1>
@@ -70,34 +72,36 @@
             <li><a href="../Util/Util_ReverseComparator.html">Util_ReverseComparator</a></li>
             <li><a href="../Util/Util_Strings.html">Util_Strings</a></li>
             <li><a href="../Util/Util_Values.html">Util_Values</a></li>
-        </ul>
+        </ul>
+
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
-            <li><a href="../Util/_AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
-            <li><a href="../Util/_ArrayMap.php.html">ArrayMap.php</a></li>
-            <li><a href="../Util/_ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
-            <li><a href="../Util/_Arrays.php.html">Arrays.php</a></li>
-            <li><a href="../Util/_Comparable.php.html">Comparable.php</a></li>
-            <li><a href="../Util/_Comparator.php.html">Comparator.php</a></li>
-            <li><a href="../Util/_DefaultComparator.php.html">DefaultComparator.php</a></li>
-            <li><a href="../Util/_DefaultEquator.php.html">DefaultEquator.php</a></li>
-            <li><a href="../Util/_Equator.php.html">Equator.php</a></li>
-            <li><a href="../Util/_HashMap.php.html">HashMap.php</a></li>
-            <li><a href="../Util/_HashMapEntry.php.html">HashMapEntry.php</a></li>
-            <li><a href="../Util/_load.php.html">load.php</a></li>
-            <li><a href="../Util/_Map.php.html">Map.php</a></li>
-            <li><a href="../Util/_MapEntry.php.html">MapEntry.php</a></li>
-            <li><a href="../Util/_ReverseComparator.php.html">ReverseComparator.php</a></li>
-            <li><a href="../Util/_Strings.php.html">Strings.php</a></li>
-            <li><a href="../Util/_Values.php.html">Values.php</a></li>
-        </ul>
+            <li><a href="../Util/_Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Util---load.php.html">load.php</a></li>
+            <li><a href="../Util/_Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_Util---ReverseComparator.php.html">ReverseComparator.php</a></li>
+            <li><a href="../Util/_Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_Util---Values.php.html">Values.php</a></li>
+        </ul>
+
     </section>
 </nav>
 <section id="main">
 <h1 class="symbol">インタフェース: Util_Equator</h1>
-<p class="src_location">定義: <code>/Equator.php</code></p>
+<p class="src_location">定義: <code>/Util/Equator.php</code></p>
 <div class="docblock"><p>二つの値が等価かどうかを調べるためのインタフェースです.</p><p><a href="../Util/Util_HashMap.html">Util_HashMap</a> などでキーの等価性をチェックするために使用されます.</p></div>
 <section class="tags">
     <h1>Tags</h1>
@@ -120,7 +124,7 @@
 <section class="class_fields" id="class_methods">
 <h1>メソッド 詳細</h1>
 <section id="methodequate">
-    <h1 class="symbol"><b>equate</b> <span class="smalllinenumber">[line 18]</span></h1>
+    <h1 class="symbol"><b>equate</b> <span class="smalllinenumber">[line 39]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>bool equate(mixed $var1, mixed $var2)</code>
@@ -153,15 +157,17 @@
 </section>
 
 <section id="methodhashCode">
-    <h1 class="symbol"><b>hashCode</b> <span class="smalllinenumber">[line 33]</span></h1>
+    <h1 class="symbol"><b>hashCode</b> <span class="smalllinenumber">[line 57]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>int hashCode(mixed $var)</code>
         </div>
-        <div class="docblock"><p>指定された値のハッシュ値を計算します.</p><p>もしもこのオブジェクトの equate($var1, $var2) が TRUE を返す場合,  hashCode($var1) と hashCode($var2) が必ず同じ値を返すようにしなければなりません.</p><p>この制約条件は Java の  <a href="http://java.sun.com/javase/ja/6/docs/ja/api/java/lang/Object.html#equals(java.lang.Object)">java.lang.Object#equals()</a>,  <a href="http://java.sun.com/javase/ja/6/docs/ja/api/java/lang/Object.html#hashCode()">java.lang.Object#hashCode()</a>  で定義されている規約に相当します.</p></div>
+        <div class="docblock"><p>指定された値のハッシュ値を計算します.</p><p>もしもこのオブジェクトの equate($var1, $var2) が TRUE を返す場合,  hashCode($var1) と hashCode($var2) が必ず同じ値を返すようにしなければなりません.</p><p>この制約条件は, Java で例えると  <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Object.html#equals(java.lang.Object)">java.lang.Object#equals()</a>,  <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Object.html#hashCode()">java.lang.Object#hashCode()</a>  で定義されている規約に相当します.</p><p>また, このメソッドは不正な値が指定された場合に任意の例外を投げる必要があります.</p></div>
         <section class="tags">
             <h1>Tags</h1>
             <ul>
+                <li>return : ハッシュ値</li>
+                <li>throws : Exception  不正な値が指定された場合</li>
                 <li>access : public</li>
             </ul>
         </section>
@@ -171,7 +177,7 @@
                 <tr>
                     <td class="type">mixed</td>
                     <td class="varname">$var</td>
-                    <td>&nbsp;</td>
+                    <td>任意の値</td>
                 </tr>
             </table>
         </section>
@@ -183,7 +189,7 @@
 
 </section>
 <footer>
-    Documentation generated on Fri, 10 Aug 2012 21:50:14 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:34 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

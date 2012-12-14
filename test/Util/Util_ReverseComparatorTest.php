@@ -1,6 +1,5 @@
 <?php
-
-require_once 'Util/load.php';
+require_once dirname(__FILE__) . '/../../src/Util/load.php';
 
 /**
  * Test class for Util_ReverseComparator.

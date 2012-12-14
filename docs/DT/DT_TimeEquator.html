@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Docs For Class DT_TimeEquator</title>
+    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <!--[if lt IE 9]>
+    <script src="../media/html5.js"></script>  
+    <![endif]-->
+</head>
+<body>
+<header>
+    <h1>DT</h1>
+    <nav>
+        <h1>グローバルナビゲーション</h1>
+        <ul>
+            <li><a href="../classtrees_DT.html">class tree: DT</a></li>
+            <li><a href="../elementindex_DT.html">index: DT</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="menu">
+    <h1>メニュー</h1>
+    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DT/DT_Format.html">DT_Format</a></li>
+            <li><a href="../DT/DT_Time.html">DT_Time</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a></li>
+            <li><a href="../DT/DT_Date.html">DT_Date</a></li>
+            <li><a href="../DT/DT_Datetime.html">DT_Datetime</a></li>
+            <li><a href="../DT/DT_FormatWrapper.html">DT_FormatWrapper</a></li>
+            <li><a href="../DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a></li>
+            <li><a href="../DT/DT_ShiftFormat.html">DT_ShiftFormat</a></li>
+            <li><a href="../DT/DT_SimpleFormat.html">DT_SimpleFormat</a></li>
+            <li><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></li>
+            <li><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></li>
+            <li><a href="../DT/DT_TimeWrapper.html">DT_TimeWrapper</a></li>
+            <li><a href="../DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a></li>
+            <li><a href="../DT/DT_Util.html">DT_Util</a></li>
+            <li><a href="../DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DT/_DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_DT---load.php.html">load.php</a></li>
+            <li><a href="../DT/_DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
+    </section>
+</nav>
+<section id="main">
+<h1 class="symbol">クラス: DT_TimeEquator</h1>
+<p class="src_location">定義: <code>/DT/TimeEquator.php</code></p>
+<div class="docblock"><p>時間オブジェクトの比較を行うための Equator です.</p><p>このクラスは, 時間オブジェクトをキーとした <a href="../Util/Util_HashMap.html">HashMap</a>  を構築する際に使用してください.</p></div>
+
+
+
+<section id="implements_interfaces">
+    <h1>すべての実装されたインタフェース</h1>
+    <ul class="enums">
+        <li><a href="../Util/Util_Equator.html">Util_Equator</a></li>
+    </ul>
+</section>
+
+<section id="methods">
+    <h1><a href="#class_methods">メソッド</a></h1>
+    <ul class="enums">
+        <li><a href="../DT/DT_TimeEquator.html#method__construct">__construct</a></li>
+        <li><a href="../DT/DT_TimeEquator.html#methodequate">equate</a></li>
+        <li><a href="../DT/DT_TimeEquator.html#methodgetDefault">getDefault</a></li>
+        <li><a href="../DT/DT_TimeEquator.html#methodhashCode">hashCode</a></li>
+    </ul>
+</section>
+
+
+<section class="class_fields" id="class_methods">
+<h1>メソッド 詳細</h1>
+<section id="methodgetDefault">
+    <h1 class="symbol">static <b>getDefault</b> <span class="smalllinenumber">[line 113]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>
+                static <a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a> getDefault()
+            </code>
+        </div>
+        <div class="docblock"><p>デフォルトの DT_Equator オブジェクトを返します.</p><p>このオブジェクトは <a href="../DT/DT_Time.html#methodequals">DT_Time::equals()</a> を使って等値性を調べます.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+<section id="method__construct">
+    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 77]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>DT_TimeEquator __construct([mixed $fields = NULL])</code>
+        </div>
+        <div class="docblock"><p>比較対象のフィールドを指定して, 新しい DT_TimeEquator オブジェクトを作成します.</p><p>引数の指定方法には以下の方法があります.</p><ol class="src"><li><div class="src-line">&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;minute&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;second&quot;</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></span><span class="src-sym">(</span><span class="src-str">&quot;date&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></span><span class="src-sym">(</span><span class="src-id"><a href="../DT/DT_Time.html">DT_Time</a></span><span class="src-sym">::</span><span class="src-id">TYPE_DATE</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol><p>引数なしでオブジェクトを生成した場合, このオブジェクトは  <a href="../DT/DT_Time.html#methodequals">DT_Time::equals()</a> を使って比較を行います.  通常は, 引数なしのコンストラクタを使う代わりに  <a href="../DT/DT_TimeEquator.html#methodgetDefault">DT_TimeEquator::getDefault()</a> を使用してください.</p><p>引数に比較対象のフィールドを配列で指定した場合,  指定されたフィールドすべてが等しい場合に等価とみなします.</p><p>比較対象のフィールドが 1 つだけの場合, そのフィールドを文字列で指定することもできます.</p><p>また, 以下の定数を使用することもできます.</p><ul><li><a href="../DT/DT_Time.html#constTYPE_DATE">DT_Time::TYPE_DATE</a></li><li><a href="../DT/DT_Time.html#constTYPE_DATETIME">DT_Time::TYPE_DATETIME</a></li><li><a href="../DT/DT_Time.html#constTYPE_TIMESTAMP">DT_Time::TYPE_TIMESTAMP</a></li></ul><p>それぞれ</p><ul><li>array(&quot;year&quot;, &quot;month&quot;, &quot;date&quot;)</li><li>array(&quot;year&quot;, &quot;month&quot;, &quot;date&quot;, &quot;hour&quot;, &quot;minute&quot;)</li><li>array(&quot;year&quot;, &quot;month&quot;, &quot;date&quot;, &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot;)</li></ul><p>を指定した場合と同じになります.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">mixed</td>
+                    <td class="varname">$fields</td>
+                    <td>比較対象のフィールド一覧</td>
+                </tr>
+            </table>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodequate">
+    <h1 class="symbol"><b>equate</b> <span class="smalllinenumber">[line 131]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>bool equate(<a href="../DT/DT_Time.html">DT_Time</a> $var1, <a href="../DT/DT_Time.html">DT_Time</a> $var2)</code>
+        </div>
+        <div class="docblock"><p>指定された 2 つの時間オブジェクトが等しいかどうか調べます.</p><p>この Equator に設定されているフィールドについて比較を行い,  全て等しい場合のみ TRUE を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : 2 つの時間オブジェクトが等しいと判断された場合のみ TRUE</li>
+                <li>throws : Exception 引数に DT_Time インスタンス以外の値が指定された場合</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Time.html">DT_Time</a></td>
+                    <td class="varname">$var1</td>
+                    <td>比較対象の時間オブジェクト</td>
+                </tr>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Time.html">DT_Time</a></td>
+                    <td class="varname">$var2</td>
+                    <td>比較対象の時間オブジェクト</td>
+                </tr>
+            </table>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+
+<section id="methodhashCode">
+    <h1 class="symbol"><b>hashCode</b> <span class="smalllinenumber">[line 159]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>int hashCode(mixed $var)</code>
+        </div>
+        <div class="docblock"><p>年・月・日・時・分・秒の各フィールドからハッシュ値を算出します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : ハッシュ値</li>
+                <li>throws : Exception  引数が DT_Time インスタンスでなかった場合</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">mixed</td>
+                    <td class="varname">$var</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+</section>
+
+</section>
+<footer>
+    Documentation generated on Sat, 15 Dec 2012 00:35:36 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+</footer>
+</body>
+</html>

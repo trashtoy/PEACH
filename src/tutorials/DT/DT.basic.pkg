@@ -1,0 +1,162 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DT.basic}">
+    <refnamediv>
+        <refname>基本的な使用方法</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id DT.basic.about}">
+        <title>時間オブジェクトとは</title>
+        <para>
+            特定の日付・時刻を指すインタフェース {@link DT_Time}
+            の実装クラスのことを「時間オブジェクト」と呼びます.
+            時間オブジェクトには以下の種類があります.
+        </para>
+        <itemizedlist>
+            <listitem>{@link DT_Date} : ある特定の日付を表現します</listitem>
+            <listitem>{@link DT_Datetime} : ある特定の時刻 (分まで) を表現します</listitem>
+            <listitem>{@link DT_Timestamp} : ある特定の時刻 (秒を含む) を表現します</listitem>
+        </itemizedlist>
+    </refsect1>
+    <refsect1 id="{@id DT.basic.usage}">
+        <title>時間操作メソッド</title>
+        <para>
+            時間オブジェクトの各フィールドの値を得るには
+            {@link DT_Time::get() get} メソッドを使用します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d = new DT_Date(2012, 5, 21);
+var_dump($d->get("year"));     // int(2012)
+var_dump($d->get("month"));    // int(5)
+var_dump($d->get("date"));     // int(21)
+            ]]>
+        </programlisting>
+        <para>
+            時刻の計算方法 (特定のフィールドを足したり引いたりする) には
+            {@link DT_Time::add() add}, {@link DT_Time::set() set}, 
+            {@link DT_Time::setAll() setAll} などの種類があります.
+            これらのメソッドは新しい時間オブジェクトを返します.
+            (既存の時間オブジェクトの内部状態は変化しません)
+        </para>
+        <para>以下に使い方の例を挙げます.</para>
+        <programlisting role="php">
+            <![CDATA[
+$d  = new DT_Date(2012, 5, 21);
+
+$d1 = $d->add("date", 15);
+echo $d1; // 2012-06-05
+
+$d2 = $d->add("month", -3);
+echo $d2; // 2012-02-21
+
+$d3 = $d->set("year", 2000);
+echo $d3; // 2000-05-21
+
+$d4 = $d->setAll(array("month" => 12, "date"  => 24));
+echo $d4; // 2012-12-24
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id DT.basic.field}">
+        <title>フィールド指定方法</title>
+        <para>
+            各メソッドの引数には
+            "year", "month", "date", "hour", "minute", "second" などを指定します.
+            具体的には以下の規則に従って解釈されます. (大文字・小文字は区別しません)
+        </para>
+        <itemizedlist>
+            <listitem>先頭が "Y" で始まる場合 : 年</listitem>
+            <listitem>先頭が "MO" で始まる場合 : 月</listitem>
+            <listitem>先頭が "D" で始まる場合 : 日</listitem>
+            <listitem>先頭が "H" で始まる場合 : 時</listitem>
+            <listitem>先頭が "M" で始まり, 直後に "O" が続かない場合 : 分</listitem>
+            <listitem>先頭が "S" で始まる場合 : 秒</listitem>
+        </itemizedlist>
+        <para>無効なフィールド名を指定した場合, その指定は無視されます.</para>
+        <para>
+            例えば, 時・分・秒のフィールドを持たない DT_Date オブジェクトに対して,
+            引数に "hour" を指定して add メソッドを実行した場合, 
+            元のオブジェクトと同じオブジェクトを返します.
+        </para>
+        <para>get の引数に無効な引数を指定した場合は NULL が返ります.</para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = new DT_Date(2012, 5, 21);            // 2012-05-21
+$d2 = new DT_Datetime(2012, 5, 21, 7, 30); // 2012-05-21 07:30
+
+$d3 = $d1->set("hour", 10); // 無効な設定なので何も変化しない. $d1 == $d3 となる
+$d4 = $d2->set("hour", 10); // 2012-05-21 10:30 になる
+
+var_dump($d1->get("hour")); // NULL
+var_dump($d2->get("hour")); // int(7)
+var_dump($d3->get("hour")); // NULL
+var_dump($d4->get("hour")); // int(10)
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id DT.basic.comp}">
+        <title>ソート・比較</title>
+        <para>
+            時間オブジェクトの配列は, {@link Util_Arrays::sort()}
+            を使って簡単にソートすることが出来ます.
+            以下に例を示します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$arr = array(
+    new DT_Date(2012, 1, 1),
+    new DT_Datetime(2012, 11, 23, 21, 0),
+    new DT_Date(2012, 11, 23),
+    new DT_Timestamp(2012, 8, 31, 12, 34, 56),
+    new DT_Datetime(2012, 5, 3, 10, 20),
+    new DT_Timestamp(2012, 3, 3, 11, 22, 33)
+);
+
+$arr2 = Util_Arrays::sort($arr);
+foreach ($arr2 as $d) {
+    echo $d->format() . "\n";
+}
+            ]]>
+        </programlisting>
+        <para>このコードは以下を出力します.</para>
+        <programlisting>
+            <![CDATA[
+2012-01-01
+2012-03-03 11:22:33
+2012-05-03 10:20
+2012-08-31 12:34:56
+2012-11-23
+2012-11-23 21:00
+            ]]>
+        </programlisting>
+        <para>
+            {@link DT_Time::before() before()},
+            {@link DT_Time::after() after()} を使って時間オブジェクト同士の比較をすることができます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = new DT_Date(2012, 5, 1);
+$d2 = new DT_Date(2012, 3, 31);
+
+var_dump($d1->after($d2));  // bool(true)
+var_dump($d1->before($d2)); // bool(false)
+            ]]>
+        </programlisting>
+        <para>
+            異なる型の時間オブジェクト同士も比較することができますが,
+            もしも共通するフィールドがすべて等しい場合は, 上位の型のほうが「後」とみなされることに注意してください.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d1 = new DT_Date(2012, 5, 21);
+$d2 = new DT_Timestamp(2012, 5, 21, 0, 0, 0;
+
+var_dump($d1->after($d2));  // bool(false)
+var_dump($d1->before($d2)); // bool(true)
+            ]]>
+        </programlisting>
+    </refsect1>
+</refentry>

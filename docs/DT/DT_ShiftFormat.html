@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Docs For Class DT_ShiftFormat</title>
+    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <!--[if lt IE 9]>
+    <script src="../media/html5.js"></script>  
+    <![endif]-->
+</head>
+<body>
+<header>
+    <h1>DT</h1>
+    <nav>
+        <h1>グローバルナビゲーション</h1>
+        <ul>
+            <li><a href="../classtrees_DT.html">class tree: DT</a></li>
+            <li><a href="../elementindex_DT.html">index: DT</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="menu">
+    <h1>メニュー</h1>
+    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DT/DT_Format.html">DT_Format</a></li>
+            <li><a href="../DT/DT_Time.html">DT_Time</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a></li>
+            <li><a href="../DT/DT_Date.html">DT_Date</a></li>
+            <li><a href="../DT/DT_Datetime.html">DT_Datetime</a></li>
+            <li><a href="../DT/DT_FormatWrapper.html">DT_FormatWrapper</a></li>
+            <li><a href="../DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a></li>
+            <li><a href="../DT/DT_ShiftFormat.html">DT_ShiftFormat</a></li>
+            <li><a href="../DT/DT_SimpleFormat.html">DT_SimpleFormat</a></li>
+            <li><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></li>
+            <li><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></li>
+            <li><a href="../DT/DT_TimeWrapper.html">DT_TimeWrapper</a></li>
+            <li><a href="../DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a></li>
+            <li><a href="../DT/DT_Util.html">DT_Util</a></li>
+            <li><a href="../DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DT/_DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_DT---load.php.html">load.php</a></li>
+            <li><a href="../DT/_DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
+    </section>
+</nav>
+<section id="main">
+<h1 class="symbol">クラス: DT_ShiftFormat</h1>
+<p class="src_location">定義: <code>/DT/ShiftFormat.php</code></p>
+<pre id="class_tree"><a href="../DT/DT_FormatWrapper.html">DT_FormatWrapper</a>
+    │
+    └DT_ShiftFormat</pre>
+<div class="docblock"><p>システム内部の時差とフォーマットの時差を自動で調整するためのフォーマットです.</p><p>「閲覧しているユーザーのタイムゾーンに合わせて表示する時刻を調整したい」  といったケースで, 既存のフォーマットにかぶせる形で利用します.</p><p>サンプルとして, 日本語のサイトがニューヨークのサーバーで管理されているというシナリオを考えます.  サーバー側ではタイムゾーンを America/New_York (UTC-5) として時間の管理をしているが,  ブラウザに出力する際は Asia/Tokyo (UTC+9) のタイムゾーンで表示させたいとします.</p><ol class="src"><li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;php.ini&nbsp;で&nbsp;timezone&nbsp;=&nbsp;America/New_York&nbsp;が設定されているものとする</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;表示用の時刻を&nbsp;UTC+9&nbsp;とする&nbsp;(-540&nbsp;分のオフセットを指定する)</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$f&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_ShiftFormat.html">DT_ShiftFormat</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_SimpleFormat.html">DT_SimpleFormat</a></span><span class="src-sym">(</span><span class="src-str">&quot;Y/m/d&nbsp;H:i:s&quot;</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span>-<span class="src-num">540</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;日本のユーザーが入力した時刻をサーバー内部の時刻に変換する</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$d&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></span><span class="src-sym">::</span><a href="../DT/DT_Timestamp.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;2012/05/21&nbsp;07:30:45&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$f</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;echo&nbsp;<span class="src-var">$d</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-20&nbsp;17:30:45&quot;&nbsp;(UTC+9&nbsp;から&nbsp;UTC-5&nbsp;に変換)</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;<span class="src-comm">//&nbsp;サーバで管理されている時刻を日本のユーザー向けに変換する</span></div></li>
+<li><div class="src-line">&nbsp;<span class="src-var">$d&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;echo&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">format</span><span class="src-sym">(</span><span class="src-var">$f</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012/01/01&nbsp;14:00:00&quot;&nbsp;(UTC-5&nbsp;から&nbsp;UTC+9&nbsp;に変換)</span></div></li>
+</ol><p>このクラスの parseDate と formatDate は時差の変換を行いません.  オリジナルの実行結果をそのまま返します.</p><p>ちなみに <a href="../DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a> と <a href="../DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a>  に関しては, 自身でタイムゾーンの変換機能をサポートしているため,  このクラスを使う必要はありません.</p></div>
+
+
+
+<section id="methods">
+    <h1><a href="#class_methods">メソッド</a></h1>
+    <ul class="enums">
+        <li><a href="../DT/DT_ShiftFormat.html#method__construct">__construct</a></li>
+        <li><a href="../DT/DT_ShiftFormat.html#methodformatDatetime">formatDatetime</a></li>
+        <li><a href="../DT/DT_ShiftFormat.html#methodformatTimestamp">formatTimestamp</a></li>
+        <li><a href="../DT/DT_ShiftFormat.html#methodparseDatetime">parseDatetime</a></li>
+        <li><a href="../DT/DT_ShiftFormat.html#methodparseTimestamp">parseTimestamp</a></li>
+    </ul>
+</section>
+
+<section id="inherited_methods">
+    <h1>継承されたメソッド</h1>
+    <section class="inherited">
+        <h1 class="symbol">クラス: <a href="../DT/DT_FormatWrapper.html">DT_FormatWrapper</a></h1>
+        <ul class="enums">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </section>
+</section>
+
+
+<section class="class_fields" id="class_methods">
+<h1>メソッド 詳細</h1>
+<section id="method__construct">
+    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 83]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>DT_ShiftFormat __construct(<a href="../DT/DT_Format.html">DT_Format</a> $original, type $externalOffset, [type $internalOffset = NULL])</code>
+        </div>
+        <div class="docblock"><p>フォーマットの時差とシステム時刻の時差を指定して,  新しい ShiftFormat を構築します.</p><p>引数の単位は分です. UTC+1 以降の場合は負の値,  UTC-1 以前の場合は正の値を指定してください.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Format.html">DT_Format</a></td>
+                    <td class="varname">$original</td>
+                    <td>調整対象のフォーマット</td>
+                </tr>
+                <tr>
+                    <td class="type">type</td>
+                    <td class="varname">$externalOffset</td>
+                    <td>フォーマットの時差 (単位は分)</td>
+                </tr>
+                <tr>
+                    <td class="type">type</td>
+                    <td class="varname">$internalOffset</td>
+                    <td>システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_FormatWrapper.html#method__construct">DT_FormatWrapper::__construct()</a> (指定された DT_Format オブジェクトをラップする FormatWrapper を構築します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodformatDatetime">
+    <h1 class="symbol"><b>formatDatetime</b> <span class="smalllinenumber">[line 122]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string formatDatetime(<a href="../DT/DT_Datetime.html">DT_Datetime</a> $d)</code>
+        </div>
+        <div class="docblock"><p>変換対象の時間オブジェクトを表示用のタイムゾーンに変換してから,  オリジナルの formatDatetime を実行します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : 変換結果</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Datetime.html">DT_Datetime</a></td>
+                    <td class="varname">$d</td>
+                    <td>変換対象の時間オブジェクト</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_FormatWrapper.html#methodformatDatetime">DT_FormatWrapper::formatDatetime()</a> (ラップ対象のオブジェクトの formatDatetime メソッドを実行します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodformatTimestamp">
+    <h1 class="symbol"><b>formatTimestamp</b> <span class="smalllinenumber">[line 132]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string formatTimestamp(<a href="../DT/DT_Timestamp.html">DT_Timestamp</a> $d)</code>
+        </div>
+        <div class="docblock"><p>変換対象の時間オブジェクトを表示用のタイムゾーンに変換してから,  オリジナルの formatTimestamp を実行します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : 変換結果</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></td>
+                    <td class="varname">$d</td>
+                    <td>変換対象の時間オブジェクト</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_FormatWrapper.html#methodformatTimestamp">DT_FormatWrapper::formatTimestamp()</a> (ラップ対象のオブジェクトの formatTimestamp メソッドを実行します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodparseDatetime">
+    <h1 class="symbol"><b>parseDatetime</b> <span class="smalllinenumber">[line 94]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Time.html">DT_Time</a> parseDatetime(string $format)</code>
+        </div>
+        <div class="docblock"><p>オリジナルの parseDatetime で得られた結果をシステム時刻に変換して返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : 変換結果</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">string</td>
+                    <td class="varname">$format</td>
+                    <td>解析対象の文字列</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_FormatWrapper.html#methodparseDatetime">DT_FormatWrapper::parseDatetime()</a> (ラップ対象のオブジェクトの parseDatetime メソッドを実行します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodparseTimestamp">
+    <h1 class="symbol"><b>parseTimestamp</b> <span class="smalllinenumber">[line 103]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Time.html">DT_Time</a> parseTimestamp(string $format)</code>
+        </div>
+        <div class="docblock"><p>オリジナルの parseTimestamp で得られた結果をシステム時刻に変換して返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : 変換結果</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">string</td>
+                    <td class="varname">$format</td>
+                    <td>解析対象の文字列</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_FormatWrapper.html#methodparseTimestamp">DT_FormatWrapper::parseTimestamp()</a> (ラップ対象のオブジェクトの parseTimestamp メソッドを実行します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+</section>
+
+</section>
+<footer>
+    Documentation generated on Sat, 15 Dec 2012 00:35:35 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+</footer>
+</body>
+</html>

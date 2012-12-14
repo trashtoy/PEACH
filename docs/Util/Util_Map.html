@@ -28,6 +28,7 @@
     <section>
         <h1>パッケージ</h1>
         <ul>
+            <li><a href="../li_DT.html">DT</a></li>
             <li><a href="../li_Util.html">Util</a></li>
         </ul>
     </section>
@@ -54,7 +55,8 @@
             <li><a href="../Util/Util_Equator.html">Util_Equator</a></li>
             <li><a href="../Util/Util_Map.html">Util_Map</a></li>
             <li><a href="../Util/Util_MapEntry.html">Util_MapEntry</a></li>
-        </ul>
+        </ul>
+
     </section>
     <section>
         <h1>クラス</h1>
@@ -70,34 +72,36 @@
             <li><a href="../Util/Util_ReverseComparator.html">Util_ReverseComparator</a></li>
             <li><a href="../Util/Util_Strings.html">Util_Strings</a></li>
             <li><a href="../Util/Util_Values.html">Util_Values</a></li>
-        </ul>
+        </ul>
+
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
-            <li><a href="../Util/_AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
-            <li><a href="../Util/_ArrayMap.php.html">ArrayMap.php</a></li>
-            <li><a href="../Util/_ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
-            <li><a href="../Util/_Arrays.php.html">Arrays.php</a></li>
-            <li><a href="../Util/_Comparable.php.html">Comparable.php</a></li>
-            <li><a href="../Util/_Comparator.php.html">Comparator.php</a></li>
-            <li><a href="../Util/_DefaultComparator.php.html">DefaultComparator.php</a></li>
-            <li><a href="../Util/_DefaultEquator.php.html">DefaultEquator.php</a></li>
-            <li><a href="../Util/_Equator.php.html">Equator.php</a></li>
-            <li><a href="../Util/_HashMap.php.html">HashMap.php</a></li>
-            <li><a href="../Util/_HashMapEntry.php.html">HashMapEntry.php</a></li>
-            <li><a href="../Util/_load.php.html">load.php</a></li>
-            <li><a href="../Util/_Map.php.html">Map.php</a></li>
-            <li><a href="../Util/_MapEntry.php.html">MapEntry.php</a></li>
-            <li><a href="../Util/_ReverseComparator.php.html">ReverseComparator.php</a></li>
-            <li><a href="../Util/_Strings.php.html">Strings.php</a></li>
-            <li><a href="../Util/_Values.php.html">Values.php</a></li>
-        </ul>
+            <li><a href="../Util/_Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Util---load.php.html">load.php</a></li>
+            <li><a href="../Util/_Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_Util---ReverseComparator.php.html">ReverseComparator.php</a></li>
+            <li><a href="../Util/_Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_Util---Values.php.html">Values.php</a></li>
+        </ul>
+
     </section>
 </nav>
 <section id="main">
 <h1 class="symbol">インタフェース: Util_Map</h1>
-<p class="src_location">定義: <code>/Map.php</code></p>
+<p class="src_location">定義: <code>/Util/Map.php</code></p>
 <div class="docblock"><p>キーと値のマッピングを管理するインタフェースです. API は  <a href="http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html">java.util.Map</a>  を参考にして作られています.</p><p>このインタフェースを使うと, 今まで配列を使って</p><ol class="src"><li><div class="src-line"><span class="src-var">$value&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
 </ol><p>と書かなければならなかったコードが</p><ol class="src"><li><div class="src-line"><span class="src-var">$value&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><a href="../Util/Util_Map.html#methodget">get</a><span class="src-sym">(</span><span class="src-var">$name</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </ol><p>に簡略化できます. (※ E_NOTICE を無視する場合はこの限りではありません)</p><p>PHP の配列機能との違いはその他に以下のものがあります.</p><ul><li>実装クラスによっては Java の Map のように任意のオブジェクトをキーとして利用できる. (<a href="../Util/Util_HashMap.html">Util_HashMap</a> など)</li><li>値を取得する際, マッピングが存在しない場合にデフォルト値を適用できる.</li><li>配列の操作に多態性 (ポリモーフィズム) を持たせることが出来る.</li></ul><p>原則として, キーに可変オブジェクトを使わないでください.  キーに設定した可変オブジェクトが外部から変更された場合の動作は保証されません.</p></div>
@@ -124,7 +128,7 @@
 <section class="class_fields" id="class_methods">
 <h1>メソッド 詳細</h1>
 <section id="methodclear">
-    <h1 class="symbol"><b>clear</b> <span class="smalllinenumber">[line 74]</span></h1>
+    <h1 class="symbol"><b>clear</b> <span class="smalllinenumber">[line 95]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void clear()</code>
@@ -141,7 +145,7 @@
 </section>
 
 <section id="methodcontainsKey">
-    <h1 class="symbol"><b>containsKey</b> <span class="smalllinenumber">[line 63]</span></h1>
+    <h1 class="symbol"><b>containsKey</b> <span class="smalllinenumber">[line 84]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>boolean containsKey(mixed $key)</code>
@@ -169,7 +173,7 @@
 </section>
 
 <section id="methodentryList">
-    <h1 class="symbol"><b>entryList</b> <span class="smalllinenumber">[line 102]</span></h1>
+    <h1 class="symbol"><b>entryList</b> <span class="smalllinenumber">[line 123]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array entryList()</code>
@@ -187,7 +191,7 @@
 </section>
 
 <section id="methodget">
-    <h1 class="symbol"><b>get</b> <span class="smalllinenumber">[line 40]</span></h1>
+    <h1 class="symbol"><b>get</b> <span class="smalllinenumber">[line 61]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>mixed get(mixed $key, [mixed $defaultValue = NULL])</code>
@@ -220,7 +224,7 @@
 </section>
 
 <section id="methodkeys">
-    <h1 class="symbol"><b>keys</b> <span class="smalllinenumber">[line 94]</span></h1>
+    <h1 class="symbol"><b>keys</b> <span class="smalllinenumber">[line 115]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array keys()</code>
@@ -237,7 +241,7 @@
 </section>
 
 <section id="methodput">
-    <h1 class="symbol"><b>put</b> <span class="smalllinenumber">[line 47]</span></h1>
+    <h1 class="symbol"><b>put</b> <span class="smalllinenumber">[line 68]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void put(mixed $key, mixed $value)</code>
@@ -269,7 +273,7 @@
 </section>
 
 <section id="methodputAll">
-    <h1 class="symbol"><b>putAll</b> <span class="smalllinenumber">[line 54]</span></h1>
+    <h1 class="symbol"><b>putAll</b> <span class="smalllinenumber">[line 75]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void putAll(<a href="../Util/Util_Map.html">Util_Map</a> $map)</code>
@@ -296,7 +300,7 @@
 </section>
 
 <section id="methodremove">
-    <h1 class="symbol"><b>remove</b> <span class="smalllinenumber">[line 69]</span></h1>
+    <h1 class="symbol"><b>remove</b> <span class="smalllinenumber">[line 90]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void remove(mixed $key)</code>
@@ -323,7 +327,7 @@
 </section>
 
 <section id="methodsize">
-    <h1 class="symbol"><b>size</b> <span class="smalllinenumber">[line 80]</span></h1>
+    <h1 class="symbol"><b>size</b> <span class="smalllinenumber">[line 101]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>int size()</code>
@@ -340,7 +344,7 @@
 </section>
 
 <section id="methodvalues">
-    <h1 class="symbol"><b>values</b> <span class="smalllinenumber">[line 87]</span></h1>
+    <h1 class="symbol"><b>values</b> <span class="smalllinenumber">[line 108]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array values()</code>
@@ -360,7 +364,7 @@
 
 </section>
 <footer>
-    Documentation generated on Fri, 10 Aug 2012 21:50:15 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:35 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

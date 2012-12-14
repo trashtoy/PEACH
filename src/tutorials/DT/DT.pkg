@@ -1,0 +1,183 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DT}">
+    <refnamediv>
+        <refname>時間操作モジュール DT</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id intro}">
+        <title>時間操作モジュール DT</title>
+        <para>
+            パッケージ DT は, 時間操作・入出力のためのライブラリです.
+            PHP にはもともと {@link http://www.php.net/manual/ja/ref.datetime.php 日付・時刻関数}
+            が用意されていますが, このモジュールは標準の API に比べて, 
+            よりオブジェクト指向な設計となっています.
+        </para>
+        <para>
+            DT モジュールを利用することで, やりたかったことがより簡潔に実現することができます.
+            また拡張性の高い API となっているため, 
+            様々なニーズに対して低コストで対応することができます.
+            具体的な利点について以下で説明します.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id immutable}">
+        <title>イミュータブルなクラス設計</title>
+        <para>
+            このモジュールの時間オブジェクト (特定の日付や日時をあらわすオブジェクト)
+            は, イミュータブル (不変クラス) な設計となっています.
+            以下のサンプルコードは, 特定の日付とその前後の日付を出力します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+// 既存の方法
+$d = new DateTime("2012-05-21");
+echo $d->format("Y-m-d"); // 2012-05-21
+$d->modify("+1 day");
+echo $d->format("Y-m-d"); // 2012-05-22
+$d->modiry("-2 day");
+echo $d->format("Y-m-d"); // 2012-05-20
+
+// DT モジュール
+$today     = new DT_Date(2012, 5, 21);
+$tomorrow  = $today->add("date", 1);
+$yesterday = $today->add("date", -1);
+echo $today;     // 2012-05-21
+echo $tomorrow;  // 2012-05-22
+echo $yesterday; // 2012-05-20
+            ]]>
+        </programlisting>
+        <para>
+            既存の方法では modify メソッドを実行するたびにオブジェクトの状態が変化します.
+            翌日の日付を出力するために「日」のフィールドを 1 進めた後,
+            今度は前日の日付を出力するために「日」を 2 戻す必要があります.
+            このようにオブジェクトに対する副作用を考慮しながらプログラミングする必要があります.
+        </para>
+        <para>
+            DT モジュールでは一度生成されたオブジェクトは変化することがありません.
+            add() や set() などでフィールドを操作するたびに新しいオブジェクトが生成されます.
+            プログラマはメソッドの副作用を気にする必要がなくなると共に,
+            操作後のオブジェクトに対して $yesterday や $tomorrow
+            などの変数名を付けて, 見通しの良いコードを書くことができます.
+        </para>
+        <para>
+            さらに, 「現在時刻の1年後の1週間前の10:30」といった複雑な操作を, 
+            メソッドチェインを使って簡潔に書くことができます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$d = DT_Datetime::now()
+        ->add("year", 1)
+        ->add("date", -7)
+        ->setAll(array("hour" => 10, "minute" => 30));
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id class_variation}">
+        <title>スコープによるクラスの使い分け</title>
+        <para>
+            日付だけを扱いたい場合は {@link DT_Date}, 
+            日付に加えて時刻も扱いたい場合は {@link DT_Datetime}
+            といった具合に, 用途に応じて使うクラスを選ぶことが出来ます.
+        </para>
+        <para>
+            クラスの使い分けが役に立つのは, 例えば日付同士を比較するようなケースです.
+            既存の方法では, 余計なフィールド同士で比較が行われないよう
+            setTime() で時・分・秒を 0 に揃えるなどの対処が必要でした.
+            DT モジュールの場合は DT_Date クラスを使うことで同じことが簡潔に表現できます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+// 既存の方法
+$subject = new DateTime("2012-05-21");
+$now     = new DateTime();
+$now->setTime(0, 0, 0); // 日付だけを比較したいので, 余計な時・分・秒を 0 に揃える
+if ($now == $subject) {
+    // something
+}
+
+// DT モジュール
+$subject = new DT_Date(2012, 5, 21);
+$now     = DT_Date::now();
+if ($now->equals($subject)) {
+    // something
+}
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id architecture}">
+        <title>時間操作の API と書式関連の API の分離</title>
+        <para>
+            書式関連 (parse や format) のロジックは全て {@link DT_Format} インタフェースに移譲しているため,
+            全体的にシンプルな設計となっています.
+        </para>
+        <para>
+            DT_Format の具象クラスをどのように利用するか, 以下のサンプルコードで例を示します.
+            まずは特定の時刻を Last-Modified ヘッダで出力するサンプルです.
+            HTTP-date を扱うクラス {@link DT_HttpDateFormat} を使います.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+// タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
+
+$f    = DT_HttpDateFormat::getInstance();
+$time = new DT_Timestamp(2012, 4, 1, 15, 43, 21);
+header("Last-Modified: " . $time->format($f)); // "Last-Modified: Sun, 01 Apr 2012 06:43:21 GMT"
+            ]]>
+        </programlisting>
+        <para>
+            次に, サーバー上の任意のファイルの更新日時を時間オブジェクトに変換する例です.
+            今度は UNIX タイムスタンプを取り扱うためのクラス {@link DT_UnixTimeFormat} を使います.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+// タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
+
+$f = DT_UnixTimeFormat::getInstance();
+echo filemtime("/tmp/sample.txt"); // 1234567890
+$d = DT_Timestamp::parse(filemtime("/tmp/sample.txt"), $f);
+echo $d->format(); // "2009-02-14 08:31:30"
+            ]]>
+        </programlisting>
+        <para>今度は複数のフォーマットを使い分けてみましょう. 以下のようなプログラムを考えます.</para>
+        <orderedlist>
+            <listitem>とあるファイルの更新日時を調べる.</listitem>
+            <listitem>
+                もしもリクエストヘッダに If-Modified-Since が存在する場合は,
+                ファイルの更新日時と比較する.
+                2つが同じ時刻だった場合はステータスコード "304 Not Modified"
+                を出力して終了する.
+            </listitem>
+            <listitem>
+                それ以外は, そのファイルの更新日時を Last-Modified ヘッダとして出力し,
+                そのファイルの中身を出力する.
+            </listitem>
+        </orderedlist>
+        <para>
+            これを実現するためのコードは以下の通りです.
+            DT_HttpDateFormat が If-Modified-Since のパースと
+            Last-Modified の出力の 2 箇所で利用されていて,
+            DT_UnixTimeFormat がファイルの更新日時の取得に使われていることに注目してください.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$uFormat  = DT_UnixTimeFormat::getInstance();
+$hFormat  = DT_HttpDateFormat::getInstance();
+$filename = "/tmp/sample.txt";
+$modified = DT_Timestamp::parse(filemtime($filename), $uFormat);
+
+if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {  
+    $since = DT_Timestamp::parse($_SERVER["HTTP_IF_MODIFIED_SINCE"], $hFormat);
+    if ($modified->equals($since)) {
+        header("304 Not Modified");
+        exit;
+    }
+}
+
+header("Last-Modified: " . $modified->format($hFormat));
+echo file_get_contents($filename);
+            ]]>
+        </programlisting>
+    </refsect1>
+</refentry>

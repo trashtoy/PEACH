@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Docs For Class DT_Datetime</title>
+    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <!--[if lt IE 9]>
+    <script src="../media/html5.js"></script>  
+    <![endif]-->
+</head>
+<body>
+<header>
+    <h1>DT</h1>
+    <nav>
+        <h1>グローバルナビゲーション</h1>
+        <ul>
+            <li><a href="../classtrees_DT.html">class tree: DT</a></li>
+            <li><a href="../elementindex_DT.html">index: DT</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="menu">
+    <h1>メニュー</h1>
+    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DT/DT_Format.html">DT_Format</a></li>
+            <li><a href="../DT/DT_Time.html">DT_Time</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a></li>
+            <li><a href="../DT/DT_Date.html">DT_Date</a></li>
+            <li><a href="../DT/DT_Datetime.html">DT_Datetime</a></li>
+            <li><a href="../DT/DT_FormatWrapper.html">DT_FormatWrapper</a></li>
+            <li><a href="../DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a></li>
+            <li><a href="../DT/DT_ShiftFormat.html">DT_ShiftFormat</a></li>
+            <li><a href="../DT/DT_SimpleFormat.html">DT_SimpleFormat</a></li>
+            <li><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></li>
+            <li><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></li>
+            <li><a href="../DT/DT_TimeWrapper.html">DT_TimeWrapper</a></li>
+            <li><a href="../DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a></li>
+            <li><a href="../DT/DT_Util.html">DT_Util</a></li>
+            <li><a href="../DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DT/_DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_DT---load.php.html">load.php</a></li>
+            <li><a href="../DT/_DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
+    </section>
+</nav>
+<section id="main">
+<h1 class="symbol">クラス: DT_Datetime</h1>
+<p class="src_location">定義: <code>/DT/Datetime.php</code></p>
+<pre id="class_tree"><a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a>
+    │
+    └<a href="../DT/DT_Date.html">DT_Date</a>
+       │
+       └DT_Datetime</pre>
+<div class="docblock"><p>DATETIME 型の時間オブジェクトです.</p><p>このクラスは年・月・日・時・分のフィールドをサポートします.</p></div>
+
+
+
+<section id="methods">
+    <h1><a href="#class_methods">メソッド</a></h1>
+    <ul class="enums">
+        <li><a href="../DT/DT_Datetime.html#method__construct">__construct</a></li>
+        <li><a href="../DT/DT_Datetime.html#methodformatTime">formatTime</a></li>
+        <li><a href="../DT/DT_Datetime.html#methodgetType">getType</a></li>
+        <li><a href="../DT/DT_Datetime.html#methodnow">now</a></li>
+        <li><a href="../DT/DT_Datetime.html#methodparse">parse</a></li>
+        <li><a href="../DT/DT_Datetime.html#methodtoDatetime">toDatetime</a></li>
+        <li><a href="../DT/DT_Datetime.html#methodtoTimestamp">toTimestamp</a></li>
+        <li><a href="../DT/DT_Datetime.html#method__toString">__toString</a></li>
+    </ul>
+</section>
+
+<section id="children">
+    <h1>直系の既知のサブクラス</h1>
+    <dl>
+        <dt><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></dt>
+        <dd>TIMESTAMP 型の時間オブジェクトです.</dd>
+    </dl>
+</section>
+
+<section id="inherited_methods">
+    <h1>継承されたメソッド</h1>
+    <section class="inherited">
+        <h1 class="symbol">クラス: <a href="../DT/DT_Date.html">DT_Date</a></h1>
+        <ul class="enums">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </section>
+    <section class="inherited">
+        <h1 class="symbol">クラス: <a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a></h1>
+        <ul class="enums">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </section>
+</section>
+
+
+<section class="class_fields" id="class_methods">
+<h1>メソッド 詳細</h1>
+<section id="methodnow">
+    <h1 class="symbol">static <b>now</b> <span class="smalllinenumber">[line 53]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>
+                static <a href="../DT/DT_Datetime.html">DT_Datetime</a> now()
+            </code>
+        </div>
+        <div class="docblock"><p>現在時刻の DT_Datetime オブジェクトを返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#methodnow">DT_Date::now()</a> (アクセスした時点の DT_Date オブジェクトを返します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+<section id="methodparse">
+    <h1 class="symbol">static <b>parse</b> <span class="smalllinenumber">[line 73]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>
+                static <a href="../DT/DT_Datetime.html">DT_Datetime</a> parse(string $text, [<a href="../DT/DT_Format.html">DT_Format</a> $format = NULL])
+            </code>
+        </div>
+        <div class="docblock"><p>指定されたテキストを解析して DT_Datetime オブジェクトに変換します.</p><p>$format が指定されていない場合は <a href="../DT/DT_W3cDatetimeFormat.html#methodgetInstance">DT_W3cDatetimeFormat::getInstance()</a>  を使って解析を行います.  (&quot;YYYY-MM-DD hh:mm&quot; 形式の文字列を受理します.  日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : 変換結果</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">string</td>
+                    <td class="varname">$text</td>
+                    <td>変換対象の文字列</td>
+                </tr>
+                <tr>
+                    <td class="type"><a href="../DT/DT_Format.html">DT_Format</a></td>
+                    <td class="varname">$format</td>
+                    <td>変換に使用するフォーマット</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#methodparse">DT_Date::parse()</a> (指定された文字列を解析して DT_Date オブジェクトに変換します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+<section id="method__construct">
+    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 89]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>DT_Datetime __construct(int $year, int $month, int $date, int $hour, int $min)</code>
+        </div>
+        <div class="docblock"><p>与えられた時刻を表現する DT_Datetime オブジェクトを構築します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">int</td>
+                    <td class="varname">$year</td>
+                    <td>年</td>
+                </tr>
+                <tr>
+                    <td class="type">int</td>
+                    <td class="varname">$month</td>
+                    <td>月</td>
+                </tr>
+                <tr>
+                    <td class="type">int</td>
+                    <td class="varname">$date</td>
+                    <td>日</td>
+                </tr>
+                <tr>
+                    <td class="type">int</td>
+                    <td class="varname">$hour</td>
+                    <td>時</td>
+                </tr>
+                <tr>
+                    <td class="type">int</td>
+                    <td class="varname">$min</td>
+                    <td>分</td>
+                </tr>
+            </table>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#method__construct">DT_Date::__construct()</a> (与えられた日付を表現する DT_Date オブジェクトを構築します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodformatTime">
+    <h1 class="symbol"><b>formatTime</b> <span class="smalllinenumber">[line 206]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string formatTime()</code>
+        </div>
+        <div class="docblock"><p>このオブジェクトの時刻部分の文字列を &quot;hh:mm&quot; 形式で返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : &quot;hh:mm&quot; 形式の文字列</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_AbstractTime.html#methodformatTime">DT_AbstractTime::formatTime()</a> (この時間の時刻 (時・分・秒) 部分を書式化します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodgetType">
+    <h1 class="symbol"><b>getType</b> <span class="smalllinenumber">[line 103]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>int getType()</code>
+        </div>
+        <div class="docblock"><p>このオブジェクトの型 <a href="../DT/DT_Time.html#constTYPE_DATETIME">DT_Time::TYPE_DATETIME</a> を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : DT_Time::TYPE_DATETIME</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#methodgetType">DT_Date::getType()</a> (このオブジェクトの型 <a href="../DT/DT_Time.html#constTYPE_DATE">DT_Time::TYPE_DATE</a> を返します.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+
+
+<section id="methodtoDatetime">
+    <h1 class="symbol"><b>toDatetime</b> <span class="smalllinenumber">[line 229]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Datetime.html">DT_Datetime</a> toDatetime()</code>
+        </div>
+        <div class="docblock"><p>このオブジェクトを DT_Datetime 型にキャストします.</p><p>返り値はこのオブジェクトのクローンです.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : このオブジェクトのクローン</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#methodtoDatetime">DT_Date::toDatetime()</a> (このオブジェクトを DT_Datetime 型にキャストします.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodtoTimestamp">
+    <h1 class="symbol"><b>toTimestamp</b> <span class="smalllinenumber">[line 239]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code><a href="../DT/DT_Timestamp.html">DT_Timestamp</a> toTimestamp()</code>
+        </div>
+        <div class="docblock"><p>このオブジェクトを DT_Timestamp 型にキャストします.</p><p>この時刻の 0 秒を表す DT_Timestamp オブジェクトを返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : このオブジェクトの timestamp 表現</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#methodtoTimestamp">DT_Date::toTimestamp()</a> (このオブジェクトを DT_Timestamp 型にキャストします.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="method__toString">
+    <h1 class="symbol"><b>__toString</b> <span class="smalllinenumber">[line 218]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>string __toString()</code>
+        </div>
+        <div class="docblock"><p>このオブジェクトの文字列表現です.</p><p>&quot;YYYY-MM-DD hh:mm&quot; 形式の文字列を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : W3CDTF に則った文字列表現</li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_Date.html#method__toString">DT_Date::__toString()</a> (このオブジェクトの文字列表現です.)</div>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+</section>
+
+</section>
+<footer>
+    Documentation generated on Sat, 15 Dec 2012 00:35:33 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+</footer>
+</body>
+</html>
