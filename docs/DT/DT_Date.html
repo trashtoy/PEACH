@@ -33,57 +33,79 @@
         </ul>
     </section>
     <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
         <h1>インタフェース</h1>
         <ul>
             <li><a href="../DT/DT_Format.html">DT_Format</a></li>
+            <li><a href="../DT/DT_Time.html">DT_Time</a></li>
         </ul>
     </section>
     <section>
         <h1>クラス</h1>
         <ul>
+            <li><a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a></li>
             <li><a href="../DT/DT_Date.html">DT_Date</a></li>
             <li><a href="../DT/DT_Datetime.html">DT_Datetime</a></li>
-            <li><a href="../DT/DT_Time.html">DT_Time</a></li>
+            <li><a href="../DT/DT_FormatWrapper.html">DT_FormatWrapper</a></li>
+            <li><a href="../DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a></li>
+            <li><a href="../DT/DT_ShiftFormat.html">DT_ShiftFormat</a></li>
+            <li><a href="../DT/DT_SimpleFormat.html">DT_SimpleFormat</a></li>
+            <li><a href="../DT/DT_TimeEquator.html">DT_TimeEquator</a></li>
             <li><a href="../DT/DT_Timestamp.html">DT_Timestamp</a></li>
+            <li><a href="../DT/DT_TimeWrapper.html">DT_TimeWrapper</a></li>
             <li><a href="../DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a></li>
-            <li><a href="../DT/DT_W3CDatetimeFormat.html">DT_W3CDatetimeFormat</a></li>
+            <li><a href="../DT/DT_Util.html">DT_Util</a></li>
+            <li><a href="../DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a></li>
         </ul>
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
+            <li><a href="../DT/_DT---AbstractTime.php.html">AbstractTime.php</a></li>
             <li><a href="../DT/_DT---Date.php.html">Date.php</a></li>
             <li><a href="../DT/_DT---Datetime.php.html">Datetime.php</a></li>
             <li><a href="../DT/_DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_DT---load.php.html">load.php</a></li>
+            <li><a href="../DT/_DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
             <li><a href="../DT/_DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_DT---TimeEquator.php.html">TimeEquator.php</a></li>
             <li><a href="../DT/_DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
             <li><a href="../DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
-            <li><a href="../DT/_DT---W3CDatetimeFormat.php.html">W3CDatetimeFormat.php</a></li>
+            <li><a href="../DT/_DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
         </ul>
     </section>
 </nav>
 <section id="main">
 <h1 class="symbol">クラス: DT_Date</h1>
 <p class="src_location">定義: <code>/DT/Date.php</code></p>
-<pre id="class_tree"><a href="../DT/DT_Time.html">DT_Time</a>
+<pre id="class_tree"><a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a>
     │
     └DT_Date</pre>
-<div class="docblock"><p>年月日をあらわすクラスです.</p></div>
+<div class="docblock"><p>DATE 型の時間オブジェクトです.</p><p>このクラスは年・月・日のフィールドをサポートします.</p></div>
 
 
-
-<section id="consts">
-    <h1><a href="#class_consts">クラス定数</a></h1>
-    <ul class="enums">
-        <li><a href="../DT/DT_Date.html#constFRIDAY">FRIDAY</a></li>
-        <li><a href="../DT/DT_Date.html#constMONDAY">MONDAY</a></li>
-        <li><a href="../DT/DT_Date.html#constSATURDAY">SATURDAY</a></li>
-        <li><a href="../DT/DT_Date.html#constSUNDAY">SUNDAY</a></li>
-        <li><a href="../DT/DT_Date.html#constTHURSDAY">THURSDAY</a></li>
-        <li><a href="../DT/DT_Date.html#constTUESDAY">TUESDAY</a></li>
-        <li><a href="../DT/DT_Date.html#constWEDNESDAY">WEDNESDAY</a></li>
-    </ul>
-</section>
 
 <section id="methods">
     <h1><a href="#class_methods">メソッド</a></h1>
@@ -91,6 +113,7 @@
         <li><a href="../DT/DT_Date.html#method__construct">__construct</a></li>
         <li><a href="../DT/DT_Date.html#methodgetDateCount">getDateCount</a></li>
         <li><a href="../DT/DT_Date.html#methodgetDay">getDay</a></li>
+        <li><a href="../DT/DT_Date.html#methodgetType">getType</a></li>
         <li><a href="../DT/DT_Date.html#methodisLeapYear">isLeapYear</a></li>
         <li><a href="../DT/DT_Date.html#methodnow">now</a></li>
         <li><a href="../DT/DT_Date.html#methodparse">parse</a></li>
@@ -105,21 +128,15 @@
     <h1>直系の既知のサブクラス</h1>
     <dl>
         <dt><a href="../DT/DT_Datetime.html">DT_Datetime</a></dt>
-        <dd>時刻を表すクラスです.</dd>
+        <dd>DATETIME 型の時間オブジェクトです.</dd>
     </dl>
 </section>
 
 <section id="inherited_methods">
     <h1>継承されたメソッド</h1>
     <section class="inherited">
-        <h1 class="symbol">クラス: <a href="../DT/DT_Time.html">DT_Time</a></h1>
+        <h1 class="symbol">クラス: <a href="../DT/DT_AbstractTime.html">DT_AbstractTime</a></h1>
         <ul class="enums">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
             <li></li>
             <li></li>
             <li></li>
@@ -136,63 +153,10 @@
 </section>
 
 
-<section class="class_fields" id="class_consts">
-<h1>クラス定数 詳細</h1>
-<section id="constFRIDAY">
-    <h1 class="symbol"><b>FRIDAY</b> <span class="smalllinenumber">[line 46]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>金曜日をあらわす定数です</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-<section id="constMONDAY">
-    <h1 class="symbol"><b>MONDAY</b> <span class="smalllinenumber">[line 22]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>月曜日をあらわす定数です</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-<section id="constSATURDAY">
-    <h1 class="symbol"><b>SATURDAY</b> <span class="smalllinenumber">[line 52]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>土曜日をあらわす定数です</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-<section id="constSUNDAY">
-    <h1 class="symbol"><b>SUNDAY</b> <span class="smalllinenumber">[line 16]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>日曜日をあらわす定数です.</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-<section id="constTHURSDAY">
-    <h1 class="symbol"><b>THURSDAY</b> <span class="smalllinenumber">[line 40]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>木曜日をあらわす定数です</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-<section id="constTUESDAY">
-    <h1 class="symbol"><b>TUESDAY</b> <span class="smalllinenumber">[line 28]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>火曜日をあらわす定数です</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-<section id="constWEDNESDAY">
-    <h1 class="symbol"><b>WEDNESDAY</b> <span class="smalllinenumber">[line 34]</span></h1>
-    <div class="class_field">
-        <div class="docblock"><p>水曜日をあらわす定数です</p></div>
-        <div class="top">[ <a href="#top">Top</a> ]</div>
-    </div>
-</section>
-</section>
-
 <section class="class_fields" id="class_methods">
 <h1>メソッド 詳細</h1>
 <section id="methodnow">
-    <h1 class="symbol">static <b>now</b> <span class="smalllinenumber">[line 79]</span></h1>
+    <h1 class="symbol">static <b>now</b> <span class="smalllinenumber">[line 59]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>
@@ -210,14 +174,14 @@
     </div>
 </section>
 <section id="methodparse">
-    <h1 class="symbol">static <b>parse</b> <span class="smalllinenumber">[line 94]</span></h1>
+    <h1 class="symbol">static <b>parse</b> <span class="smalllinenumber">[line 76]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>
                 static <a href="../DT/DT_Date.html">DT_Date</a> parse(string $text, [<a href="../DT/DT_Format.html">DT_Format</a> $format = NULL])
             </code>
         </div>
-        <div class="docblock"><p>指定された文字列を DT_Date オブジェクトに変換します.</p><p>$format が指定されていない場合は <a href="../DT/DT_W3CDatetimeFormat.html">DT_W3CDatetimeFormat</a> を使ってパースを行います.</p></div>
+        <div class="docblock"><p>指定された文字列を解析して DT_Date オブジェクトに変換します.</p><p>$format が指定されていない場合は <a href="../DT/DT_W3cDatetimeFormat.html#methodgetInstance">DT_W3cDatetimeFormat::getInstance()</a>  を使って解析を行います.  (&quot;YYYY-MM-DD&quot; 形式の文字列を受理します.)</p></div>
         <section class="tags">
             <h1>Tags</h1>
             <ul>
@@ -244,7 +208,7 @@
     </div>
 </section>
 <section id="method__construct">
-    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 108]</span></h1>
+    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 90]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>DT_Date __construct(int $year, int $month, int $date)</code>
@@ -281,7 +245,7 @@
 </section>
 
 <section id="methodgetDateCount">
-    <h1 class="symbol"><b>getDateCount</b> <span class="smalllinenumber">[line 363]</span></h1>
+    <h1 class="symbol"><b>getDateCount</b> <span class="smalllinenumber">[line 353]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>int getDateCount()</code>
@@ -299,7 +263,7 @@
 </section>
 
 <section id="methodgetDay">
-    <h1 class="symbol"><b>getDay</b> <span class="smalllinenumber">[line 330]</span></h1>
+    <h1 class="symbol"><b>getDay</b> <span class="smalllinenumber">[line 320]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>int getDay()</code>
@@ -309,13 +273,31 @@
             <h1>Tags</h1>
             <ul>
                 <li>return : 曜日 (0 以上 6 以下の整数)</li>
-                <li>see : <a href="../DT/DT_Date.html#constFRIDAY">DT_Date::FRIDAY</a></li>
-                <li>see : <a href="../DT/DT_Date.html#constSATURDAY">DT_Date::SATURDAY</a></li>
-                <li>see : <a href="../DT/DT_Date.html#constTHURSDAY">DT_Date::THURSDAY</a></li>
-                <li>see : <a href="../DT/DT_Date.html#constWEDNESDAY">DT_Date::WEDNESDAY</a></li>
-                <li>see : <a href="../DT/DT_Date.html#constMONDAY">DT_Date::MONDAY</a></li>
-                <li>see : <a href="../DT/DT_Date.html#constTUESDAY">DT_Date::TUESDAY</a></li>
-                <li>see : <a href="../DT/DT_Date.html#constSUNDAY">DT_Date::SUNDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constFRIDAY">DT_Time::FRIDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constSATURDAY">DT_Time::SATURDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constTHURSDAY">DT_Time::THURSDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constWEDNESDAY">DT_Time::WEDNESDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constMONDAY">DT_Time::MONDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constTUESDAY">DT_Time::TUESDAY</a></li>
+                <li>see : <a href="../DT/DT_Time.html#constSUNDAY">DT_Time::SUNDAY</a></li>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
+
+<section id="methodgetType">
+    <h1 class="symbol"><b>getType</b> <span class="smalllinenumber">[line 102]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>int getType()</code>
+        </div>
+        <div class="docblock"><p>このオブジェクトの型 <a href="../DT/DT_Time.html#constTYPE_DATE">DT_Time::TYPE_DATE</a> を返します.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>return : DT_Time::TYPE_DATE</li>
                 <li>access : public</li>
             </ul>
         </section>
@@ -324,7 +306,7 @@
 </section>
 
 <section id="methodisLeapYear">
-    <h1 class="symbol"><b>isLeapYear</b> <span class="smalllinenumber">[line 344]</span></h1>
+    <h1 class="symbol"><b>isLeapYear</b> <span class="smalllinenumber">[line 334]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>bool isLeapYear()</code>
@@ -344,7 +326,7 @@
 
 
 <section id="methodtoDate">
-    <h1 class="symbol"><b>toDate</b> <span class="smalllinenumber">[line 292]</span></h1>
+    <h1 class="symbol"><b>toDate</b> <span class="smalllinenumber">[line 282]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code><a href="../DT/DT_Date.html">DT_Date</a> toDate()</code>
@@ -357,13 +339,12 @@
                 <li>access : public</li>
             </ul>
         </section>
-        <div class="overrides">オーバーライド: <a href="../DT/DT_Time.html#methodtoDate">DT_Time::toDate()</a> (このオブジェクトを <a href="../DT/DT_Date.html">DT_Date</a> 型にキャストします.)</div>
         <div class="top">[ <a href="#main">Top</a> ]</div>
     </div>
 </section>
 
 <section id="methodtoDatetime">
-    <h1 class="symbol"><b>toDatetime</b> <span class="smalllinenumber">[line 302]</span></h1>
+    <h1 class="symbol"><b>toDatetime</b> <span class="smalllinenumber">[line 292]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code><a href="../DT/DT_Datetime.html">DT_Datetime</a> toDatetime()</code>
@@ -376,13 +357,12 @@
                 <li>access : public</li>
             </ul>
         </section>
-        <div class="overrides">オーバーライド: <a href="../DT/DT_Time.html#methodtoDatetime">DT_Time::toDatetime()</a> (このオブジェクトを <a href="../DT/DT_Datetime.html">DT_Datetime</a> 型にキャストします.)</div>
         <div class="top">[ <a href="#main">Top</a> ]</div>
     </div>
 </section>
 
 <section id="methodtoTimestamp">
-    <h1 class="symbol"><b>toTimestamp</b> <span class="smalllinenumber">[line 312]</span></h1>
+    <h1 class="symbol"><b>toTimestamp</b> <span class="smalllinenumber">[line 302]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code><a href="../DT/DT_Timestamp.html">DT_Timestamp</a> toTimestamp()</code>
@@ -395,13 +375,12 @@
                 <li>access : public</li>
             </ul>
         </section>
-        <div class="overrides">オーバーライド: <a href="../DT/DT_Time.html#methodtoTimestamp">DT_Time::toTimestamp()</a> (このオブジェクトを <a href="../DT/DT_Timestamp.html">DT_Timestamp</a> 型にキャストします.)</div>
         <div class="top">[ <a href="#main">Top</a> ]</div>
     </div>
 </section>
 
 <section id="method__toString">
-    <h1 class="symbol"><b>__toString</b> <span class="smalllinenumber">[line 279]</span></h1>
+    <h1 class="symbol"><b>__toString</b> <span class="smalllinenumber">[line 269]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>string __toString()</code>
@@ -414,7 +393,7 @@
                 <li>access : public</li>
             </ul>
         </section>
-        <div class="overrides">オーバーライド: <a href="../DT/DT_Time.html#method__toString">DT_Time::__toString()</a> (このオブジェクトの文字列表現を返します.)</div>
+        <div class="overrides">オーバーライド: <a href="../DT/DT_AbstractTime.html#method__toString">DT_AbstractTime::__toString()</a> (このオブジェクトが指す時刻を, SQL などで使われる慣用表現に変換して返します.)</div>
         <div class="top">[ <a href="#main">Top</a> ]</div>
     </div>
 </section>
@@ -423,7 +402,7 @@
 
 </section>
 <footer>
-    Documentation generated on Tue, 17 Jul 2012 19:12:58 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:33 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

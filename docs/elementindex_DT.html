@@ -33,32 +33,67 @@
         </ul>
     </section>
     <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
         <h1>インタフェース</h1>
         <ul>
             <li><a href="DT/DT_Format.html">DT_Format</a></li>
+            <li><a href="DT/DT_Time.html">DT_Time</a></li>
         </ul>
     </section>
     <section>
         <h1>クラス</h1>
         <ul>
+            <li><a href="DT/DT_AbstractTime.html">DT_AbstractTime</a></li>
             <li><a href="DT/DT_Date.html">DT_Date</a></li>
             <li><a href="DT/DT_Datetime.html">DT_Datetime</a></li>
-            <li><a href="DT/DT_Time.html">DT_Time</a></li>
+            <li><a href="DT/DT_FormatWrapper.html">DT_FormatWrapper</a></li>
+            <li><a href="DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a></li>
+            <li><a href="DT/DT_ShiftFormat.html">DT_ShiftFormat</a></li>
+            <li><a href="DT/DT_SimpleFormat.html">DT_SimpleFormat</a></li>
+            <li><a href="DT/DT_TimeEquator.html">DT_TimeEquator</a></li>
             <li><a href="DT/DT_Timestamp.html">DT_Timestamp</a></li>
+            <li><a href="DT/DT_TimeWrapper.html">DT_TimeWrapper</a></li>
             <li><a href="DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a></li>
-            <li><a href="DT/DT_W3CDatetimeFormat.html">DT_W3CDatetimeFormat</a></li>
+            <li><a href="DT/DT_Util.html">DT_Util</a></li>
+            <li><a href="DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a></li>
         </ul>
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
+            <li><a href="DT/_DT---AbstractTime.php.html">AbstractTime.php</a></li>
             <li><a href="DT/_DT---Date.php.html">Date.php</a></li>
             <li><a href="DT/_DT---Datetime.php.html">Datetime.php</a></li>
             <li><a href="DT/_DT---Format.php.html">Format.php</a></li>
+            <li><a href="DT/_DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="DT/_DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="DT/_DT---load.php.html">load.php</a></li>
+            <li><a href="DT/_DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="DT/_DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
             <li><a href="DT/_DT---Time.php.html">Time.php</a></li>
+            <li><a href="DT/_DT---TimeEquator.php.html">TimeEquator.php</a></li>
             <li><a href="DT/_DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="DT/_DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
             <li><a href="DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
-            <li><a href="DT/_DT---W3CDatetimeFormat.php.html">W3CDatetimeFormat.php</a></li>
+            <li><a href="DT/_DT---Util.php.html">Util.php</a></li>
+            <li><a href="DT/_DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
         </ul>
     </section>
 </nav>
@@ -72,6 +107,7 @@
 	[ <a href="elementindex_DT.html#e">e</a> ]
 	[ <a href="elementindex_DT.html#f">f</a> ]
 	[ <a href="elementindex_DT.html#g">g</a> ]
+	[ <a href="elementindex_DT.html#h">h</a> ]
 	[ <a href="elementindex_DT.html#i">i</a> ]
 	[ <a href="elementindex_DT.html#l">l</a> ]
 	[ <a href="elementindex_DT.html#m">m</a> ]
@@ -81,6 +117,7 @@
 	[ <a href="elementindex_DT.html#s">s</a> ]
 	[ <a href="elementindex_DT.html#t">t</a> ]
 	[ <a href="elementindex_DT.html#u">u</a> ]
+	[ <a href="elementindex_DT.html#v">v</a> ]
 	[ <a href="elementindex_DT.html#w">w</a> ]
 	[ <a href="elementindex_DT.html#_">_</a> ]
 
@@ -90,19 +127,33 @@
 		<h2>_</h2>
 		<dl>
 							<dt><b>__construct</b></dt>
+				<dd>in file TimeEquator.php, method <a href="DT/DT_TimeEquator.html#method__construct">DT_TimeEquator::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;比較対象のフィールドを指定して, 新しい DT_TimeEquator オブジェクトを作成します.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#method__construct">DT_SimpleFormat::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたパターン文字列で SimpleFormat を初期化します.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#method__construct">DT_Timestamp::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;与えられた時刻を表現する DT_Timestamp オブジェクトを構築します.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#method__construct">DT_TimeWrapper::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間オブジェクトをラップする TimeWrapper を構築します.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#method__construct">DT_W3cDatetimeFormat::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたタイムゾーンの条件で, 新しいフォーマットを構築します.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file ShiftFormat.php, method <a href="DT/DT_ShiftFormat.html#method__construct">DT_ShiftFormat::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;フォーマットの時差とシステム時刻の時差を指定して,  新しい ShiftFormat を構築します.</dd>
+							<dt><b>__construct</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#method__construct">DT_HttpDateFormat::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;新しいフォーマットを生成します.</dd>
+							<dt><b>__construct</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#method__construct">DT_Date::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;与えられた日付を表現する DT_Date オブジェクトを構築します.</dd>
 							<dt><b>__construct</b></dt>
 				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#method__construct">DT_Datetime::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;与えられた時刻を表現する DT_Datetime オブジェクトを構築します.</dd>
 							<dt><b>__construct</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#method__construct">DT_W3CDatetimeFormat::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;新しいオブジェクトを構築します.</dd>
-							<dt><b>__construct</b></dt>
-				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#method__construct">DT_Timestamp::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;与えられた時刻を表現する DT_Timestamp オブジェクトを構築します.</dd>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#method__construct">DT_FormatWrapper::__construct()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Format オブジェクトをラップする FormatWrapper を構築します.</dd>
 							<dt><b>__toString</b></dt>
-				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#method__toString">DT_Datetime::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの文字列表現です.</dd>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#method__toString">DT_TimeWrapper::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの __toString メソッドを実行します.</dd>
 							<dt><b>__toString</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#method__toString">DT_Date::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの文字列表現です.</dd>
 							<dt><b>__toString</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#method__toString">DT_Time::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの文字列表現を返します.</dd>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#method__toString">DT_AbstractTime::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトが指す時刻を, SQL などで使われる慣用表現に変換して返します.</dd>
+							<dt><b>__toString</b></dt>
+				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#method__toString">DT_Datetime::__toString()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの文字列表現です.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -112,9 +163,19 @@
 		<h2>a</h2>
 		<dl>
 							<dt><b>add</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodadd">DT_TimeWrapper::add()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの add メソッドを実行し, その返り値をこのクラスでラップします.</dd>
+							<dt><b>add</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodadd">DT_Time::add()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.</dd>
+							<dt><b>add</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodadd">DT_AbstractTime::add()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.</dd>
+							<dt><b>after</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodafter">DT_TimeWrapper::after()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの after メソッドを実行します.</dd>
 							<dt><b>after</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodafter">DT_Time::after()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間とこの時間を比較します.</dd>
+							<dt><b>after</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodafter">DT_AbstractTime::after()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間とこの時間を比較します.</dd>
+							<dt><b>AbstractTime.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---AbstractTime.php.html">AbstractTime.php</a></dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -124,7 +185,11 @@
 		<h2>b</h2>
 		<dl>
 							<dt><b>before</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodbefore">DT_TimeWrapper::before()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの before メソッドを実行します.</dd>
+							<dt><b>before</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodbefore">DT_Time::before()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間とこの時間を比較します.</dd>
+							<dt><b>before</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodbefore">DT_AbstractTime::before()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間とこの時間を比較します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -133,10 +198,14 @@
 	<div>
 		<h2>c</h2>
 		<dl>
+							<dt><b>cleanTimeZoneOffset</b></dt>
+				<dd>in file Util.php, method <a href="DT/DT_Util.html#methodcleanTimeZoneOffset">DT_Util::cleanTimeZoneOffset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時差 (分単位) の値が妥当かどうかを調べ, 必要に応じて値を丸めた結果を返します.</dd>
 							<dt><b>compareTime</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodcompareTime">DT_Time::compareTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;2つの時間オブジェクトを比較します. 一つめの引数のほうが後 (未来) の場合は正の値,  前 (過去) の場合は負の値, 同じ場合は 0 を返します.</dd>
+				<dd>in file Util.php, method <a href="DT/DT_Util.html#methodcompareTime">DT_Util::compareTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;2つの時間オブジェクトを比較します. 一つめの引数のほうが後 (未来) の場合は正の値,  前 (過去) の場合は負の値, 同じ場合は 0 を返します.</dd>
 							<dt><b>compareTo</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodcompareTo">DT_Time::compareTo()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間と指定された時間を比較します.</dd>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodcompareTo">DT_TimeWrapper::compareTo()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの compareTo メソッドを実行します.</dd>
+							<dt><b>compareTo</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodcompareTo">DT_AbstractTime::compareTo()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間と指定された時間を比較します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -149,20 +218,36 @@
 				<dd>procedural page <a href="DT/_DT---Date.php.html">Date.php</a></dd>
 							<dt><b>Datetime.php</b></dt>
 				<dd>procedural page <a href="DT/_DT---Datetime.php.html">Datetime.php</a></dd>
+							<dt><b>DT_AbstractTime</b></dt>
+				<dd>in file AbstractTime.php, class <a href="DT/DT_AbstractTime.html">DT_AbstractTime</a><br>&nbsp;&nbsp;&nbsp;&nbsp;時間を表す抽象基底クラスです.</dd>
 							<dt><b>DT_Date</b></dt>
-				<dd>in file Date.php, class <a href="DT/DT_Date.html">DT_Date</a><br>&nbsp;&nbsp;&nbsp;&nbsp;年月日をあらわすクラスです.</dd>
+				<dd>in file Date.php, class <a href="DT/DT_Date.html">DT_Date</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DATE 型の時間オブジェクトです.</dd>
 							<dt><b>DT_Datetime</b></dt>
-				<dd>in file Datetime.php, class <a href="DT/DT_Datetime.html">DT_Datetime</a><br>&nbsp;&nbsp;&nbsp;&nbsp;時刻を表すクラスです.</dd>
+				<dd>in file Datetime.php, class <a href="DT/DT_Datetime.html">DT_Datetime</a><br>&nbsp;&nbsp;&nbsp;&nbsp;DATETIME 型の時間オブジェクトです.</dd>
 							<dt><b>DT_Format</b></dt>
-				<dd>in file Format.php, class <a href="DT/DT_Format.html">DT_Format</a><br>&nbsp;&nbsp;&nbsp;&nbsp;特定の書式に則った文字列から時間オブジェクトを構築するメソッドと,  時間オブジェクトを文字列に変換するメソッドを備えたインタフェースです.</dd>
+				<dd>in file Format.php, class <a href="DT/DT_Format.html">DT_Format</a><br>&nbsp;&nbsp;&nbsp;&nbsp;文字列から時間オブジェクトへの変換と, 時間オブジェクトから文字列への変換をサポートするインタフェースです.</dd>
+							<dt><b>DT_FormatWrapper</b></dt>
+				<dd>in file FormatWrapper.php, class <a href="DT/DT_FormatWrapper.html">DT_FormatWrapper</a><br>&nbsp;&nbsp;&nbsp;&nbsp;既存の DT_Format オブジェクトを機能拡張するためのラッパークラスです.</dd>
+							<dt><b>DT_HttpDateFormat</b></dt>
+				<dd>in file HttpDateFormat.php, class <a href="DT/DT_HttpDateFormat.html">DT_HttpDateFormat</a><br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP-Date の書式を扱うクラスです.</dd>
+							<dt><b>DT_ShiftFormat</b></dt>
+				<dd>in file ShiftFormat.php, class <a href="DT/DT_ShiftFormat.html">DT_ShiftFormat</a><br>&nbsp;&nbsp;&nbsp;&nbsp;システム内部の時差とフォーマットの時差を自動で調整するためのフォーマットです.</dd>
+							<dt><b>DT_SimpleFormat</b></dt>
+				<dd>in file SimpleFormat.php, class <a href="DT/DT_SimpleFormat.html">DT_SimpleFormat</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Java の  <a href="http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a>  と同じような使い勝手で, ユーザー定義の書式を扱うことができるクラスです.</dd>
 							<dt><b>DT_Time</b></dt>
-				<dd>in file Time.php, class <a href="DT/DT_Time.html">DT_Time</a><br>&nbsp;&nbsp;&nbsp;&nbsp;時間を表す抽象基底クラスです.</dd>
+				<dd>in file Time.php, class <a href="DT/DT_Time.html">DT_Time</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ある特定の日付または時刻を表すインタフェースです.</dd>
+							<dt><b>DT_TimeEquator</b></dt>
+				<dd>in file TimeEquator.php, class <a href="DT/DT_TimeEquator.html">DT_TimeEquator</a><br>&nbsp;&nbsp;&nbsp;&nbsp;時間オブジェクトの比較を行うための Equator です.</dd>
 							<dt><b>DT_Timestamp</b></dt>
-				<dd>in file Timestamp.php, class <a href="DT/DT_Timestamp.html">DT_Timestamp</a><br>&nbsp;&nbsp;&nbsp;&nbsp;時刻を表すクラスです.</dd>
+				<dd>in file Timestamp.php, class <a href="DT/DT_Timestamp.html">DT_Timestamp</a><br>&nbsp;&nbsp;&nbsp;&nbsp;TIMESTAMP 型の時間オブジェクトです.</dd>
+							<dt><b>DT_TimeWrapper</b></dt>
+				<dd>in file TimeWrapper.php, class <a href="DT/DT_TimeWrapper.html">DT_TimeWrapper</a><br>&nbsp;&nbsp;&nbsp;&nbsp;既存の時間オブジェクトを機能拡張するためのラッパークラスです.</dd>
 							<dt><b>DT_UnixTimeFormat</b></dt>
 				<dd>in file UnixTimeFormat.php, class <a href="DT/DT_UnixTimeFormat.html">DT_UnixTimeFormat</a><br>&nbsp;&nbsp;&nbsp;&nbsp;Unix time (<a href="http://www.php.net/time">time()</a> の返り値や <a href="http://www.php.net/date">date()</a> の引数として使用される整数)  と時間オブジェクトの相互変換を行うクラスです.</dd>
-							<dt><b>DT_W3CDatetimeFormat</b></dt>
-				<dd>in file W3CDatetimeFormat.php, class <a href="DT/DT_W3CDatetimeFormat.html">DT_W3CDatetimeFormat</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.w3.org/TR/NOTE-datetime">W3CDTF</a> と時間オブジェクトの相互変換を行うフォーマットです.</dd>
+							<dt><b>DT_Util</b></dt>
+				<dd>in file Util.php, class <a href="DT/DT_Util.html">DT_Util</a><br>&nbsp;&nbsp;&nbsp;&nbsp;時間関連のユーティリティクラスです.</dd>
+							<dt><b>DT_W3cDatetimeFormat</b></dt>
+				<dd>in file W3cDatetimeFormat.php, class <a href="DT/DT_W3cDatetimeFormat.html">DT_W3cDatetimeFormat</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.w3.org/TR/NOTE-datetime">W3CDTF</a> と時間オブジェクトの相互変換を行うフォーマットです.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -172,7 +257,13 @@
 		<h2>e</h2>
 		<dl>
 							<dt><b>equals</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodequals">DT_TimeWrapper::equals()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトとこのオブジェクトを比較します.</dd>
+							<dt><b>equals</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodequals">DT_Time::equals()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトとこのオブジェクトを比較します.</dd>
+							<dt><b>equals</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodequals">DT_AbstractTime::equals()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトとこのオブジェクトを比較します.</dd>
+							<dt><b>equate</b></dt>
+				<dd>in file TimeEquator.php, method <a href="DT/DT_TimeEquator.html#methodequate">DT_TimeEquator::equate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された 2 つの時間オブジェクトが等しいかどうか調べます.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -183,34 +274,66 @@
 		<dl>
 							<dt><b>Format.php</b></dt>
 				<dd>procedural page <a href="DT/_DT---Format.php.html">Format.php</a></dd>
+							<dt><b>FormatWrapper.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---FormatWrapper.php.html">FormatWrapper.php</a></dd>
+							<dt><b>format</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodformat">DT_AbstractTime::format()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたフォーマットを使ってこの時間オブジェクトを書式化します.</dd>
 							<dt><b>format</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodformat">DT_Time::format()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたフォーマットを使ってこの時間オブジェクトを書式化します.</dd>
+							<dt><b>format</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodformat">DT_TimeWrapper::format()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの format メソッドを実行します.</dd>
 							<dt><b>formatDate</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodformatDate">DT_W3CDatetimeFormat::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DD&quot; 形式の文字列を返します.</dd>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodformatDate">DT_SimpleFormat::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Date オブジェクトを書式化します.</dd>
 							<dt><b>formatDate</b></dt>
-				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodformatDate">DT_Format::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された Date オブジェクトを書式化します.</dd>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodformatDate">DT_FormatWrapper::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの formatDate メソッドを実行します.</dd>
 							<dt><b>formatDate</b></dt>
-				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodformatDate">DT_UnixTimeFormat::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトを DT_Timestamp 型にキャストして  formatTimestamp() を実行した結果を返します.</dd>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodformatDate">DT_W3cDatetimeFormat::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間オブジェクトを &quot;YYYY-MM-DD&quot; 形式の文字列に変換します.</dd>
+							<dt><b>formatDate</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodformatDate">DT_HttpDateFormat::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.</dd>
+							<dt><b>formatDate</b></dt>
+				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodformatDate">DT_UnixTimeFormat::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトを DT_Timestamp 型にキャストして  <a href="DT/DT_HttpDateFormat.html#methodformatTimestamp">formatTimestamp()</a>  を実行した結果を返します.</dd>
+							<dt><b>formatDate</b></dt>
+				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodformatDate">DT_Format::formatDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Date オブジェクトを書式化します.</dd>
 							<dt><b>formatDatetime</b></dt>
-				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodformatDatetime">DT_UnixTimeFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトを DT_Timestamp 型にキャストして  formatTimestamp() を実行した結果を返します.</dd>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodformatDatetime">DT_SimpleFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Datetime オブジェクトを書式化します.</dd>
 							<dt><b>formatDatetime</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodformatDatetime">DT_W3CDatetimeFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DDThh:mm&quot; 形式の文字列を返します.</dd>
+				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodformatDatetime">DT_UnixTimeFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたオブジェクトを DT_Timestamp 型にキャストして  <a href="DT/DT_HttpDateFormat.html#methodformatTimestamp">formatTimestamp()</a>  を実行した結果を返します.</dd>
 							<dt><b>formatDatetime</b></dt>
-				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodformatDatetime">DT_Format::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された Datetime オブジェクトを書式化します.</dd>
+				<dd>in file ShiftFormat.php, method <a href="DT/DT_ShiftFormat.html#methodformatDatetime">DT_ShiftFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;変換対象の時間オブジェクトを表示用のタイムゾーンに変換してから,  オリジナルの formatDatetime を実行します.</dd>
+							<dt><b>formatDatetime</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodformatDatetime">DT_HttpDateFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時刻の HTTP-date 表現を返します.</dd>
+							<dt><b>formatDatetime</b></dt>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodformatDatetime">DT_W3cDatetimeFormat::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間オブジェクトを &quot;YYYY-MM-DDThh:mm&quot; 形式の文字列に変換します.</dd>
+							<dt><b>formatDatetime</b></dt>
+				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodformatDatetime">DT_Format::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Datetime オブジェクトを書式化します.</dd>
+							<dt><b>formatDatetime</b></dt>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodformatDatetime">DT_FormatWrapper::formatDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの formatDatetime メソッドを実行します.</dd>
+							<dt><b>formatTime</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodformatTime">DT_AbstractTime::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間の時刻 (時・分・秒) 部分を書式化します.</dd>
+							<dt><b>formatTime</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodformatTime">DT_TimeWrapper::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの formatTime メソッドを実行します.</dd>
+							<dt><b>formatTime</b></dt>
+				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodformatTime">DT_Timestamp::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの時刻部分の文字列を &quot;hh:mm:ss&quot; 形式で返します.</dd>
 							<dt><b>formatTime</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodformatTime">DT_Time::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間の時刻 (時・分・秒) 部分を書式化します.</dd>
 							<dt><b>formatTime</b></dt>
-				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodformatTime">DT_Datetime::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;hh:mm&quot; 形式の文字列を返します.</dd>
-							<dt><b>formatTime</b></dt>
-				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodformatTime">DT_Timestamp::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;(non-PHPdoc)</dd>
+				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodformatTime">DT_Datetime::formatTime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの時刻部分の文字列を &quot;hh:mm&quot; 形式で返します.</dd>
 							<dt><b>formatTimestamp</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodformatTimestamp">DT_W3CDatetimeFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DDThh:mm:ss&quot; 形式の文字列を返します.</dd>
+				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodformatTimestamp">DT_UnixTimeFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時刻をタイムスタンプに変換します.</dd>
 							<dt><b>formatTimestamp</b></dt>
-				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodformatTimestamp">DT_UnixTimeFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたタイムスタンプを書式化します.</dd>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodformatTimestamp">DT_W3cDatetimeFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された時間オブジェクトを &quot;YYYY-MM-DDThh:mm:ss&quot; 形式の文字列に変換します.</dd>
 							<dt><b>formatTimestamp</b></dt>
-				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodformatTimestamp">DT_Format::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された Timestamp オブジェクトを書式化します.</dd>
+				<dd>in file ShiftFormat.php, method <a href="DT/DT_ShiftFormat.html#methodformatTimestamp">DT_ShiftFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;変換対象の時間オブジェクトを表示用のタイムゾーンに変換してから,  オリジナルの formatTimestamp を実行します.</dd>
+							<dt><b>formatTimestamp</b></dt>
+				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodformatTimestamp">DT_Format::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Timestamp オブジェクトを書式化します.</dd>
+							<dt><b>formatTimestamp</b></dt>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodformatTimestamp">DT_FormatWrapper::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの formatTimestamp メソッドを実行します.</dd>
+							<dt><b>formatTimestamp</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodformatTimestamp">DT_HttpDateFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時刻の HTTP-date 表現を返します.</dd>
+							<dt><b>formatTimestamp</b></dt>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodformatTimestamp">DT_SimpleFormat::formatTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された DT_Timestamp オブジェクトを書式化します.</dd>
 							<dt><b>FRIDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constFRIDAY">DT_Date::FRIDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;金曜日をあらわす定数です</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constFRIDAY">DT_Time::FRIDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;金曜日をあらわす定数です</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -220,15 +343,61 @@
 		<h2>g</h2>
 		<dl>
 							<dt><b>get</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodget">DT_AbstractTime::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたフィールドの値を取得します.</dd>
+							<dt><b>get</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodget">DT_TimeWrapper::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの get メソッドを実行します.</dd>
+							<dt><b>get</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodget">DT_Time::get()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたフィールドの値を取得します.</dd>
+							<dt><b>getDateCount</b></dt>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodgetDateCount">DT_Time::getDateCount()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この月の日数を返します.</dd>
+							<dt><b>getDateCount</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodgetDateCount">DT_TimeWrapper::getDateCount()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの getDateCount メソッドを実行します.</dd>
 							<dt><b>getDateCount</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodgetDateCount">DT_Date::getDateCount()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この月の日数を返します.</dd>
 							<dt><b>getDay</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodgetDay">DT_TimeWrapper::getDay()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの getDay メソッドを実行します.</dd>
+							<dt><b>getDay</b></dt>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodgetDay">DT_Time::getDay()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この日付の曜日を返します. 返される値は 0 から 6 までの整数で, 0 が日曜, 6 が土曜をあらわします.</dd>
+							<dt><b>getDay</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodgetDay">DT_Date::getDay()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この日付の曜日を返します. 返される値は 0 から 6 までの整数で, 0 が日曜, 6 が土曜をあらわします.</dd>
 							<dt><b>getDefault</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodgetDefault">DT_W3CDatetimeFormat::getDefault()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;デフォルトのフォーマットを返します.</dd>
+				<dd>in file TimeEquator.php, method <a href="DT/DT_TimeEquator.html#methodgetDefault">DT_TimeEquator::getDefault()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;デフォルトの DT_Equator オブジェクトを返します.</dd>
+							<dt><b>getFormat</b></dt>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodgetFormat">DT_SimpleFormat::getFormat()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトのパターン文字列を返します.</dd>
 							<dt><b>getInstance</b></dt>
 				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodgetInstance">DT_UnixTimeFormat::getInstance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このクラスのインスタンスを取得します.</dd>
+							<dt><b>getInstance</b></dt>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodgetInstance">DT_W3cDatetimeFormat::getInstance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;デフォルトのインスタンスを返します.</dd>
+							<dt><b>getInstance</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodgetInstance">DT_HttpDateFormat::getInstance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;デフォルトのインスタンスを返します.</dd>
+							<dt><b>getOriginal</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodgetOriginal">DT_TimeWrapper::getOriginal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象の時間オブジェクトを返します.</dd>
+							<dt><b>getOriginal</b></dt>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodgetOriginal">DT_FormatWrapper::getOriginal()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象の DT_Format オブジェクトを返します.</dd>
+							<dt><b>getTimeZoneOffset</b></dt>
+				<dd>in file Util.php, method <a href="DT/DT_Util.html#methodgetTimeZoneOffset">DT_Util::getTimeZoneOffset()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;システム時刻と GMT との時差を, 分単位で返します.</dd>
+							<dt><b>getType</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodgetType">DT_TimeWrapper::getType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトのタイプを返します.</dd>
+							<dt><b>getType</b></dt>
+				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodgetType">DT_Datetime::getType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの型 <a href="DT/DT_Time.html#constTYPE_DATETIME">DT_Time::TYPE_DATETIME</a> を返します.</dd>
+							<dt><b>getType</b></dt>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodgetType">DT_Time::getType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの型を返します.</dd>
+							<dt><b>getType</b></dt>
+				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodgetType">DT_Timestamp::getType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの型 <a href="DT/DT_Time.html#constTYPE_TIMESTAMP">DT_Time::TYPE_TIMESTAMP</a> を返します.</dd>
+							<dt><b>getType</b></dt>
+				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodgetType">DT_Date::getType()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトの型 <a href="DT/DT_Time.html#constTYPE_DATE">DT_Time::TYPE_DATE</a> を返します.</dd>
+					</dl>
+	</div>
+	<a href="elementindex_DT.html#top">top</a><br>
+  <hr />
+	<a name="h"></a>
+	<div>
+		<h2>h</h2>
+		<dl>
+							<dt><b>HttpDateFormat.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---HttpDateFormat.php.html">HttpDateFormat.php</a></dd>
+							<dt><b>hashCode</b></dt>
+				<dd>in file TimeEquator.php, method <a href="DT/DT_TimeEquator.html#methodhashCode">DT_TimeEquator::hashCode()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;年・月・日・時・分・秒の各フィールドからハッシュ値を算出します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -237,6 +406,10 @@
 	<div>
 		<h2>i</h2>
 		<dl>
+							<dt><b>isLeapYear</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodisLeapYear">DT_TimeWrapper::isLeapYear()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの isLeapYear メソッドを実行します.</dd>
+							<dt><b>isLeapYear</b></dt>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodisLeapYear">DT_Time::isLeapYear()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この年がうるう年かどうかを判定します.</dd>
 							<dt><b>isLeapYear</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodisLeapYear">DT_Date::isLeapYear()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この年がうるう年かどうかを判定します.</dd>
 					</dl>
@@ -247,8 +420,10 @@
 	<div>
 		<h2>l</h2>
 		<dl>
+							<dt><b>load.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---load.php.html">load.php</a></dd>
 							<dt><b>latest</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodlatest">DT_Time::latest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数に渡された時間オブジェクトの中で最新のものを返します.</dd>
+				<dd>in file Util.php, method <a href="DT/DT_Util.html#methodlatest">DT_Util::latest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数に渡された時間オブジェクトの中で最新のものを返します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -258,7 +433,7 @@
 		<h2>m</h2>
 		<dl>
 							<dt><b>MONDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constMONDAY">DT_Date::MONDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;月曜日をあらわす定数です</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constMONDAY">DT_Time::MONDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;月曜日をあらわす定数です</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -267,6 +442,8 @@
 	<div>
 		<h2>n</h2>
 		<dl>
+							<dt><b>newInstance</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodnewInstance">DT_TimeWrapper::newInstance()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたインスタンスをラップする新しい TimeWrapper を構築します.</dd>
 							<dt><b>now</b></dt>
 				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodnow">DT_Timestamp::now()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;実行時の DT_Timestamp オブジェクトを返します.</dd>
 							<dt><b>now</b></dt>
@@ -282,7 +459,7 @@
 		<h2>o</h2>
 		<dl>
 							<dt><b>oldest</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodoldest">DT_Time::oldest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数に渡された時間オブジェクトの中で最も古いものを返します.</dd>
+				<dd>in file Util.php, method <a href="DT/DT_Util.html#methodoldest">DT_Util::oldest()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数に渡された時間オブジェクトの中で最も古いものを返します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -292,29 +469,51 @@
 		<h2>p</h2>
 		<dl>
 							<dt><b>parse</b></dt>
-				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodparse">DT_Date::parse()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を DT_Date オブジェクトに変換します.</dd>
+				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodparse">DT_Timestamp::parse()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたテキストを解析して DT_Timestamp オブジェクトに変換します.</dd>
 							<dt><b>parse</b></dt>
-				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodparse">DT_Timestamp::parse()</a></dd>
+				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodparse">DT_Date::parse()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して DT_Date オブジェクトに変換します.</dd>
 							<dt><b>parse</b></dt>
-				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodparse">DT_Datetime::parse()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたテキストをパースして DT_Datetime オブジェクトに変換します.</dd>
+				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodparse">DT_Datetime::parse()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたテキストを解析して DT_Datetime オブジェクトに変換します.</dd>
 							<dt><b>parseDate</b></dt>
-				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodparseDate">DT_Format::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して Date オブジェクトに変換します.</dd>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodparseDate">DT_HttpDateFormat::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="DT/DT_HttpDateFormat.html#methodparseTimestamp">parseTimestamp()</a> の実行結果を DT_Date にキャストします.</dd>
 							<dt><b>parseDate</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodparseDate">DT_W3CDatetimeFormat::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DD&quot; 形式の文字列をパースします.</dd>
+				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodparseDate">DT_UnixTimeFormat::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたタイムスタンプを DT_Date に変換します.</dd>
 							<dt><b>parseDate</b></dt>
-				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodparseDate">DT_UnixTimeFormat::parseDate()</a></dd>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodparseDate">DT_FormatWrapper::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの parseDate メソッドを実行します.</dd>
+							<dt><b>parseDate</b></dt>
+				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodparseDate">DT_Format::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して DATE 型の時間オブジェクトに変換します.</dd>
+							<dt><b>parseDate</b></dt>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodparseDate">DT_W3cDatetimeFormat::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DD&quot; 形式の文字列を解析します.</dd>
+							<dt><b>parseDate</b></dt>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodparseDate">DT_SimpleFormat::parseDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析し, DT_Date に変換します.</dd>
 							<dt><b>parseDatetime</b></dt>
-				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodparseDatetime">DT_Format::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して Datetime オブジェクトに変換します.</dd>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodparseDatetime">DT_SimpleFormat::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析し, DT_Datetime に変換します.</dd>
 							<dt><b>parseDatetime</b></dt>
-				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodparseDatetime">DT_UnixTimeFormat::parseDatetime()</a></dd>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodparseDatetime">DT_W3cDatetimeFormat::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DDThh:mm&quot; 形式の文字列を解析します.</dd>
 							<dt><b>parseDatetime</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodparseDatetime">DT_W3CDatetimeFormat::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DDThh:mm&quot; 形式の文字列をパースします.</dd>
+				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodparseDatetime">DT_UnixTimeFormat::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたタイムスタンプを DT_Datetime に変換します.</dd>
+							<dt><b>parseDatetime</b></dt>
+				<dd>in file ShiftFormat.php, method <a href="DT/DT_ShiftFormat.html#methodparseDatetime">DT_ShiftFormat::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;オリジナルの parseDatetime で得られた結果をシステム時刻に変換して返します.</dd>
+							<dt><b>parseDatetime</b></dt>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodparseDatetime">DT_FormatWrapper::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの parseDatetime メソッドを実行します.</dd>
+							<dt><b>parseDatetime</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodparseDatetime">DT_HttpDateFormat::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href="DT/DT_HttpDateFormat.html#methodparseTimestamp">parseTimestamp()</a> の実行結果を DT_Datetime にキャストします.</dd>
+							<dt><b>parseDatetime</b></dt>
+				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodparseDatetime">DT_Format::parseDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して DATETIME 型の時間オブジェクトに変換します.</dd>
 							<dt><b>parseTimestamp</b></dt>
-				<dd>in file W3CDatetimeFormat.php, method <a href="DT/DT_W3CDatetimeFormat.html#methodparseTimestamp">DT_W3CDatetimeFormat::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DDThh:mm:ss&quot; 形式の文字列をパースします.</dd>
+				<dd>in file W3cDatetimeFormat.php, method <a href="DT/DT_W3cDatetimeFormat.html#methodparseTimestamp">DT_W3cDatetimeFormat::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;YYYY-MM-DDThh:mm:ss&quot; 形式の文字列を解析します.</dd>
 							<dt><b>parseTimestamp</b></dt>
-				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodparseTimestamp">DT_UnixTimeFormat::parseTimestamp()</a></dd>
+				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodparseTimestamp">DT_Format::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して TIMESTAMP 型の時間オブジェクトに変換します.</dd>
 							<dt><b>parseTimestamp</b></dt>
-				<dd>in file Format.php, method <a href="DT/DT_Format.html#methodparseTimestamp">DT_Format::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析して Timestamp オブジェクトに変換します.</dd>
+				<dd>in file UnixTimeFormat.php, method <a href="DT/DT_UnixTimeFormat.html#methodparseTimestamp">DT_UnixTimeFormat::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定されたタイムスタンプを DT_Timestamp に変換します.</dd>
+							<dt><b>parseTimestamp</b></dt>
+				<dd>in file FormatWrapper.php, method <a href="DT/DT_FormatWrapper.html#methodparseTimestamp">DT_FormatWrapper::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの parseTimestamp メソッドを実行します.</dd>
+							<dt><b>parseTimestamp</b></dt>
+				<dd>in file HttpDateFormat.php, method <a href="DT/DT_HttpDateFormat.html#methodparseTimestamp">DT_HttpDateFormat::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP-date 形式のフォーマットを DT_Timestamp に変換します.</dd>
+							<dt><b>parseTimestamp</b></dt>
+				<dd>in file SimpleFormat.php, method <a href="DT/DT_SimpleFormat.html#methodparseTimestamp">DT_SimpleFormat::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;指定された文字列を解析し, DT_Timestamp に変換します.</dd>
+							<dt><b>parseTimestamp</b></dt>
+				<dd>in file ShiftFormat.php, method <a href="DT/DT_ShiftFormat.html#methodparseTimestamp">DT_ShiftFormat::parseTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;オリジナルの parseTimestamp で得られた結果をシステム時刻に変換して返します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -323,14 +522,28 @@
 	<div>
 		<h2>s</h2>
 		<dl>
+							<dt><b>$second</b></dt>
+				<dd>in file Timestamp.php, variable <a href="DT/DT_Timestamp.html#var$second">DT_Timestamp::$second</a><br>&nbsp;&nbsp;&nbsp;&nbsp;秒を表す整数です.</dd>
+							<dt><b>ShiftFormat.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---ShiftFormat.php.html">ShiftFormat.php</a></dd>
+							<dt><b>SimpleFormat.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---SimpleFormat.php.html">SimpleFormat.php</a></dd>
 							<dt><b>SATURDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constSATURDAY">DT_Date::SATURDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;土曜日をあらわす定数です</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constSATURDAY">DT_Time::SATURDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;土曜日をあらわす定数です</dd>
+							<dt><b>set</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodset">DT_TimeWrapper::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの set メソッドを実行し, その返り値をこのクラスでラップします.</dd>
 							<dt><b>set</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodset">DT_Time::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間オブジェクトの指定されたフィールドを上書きします.</dd>
+							<dt><b>set</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodset">DT_AbstractTime::set()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間オブジェクトの指定されたフィールドを上書きします.</dd>
+							<dt><b>setAll</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodsetAll">DT_TimeWrapper::setAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの setAll メソッドを実行し, その返り値をこのクラスでラップします.</dd>
+							<dt><b>setAll</b></dt>
+				<dd>in file AbstractTime.php, method <a href="DT/DT_AbstractTime.html#methodsetAll">DT_AbstractTime::setAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間オブジェクトの複数のフィールドを一度に上書きします.</dd>
 							<dt><b>setAll</b></dt>
 				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodsetAll">DT_Time::setAll()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;この時間オブジェクトの複数のフィールドを一度に上書きします.</dd>
 							<dt><b>SUNDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constSUNDAY">DT_Date::SUNDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;日曜日をあらわす定数です.</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constSUNDAY">DT_Time::SUNDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;日曜日をあらわす定数です.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -341,30 +554,46 @@
 		<dl>
 							<dt><b>Time.php</b></dt>
 				<dd>procedural page <a href="DT/_DT---Time.php.html">Time.php</a></dd>
+							<dt><b>TimeEquator.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---TimeEquator.php.html">TimeEquator.php</a></dd>
 							<dt><b>Timestamp.php</b></dt>
 				<dd>procedural page <a href="DT/_DT---Timestamp.php.html">Timestamp.php</a></dd>
+							<dt><b>TimeWrapper.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---TimeWrapper.php.html">TimeWrapper.php</a></dd>
 							<dt><b>THURSDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constTHURSDAY">DT_Date::THURSDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;木曜日をあらわす定数です</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constTHURSDAY">DT_Time::THURSDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;木曜日をあらわす定数です</dd>
 							<dt><b>toDate</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodtoDate">DT_Time::toDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを <a href="DT/DT_Date.html">DT_Date</a> 型にキャストします.</dd>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodtoDate">DT_Time::toDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DATE 型にキャストします.</dd>
+							<dt><b>toDate</b></dt>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodtoDate">DT_TimeWrapper::toDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの toDate メソッドを実行します.</dd>
 							<dt><b>toDate</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodtoDate">DT_Date::toDate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Date 型にキャストします.</dd>
 							<dt><b>toDatetime</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodtoDatetime">DT_Time::toDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを <a href="DT/DT_Datetime.html">DT_Datetime</a> 型にキャストします.</dd>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodtoDatetime">DT_TimeWrapper::toDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの toDatetime メソッドを実行します.</dd>
 							<dt><b>toDatetime</b></dt>
-				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodtoDatetime">DT_Datetime::toDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Datetime 型にキャストします.</dd>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodtoDatetime">DT_Time::toDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DATETIME 型にキャストします.</dd>
 							<dt><b>toDatetime</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodtoDatetime">DT_Date::toDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Datetime 型にキャストします.</dd>
+							<dt><b>toDatetime</b></dt>
+				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodtoDatetime">DT_Datetime::toDatetime()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Datetime 型にキャストします.</dd>
 							<dt><b>toTimestamp</b></dt>
 				<dd>in file Timestamp.php, method <a href="DT/DT_Timestamp.html#methodtoTimestamp">DT_Timestamp::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Timestamp 型にキャストします.</dd>
 							<dt><b>toTimestamp</b></dt>
-				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodtoTimestamp">DT_Time::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを <a href="DT/DT_Timestamp.html">DT_Timestamp</a> 型にキャストします.</dd>
-							<dt><b>toTimestamp</b></dt>
-				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodtoTimestamp">DT_Datetime::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Timestamp 型にキャストします.</dd>
+				<dd>in file TimeWrapper.php, method <a href="DT/DT_TimeWrapper.html#methodtoTimestamp">DT_TimeWrapper::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;ラップ対象のオブジェクトの toTimestamp メソッドを実行します.</dd>
 							<dt><b>toTimestamp</b></dt>
 				<dd>in file Date.php, method <a href="DT/DT_Date.html#methodtoTimestamp">DT_Date::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Timestamp 型にキャストします.</dd>
+							<dt><b>toTimestamp</b></dt>
+				<dd>in file Time.php, method <a href="DT/DT_Time.html#methodtoTimestamp">DT_Time::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを TIMESTAMP 型にキャストします.</dd>
+							<dt><b>toTimestamp</b></dt>
+				<dd>in file Datetime.php, method <a href="DT/DT_Datetime.html#methodtoTimestamp">DT_Datetime::toTimestamp()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトを DT_Timestamp 型にキャストします.</dd>
 							<dt><b>TUESDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constTUESDAY">DT_Date::TUESDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;火曜日をあらわす定数です</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constTUESDAY">DT_Time::TUESDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;火曜日をあらわす定数です</dd>
+							<dt><b>TYPE_DATE</b></dt>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constTYPE_DATE">DT_Time::TYPE_DATE</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトが年・月・日のフィールドをサポートしていることを示します.</dd>
+							<dt><b>TYPE_DATETIME</b></dt>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constTYPE_DATETIME">DT_Time::TYPE_DATETIME</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトが年・月・日・時・分のフィールドをサポートしていることを示します.</dd>
+							<dt><b>TYPE_TIMESTAMP</b></dt>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constTYPE_TIMESTAMP">DT_Time::TYPE_TIMESTAMP</a><br>&nbsp;&nbsp;&nbsp;&nbsp;このオブジェクトが年・月・日・時・分・秒のフィールドをサポートしていることを示します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -375,6 +604,18 @@
 		<dl>
 							<dt><b>UnixTimeFormat.php</b></dt>
 				<dd>procedural page <a href="DT/_DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></dd>
+							<dt><b>Util.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---Util.php.html">Util.php</a></dd>
+					</dl>
+	</div>
+	<a href="elementindex_DT.html#top">top</a><br>
+  <hr />
+	<a name="v"></a>
+	<div>
+		<h2>v</h2>
+		<dl>
+							<dt><b>validate</b></dt>
+				<dd>in file Util.php, method <a href="DT/DT_Util.html#methodvalidate">DT_Util::validate()</a><br>&nbsp;&nbsp;&nbsp;&nbsp;引数に指定された年・月・日 (オプションで時・分・秒) の妥当性を検証します.</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
@@ -383,16 +624,16 @@
 	<div>
 		<h2>w</h2>
 		<dl>
-							<dt><b>W3CDatetimeFormat.php</b></dt>
-				<dd>procedural page <a href="DT/_DT---W3CDatetimeFormat.php.html">W3CDatetimeFormat.php</a></dd>
+							<dt><b>W3cDatetimeFormat.php</b></dt>
+				<dd>procedural page <a href="DT/_DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></dd>
 							<dt><b>WEDNESDAY</b></dt>
-				<dd>in file Date.php, class constant <a href="DT/DT_Date.html#constWEDNESDAY">DT_Date::WEDNESDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;水曜日をあらわす定数です</dd>
+				<dd>in file Time.php, class constant <a href="DT/DT_Time.html#constWEDNESDAY">DT_Time::WEDNESDAY</a><br>&nbsp;&nbsp;&nbsp;&nbsp;水曜日をあらわす定数です</dd>
 					</dl>
 	</div>
 	<a href="elementindex_DT.html#top">top</a><br>
 </section>
 <footer>
-    Documentation generated on Tue, 17 Jul 2012 19:12:19 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:31 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

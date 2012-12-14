@@ -87,6 +87,7 @@
             <li><a href="../Util/_Util---Equator.php.html">Equator.php</a></li>
             <li><a href="../Util/_Util---HashMap.php.html">HashMap.php</a></li>
             <li><a href="../Util/_Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Util---load.php.html">load.php</a></li>
             <li><a href="../Util/_Util---Map.php.html">Map.php</a></li>
             <li><a href="../Util/_Util---MapEntry.php.html">MapEntry.php</a></li>
             <li><a href="../Util/_Util---ReverseComparator.php.html">ReverseComparator.php</a></li>
@@ -131,7 +132,7 @@
 <section class="class_fields" id="class_methods">
 <h1>メソッド 詳細</h1>
 <section id="method__construct">
-    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 24]</span></h1>
+    <h1 class="symbol">コンストラクタ <b>__construct</b> <span class="smalllinenumber">[line 43]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>Util_ArrayMap __construct([<a href="../Util/Util_Map.html">Util_Map</a>|array $var = NULL])</code>
@@ -158,7 +159,7 @@
 </section>
 
 <section id="methodasArray">
-    <h1 class="symbol"><b>asArray</b> <span class="smalllinenumber">[line 164]</span></h1>
+    <h1 class="symbol"><b>asArray</b> <span class="smalllinenumber">[line 183]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array asArray()</code>
@@ -176,7 +177,7 @@
 </section>
 
 <section id="methodclear">
-    <h1 class="symbol"><b>clear</b> <span class="smalllinenumber">[line 114]</span></h1>
+    <h1 class="symbol"><b>clear</b> <span class="smalllinenumber">[line 133]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void clear()</code>
@@ -199,7 +200,7 @@
 </section>
 
 <section id="methodcontainsKey">
-    <h1 class="symbol"><b>containsKey</b> <span class="smalllinenumber">[line 97]</span></h1>
+    <h1 class="symbol"><b>containsKey</b> <span class="smalllinenumber">[line 116]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>boolean containsKey(string $name)</code>
@@ -233,7 +234,7 @@
 </section>
 
 <section id="methodentryList">
-    <h1 class="symbol"><b>entryList</b> <span class="smalllinenumber">[line 150]</span></h1>
+    <h1 class="symbol"><b>entryList</b> <span class="smalllinenumber">[line 169]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array entryList()</code>
@@ -257,7 +258,7 @@
 </section>
 
 <section id="methodget">
-    <h1 class="symbol"><b>get</b> <span class="smalllinenumber">[line 56]</span></h1>
+    <h1 class="symbol"><b>get</b> <span class="smalllinenumber">[line 75]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>mixed get(string $name, [mixed $defaultValue = NULL])</code>
@@ -296,7 +297,7 @@
 </section>
 
 <section id="methodkeys">
-    <h1 class="symbol"><b>keys</b> <span class="smalllinenumber">[line 132]</span></h1>
+    <h1 class="symbol"><b>keys</b> <span class="smalllinenumber">[line 151]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array keys()</code>
@@ -319,13 +320,13 @@
 </section>
 
 <section id="methodput">
-    <h1 class="symbol"><b>put</b> <span class="smalllinenumber">[line 70]</span></h1>
+    <h1 class="symbol"><b>put</b> <span class="smalllinenumber">[line 89]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void put(string $key, mixed $value)</code>
         </div>
         <div class="docblock"><p>指定されたキー名と値を関連づけます.</p><p>この実装では, 内部に保存されている配列に対して</p><ol class="src"><li><div class="src-line"><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-var">$key</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-var">$value</span><span class="src-sym">;</span></div></li>
-</ol><p>を実行するのと同等の操作を行います.  もしも $key に非スカラー値 (オブジェクトや配列など) が指定された場合は,  string 型に変換したものをキーとします.</p></div>
+</ol><p>を実行するのと同等の操作を行います.  もしも $key に非スカラー値 (オブジェクトや配列など) が指定された場合は,  <a href="../Util/Util_Values.html#methodstringValue">Util_Values::stringValue()</a> で string 型に変換した結果をキーとします.</p></div>
         <section class="tags">
             <h1>Tags</h1>
             <ul>
@@ -358,7 +359,7 @@
 </section>
 
 <section id="methodputAll">
-    <h1 class="symbol"><b>putAll</b> <span class="smalllinenumber">[line 83]</span></h1>
+    <h1 class="symbol"><b>putAll</b> <span class="smalllinenumber">[line 102]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void putAll(<a href="../Util/Util_Map.html">Util_Map</a> $map)</code>
@@ -392,7 +393,7 @@
 </section>
 
 <section id="methodremove">
-    <h1 class="symbol"><b>remove</b> <span class="smalllinenumber">[line 105]</span></h1>
+    <h1 class="symbol"><b>remove</b> <span class="smalllinenumber">[line 124]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>void remove(string $key)</code>
@@ -425,7 +426,7 @@
 </section>
 
 <section id="methodsize">
-    <h1 class="symbol"><b>size</b> <span class="smalllinenumber">[line 122]</span></h1>
+    <h1 class="symbol"><b>size</b> <span class="smalllinenumber">[line 141]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>int size()</code>
@@ -448,7 +449,7 @@
 </section>
 
 <section id="methodvalues">
-    <h1 class="symbol"><b>values</b> <span class="smalllinenumber">[line 141]</span></h1>
+    <h1 class="symbol"><b>values</b> <span class="smalllinenumber">[line 160]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>array values()</code>
@@ -474,7 +475,7 @@
 
 </section>
 <footer>
-    Documentation generated on Tue, 17 Jul 2012 19:12:38 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:32 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

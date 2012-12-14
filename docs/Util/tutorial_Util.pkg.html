@@ -87,6 +87,7 @@
             <li><a href="../Util/_Util---Equator.php.html">Equator.php</a></li>
             <li><a href="../Util/_Util---HashMap.php.html">HashMap.php</a></li>
             <li><a href="../Util/_Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Util---load.php.html">load.php</a></li>
             <li><a href="../Util/_Util---Map.php.html">Map.php</a></li>
             <li><a href="../Util/_Util---MapEntry.php.html">MapEntry.php</a></li>
             <li><a href="../Util/_Util---ReverseComparator.php.html">ReverseComparator.php</a></li>
@@ -97,27 +98,27 @@
 </nav>
 <section id="main">
 <h1 class="symbol">汎用モジュール群 Util</h1>
-  <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
-  <section id="toc">
+    <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+    <section id="toc">
     <h1>Table of Contents</h1>
     <ul>
         <li><a href="../Util/tutorial_Util.pkg.html#intro">汎用モジュール群 Util</a></li>
-        <li><a href="../Util/tutorial_Util.pkg.html#map">Map インタフェースの導入</a></li>
+        <li><a href="../Util/tutorial_Util.pkg.html#map">Map インタフェースの概要</a></li>
         <li><a href="../Util/tutorial_Util.pkg.html#arrays">配列操作用ユーティリティクラス Arrays</a></li>
         <li><a href="../Util/tutorial_Util.pkg.html#etc">その他のユーティリティクラス</a></li>
     </ul>
 </section>
 
-  <!-- refsect1 --><section class="tutorial" id="intro"><h1>汎用モジュール群 Util</h1><p>パッケージ Util は, プログラム内で汎用的に用いられる機能を集めたものです.
-    各種ユーティリティクラスなどが揃っています.</p></section><!-- /refsect1 -->
-  <!-- refsect1 --><section class="tutorial" id="map"><h1>Map インタフェースの導入</h1><p>このモジュール内に存在する各種 Map インタフェースのコンセプトは,
-    PHP の配列操作を簡潔なコードに置き換えることです.</p>
-    <p>PHP で配列を連想配列として利用する際, 以下のようなコーディングをする必要がありました.</p>
-    <ol class="src"><li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+    <!-- refsect1 --><section class="tutorial" id="intro"><h1>汎用モジュール群 Util</h1><p>パッケージ Util は, プログラム内で汎用的に用いられる機能を集めたものです.
+            各種ユーティリティクラスなどが揃っています.</p></section><!-- /refsect1 -->
+    <!-- refsect1 --><section class="tutorial" id="map"><h1>Map インタフェースの概要</h1><p>このモジュールの各種 Map クラスのコンセプトは,
+            PHP の配列操作を簡潔なコードに置き換えることです.</p>
+        <p>PHP で配列を連想配列として利用する際, 以下のようなコーディングをする必要がありました.</p>
+        <ol class="src"><li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><span class="src-var">$bar&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
 </ol>
-    <p>あるいは, コーディング規約で三項演算子が禁止されているようなプロジェクトでは</p>
-    <ol class="src"><li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+        <p>あるいは, コーディング規約で三項演算子が禁止されているようなプロジェクトでは</p>
+        <ol class="src"><li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
@@ -129,33 +130,34 @@
 <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><span class="src-sym">}</span></div></li>
 </ol>
-    <p>ここまで冗長なコードを書かなければなりません.
-    このモジュールで定義されている <a href="../Util/Util_ArrayMap.html">Util_ArrayMap</a> クラスを利用すると, 
-    このコードを以下のように表現することが出来ます.</p>
-    <ol class="src"><li><div class="src-line"><span class="src-var">$map&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Util/Util_ArrayMap.html">Util_ArrayMap</a></span><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <p>ここまで冗長なコードを書かなければなりません.
+            このモジュールで定義されている <a href="../Util/Util_ArrayMap.html">Util_ArrayMap</a> クラスを利用すると, 
+            このコードを以下のように表現することが出来ます.</p>
+        <ol class="src"><li><div class="src-line"><span class="src-var">$map&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Util/Util_ArrayMap.html">Util_ArrayMap</a></span><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 <li><div class="src-line"><span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
 </ol>
-    <p>配列を使った操作では, キーが存在しない場合の代替処理を三項演算子や if 文で行う必要がありますが, 
-    Map を利用すればこれらの代替処理がすべて get() メソッドに吸収されるため, 非常にシンプルな記述となります.</p>
-    <p>詳しくは <a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a> を参照してください.</p></section><!-- /refsect1 -->
-  <!-- refsect1 --><section class="tutorial" id="arrays"><h1>配列操作用ユーティリティクラス Arrays</h1><p><a href="../Util/Util_Arrays.html">Util_Arrays</a> は, Java のコレクション・フレームワークのようなオブジェクト指向的な配列のソートや, 
-    その他様々な配列操作を行うためのユーティリティクラスです.</p>
-    <p>詳しくは <a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a> を参照してください.</p></section><!-- /refsect1 -->
-  <!-- refsect1 --><section class="tutorial" id="etc"><h1>その他のユーティリティクラス</h1><p>上記に挙げた以外で, ちょっとした処理を簡単に実現するための
-    <a href="../Util/Util_Values.html">Util_Values</a>, <a href="../Util/Util_Strings.html">Util_Strings</a> などのユーティリティクラスがあります.
-    詳しくは各クラスの詳細ページを参照してください.</p></section><!-- /refsect1 -->
+        <p>配列を使った操作では, キーが存在しない場合の代替処理を三項演算子や if 文で行う必要がありますが, 
+            Map を利用すればこれらの代替処理がすべて get() メソッドに吸収されるため,
+            非常にシンプルな記述となります.</p>
+        <p>詳しくは <a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a> を参照してください.</p></section><!-- /refsect1 -->
+    <!-- refsect1 --><section class="tutorial" id="arrays"><h1>配列操作用ユーティリティクラス Arrays</h1><p><a href="../Util/Util_Arrays.html">Util_Arrays</a> は, Java のコレクション・フレームワークのようなオブジェクト指向的な配列のソートや, 
+            その他様々な配列操作を行うためのユーティリティクラスです.</p>
+        <p>詳しくは <a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a> を参照してください.</p></section><!-- /refsect1 -->
+    <!-- refsect1 --><section class="tutorial" id="etc"><h1>その他のユーティリティクラス</h1><p>上記に挙げた以外で, ちょっとした処理を簡単に実現するための
+            <a href="../Util/Util_Values.html">Util_Values</a>, <a href="../Util/Util_Strings.html">Util_Strings</a> などのユーティリティクラスがあります.
+            詳しくは各クラスの詳細ページを参照してください.</p></section><!-- /refsect1 -->
 <ul class="direction">
-    <li class="prev">Prev</li>
+    <li class="prev"><a href="../DT/tutorial_DT.format.pkg.html">Prev</a></li>
     <li class="next"><a href="../Util/tutorial_Util.Map.pkg.html">Next</a></li>
 </ul>
 <ul class="direction">
-    <li class="prev"></li>
+    <li class="prev">文字列の入出力方法</li>
     <li class="next">Map (連想配列)</li>
 </ul>
 </section>
 <footer>
-    Documentation generated on Tue, 17 Jul 2012 19:11:56 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:29 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

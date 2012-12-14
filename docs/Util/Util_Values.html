@@ -87,6 +87,7 @@
             <li><a href="../Util/_Util---Equator.php.html">Equator.php</a></li>
             <li><a href="../Util/_Util---HashMap.php.html">HashMap.php</a></li>
             <li><a href="../Util/_Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Util---load.php.html">load.php</a></li>
             <li><a href="../Util/_Util---Map.php.html">Map.php</a></li>
             <li><a href="../Util/_Util---MapEntry.php.html">MapEntry.php</a></li>
             <li><a href="../Util/_Util---ReverseComparator.php.html">ReverseComparator.php</a></li>
@@ -107,6 +108,7 @@
     <ul class="enums">
         <li><a href="../Util/Util_Values.html#methodarrayValue">arrayValue</a></li>
         <li><a href="../Util/Util_Values.html#methodboolValue">boolValue</a></li>
+        <li><a href="../Util/Util_Values.html#methodgetType">getType</a></li>
         <li><a href="../Util/Util_Values.html#methodintValue">intValue</a></li>
         <li><a href="../Util/Util_Values.html#methodstringValue">stringValue</a></li>
     </ul>
@@ -116,7 +118,7 @@
 <section class="class_fields" id="class_methods">
 <h1>メソッド 詳細</h1>
 <section id="methodarrayValue">
-    <h1 class="symbol">static <b>arrayValue</b> <span class="smalllinenumber">[line 94]</span></h1>
+    <h1 class="symbol">static <b>arrayValue</b> <span class="smalllinenumber">[line 115]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>
@@ -150,7 +152,7 @@
     </div>
 </section>
 <section id="methodboolValue">
-    <h1 class="symbol">static <b>boolValue</b> <span class="smalllinenumber">[line 127]</span></h1>
+    <h1 class="symbol">static <b>boolValue</b> <span class="smalllinenumber">[line 148]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>
@@ -183,8 +185,36 @@
         <div class="top">[ <a href="#main">Top</a> ]</div>
     </div>
 </section>
+<section id="methodgetType">
+    <h1 class="symbol">static <b>getType</b> <span class="smalllinenumber">[line 204]</span></h1>
+    <div class="class_field">
+        <div class="signature">
+            <code>
+                static void getType(mixed $var)
+            </code>
+        </div>
+        <div class="docblock"><p>指定された値の型を返します.</p><p>内部関数の <a href="http://www.php.net/gettype">gettype()</a> とほぼ同じ動作をしますが,  引数にオブジェクトを指定した場合に文字列 &quot;object&quot;  ではなくその値のクラス名を返すところが異なります.</p></div>
+        <section class="tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>access : public</li>
+            </ul>
+        </section>
+        <section class="parameters">
+            <h1>引数</h1>
+            <table>
+                <tr>
+                    <td class="type">mixed</td>
+                    <td class="varname">$var</td>
+                    <td>検査対象の値</td>
+                </tr>
+            </table>
+        </section>
+        <div class="top">[ <a href="#main">Top</a> ]</div>
+    </div>
+</section>
 <section id="methodintValue">
-    <h1 class="symbol">static <b>intValue</b> <span class="smalllinenumber">[line 32]</span></h1>
+    <h1 class="symbol">static <b>intValue</b> <span class="smalllinenumber">[line 53]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>
@@ -223,7 +253,7 @@
     </div>
 </section>
 <section id="methodstringValue">
-    <h1 class="symbol">static <b>stringValue</b> <span class="smalllinenumber">[line 63]</span></h1>
+    <h1 class="symbol">static <b>stringValue</b> <span class="smalllinenumber">[line 84]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>
@@ -255,11 +285,12 @@
 
 
 
+
 </section>
 
 </section>
 <footer>
-    Documentation generated on Tue, 17 Jul 2012 19:13:45 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:37 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

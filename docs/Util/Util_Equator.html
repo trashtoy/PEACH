@@ -87,6 +87,7 @@
             <li><a href="../Util/_Util---Equator.php.html">Equator.php</a></li>
             <li><a href="../Util/_Util---HashMap.php.html">HashMap.php</a></li>
             <li><a href="../Util/_Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Util---load.php.html">load.php</a></li>
             <li><a href="../Util/_Util---Map.php.html">Map.php</a></li>
             <li><a href="../Util/_Util---MapEntry.php.html">MapEntry.php</a></li>
             <li><a href="../Util/_Util---ReverseComparator.php.html">ReverseComparator.php</a></li>
@@ -120,7 +121,7 @@
 <section class="class_fields" id="class_methods">
 <h1>メソッド 詳細</h1>
 <section id="methodequate">
-    <h1 class="symbol"><b>equate</b> <span class="smalllinenumber">[line 18]</span></h1>
+    <h1 class="symbol"><b>equate</b> <span class="smalllinenumber">[line 39]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>bool equate(mixed $var1, mixed $var2)</code>
@@ -153,15 +154,17 @@
 </section>
 
 <section id="methodhashCode">
-    <h1 class="symbol"><b>hashCode</b> <span class="smalllinenumber">[line 33]</span></h1>
+    <h1 class="symbol"><b>hashCode</b> <span class="smalllinenumber">[line 57]</span></h1>
     <div class="class_field">
         <div class="signature">
             <code>int hashCode(mixed $var)</code>
         </div>
-        <div class="docblock"><p>指定された値のハッシュ値を計算します.</p><p>もしもこのオブジェクトの equate($var1, $var2) が TRUE を返す場合,  hashCode($var1) と hashCode($var2) が必ず同じ値を返すようにしなければなりません.</p><p>この制約条件は Java の  <a href="http://java.sun.com/javase/ja/6/docs/ja/api/java/lang/Object.html#equals(java.lang.Object)">java.lang.Object#equals()</a>,  <a href="http://java.sun.com/javase/ja/6/docs/ja/api/java/lang/Object.html#hashCode()">java.lang.Object#hashCode()</a>  で定義されている規約に相当します.</p></div>
+        <div class="docblock"><p>指定された値のハッシュ値を計算します.</p><p>もしもこのオブジェクトの equate($var1, $var2) が TRUE を返す場合,  hashCode($var1) と hashCode($var2) が必ず同じ値を返すようにしなければなりません.</p><p>この制約条件は, Java で例えると  <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Object.html#equals(java.lang.Object)">java.lang.Object#equals()</a>,  <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Object.html#hashCode()">java.lang.Object#hashCode()</a>  で定義されている規約に相当します.</p><p>また, このメソッドは不正な値が指定された場合に任意の例外を投げる必要があります.</p></div>
         <section class="tags">
             <h1>Tags</h1>
             <ul>
+                <li>return : ハッシュ値</li>
+                <li>throws : Exception  不正な値が指定された場合</li>
                 <li>access : public</li>
             </ul>
         </section>
@@ -171,7 +174,7 @@
                 <tr>
                     <td class="type">mixed</td>
                     <td class="varname">$var</td>
-                    <td>&nbsp;</td>
+                    <td>任意の値</td>
                 </tr>
             </table>
         </section>
@@ -183,7 +186,7 @@
 
 </section>
 <footer>
-    Documentation generated on Tue, 17 Jul 2012 19:13:20 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+    Documentation generated on Sat, 15 Dec 2012 00:35:34 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
 </footer>
 </body>
 </html>

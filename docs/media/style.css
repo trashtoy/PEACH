@@ -2,14 +2,14 @@
 
 /* Layout */
 #menu {
-    width    : 200px;
+    width    : 300px;
     overflow : auto;
     float    : left;
     position : relative;
     z-index  : 2;
 }
 #main, footer {
-    margin-left : 201px;
+    margin-left : 301px;
 }
 
 /* whitespace */
@@ -30,18 +30,22 @@ header {
 header h1 {
     color            : #ffffff;
     background-color : #9999cc;
+    background       : -webkit-linear-gradient(top, #8888c3, #9999cc);
+    background       : -moz-linear-gradient(top, #8888c3, #9999cc);
     font-size        : 16pt;
     font-weight      : bold;
     font-family      : 'Verdana', 'tahoma', 'Arial', sans-serif;
-    text-shadow      : 1px 1px 1px #000;
+    text-shadow      : 1px 1px 1px rgba(0, 0, 0, 0.75);
     text-align       : right;
     margin           : 0;
     padding          : 10px;
 
 }
 header nav {
-    background-color : #666699;
     color            : #ffffff;
+    background-color : #666699;
+    background       : -webkit-linear-gradient(top, #666699, #7777a3);
+    background       : -moz-linear-gradient(top, #666699, #7777a3);
     border-top       : 1px solid #333366;
     border-bottom    : 1px solid #333366;
     margin           : 0;
@@ -78,6 +82,9 @@ header nav li:after {
 }
 
 /* menu */
+#menu {
+    background-color : #f0f0f0;
+}
 #menu section, #todolist {
     padding  : 0 5px;
     margin   : 0 0 1.0em;
@@ -108,11 +115,13 @@ header nav li:after {
 #menu li {
     list-style-type : none;
     font-family     : 'Verdana', 'tahoma', 'Arial', sans-serif;
-    line-height     : 1.2; /* lt IE7 */
+    line-height     : 1.2;
 }
-
-#menu>/**/ul li {
-    line-height     : 1.4;
+#menu li.tutorial_tree {
+    line-height     : 1.33;
+}
+#menu li.tutorial_tree ul {
+    margin-left     : 1.0em;
 }
 
 /* body */
@@ -152,8 +161,7 @@ header nav li:after {
     margin      : 0 0 20px;
     padding     : 0;
     font-size   : 200%;
-    font-family : 'Verdana', 'Geneva', 'Arial', sans-serif;
-    text-shadow : 2px 2px 2px #ddd;
+    text-shadow : 2px 2px 2px rgba(0, 0, 0, 0.15);
     line-height : 1.5; /* lt IE8 */
     vertical-align: super;
 }
@@ -162,7 +170,7 @@ header nav li:after {
 }
 #main section h1 {
     font-size   : 100%;
-    text-shadow : 1px 1px 1px #eee;
+    text-shadow : 1px 1px 1px rgba(0, 0, 0, 0.15);
     margin      : 0 0 1.0em;
     line-height : 2.0;
     vertical-align : baseline;
@@ -238,7 +246,7 @@ header nav li:after {
     margin           : 0 -10px 1.0em;
     padding          : 0 10px;
     font-size        : 140%;
-    text-shadow      : 1px 1px 1px #fff;
+    text-shadow      : -1px -1px 1px rgba(255, 255, 255, 0.4);
     background-color : #cce;
 }
 #main #toc li {
@@ -282,16 +290,21 @@ footer {
 }
 .php-src { font-family: 'Courier New', Courier, monospace; font-weight: normal; }
 
-body
-{
+body {
   color:              #000000;
   background-color:   #ffffff;
-  background-image:   url("background.png");
+  background-image:   url("background-300.png");
   background-repeat:  repeat-y;
   font-family:        'メイリオ', 'Osaka', 'ＭＳ Ｐゴシック', 'tahoma', 'verdana', 'arial', sans-serif;
   font-size:          10pt;
   margin:             0;
   padding:            0;
+}
+@media screen and (min-width: 1290px) {
+    body {
+        width: 1280px;
+        background-image: url("background-1280.png");
+    }
 }
 
 a
