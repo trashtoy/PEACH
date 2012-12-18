@@ -34,7 +34,7 @@ That's all.
 How to use
 ------------
 1. Upload 'src' directory to the web server.
-2. Include load.php of the module to use. Here is an example.
+2. Include load.php of the module to use. Here is an example.  
    `require_once("/path/to/PEACH/src/Module/load.php");`  
    or  
    `require_once("C:/path/to/PEACH/src/Module/load.php");`
