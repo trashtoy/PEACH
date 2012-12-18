@@ -9,12 +9,19 @@ Features
 
 ### Util
 Object-oriented array manipulation modules like 
-[Java Collections Framework] (http://docs.oracle.com/javase/7/docs/technotes/guides/collections/index.html).
+[Java Collections Framework](http://docs.oracle.com/javase/7/docs/technotes/guides/collections/index.html).
 
 - Map interface like java.util.HashMap. You can use objects as key.
-- sorting arrays which contain objects.
+- Sorting arrays which contain objects.
 - Some other utility classes.
 
+### DT
+Object-oriented datetime management API.
+
+- Datetime objects consisting of various scopes. (DATE, DATETIME and TIMESTAMP)
+- Easy to sort and compare.
+- Library which is designed by immutable classes.
+- Loosely-coupled API between datetime manipulation and format/parse.
 
 Requirements
 ------------
@@ -24,14 +31,13 @@ Requirements
 That's all.
 
 
-Installation
+How to use
 ------------
-1. Place the 'src' directory in the Web server.
-2. Add 'src' directory to include path in your PHP.  
-   `set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/PEACH/src");`  
+1. Upload 'src' directory to the web server.
+2. Include load.php of the module to use. Here is an example.  
+   `require_once("/path/to/PEACH/src/Module/load.php");`  
    or  
-   `set_include_path(get_include_path() . PATH_SEPARATOR . "C:/path/to/PEACH/src");`
-
+   `require_once("C:/path/to/PEACH/src/Module/load.php");`
 
 Documentation
 -------------
@@ -44,8 +50,7 @@ Roadmap
 
 Package | Description
 --------|------------
-DT      | Object-oriented date-time management module.
-Markup  | Assisting output of markup language such as HTML or XML.
+Markup  | Assisting output of markup language such as HTML, RSS, XML and so on.
 RB      | Object-oriented i18n module. (RB represents ResourceBundle.)
 
 
@@ -59,4 +64,4 @@ English documentation is not available.
 1. 英語版ソースコードのブランチを作成し、コードはそのままでコメント行をすべて英語で書きなおす
 2. 編集したソースコードを phpDocumentor にかけてドキュメント一式を作成
 
-という手順を踏む必要があります。英語版のソースコードを整備してくださる方を募集しています。
+という手順を踏む必要があります。英語版のソースコード内コメントを整備してくださる方を募集しています。
