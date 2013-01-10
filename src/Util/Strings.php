@@ -26,12 +26,13 @@
  * 
  * @package Util
  */
-class Util_Strings {
+class Util_Strings
+{
     /**
      * このクラスはインスタンス化することができません.
      */
     private function __construct() {}
-    
+
     /**
      * 内部関数の {@link explode() explode()} のカスタム版です. 
      * 基本的にはオリジナルの explode() と同じですが, 以下の点が異なります.
@@ -48,18 +49,17 @@ class Util_Strings {
      * @return array  セパレータが見つからないときは長さ 1 の配列, 
      *                対象が空文字列の場合は空の配列, それ以外は explode() と同じ.
      */
-    public static function explode($separator, $value) {
+    public static function explode($separator, $value)
+    {
         if (!is_string($value)) {
             return self::explode($separator, Util_Values::stringValue($value));
-        }
-        else if (strlen($separator)) {
+        } else if (strlen($separator)) {
             return explode($separator, $value);
-        }
-        else {
+        } else {
             return array();
         }
     }
-    
+
     /**
      * 指定された文字列を行単位で分割します.
      * 引数の文字列を CR, LF, CRLF で分割し, 結果の配列を返します.
@@ -68,20 +68,22 @@ class Util_Strings {
      * @param  string 分割対象の文字列
      * @return array  行単位で分割された文字列の配列
      */
-    public static function getLines($str) {
+    public static function getLines($str)
+    {
         return preg_split("/\\r\\n|\\r|\\n/", $str);
     }
-    
+
     /**
      * 指定された文字列が空白文字の集合からなる文字列かどうかを返します.
      * @param  string
      * @return boolean 引数が NULL, 空文字列, "\r", "\n", "\t", 
      *                 半角スペースから成る文字列の場合に TRUE, それ以外は FALSE
      */
-    public static function isWhitespace($str) {
+    public static function isWhitespace($str)
+    {
         return !strlen($str) || !preg_match("/[^\\s]/", $str);
     }
-    
+
     /**
      * 指定された文字列を基底ディレクトリに変換します.
      * 引数が空文字列か, '/' で終わる文字列の場合は引数をそのまま返します.
@@ -90,21 +92,19 @@ class Util_Strings {
      * @param  string 変換対象の文字列
      * @return string 基底ディレクトリ名
      */
-    public static function basedir($basedir) {
+    public static function basedir($basedir)
+    {
         if (!is_string($basedir)) {
             return self::basedir(Util_Values::stringValue($basedir));
-        }
-        else if (!strlen($basedir)) {
+        } else if (!strlen($basedir)) {
             return "";
-        }
-        else if (substr($basedir, -1) === "/") {
+        } else if (substr($basedir, -1) === "/") {
             return $basedir;
-        }
-        else {
+        } else {
             return $basedir . "/";
-        }        
+        }
     }
-    
+
     /**
      * 指定された文字列の中で、"\" によるエスケープ処理のされていない文字列があらわれる
      * 最初のインデックスを返します.
@@ -124,18 +124,18 @@ class Util_Strings {
      * @param  string 検索対象の文字
      * @return int    インデックス. ただし存在しない場合は FALSE
      */
-    public static function getRawIndex($text, $chr) {
+    public static function getRawIndex($text, $chr)
+    {
         $chr = str_replace("\\", "\\\\", $chr);
         $pattern = "/(?<!\\\\)(?:\\\\\\\\)*(" . $chr . ".*)$/";
         preg_match($pattern, $text, $result);
         if (count($result)) {
             return strlen($text) - strlen($result[1]);
-        }
-        else {
+        } else {
             return FALSE;
         }
     }
-    
+
     /**
      * ある文字列が指定された文字列で始まっているかどうかを判別します.
      * $prefix が空文字列の場合は TRUE を返します.
@@ -145,21 +145,19 @@ class Util_Strings {
      * @param  string 開始する文字列
      * @return bool   引数 $text の先頭が $prefix である場合に TRUE
      */
-    public static function startsWith($text, $prefix) {
+    public static function startsWith($text, $prefix)
+    {
         if (!is_string($text)) {
             return self::startsWith(Util_Values::stringValue($text), $prefix);
-        }
-        else if (!is_string($prefix)) {
+        } else if (!is_string($prefix)) {
             return self::startsWith($text, Util_Values::stringValue($prefix));
-        }
-        else if ($prefix === "") {
+        } else if ($prefix === "") {
             return TRUE;
-        }
-        else {
+        } else {
             return (strpos($text, $prefix) === 0);
         }
     }
-    
+
     /**
      * ある文字列が指定された文字列で終了しているかどうかを判別します.
      * $suffix が空文字列の場合は TRUE を返します.
@@ -169,22 +167,20 @@ class Util_Strings {
      * @param  string 終了する文字列
      * @return bool   引数 $text の末尾が $suffix に等しい場合に TRUE
      */
-    public static function endsWith($text, $suffix) {
+    public static function endsWith($text, $suffix)
+    {
         if (!is_string($text)) {
             return self::endsWith(Util_Values::stringValue($text), $suffix);
-        }
-        else if (!is_string($suffix)) {
+        } else if (!is_string($suffix)) {
             return self::endsWith($text, Util_Values::stringValue($suffix));
-        }
-        else if ($suffix === "") {
+        } else if ($suffix === "") {
             return TRUE;
-        }
-        else {
+        } else {
             $index = strlen($text) - strlen($suffix);
             return substr($text, $index) === $suffix;
         }
     }
-    
+
     /**
      * ある文字列が指定された文字で終了して, かつエスケープ処理されていないかを判別します.
      * 以下に例を示します.
@@ -197,13 +193,14 @@ class Util_Strings {
      * @param  string 検査対象の文字
      * @return bool   引数 $text の末尾が, '\' でエスケープされていない $chr で終了している場合のみ TRUE
      */
-    public static function endsWithRawChar($text, $chr) {
+    public static function endsWithRawChar($text, $chr)
+    {
         $chr = str_replace("\\", "\\\\", $chr);
         $pattern = "/(?<!\\\\)(?:\\\\\\\\)*(" . $chr . ")$/";
         $result = preg_match($pattern, $text);
         return (0 < $result);
     }
-    
+
     /**
      * 文字列内に含まれる {0}, {1}, {2} などのテンプレート変数を, $args 内の各要素で置き換えます. 例えば
      * <code>template('My name is {0}. I am {1} years old', array('Taro', 18))</code>
@@ -216,7 +213,8 @@ class Util_Strings {
      * @param  array  置き換える内容の配列
      * @return string テンプレートの適用結果
      */
-    public static function template($template, array $args = array()) {
+    public static function template($template, array $args = array())
+    {
         if (!isset($template)) {
             return NULL;
         }

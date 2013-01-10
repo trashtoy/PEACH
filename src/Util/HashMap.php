@@ -34,7 +34,8 @@ require_once(dirname(__FILE__) . "/Map.php");
  * 
  * @package Util
  */
-class Util_HashMap implements Util_Map {
+class Util_HashMap implements Util_Map
+{
     /**
      * このマップが持つエントリーの一覧です. 
      * この値は以下のような構造となります. (値は HashMapEntry オブジェクト)
@@ -57,7 +58,7 @@ class Util_HashMap implements Util_Map {
      * @var array
      */
     private $table;
-    
+
     /**
      * 格納先のインデックスの個数です.
      * 常に 2 の累乗の値になります.
@@ -65,13 +66,13 @@ class Util_HashMap implements Util_Map {
      * @var int
      */
     private $capacity;
-    
+
     /**
      * キーの等価性のチェックを行うために使用する Equator です.
      * @var Util_Equator
      */
     private $equator;
-    
+
     /**
      * put() や remove() などで内部構造に変化が加えられたことを示すフラグです.
      * {@link Util_HashMap::entryList()} を呼び出した際にキャッシュを使用するかどうか
@@ -80,7 +81,7 @@ class Util_HashMap implements Util_Map {
      * @var bool
      */
     private $modFlag;
-    
+
     /**
      * {@link Util_HashMap::entryList()} の返り値のキャッシュデータです.
      * この値はオブジェクトの内部構造が変化すると無効化されます.
@@ -88,7 +89,7 @@ class Util_HashMap implements Util_Map {
      * @var array
      */
     private $cache;
-    
+
     /**
      * 新しい HashMap を構築します.
      * 引数で設定された容量は, オブジェクト構築後に変更することは出来ません.
@@ -97,7 +98,8 @@ class Util_HashMap implements Util_Map {
      * @param  Util_Equator   $e        オブジェクトの等価性を判断するための Equator (NULL の場合は {@link Util_DefaultEquator} が適用されます)
      * @param  int            $capacity 容量 (デフォルトは 16, 最小で 2)
      */
-    public function __construct(Util_Map $map = NULL, Util_Equator $e = NULL, $capacity = 16) {
+    public function __construct(Util_Map $map = NULL, Util_Equator $e = NULL, $capacity = 16)
+    {
         $this->table    = array();
         $this->equator  = isset($e) ? $e : Util_DefaultEquator::getInstance();
         $this->capacity = self::detectCapacity($capacity);
@@ -107,36 +109,36 @@ class Util_HashMap implements Util_Map {
             $this->initTable($map);
         }
     }
-    
+
     /**
      * コンストラクタの第一引数が指定された場合に実行される,
      * マッピングの初期化処理です.
      * 
      * @param Util_Map|array $map 
      */
-    private function initTable(&$map) {
+    private function initTable(&$map)
+    {
         if ($map instanceof Util_Map) {
             $entryList = $map->entryList();
             foreach ($entryList as $entry) {
                 $this->put($entry->getKey(), $entry->getValue());
             }
-        }
-        else if (is_array($map)) {
+        } else if (is_array($map)) {
             foreach ($map as $key => $value) {
                 $this->put($key, $value);
             }
-        }
-        else {
+        } else {
             throw new Exception("\$map must be Util_Map or array.");
         }
     }
-    
+
     /**
      * このマップの容量を計算します.
      * 引数以上で最小の 2 の累乗となる整数を返します.
      * @param int 容量
      */
-    private static function detectCapacity($capacity) {
+    private static function detectCapacity($capacity)
+    {
         if ($capacity < 2) {
             return 2;
         }
@@ -146,13 +148,14 @@ class Util_HashMap implements Util_Map {
         }
         return $i;
     }
-    
+
     /**
      * 指定されたキーと値をこの Map に関連づけます.
      * @param mixed キー
      * @param mixed 値
      */
-    public function put($key, $value) {
+    public function put($key, $value)
+    {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
             $this->table[$index] = array();
@@ -167,18 +170,19 @@ class Util_HashMap implements Util_Map {
         $this->table[$index][] = $this->createEntry($key, $value);
         $this->modFlag = TRUE;
     }
-    
+
     /**
      * @param Util_Map $map
      * @see   Util_Map::putAll($map)
      */
-    public function putAll(Util_Map $map) {
+    public function putAll(Util_Map $map)
+    {
         $entryList = $map->entryList();
         foreach ($entryList as $entry) {
             $this->put($entry->getKey(), $entry->getValue());
         }
     }
-    
+
     /**
      * 指定されたキーにマッピングされている値を返します.
      * マッピングが存在しない場合は代替値 (デフォルトは NULL) を返します.
@@ -189,7 +193,8 @@ class Util_HashMap implements Util_Map {
      * @param  mixed $defaultValue マッピングが存在しない場合に返される代替値
      * @return mixed
      */
-    public function get($key, $defaultValue = NULL) {
+    public function get($key, $defaultValue = NULL)
+    {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
             return NULL;
@@ -201,21 +206,23 @@ class Util_HashMap implements Util_Map {
         }
         return NULL;
     }
-    
+
     /**
      * マッピングを空にします.
      */
-    public function clear() {
-        $this->table   = array();
+    public function clear()
+    {
+        $this->table = array();
         $this->modFlag = TRUE;
     }
-    
+
     /**
      * この Map が持つマッピングの個数を返します.
      * @return int
      * @see    Util_Map::size()
      */
-    public function size() {
+    public function size()
+    {
         $size = 0;
         foreach ($this->table as $entries) {
             $size += count($entries);
@@ -228,7 +235,8 @@ class Util_HashMap implements Util_Map {
      * @see Util_Map#keys()
      * @ignore
      */
-    public function keys() {
+    public function keys()
+    {
         $result = array();
         foreach ($this->table as $entries) {
             foreach ($entries as $entry) {
@@ -237,7 +245,7 @@ class Util_HashMap implements Util_Map {
         }
         return $result;
     }
-    
+
     /**
      * 指定されたキーによるマッピングが存在するかどうかを調べます.
      * マッピングが存在する場合に TRUE を返します.
@@ -245,7 +253,8 @@ class Util_HashMap implements Util_Map {
      * @param  mixed   キー
      * @return boolean マッピングが存在する場合に TRUE
      */
-    public function containsKey($key) {
+    public function containsKey($key)
+    {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
             return FALSE;
@@ -257,12 +266,13 @@ class Util_HashMap implements Util_Map {
         }
         return FALSE;
     }
-    
+
     /**
      * 指定されたキーのマッピングを削除します.
      * @param mixed キー
      */
-    public function remove($key) {
+    public function remove($key)
+    {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
             return;
@@ -276,13 +286,14 @@ class Util_HashMap implements Util_Map {
         }
         return;
     }
-    
+
     /**
      * このマップに登録されているすべての値を配列で返します.
      * 返される配列に対する操作はこのマップには反映されません.
      * @return array
      */
-    public function values() {
+    public function values()
+    {
         $result = array();
         foreach ($this->table as $entries) {
             foreach ($entries as $entry) {
@@ -291,13 +302,14 @@ class Util_HashMap implements Util_Map {
         }
         return $result;
     }
-    
+
     /**
      * この HashMap に登録されているすべてのエントリーを返します.
      * 
      * @return array {@link Util_HashMapEntry} の配列
      */
-    public function entryList() {
+    public function entryList()
+    {
         if ($this->modFlag) {
             $this->cache = array();
             foreach ($this->table as $entries) {
@@ -309,7 +321,7 @@ class Util_HashMap implements Util_Map {
         }
         return $this->cache;
     }
-    
+
     /**
      * 指定されたキーと値をマッピングする, 新しいエントリーを構築します.
      * ユーザーは, 必要に応じてこのメソッドをオーバーライドし,
@@ -319,16 +331,18 @@ class Util_HashMap implements Util_Map {
      * @param  mixed マッピングの値.
      * @return Util_HashMapEntry
      */
-    protected function createEntry($key, $value) {
+    protected function createEntry($key, $value)
+    {
         return new Util_HashMapEntry($key, $value);
     }
-    
+
     /**
      * 指定されたキーのインデックスを返します.
      * @param  string $key
      * @return int
      */
-    private function getIndexOf($key) {
+    private function getIndexOf($key)
+    {
         $hash = $this->equator->hashCode($key);
         return ($this->capacity - 1) & $hash;
     }

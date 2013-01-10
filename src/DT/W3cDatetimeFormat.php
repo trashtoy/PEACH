@@ -48,25 +48,26 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * 
  * @package DT
  */
-class DT_W3cDatetimeFormat implements DT_Format {
+class DT_W3cDatetimeFormat implements DT_Format
+{
     /**
      * タイムゾーンを扱うのみ TRUE となります
      * @var bool
      */
     private $usingTz;
-    
+
     /**
      * システム時刻の時差です (単位は分)
      * @var int
      */
     private $internalOffset;
-    
+
     /**
      * フォーマットの時差です (単位は分)
      * @var type 
      */
     private $externalOffset;
-    
+
     /**
      * 日付文字列のパターンです.
      * "YYYY-MM-DD" のような形式にマッチします.
@@ -74,7 +75,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @var string
      */
     private static $datePattern = "[0-9]{4}[^0-9][0-9]{2}[^0-9][0-9]{2}";
-    
+
     /**
      * タイムゾーンの文字列のパターンです. 以下の形式にマッチします.
      * 
@@ -86,7 +87,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @var string
      */
     private static $timeZonePattern = "(Z|[\\-\\+][0-9]{2}:[0-9]{2})?";
-    
+
     /**
      * 指定されたタイムゾーンの条件で, 新しいフォーマットを構築します.
      * タイムゾーンを扱わない場合は, コンストラクタの代わりに
@@ -125,19 +126,19 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @param int  $externalOffset フォーマットの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      * @param int  $internalOffset システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
-    public function __construct($externalOffset = NULL, $internalOffset = NULL) {
+    public function __construct($externalOffset = NULL, $internalOffset = NULL)
+    {
         if ($externalOffset === FALSE) {
             $this->usingTz        = FALSE;
             $this->externalOffset = NULL;
             $this->internalOffset = NULL;
-        }
-        else {
+        } else {
             $this->usingTz        = TRUE;
             $this->externalOffset = DT_Util::cleanTimeZoneOffset($externalOffset);
             $this->internalOffset = DT_Util::cleanTimeZoneOffset($internalOffset);
         }
     }
-    
+
     /**
      * デフォルトのインスタンスを返します.
      * このメソッドから生成されたオブジェクトは, parse の際にタイムゾーンを一切考慮しません.
@@ -145,33 +146,34 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * 
      * @return DT_W3cDatetimeFormat タイムゾーンに対応しないインスタンス
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         static $instance;
         if (!isset($instance)) {
             $instance = new self(FALSE);
         }
         return $instance;
     }
-    
+
     /**
      * "YYYY-MM-DD" 形式の文字列を解析します.
      * 
      * @return DT_Date
      * @see DT_Format::parseDate()
      */
-    public function parseDate($format) {
+    public function parseDate($format)
+    {
         $dp = self::$datePattern;
         if (preg_match("/^{$dp}/", $format)) {
             $year  = substr($format, 0, 4);
             $month = substr($format, 5, 2);
             $date  = substr($format, 8, 2);
             return new DT_Date($year, $month, $date);
-        }
-        else {
+        } else {
             $this->throwFormatException($format, "YYYY-MM-DD");
         }
     }
-    
+
     /**
      * "YYYY-MM-DDThh:mm" 形式の文字列を解析します.
      * 文字列の末尾にタイムゾーン (+hh:mm や -hh:mm など) を含む場合は, システム時刻への変換を行います.
@@ -179,13 +181,14 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @return DT_Datetime 解析結果
      * @see DT_Format::parseDatetime()
      */
-    public function parseDatetime($format) {
+    public function parseDatetime($format)
+    {
         $dp  = self::$datePattern;
         $tzp = self::$timeZonePattern;
         if (!preg_match("/^{$dp}[^0-9][0-9]{2}:[0-9]{2}{$tzp}/", $format, $result)) {
             $this->throwFormatException($format, "YYYY-MM-DD hh:mm[timezone]");
         }
-        
+
         $year   = substr($format, 0,  4);
         $month  = substr($format, 5,  2);
         $date   = substr($format, 8,  2);
@@ -195,19 +198,20 @@ class DT_W3cDatetimeFormat implements DT_Format {
         return ($this->usingTz && isset($result[1])) ?
             $this->adjustFromParse($obj, $result[1]) : $obj;
     }
-    
+
     /**
      * "YYYY-MM-DDThh:mm:ss" 形式の文字列を解析します.
      * @return DT_Timestamp 解析結果
      * @see DT_Format::parseTimestamp()
      */
-    public function parseTimestamp($format) {
+    public function parseTimestamp($format)
+    {
         $dp  = self::$datePattern;
         $tzp = self::$timeZonePattern;
         if (!preg_match("/^{$dp}[^0-9][0-9]{2}:[0-9]{2}:[0-9]{2}{$tzp}/", $format, $result)) {
             $this->throwFormatException($format, "YYYY-MM-DD hh:mm:ss");
         }
-        
+
         $year   = substr($format, 0,  4);
         $month  = substr($format, 5,  2);
         $date   = substr($format, 8,  2);
@@ -218,16 +222,17 @@ class DT_W3cDatetimeFormat implements DT_Format {
         return ($this->usingTz && isset($result[1])) ?
             $this->adjustFromParse($obj, $result[1]) : $obj;
     }
-    
+
     /**
      * 指定された時間オブジェクトを "YYYY-MM-DD" 形式の文字列に変換します.
      * @return string "YYYY-MM-DD" 形式の文字列
      * @see    DT_Format::formatDate()
      */
-    public function formatDate(DT_Date $d) {
+    public function formatDate(DT_Date $d)
+    {
         return $d->__toString();
     }
-    
+
     /**
      * 指定された時間オブジェクトを "YYYY-MM-DDThh:mm" 形式の文字列に変換します.
      * このインスタンスがタイムゾーンに対応している場合, 末尾にタイムゾーン文字列も付加します.
@@ -235,11 +240,12 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @return string "YYYY-MM-DDThh:mm" 形式の文字列
      * @see    DT_Format::formatDatetime()
      */
-    public function formatDatetime(DT_Datetime $d) {
+    public function formatDatetime(DT_Datetime $d)
+    {
         $a = $this->adjustFromFormat($d, FALSE);
         return $this->formatDate($a->toDate()) . "T" . $a->formatTime() . $this->formatTimezone();
     }
-    
+
     /**
      * 指定された時間オブジェクトを "YYYY-MM-DDThh:mm:ss" 形式の文字列に変換します.
      * このインスタンスがタイムゾーンに対応している場合, 末尾にタイムゾーン文字列も付加します.
@@ -247,14 +253,16 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @return string "YYYY-MM-DDThh:mm:ss" 形式の文字列
      * @see    DT_Format::formatTimestamp()
      */
-    public function formatTimestamp(DT_Timestamp $d) {
+    public function formatTimestamp(DT_Timestamp $d)
+    {
         return $this->formatDatetime($d);
     }
-    
-    private function throwFormatException($format, $expected) {
+
+    private function throwFormatException($format, $expected)
+    {
         throw new Exception("Illegal format({$format}). Expected: {$expected}");
     }
-    
+
     /**
      * タイムゾーン文字列をパースして, 時差を分単位で返します.
      * NULL が指定された場合 (タイムゾーン文字列がなかった場合),
@@ -263,11 +271,11 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @param  string $tz NULL, "Z", または "+h:mm", "-h:mm" 形式の文字列
      * @return int
      */
-    private function parseTimezone($tz) {
+    private function parseTimezone($tz)
+    {
         if ($tz === "Z") {
             return 0;
-        }
-        else {
+        } else {
             $coronIndex = strpos($tz, ":");
             $sign       = substr($tz, 0, 1);
             $hour       = substr($tz, 1, $coronIndex - 1);
@@ -276,7 +284,7 @@ class DT_W3cDatetimeFormat implements DT_Format {
             return ($sign === "-") ? $offset : - $offset;
         }
     }
-    
+
     /**
      * フォーマットのタイムゾーンと, 時間オブジェクトのタイムゾーンを元に
      * 指定された時間オブジェクトの補正処理を行います.
@@ -286,26 +294,29 @@ class DT_W3cDatetimeFormat implements DT_Format {
      * @param  bool        $toParse parse の場合は TRUE, format の場合は FALSE
      * @return DT_Datetime 補正結果の時間オブジェクト
      */
-    private function adjustFromParse(DT_Datetime $d, $tz) {
+    private function adjustFromParse(DT_Datetime $d, $tz)
+    {
         $externalOffset = $this->parseTimezone($tz);
         return $d->add("minute", $externalOffset - $this->internalOffset);
     }
-    
-    private function adjustFromFormat(DT_Datetime $d) {
+
+    private function adjustFromFormat(DT_Datetime $d)
+    {
         return $this->usingTz ? $d->add("minute", $this->internalOffset - $this->externalOffset) : $d;
     }
-    
+
     /**
      * タイムゾーンを書式化します.
      */
-    private function formatTimezone() {
+    private function formatTimezone()
+    {
         if (!$this->usingTz) {
             return "";
         }
         if ($this->externalOffset === 0) {
             return "Z";
         }
-        
+
         $ext    = $this->externalOffset;
         $format = (0 < $ext) ? "-" : "+";
         $offset = abs($ext);

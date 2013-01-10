@@ -26,12 +26,13 @@
  * 
  * @package Util
  */
-class Util_Values {
+class Util_Values
+{
     /**
      * このクラスはインスタンス化することができません.
      */
     private function __construct() {}
-    
+
     /**
      * 指定された値を整数に変換します.
      * この関数は変換処理に {@link intval() intval()} を利用します.
@@ -50,25 +51,22 @@ class Util_Values {
      * @param  int   $max   最大値 (省略可). 変換後の値がこの値よりも大きい場合は, この値を返す.
      * @return int          引数を整数に変換した値
      */
-    public static function intValue($value, $min = NULL, $max = NULL) {
+    public static function intValue($value, $min = NULL, $max = NULL)
+    {
         if (!is_int($value)) {
             $iValue = @intval($value);
             return self::intValue($iValue, $min, $max);
-        }
-        else if (isset($min) && isset($max) && $max < $min) {
+        } else if (isset($min) && isset($max) && $max < $min) {
             return self::intValue($value, $min);
-        }
-        else if (isset($min) && $value < $min) {
+        } else if (isset($min) && $value < $min) {
             return $min;
-        }
-        else if (isset($max) && $max < $value) {
+        } else if (isset($max) && $max < $value) {
             return $max;
-        }
-        else {
+        } else {
             return $value;
         }
     }
-    
+
     /**
      * 指定された値を文字列型に変換します.
      * 
@@ -81,23 +79,23 @@ class Util_Values {
      * @param  mixed  $value 変換対象の値
      * @return string        変換後の文字列
      */
-    public static function stringValue($value) {
+    public static function stringValue($value)
+    {
         if (is_object($value)) {
             if (method_exists($value, '__toString')) {
                 return $value->__toString();
-            }
-            else {
+            } else {
                 return get_class($value);
             }
         }
         if (is_resource($value)) {
             $parts = explode(" ", strval($value));
-            $id    = array_pop($parts);
+            $id = array_pop($parts);
             return get_resource_type($value) . " " . $id;
         }
         return is_string($value) ? $value : strval($value);
     }
-    
+
     /**
      * 指定された値を配列に変換します.
      * 引数が配列の場合は引数をそのまま返します.
@@ -112,15 +110,15 @@ class Util_Values {
      * @param  bool  $wrap  配列以外の値の場合に, 長さ 1 の配列に変換する場合は TRUE
      * @return array        変換後の配列
      */
-    public static function arrayValue($value, $wrap = FALSE) {
+    public static function arrayValue($value, $wrap = FALSE)
+    {
         if (is_array($value)) {
             return $value;
-        }
-        else {
+        } else {
             return $wrap ? array($value) : array();
         }
     }
-    
+
     /**
      * 指定された値を bool 型に変換します.
      * この関数は "Yes", "No", "True", "False", "OK", "NG" などの文字列を
@@ -145,54 +143,52 @@ class Util_Values {
      * @param  bool  $defaultValue デフォルトの返り値
      * @return bool                bool 値
      */
-    public static function boolValue($value, $defaultValue = NULL) {
+    public static function boolValue($value, $defaultValue = NULL)
+    {
         if (is_bool($value)) {
             return $value;
-        }
-        else if (is_string($value)) {
+        } else if (is_string($value)) {
             return self::stringToBool($value, $defaultValue);
-        }
-        else if (is_numeric($value)) {
+        } else if (is_numeric($value)) {
             return (bool) $value;
-        }
-        else {
+        } else {
             return self::handleBoolValue($value, $defaultValue);
         }
     }
-    
+
     /**
      * 文字列を bool 型にキャストします.
      * 
      */
-    private static function stringToBool($value, $defaultValue = NULL) {
+    private static function stringToBool($value, $defaultValue = NULL)
+    {
         static $tPrefix, $fPrefix;
         if (!isset($tPrefix)) {
             $tPrefix = array("t", "y", "o");
             $fPrefix = array("f", "n");
         }
-        
+
         $prefix = strtolower(substr($value, 0, 1));
         if (in_array($prefix, $tPrefix)) {
             return TRUE;
-        }
-        else if (in_array($prefix, $fPrefix)) {
+        } else if (in_array($prefix, $fPrefix)) {
             return FALSE;
-        }
-        else {
+        } else {
             return self::handleBoolValue($value, $defaultValue);
         }
     }
-    
+
     /**
      * デフォルト値に NULL 以外の値が指定されている場合はデフォルト値の bool 表現を,
      * そうでない場合は第一引数の bool 表現を返します.
      * @param bool $value
      * @param bool $defaultValue
      */
-    private static function handleBoolValue($value, $defaultValue = NULL) {
+    private static function handleBoolValue($value, $defaultValue = NULL)
+    {
         return (isset($defaultValue) ? (bool) $defaultValue : (bool) $value);
     }
-    
+
     /**
      * 指定された値の型を返します.
      * 内部関数の {@link gettype() gettype()} とほぼ同じ動作をしますが,
@@ -201,7 +197,8 @@ class Util_Values {
      * 
      * @param mixed $var 検査対象の値
      */
-    public static function getType($var) {
+    public static function getType($var)
+    {
         return is_object($var) ? get_class($var) : gettype($var);
     }
 }

@@ -34,7 +34,8 @@
  * 
  * @package Util
  */
-interface Util_Comparator {
+interface Util_Comparator
+{
     /**
      * 二つの値を比較します.
      * 

@@ -47,7 +47,8 @@
  * 
  * @package Util
  */
-interface Util_Map {
+interface Util_Map
+{
     /**
      * 指定されたキーにマッピングされている値を返します.
      * マッピングが存在しない場合は $defaultValue を返します.
@@ -59,21 +60,21 @@ interface Util_Map {
      *                             存在しない場合は引数のデフォルト値.
      */
     public function get($key, $defaultValue = NULL);
-    
+
     /**
      * 指定されたキーと値を関連づけます.
      * @param  mixed $key   キー
      * @param  mixed $value 指定されたキーに関連づける値
      */
     public function put($key, $value);
-    
+
     /**
      * 指定されたマップのマッピングすべてを登録します.
      * 
      * @param Util_Map $map 登録対象のマップ
      */
     public function putAll(Util_Map $map);
-    
+
     /**
      * 指定されたキーによるマッピングが存在するかどうかを調べます.
      * マッピングが存在する場合に TRUE を返します.
@@ -82,38 +83,38 @@ interface Util_Map {
      * @return boolean      マッピングが存在する場合に TRUE
      */
     public function containsKey($key);
-    
+
     /**
      * 指定されたキー名によるマッピングが存在する場合に, そのマッピングを削除します.
      * @param mixed $key キー
      */
     public function remove($key);
-    
+
     /**
      * このマップを空にします.
      */
     public function clear();
-    
+
     /**
      * 登録されているマッピングの個数を返します.
      * @return int
      */
     public function size();
-    
+
     /**
      * このマップに登録されているすべての値を配列で返します.
      * 返される配列に対する操作はこのオブジェクトに反映されません.
      * @return array
      */
     public function values();
-    
+
     /**
      * このマップに登録されているすべてのキーを配列で返します.
      * 返される配列に対する操作はこのオブジェクトに反映されません.
      * @return array
      */
     public function keys();
-    
+
     /**
      * このマップのすべてのエントリーを {@link Util_MapEntry} オブジェクトの配列で返します.
      * 

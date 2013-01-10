@@ -41,13 +41,14 @@ require_once(dirname(__FILE__) . "/Format.php");
  * 
  * @package DT
  */
-class DT_HttpDateFormat implements DT_Format {
+class DT_HttpDateFormat implements DT_Format
+{
     /**
      * システム時刻の時差です (単位は分)
      * @var int
      */
     private $internalOffset;
-    
+
     /**
      * 新しいフォーマットを生成します.
      * 引数 $offset を指定した場合, parse または format を行った際に,
@@ -60,10 +61,11 @@ class DT_HttpDateFormat implements DT_Format {
      * 
      * @param int $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
-    public function __construct($offset = NULL) {
+    public function __construct($offset = NULL)
+    {
         $this->internalOffset = DT_Util::cleanTimeZoneOffset($offset);
     }
-    
+
     /**
      * デフォルトのインスタンスを返します.
      * このメソッドは引数なしでコンストラクタを呼び出した場合と同じ結果を返しますが,
@@ -75,14 +77,15 @@ class DT_HttpDateFormat implements DT_Format {
      * @param  bool $clearCache  キャッシュを破棄してインスタンスを再生成する場合は TRUE
      * @return DT_HttpDateFormat デフォルトのインスタンス
      */
-    public static function getInstance($clearCache = FALSE) {
+    public static function getInstance($clearCache = FALSE)
+    {
         static $instance = NULL;
         if (!isset($instance) || $clearCache) {
             $instance = new self();
         }
         return $instance;
     }
-    
+
     /**
      * {@link DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を DT_Date にキャストします.
      * 
@@ -90,10 +93,11 @@ class DT_HttpDateFormat implements DT_Format {
      * @return DT_Date      変換結果
      * @throws Exception    フォーマットが不正な場合
      */
-    public function parseDate($format) {
+    public function parseDate($format)
+    {
         return $this->parseTimestamp($format)->toDate();
     }
-    
+
     /**
      * {@link DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を DT_Datetime にキャストします.
      * 
@@ -101,10 +105,11 @@ class DT_HttpDateFormat implements DT_Format {
      * @return DT_Datetime  変換結果
      * @throws Exception    フォーマットが不正な場合
      */
-    public function parseDatetime($format) {
+    public function parseDatetime($format)
+    {
         return $this->parseTimestamp($format)->toDatetime();
     }
-    
+
     /**
      * HTTP-date 形式のフォーマットを DT_Timestamp に変換します.
      * 
@@ -112,7 +117,8 @@ class DT_HttpDateFormat implements DT_Format {
      * @return DT_Timestamp 変換結果
      * @throws Exception    フォーマットが不正な場合
      */
-    public function parseTimestamp($format) {
+    public function parseTimestamp($format)
+    {
         $temp_date = array();
         if (preg_match("/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), ([0-3][0-9]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ([0-9]{4}) ([0-2][0-9]):([0-5][0-9]):([0-5][0-9]) GMT$/", $format, $temp_date)) {
             $date["hour"]   = $temp_date[5];
@@ -121,16 +127,14 @@ class DT_HttpDateFormat implements DT_Format {
             $date["month"]  = $this->parseMonthDescription($temp_date[3]);
             $date["day"]    = $temp_date[2];
             $date["year"]   = $temp_date[4];
-        }
-        else if (preg_match("/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), ([0-3][0-9])-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-([0-9]{2}) ([0-2][0-9]):([0-5][0-9]):([0-5][0-9]) GMT$/", $format, $temp_date)) {
+        } else if (preg_match("/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), ([0-3][0-9])-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-([0-9]{2}) ([0-2][0-9]):([0-5][0-9]):([0-5][0-9]) GMT$/", $format, $temp_date)) {
             $date["hour"]   = $temp_date[5];
             $date["minute"] = $temp_date[6];
             $date["second"] = $temp_date[7];
             $date["month"]  = $this->parseMonthDescription($temp_date[3]);
             $date["day"]    = $temp_date[2];
             $date["year"]   = $this->getFullYear($temp_date[4]);
-        }
-        else if (preg_match("/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ([0-3 ][0-9]) ([0-2][0-9]):([0-5][0-9]):([0-5][0-9]) ([0-9]{4})$/", $format, $temp_date)) {
+        } else if (preg_match("/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ([0-3 ][0-9]) ([0-2][0-9]):([0-5][0-9]):([0-5][0-9]) ([0-9]{4})$/", $format, $temp_date)) {
             $date["hour"]   = $temp_date[4];
             $date["minute"] = $temp_date[5];
             $date["second"] = $temp_date[6];
@@ -139,15 +143,14 @@ class DT_HttpDateFormat implements DT_Format {
             $date["day"]    = str_replace(" ", "0", $temp_date[3]);
             // 定義済みの月の名前を数字に変換する
             $date["year"]   = $temp_date[7];
-        } 
-        else {
+        } else {
             $this->throwFormatException($format);
         }
-        
+
         $parsed = new DT_Timestamp($date["year"], $date["month"], $date["day"], $date["hour"], $date["minute"], $date["second"]);
         return $parsed->add("minute", - $this->internalOffset);
     }
-    
+
     /**
      * この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.
      * 例えばシステム時刻の時差が UTC+9 だった場合, 前日の 15:00 の HTTP-date 表現を返り値とします.
@@ -155,19 +158,21 @@ class DT_HttpDateFormat implements DT_Format {
      * @param  DT_Date 書式化対象の時間オブジェクト
      * @return string この日付の HTTP-date 表現
      */
-    public function formatDate(DT_Date $d) {
+    public function formatDate(DT_Date $d)
+    {
         return $this->formatDatetime($d->toDatetime());
     }
-    
+
     /**
      * この時刻の HTTP-date 表現を返します.
      * 
      * @param  DT_Datetime 書式化対象の時間オブジェクト
      * @return string この時刻の HTTP-date 表現
      */
-    public function formatDatetime(DT_Datetime $d) {
+    public function formatDatetime(DT_Datetime $d)
+    {
         $d = $d->add("minute", $this->internalOffset);
-        
+
         $format  = '';
         $format .= $this->getDayDescription($d->getDay()).', ';
         $format .= str_pad($d->get('date'), 2, '0', STR_PAD_LEFT) . ' ';
@@ -177,57 +182,62 @@ class DT_HttpDateFormat implements DT_Format {
         $format .= 'GMT';
         return $format;
     }
-    
+
     /**
      * この時刻の HTTP-date 表現を返します.
      * 
      * @param  DT_Timestamp 書式化対象の時間オブジェクト
      * @return string この時刻の HTTP-date 表現
      */
-    public function formatTimestamp(DT_Timestamp $d) {
+    public function formatTimestamp(DT_Timestamp $d)
+    {
         return $this->formatDatetime($d);
     }
-    
+
     /**
      * parse に失敗した場合に呼び出されます.
      * 
      * @param  string $format parse に失敗した文字列
      * @throws Exception
      */
-    private function throwFormatException($format) {
+    private function throwFormatException($format)
+    {
         throw new Exception("Illegal format({$format}). HTTP-date format required.");
     }
-    
+
     /**
      * 月の略称一覧です
      * @return array "Jan" から "Dec" までの月の略称を持つ配列
      */
-    private function getMonthMapping() {
+    private function getMonthMapping()
+    {
         static $mapping = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
         return $mapping;
     }
-    
+
     /**
      * 月の略称を書式化します.
      * @param  int    月
      * @return string 引数の月の略称
      */
-    private function getMonthDescription($month) {
+    private function getMonthDescription($month)
+    {
         $mapping = $this->getMonthMapping();
         return $mapping[$month - 1];
     }
-    
+
     /**
      * 月の略称を月に変換します.
      * @param  string $mon 月の略称
      * @return int 引数の略称の数値表現 (1 から 12)
      */
-    private function parseMonthDescription($mon) {
+    private function parseMonthDescription($mon)
+    {
         $mapping = $this->getMonthMapping();
         $month   = array_search($mon, $mapping) + 1;
         return str_pad($month, 2, '0', STR_PAD_LEFT);
     }
-    
+
     /**
      * 2 桁の年表示を 4 桁に変換します.
      * もしも引数の 2 桁年が, 現在の 2 桁年よりも大きい場合,
@@ -235,30 +245,32 @@ class DT_HttpDateFormat implements DT_Format {
      * 
      * @param int $y 変換対象の 2 桁年
      */
-    private function getFullYear($y) {
+    private function getFullYear($y)
+    {
         $currentYear = intval(date("Y"));
         $century     = intval($currentYear / 100);
         $smallY      = $currentYear % 100;
         $resultC     = ($smallY < $y) ? $century - 1 : $century;
         return $resultC * 100 + $y;
     }
-    
+
     /**
      * 曜日の略称を(ry
      * @param  int    曜日の値
      * @return string 曜日の略称
      */
-    private function getDayDescription($day) {
+    private function getDayDescription($day)
+    {
         switch ($day) {
-        case 0: return 'Sun';
-        case 1: return 'Mon';
-        case 2: return 'Tue';
-        case 3: return 'Wed';
-        case 4: return 'Thu';
-        case 5: return 'Fri';
-        case 6: return 'Sat';
-        default:
-            throw new Exception('');
+            case 0: return 'Sun';
+            case 1: return 'Mon';
+            case 2: return 'Tue';
+            case 3: return 'Wed';
+            case 4: return 'Thu';
+            case 5: return 'Fri';
+            case 6: return 'Sat';
+            default:
+                throw new Exception('');
         }
     }
 }

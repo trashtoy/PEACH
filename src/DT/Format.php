@@ -33,7 +33,8 @@
  * 
  * @package DT
  */
-interface DT_Format {
+interface DT_Format
+{
     /**
      * 指定された文字列を解析して DATE 型の時間オブジェクトに変換します.
      * 解析に失敗した場合は例外をスローします.
@@ -42,7 +43,7 @@ interface DT_Format {
      * @return DT_Time        解析結果
      */
     public function parseDate($format);
-    
+
     /**
      * 指定された文字列を解析して DATETIME 型の時間オブジェクトに変換します.
      * 解析に失敗した場合は例外をスローします.
@@ -51,7 +52,7 @@ interface DT_Format {
      * @return DT_Time        解析結果
      */
     public function parseDatetime($format);
-    
+
     /**
      * 指定された文字列を解析して TIMESTAMP 型の時間オブジェクトに変換します.
      * 解析に失敗した場合は例外をスローします.
@@ -60,7 +61,7 @@ interface DT_Format {
      * @return DT_Time        解析結果
      */
     public function parseTimestamp($format);
-    
+
     /**
      * 指定された DT_Date オブジェクトを書式化します.
      * 
@@ -68,7 +69,7 @@ interface DT_Format {
      * @return string     このフォーマットによる文字列表現
      */
     public function formatDate(DT_Date $d);
-    
+
     /**
      * 指定された DT_Datetime オブジェクトを書式化します.
      * 
@@ -76,7 +77,7 @@ interface DT_Format {
      * @return string         このフォーマットによる文字列表現
      */
     public function formatDatetime(DT_Datetime $d);
-    
+
     /**
      * 指定された DT_Timestamp オブジェクトを書式化します.
      * 

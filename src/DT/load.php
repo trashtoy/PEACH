@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2012 @trashtoy
  * https://github.com/trashtoy/
@@ -26,9 +27,10 @@
  */
 if (!function_exists("loadDT")) {
     /** @ignore */
-    function loadDT() {
-        $base        = dirname(__FILE__);
-        $dir         = dir($base);
+    function loadDT()
+    {
+        $base = dirname(__FILE__);
+        $dir  = dir($base);
         while (FALSE !== ($entry = $dir->read())) {
             switch ($entry) {
                 case ".":

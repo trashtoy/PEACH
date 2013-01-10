@@ -20,7 +20,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/** 
+/**
  * @package Util
  * @ignore
  */
@@ -32,13 +32,14 @@ require_once(dirname(__FILE__) . "/AbstractMapEntry.php");
  * 
  * @package Util
  */
-class Util_ArrayMapEntry extends Util_AbstractMapEntry {
+class Util_ArrayMapEntry extends Util_AbstractMapEntry
+{
     /**
      * このエントリーが登録されている ArrayMap です.
      * @var Util_ArrayMap
      */
     private $map;
-    
+
     /**
      * 新しい ArrayMapEntry を構築します.
      * 
@@ -46,25 +47,28 @@ class Util_ArrayMapEntry extends Util_AbstractMapEntry {
      * @param mixed         $value キーに関連づけられた値
      * @param Util_ArrayMap $map   このエントリーが属する ArrayMap
      */
-    public function __construct($key, $value, Util_ArrayMap $map) {
+    public function __construct($key, $value, Util_ArrayMap $map)
+    {
         parent::__construct($key, $value);
         $this->map = $map;
     }
-    
+
     /**
      * このエントリーの値を更新します.
      * @param mixed $value 新しくセットされる値
      */
-    public function setValue($value) {
+    public function setValue($value)
+    {
         $this->map->put($this->key, $value);
         $this->value = $value;
     }
-    
+
     /**
      * この MapEntry の文字列表現です.
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return "[{$this->key}={$this->value}]";
     }
 }

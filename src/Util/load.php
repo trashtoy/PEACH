@@ -26,9 +26,10 @@
  */
 if (!function_exists("loadUtil")) {
     /** @ignore */
-    function loadUtil() {
-        $base        = dirname(__FILE__);
-        $dir         = dir($base);
+    function loadUtil()
+    {
+        $base = dirname(__FILE__);
+        $dir = dir($base);
         while (FALSE !== ($entry = $dir->read())) {
             switch ($entry) {
                 case ".":

@@ -31,7 +31,9 @@
  * 
  * @package Util
  */
-interface Util_Comparable {
+interface Util_Comparable
+{
+
     /**
      * このオブジェクトと引数の値を比較します.
      * 

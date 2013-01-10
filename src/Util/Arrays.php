@@ -21,16 +21,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package Util */
+
 /**
  * 配列に関する操作を行うユーティリティクラスです.
  * @package Util
  */
-class Util_Arrays {
+class Util_Arrays
+{
     /**
      * このクラスはインスタンス化できません
      */
     private function __construct() {}
-       
+
     /**
      * {@link Util_Arrays::max()} と {@link Util_Arrays::min()} の共通部分の実装です.
      * @param  array           $arr           
@@ -38,7 +40,8 @@ class Util_Arrays {
      * @param  bool            $isMax
      * @return mixed
      */
-    private static function getTop(array $arr, Util_Comparator $c = NULL, $isMax = FALSE) {
+    private static function getTop(array $arr, Util_Comparator $c = NULL, $isMax = FALSE)
+    {
         if (!isset($c)) {
             $c = Util_DefaultComparator::getInstance();
         }
@@ -55,7 +58,7 @@ class Util_Arrays {
         }
         return $candidate;
     }
-    
+
     /**
      * 指定された配列の各要素の中で「最も大きい」値を返します.
      * 
@@ -80,10 +83,11 @@ class Util_Arrays {
      * @param  Util_Comparator $c
      * @return mixed           引数 $arr の中で最も大きな値. 配列が空の場合は NULL
      */
-    public static function max(array $arr, Util_Comparator $c = NULL) {
+    public static function max(array $arr, Util_Comparator $c = NULL)
+    {
         return self::getTop($arr, $c, TRUE);
     }
-    
+
     /**
      * 指定された配列の各要素の中で「最も小さい」値を返します.
      * 
@@ -108,10 +112,11 @@ class Util_Arrays {
      * @param  Util_Comparator
      * @return mixed $arr の中で最も大きな値. 配列が空の場合は NULL
      */
-    public static function min(array $arr, Util_Comparator $c = NULL) {
+    public static function min(array $arr, Util_Comparator $c = NULL)
+    {
         return self::getTop($arr, $c, FALSE);
     }
-    
+
     /**
      * 配列の中から, $type で指定した型の値だけを取り出します. 
      * $keyFlag に TRUE を指定した場合はキーと要素の関連付けを維持します.
@@ -138,53 +143,54 @@ class Util_Arrays {
      * @param  bool   $keyFlag 関連付けを維持する場合は TRUE (デフォルトは FALSE)
      * @return array
      */
-    public static function pickup(array $arr, $type, $keyFlag = FALSE) {
+    public static function pickup(array $arr, $type, $keyFlag = FALSE)
+    {
         $result = array();
         foreach ($arr as $key => $value) {
             if (self::pickupMatch($value, $type)) {
                 if ($keyFlag) {
                     $result[$key] = $value;
-                }
-                else {
+                } else {
                     $result[] = $value;
                 }
             }
         }
         return $result;
     }
-    
+
     /**
      * @param  string  $value
      * @param  string  $type
      * @return boolean
      */
-    private static function pickupMatch($value, $type) {
+    private static function pickupMatch($value, $type)
+    {
         $ltype = strtolower($type);
         switch ($ltype) {
-        case 'int':
-        case 'integer':
-            return is_int($value);
-        case 'float':
-        case 'numeric':
-            return is_numeric($value);
-        case 'string':
-            return is_string($value);
-        case 'null':
-            return is_null($value);
-        case 'bool':
-        case 'boolean':
-            return is_bool($value);
-        case 'array':
-            return is_array($value);
-        case 'resource':
-            return is_resource($value);
-        case 'object':
-            return is_object($value);
-        default:
-            return is_object($value) && ($value instanceof $type);
+            case 'int':
+            case 'integer':
+                return is_int($value);
+            case 'float':
+            case 'numeric':
+                return is_numeric($value);
+            case 'string':
+                return is_string($value);
+            case 'null':
+                return is_null($value);
+            case 'bool':
+            case 'boolean':
+                return is_bool($value);
+            case 'array':
+                return is_array($value);
+            case 'resource':
+                return is_resource($value);
+            case 'object':
+                return is_object($value);
+            default:
+                return is_object($value) && ($value instanceof $type);
         }
     }
-    
+
     /**
      * 指定された配列をソートします.
      * 配列のキーは連番で初期化されます.
@@ -194,7 +200,8 @@ class Util_Arrays {
      * @param  Util_Comparator $c   コンパレータ
      * @return array
      */
-    public static function sort(array $arr, Util_Comparator $c = NULL) {
+    public static function sort(array $arr, Util_Comparator $c = NULL)
+    {
         if (count($arr) < 2) {
             return $arr;
         }
@@ -209,14 +216,13 @@ class Util_Arrays {
             $compValue = $c->compare($first, $value);
             if (0 < $compValue) {
                 $lower[] = $value;
-            }
-            else {
+            } else {
                 $upper[] = $value;
             }
         }
         return self::concat(self::sort($lower, $c), $first, self::sort($upper, $c));
     }
-    
+
     /**
      * 配列のキーと値のマッピングを保持しながら, 指定された配列をソートします.
      * コンパレータが指定されなかった場合は {@link Util_DefaultComparator} が適用されます.
@@ -225,7 +231,8 @@ class Util_Arrays {
      * @param  Util_Comparator $c   コンパレータ
      * @return array                ソート後の配列
      */
-    public static function asort(array $arr, Util_Comparator $c = NULL) {
+    public static function asort(array $arr, Util_Comparator $c = NULL)
+    {
         if (count($arr) < 2) {
             return $arr;
         }
@@ -240,15 +247,13 @@ class Util_Arrays {
             $compValue = $c->compare($firstValue, $value);
             if (0 < $compValue) {
                 $lower[$key] = $value;
-            }
-            else {
+            } else {
                 $upper[$key] = $value;
             }
         }
         return self::asort($lower, $c) + array($firstKey => $firstValue) + self::asort($upper, $c);
     }
-    
-    
+
     /**
      * 引数の配列または値を連結して, 一つの配列として返します.
      * 
@@ -293,22 +298,22 @@ class Util_Arrays {
      * 
      * @return array
      */
-    public static function concat() {
-        $args   = func_get_args();
+    public static function concat()
+    {
+        $args = func_get_args();
         $result = array();
         foreach ($args as $arg) {
             if (is_array($arg)) {
                 foreach ($arg as $subarg) {
                     $result[] = $subarg;
                 }
-            }
-            else {
+            } else {
                 $result[] = $arg;
             }
         }
         return $result;
     }
-    
+
     /**
      * 指定された配列から, 重複した値を取り除いた結果を返します.
      * 重複かどうかの判定は, 引数に指定されたコンパレータを使って行われます.
@@ -318,7 +323,8 @@ class Util_Arrays {
      * @param  Util_Comparator $c   コンパレータ
      * @return array 
      */
-    public static function unique(array $arr, Util_Comparator $c = NULL) {
+    public static function unique(array $arr, Util_Comparator $c = NULL)
+    {
         if (!isset($c)) {
             $c = Util_DefaultComparator::getInstance();
         }
@@ -329,9 +335,8 @@ class Util_Arrays {
             if ($c->compare($value, $lastValue) === 0 && $value == $lastValue) {
                 $delKey[] = $key;
                 continue;
-            }
-            else {
-                $lastKey   = $key;
+            } else {
+                $lastKey = $key;
                 $lastValue = $value;
             }
         }

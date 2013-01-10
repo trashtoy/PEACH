@@ -27,21 +27,23 @@
  * 
  * @package Util
  */
-interface Util_MapEntry {
+interface Util_MapEntry
+{
+
     /**
      * このエントリーのキーです.
      * 
      * @return mixed このエントリーのキー
      */
     public function getKey();
-    
+
     /**
      * このエントリーの値です.
      * 
      * @return mixed このエントリーの値.
      */
     public function getValue();
-    
+
     /**
      * このエントリーの値を新しい値に更新します. 更新はもとの Map に反映されます.
      * ただし, このエントリーがもとのマップから削除されている場合は

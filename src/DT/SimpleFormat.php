@@ -73,93 +73,102 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * 
  * @package DT
  */
-class DT_SimpleFormat implements DT_Format {
+class DT_SimpleFormat implements DT_Format
+{
     /**
      * parse または format に使うパターン文字列です.
      * @var string
      */
     private $format;
-    
+
     /**
      * パターン文字列を分解した結果をあらわします.
      * 
      * @var array
      */
     private $context;
-    
+
     /**
      * 指定されたパターン文字列で SimpleFormat を初期化します.
      * 
      * @param string $pattern パターン文字列
      */
-    public function __construct($pattern) {
+    public function __construct($pattern)
+    {
         $format        = strval($pattern);
         $this->format  = $format;
         $this->context = $this->createContext($format);
     }
-    
+
     /**
      * このオブジェクトのパターン文字列を返します.
      * @return string パターン文字列
      */
-    public function getFormat() {
+    public function getFormat()
+    {
         return $this->format;
     }
-    
+
     /**
      * 指定された文字列を解析し, DT_Date に変換します.
      * @param  string $format 解析対象の文字列
      * @return DT_Date 解析結果
      */
-    public function parseDate($format) {
+    public function parseDate($format)
+    {
         $d = DT_Date::now();
         return $d->setAll($this->interpret($format));
     }
-    
+
     /**
      * 指定された文字列を解析し, DT_Datetime に変換します.
      * @param  string $format 解析対象の文字列
      * @return DT_Datetime 解析結果
      */
-    public function parseDatetime($format) {
+    public function parseDatetime($format)
+    {
         $d = DT_Date::now();
         return $d->toDatetime()->setAll($this->interpret($format));
     }
-    
+
     /**
      * 指定された文字列を解析し, DT_Timestamp に変換します.
      * @param  string $format 解析対象の文字列
      * @return DT_Date 解析結果
      */
-    public function parseTimestamp($format) {
+    public function parseTimestamp($format)
+    {
         $d = DT_Date::now();
         return $d->toTimestamp()->setAll($this->interpret($format));
     }
-    
+
     /**
      * 指定された DT_Date オブジェクトを書式化します.
      * @param  DT_Date $d 書式化対象の時間オブジェクト
      * @return string このフォーマットによる文字列表現
      */
-    public function formatDate(DT_Date $d) {
+    public function formatDate(DT_Date $d)
+    {
         return $this->formatTimestamp($d->toTimestamp());
     }
-    
+
     /**
      * 指定された DT_Datetime オブジェクトを書式化します.
      * @param  DT_Datetime $d 書式化対象の時間オブジェクト
      * @return string このフォーマットによる文字列表現
      */
-    public function formatDatetime(DT_Datetime $d) {
+    public function formatDatetime(DT_Datetime $d)
+    {
         return $this->formatTimestamp($d->toTimestamp());
     }
-    
+
     /**
      * 指定された DT_Timestamp オブジェクトを書式化します.
      * @param  DT_Timestamp $d 書式化対象の時間オブジェクト
      * @return string このフォーマットによる文字列表現
      */
-    public function formatTimestamp(DT_Timestamp $d) {
+    public function formatTimestamp(DT_Timestamp $d)
+    {
         $patternList = $this->getPatternList();
         $result      = "";
         foreach ($this->context as $part) {
@@ -168,8 +177,9 @@ class DT_SimpleFormat implements DT_Format {
         }
         return $result;
     }
-    
-    private function getPatternList() {
+
+    private function getPatternList()
+    {
         static $patterns = NULL;
         if (!isset($patterns)) {
             $fixed4   = "\\d{4}";
@@ -194,8 +204,9 @@ class DT_SimpleFormat implements DT_Format {
         }
         return $patterns;
     }
-    
-    private function getKey($pattern) {
+
+    private function getKey($pattern)
+    {
         static $keyList = array(
             "year"   => array("Y"),
             "month"  => array("m", "n"),
@@ -211,15 +222,16 @@ class DT_SimpleFormat implements DT_Format {
         }
         throw new Exception("Illegal pattern: " . $pattern);
     }
-    
-    private function formatKey(DT_Time $d, $key) {
+
+    private function formatKey(DT_Time $d, $key)
+    {
         $year  = $d->get("year");
         $month = $d->get("month");
         $date  = $d->get("date");
         $hour  = $d->get("hour");
         $min   = $d->get("minute");
         $sec   = $d->get("second");
-        
+
         switch ($key) {
             case "Y":
                 return str_pad($year,  4, "0", STR_PAD_LEFT);
@@ -247,13 +259,14 @@ class DT_SimpleFormat implements DT_Format {
                 throw new Exception("Illegal pattern: " . $key);
         }
     }
-    
+
     /**
      * 
      * @param  string $format
      * @return array
      */
-    private function createContext($format) {
+    private function createContext($format)
+    {
         $patternList = $this->getPatternList();
         $result      = array();
         $current     = "";
@@ -263,19 +276,16 @@ class DT_SimpleFormat implements DT_Format {
             if ($escaped) {
                 $current .= $chr;
                 $escaped = FALSE;
-            }
-            else if ($chr === "\\") {
+            } else if ($chr === "\\") {
                 $current .= $chr;
-                $escaped  = TRUE;
-            }
-            else if (array_key_exists($chr, $patternList)) {
+                $escaped = TRUE;
+            } else if (array_key_exists($chr, $patternList)) {
                 if (strlen($current)) {
                     $result[] = $current;
-                    $current  = "";
+                    $current = "";
                 }
                 $result[] = $chr;
-            }
-            else {
+            } else {
                 $current .= $chr;
             }
         }
@@ -284,14 +294,15 @@ class DT_SimpleFormat implements DT_Format {
         }
         return $result;
     }
-    
+
     /**
      * 指定されたテキストを構文解析します.
      * 
      * @param  string $text
      * @return array 構文解析した結果
      */
-    private function interpret($text) {
+    private function interpret($text)
+    {
         $input       = $text;
         $patternList = $this->getPatternList();
         $result      = array();
@@ -302,32 +313,32 @@ class DT_SimpleFormat implements DT_Format {
                 if ($test === FALSE) {
                     $this->throwFormatException($input, $this->format);
                 }
-                
+
                 $key          = $this->getKey($part);
                 $result[$key] = intval($matched[0]);
                 $input        = substr($input, strlen($matched[0]));
-            }
-            else {
+            } else {
                 $text   = stripslashes($part);
                 $length = strlen($text);
                 if (substr($input, 0, $length) !== $text) {
                     $this->throwFormatException($text, $this->format);
                 }
-                
+
                 $input = substr($input, $length);
             }
         }
-        
+
         return $result;
     }
-    
+
     /**
      * 
      * @param  string $format
      * @param  string $expected
      * @throws Exception
      */
-    private function throwFormatException($format, $expected) {
+    private function throwFormatException($format, $expected)
+    {
         throw new Exception("Illegal format({$format}). Expected: {$expected}");
     }
 }

@@ -57,64 +57,65 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * 
  * @package DT
  */
-interface DT_Time extends Util_Comparable {
+interface DT_Time extends Util_Comparable
+{
     /**
      * このオブジェクトが年・月・日のフィールドをサポートしていることを示します.
      */
     const TYPE_DATE      = 129;
-    
+
     /**
      * このオブジェクトが年・月・日・時・分のフィールドをサポートしていることを示します.
      */
     const TYPE_DATETIME  = 130;
-    
+
     /**
      * このオブジェクトが年・月・日・時・分・秒のフィールドをサポートしていることを示します.
      */
     const TYPE_TIMESTAMP = 131;
-    
+
     /**
      * 日曜日をあらわす定数です.
      * @var int
      */
     const SUNDAY    = 0;
-    
+
     /**
      * 月曜日をあらわす定数です
      * @var int
      */
     const MONDAY    = 1;
-    
+
     /**
      * 火曜日をあらわす定数です
      * @var int
      */
     const TUESDAY   = 2;
-    
+
     /**
      * 水曜日をあらわす定数です
      * @var int
      */
     const WEDNESDAY = 3;
-    
+
     /**
      * 木曜日をあらわす定数です
      * @var int
      */
     const THURSDAY  = 4;
-    
+
     /**
      * 金曜日をあらわす定数です
      * @var int
      */
     const FRIDAY    = 5;
-    
+
     /**
      * 土曜日をあらわす定数です
      * @var int
      */
     const SATURDAY  = 6;
-    
+
     /**
      * このオブジェクトの型を返します.
      * 返り値の数値は, 上位の (より多くのフィールドをサポートしている) 型ほど大きくなります.
@@ -128,14 +129,14 @@ interface DT_Time extends Util_Comparable {
      * @see DT_Time::TYPE_TIMESTAMP
      */
     public function getType();
-    
+
     /**
      * 指定されたフィールドの値を取得します.
      * @param  string $field フィールド名
      * @return int           対象フィールドの値. ただしフィールド名が不正な場合は NULL
      */
     public function get($field);
-    
+
     /**
      * この時間オブジェクトの指定されたフィールドを上書きします.
      * 
@@ -144,7 +145,7 @@ interface DT_Time extends Util_Comparable {
      * @return DT_Time 設定後の時間オブジェクト
      */
     public function set($field, $value);
-    
+
     /**
      * この時間オブジェクトの複数のフィールドを一度に上書きします.
      * 引数には, 
@@ -155,7 +156,7 @@ interface DT_Time extends Util_Comparable {
      * @return DT_Time        設定後の時間オブジェクト
      */
     public function setAll($subject);
-    
+
     /**
      * 引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.
      * @param  string  対象のフィールド
@@ -163,7 +164,7 @@ interface DT_Time extends Util_Comparable {
      * @return DT_Time 設定後の時間オブジェクト
      */
     public function add($field, $amount);
-    
+
     /**
      * 指定されたフォーマットを使ってこの時間オブジェクトを書式化します.
      * フォーマットを指定しない場合はデフォルトの方法 (SQL などで使われる慣用表現) で書式化を行ないます.
@@ -172,7 +173,7 @@ interface DT_Time extends Util_Comparable {
      *                           引数を指定しない場合は "YYYY-MM-DD" あるいは "YYYY-MM-DD hh:mm:ss" などの文字列
      */
     public function format(DT_Format $format = NULL);
-    
+
     /**
      * 指定されたオブジェクトとこのオブジェクトを比較します.
      * 二つのオブジェクトが等しいと判断された場合に TRUE を返します.
@@ -181,7 +182,7 @@ interface DT_Time extends Util_Comparable {
      * @return boolean      二つのオブジェクトが等しい場合に TRUE, それ以外は FALSE
      */
     public function equals($obj);
-    
+
     /**
      * 指定された時間とこの時間を比較します.
      *
@@ -195,8 +196,8 @@ interface DT_Time extends Util_Comparable {
      * @return boolean         この時間のほうが過去である場合は TRUE, それ以外は FALSE
      */
     public function before(DT_Time $time);
-    
-        /**
+
+    /**
      * 指定された時間とこの時間を比較します.
      *
      * もしもこのオブジェクトが持つ時間フィールドすべてが
@@ -209,7 +210,7 @@ interface DT_Time extends Util_Comparable {
      * @return boolean   この時間のほうが未来である場合は TRUE, それ以外は FALSE
      */
     public function after(DT_Time $time);
-    
+
     /**
      * この年がうるう年かどうかを判定します.
      *
@@ -221,7 +222,7 @@ interface DT_Time extends Util_Comparable {
      * @return bool うるう年である場合に TRUE, それ以外は FALSE
      */
     public function isLeapYear();
-    
+
     /**
      * この日付の曜日を返します. 返される値は 0 から 6 までの整数で, 0 が日曜, 6 が土曜をあらわします.
      * それぞれの整数は, このクラスで定義されている各定数に対応しています.
@@ -237,13 +238,13 @@ interface DT_Time extends Util_Comparable {
      * @see    DT_Time::SATURDAY
      */
     public function getDay();
-    
+
     /**
      * この月の日数を返します.
      * @return int この月の日数. すなわち, 28 から 31 までの整数.
      */
     public function getDateCount();
-    
+
     /**
      * このオブジェクトを DATE 型にキャストします.
      * このメソッドの返り値は以下の性質を持ちます.
@@ -256,7 +257,7 @@ interface DT_Time extends Util_Comparable {
      * @return DT_Time DATE 型の時間オブジェクト
      */
     public function toDate();
-    
+
     /**
      * このオブジェクトを DATETIME 型にキャストします.
      * このメソッドの返り値は以下の性質を持ちます.
@@ -269,7 +270,7 @@ interface DT_Time extends Util_Comparable {
      * @return DT_Time DATETIME 型の時間オブジェクト
      */
     public function toDatetime();
-    
+
     /**
      * このオブジェクトを TIMESTAMP 型にキャストします.
      * このメソッドの返り値は以下の性質を持ちます.
@@ -282,7 +283,7 @@ interface DT_Time extends Util_Comparable {
      * @return DT_Time TIMESTAMP 型の時間オブジェクト
      */
     public function toTimestamp();
-    
+
     /**
      * この時間の時刻 (時・分・秒) 部分を書式化します.
      * 返される文字列はタイプによって以下の通りとなります.
