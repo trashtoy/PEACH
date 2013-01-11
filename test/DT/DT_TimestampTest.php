@@ -5,14 +5,16 @@ require_once 'DT_AbstractTimeTest.php';
 /**
  * Test class for DT_Timestamp.
  */
-class DT_TimestampTest extends DT_AbstractTimeTest {
+class DT_TimestampTest extends DT_AbstractTimeTest
+{
     /**
      * 以下の確認を行います.
      * 
      * - フィールドの加減が正常に出来ること.
      * - 不正なフィールド名を指定した場合に無視されること.
      */
-    public function testAdd() {
+    public function testAdd()
+    {
         $d1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertEquals(new DT_Timestamp(2015, 5,  21,  7, 30, 15),  $d1->add("year",   3));
         $this->assertEquals(new DT_Timestamp(2009, 5,  21,  7, 30, 15),  $d1->add("year",  -3));
@@ -37,7 +39,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 同じオブジェクトの場合は FALSE を返す
      * - 異なる型との比較で, 共通のフィールドが全て等しい場合は, フィールドが多いほうが「後」
      */
-    public function testAfter() {
+    public function testAfter()
+    {
         $d1 = new DT_Timestamp(2012, 5, 21, 7, 30, 0);
         
         // 比較が正常にできる
@@ -60,7 +63,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 異なる型との比較で, 共通のフィールドが全て等しい場合は, フィールドが少ないほうが「前」
      * - DT_Time 以外のオブジェクトと比較した場合は FALSE を返す
      */
-    public function testBefore() {
+    public function testBefore()
+    {
         $d1 = new DT_Timestamp(2012, 5, 21, 7, 30, 0);
         
         // 比較が正常にできる
@@ -80,7 +84,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * 
      * - 比較が正常に出来る
      */
-    public function testCompareTo() {
+    public function testCompareTo()
+    {
         $d = array(
             new DT_Timestamp(2012, 3, 12, 23, 59, 59),
             new DT_Timestamp(2012, 5, 21,  7, 30, 0),
@@ -98,7 +103,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 同じ型で, 一つ以上のフィールドの値が異なるオブジェクトの場合は FALSE
      * - 型が異なる場合は FALSE
      */
-    public function testEquals() {
+    public function testEquals()
+    {
         $d1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $d2 = new DT_Timestamp(2012, 5, 21, 7, 30, 45);
         $d3 = new DT_Date(2012, 5, 21);
@@ -115,7 +121,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 指定された Format オブジェクトの formatDatetime() メソッドを使って書式化されること
      * - 引数を省略した場合は __toString と同じ結果を返すこと
      */
-    public function testFormat() {
+    public function testFormat()
+    {
         $d = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertSame("2012-05-21 07:30:15", $d->format());
         $this->assertSame("2012-05-21T07:30:15", $d->format(DT_W3CDatetimeFormat::getInstance()));
@@ -127,7 +134,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 年・月・日・時・分・秒のフィールドの取得が出来る
      * - 不正な引数を指定した場合は NULL を返す
      */
-    public function testGet() {
+    public function testGet()
+    {
         $time        = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $valid       = array();
         $valid[15]   = array("s", "S", "Sec", "sec", "smile"); // any string which starts with "s" is OK.
@@ -148,7 +156,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 秒のフィールドの設定が出来る
      * - 不正な引数を指定した場合は同じオブジェクトを返す
      */
-    public function testSet() {
+    public function testSet()
+    {
         $time = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertEquals(
             array(
@@ -173,7 +182,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
      * - 配列・Map 以外の型を指定した場合に例外をスローすること
      */
-    public function testSetAll() {
+    public function testSetAll()
+    {
         $d    = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $test = $d->setAll(array("min" => 34, "sec" => 59, "hour" => 6));
         $this->assertEquals(new DT_Timestamp(2012, 5, 21, 6, 34, 59), $test);
@@ -191,8 +201,7 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
         try {
             $test = $d->setAll("hoge");
             $this->fail();
-        }
-        catch (Exception $e) {}
+        } catch (Exception $e) {}
     }
     
     /**
@@ -200,7 +209,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * このメソッドは, テストを開始するタイミングによって極稀に失敗する可能性があるため,
      * 失敗した場合は再度テストしてください.
      */
-    public function testNow() {
+    public function testNow()
+    {
         $d = DT_Timestamp::now();
         $this->assertSame(intval(date("Y")), $d->get("year"));
         $this->assertSame(intval(date("n")), $d->get("month"));
@@ -209,35 +219,37 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
         $this->assertSame(intval(date("i")), $d->get("min"));
         $this->assertSame(intval(date("s")), $d->get("sec"));
     }
-
+    
     /**
      * parse に成功した場合に DT_Timestamp オブジェクト,
      * 失敗した場合に Exception をスローすることを確認します.
      */
-    public function testParse() {
+    public function testParse()
+    {
         $d = DT_Timestamp::parse("2011-05-21 07:30:15");
         $this->assertEquals(new DT_Timestamp(2011, 5, 21, 7, 30, 15), $d);
         try {
             $d = DT_Timestamp::parse("Illegal Format");
             $this->fail(); // Exception が発生しなかった場合は FAIL
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->assertTrue($e instanceof Exception);
         }
     }
-
+    
     /**
      * {@link DT_Time::TYPE_TIMESTAMP} を返すことを確認します.
      */
-    public function testGetType() {
+    public function testGetType()
+    {
         $d = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertSame(DT_Time::TYPE_TIMESTAMP, $d->getType());
     }
-
+    
     /**
      * "hh:mm:ss" 形式の文字列を返すことを確認します.
      */
-    public function testFormatTime() {
+    public function testFormatTime()
+    {
         $d = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertSame("07:30:15", $d->formatTime());
     }
@@ -245,7 +257,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
     /**
      * DT_Timestamp から DT_Date へのキャストをテストします.
      */
-    public function testToDate() {
+    public function testToDate()
+    {
         $d1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertEquals(new DT_Date(2012, 5, 21), $d1->toDate());
     }
@@ -253,7 +266,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
     /**
      * DT_Timestamp から DT_Datetime へのキャストをテストします.
      */
-    public function testToDatetime() {
+    public function testToDatetime()
+    {
         $t1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $this->assertEquals(new DT_Datetime(2012, 5, 21, 7, 30), $t1->toDatetime());
     }
@@ -263,7 +277,8 @@ class DT_TimestampTest extends DT_AbstractTimeTest {
      * 生成されたオブジェクトが, 元のオブジェクトのクローンであることを確認します.
      * すなわち, == による比較が TRUE, === による比較が FALSE となります.
      */
-    public function testToTimestamp() {
+    public function testToTimestamp()
+    {
         $t1 = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $t2 = $t1->toTimestamp();
         $this->assertEquals($t1, $t2);

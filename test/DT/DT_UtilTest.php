@@ -4,11 +4,13 @@ require_once dirname(__FILE__) . '/../../src/DT/load.php';
 /**
  * Test class for DT_Util.
  */
-class DT_UtilTest extends PHPUnit_Framework_TestCase {
+class DT_UtilTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @return array
      */
-    private function getTestArray() {
+    private function getTestArray()
+    {
         $d   = array();
         $d[] = new DT_Date(     2012, 3,  29);
         $d[] = new DT_Datetime( 2012, 3,  29, 21, 59);
@@ -26,12 +28,14 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->defaultTZ = date_default_timezone_get();
         date_default_timezone_set("Asia/Tokyo");
     }
     
-    protected function tearDown() {
+    protected function tearDown()
+    {
         date_default_timezone_set($this->defaultTZ);
     }
     
@@ -39,11 +43,12 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * - 正しく比較が行えることを確認します
      * - 異なる型の比較で共通フィールドが全て等しかった場合, より上位の型を大とします.
      */
-    public function testCompareTime() {
-        $d   = $this->getTestArray();
+    public function testCompareTime()
+    {
+        $d = $this->getTestArray();
         
         // 同じオブジェクト同士の比較は 0 を返します
-        for ($i = 0; $i < 9; $i ++) {
+        for ($i = 0; $i < 9; $i++) {
             $this->assertSame(0, DT_Util::compareTime($d[$i], $d[$i]));
         }
         // 同じ型同士の比較が正しく出来ることを確認します
@@ -75,7 +80,7 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
         $subTest1  = array(1, 2, 2, 4, 5, 5);
         $subTest2  = array(0, 0, 1, 3, 3, 4);
         $subTest3  = array(3, 3, 4, 0, 0, 1);
-
+        
         for ($i = 0; $i < 6; $i ++) {
             $i1 = $zeroTest1[$i];
             $i2 = $zeroTest2[$i];
@@ -94,7 +99,7 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
             $this->assertLessThan(0, DT_Util::compareTime($d[$i5], $d[$i3]));
         }
     }
-
+    
     /**
      * 以下を確認します.
      * 
@@ -102,13 +107,14 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * - 引数を羅列して実行できること
      * - 引数に不正な型を含む場合でも正常に動作すること
      */
-    public function testOldest() {
+    public function testOldest()
+    {
         $d = $this->getTestArray();
         $this->assertSame($d[0], DT_Util::oldest($d));
         $this->assertSame($d[1], DT_Util::oldest($d[4], $d[1], $d[3], $d[5], $d[8]));
         $this->assertSame($d[2], DT_Util::oldest($d[5], NULL, $d[2], 128, $d[3]));
     }
-
+    
     /**
      * 以下を確認します.
      * 
@@ -116,7 +122,8 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * - 引数を羅列して実行できること
      * - 引数に不正な型を含む場合でも正常に動作すること
      */
-    public function testLatest() {
+    public function testLatest()
+    {
         $d = $this->getTestArray();
         $this->assertSame($d[8], DT_Util::latest($d));
         $this->assertSame($d[6], DT_Util::latest($d[4], $d[2], $d[6], $d[0], $d[5]));
@@ -130,7 +137,8 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * 引数に文字列が含まれていた場合は, 数字文字列 (is_numeric() が TRUE を返す)
      * の場合のみ OK とします.
      */
-    public function testValidate() {
+    public function testValidate()
+    {
         $this->assertTrue(DT_Util::validate(2012, 2, 29));
         $this->assertTrue(DT_Util::validate(2012, 5, 21, 18, 30));
         $this->assertTrue(DT_Util::validate(2012, 3,  1, 23,  0, 30));
@@ -145,7 +153,8 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
     /**
      * システムの時差を分単位で取得することを確認します.
      */
-    public function testGetTimeZoneOffset() {
+    public function testGetTimeZoneOffset()
+    {
         $this->assertSame(-540, DT_Util::getTimeZoneOffset());
     }
     
@@ -157,7 +166,8 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase {
      * - -1425 より小さい値 (+23:45 以降) は -1425 に丸める
      * - 数値以外の値は整数に変換する
      */
-    public function testCleanTimeZoneOffset() {
+    public function testCleanTimeZoneOffset()
+    {
         $expected = array(300, -540, 1425, -1425, 0);
         $test     = array(300, NULL, 1500, -1800, "asdf");
         for ($i = 0; $i < 5; $i ++) {

@@ -5,7 +5,8 @@ require_once dirname(__FILE__) . '/../../src/DT/load.php';
 /**
  * Test class for DT_W3CDatetimeFormat.
  */
-class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
+class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var array DT_W3CDatetimeFormat の配列
      */
@@ -15,7 +16,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->objects = array(
             new DT_W3cDatetimeFormat(-540, -540),
             new DT_W3cDatetimeFormat(   0, -540),
@@ -31,7 +33,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         date_default_timezone_set($this->defaultTZ);
     }
     
@@ -39,7 +42,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * 引数を省略した場合に, DT_Util::getTimeZoneOffset()
      * と同じ値がセットされることを確認します.
      */
-    public function test__construct() {
+    public function test__construct()
+    {
         $this->assertEquals(new DT_W3cDatetimeFormat(-540, -540), new DT_W3cDatetimeFormat());
         $this->assertEquals(new DT_W3cDatetimeFormat(300,  -540), new DT_W3cDatetimeFormat(300));
     }
@@ -50,7 +54,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * - parse 時にタイムゾーン文字列をすべて無視する
      * - format 時にタイムゾーン文字列を付与しない
      */
-    public function testGetInstance() {
+    public function testGetInstance()
+    {
         $obj = DT_W3cDatetimeFormat::getInstance();
         $this->assertEquals(new DT_Datetime(2012, 5, 21, 7, 30), $obj->parseDatetime("2012-05-21T07:30+05:00"));
         $this->assertEquals(new DT_Timestamp(2012, 5, 21, 7, 30, 45), $obj->parseTimestamp("2012-05-21T07:30:45-06:30"));
@@ -64,7 +69,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * - "YYYY-MM-DD" 形式の文字列を, 対応する DT_Date オブジェクトに変換すること
      * - 不正なフォーマットの場合に Exception をスローすること
      */
-    public function testParseDate() {
+    public function testParseDate()
+    {
         $format = "2012-05-21";
         $expect = new DT_Date(2012, 5, 21);
         foreach ($this->objects as $obj) {
@@ -73,8 +79,7 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
         try {
             $this->object1->parseDate("foobar");
             $this->fail();
-        }
-        catch (Exception $e) {}
+        } catch (Exception $e) {}
     }
 
     /**
@@ -83,7 +88,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * - "YYYY-MM-DD?hh:mm" 形式の文字列を, 対応する DT_Datetime オブジェクトに変換すること
      * - 不正なフォーマットの場合に Exception をスローすること
      */
-    public function testParseDatetime() {
+    public function testParseDatetime()
+    {
         $format = array(
             "2012-05-21 07:30",
             "2012-05-20T22:30Z",
@@ -97,8 +103,7 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
         try {
             $obj->parseDate("foobar");
             $this->fail();
-        }
-        catch (Exception $e) {}
+        } catch (Exception $e) {}
     }
 
     /**
@@ -107,7 +112,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * - "YYYY-MM-DD?hh:mm:ss" 形式の文字列を, 対応する DT_Timestamp オブジェクトに変換すること
      * - 不正なフォーマットの場合に Exception をスローすること
      */
-    public function testParseTimestamp() {
+    public function testParseTimestamp()
+    {
         $format = array(
             "2012-05-21 07:30:45",
             "2012-05-20T22:30:45Z",
@@ -121,14 +127,14 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
         try {
             $obj->parseDate("foobar");
             $this->fail();
-        }
-        catch (Exception $e) {}
+        } catch (Exception $e) {}
     }
 
     /**
      * タイムゾーンの設定に関係なく、常に "YYYY-MM-DD" 形式の文字列を出力することを確認します.
      */
-    public function testFormatDate() {
+    public function testFormatDate()
+    {
         $d = new DT_Date(2012, 5, 21);
         $f = "2012-05-21";
         foreach ($this->objects as $obj) {
@@ -140,7 +146,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * "YYYY-MM-DDThh:mm+09:00" 形式の文字列を生成することを確認します.
      * タイムゾーンの設定がある場合は "YYYY-MM-DDThh:mm+9:00" のような文字列を生成します.
      */
-    public function testFormatDatetime() {
+    public function testFormatDatetime()
+    {
         $d = new DT_Datetime(2012, 5, 21, 7, 30);
         $expected = array(
             "2012-05-21T07:30+09:00",
@@ -160,7 +167,8 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
      * "YYYY-MM-DDThh:mm:ss" 形式の文字列を生成することを確認します.
      * タイムゾーンの設定がある場合は "YYYY-MM-DDThh:mm:ss+9:00" のような文字列を生成します.
      */
-    public function testFormatTimestamp() {
+    public function testFormatTimestamp()
+    {
         $d = new DT_Timestamp(2012, 5, 21, 7, 30, 45);
         $expected = array(
             "2012-05-21T07:30:45+09:00",
@@ -175,6 +183,5 @@ class DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase {
             $this->assertSame($exp, $obj->formatTimestamp($d));
         }
     }
-
 }
 ?>

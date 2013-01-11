@@ -1,10 +1,12 @@
 <?php
+
 require_once dirname(__FILE__) . '/../../src/DT/load.php';
 
 /**
  * Test class for DT_SimpleFormat.
  */
-class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
+class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
+{
     /**
      *
      * @var array
@@ -15,7 +17,8 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testFormats = array(
             array("YmdHis", "Y年n月j日G時f分b秒", "\\Y=Y \\n=n \\j=j \\H=H \\i=i \\s=s"),
             array("Y/m/d",  "Y.n.j"),
@@ -23,20 +26,22 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
         );
     }
     
-    private function getObjectList() {
+    private function getObjectList()
+    {
         return array_map("DT_SimpleFormatTest::createObject", $this->testFormats);
     }
     
-    public static function createObject($arg) {
+    public static function createObject($arg)
+    {
         if (is_array($arg)) {
             return array_map("DT_SimpleFormatTest::createObject", $arg);
-        }
-        else {
+        } else {
             return new DT_SimpleFormat($arg);
         }
     }
     
-    private function getParseDataList() {
+    private function getParseDataList()
+    {
         static $parseDataList = array(
             array(
                 array("20120521073009",                 "2012052112345"),
@@ -52,10 +57,11 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
                 array("8時6分4秒",  "8じ6分4秒"),
             ),
         );
-        return array_map("DT_SimpleFormatTest::createTestDataList", $parseDataList,  $this->testFormats);
+        return array_map("DT_SimpleFormatTest::createTestDataList", $parseDataList, $this->testFormats);
     }
     
-    public static function createTestDataList($dataList, $formats) {
+    public static function createTestDataList($dataList, $formats)
+    {
         return array_map("DT_SimpleFormatTest::createTestData", $dataList, $formats);
     }
     
@@ -67,7 +73,8 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
      *     3 => 失敗するパース文字列
      * )
      */
-    public static function createTestData($testData, $format) {
+    public static function createTestData($testData, $format)
+    {
         return array_merge(array(new DT_SimpleFormat($format), $format), $testData);
     }
     
@@ -75,11 +82,12 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
     
-    public function testGetFormat() {
+    public function testGetFormat()
+    {
         $arg = "\\Y=Y \\n=n \\j=j \\H=H \\i=i \\s=s";
         $f = new DT_SimpleFormat($arg);
         $this->assertSame($arg, $f->getFormat());
@@ -88,51 +96,52 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
     /**
      * @todo Implement testParseDate().
      */
-    public function testParseDate() {
+    public function testParseDate()
+    {
         $testData = $this->getParseDataList();
         $expected = array(
             new DT_Date(2012, 5, 21),
             new DT_Date(2012, 3, 7),
             DT_Date::now()
         );
-        for ($i = 0; $i < 3; $i ++) {
+        for ($i = 0; $i < 3; $i++) {
             foreach ($testData[$i] as $formats) {
                 $this->assertEquals($expected[$i], $formats[0]->parseDate($formats[2]));
                 try {
                     $formats[0]->parseDate($formats[3]);
                     $this->fail();
-                }
-                catch (Exception $e) {}
+                } catch (Exception $e) {}
             }
         }
     }
-
+    
     /**
      * @todo Implement testParseDatetime().
      */
-    public function testParseDatetime() {
+    public function testParseDatetime()
+    {
         $testData = $this->getParseDataList();
         $expected = array(
             new DT_Datetime(2012, 5, 21, 7, 30),
             new DT_Datetime(2012, 3, 7,  0,  0),
             DT_Datetime::now()->setAll(array("hour" => 8, "minute" => 6)),
         );
-        for ($i = 0; $i < 3; $i ++) {
+        for ($i = 0; $i < 3; $i++) {
             foreach ($testData[$i] as $formats) {
                 $this->assertEquals($expected[$i], $formats[0]->parseDatetime($formats[2]));
                 try {
                     $formats[0]->parseDatetime($formats[3]);
                     $this->fail();
-                }
-                catch (Exception $e) {}
+                } catch (Exception $e) {}
             }
         }
     }
-
+    
     /**
      * @todo Implement testParseTimestamp().
      */
-    public function testParseTimestamp() {
+    public function testParseTimestamp()
+    {
         $testData = $this->getParseDataList();
         $expected = array(
             new DT_Timestamp(2012, 5, 21, 7, 30, 9),
@@ -145,16 +154,16 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
                 try {
                     $formats[0]->parseTimestamp($formats[3]);
                     $this->fail();
-                }
-                catch (Exception $e) {}
+                } catch (Exception $e) {}
             }
         }
     }
-
+    
     /**
      * @todo Implement testFormatDate().
      */
-    public function testFormatDate() {
+    public function testFormatDate()
+    {
         $d    = new DT_Date(2012, 5, 21);
         $obj  = $this->getObjectList();
         $test = array(
@@ -168,11 +177,12 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
             }
         }
     }
-
+    
     /**
      * @todo Implement testFormatDatetime().
      */
-    public function testFormatDatetime() {
+    public function testFormatDatetime()
+    {
         $d    = new DT_Datetime(2012, 5, 21, 7, 30);
         $obj  = $this->getObjectList();
         $test = array(
@@ -190,7 +200,8 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
     /**
      * @todo Implement testFormatTimestamp().
      */
-    public function testFormatTimestamp() {
+    public function testFormatTimestamp()
+    {
         $d    = new DT_Timestamp(2012, 5, 21, 7, 30, 9);
         $obj  = $this->getObjectList();
         $test = array(
@@ -204,7 +215,5 @@ class DT_SimpleFormatTest extends PHPUnit_Framework_TestCase {
             }
         }
     }
-
 }
-
 ?>

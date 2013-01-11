@@ -13,7 +13,8 @@ require_once dirname(__FILE__) . '/../../src/DT/load.php';
  * 
  * となることを確認します.
  */
-class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
+class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var DT_ShiftFormat
      */
@@ -23,7 +24,8 @@ class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->defaultTZ = date_default_timezone_get();
         date_default_timezone_set("Asia/Tokyo");
         $f = new DT_SimpleFormat("Y.m.d H:i:s");
@@ -34,14 +36,16 @@ class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
         date_default_timezone_set($this->defaultTZ);
     }
     
     /**
      * 第二引数を省略した場合に, システム時刻の時差が設定されることを確認します.
      */
-    public function test__construct() {
+    public function test__construct()
+    {
         $f        = DT_W3cDatetimeFormat::getInstance();
         $test     = new DT_ShiftFormat($f, 300);
         $expected = new DT_ShiftFormat($f, 300, -540);
@@ -51,15 +55,17 @@ class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
     /**
      * parseDate のテストです. オリジナルと同じ結果になることを確認します.
      */
-    public function testParseDate() {
-       $this->assertEquals(new DT_Date(2012, 5, 20), $this->object->parseDate("2012.05.20 17:30:45")); 
+    public function testParseDate()
+    {
+        $this->assertEquals(new DT_Date(2012, 5, 20), $this->object->parseDate("2012.05.20 17:30:45"));
     }
     
     /**
      * parseDatetime のテストです.
      * 表示時刻の 14 時間後の時間オブジェクトが生成されることを確認します.
      */
-    public function testParseDatetime() {
+    public function testParseDatetime()
+    {
         $this->assertEquals(new DT_Datetime(2012, 5, 21, 7, 30), $this->object->parseDatetime("2012.05.20 17:30:45"));
     }
 
@@ -67,7 +73,8 @@ class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
      * parseTimestamp のテストです. 
      * 表示時刻の 14 時間後の時間オブジェクトが生成されることを確認します.
      */
-    public function testParseTimestamp() {
+    public function testParseTimestamp()
+    {
         $this->assertEquals(new DT_Timestamp(2012, 5, 21, 7, 30, 45), $this->object->parseTimestamp("2012.05.20 17:30:45"));
     }
     
@@ -75,22 +82,26 @@ class DT_ShiftFormatTest extends PHPUnit_Framework_TestCase {
      * formatDate のテストです.
      * オリジナルと同じ結果を返すことを確認します.
      */
-    public function testFormatDate() {
+    public function testFormatDate()
+    {
         $this->assertSame("2012.05.21 00:00:00", $this->object->formatDate(new DT_Date(2012, 5, 21)));
     }
+    
     /**
      * formatDatetime のテストです.
      * 表示時刻の 14 時間前のフォーマットが出力されることを確認します.
      */
-    public function testFormatDatetime() {
+    public function testFormatDatetime()
+    {
         $this->assertSame("2012.05.20 17:30:00", $this->object->formatDatetime(new DT_Datetime(2012, 5, 21, 7, 30)));
     }
-
+    
     /**
      * formatTimestamp のテストです.
      * 表示時刻の 14 時間前のフォーマットが出力されることを確認します.
      */
-    public function testFormatTimestamp() {
+    public function testFormatTimestamp()
+    {
         $this->assertSame("2012.05.20 17:30:45", $this->object->formatTimestamp(new DT_Timestamp(2012, 5, 21, 7, 30, 45)));
     }
 }
