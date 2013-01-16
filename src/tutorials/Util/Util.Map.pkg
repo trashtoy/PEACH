@@ -159,8 +159,8 @@ $k1 = new TestKey(1, "John Smith");
 $k2 = new TestKey(2, "Emily Smith");
 $k3 = new TestKey(2, "Emily Johns");
 
-$map1 = new Util_HashMap(NULL, $e1);
-$map2 = new Util_HashMap(NULL, $e2);
+$map1 = new Util_HashMap(null, $e1);
+$map2 = new Util_HashMap(null, $e2);
 
 $map1->put($k1, "foo");
 $map1->put($k2, "bar");

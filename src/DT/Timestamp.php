@@ -64,7 +64,7 @@ class DT_Timestamp extends DT_Datetime
      * @param  DT_Format    変換に使用するフォーマット
      * @return DT_Timestamp 変換結果
      */
-    public static function parse($text, DT_Format $format = NULL)
+    public static function parse($text, DT_Format $format = null)
     {
         if (!isset($format)) {
             $format = DT_W3cDatetimeFormat::getInstance();

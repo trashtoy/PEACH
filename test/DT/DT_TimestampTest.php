@@ -139,7 +139,7 @@ class DT_TimestampTest extends DT_AbstractTimeTest
         $time        = new DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $valid       = array();
         $valid[15]   = array("s", "S", "Sec", "sec", "smile"); // any string which starts with "s" is OK.
-        $invalid = array(NULL, 1, "bar");
+        $invalid = array(null, 1, "bar");
         foreach ($valid as $expected => $v) {
             foreach ($v as $key) {
                 $this->assertEquals($time->get($key), $expected);

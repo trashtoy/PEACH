@@ -59,7 +59,7 @@ interface Util_Map
      * @return mixed               指定したキーに関連づけられた値. 
      *                             存在しない場合は引数のデフォルト値.
      */
-    public function get($key, $defaultValue = NULL);
+    public function get($key, $defaultValue = null);
 
     /**
      * 指定されたキーと値を関連づけます.

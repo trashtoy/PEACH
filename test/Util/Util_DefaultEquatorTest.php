@@ -41,7 +41,7 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($e->equate(-10, -10.0));
         $this->assertTrue($e->equate("15", 15));
         $this->assertFalse($e->equate("2a", 2));
-        $this->assertFalse($e->equate(TRUE, 1));
+        $this->assertFalse($e->equate(true, 1));
         $this->assertFalse($e->equate($obj1, $obj2));
         $this->assertTrue($e->equate($obj1,  $obj3));
         $this->assertFalse($e->equate($arr1, $arr2));
@@ -51,8 +51,8 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
     public function testHashCode()
     {
         $e = $this->e;
-        $this->assertSame(0,  $e->hashCode(NULL));
-        $this->assertSame(0,  $e->hashCode(FALSE));
+        $this->assertSame(0,  $e->hashCode(null));
+        $this->assertSame(0,  $e->hashCode(false));
         $this->assertSame(0,  $e->hashCode(array()));
         $this->assertSame(10, $e->hashCode(10));
         $this->assertSame(20, $e->hashCode("0020"));

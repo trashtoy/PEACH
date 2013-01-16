@@ -30,7 +30,7 @@ if (!function_exists("loadUtil")) {
     {
         $base = dirname(__FILE__);
         $dir = dir($base);
-        while (FALSE !== ($entry = $dir->read())) {
+        while (false !== ($entry = $dir->read())) {
             switch ($entry) {
                 case ".":
                 case "..":

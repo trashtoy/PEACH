@@ -47,7 +47,7 @@ class Util_DefaultComparatorTest extends PHPUnit_Framework_TestCase
         $c1 = Util_DefaultComparator::getInstance();
         $c2 = Util_DefaultComparator::getInstance();
         $this->assertSame("Util_DefaultComparator", get_class($c1));
-        $this->assertSame(TRUE, $c1 === $c2);
+        $this->assertSame(true, $c1 === $c2);
     }
 }
 

@@ -43,7 +43,7 @@ class Util_HashMapEntry extends Util_AbstractMapEntry
      * 
      * @param  mixed $key 比較対象のキー
      * @param  Util_Equator $e 比較に使用する Equator
-     * @return bool  このエントリーのキーと引数が等しい場合に TRUE
+     * @return bool  このエントリーのキーと引数が等しい場合に true
      */
     public function keyEquals($key, Util_Equator $e)
     {

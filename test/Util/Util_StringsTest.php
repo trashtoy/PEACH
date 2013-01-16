@@ -36,13 +36,13 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase
     
     public function testIsWhiteSpace()
     {
-        $this->assertSame(TRUE,  Util_Strings::isWhiteSpace(""));
-        $this->assertSame(TRUE,  Util_Strings::isWhiteSpace(NULL));
-        $this->assertSame(TRUE,  Util_Strings::isWhiteSpace(FALSE));
-        $this->assertSame(FALSE, Util_Strings::isWhiteSpace(TRUE));
-        $this->assertSame(FALSE, Util_Strings::isWhiteSpace(0));
-        $this->assertSame(TRUE,  Util_Strings::isWhiteSpace("    \t\r\n    "));
-        $this->assertSame(FALSE, Util_Strings::isWhiteSpace("  asdf "));
+        $this->assertSame(true,  Util_Strings::isWhiteSpace(""));
+        $this->assertSame(true,  Util_Strings::isWhiteSpace(null));
+        $this->assertSame(true,  Util_Strings::isWhiteSpace(false));
+        $this->assertSame(false, Util_Strings::isWhiteSpace(true));
+        $this->assertSame(false, Util_Strings::isWhiteSpace(0));
+        $this->assertSame(true,  Util_Strings::isWhiteSpace("    \t\r\n    "));
+        $this->assertSame(false, Util_Strings::isWhiteSpace("  asdf "));
     }
     
     public function testBasedir()
@@ -59,42 +59,42 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase
     {
         $this->assertSame(3,     Util_Strings::getRawIndex("abc=def", "="));
         $this->assertSame(7,     Util_Strings::getRawIndex("a\\=b\\=c=d", "="));
-        $this->assertSame(FALSE, Util_Strings::getRawIndex("", "="));
-        $this->assertSame(FALSE, Util_Strings::getRawIndex("a\\=b", "="));
+        $this->assertSame(false, Util_Strings::getRawIndex("", "="));
+        $this->assertSame(false, Util_Strings::getRawIndex("a\\=b", "="));
         $this->assertSame(1,     Util_Strings::getRawIndex("a=\\=b", "="));
     }
     
     public function testStartsWith()
     {
-        $this->assertSame(TRUE,  Util_Strings::startsWith("The quick brown fox", "The"));
-        $this->assertSame(FALSE, Util_Strings::startsWith("Hogehoge", "hoge"));
-        $this->assertSame(TRUE,  Util_Strings::startsWith("something", ""));
+        $this->assertSame(true,  Util_Strings::startsWith("The quick brown fox", "The"));
+        $this->assertSame(false, Util_Strings::startsWith("Hogehoge", "hoge"));
+        $this->assertSame(true,  Util_Strings::startsWith("something", ""));
         $prefix  = new Util_StringsTest_Object("TEST");
         $subject = new Util_StringsTest_Object("TEST object");
         $other   = new Util_StringsTest_Object("fuga");
-        $this->assertSame(TRUE,  Util_Strings::startsWith($subject, $prefix));
-        $this->assertSame(FALSE, Util_Strings::startsWith($subject, $other));
+        $this->assertSame(true,  Util_Strings::startsWith($subject, $prefix));
+        $this->assertSame(false, Util_Strings::startsWith($subject, $other));
     }
     
     public function testEndsWith()
     {
-        $this->assertSame(TRUE,  Util_Strings::endsWith("The quick brown fox", "fox"));
-        $this->assertSame(FALSE, Util_Strings::endsWith("Hogehoge", "Hoge"));
-        $this->assertSame(TRUE,  Util_Strings::endsWith("something", ""));
+        $this->assertSame(true,  Util_Strings::endsWith("The quick brown fox", "fox"));
+        $this->assertSame(false, Util_Strings::endsWith("Hogehoge", "Hoge"));
+        $this->assertSame(true,  Util_Strings::endsWith("something", ""));
         $suffix  = new Util_StringsTest_Object("TEST");
         $subject = new Util_StringsTest_Object("objectTEST");
         $other   = new Util_StringsTest_Object("fuga");
-        $this->assertSame(TRUE,  Util_Strings::endsWith($subject, $suffix));
-        $this->assertSame(FALSE, Util_Strings::endsWith($subject, $other));
+        $this->assertSame(true,  Util_Strings::endsWith($subject, $suffix));
+        $this->assertSame(false, Util_Strings::endsWith($subject, $other));
     }
     
     public function testEndsWithRawChar()
     {
-        $this->assertSame(TRUE,  Util_Strings::endsWithRawChar("ABCDE",       "DE"));
-        $this->assertSame(TRUE,  Util_Strings::endsWithRawChar("AB\\CDE",     "DE"));
-        $this->assertSame(FALSE, Util_Strings::endsWithRawChar("ABC\\DE",     "DE"));
-        $this->assertSame(TRUE,  Util_Strings::endsWithRawChar("ABC\\\\DE",   "DE"));
-        $this->assertSame(FALSE, Util_Strings::endsWithRawChar("ABC\\\\\\DE", "DE"));
+        $this->assertSame(true,  Util_Strings::endsWithRawChar("ABCDE",       "DE"));
+        $this->assertSame(true,  Util_Strings::endsWithRawChar("AB\\CDE",     "DE"));
+        $this->assertSame(false, Util_Strings::endsWithRawChar("ABC\\DE",     "DE"));
+        $this->assertSame(true,  Util_Strings::endsWithRawChar("ABC\\\\DE",   "DE"));
+        $this->assertSame(false, Util_Strings::endsWithRawChar("ABC\\\\\\DE", "DE"));
     }
     
     public function testTemplate()

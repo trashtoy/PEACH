@@ -23,8 +23,8 @@
         <para>PHP で配列を連想配列として利用する際, 以下のようなコーディングをする必要がありました.</para>
         <programlisting role="php">
             <![CDATA[
-$foo = isset($arr["foo"]) ? $arr["foo"] : NULL;
-$bar = isset($arr["bar"]) ? $arr["bar"] : NULL;
+$foo = isset($arr["foo"]) ? $arr["foo"] : null;
+$bar = isset($arr["bar"]) ? $arr["bar"] : null;
             ]]>
         </programlisting>
         <para>あるいは, コーディング規約で三項演算子が禁止されているようなプロジェクトでは</para>
@@ -33,13 +33,13 @@ $bar = isset($arr["bar"]) ? $arr["bar"] : NULL;
 if (isset($arr["foo"])) {
     $foo = $arr["foo"];
 } else {
-    $foo = NULL;
+    $foo = null;
 }
 
 if (isset($arr["bar"])) {
     $bar = $arr["bar"];
 } else {
-    $bar = NULL;
+    $bar = null;
 }
             ]]>
         </programlisting>

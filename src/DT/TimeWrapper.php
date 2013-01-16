@@ -157,7 +157,7 @@ class DT_TimeWrapper implements DT_Time
      * @param  DT_Format $format
      * @return string
      */
-    public function format(DT_Format $format = NULL)
+    public function format(DT_Format $format = null)
     {
         return $this->original->format($format);
     }
@@ -180,7 +180,7 @@ class DT_TimeWrapper implements DT_Time
      */
     public function equals($obj)
     {
-        if (get_class($this) != get_class($obj)) return FALSE;
+        if (get_class($this) != get_class($obj)) return false;
         return $this->compareTo($obj) === 0;
     }
 

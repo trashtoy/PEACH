@@ -172,7 +172,7 @@ interface DT_Time extends Util_Comparable
      * @return string            このオブジェクトの書式化.
      *                           引数を指定しない場合は "YYYY-MM-DD" あるいは "YYYY-MM-DD hh:mm:ss" などの文字列
      */
-    public function format(DT_Format $format = NULL);
+    public function format(DT_Format $format = null);
 
     /**
      * 指定されたオブジェクトとこのオブジェクトを比較します.

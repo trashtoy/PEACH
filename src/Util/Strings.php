@@ -132,7 +132,7 @@ class Util_Strings
         if (count($result)) {
             return strlen($text) - strlen($result[1]);
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -152,7 +152,7 @@ class Util_Strings
         } else if (!is_string($prefix)) {
             return self::startsWith($text, Util_Values::stringValue($prefix));
         } else if ($prefix === "") {
-            return TRUE;
+            return true;
         } else {
             return (strpos($text, $prefix) === 0);
         }
@@ -174,7 +174,7 @@ class Util_Strings
         } else if (!is_string($suffix)) {
             return self::endsWith($text, Util_Values::stringValue($suffix));
         } else if ($suffix === "") {
-            return TRUE;
+            return true;
         } else {
             $index = strlen($text) - strlen($suffix);
             return substr($text, $index) === $suffix;
@@ -216,7 +216,7 @@ class Util_Strings
     public static function template($template, array $args = array())
     {
         if (!isset($template)) {
-            return NULL;
+            return null;
         }
         $template = Util_Values::stringValue($template);
         $replaces = array();

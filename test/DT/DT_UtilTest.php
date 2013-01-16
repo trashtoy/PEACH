@@ -112,7 +112,7 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase
         $d = $this->getTestArray();
         $this->assertSame($d[0], DT_Util::oldest($d));
         $this->assertSame($d[1], DT_Util::oldest($d[4], $d[1], $d[3], $d[5], $d[8]));
-        $this->assertSame($d[2], DT_Util::oldest($d[5], NULL, $d[2], 128, $d[3]));
+        $this->assertSame($d[2], DT_Util::oldest($d[5], null, $d[2], 128, $d[3]));
     }
     
     /**
@@ -127,7 +127,7 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase
         $d = $this->getTestArray();
         $this->assertSame($d[8], DT_Util::latest($d));
         $this->assertSame($d[6], DT_Util::latest($d[4], $d[2], $d[6], $d[0], $d[5]));
-        $this->assertSame($d[7], DT_Util::latest($d[1], 256, $d[7], FALSE, $d[3]));
+        $this->assertSame($d[7], DT_Util::latest($d[1], 256, $d[7], false, $d[3]));
     }
     
     /**
@@ -169,7 +169,7 @@ class DT_UtilTest extends PHPUnit_Framework_TestCase
     public function testCleanTimeZoneOffset()
     {
         $expected = array(300, -540, 1425, -1425, 0);
-        $test     = array(300, NULL, 1500, -1800, "asdf");
+        $test     = array(300, null, 1500, -1800, "asdf");
         for ($i = 0; $i < 5; $i ++) {
             $this->assertSame($expected[$i], DT_Util::cleanTimeZoneOffset($test[$i]));
         }

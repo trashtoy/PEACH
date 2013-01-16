@@ -137,7 +137,7 @@ class DT_DateTest extends DT_AbstractTimeTest
         $valid[2012] = array('y', 'Y', 'year', 'YEAR', 'young', 'Yacht'); // any string which starts with "Y" or "y" is OK.
         $valid[5]    = array('MO', 'mo', 'Month', 'month', 'monkey');     // any string which starts with "mo" is OK.
         $valid[21]   = array('d', 'D', 'DATE', 'dog');                    // any string which starts with "d" is OK.
-        $invalid = array("m", "hour", "min", "sec", NULL, "foo");
+        $invalid = array("m", "hour", "min", "sec", null, "foo");
         foreach ($valid as $expected => $v) {
             foreach ($v as $key) {
                 $this->assertEquals($time->get($key), $expected);

@@ -81,7 +81,7 @@ class DT_ShiftFormat extends DT_FormatWrapper
      * @param type $externalOffset フォーマットの時差 (単位は分)
      * @param type $internalOffset システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
-    public function __construct(DT_Format $original, $externalOffset, $internalOffset = NULL)
+    public function __construct(DT_Format $original, $externalOffset, $internalOffset = null)
     {
         parent::__construct($original);
         $this->externalOffset = DT_Util::cleanTimeZoneOffset($externalOffset);

@@ -94,7 +94,7 @@ class DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($e2->equate($d1, $d3));
         $this->assertFalse($e2->equate($d1, $d5));
         
-        // 0 と NULL を区別するため FALSE を返す
+        // 0 と null を区別するため FALSE を返す
         $this->assertFalse($e2->equate($d4, $d5));
     }
     

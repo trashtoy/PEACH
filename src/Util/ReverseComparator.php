@@ -43,7 +43,7 @@ class Util_ReverseComparator implements Util_Comparator
      * 
      * @param Util_Comparator $comparator ソート条件
      */
-    public function __construct(Util_Comparator $comparator = NULL)
+    public function __construct(Util_Comparator $comparator = null)
     {
         $this->comparator = $comparator;
     }

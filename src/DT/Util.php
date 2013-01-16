@@ -107,10 +107,10 @@ class DT_Util
         $d    = new DT_Timestamp($year, $month, $date, $hour, $minute, $second);
         foreach ($test as $key => $value) {
             if (!is_numeric($value) || $d->get($key) !== intval($value)) {
-                return FALSE;
+                return false;
             }
         }
-        return TRUE;
+        return true;
     }
 
     /**

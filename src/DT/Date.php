@@ -75,7 +75,7 @@ class DT_Date extends DT_AbstractTime
      * @param  DT_Format 変換に使用するフォーマット
      * @return DT_Date   変換結果の DT_Date オブジェクト
      */
-    public static function parse($text, DT_Format $format = NULL)
+    public static function parse($text, DT_Format $format = null)
     {
         if (!isset($format)) {
             $format = DT_W3cDatetimeFormat::getInstance();
@@ -359,8 +359,8 @@ class DT_Date extends DT_AbstractTime
      */
     private static function checkLeapYear($year)
     {
-        if($year % 4 != 0)   return FALSE;
-        if($year % 100 != 0) return TRUE;
+        if($year % 4 != 0)   return false;
+        if($year % 100 != 0) return true;
         return ($year % 400 == 0);
     }
 

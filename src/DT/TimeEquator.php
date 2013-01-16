@@ -75,7 +75,7 @@ class DT_TimeEquator implements Util_Equator
      * 
      * @param mixed $fields 比較対象のフィールド一覧
      */
-    public function __construct($fields = NULL)
+    public function __construct($fields = null)
     {
         $this->fields = $this->initFields($fields);
     }
@@ -98,11 +98,11 @@ class DT_TimeEquator implements Util_Equator
         }
 
         if (is_array($fields)) {
-            return count($fields) ? $fields : NULL;
+            return count($fields) ? $fields : null;
         } else if (is_string($fields)) {
             return array($fields);
         } else {
-            return NULL;
+            return null;
         }
     }
 
@@ -113,7 +113,7 @@ class DT_TimeEquator implements Util_Equator
      */
     public static function getDefault()
     {
-        static $instance = NULL;
+        static $instance = null;
         if (!isset($instance)) {
             $instance = new self();
         }
@@ -142,10 +142,10 @@ class DT_TimeEquator implements Util_Equator
         if (isset($fields)) {
             foreach ($fields as $field) {
                 if ($var1->get($field) !== $var2->get($field)) {
-                    return FALSE;
+                    return false;
                 }
             }
-            return TRUE;
+            return true;
         } else {
             return $var1->equals($var2);
         }

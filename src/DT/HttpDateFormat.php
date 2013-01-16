@@ -61,7 +61,7 @@ class DT_HttpDateFormat implements DT_Format
      * 
      * @param int $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
-    public function __construct($offset = NULL)
+    public function __construct($offset = null)
     {
         $this->internalOffset = DT_Util::cleanTimeZoneOffset($offset);
     }
@@ -77,9 +77,9 @@ class DT_HttpDateFormat implements DT_Format
      * @param  bool $clearCache  キャッシュを破棄してインスタンスを再生成する場合は TRUE
      * @return DT_HttpDateFormat デフォルトのインスタンス
      */
-    public static function getInstance($clearCache = FALSE)
+    public static function getInstance($clearCache = false)
     {
-        static $instance = NULL;
+        static $instance = null;
         if (!isset($instance) || $clearCache) {
             $instance = new self();
         }

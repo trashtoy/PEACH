@@ -40,12 +40,12 @@ class Util_Arrays
      * @param  bool            $isMax
      * @return mixed
      */
-    private static function getTop(array $arr, Util_Comparator $c = NULL, $isMax = FALSE)
+    private static function getTop(array $arr, Util_Comparator $c = null, $isMax = false)
     {
         if (!isset($c)) {
             $c = Util_DefaultComparator::getInstance();
         }
-        $candidate = NULL;
+        $candidate = null;
         foreach ($arr as $current) {
             if (!isset($candidate)) {
                 $candidate = $current;
@@ -83,9 +83,9 @@ class Util_Arrays
      * @param  Util_Comparator $c
      * @return mixed           引数 $arr の中で最も大きな値. 配列が空の場合は NULL
      */
-    public static function max(array $arr, Util_Comparator $c = NULL)
+    public static function max(array $arr, Util_Comparator $c = null)
     {
-        return self::getTop($arr, $c, TRUE);
+        return self::getTop($arr, $c, true);
     }
 
     /**
@@ -112,9 +112,9 @@ class Util_Arrays
      * @param  Util_Comparator
      * @return mixed $arr の中で最も大きな値. 配列が空の場合は NULL
      */
-    public static function min(array $arr, Util_Comparator $c = NULL)
+    public static function min(array $arr, Util_Comparator $c = null)
     {
-        return self::getTop($arr, $c, FALSE);
+        return self::getTop($arr, $c, false);
     }
 
     /**
@@ -143,7 +143,7 @@ class Util_Arrays
      * @param  bool   $keyFlag 関連付けを維持する場合は TRUE (デフォルトは FALSE)
      * @return array
      */
-    public static function pickup(array $arr, $type, $keyFlag = FALSE)
+    public static function pickup(array $arr, $type, $keyFlag = false)
     {
         $result = array();
         foreach ($arr as $key => $value) {
@@ -200,7 +200,7 @@ class Util_Arrays
      * @param  Util_Comparator $c   コンパレータ
      * @return array
      */
-    public static function sort(array $arr, Util_Comparator $c = NULL)
+    public static function sort(array $arr, Util_Comparator $c = null)
     {
         if (count($arr) < 2) {
             return $arr;
@@ -231,7 +231,7 @@ class Util_Arrays
      * @param  Util_Comparator $c   コンパレータ
      * @return array                ソート後の配列
      */
-    public static function asort(array $arr, Util_Comparator $c = NULL)
+    public static function asort(array $arr, Util_Comparator $c = null)
     {
         if (count($arr) < 2) {
             return $arr;
@@ -243,7 +243,7 @@ class Util_Arrays
         list($firstKey, $firstValue) = each($arr);
         $upper = array();
         $lower = array();
-        while (FALSE !== (list($key, $value) = each($arr))) {
+        while (false !== (list($key, $value) = each($arr))) {
             $compValue = $c->compare($firstValue, $value);
             if (0 < $compValue) {
                 $lower[$key] = $value;
@@ -323,7 +323,7 @@ class Util_Arrays
      * @param  Util_Comparator $c   コンパレータ
      * @return array 
      */
-    public static function unique(array $arr, Util_Comparator $c = NULL)
+    public static function unique(array $arr, Util_Comparator $c = null)
     {
         if (!isset($c)) {
             $c = Util_DefaultComparator::getInstance();

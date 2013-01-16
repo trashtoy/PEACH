@@ -47,7 +47,7 @@ class DT_UnixTimeFormat implements DT_Format
      */
     public static function getInstance()
     {
-        static $instance = NULL;
+        static $instance = null;
         if (!isset($instance)) {
             $instance = new self();
         }

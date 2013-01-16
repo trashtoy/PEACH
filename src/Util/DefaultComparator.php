@@ -121,9 +121,9 @@ class Util_DefaultComparator implements Util_Comparator
      */
     private static function compareTypes($var1, $var2)
     {
-        if ($var1 === NULL) {
+        if ($var1 === null) {
             return -1;
-        } else if ($var2 === NULL) {
+        } else if ($var2 === null) {
             return 1;
         } else if (is_bool($var1)) {
             return -1;

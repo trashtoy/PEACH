@@ -42,7 +42,7 @@ class Util_ArrayMap implements Util_Map
      * 新しいインスタンスを構築します.
      * @param Util_Map|array $var 指定された配列またはマッピングでこのマップを初期化します.
      */
-    public function __construct($var = NULL)
+    public function __construct($var = null)
     {
         if ($var instanceof Util_ArrayMap) {
             $this->data = $var->data;
@@ -71,7 +71,7 @@ class Util_ArrayMap implements Util_Map
      * @param  mixed  $defaultValue デフォルト値
      * @return mixed  指定したキーに関連づけられた値. 存在しない場合は $defaultValue を返す
      */
-    public function get($name, $defaultValue = NULL)
+    public function get($name, $defaultValue = null)
     {
         return (isset($this->data[$name])) ? $this->data[$name] : $defaultValue;
     }

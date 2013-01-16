@@ -13,7 +13,7 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase
         $map = new Util_HashMap();
         $map->put(new Util_HashMapTest_TestObject(10),   'foo');
         $map->put(new Util_HashMapTest_TestObject(20),   'bar');
-        $map->put(new Util_HashMapTest_TestObject(NULL), 'hoge');
+        $map->put(new Util_HashMapTest_TestObject(null), 'hoge');
         $this->object = $map;
     }
     
@@ -42,7 +42,7 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase
         $this->assertSame("asdf", $map->get($o1));
         $this->assertSame("asdf", $map->get($o2));
         $this->assertSame("hoge", $map->get($o3));
-        $this->assertSame(NULL,   $map->get($o4));
+        $this->assertSame(null,   $map->get($o4));
     }
     
     public function testPutAll()
@@ -57,7 +57,7 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase
     public function testGet()
     {
         $this->assertSame("foo", $this->object->get(new Util_HashMapTest_TestObject("10")));
-        $this->assertSame(NULL,  $this->object->get(new Util_HashMapTest_TestObject(1000)));
+        $this->assertSame(null,  $this->object->get(new Util_HashMapTest_TestObject(1000)));
     }
     
     public function testClear()
@@ -85,9 +85,9 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase
     public function testContainsKey()
     {
         $test = new Util_HashMapTest_TestObject(5);
-        $this->assertSame(FALSE, $this->object->containsKey($test));
+        $this->assertSame(false, $this->object->containsKey($test));
         $test = new Util_HashMapTest_TestObject(10);
-        $this->assertSame(TRUE,  $this->object->containsKey($test));
+        $this->assertSame(true,  $this->object->containsKey($test));
     }
     
     public function testRemove()

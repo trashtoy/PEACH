@@ -51,7 +51,7 @@ class Util_Values
      * @param  int   $max   最大値 (省略可). 変換後の値がこの値よりも大きい場合は, この値を返す.
      * @return int          引数を整数に変換した値
      */
-    public static function intValue($value, $min = NULL, $max = NULL)
+    public static function intValue($value, $min = null, $max = null)
     {
         if (!is_int($value)) {
             $iValue = @intval($value);
@@ -110,7 +110,7 @@ class Util_Values
      * @param  bool  $wrap  配列以外の値の場合に, 長さ 1 の配列に変換する場合は TRUE
      * @return array        変換後の配列
      */
-    public static function arrayValue($value, $wrap = FALSE)
+    public static function arrayValue($value, $wrap = false)
     {
         if (is_array($value)) {
             return $value;
@@ -143,7 +143,7 @@ class Util_Values
      * @param  bool  $defaultValue デフォルトの返り値
      * @return bool                bool 値
      */
-    public static function boolValue($value, $defaultValue = NULL)
+    public static function boolValue($value, $defaultValue = null)
     {
         if (is_bool($value)) {
             return $value;
@@ -160,7 +160,7 @@ class Util_Values
      * 文字列を bool 型にキャストします.
      * 
      */
-    private static function stringToBool($value, $defaultValue = NULL)
+    private static function stringToBool($value, $defaultValue = null)
     {
         static $tPrefix, $fPrefix;
         if (!isset($tPrefix)) {
@@ -170,9 +170,9 @@ class Util_Values
 
         $prefix = strtolower(substr($value, 0, 1));
         if (in_array($prefix, $tPrefix)) {
-            return TRUE;
+            return true;
         } else if (in_array($prefix, $fPrefix)) {
-            return FALSE;
+            return false;
         } else {
             return self::handleBoolValue($value, $defaultValue);
         }
@@ -184,7 +184,7 @@ class Util_Values
      * @param bool $value
      * @param bool $defaultValue
      */
-    private static function handleBoolValue($value, $defaultValue = NULL)
+    private static function handleBoolValue($value, $defaultValue = null)
     {
         return (isset($defaultValue) ? (bool) $defaultValue : (bool) $value);
     }

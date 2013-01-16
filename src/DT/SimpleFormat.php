@@ -180,7 +180,7 @@ class DT_SimpleFormat implements DT_Format
 
     private function getPatternList()
     {
-        static $patterns = NULL;
+        static $patterns = null;
         if (!isset($patterns)) {
             $fixed4   = "\\d{4}";
             $fixed2   = "\\d{2}";
@@ -270,15 +270,15 @@ class DT_SimpleFormat implements DT_Format
         $patternList = $this->getPatternList();
         $result      = array();
         $current     = "";
-        $escaped     = FALSE;
+        $escaped     = false;
         for ($i = 0, $length = strlen($format); $i < $length; $i ++) {
             $chr = substr($format, $i, 1);
             if ($escaped) {
                 $current .= $chr;
-                $escaped = FALSE;
+                $escaped = false;
             } else if ($chr === "\\") {
                 $current .= $chr;
-                $escaped = TRUE;
+                $escaped = true;
             } else if (array_key_exists($chr, $patternList)) {
                 if (strlen($current)) {
                     $result[] = $current;
@@ -310,7 +310,7 @@ class DT_SimpleFormat implements DT_Format
             if (array_key_exists($part, $patternList)) {
                 $reg  = $patternList[$part];
                 $test = preg_match("/^{$reg}/", $input, $matched);
-                if ($test === FALSE) {
+                if ($test === false) {
                     $this->throwFormatException($input, $this->format);
                 }
 

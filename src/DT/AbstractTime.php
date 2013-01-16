@@ -168,7 +168,7 @@ abstract class DT_AbstractTime implements DT_Time
             $c = $this->compareFields($obj);
             return ($c !== 0) ? $c : $this->getType() - $obj->getType();
         } else {
-            return NULL;
+            return null;
         }
     }
 
@@ -178,7 +178,7 @@ abstract class DT_AbstractTime implements DT_Time
      * @param  DT_Format $format
      * @return string
      */
-    public final function format(DT_Format $format = NULL)
+    public final function format(DT_Format $format = null)
     {
         return isset($format) ? $this->handleFormat($format) : $this->__toString();
     }
@@ -192,7 +192,7 @@ abstract class DT_AbstractTime implements DT_Time
      */
     public function equals($obj)
     {
-        if (get_class($this) != get_class($obj)) return FALSE;
+        if (get_class($this) != get_class($obj)) return false;
         return $this->compareTo($obj) === 0;
     }
 

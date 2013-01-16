@@ -98,12 +98,12 @@ class Util_HashMap implements Util_Map
      * @param  Util_Equator   $e        オブジェクトの等価性を判断するための Equator (NULL の場合は {@link Util_DefaultEquator} が適用されます)
      * @param  int            $capacity 容量 (デフォルトは 16, 最小で 2)
      */
-    public function __construct(Util_Map $map = NULL, Util_Equator $e = NULL, $capacity = 16)
+    public function __construct(Util_Map $map = null, Util_Equator $e = null, $capacity = 16)
     {
         $this->table    = array();
         $this->equator  = isset($e) ? $e : Util_DefaultEquator::getInstance();
         $this->capacity = self::detectCapacity($capacity);
-        $this->modFlag  = TRUE;
+        $this->modFlag  = true;
         $this->cache    = array();
         if (isset($map)) {
             $this->initTable($map);
@@ -163,12 +163,12 @@ class Util_HashMap implements Util_Map
         foreach ($this->table[$index] as $entry) {
             if ($entry->keyEquals($key, $this->equator)) {
                 $entry->setValue($value);
-                $this->modFlag = TRUE;
+                $this->modFlag = true;
                 return;
             }
         }
         $this->table[$index][] = $this->createEntry($key, $value);
-        $this->modFlag = TRUE;
+        $this->modFlag = true;
     }
 
     /**
@@ -193,18 +193,18 @@ class Util_HashMap implements Util_Map
      * @param  mixed $defaultValue マッピングが存在しない場合に返される代替値
      * @return mixed
      */
-    public function get($key, $defaultValue = NULL)
+    public function get($key, $defaultValue = null)
     {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
-            return NULL;
+            return null;
         }
         foreach ($this->table[$index] as $entry) {
             if ($entry->keyEquals($key, $this->equator)) {
                 return $entry->getValue();
             }
         }
-        return NULL;
+        return null;
     }
 
     /**
@@ -213,7 +213,7 @@ class Util_HashMap implements Util_Map
     public function clear()
     {
         $this->table = array();
-        $this->modFlag = TRUE;
+        $this->modFlag = true;
     }
 
     /**
@@ -257,14 +257,14 @@ class Util_HashMap implements Util_Map
     {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
-            return FALSE;
+            return false;
         }
         foreach ($this->table[$index] as $entry) {
             if ($entry->keyEquals($key, $this->equator)) {
-                return TRUE;
+                return true;
             }
         }
-        return FALSE;
+        return false;
     }
 
     /**
@@ -280,7 +280,7 @@ class Util_HashMap implements Util_Map
         foreach ($this->table[$index] as $i => $entry) {
             if ($entry->keyEquals($key, $this->equator)) {
                 array_splice($this->table[$index], $i, 1);
-                $this->modFlag = TRUE;
+                $this->modFlag = true;
                 return;
             }
         }
@@ -317,7 +317,7 @@ class Util_HashMap implements Util_Map
                     $this->cache[] = $entry;
                 }
             }
-            $this->modFlag = FALSE;
+            $this->modFlag = false;
         }
         return $this->cache;
     }

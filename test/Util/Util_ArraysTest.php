@@ -48,16 +48,16 @@ class Util_ArraysTest extends PHPUnit_Framework_TestCase
         $arr = array(
             "A",
             1,
-            NULL,
+            null,
             array(),
             $obj1,
             "B",
-            TRUE,
+            true,
             $obj2,
             2.5,
             array(1, 3, 5),
-            NULL,
-            FALSE,
+            null,
+            false,
             self::$fp
         );
         
@@ -72,15 +72,15 @@ class Util_ArraysTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expected, Util_Arrays::pickup($arr, "INT"));
         $this->assertSame($expected, Util_Arrays::pickup($arr, "integer"));
         
-        $expected = array(TRUE, FALSE);
+        $expected = array(true, false);
         $this->assertSame($expected, Util_Arrays::pickup($arr, "bool"));
         $this->assertSame($expected, Util_Arrays::pickup($arr, "Boolean"));
         
         $expected = array(self::$fp);
         $this->assertSame($expected, Util_Arrays::pickup($arr, "resource"));
         
-        $expected = array(NULL, NULL);
-        $this->assertSame($expected, Util_Arrays::pickup($arr, "NULL"));
+        $expected = array(null, null);
+        $this->assertSame($expected, Util_Arrays::pickup($arr, "null"));
         
         $expected = array(array(), array(1, 3, 5));
         $this->assertSame($expected, Util_Arrays::pickup($arr, "array"));
@@ -94,9 +94,9 @@ class Util_ArraysTest extends PHPUnit_Framework_TestCase
         
         // 第3引数を TRUE にした場合は添字を維持する
         $expected = array(0 => "A", 1 => "B");
-        $this->assertSame($expected, Util_Arrays::pickup($arr, "string", FALSE));
+        $this->assertSame($expected, Util_Arrays::pickup($arr, "string", false));
         $expected = array(0 => "A", 5 => "B");
-        $this->assertSame($expected, Util_Arrays::pickup($arr, "string", TRUE));
+        $this->assertSame($expected, Util_Arrays::pickup($arr, "string", true));
     }
     
     public function testSort()

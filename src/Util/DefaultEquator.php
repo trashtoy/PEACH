@@ -66,10 +66,10 @@ class Util_DefaultEquator implements Util_Equator
     public function equate($var1, $var2)
     {
         if ($var1 === $var2) {
-            return TRUE;
+            return true;
         } else if (is_object($var1) || is_object($var2) || is_array($var1) || is_array($var2)) {
-            $str1 = print_r($var1, TRUE);
-            $str2 = print_r($var2, TRUE);
+            $str1 = print_r($var1, true);
+            $str2 = print_r($var2, true);
             return $str1 === $str2;
         } else if (is_string($var1) || is_string($var2)) {
             return strcmp($var1, $var2) === 0;
@@ -98,7 +98,7 @@ class Util_DefaultEquator implements Util_Equator
         } else if (is_numeric($var)) {
             return abs(intval($var));
         } else {
-            $str = (is_object($var) || is_array($var)) ? print_r($var, TRUE) : strval($var);
+            $str = (is_object($var) || is_array($var)) ? print_r($var, true) : strval($var);
             return hexdec(substr(md5($str), 22));
         }
     }

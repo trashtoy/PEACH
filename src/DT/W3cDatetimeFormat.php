@@ -126,14 +126,14 @@ class DT_W3cDatetimeFormat implements DT_Format
      * @param int  $externalOffset フォーマットの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      * @param int  $internalOffset システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
-    public function __construct($externalOffset = NULL, $internalOffset = NULL)
+    public function __construct($externalOffset = null, $internalOffset = null)
     {
-        if ($externalOffset === FALSE) {
-            $this->usingTz        = FALSE;
-            $this->externalOffset = NULL;
-            $this->internalOffset = NULL;
+        if ($externalOffset === false) {
+            $this->usingTz        = false;
+            $this->externalOffset = null;
+            $this->internalOffset = null;
         } else {
-            $this->usingTz        = TRUE;
+            $this->usingTz        = true;
             $this->externalOffset = DT_Util::cleanTimeZoneOffset($externalOffset);
             $this->internalOffset = DT_Util::cleanTimeZoneOffset($internalOffset);
         }
@@ -150,7 +150,7 @@ class DT_W3cDatetimeFormat implements DT_Format
     {
         static $instance;
         if (!isset($instance)) {
-            $instance = new self(FALSE);
+            $instance = new self(false);
         }
         return $instance;
     }
@@ -242,7 +242,7 @@ class DT_W3cDatetimeFormat implements DT_Format
      */
     public function formatDatetime(DT_Datetime $d)
     {
-        $a = $this->adjustFromFormat($d, FALSE);
+        $a = $this->adjustFromFormat($d, false);
         return $this->formatDate($a->toDate()) . "T" . $a->formatTime() . $this->formatTimezone();
     }
 

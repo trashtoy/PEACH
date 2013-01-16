@@ -20,9 +20,9 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase
         $this->assertSame(-2, Util_Values::intValue(-2.71));
         $this->assertSame(-1, Util_Values::intValue("-1asdf"));
         $this->assertSame(0,  Util_Values::intValue("hoge"));
-        $this->assertSame(1,  Util_Values::intValue(TRUE));
-        $this->assertSame(0,  Util_Values::intValue(FALSE));
-        $this->assertSame(0,  Util_Values::intValue(NULL));
+        $this->assertSame(1,  Util_Values::intValue(true));
+        $this->assertSame(0,  Util_Values::intValue(false));
+        $this->assertSame(0,  Util_Values::intValue(null));
         $this->assertSame(1,  Util_Values::intValue(new Util_ValuesTest_Object("hoge")));
         $this->assertSame(0,  Util_Values::intValue(array()));
         $this->assertSame(1,  Util_Values::intValue(array(1, 2, 3)));
@@ -33,10 +33,10 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase
         $this->assertSame(10, Util_Values::intValue(9,  10));
         
         // 第一引数が最大値 (90) より大きな値は最大値を返す.
-        $this->assertSame(90, Util_Values::intValue(91, NULL, 90));
-        $this->assertSame(90, Util_Values::intValue(90, NULL, 90));
-        $this->assertSame(89, Util_Values::intValue(89, NULL, 90));
-        $this->assertSame(-5, Util_Values::intValue(-5, NULL, 90));
+        $this->assertSame(90, Util_Values::intValue(91, null, 90));
+        $this->assertSame(90, Util_Values::intValue(90, null, 90));
+        $this->assertSame(89, Util_Values::intValue(89, null, 90));
+        $this->assertSame(-5, Util_Values::intValue(-5, null, 90));
         
         // 最小値と最大値の両方が指定されている場合
         $this->assertSame(10, Util_Values::intValue(5,  10, 90));
@@ -69,8 +69,8 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase
         $this->assertSame("stdClass",        Util_Values::stringValue($std));
         // スカラー値は strval() のアルゴリズムに基づく
         $this->assertSame("hoge",            Util_Values::stringValue("hoge"));
-        $this->assertSame("",                Util_Values::stringValue(NULL));
-        $this->assertSame("1",               Util_Values::stringValue(TRUE));
+        $this->assertSame("",                Util_Values::stringValue(null));
+        $this->assertSame("1",               Util_Values::stringValue(true));
         $this->assertSame("0",               Util_Values::stringValue(0));
         // リソース型は "resource_type #num" 形式の文字列
         $this->assertStringStartsWith("stream #", Util_Values::stringValue($fp));
@@ -87,30 +87,30 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase
     {
         // 引数が配列の場合, ($force の指定によらず) 引数をそのまま返す
         $this->assertSame(array(1),      Util_Values::arrayValue(array(1)));
-        $this->assertSame(array(2),      Util_Values::arrayValue(array(2), TRUE));        
+        $this->assertSame(array(2),      Util_Values::arrayValue(array(2), true));
         // 配列以外の値を指定した場合, $force = FALSE の場合は空の配列を返す
         $this->assertSame(array(),       Util_Values::arrayValue("hoge"));
-        $this->assertSame(array(),       Util_Values::arrayValue("hoge", FALSE));
+        $this->assertSame(array(),       Util_Values::arrayValue("hoge", false));
         // 配列以外の値を指定した場合, $force = TRUE の場合は長さ 1 の配列にして返す
-        $this->assertSame(array("hoge"), Util_Values::arrayValue("hoge", TRUE));
+        $this->assertSame(array("hoge"), Util_Values::arrayValue("hoge", true));
     }
     
     public function testBoolValue()
     {
         // "T", "Y", "O" で始まる文字列と 0 以外の数値, TRUE は常に TRUE を返す
-        $okList = array("test", "True", "yes", "Young", "orz", "OK", TRUE, 1.5, -10);
+        $okList = array("test", "True", "yes", "Young", "orz", "OK", true, 1.5, -10);
         foreach ($okList as $value) {
-            $this->assertSame(TRUE,  Util_Values::boolValue($value));
-            $this->assertSame(TRUE,  Util_Values::boolValue($value, TRUE));
-            $this->assertSame(TRUE,  Util_Values::boolValue($value, FALSE));
+            $this->assertSame(true,  Util_Values::boolValue($value));
+            $this->assertSame(true,  Util_Values::boolValue($value, true));
+            $this->assertSame(true,  Util_Values::boolValue($value, false));
         }
         
         // "F", "N" で始まる文字列と 0, FALSE は常に FALSE を返す
-        $ngList = array("false", "FOX", "NG", "no", FALSE, 0, 0.0);
+        $ngList = array("false", "FOX", "NG", "no", false, 0, 0.0);
         foreach ($ngList as $value) {
-            $this->assertSame(FALSE, Util_Values::boolValue($value));
-            $this->assertSame(FALSE, Util_Values::boolValue($value, TRUE));
-            $this->assertSame(FALSE, Util_Values::boolValue($value, FALSE));
+            $this->assertSame(false, Util_Values::boolValue($value));
+            $this->assertSame(false, Util_Values::boolValue($value, true));
+            $this->assertSame(false, Util_Values::boolValue($value, false));
         }
         
         // それ以外の文字列, 型の場合は $defaultValue に応じて返り値が決まる
@@ -121,21 +121,21 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase
             new stdClass()
         );
         foreach ($castTrue as $value) {
-            $this->assertSame(TRUE,  Util_Values::boolValue($value));
-            $this->assertSame(TRUE,  Util_Values::boolValue($value, TRUE));
-            $this->assertSame(FALSE, Util_Values::boolValue($value, FALSE));
+            $this->assertSame(true,  Util_Values::boolValue($value));
+            $this->assertSame(true,  Util_Values::boolValue($value, true));
+            $this->assertSame(false, Util_Values::boolValue($value, false));
         }
         
         $castFalse = array(
             "0",
             "",
-            NULL,
+            null,
             array()
         );
         foreach ($castFalse as $value) {
-            $this->assertSame(FALSE, Util_Values::boolValue($value));
-            $this->assertSame(TRUE,  Util_Values::boolValue($value, TRUE));
-            $this->assertSame(FALSE, Util_Values::boolValue($value, FALSE));
+            $this->assertSame(false, Util_Values::boolValue($value));
+            $this->assertSame(true,  Util_Values::boolValue($value, true));
+            $this->assertSame(false, Util_Values::boolValue($value, false));
         }
     }
 }

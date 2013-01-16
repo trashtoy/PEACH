@@ -139,7 +139,7 @@ class DT_DatetimeTest extends DT_AbstractTimeTest
         $valid       = array();
         $valid[7]    = array("h", "H", "HOUR", "hour", "heaven"); // any string which starts with "h" is OK.
         $valid[30]   = array("M", "m", "Min", "min", "mushroom"); // any string which starts with "m" (except "mo") is OK.
-        $invalid = array("sec", NULL, "bar");
+        $invalid = array("sec", null, "bar");
         foreach ($valid as $expected => $v) {
             foreach ($v as $key) {
                 $this->assertEquals($time->get($key), $expected);
