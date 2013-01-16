@@ -1,13 +1,15 @@
 <?php
 require_once dirname(__FILE__) . '/../../src/Util/load.php';
 
-class Util_HashMapTest extends PHPUnit_Framework_TestCase {
+class Util_HashMapTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var Util_HashMap
      */
     protected $object;
     
-    public function setUp() {
+    public function setUp()
+    {
         $map = new Util_HashMap();
         $map->put(new Util_HashMapTest_TestObject(10),   'foo');
         $map->put(new Util_HashMapTest_TestObject(20),   'bar');
@@ -19,8 +21,8 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
     
     /**
@@ -28,7 +30,8 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
      * - 同一ではない, 等価なオブジェクトは同じキーとして扱われることを確認する.
      * - 存在しないマッピングの場合は NULL を返すことを確認する.
      */
-    public function testPut() {
+    public function testPut()
+    {
         $map = $this->object;
         $o1  = new Util_HashMapTest_TestObject(10);
         $o2  = new Util_HashMapTest_TestObject(10);
@@ -42,7 +45,8 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(NULL,   $map->get($o4));
     }
     
-    public function testPutAll() {
+    public function testPutAll()
+    {
         $map = $this->object;
         $arr = array(1 => "foo", 3 => "bar", 5 => "baz");
         $map->putAll(new Util_ArrayMap($arr));
@@ -50,21 +54,25 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         $this->assertSame("bar", $map->get(3));
     }
     
-    public function testGet() {
+    public function testGet()
+    {
         $this->assertSame("foo", $this->object->get(new Util_HashMapTest_TestObject("10")));
         $this->assertSame(NULL,  $this->object->get(new Util_HashMapTest_TestObject(1000)));
     }
     
-    public function testClear() {
+    public function testClear()
+    {
         $this->object->clear();
         $this->assertSame(0, $this->object->size());
     }
     
-    public function testSize() {
+    public function testSize()
+    {
         $this->assertSame(3, $this->object->size());
     }
     
-    public function testKeys() {
+    public function testKeys()
+    {
         $map  = $this->getTestMap();
         $keys = $map->keys();
         $this->assertSame(100, count($keys));
@@ -74,14 +82,16 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         }
     }
     
-    public function testContainsKey() {
+    public function testContainsKey()
+    {
         $test = new Util_HashMapTest_TestObject(5);
         $this->assertSame(FALSE, $this->object->containsKey($test));
         $test = new Util_HashMapTest_TestObject(10);
         $this->assertSame(TRUE,  $this->object->containsKey($test));
     }
     
-    public function testRemove() {
+    public function testRemove()
+    {
         $map = $this->object;
         $map->remove(new Util_HashMapTest_TestObject(150));
         $this->assertSame(3, $map->size());
@@ -92,7 +102,8 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($map->containsKey(new Util_HashMapTest_TestObject(20)));
     }
     
-    public function testValues() {
+    public function testValues()
+    {
         $map    = $this->getTestMap();
         $values = $map->values();
         $this->assertSame(100, count($values));
@@ -103,8 +114,9 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         }
     }
     
-    public function testEntryList() {
-        $map       = $this->getTestMap();
+    public function testEntryList()
+    {
+        $map = $this->getTestMap();
         $entryList = $map->entryList();
         $this->assertSame(100, count($entryList));
         $keys      = array();
@@ -115,7 +127,8 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         }
     }
     
-    private function getTestObjectList() {
+    private function getTestObjectList()
+    {
         static $objList;
         if (!isset($objList)) {
             $objList = array();
@@ -126,7 +139,8 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
         return $objList;
     }
     
-    private function getTestMap() {
+    private function getTestMap()
+    {
         $map = new Util_HashMap();
         $objList = $this->getTestObjectList();
         foreach ($objList as $key => $obj) {
@@ -136,28 +150,42 @@ class Util_HashMapTest extends PHPUnit_Framework_TestCase {
     }
 }
 
-class Util_HashMapTest_TestObject {
+class Util_HashMapTest_TestObject
+{
     private $value;
-    public function __construct($value) {
+    
+    public function __construct($value)
+    {
         $this->value = $value;
     }
-    public function getValue() {
+    
+    public function getValue()
+    {
         return $this->value;
     }
 }
 
-class Util_HashMapTest_C implements Util_Comparable {
+class Util_HashMapTest_C implements Util_Comparable
+{
     private $value;
-    public function __construct($value) {
+    
+    public function __construct($value)
+    {
         $this->value = $value;
     }
-    public function getValue() {
+    
+    public function getValue()
+    {
         return $this->value;
     }
-    public function compareTo($subject) {
+    
+    public function compareTo($subject)
+    {
         return $this->value - $subject->value;
     }
-    public function __toString() {
+    
+    public function __toString()
+    {
         return "KEY:{$this->value}";
     }
 }

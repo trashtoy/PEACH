@@ -1,35 +1,41 @@
 <?php
 require_once dirname(__FILE__) . '/../../src/Util/load.php';
 
-class Util_StringsTest extends PHPUnit_Framework_TestCase {
+class Util_StringsTest extends PHPUnit_Framework_TestCase
+{
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
     }
     
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
     }
     
-    public function testExplode() {
+    public function testExplode()
+    {
         $this->assertSame(array("A","B","C"), Util_Strings::explode("-", "A-B-C"));
         $this->assertSame(array(), Util_Strings::explode("", "A-B-C"));
         $obj = new Util_StringsTest_Object("A-B-C");
         $this->assertSame(array("A","B","C"), Util_Strings::explode("-", $obj));
     }
     
-    public function testGetLines() {
+    public function testGetLines()
+    {
         $str = "This\ris\na\r\npen.";
         $exp = array("This", "is", "a", "pen.");
         $this->assertSame($exp, Util_Strings::getLines($str));
     }
     
-    public function testIsWhiteSpace() {
+    public function testIsWhiteSpace()
+    {
         $this->assertSame(TRUE,  Util_Strings::isWhiteSpace(""));
         $this->assertSame(TRUE,  Util_Strings::isWhiteSpace(NULL));
         $this->assertSame(TRUE,  Util_Strings::isWhiteSpace(FALSE));
@@ -39,7 +45,8 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(FALSE, Util_Strings::isWhiteSpace("  asdf "));
     }
     
-    public function testBasedir() {
+    public function testBasedir()
+    {
         $this->assertSame("/foo/bar/baz/", Util_Strings::basedir("/foo/bar/baz"));
         $this->assertSame("/hoge/fuga/",   Util_Strings::basedir("/hoge/fuga/"));
         $this->assertSame("",              Util_Strings::basedir(""));
@@ -48,7 +55,8 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $this->assertSame("/aaa/bbb/ccc/", Util_Strings::basedir($obj));
     }
     
-    public function testGetRawIndex() {
+    public function testGetRawIndex()
+    {
         $this->assertSame(3,     Util_Strings::getRawIndex("abc=def", "="));
         $this->assertSame(7,     Util_Strings::getRawIndex("a\\=b\\=c=d", "="));
         $this->assertSame(FALSE, Util_Strings::getRawIndex("", "="));
@@ -56,7 +64,8 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(1,     Util_Strings::getRawIndex("a=\\=b", "="));
     }
     
-    public function testStartsWith() {
+    public function testStartsWith()
+    {
         $this->assertSame(TRUE,  Util_Strings::startsWith("The quick brown fox", "The"));
         $this->assertSame(FALSE, Util_Strings::startsWith("Hogehoge", "hoge"));
         $this->assertSame(TRUE,  Util_Strings::startsWith("something", ""));
@@ -67,7 +76,8 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(FALSE, Util_Strings::startsWith($subject, $other));
     }
     
-    public function testEndsWith() {
+    public function testEndsWith()
+    {
         $this->assertSame(TRUE,  Util_Strings::endsWith("The quick brown fox", "fox"));
         $this->assertSame(FALSE, Util_Strings::endsWith("Hogehoge", "Hoge"));
         $this->assertSame(TRUE,  Util_Strings::endsWith("something", ""));
@@ -78,7 +88,8 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(FALSE, Util_Strings::endsWith($subject, $other));
     }
     
-    public function testEndsWithRawChar() {
+    public function testEndsWithRawChar()
+    {
         $this->assertSame(TRUE,  Util_Strings::endsWithRawChar("ABCDE",       "DE"));
         $this->assertSame(TRUE,  Util_Strings::endsWithRawChar("AB\\CDE",     "DE"));
         $this->assertSame(FALSE, Util_Strings::endsWithRawChar("ABC\\DE",     "DE"));
@@ -86,7 +97,8 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(FALSE, Util_Strings::endsWithRawChar("ABC\\\\\\DE", "DE"));
     }
     
-    public function testTemplate() {
+    public function testTemplate()
+    {
         $exp  = "hoge";
         $test = "hoge";
         $arr  = array();
@@ -114,14 +126,17 @@ class Util_StringsTest extends PHPUnit_Framework_TestCase {
     }
 }
 
-class Util_StringsTest_Object {
+class Util_StringsTest_Object
+{
     private $value;
     
-    public function __construct($value) {
+    public function __construct($value)
+    {
         $this->value = $value;
     }
     
-    public function __toString() {
+    public function __toString()
+    {
         return $this->value;
     }
 }

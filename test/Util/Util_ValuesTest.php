@@ -1,7 +1,8 @@
 <?php
 require_once dirname(__FILE__) . '/../../src/Util/load.php';
 
-class Util_ValuesTest extends PHPUnit_Framework_TestCase {
+class Util_ValuesTest extends PHPUnit_Framework_TestCase
+{
     /**
      * {@link Util_Values::intValue()} のテストです.
      * 
@@ -11,7 +12,8 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase {
      * - 最大値が指定されており, 変換結果が最大値より大きい場合は最大値を返す
      * - 最小値より最大値のほうが小さい場合, 最大値の指定は無視する
      */
-    public function testIntValue() {
+    public function testIntValue()
+    {
         // intval() に基づいて値を整数に変換する
         $this->assertSame(10, Util_Values::intValue(10));
         $this->assertSame(3,  Util_Values::intValue(3.14));
@@ -55,10 +57,11 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase {
      * - スカラー値は strval() のアルゴリズムに基づいて文字列に変換する
      * - リソース型の値は "resource_type #num" 形式の文字列となる. (例えば "stream #1") 
      */
-    public function testStringValue() {
-        $obj  = new Util_ValuesTest_Object("asdf");
-        $std  = new stdClass();
-        $fp   = fopen(__FILE__, "r");
+    public function testStringValue()
+    {
+        $obj = new Util_ValuesTest_Object("asdf");
+        $std = new stdClass();
+        $fp  = fopen(__FILE__, "r");
         
         // __toString() が定義されているオブジェクトは、呼び出した結果を返す
         $this->assertSame("test value=asdf", Util_Values::stringValue($obj));
@@ -80,7 +83,8 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase {
      * - 引数が配列以外の場合, $force = TRUE の場合は引数を長さ 1 の配列として返す
      * - 引数が配列以外の場合, $force = FALSE の場合は空の配列を返す
      */
-    public function testArrayValue() {
+    public function testArrayValue()
+    {
         // 引数が配列の場合, ($force の指定によらず) 引数をそのまま返す
         $this->assertSame(array(1),      Util_Values::arrayValue(array(1)));
         $this->assertSame(array(2),      Util_Values::arrayValue(array(2), TRUE));        
@@ -91,7 +95,8 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(array("hoge"), Util_Values::arrayValue("hoge", TRUE));
     }
     
-    public function testBoolValue() {
+    public function testBoolValue()
+    {
         // "T", "Y", "O" で始まる文字列と 0 以外の数値, TRUE は常に TRUE を返す
         $okList = array("test", "True", "yes", "Young", "orz", "OK", TRUE, 1.5, -10);
         foreach ($okList as $value) {
@@ -135,14 +140,17 @@ class Util_ValuesTest extends PHPUnit_Framework_TestCase {
     }
 }
 
-class Util_ValuesTest_Object {
+class Util_ValuesTest_Object
+{
     private $value;
     
-    public function __construct($value) {
+    public function __construct($value)
+    {
         $this->value = $value;
     }
     
-    public function __toString() {
+    public function __toString()
+    {
         return "test value=" . $this->value;
     }
 }

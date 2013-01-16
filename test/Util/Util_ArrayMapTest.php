@@ -1,8 +1,8 @@
 <?php
 require_once dirname(__FILE__) . '/../../src/Util/load.php';
 
-class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
-
+class Util_ArrayMapTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @var Util_ArrayMap
      */
@@ -12,7 +12,8 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->object = new Util_ArrayMap();
         $this->object->put("key1", "foo");
         $this->object->put("key2", "bar");
@@ -23,18 +24,21 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
+    protected function tearDown()
+    {
     }
     
     /**
      * 
      * @expectedException Exception
      */
-    public function testConstructorFail() {
+    public function testConstructorFail()
+    {
         $map = new Util_ArrayMap("hoge");
     }
     
-    public function testGet() {
+    public function testGet()
+    {
         $test = $this->object->get("key1");
         $this->assertSame("foo", $test);
         $test = $this->object->get("key4");
@@ -43,7 +47,8 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
         $this->assertSame("DEF", $test);
     }
     
-    public function testPut() {
+    public function testPut()
+    {
         $map = $this->object;
         $map->put('test', 'X');
         $this->assertEquals('X', $map->get('test'));
@@ -51,7 +56,8 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('Y', $map->get('test'));
     }
     
-    public function testPutAll() {
+    public function testPutAll()
+    {
         $map = new Util_ArrayMap();
         $map->put("test1", "hoge");
         $map->put("test2", "fuga");
@@ -68,12 +74,14 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($expected, $arr);
     }
     
-    public function testContainsKey() {
+    public function testContainsKey()
+    {
         $this->assertFalse($this->object->containsKey("key4"));
         $this->assertTrue($this->object->containsKey("key2"));
     }
     
-    public function testRemove() {
+    public function testRemove()
+    {
         $this->object->remove("key4");
         $this->assertSame(3, $this->object->size());
         $this->object->remove("key3");
@@ -81,29 +89,34 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->containsKey("key3"));
     }
     
-    public function testClear() {
+    public function testClear()
+    {
         $this->object->clear();
         $data = $this->object->asArray();
         $this->assertSame(array(), $data);
     }
     
-    public function testSize() {
+    public function testSize()
+    {
         $this->assertSame(3, $this->object->size());
     }
     
-    public function testKeys() {
+    public function testKeys()
+    {
         $expected = array("key1", "key2", "key3");
         $keys     = $this->object->keys();
         $this->assertSame($expected, $keys);
     }
     
-    public function testValues() {
+    public function testValues()
+    {
         $expected = array("foo", "bar", "baz");
         $values   = $this->object->values();
         $this->assertSame($expected, $values);
     }
     
-    public function testEntryList() {
+    public function testEntryList()
+    {
         $entryList = $this->object->entryList();
         $this->assertSame(3, count($entryList));
         $entryList[0]->setValue("asdf");
@@ -111,7 +124,8 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($expected, $this->object->asArray());
     }
     
-    public function testAsArray() {
+    public function testAsArray()
+    {
         $expected = array(
             "key1" => "foo",
             "key2" => "bar",

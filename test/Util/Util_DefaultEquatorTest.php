@@ -1,14 +1,16 @@
 <?php
 require_once dirname(__FILE__) . '/../../src/Util/load.php';
 
-class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase {
+class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
+{
     private $e;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->e = Util_DefaultEquator::getInstance();
     }
     
@@ -16,18 +18,20 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase {
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown() {
-        
+    protected function tearDown()
+    {
     }
     
-    public function testGetInstance() {
+    public function testGetInstance()
+    {
         $obj1 = Util_DefaultEquator::getInstance();
         $obj2 = Util_DefaultEquator::getInstance();
         $this->assertTrue($obj1 === $obj2);
     }
     
-    public function testEquate() {
-        $e = $this->e;
+    public function testEquate()
+    {
+        $e    = $this->e;
         $obj1 = new Test(15);
         $obj2 = new Test(20);
         $obj3 = new Test(15);
@@ -39,12 +43,13 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($e->equate("2a", 2));
         $this->assertFalse($e->equate(TRUE, 1));
         $this->assertFalse($e->equate($obj1, $obj2));
-        $this->assertTrue($e->equate($obj1, $obj3));
+        $this->assertTrue($e->equate($obj1,  $obj3));
         $this->assertFalse($e->equate($arr1, $arr2));
-        $this->assertTrue($e->equate($arr2, $arr3));
+        $this->assertTrue($e->equate($arr2,  $arr3));
     }
     
-    public function testHashCode() {
+    public function testHashCode()
+    {
         $e = $this->e;
         $this->assertSame(0,  $e->hashCode(NULL));
         $this->assertSame(0,  $e->hashCode(FALSE));
@@ -58,9 +63,13 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($hash1, $hash2);
     }
 }
-class Test {
+
+class Test
+{
     private $value;
-    public function __construct($value) {
+    
+    public function __construct($value)
+    {
         $this->value = $value;
     }
 }
