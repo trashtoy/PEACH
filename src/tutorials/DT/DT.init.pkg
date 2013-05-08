@@ -19,9 +19,9 @@
         </para>
         <programlisting role="php">
             <![CDATA[
-$d1 = new DT_Date(2012, 5, 21);                 
-$d2 = new DT_Datetime(2012, 5, 21, 7, 30);      
-$d3 = new DT_Timestamp(2012, 5, 21, 7, 30, 45);
+$d1 = new Peach_DT_Date(2012, 5, 21);                 
+$d2 = new Peach_DT_Datetime(2012, 5, 21, 7, 30);      
+$d3 = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 45);
 echo $d1; // 2012-05-21
 echo $d2; // 2012-05-21 07:30
 echo $d3; // 2012-05-21 07:30:45
@@ -31,36 +31,36 @@ echo $d3; // 2012-05-21 07:30:45
     <refsect1 id="{@id DT.init.now}">
         <title>クラスメソッド now</title>
         <para>
-            {@link DT_Date}, {@link DT_Datetime}, {@link DT_Timestamp}
+            {@link Peach_DT_Date}, {@link Peach_DT_Datetime}, {@link Peach_DT_Timestamp}
             はそれぞれ now() というクラスメソッドを持っています.
             現在時刻を取得するには now() メソッドを使ってください.
         </para>
         <programlisting role="php">
             <![CDATA[
-$d1 = DT_Date::now();
-$d2 = DT_Datetime::now();
-$d3 = DT_Timestamp::now();
+$d1 = Peach_DT_Date::now();
+$d2 = Peach_DT_Datetime::now();
+$d3 = Peach_DT_Timestamp::now();
             ]]>
         </programlisting>
     </refsect1>
     <refsect1 id="{@id DT.init.parse}">
         <title>クラスメソッド parse</title>
         <para>
-            {@link DT_Date}, {@link DT_Datetime}, {@link DT_Timestamp}
+            {@link Peach_DT_Date}, {@link Peach_DT_Datetime}, {@link Peach_DT_Timestamp}
             それぞれに定義されている parse() というクラスメソッドを使うことで,
             文字列を時間オブジェクトに変換することができます.
         </para>
         <programlisting role="php">
             <![CDATA[
-$d1 = DT_Date::parse("2012-05-21");
-$d2 = DT_Datetime::parse("2012-05-21 07:30");
-$d3 = DT_Timestamp::parse("2012-05-21 07:30:45");
+$d1 = Peach_DT_Date::parse("2012-05-21");
+$d2 = Peach_DT_Datetime::parse("2012-05-21 07:30");
+$d3 = Peach_DT_Timestamp::parse("2012-05-21 07:30:45");
 
 // フォーマットを指定する場合
-$f  = new DT_SimpleFormat("Ymd_His");
-$d1 = DT_Date::parse("20120521_073045", $f);
-$d2 = DT_Datetime::parse("20120521_073045", $f);
-$d3 = DT_Timestamp::parse("20120521_073045", $f);
+$f  = new Peach_DT_SimpleFormat("Ymd_His");
+$d1 = Peach_DT_Date::parse("20120521_073045", $f);
+$d2 = Peach_DT_Datetime::parse("20120521_073045", $f);
+$d3 = Peach_DT_Timestamp::parse("20120521_073045", $f);
 echo $d1; // "2012-05-21"
 echo $d2; // "2012-05-21 07:30"
 echo $d3; // "2012-05-21 07:30:45"
@@ -75,7 +75,7 @@ echo $d3; // "2012-05-21 07:30:45"
         </para>
         <programlisting role="php">
             <![CDATA[
-$d1 = new DT_Date(2012, 5, 21);
+$d1 = new Peach_DT_Date(2012, 5, 21);
 $d2 = $d1->toDatetime();
 $d3 = $d1->toTimestamp();
 echo $d1; // "2012-05-21"

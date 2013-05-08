@@ -9,7 +9,7 @@
   {@toc}
   <refsect1 id="{@id Util.Arrays.summary}">
     <title>Arrays クラスの概要</title>
-    <para>{@link Util_Arrays} は, 配列のソートや最大値・最小値の取得など, 
+    <para>{@link Peach_Util_Arrays} は, 配列のソートや最大値・最小値の取得など, 
     配列操作に関する汎用処理を集めたユーティリティクラスです.</para>
   </refsect1>
   
@@ -17,18 +17,18 @@
     <title>オブジェクトの配列をソートする</title>
     <para>オブジェクトを含んだ配列をソートするための方法として, 一般的に {@link usort() usort} が利用されますが,
     このモジュールでは Java のコレクション・フレームワークのようなオブジェクト指向的なソート API を使うことができます.
-    オブジェクトの配列をソートする際に利用する {@link Util_Comparator} および {@link Util_Comparable} は, それぞれ
-    {@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Comparator.html java.util.Comparator}, 
-    {@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Comparable.html java.util.Comparable}
+    オブジェクトの配列をソートする際に利用する {@link Peach_Util_Comparator} および {@link Peach_Util_Comparable} は, それぞれ
+    {@link http://docs.oracle.com/javase/jp/6/api/java/util/Comparator.html java.util.Comparator}, 
+    {@link http://docs.oracle.com/javase/jp/6/api/java/util/Comparator.html java.util.Comparable}
     と同じような使い方をします. </para>
     <refsect2 id="{@id Util.Arrays.sort.Comparable}">
-      <title>Util_Comparable の使用例</title>
-      <para>Util_Comparable を使ったソートの例を以下に示します.
-      ソート対象のクラスで implements Util_Comparable を宣言して,
+      <title>Peach_Util_Comparable の使用例</title>
+      <para>Peach_Util_Comparable を使ったソートの例を以下に示します.
+      ソート対象のクラスで implements Peach_Util_Comparable を宣言して,
       compareTo() メソッド内にソート条件を定義します.</para>
       <programlisting role="php">
         <![CDATA[
-class TestObject implements Util_Comparable {
+class TestObject implements Peach_Util_Comparable {
     private $id;
     private $value;
 
@@ -74,16 +74,16 @@ $arr = array(
     new TestObject(2, 400)
 );
 
-$arr = Util_Arrays::sort($arr); // => ID が 5(100), 1(250), 3(320), 2(400), 4(400) の順にソートされる
+$arr = Peach_Util_Arrays::sort($arr); // => ID が 5(100), 1(250), 3(320), 2(400), 4(400) の順にソートされる
         ]]>
       </programlisting>
     </refsect2>
     <refsect2 id="{@id Util.Arrays.sort.Comparator}">
-      <title>Util_Comparator の使用例</title>
-      <para>Util_Comparable を使った例では既存のクラスに手を加えることでソートを実装しましたが,
+      <title>Peach_Util_Comparator の使用例</title>
+      <para>Peach_Util_Comparable を使った例では既存のクラスに手を加えることでソートを実装しましたが,
       他者が公開したクラスライブラリのように自由に改変することが難しいクラスをソートする場合や,
-      ソート条件を状況に応じて柔軟に切り替えたい場合には Util_Comparator を使ってください.
-      Util_Comparator を使ったソートの例を以下に示します. 
+      ソート条件を状況に応じて柔軟に切り替えたい場合には Peach_Util_Comparator を使ってください.
+      Peach_Util_Comparator を使ったソートの例を以下に示します. 
       この例では一つの配列に対して, 4種類の Comparator を使ってソートを行います.
       それぞれ別の順序でソートされることに着目してください.</para>
       <programlisting role="php">
@@ -109,7 +109,7 @@ class TestObject {
 /**
  * 1.value 昇順, 2.ID 昇順の順番でソートします
  */
-class TestObjectComparator1 implements Util_Comparator {
+class TestObjectComparator1 implements Peach_Util_Comparator {
     public function compare($var1, $var2) {
         if (($var1 instanceof TestObject) && ($var2 instanceof TestObject)) {
             $comp = $var1->getValue() - $var2->getValue();
@@ -130,7 +130,7 @@ class TestObjectComparator1 implements Util_Comparator {
 /**
  * 1.ID 昇順, 2.value 昇順の順番でソートします
  */
-class TestObjectComparator2 implements Util_Comparator {
+class TestObjectComparator2 implements Peach_Util_Comparator {
     public function compare($var1, $var2) {
         if (($var1 instanceof TestObject) && ($var2 instanceof TestObject)) {
             $comp = $var1->getId() - $var2->getId();
@@ -161,10 +161,10 @@ $arr = array(
     new TestObject(1, 300)
 );
 
-$result1 = Util_Arrays::sort($arr, $c1); // ID が 2(100), 5(100), 4(200), 1(300), 3(300) の順にソート
-$result2 = Util_Arrays::sort($arr, $r1); // ID が 3(300), 1(300), 4(200), 5(100), 2(100) の順にソート
-$result3 = Util_Arrays::sort($arr, $c2); // ID が 1, 2, 3, 4, 5 の順にソート
-$result4 = Util_Arrays::sort($arr, $r2); // ID が 5, 4, 3, 2, 1 の順にソート
+$result1 = Peach_Util_Arrays::sort($arr, $c1); // ID が 2(100), 5(100), 4(200), 1(300), 3(300) の順にソート
+$result2 = Peach_Util_Arrays::sort($arr, $r1); // ID が 3(300), 1(300), 4(200), 5(100), 2(100) の順にソート
+$result3 = Peach_Util_Arrays::sort($arr, $c2); // ID が 1, 2, 3, 4, 5 の順にソート
+$result4 = Peach_Util_Arrays::sort($arr, $r2); // ID が 5, 4, 3, 2, 1 の順にソート
         ]]>
       </programlisting>
     </refsect2>
@@ -178,15 +178,15 @@ $result4 = Util_Arrays::sort($arr, $r2); // ID が 5, 4, 3, 2, 1 の順にソー
       <listitem>配列の先頭 (あるいは末尾) の項目を取り出す</listitem>
     </orderedlist>
     <para>という手順で実現されることが多いです.</para>
-    <para>そのようなケースでは {@link Util_Arrays::max()} あるいは {@link Util_Arrays::min()}
+    <para>そのようなケースでは {@link Peach_Util_Arrays::max()} あるいは {@link Peach_Util_Arrays::min()}
     を使うことで簡単に最大・最小値を取り出すことが出来ます.</para>
     <para>(数値の配列から最大・最小値を取り出す場合はビルトイン関数の
     {@link min() min()}, {@link max() max()} を使ってください.
-    ただし, パフォーマンスは劣りますが Util_Arrays::max(), Util_Arrays::min()
+    ただし, パフォーマンスは劣りますが Peach_Util_Arrays::max(), Peach_Util_Arrays::min()
     でも同様の結果を得られます.)</para>
     <programlisting role="php">
     <![CDATA[
-class TestObject implements Util_Comparable {
+class TestObject implements Peach_Util_Comparable {
     // (中略)
 }
 
@@ -198,7 +198,7 @@ $arr = array(
     new TestObject(2, 400)
 );
 
-$max = Util_Arrays::max($arr); // => ID = 4, value = 400 のオブジェクトを取得する
+$max = Peach_Util_Arrays::max($arr); // => ID = 4, value = 400 のオブジェクトを取得する
      ]]>
     </programlisting>
   </refsect1>

@@ -16,7 +16,7 @@
         </para>
         <programlisting role="php">
             <![CDATA[
-$d1 = DT_Date::parse("2012-05-21");
+$d1 = Peach_DT_Date::parse("2012-05-21");
 $d2 = $d1->add("date", 10);
 echo $d2->format(); // "2012-06-01"
             ]]>
@@ -27,7 +27,7 @@ echo $d2->format(); // "2012-06-01"
         </para>
         <programlisting role="php">
             <![CDATA[
-$d1 = new DT_Date(2012, 5, 21);
+$d1 = new Peach_DT_Date(2012, 5, 21);
 echo $d1->format();
 echo $d1->__toString();
 echo $d1;
@@ -37,25 +37,25 @@ echo $d1;
     <refsect1 id="{@id DT.format.custom_class}">
         <title>フォーマットオブジェクトを指定した入出力</title>
         <para>
-            format() の引数に任意の {@link DT_Format} オブジェクトを指定することで,
+            format() の引数に任意の {@link Peach_DT_Format} オブジェクトを指定することで,
             任意の形式で文字列を出力することが出来ます.
         </para>
         <programlisting role="php">
             <![CDATA[
 // タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
 
-$f1 = DT_W3cDatetimeFormat::getInstance();
-$f2 = DT_HttpDateFormat::getInstance();
-$f3 = DT_UnixTimeFormat::getInstance();
+$f1 = Peach_DT_W3cDatetimeFormat::getInstance();
+$f2 = Peach_DT_HttpDateFormat::getInstance();
+$f3 = Peach_DT_UnixTimeFormat::getInstance();
 
-$d = new DT_Timestamp(2012, 5, 21, 7, 30, 45);
+$d = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 45);
 var_dump($d->format($f1)); // string(19) "2012-05-21T07:30:45"
 var_dump($d->format($f2)); // string(29) "Sun, 20 May 2012 22:30:45 GMT"
 var_dump($d->format($f3)); // string(10) "1337553045"
             ]]>
         </programlisting>
         <para>
-            parse() の第 2 引数に DT_Format オブジェクトを指定することで,
+            parse() の第 2 引数に Peach_DT_Format オブジェクトを指定することで,
             特定の形式の文字列を解析することができます.
             以下のコードの $d1, $d2, $d3 は全て等価なオブジェクト
             (2012-05-21T07:30:45) になります.
@@ -64,20 +64,20 @@ var_dump($d->format($f3)); // string(10) "1337553045"
             <![CDATA[
 // タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
 
-$f1 = DT_W3cDatetimeFormat::getInstance();
-$f2 = DT_HttpDateFormat::getInstance();
-$f3 = DT_UnixTimeFormat::getInstance();
+$f1 = Peach_DT_W3cDatetimeFormat::getInstance();
+$f2 = Peach_DT_HttpDateFormat::getInstance();
+$f3 = Peach_DT_UnixTimeFormat::getInstance();
 
-$d1 = DT_Timestamp::parse("2012-05-21T07:30:45",           $f1);
-$d2 = DT_Timestamp::parse("Sun, 20 May 2012 22:30:45 GMT", $f2);
-$d3 = DT_Timestamp::parse(1337553045, $f3);
+$d1 = Peach_DT_Timestamp::parse("2012-05-21T07:30:45",           $f1);
+$d2 = Peach_DT_Timestamp::parse("Sun, 20 May 2012 22:30:45 GMT", $f2);
+$d3 = Peach_DT_Timestamp::parse(1337553045, $f3);
             ]]>
         </programlisting>
     </refsect1>
     <refsect1 id="{@id DT.format.simpleformat}">
         <title>ユーザー定義のパターンで入出力したい場合</title>
         <para>
-            クラス {@link  DT_SimpleFormat} を使うことで,
+            クラス {@link  Peach_DT_SimpleFormat} を使うことで,
             ユーザー定義の日付・時刻パターンで文字列解析と書式化が出来ます.
             Java で例えると
             {@link http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html SimpleDateFormat}
@@ -85,8 +85,8 @@ $d3 = DT_Timestamp::parse(1337553045, $f3);
         </para>
         <programlisting role="php">
             <![CDATA[
-$f = new DT_SimpleFormat("Y/m/d");
-$d = DT_Date::parse("2012/05/21", $f);
+$f = new Peach_DT_SimpleFormat("Y/m/d");
+$d = Peach_DT_Date::parse("2012/05/21", $f);
 $d->add("date", 20);
 echo $d->format($f); // "2012/06/10"
             ]]>
@@ -103,20 +103,20 @@ echo $d->format($f); // "2012/06/10"
         </para>
         <programlisting role="php">
             <![CDATA[
-$f = new DT_ShiftFormat(new DT_SimpleFormat("Y/m/d H:i:s"), -540, 300);
-$d = new DT_Timestamp(2012, 1, 1, 0, 0, 0); // サーバー内部の時刻
+$f = new Peach_DT_ShiftFormat(new Peach_DT_SimpleFormat("Y/m/d H:i:s"), -540, 300);
+$d = new Peach_DT_Timestamp(2012, 1, 1, 0, 0, 0); // サーバー内部の時刻
 echo $d->format($f);                        // "2012/01/01 14:00:00" (UTC-5 から UTC+9 に変換)
             ]]>
         </programlisting>
         <para>
-            {@link DT_W3cDatetimeFormat} や {@link DT_HttpDateFormat} など,
+            {@link Peach_DT_W3cDatetimeFormat} や {@link Peach_DT_HttpDateFormat} など,
             タイムゾーンの自動変換機能を単体でサポートしているフォーマットもあります.
             以下に例を挙げます.
         </para>
         <programlisting role="php">
             <![CDATA[
-$f = new DT_W3cDatetimeFormat(-540, 300);
-$d = new DT_Timestamp(2012, 1, 1, 0, 0, 0);
+$f = new Peach_DT_W3cDatetimeFormat(-540, 300);
+$d = new Peach_DT_Timestamp(2012, 1, 1, 0, 0, 0);
 echo $d->format($f); // "2012-01-01T14:00+09:00"
             ]]>
         </programlisting>
