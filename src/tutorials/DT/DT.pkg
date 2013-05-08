@@ -40,7 +40,7 @@ $d->modiry("-2 day");
 echo $d->format("Y-m-d"); // 2012-05-20
 
 // DT モジュール
-$today     = new DT_Date(2012, 5, 21);
+$today     = new Peach_DT_Date(2012, 5, 21);
 $tomorrow  = $today->add("date", 1);
 $yesterday = $today->add("date", -1);
 echo $today;     // 2012-05-21
@@ -67,7 +67,7 @@ echo $yesterday; // 2012-05-20
         </para>
         <programlisting role="php">
             <![CDATA[
-$d = DT_Datetime::now()
+$d = Peach_DT_Datetime::now()
         ->add("year", 1)
         ->add("date", -7)
         ->setAll(array("hour" => 10, "minute" => 30));
@@ -77,15 +77,15 @@ $d = DT_Datetime::now()
     <refsect1 id="{@id class_variation}">
         <title>スコープによるクラスの使い分け</title>
         <para>
-            日付だけを扱いたい場合は {@link DT_Date}, 
-            日付に加えて時刻も扱いたい場合は {@link DT_Datetime}
+            日付だけを扱いたい場合は {@link Peach_DT_Date}, 
+            日付に加えて時刻も扱いたい場合は {@link Peach_DT_Datetime}
             といった具合に, 用途に応じて使うクラスを選ぶことが出来ます.
         </para>
         <para>
             クラスの使い分けが役に立つのは, 例えば日付同士を比較するようなケースです.
             既存の方法では, 余計なフィールド同士で比較が行われないよう
             setTime() で時・分・秒を 0 に揃えるなどの対処が必要でした.
-            DT モジュールの場合は DT_Date クラスを使うことで同じことが簡潔に表現できます.
+            DT モジュールの場合は Peach_DT_Date クラスを使うことで同じことが簡潔に表現できます.
         </para>
         <programlisting role="php">
             <![CDATA[
@@ -98,8 +98,8 @@ if ($now == $subject) {
 }
 
 // DT モジュール
-$subject = new DT_Date(2012, 5, 21);
-$now     = DT_Date::now();
+$subject = new Peach_DT_Date(2012, 5, 21);
+$now     = Peach_DT_Date::now();
 if ($now->equals($subject)) {
     // something
 }
@@ -109,34 +109,34 @@ if ($now->equals($subject)) {
     <refsect1 id="{@id architecture}">
         <title>時間操作の API と書式関連の API の分離</title>
         <para>
-            書式関連 (parse や format) のロジックは全て {@link DT_Format} インタフェースに移譲しているため,
+            書式関連 (parse や format) のロジックは全て {@link Peach_DT_Format} インタフェースに移譲しているため,
             全体的にシンプルな設計となっています.
         </para>
         <para>
-            DT_Format の具象クラスをどのように利用するか, 以下のサンプルコードで例を示します.
+            Peach_DT_Format の具象クラスをどのように利用するか, 以下のサンプルコードで例を示します.
             まずは特定の時刻を Last-Modified ヘッダで出力するサンプルです.
-            HTTP-date を扱うクラス {@link DT_HttpDateFormat} を使います.
+            HTTP-date を扱うクラス {@link Peach_DT_HttpDateFormat} を使います.
         </para>
         <programlisting role="php">
             <![CDATA[
 // タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
 
-$f    = DT_HttpDateFormat::getInstance();
-$time = new DT_Timestamp(2012, 4, 1, 15, 43, 21);
+$f    = Peach_DT_HttpDateFormat::getInstance();
+$time = new Peach_DT_Timestamp(2012, 4, 1, 15, 43, 21);
 header("Last-Modified: " . $time->format($f)); // "Last-Modified: Sun, 01 Apr 2012 06:43:21 GMT"
             ]]>
         </programlisting>
         <para>
             次に, サーバー上の任意のファイルの更新日時を時間オブジェクトに変換する例です.
-            今度は UNIX タイムスタンプを取り扱うためのクラス {@link DT_UnixTimeFormat} を使います.
+            今度は UNIX タイムスタンプを取り扱うためのクラス {@link Peach_DT_UnixTimeFormat} を使います.
         </para>
         <programlisting role="php">
             <![CDATA[
 // タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
 
-$f = DT_UnixTimeFormat::getInstance();
+$f = Peach_DT_UnixTimeFormat::getInstance();
 echo filemtime("/tmp/sample.txt"); // 1234567890
-$d = DT_Timestamp::parse(filemtime("/tmp/sample.txt"), $f);
+$d = Peach_DT_Timestamp::parse(filemtime("/tmp/sample.txt"), $f);
 echo $d->format(); // "2009-02-14 08:31:30"
             ]]>
         </programlisting>
@@ -156,19 +156,19 @@ echo $d->format(); // "2009-02-14 08:31:30"
         </orderedlist>
         <para>
             これを実現するためのコードは以下の通りです.
-            DT_HttpDateFormat が If-Modified-Since のパースと
+            Peach_DT_HttpDateFormat が If-Modified-Since のパースと
             Last-Modified の出力の 2 箇所で利用されていて,
-            DT_UnixTimeFormat がファイルの更新日時の取得に使われていることに注目してください.
+            Peach_DT_UnixTimeFormat がファイルの更新日時の取得に使われていることに注目してください.
         </para>
         <programlisting role="php">
             <![CDATA[
-$uFormat  = DT_UnixTimeFormat::getInstance();
-$hFormat  = DT_HttpDateFormat::getInstance();
+$uFormat  = Peach_DT_UnixTimeFormat::getInstance();
+$hFormat  = Peach_DT_HttpDateFormat::getInstance();
 $filename = "/tmp/sample.txt";
-$modified = DT_Timestamp::parse(filemtime($filename), $uFormat);
+$modified = Peach_DT_Timestamp::parse(filemtime($filename), $uFormat);
 
 if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {  
-    $since = DT_Timestamp::parse($_SERVER["HTTP_IF_MODIFIED_SINCE"], $hFormat);
+    $since = Peach_DT_Timestamp::parse($_SERVER["HTTP_IF_MODIFIED_SINCE"], $hFormat);
     if ($modified->equals($since)) {
         header("304 Not Modified");
         exit;

@@ -9,20 +9,20 @@
   {@toc}
   <refsect1 id="{@id Util.Map.summary}">
     <title>Map インタフェースの概要</title>
-    <para>{@link Util_Map} は, PHP の配列機能をオブジェクト指向化した, 連想配列 (キー・バリュー形式) のインタフェースです.
+    <para>{@link Peach_Util_Map} は, PHP の配列機能をオブジェクト指向化した, 連想配列 (キー・バリュー形式) のインタフェースです.
     Java の コレクションフレームワークの一部
     ({@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html java.util.Map} 等)
     の API を取り入れつつ, 独自の付加機能を付け加えています.
     ある程度 Java プログラミングに慣れているユーザーはすんなり使いこなせるでしょう.</para>
     
-    <para>既に用意されている実装クラスとして {@link Util_ArrayMap} と {@link Util_HashMap} があります.
-    既存の PHP の配列と同様のデータを扱う場合は {@link Util_ArrayMap},
-    キーにオブジェクトを利用したい場合は {@link Util_HashMap} を使用してください.</para>
+    <para>既に用意されている実装クラスとして {@link Peach_Util_ArrayMap} と {@link Peach_Util_HashMap} があります.
+    既存の PHP の配列と同様のデータを扱う場合は {@link Peach_Util_ArrayMap},
+    キーにオブジェクトを利用したい場合は {@link Peach_Util_HashMap} を使用してください.</para>
     
     <para>Java の Map インタフェースと以下の相違点があります.</para>
     <itemizedlist>
       <listitem>キーが存在しない場合に返すデフォルト値の指定が出来る.</listitem>
-      <listitem>({@link Util_HashMap} について) put または get を行う際にキーの等価条件を独自に定義できる ({@link Util_Equator} を参照)</listitem>
+      <listitem>({@link Peach_Util_HashMap} について) put または get を行う際にキーの等価条件を独自に定義できる ({@link Util_Equator} を参照)</listitem>
       <listitem>capacity 値の動的な変更はサポートせず, 負荷係数などの概念が存在しない. (今後のバージョンでサポートする可能性はある)</listitem>
     </itemizedlist>
     <para>SPL をインストールしていない PHP5.2 以前の環境に対応するため, 
@@ -57,23 +57,23 @@ $userName = $map->get("NAME", "anonymous");
      <programlisting role="php">
      <![CDATA[
 $arr = array("key1" => "AAAA", "key2" => "BBBB", "key3" => "CCCC");
-$map = new Util_ArrayMap($arr); // 指定された配列をそのままマッピングする
+$map = new Peach_Util_ArrayMap($arr); // 指定された配列をそのままマッピングする
 $map->get("key2"); // => "BBBB"
 $map->get("key4"); // => NULL
      ]]>
      </programlisting>
      <para>既存の配列を元にして新しい Map を作成する場合, Map に対する操作は元の配列に影響しないので,
      安全に使うことができます.</para>
-     <para>$_GET や $_POST をそのまま使う代わりに {@link Util_ArrayMap} に変換してから利用すれば,
+     <para>$_GET や $_POST をそのまま使う代わりに {@link Peach_Util_ArrayMap} に変換してから利用すれば,
      ずっと扱いやすくなるでしょう.</para>
-     <para>もしも, Map オブジェクトを配列に変換したい場合は {@link Util_ArrayMap::asArray()}
+     <para>もしも, Map オブジェクトを配列に変換したい場合は {@link Peach_Util_ArrayMap::asArray()}
      などを使います. 
-     HashMap の場合は {@link Util_HashMap::entryList()} を使ってください.</para>
+     HashMap の場合は {@link Peach_Util_HashMap::entryList()} を使ってください.</para>
    </refsect1>
    
    <refsect1 id="{@id Util.Map.equator}">
      <title>HashMap と Equator の利用</title>
-     <para>{@link Util_HashMap} は、オブジェクトをキーとして利用することが出来ます.
+     <para>{@link Peach_Util_HashMap} は、オブジェクトをキーとして利用することが出来ます.
      以下に利用例を挙げます.</para>
      <programlisting role="php">
      <![CDATA[
@@ -97,7 +97,7 @@ class TestKey {
 
 $k1  = new TestKey(1, "foo");
 $k2  = new TestKey(2, "bar");
-$map = new Util_HashMap();
+$map = new Peach_Util_HashMap();
 $map->put($k1, 100);
 $map->put($k2, 200);
 
@@ -159,8 +159,8 @@ $k1 = new TestKey(1, "John Smith");
 $k2 = new TestKey(2, "Emily Smith");
 $k3 = new TestKey(2, "Emily Johns");
 
-$map1 = new Util_HashMap(NULL, $e1);
-$map2 = new Util_HashMap(NULL, $e2);
+$map1 = new Peach_Util_HashMap(null, $e1);
+$map2 = new Peach_Util_HashMap(null, $e2);
 
 $map1->put($k1, "foo");
 $map1->put($k2, "bar");
