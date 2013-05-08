@@ -1,12 +1,17 @@
 <?php
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
+/**
+ * Test class for Peach_Util_ArrayMapEntry.
+ */
+class Peach_Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Util_ArrayMap
      */
     private $map;
+    
+    /**
+     * @var array
+     */
     private $entryList;
     
     /**
@@ -15,7 +20,7 @@ class Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->map = new Util_ArrayMap();
+        $this->map = new Peach_Util_ArrayMap();
         $this->map->put("key1", "foo");
         $this->map->put("key2", "bar");
         $this->map->put("key3", "baz");
@@ -46,6 +51,11 @@ class Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
         $this->assertSame("hoge", $this->entryList[0]->getValue());
         $expected = array("key1" => "hoge", "key2" => "bar", "key3" => "baz");
         $this->assertSame($expected, $this->map->asArray());
+    }
+    
+    public function test__toString()
+    {
+        $this->assertSame("[key3=baz]", $this->entryList[2]->__toString());
     }
 }
 ?>

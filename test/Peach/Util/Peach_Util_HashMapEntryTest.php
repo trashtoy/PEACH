@@ -1,15 +1,14 @@
 <?php
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
+class Peach_Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Util_HashMapEntry
+     * @var Peach_Util_HashMapEntry
      */
     protected $object;
     
     /**
-     * @var Util_HashMap
+     *
+     * @var Peach_Util_HashMap
      */
     private $map;
     
@@ -19,12 +18,12 @@ class Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->map = new Util_HashMap();
+        $this->map = new Peach_Util_HashMap();
         $this->map->put("First", 1);
         $entryList = $this->map->entryList();
         $this->object = $entryList[0];
     }
-    
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -32,14 +31,15 @@ class Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
     }
-    
+
     /**
-     * @todo Implement testKeyEquals().
+     * @covers Peach_Util_HashMapEntry::keyEquals
+     * @todo   Implement testKeyEquals().
      */
     public function testKeyEquals()
     {
         $entry = $this->object;
-        $e     = Util_DefaultEquator::getInstance();
+        $e     = Peach_Util_DefaultEquator::getInstance();
         $this->assertFalse($entry->keyEquals("first", $e));
         $this->assertTrue($entry->keyEquals("First", $e));
     }
@@ -50,6 +50,10 @@ class Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1, $entry->getValue());
     }
     
+    /**
+     * HashMapEntry に対する操作が, HashMap に適用されていることを確認します.
+     * @covers Peach_Util_HashMapEntry::setValue
+     */
     public function testSetValue()
     {
         $entry = $this->object;

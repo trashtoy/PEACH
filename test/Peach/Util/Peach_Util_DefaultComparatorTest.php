@@ -1,12 +1,10 @@
 <?php
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_DefaultComparatorTest extends PHPUnit_Framework_TestCase
+class Peach_Util_DefaultComparatorTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Util_DefaultComparator
+     * @var Peach_Util_DefaultComparator
      */
-    private $c;
+    protected $object;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -14,7 +12,7 @@ class Util_DefaultComparatorTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->c = Util_DefaultComparator::getInstance();
+        $this->object = Peach_Util_DefaultComparator::getInstance();
     }
     
     /**
@@ -26,66 +24,97 @@ class Util_DefaultComparatorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @todo Implement testCompare().
+     * {@link Peach_Util_DefaultComparator::compare()} をテストします.
+     * 以下を確認します.
+     * 
+     * - 一般的な大小比較
+     * - string("2a") > int(2) となること (2a問題をクリアしていること)
+     * - オブジェクト同士の比較では, var_dump の結果で大小比較が行われること
+     * - Peach_Util_Comparable の実装オブジェクトの場合, compareTo の結果で代償比較が行われること
+     * 
+     * @covers Peach_Util_DefaultComparator::compare
      */
     public function testCompare()
     {
-        $c = $this->c;
+        $c = $this->object;
         $this->assertLessThan(   0, $c->compare(10,   20));
         $this->assertGreaterThan(0, $c->compare(25,   15.0));
         $this->assertSame(       0, $c->compare(10,   10));
         $this->assertSame(       0, $c->compare("3",  3));
-        $this->assertGreaterThan(0, $c->compare("5a", 5));
-        $obj1 = new TestC(5, "hoge");
-        $obj2 = new TestC(7, "asdf");
-        $obj3 = new TestC(7, "fuga");
-        $obj4 = new TestC(5, "hoge");
+        
+        $this->assertGreaterThan(0, $c->compare("2a", 2));
+        
+        // Peach_Util_Comparable を実装していないオブジェクトの場合
+        // var_dump の結果が適用されるため, 13 と 5 は文字列として比較される
+        $obj1 = new Peach_Util_DefaultComparatorTest_Object(13, "hoge");
+        $obj2 = new Peach_Util_DefaultComparatorTest_Object(5,  "asdf");
+        $obj3 = new Peach_Util_DefaultComparatorTest_Object(5,  "fuga");
+        $obj4 = new Peach_Util_DefaultComparatorTest_Object(13, "hoge");
+        $this->assertLessThan(   0, $c->compare($obj1, $obj2));
+        $this->assertSame(       0, $c->compare($obj1, $obj4));
+        $this->assertLessThan(   0, $c->compare($obj2, $obj3));
+        $this->assertGreaterThan(0, $c->compare($obj3, $obj1));
+        
+        // Peach_Util_Comparable を実装しているオブジェクトの場合
+        // compareTo の結果が適用されるため, 80 と 120 は数値として比較される
+        $c1   = new Peach_Util_DefaultComparatorTest_C("Tom",  80);
+        $c2   = new Peach_Util_DefaultComparatorTest_C("Anna", 120);
+        $c3   = new Peach_Util_DefaultComparatorTest_C("John", 120);
+        $c4   = new Peach_Util_DefaultComparatorTest_C("Tom",  80);
+        $this->assertLessThan(   0, $c->compare($c1, $c2));
+        $this->assertLessThan(   0, $c->compare($c2, $c3));
+        $this->assertSame(       0, $c->compare($c1, $c4));
+        $this->assertGreaterThan(0, $c->compare($c3, $c1));
     }
     
+    /**
+     * {@link Peach_Util_DefaultComparator::getInstance()} のテストをします.
+     * 以下を確認します.
+     * 
+     * - 返り値が Peach_Util_DefaultComparator のインスタンスである
+     * - どの返り値も, 同一のインスタンスを返す
+     * 
+     * @covers Peach_Util_DefaultComparator::getInstance
+     */
     public function testGetInstance()
     {
-        $c1 = Util_DefaultComparator::getInstance();
-        $c2 = Util_DefaultComparator::getInstance();
-        $this->assertSame("Util_DefaultComparator", get_class($c1));
-        $this->assertSame(true, $c1 === $c2);
+        $c1 = Peach_Util_DefaultComparator::getInstance();
+        $c2 = Peach_Util_DefaultComparator::getInstance();
+        $this->assertSame("Peach_Util_DefaultComparator", get_class($c1));
+        $this->assertSame($c1, $c2);
     }
 }
 
-class TestObject
+class Peach_Util_DefaultComparatorTest_Object
 {
+    private $id;
+    private $name;
+    
+    public function __construct($id, $name)
+    {
+        $this->id   = $id;
+        $this->name = $name;
+    }
+}
+
+class Peach_Util_DefaultComparatorTest_C implements Peach_Util_Comparable
+{
+    private $name;
     private $value;
     
-    public function __construct($value)
+    public function __construct($name, $value)
     {
+        $this->name  = $name;
         $this->value = $value;
-    }
-}
-
-class TestC implements Util_Comparable
-{
-    private $value1;
-    private $value2;
-    
-    public function __construct($value1, $value2)
-    {
-        $this->value1 = $value1;
-        $this->value2 = $value2;
     }
     
     public function compareTo($subject)
     {
-        if ($subject instanceof TestC) {
-            if ($subject->value1 != $this->value1) {
-                return $this->value1 - $subject->value1;
-            }
-            if ($subject->value2 != $this->value2) {
-                return $this->value2 - $subject->value2;
-            }
-            return 0;
-        } else {
-            return 1;
+        if ($this->value !== $subject->value) {
+            return $this->value - $subject->value;
         }
+        
+        return strcmp($this->name, $subject->name);
     }
-
 }
 ?>

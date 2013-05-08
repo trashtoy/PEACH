@@ -1,10 +1,11 @@
 <?php
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_ArrayMapTest extends PHPUnit_Framework_TestCase
+/**
+ * Test class for Peach_Util_ArrayMap.
+ */
+class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Util_ArrayMap
+     * @var Peach_Util_ArrayMap
      */
     protected $object;
     
@@ -14,7 +15,7 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Util_ArrayMap();
+        $this->object = new Peach_Util_ArrayMap();
         $this->object->put("key1", "foo");
         $this->object->put("key2", "bar");
         $this->object->put("key3", "baz");
@@ -34,7 +35,7 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorFail()
     {
-        $map = new Util_ArrayMap("hoge");
+        $map = new Peach_Util_ArrayMap("hoge");
     }
     
     public function testGet()
@@ -50,15 +51,15 @@ class Util_ArrayMapTest extends PHPUnit_Framework_TestCase
     public function testPut()
     {
         $map = $this->object;
-        $map->put('test', 'X');
-        $this->assertEquals('X', $map->get('test'));
-        $map->put('test', 'Y');
-        $this->assertEquals('Y', $map->get('test'));
+        $map->put("test", "X");
+        $this->assertEquals("X", $map->get("test"));
+        $map->put("test", "Y");
+        $this->assertEquals("Y", $map->get("test"));
     }
     
     public function testPutAll()
     {
-        $map = new Util_ArrayMap();
+        $map = new Peach_Util_ArrayMap();
         $map->put("test1", "hoge");
         $map->put("test2", "fuga");
         $map->put("key3",  "piyo");

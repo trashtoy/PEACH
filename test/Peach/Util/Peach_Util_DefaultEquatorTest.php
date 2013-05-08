@@ -1,9 +1,10 @@
 <?php
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
+class Peach_Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
 {
-    private $e;
+    /**
+     * @var Peach_Util_DefaultEquator
+     */
+    protected $object;
     
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -11,30 +12,37 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->e = Util_DefaultEquator::getInstance();
+        $this->object = Peach_Util_DefaultEquator::getInstance();
     }
-    
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
     protected function tearDown()
-    {
+    {  
     }
     
+    /**
+     * @covers Peach_Util_DefaultEquator::getInstance
+     */
     public function testGetInstance()
     {
-        $obj1 = Util_DefaultEquator::getInstance();
-        $obj2 = Util_DefaultEquator::getInstance();
+        $obj1 = Peach_Util_DefaultEquator::getInstance();
+        $obj2 = Peach_Util_DefaultEquator::getInstance();
+        $this->assertSame("Peach_Util_DefaultEquator", get_class($obj1));
         $this->assertTrue($obj1 === $obj2);
     }
-    
+
+    /**
+     * @covers Peach_Util_DefaultEquator::equate
+     */
     public function testEquate()
     {
-        $e    = $this->e;
-        $obj1 = new Test(15);
-        $obj2 = new Test(20);
-        $obj3 = new Test(15);
+        $e    = $this->object;
+        $obj1 = new Peach_Util_DefaultEquatorTest_Object(15);
+        $obj2 = new Peach_Util_DefaultEquatorTest_Object(20);
+        $obj3 = new Peach_Util_DefaultEquatorTest_Object(15);
         $arr1 = array("a" => 10, "b" => 15, "c" => 13);
         $arr2 = array("a" => 10, "b" => 15, "c" => 12);
         $arr3 = array("a" => 10, "b" => 15, "c" => 12);
@@ -47,24 +55,27 @@ class Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($e->equate($arr1, $arr2));
         $this->assertTrue($e->equate($arr2,  $arr3));
     }
-    
+
+    /**
+     * @covers Peach_Util_DefaultEquator::hashCode
+     */
     public function testHashCode()
     {
-        $e = $this->e;
+        $e = $this->object;
         $this->assertSame(0,  $e->hashCode(null));
         $this->assertSame(0,  $e->hashCode(false));
         $this->assertSame(0,  $e->hashCode(array()));
         $this->assertSame(10, $e->hashCode(10));
         $this->assertSame(20, $e->hashCode("0020"));
-        $test1 = new Test(123);
-        $test2 = new Test(123);
+        $test1 = new Peach_Util_DefaultEquatorTest_Object(123);
+        $test2 = new Peach_Util_DefaultEquatorTest_Object(123);
         $hash1 = $e->hashCode($test1);
         $hash2 = $e->hashCode($test2);
         $this->assertSame($hash1, $hash2);
     }
 }
 
-class Test
+class Peach_Util_DefaultEquatorTest_Object
 {
     private $value;
     
