@@ -23,9 +23,9 @@
 /** @package Util */
 /**
  * 与えられた二つの値を比較するインタフェースです. 
- * このインタフェースは, {@link Util_Arrays::sort()} の引数として使われます.
+ * このインタフェースは, {@link Peach_Util_Arrays::sort()} の引数として使われます.
  * Java における 
- * {@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Comparator.html java.util.Comparator}
+ * {@link http://docs.oracle.com/javase/jp/6/api/java/util/Comparator.html java.util.Comparator}
  * と同じ用途で使われることを想定しています.
  * 
  * PHP には同様の働きをする {@link usort() usort()} などのビルトイン関数がありますが,
@@ -34,7 +34,7 @@
  * 
  * @package Util
  */
-interface Util_Comparator
+interface Peach_Util_Comparator
 {
     /**
      * 二つの値を比較します.
@@ -49,8 +49,8 @@ interface Util_Comparator
      * @param  mixed $var1 比較対象の値
      * @param  mixed $var2 比較対象の値
      * @return int         比較した結果, 
-     *                     $var2 < $var1 の場合は正, 
-     *                     $var1 < $var2 の場合は負, 
+     *                     $var1 > $var1 の場合は正, 
+     *                     $var2 > $var1 の場合は負, 
      *                     $var1 == $var2 の場合は 0
      */
     public function compare($var1, $var2);

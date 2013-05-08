@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,59 +21,57 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package DT */
-/** */
-require_once(dirname(__FILE__) . "/Datetime.php");
-
 /**
  * TIMESTAMP 型の時間オブジェクトです.
  * このクラスは年・月・日・時・分・秒のフィールドをサポートします.
  * 
  * @package DT
  */
-class DT_Timestamp extends DT_Datetime
+class Peach_DT_Timestamp extends Peach_DT_Datetime
 {
     /**
      * 秒を表す整数です.
      * @var int
      */
     protected $second = 0;
-
+    
     /**
-     * 実行時の DT_Timestamp オブジェクトを返します.
-     * @return DT_Timestamp
+     * 実行時の Peach_DT_Timestamp オブジェクトを返します.
+     * @return Peach_DT_Timestamp
      */
     public static function now()
     {
-        $year  = @date('Y');
-        $month = @date('n');
-        $date  = @date('d');
-        $hour  = @date('H');
-        $min   = @date('i');
-        $sec   = @date('s');
+        $time  = time();
+        $year  = @date("Y", $time);
+        $month = @date("n", $time);
+        $date  = @date("d", $time);
+        $hour  = @date("H", $time);
+        $min   = @date("i", $time);
+        $sec   = @date("s", $time);
         return new self($year, $month, $date, $hour, $min, $sec);
     }
-
+    
     /**
-     * 指定されたテキストを解析して DT_Timestamp オブジェクトに変換します.
-     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getInstance()}
+     * 指定されたテキストを解析して Peach_DT_Timestamp オブジェクトに変換します.
+     * $format が指定されていない場合は {@link Peach_DT_W3cDatetimeFormat::getInstance()}
      * を使って解析を行います.
      * ("YYYY-MM-DD hh:mm:ss" 形式の文字列を受理します. 
      * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
      * 
      * @param  string       変換対象の文字列
-     * @param  DT_Format    変換に使用するフォーマット
-     * @return DT_Timestamp 変換結果
+     * @param  Peach_DT_Format    変換に使用するフォーマット
+     * @return Peach_DT_Timestamp 変換結果
      */
-    public static function parse($text, DT_Format $format = null)
+    public static function parse($text, Peach_DT_Format $format = null)
     {
         if (!isset($format)) {
-            $format = DT_W3cDatetimeFormat::getInstance();
+            $format = Peach_DT_W3cDatetimeFormat::getInstance();
         }
         return $format->parseTimestamp($text);
     }
-
+    
     /**
-     * 与えられた時刻を表現する DT_Timestamp オブジェクトを構築します.
+     * 与えられた時刻を表現する Peach_DT_Timestamp オブジェクトを構築します.
      * 
      * @param int $year  年
      * @param int $month 月
@@ -84,7 +82,7 @@ class DT_Timestamp extends DT_Datetime
      */
     public function __construct($year, $month, $date, $hour, $min, $sec)
     {
-        $fields = new Util_ArrayMap();
+        $fields = new Peach_Util_ArrayMap();
         $fields->put(self::$YEAR,   intval($year));
         $fields->put(self::$MONTH,  intval($month));
         $fields->put(self::$DATE,   intval($date));
@@ -93,33 +91,33 @@ class DT_Timestamp extends DT_Datetime
         $fields->put(self::$SECOND, intval($sec));
         $this->init($fields);
     }
-
+    
     /**
-     * このオブジェクトの型 {@link DT_Time::TYPE_TIMESTAMP} を返します.
+     * このオブジェクトの型 {@link Peach_DT_Time::TYPE_TIMESTAMP} を返します.
      * @return int
      */
     public function getType()
     {
         return self::TYPE_TIMESTAMP;
     }
-
+    
     /**
      * @ignore
      */
-    protected function init(Util_Map $fields)
+    protected function init(Peach_Util_Map $fields)
     {
         parent::init($fields);
         $this->second = $fields->get(self::$SECOND);
     }
-
+    
     /**
      * この時間と指定された時間を比較します. 
      * 
-     * @param  DT_Time 比較対象の時間
+     * @param  Peach_DT_Time 比較対象の時間
      * @return int     この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
      * @ignore
      */
-    protected function compareFields(DT_Time $time)
+    protected function compareFields(Peach_DT_Time $time)
     {
         $c = parent::compareFields($time);
         if (!isset($c) || $c != 0) return $c;
@@ -131,12 +129,12 @@ class DT_Timestamp extends DT_Datetime
             return ($s !== $this->second) ? $this->second - $s : 0;
         }
     }
-
+    
     /**
      * 時刻の不整合を調整します.
      * @ignore
      */
-    protected function adjust(Util_Map $fields)
+    protected function adjust(Peach_Util_Map $fields)
     {
         parent::adjust($fields);
         $adjuster = $this->getAdjuster();
@@ -148,16 +146,16 @@ class DT_Timestamp extends DT_Datetime
         } else {
             return;
         }
-
+        
         $this->adjust($fields);
     }
-
+    
     /**
      * (non-PHPdoc)
-     * @see DT/DT_Time#newInstance($fields)
+     * @see DT/Peach_DT_Time#newInstance($fields)
      * @ignore
      */
-    protected function newInstance(Util_Map $fields)
+    protected function newInstance(Peach_Util_Map $fields)
     {
         $year  = $fields->get(self::$YEAR);
         $month = $fields->get(self::$MONTH);
@@ -167,15 +165,15 @@ class DT_Timestamp extends DT_Datetime
         $sec   = $fields->get(self::$SECOND);
         return new self($year, $month, $date, $hour, $min, $sec);
     }
-
+    
     /**
      * @ignore
      */
-    protected function handleFormat(DT_Format $format)
+    protected function handleFormat(Peach_DT_Format $format)
     {
         return $format->formatTimestamp($this);
     }
-
+    
     /**
      * このオブジェクトの時刻部分の文字列を "hh:mm:ss" 形式で返します.
      * @return string "hh:mm:ss" 形式の文字列
@@ -186,23 +184,23 @@ class DT_Timestamp extends DT_Datetime
         $sec    = str_pad($this->second, 2, '0', STR_PAD_LEFT);
         return $format . ":" . $sec;
     }
-
+    
     /**
-     * このオブジェクトを DT_Timestamp 型にキャストします.
+     * このオブジェクトを Peach_DT_Timestamp 型にキャストします.
      * 返り値はこのオブジェクトのクローンです.
      *
-     * @return DT_Timestamp このオブジェクトの Timestamp 表現
+     * @return Peach_DT_Timestamp このオブジェクトの Timestamp 表現
      */
     public function toTimestamp()
     {
-        return new DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->minute, $this->second);
+        return new Peach_DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->minute, $this->second);
     }
-
+    
     private function getAdjuster()
     {
-        static $adjuster;
+        static $adjuster = null;
         if (!isset($adjuster)) {
-            $adjuster = new DT_FieldAdjuster(self::$SECOND, self::$MINUTE, 0, 59);
+            $adjuster = new Peach_DT_FieldAdjuster(self::$SECOND, self::$MINUTE, 0, 59);
         }
         return $adjuster;
     }

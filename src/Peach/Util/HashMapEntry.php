@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -24,28 +24,26 @@
  * @package Util 
  * @ignore
  */
-/** */
-require_once(dirname(__FILE__) . "/AbstractMapEntry.php");
-
 /**
- * {@link Util_HashMap} の内部で使われる MapEntry です.
+ * {@link Peach_Util_HashMap} の内部で使われる MapEntry です.
  * 
  * @package Util
- * @see     Util_HashMap::createEntry()
+ * @see     Peach_Util_HashMap::createEntry()
  */
-class Util_HashMapEntry extends Util_AbstractMapEntry
+class Peach_Util_HashMapEntry extends Peach_Util_AbstractMapEntry
 {
     /**
      * このエントリーのキーと引数のキーを比較します.
-     * このメソッドは {@link Util_HashMap::put()} または
-     * {@link Util_HashMap::containsKey()} でキーが既に存在するかどうか調べるために使用されます.
-     * 
+     * このメソッドは {@link Peach_Util_HashMap::put()} または
+     * {@link Peach_Util_HashMap::containsKey()} でキーが既に存在するかどうか調べるために使用されます.
+     * このメソッドは, Java で例えると「パッケージプライベート」に相当します.
+     * エンドユーザーが直接使う機会はありません.
      * 
      * @param  mixed $key 比較対象のキー
      * @param  Util_Equator $e 比較に使用する Equator
      * @return bool  このエントリーのキーと引数が等しい場合に true
      */
-    public function keyEquals($key, Util_Equator $e)
+    public function keyEquals($key, Peach_Util_Equator $e)
     {
         return $e->equate($this->key, $key);
     }

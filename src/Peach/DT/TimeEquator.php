@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,38 +21,35 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package DT */
-/** */
-require_once(dirname(__FILE__) . "/../Util/load.php");
-
 /**
  * 時間オブジェクトの比較を行うための Equator です.
- * このクラスは, 時間オブジェクトをキーとした {@link Util_HashMap HashMap}
+ * このクラスは, 時間オブジェクトをキーとした {@link Peach_Util_HashMap HashMap}
  * を構築する際に使用してください.
  * 
  * @package DT
  */
-class DT_TimeEquator implements Util_Equator
+class Peach_DT_TimeEquator implements Peach_Util_Equator
 {
     /**
      * @var array
      */
     private $fields;
-
+    
     /**
-     * 比較対象のフィールドを指定して, 新しい DT_TimeEquator オブジェクトを作成します.
+     * 比較対象のフィールドを指定して, 新しい Peach_DT_TimeEquator オブジェクトを作成します.
      * 引数の指定方法には以下の方法があります.
      * 
      * <code>
-     * new DT_TimeEquator();
-     * new DT_TimeEquator(array("hour", "minute", "second"));
-     * new DT_TimeEquator("date");
-     * new DT_TimeEquator(DT_Time::TYPE_DATE);
+     * new Peach_DT_TimeEquator();
+     * new Peach_DT_TimeEquator(array("hour", "minute", "second"));
+     * new Peach_DT_TimeEquator("date");
+     * new Peach_DT_TimeEquator(Peach_DT_Time::TYPE_DATE);
      * </code>
      * 
      * 引数なしでオブジェクトを生成した場合, このオブジェクトは
-     * {@link DT_Time::equals()} を使って比較を行います.
+     * {@link Peach_DT_Time::equals()} を使って比較を行います.
      * 通常は, 引数なしのコンストラクタを使う代わりに
-     * {@link DT_TimeEquator::getDefault()} を使用してください.
+     * {@link Peach_DT_TimeEquator::getDefault()} を使用してください.
      * 
      * 引数に比較対象のフィールドを配列で指定した場合,
      * 指定されたフィールドすべてが等しい場合に等価とみなします.
@@ -61,9 +58,9 @@ class DT_TimeEquator implements Util_Equator
      * 
      * また, 以下の定数を使用することもできます.
      * 
-     * - {@link DT_Time::TYPE_DATE}
-     * - {@link DT_Time::TYPE_DATETIME}
-     * - {@link DT_Time::TYPE_TIMESTAMP}
+     * - {@link Peach_DT_Time::TYPE_DATE}
+     * - {@link Peach_DT_Time::TYPE_DATETIME}
+     * - {@link Peach_DT_Time::TYPE_TIMESTAMP}
      * 
      * それぞれ
      * 
@@ -79,7 +76,7 @@ class DT_TimeEquator implements Util_Equator
     {
         $this->fields = $this->initFields($fields);
     }
-
+    
     /**
      * このオブジェクトの比較対象フィールド一覧を初期化します.
      * 
@@ -89,27 +86,28 @@ class DT_TimeEquator implements Util_Equator
     private function initFields($fields)
     {
         switch ($fields) {
-            case DT_Time::TYPE_DATE:
+            case Peach_DT_Time::TYPE_DATE:
                 return $this->initFields(array("year", "month", "date"));
-            case DT_Time::TYPE_DATETIME:
+            case Peach_DT_Time::TYPE_DATETIME:
                 return $this->initFields(array("year", "month", "date", "hour", "minute"));
-            case DT_Time::TYPE_TIMESTAMP:
+            case Peach_DT_Time::TYPE_TIMESTAMP:
                 return $this->initFields(array("year", "month", "date", "hour", "minute", "second"));
         }
 
         if (is_array($fields)) {
             return count($fields) ? $fields : null;
-        } else if (is_string($fields)) {
-            return array($fields);
-        } else {
-            return null;
         }
+        if (is_string($fields)) {
+            return array($fields);
+        }
+        
+        return null;
     }
 
     /**
      * デフォルトの DT_Equator オブジェクトを返します.
-     * このオブジェクトは {@link DT_Time::equals()} を使って等値性を調べます.
-     * @return DT_TimeEquator
+     * このオブジェクトは {@link Peach_DT_Time::equals()} を使って等値性を調べます.
+     * @return Peach_DT_TimeEquator
      */
     public static function getDefault()
     {
@@ -125,17 +123,17 @@ class DT_TimeEquator implements Util_Equator
      * この Equator に設定されているフィールドについて比較を行い,
      * 全て等しい場合のみ TRUE を返します.
      * 
-     * @param  DT_Time $var1 比較対象の時間オブジェクト
-     * @param  DT_Time $var2 比較対象の時間オブジェクト
+     * @param  Peach_DT_Time $var1 比較対象の時間オブジェクト
+     * @param  Peach_DT_Time $var2 比較対象の時間オブジェクト
      * @return bool          2 つの時間オブジェクトが等しいと判断された場合のみ TRUE
-     * @throws Exception 引数に DT_Time インスタンス以外の値が指定された場合
+     * @throws Exception 引数に Peach_DT_Time インスタンス以外の値が指定された場合
      */
     public function equate($var1, $var2)
     {
-        if (!($var1 instanceof DT_Time) || !($var2 instanceof DT_Time)) {
-            $arg1 = Util_Values::getType($var1);
-            $arg2 = Util_Values::getType($var2);
-            throw new Exception("arguments must be DT_Time instance.({$arg1}, {$arg2})");
+        if (!($var1 instanceof Peach_DT_Time) || !($var2 instanceof Peach_DT_Time)) {
+            $arg1 = Peach_Util_Values::getType($var1);
+            $arg2 = Peach_Util_Values::getType($var2);
+            throw new Exception("arguments must be Peach_DT_Time instance.({$arg1}, {$arg2})");
         }
 
         $fields = $this->fields;
@@ -156,15 +154,15 @@ class DT_TimeEquator implements Util_Equator
      * 
      * @param  mixed $var
      * @return int        ハッシュ値
-     * @throws Exception  引数が DT_Time インスタンスでなかった場合
+     * @throws Exception  引数が Peach_DT_Time インスタンスでなかった場合
      */
     public function hashCode($var)
     {
-        if (!($var instanceof DT_Time)) {
-            $type = Util_Values::getType($var);
-            throw new Exception("The value must be DT_Time instance.({$type})");
+        if (!($var instanceof Peach_DT_Time)) {
+            $type = Peach_Util_Values::getType($var);
+            throw new Exception("The value must be Peach_DT_Time instance.({$type})");
         }
-
+        
         return
             $var->get("year")              +
             $var->get("month")  *       31 +  // 31^1

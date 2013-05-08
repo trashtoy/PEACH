@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,12 +21,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package Util */
-
 /**
  * 配列に関する操作を行うユーティリティクラスです.
  * @package Util
  */
-class Util_Arrays
+class Peach_Util_Arrays
 {
     /**
      * このクラスはインスタンス化できません
@@ -34,16 +33,16 @@ class Util_Arrays
     private function __construct() {}
 
     /**
-     * {@link Util_Arrays::max()} と {@link Util_Arrays::min()} の共通部分の実装です.
-     * @param  array           $arr           
-     * @param  Util_Comparator $c
-     * @param  bool            $isMax
+     * {@link Peach_Util_Arrays::max()} と {@link Peach_Util_Arrays::min()} の共通部分の実装です.
+     * @param  array                 $arr           
+     * @param  Peach_Util_Comparator $c
+     * @param  bool                  $isMax
      * @return mixed
      */
     private static function getTop(array $arr, Util_Comparator $c = null, $isMax = false)
     {
         if (!isset($c)) {
-            $c = Util_DefaultComparator::getInstance();
+            $c = Peach_Util_DefaultComparator::getInstance();
         }
         $candidate = null;
         foreach ($arr as $current) {
@@ -58,12 +57,12 @@ class Util_Arrays
         }
         return $candidate;
     }
-
+    
     /**
      * 指定された配列の各要素の中で「最も大きい」値を返します.
      * 
-     * 配列に含まれるオブジェクトが {@link Util_Comparable} を実装している場合は
-     * そのオブジェクトの {@link Util_Comparable::compareTo() compareTo()} 
+     * 配列に含まれるオブジェクトが {@link Peach_Util_Comparable} を実装している場合は
+     * そのオブジェクトの {@link Peach_Util_Comparable::compareTo() compareTo()} 
      * メソッドを使って大小の比較を行います. それ以外の値の場合は
      * {@link http://jp.php.net/manual/ja/language.operators.comparison.php 
      * PHP の比較演算子のルール} に従って大小比較が行われます.
@@ -71,19 +70,19 @@ class Util_Arrays
      * 大小の比較方法が型によって異なるため, 
      * 配列内の要素の型に一貫性がない場合は, 格納順序の違いによって
      * 異なる結果となる可能性があります. 
-     * 意図しない動作を防ぐためには, あらかじめ {@link Util_Arrays::pickup()} 
+     * 意図しない動作を防ぐためには, あらかじめ {@link Peach_Util_Arrays::pickup()} 
      * を使って配列に含まれる型を揃えてください.
      * 
-     * オプションとして第二引数に {@link Util_Comparator} 
+     * オプションとして第 2 引数に {@link Peach_Util_Comparator} 
      * オブジェクトを指定することもできます.
-     * もし第二引数が指定された場合は {@link Util_Comparator::compare() compare()} 
+     * もし第 2 引数が指定された場合は {@link Peach_Util_Comparator::compare() compare()} 
      * メソッドを使って大小比較を行います.
      * 
-     * @param  array           $arr
-     * @param  Util_Comparator $c
-     * @return mixed           引数 $arr の中で最も大きな値. 配列が空の場合は NULL
+     * @param  array                 $arr
+     * @param  Peach_Util_Comparator $c
+     * @return mixed                 引数 $arr の中で最も大きな値. 配列が空の場合は NULL
      */
-    public static function max(array $arr, Util_Comparator $c = null)
+    public static function max(array $arr, Peach_Util_Comparator $c = null)
     {
         return self::getTop($arr, $c, true);
     }
@@ -91,8 +90,8 @@ class Util_Arrays
     /**
      * 指定された配列の各要素の中で「最も小さい」値を返します.
      * 
-     * 配列に含まれるオブジェクトが {@link Util_Comparable} を実装している場合は
-     * そのオブジェクトの {@link Util_Comparable::compareTo() compareTo()} 
+     * 配列に含まれるオブジェクトが {@link Peach_Util_Comparable} を実装している場合は
+     * そのオブジェクトの {@link Peach_Util_Comparable::compareTo() compareTo()} 
      * メソッドを使って大小の比較を行います. それ以外の値の場合は
      * {@link http://jp.php.net/manual/ja/language.operators.comparison.php 
      * PHP の比較演算子のルール} に従って大小比較が行われます.
@@ -100,19 +99,19 @@ class Util_Arrays
      * 大小の比較方法が型によって異なるため, 
      * 配列内の要素の型に一貫性がない場合は, 格納順序の違いによって
      * 異なる結果となる可能性があります. 
-     * 意図しない動作を防ぐためには, あらかじめ {@link Util_Arrays::pickup()} 
+     * 意図しない動作を防ぐためには, あらかじめ {@link Peach_Util_Arrays::pickup()} 
      * を使って配列に含まれる型を揃えてください.
      * 
-     * オプションとして第二引数に {@link Util_Comparator} 
+     * オプションとして第 2 引数に {@link Peach_Util_Comparator} 
      * オブジェクトを指定することもできます.
-     * もし第二引数が指定された場合は {@link Util_Comparator::compare() compare()} 
+     * もし第 2 引数が指定された場合は {@link Peach_Util_Comparator::compare() compare()} 
      * メソッドを使って大小比較を行います.
      * 
-     * @param  array
-     * @param  Util_Comparator
+     * @param  array                 $arr
+     * @param  Peach_Util_Comparator $c
      * @return mixed $arr の中で最も大きな値. 配列が空の場合は NULL
      */
-    public static function min(array $arr, Util_Comparator $c = null)
+    public static function min(array $arr, Peach_Util_Comparator $c = null)
     {
         return self::getTop($arr, $c, false);
     }
@@ -136,10 +135,10 @@ class Util_Arrays
      * 
      * 上記に挙げた以外の文字列を指定した場合は, クラス (インタフェース) 名として扱います.
      * 
-     * @param  array  $arr  対象の配列
-     * @param  string $type 'int', 'integer', 'numeric', 'float', 'string', 'bool', 
-     *                      'object', 'resource' など. 
-     *                      それ以外の文字列はクラス(インタフェース)名として扱う
+     * @param  array  $arr     対象の配列
+     * @param  string $type    'int', 'integer', 'numeric', 'float', 'string', 'bool', 
+     *                         'object', 'resource' など. 
+     *                         それ以外の文字列はクラス (インタフェース) 名として扱う
      * @param  bool   $keyFlag 関連付けを維持する場合は TRUE (デフォルトは FALSE)
      * @return array
      */
@@ -194,19 +193,19 @@ class Util_Arrays
     /**
      * 指定された配列をソートします.
      * 配列のキーは連番で初期化されます.
-     * コンパレータが指定されなかった場合は {@link Util_DefaultComparator} が適用されます.
+     * コンパレータが指定されなかった場合は {@link Peach_Util_DefaultComparator} が適用されます.
      * 
-     * @param  array           $arr ソート対象の配列
-     * @param  Util_Comparator $c   コンパレータ
+     * @param  array                 $arr ソート対象の配列
+     * @param  Peach_Util_Comparator $c   コンパレータ
      * @return array
      */
-    public static function sort(array $arr, Util_Comparator $c = null)
+    public static function sort(array $arr, Peach_Util_Comparator $c = null)
     {
         if (count($arr) < 2) {
             return $arr;
         }
         if (!isset($c)) {
-            $c = Util_DefaultComparator::getInstance();
+            $c = Peach_Util_DefaultComparator::getInstance();
         }
         reset($arr);
         $upper = array();
@@ -227,17 +226,17 @@ class Util_Arrays
      * 配列のキーと値のマッピングを保持しながら, 指定された配列をソートします.
      * コンパレータが指定されなかった場合は {@link Util_DefaultComparator} が適用されます.
      * 
-     * @param  array           $arr ソート対象の配列
-     * @param  Util_Comparator $c   コンパレータ
-     * @return array                ソート後の配列
+     * @param  array                 $arr ソート対象の配列
+     * @param  Peach_Util_Comparator $c   コンパレータ
+     * @return array                      ソート後の配列
      */
-    public static function asort(array $arr, Util_Comparator $c = null)
+    public static function asort(array $arr, Peach_Util_Comparator $c = null)
     {
         if (count($arr) < 2) {
             return $arr;
         }
         if (!isset($c)) {
-            $c = Util_DefaultComparator::getInstance();
+            $c = Peach_Util_DefaultComparator::getInstance();
         }
         reset($arr);
         list($firstKey, $firstValue) = each($arr);
@@ -262,7 +261,7 @@ class Util_Arrays
      * <code>
      * $arr1   = array(10, 20, 30);
      * $arr2   = array(40, 50);
-     * $concat = Util_Arrays::concat($arr1, "X", $arr2, "Y");
+     * $concat = Peach_Util_Arrays::concat($arr1, "X", $arr2, "Y");
      * </code>
      * 
      * の結果は
@@ -277,7 +276,7 @@ class Util_Arrays
      *     array(1, 2, 3),
      *     array(5, 7)
      * );
-     * $concat = Util_Arrays::concat($arr1, $arr2);
+     * $concat = Peach_Util_Arrays::concat($arr1, $arr2);
      * </code> 
      * 
      * の結果は
@@ -317,16 +316,16 @@ class Util_Arrays
     /**
      * 指定された配列から, 重複した値を取り除いた結果を返します.
      * 重複かどうかの判定は, 引数に指定されたコンパレータを使って行われます.
-     * コンパレータが指定されなかった場合は {@link Util_DefaultComparator} が適用されます.
+     * コンパレータが指定されなかった場合は {@link Peach_Util_DefaultComparator} が適用されます.
      * 
-     * @param  array           $arr
-     * @param  Util_Comparator $c   コンパレータ
+     * @param  array                 Peach_$arr
+     * @param  Peach_Util_Comparator $c   コンパレータ
      * @return array 
      */
-    public static function unique(array $arr, Util_Comparator $c = null)
+    public static function unique(array $arr, Peach_Util_Comparator $c = null)
     {
         if (!isset($c)) {
-            $c = Util_DefaultComparator::getInstance();
+            $c = Peach_Util_DefaultComparator::getInstance();
         }
         $sorted = self::asort($arr, $c);
         $delKey = array();

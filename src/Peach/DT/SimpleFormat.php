@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,10 +21,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package DT */
-/** */
-require_once(dirname(__FILE__) . "/Format.php");
-require_once(dirname(__FILE__) . "/../Util/load.php");
-
 /**
  * Java の
  * {@link http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html SimpleDateFormat}
@@ -52,7 +48,7 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * 繋げて記述した際にパースに失敗する可能性があります.
  * 
  * このクラスは, 曜日や月の文字列表記のためのパターンをサポートしません.
- * そのようなフォーマットが必要となった場合は, 独自の DT_Format クラスを定義する必要があります.
+ * そのようなフォーマットが必要となった場合は, 独自の Peach_DT_Format クラスを定義する必要があります.
  * 
  * パースまたは書式化を行う際, 情報が足りない場合はデフォルト値が指定されます.
  * 年・月・日については現在の日付, 時・分・秒については 0 が適用されます.
@@ -63,8 +59,8 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  *   「年」の情報がパターン文字列に含まれていないため, 現在の年が適用されます)
  * 2. 時間オブジェクトを書式化する際に, パターン文字列に含まれるフィールドを
  *    そのオブジェクトが持っていなかった.
- *    (例: "Y/m/d H:i:s" というパターンで DT_Date オブジェクトを書式化した場合,
- *    DT_Date は時刻の情報を持たないため, 時刻部分は 00:00:00 となります.)
+ *    (例: "Y/m/d H:i:s" というパターンで Peach_DT_Date オブジェクトを書式化した場合,
+ *    Peach_DT_Date は時刻の情報を持たないため, 時刻部分は 00:00:00 となります.)
  * 
  * PHP の date() 関数の実装と同様に, 
  * バックスラッシュをつけることでパターン文字列が展開されるのを抑制することができます.
@@ -73,7 +69,7 @@ require_once(dirname(__FILE__) . "/../Util/load.php");
  * 
  * @package DT
  */
-class DT_SimpleFormat implements DT_Format
+class Peach_DT_SimpleFormat implements Peach_DT_Format
 {
     /**
      * parse または format に使うパターン文字列です.
@@ -110,64 +106,64 @@ class DT_SimpleFormat implements DT_Format
     }
 
     /**
-     * 指定された文字列を解析し, DT_Date に変換します.
+     * 指定された文字列を解析し, Peach_DT_Date に変換します.
      * @param  string $format 解析対象の文字列
-     * @return DT_Date 解析結果
+     * @return Peach_DT_Date 解析結果
      */
     public function parseDate($format)
     {
-        $d = DT_Date::now();
+        $d = Peach_DT_Date::now();
         return $d->setAll($this->interpret($format));
     }
 
     /**
-     * 指定された文字列を解析し, DT_Datetime に変換します.
+     * 指定された文字列を解析し, Peach_DT_Datetime に変換します.
      * @param  string $format 解析対象の文字列
-     * @return DT_Datetime 解析結果
+     * @return Peach_DT_Datetime 解析結果
      */
     public function parseDatetime($format)
     {
-        $d = DT_Date::now();
+        $d = Peach_DT_Date::now();
         return $d->toDatetime()->setAll($this->interpret($format));
     }
 
     /**
-     * 指定された文字列を解析し, DT_Timestamp に変換します.
+     * 指定された文字列を解析し, Peach_DT_Timestamp に変換します.
      * @param  string $format 解析対象の文字列
-     * @return DT_Date 解析結果
+     * @return Peach_DT_Date 解析結果
      */
     public function parseTimestamp($format)
     {
-        $d = DT_Date::now();
+        $d = Peach_DT_Date::now();
         return $d->toTimestamp()->setAll($this->interpret($format));
     }
 
     /**
-     * 指定された DT_Date オブジェクトを書式化します.
-     * @param  DT_Date $d 書式化対象の時間オブジェクト
+     * 指定された Peach_DT_Date オブジェクトを書式化します.
+     * @param  Peach_DT_Date $d 書式化対象の時間オブジェクト
      * @return string このフォーマットによる文字列表現
      */
-    public function formatDate(DT_Date $d)
+    public function formatDate(Peach_DT_Date $d)
     {
         return $this->formatTimestamp($d->toTimestamp());
     }
 
     /**
-     * 指定された DT_Datetime オブジェクトを書式化します.
-     * @param  DT_Datetime $d 書式化対象の時間オブジェクト
+     * 指定された Peach_DT_Datetime オブジェクトを書式化します.
+     * @param  Peach_DT_Datetime $d 書式化対象の時間オブジェクト
      * @return string このフォーマットによる文字列表現
      */
-    public function formatDatetime(DT_Datetime $d)
+    public function formatDatetime(Peach_DT_Datetime $d)
     {
         return $this->formatTimestamp($d->toTimestamp());
     }
 
     /**
-     * 指定された DT_Timestamp オブジェクトを書式化します.
-     * @param  DT_Timestamp $d 書式化対象の時間オブジェクト
+     * 指定された Peach_DT_Timestamp オブジェクトを書式化します.
+     * @param  Peach_DT_Timestamp $d 書式化対象の時間オブジェクト
      * @return string このフォーマットによる文字列表現
      */
-    public function formatTimestamp(DT_Timestamp $d)
+    public function formatTimestamp(Peach_DT_Timestamp $d)
     {
         $patternList = $this->getPatternList();
         $result      = "";
@@ -223,7 +219,7 @@ class DT_SimpleFormat implements DT_Format
         throw new Exception("Illegal pattern: " . $pattern);
     }
 
-    private function formatKey(DT_Time $d, $key)
+    private function formatKey(Peach_DT_Time $d, $key)
     {
         $year  = $d->get("year");
         $month = $d->get("month");
@@ -231,7 +227,7 @@ class DT_SimpleFormat implements DT_Format
         $hour  = $d->get("hour");
         $min   = $d->get("minute");
         $sec   = $d->get("second");
-
+        
         switch ($key) {
             case "Y":
                 return str_pad($year,  4, "0", STR_PAD_LEFT);
@@ -259,7 +255,7 @@ class DT_SimpleFormat implements DT_Format
                 throw new Exception("Illegal pattern: " . $key);
         }
     }
-
+    
     /**
      * 
      * @param  string $format

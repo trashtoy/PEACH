@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,16 +21,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package DT */
-/** */
-require_once(dirname(__FILE__) . "/Date.php");
-
 /**
  * DATETIME 型の時間オブジェクトです.
  * このクラスは年・月・日・時・分のフィールドをサポートします.
  * 
  * @package DT
  */
-class DT_Datetime extends DT_Date
+class Peach_DT_Datetime extends Peach_DT_Date
 {
     /**
      * 時を表す整数(0～23)です.
@@ -38,50 +35,51 @@ class DT_Datetime extends DT_Date
      * @ignore
      */
     protected $hour = 0;
-
+    
     /**
      * 分を表す整数(0～59)です.
      * @var int
      * @ignore
      */
     protected $minute = 0;
-
+    
     /**
-     * 現在時刻の DT_Datetime オブジェクトを返します.
+     * 現在時刻の Peach_DT_Datetime オブジェクトを返します.
      * 
-     * @return DT_Datetime
+     * @return Peach_DT_Datetime
      */
     public static function now()
     {
-        $year  = @date('Y');
-        $month = @date('n');
-        $date  = @date('d');
-        $hour  = @date('H');
-        $min   = @date('i');
+        $time  = time();
+        $year  = @date("Y", $time);
+        $month = @date("n", $time);
+        $date  = @date("d", $time);
+        $hour  = @date("H", $time);
+        $min   = @date("i", $time);
         return new self($year, $month, $date, $hour, $min);
     }
-
+    
     /**
-     * 指定されたテキストを解析して DT_Datetime オブジェクトに変換します.
-     * $format が指定されていない場合は {@link DT_W3cDatetimeFormat::getInstance()}
+     * 指定されたテキストを解析して Peach_DT_Datetime オブジェクトに変換します.
+     * $format が指定されていない場合は {@link Peach_DT_W3cDatetimeFormat::getInstance()}
      * を使って解析を行います.
      * ("YYYY-MM-DD hh:mm" 形式の文字列を受理します.
      * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
      * 
      * @param  string      変換対象の文字列
-     * @param  DT_Format   変換に使用するフォーマット
-     * @return DT_Datetime 変換結果
+     * @param  Peach_DT_Format   変換に使用するフォーマット
+     * @return Peach_DT_Datetime 変換結果
      */
-    public static function parse($text, DT_Format $format = null)
+    public static function parse($text, Peach_DT_Format $format = null)
     {
         if (!isset($format)) {
-            $format = DT_W3cDatetimeFormat::getInstance();
+            $format = Peach_DT_W3cDatetimeFormat::getInstance();
         }
         return $format->parseDatetime($text);
     }
-
+    
     /**
-     * 与えられた時刻を表現する DT_Datetime オブジェクトを構築します.
+     * 与えられた時刻を表現する Peach_DT_Datetime オブジェクトを構築します.
      *
      * @param int $year  年
      * @param int $month 月
@@ -91,7 +89,7 @@ class DT_Datetime extends DT_Date
      */
     public function __construct($year, $month, $date, $hour, $min)
     {
-        $fields = new Util_ArrayMap();
+        $fields = new Peach_Util_ArrayMap();
         $fields->put(self::$YEAR,   intval($year));
         $fields->put(self::$MONTH,  intval($month));
         $fields->put(self::$DATE,   intval($date));
@@ -99,38 +97,38 @@ class DT_Datetime extends DT_Date
         $fields->put(self::$MINUTE, intval($min));
         $this->init($fields);
     }
-
+    
     /**
-     * このオブジェクトの型 {@link DT_Time::TYPE_DATETIME} を返します.
-     * @return int DT_Time::TYPE_DATETIME
+     * このオブジェクトの型 {@link Peach_DT_Time::TYPE_DATETIME} を返します.
+     * @return int Peach_DT_Time::TYPE_DATETIME
      */
     public function getType()
     {
         return self::TYPE_DATETIME;
     }
-
+    
     /**
      * @ignore
      */
-    protected function init(Util_Map $fields)
+    protected function init(Peach_Util_Map $fields)
     {
         parent::init($fields);
         $this->hour   = $fields->get(self::$HOUR);
         $this->minute = $fields->get(self::$MINUTE);
     }
-
+    
     /**
      * 時刻の不整合を調整します.
      * @ignore
      */
-    protected function adjust(Util_Map $fields)
+    protected function adjust(Peach_Util_Map $fields)
     {
         parent::adjust($fields);
         $hourAd = $this->getHourAdjuster();
         $minAd  = $this->getMinuteAdjuster();
         $hour   = $fields->get(self::$HOUR);
         $min    = $fields->get(self::$MINUTE);
-
+        
         if ($hour < 0) {
             $hourAd->moveDown($fields);
         } else if (23 < $hour) {
@@ -142,18 +140,18 @@ class DT_Datetime extends DT_Date
         } else {
             return;
         }
-
+        
         $this->adjust($fields);
     }
-
+    
     /**
      * (non-PHPdoc)
      * 
-     * @return DT_Datetime
+     * @return Peach_DT_Datetime
      * @see DT_AbstractTime::newInstance()
      * @ignore
      */
-    protected function newInstance(Util_Map $fields)
+    protected function newInstance(Peach_Util_Map $fields)
     {
         $year  = $fields->get(self::$YEAR);
         $month = $fields->get(self::$MONTH);
@@ -162,7 +160,7 @@ class DT_Datetime extends DT_Date
         $min   = $fields->get(self::$MINUTE);
         return new self($year, $month, $date, $hour, $min);
     }
-
+    
     /**
      * この時間と指定された時間を比較します.
      * 
@@ -177,7 +175,7 @@ class DT_Datetime extends DT_Date
      * @return int       この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
      * @ignore
      */
-    protected function compareFields(DT_Time $time)
+    protected function compareFields(Peach_DT_Time $time)
     {
         $c = parent::compareFields($time);
         if ($c !== 0) return $c;
@@ -195,15 +193,15 @@ class DT_Datetime extends DT_Date
             return 0;
         }
     }
-
+    
     /**
      * @ignore
      */
-    protected function handleFormat(DT_Format $format)
+    protected function handleFormat(Peach_DT_Format $format)
     {
         return $format->formatDatetime($this);
     }
-
+    
     /**
      * このオブジェクトの時刻部分の文字列を "hh:mm" 形式で返します.
      * 
@@ -215,7 +213,7 @@ class DT_Datetime extends DT_Date
         $min  = str_pad($this->minute, 2, '0', STR_PAD_LEFT);
         return $hour . ":" . $min;
     }
-
+    
     /**
      * このオブジェクトの文字列表現です.
      * "YYYY-MM-DD hh:mm" 形式の文字列を返します.
@@ -227,51 +225,51 @@ class DT_Datetime extends DT_Date
         $date = parent::__toString();
         return $date . ' ' . $this->formatTime();
     }
-
+    
     /**
-     * このオブジェクトを DT_Datetime 型にキャストします.
+     * このオブジェクトを Peach_DT_Datetime 型にキャストします.
      * 返り値はこのオブジェクトのクローンです.
      *
-     * @return DT_Datetime このオブジェクトのクローン
+     * @return Peach_DT_Datetime このオブジェクトのクローン
      */
     public function toDatetime()
     {
         return new self($this->year, $this->month, $this->date, $this->hour, $this->minute);
     }
-
+    
     /**
-     * このオブジェクトを DT_Timestamp 型にキャストします.
-     * この時刻の 0 秒を表す DT_Timestamp オブジェクトを返します.
+     * このオブジェクトを Peach_DT_Timestamp 型にキャストします.
+     * この時刻の 0 秒を表す Peach_DT_Timestamp オブジェクトを返します.
      *
-     * @return DT_Timestamp このオブジェクトの timestamp 表現
+     * @return Peach_DT_Timestamp このオブジェクトの timestamp 表現
      */
     public function toTimestamp()
     {
-        return new DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->minute, 0);
+        return new Peach_DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->minute, 0);
     }
-
+    
     /**
      * 「時」フィールドを調整する Adjuster です
-     * @return DT_FieldAdjuster
+     * @return Peach_DT_FieldAdjuster
      */
     private function getHourAdjuster()
     {
         static $adjuster;
         if (!isset($adjuster)) {
-            $adjuster = new DT_FieldAdjuster(self::$HOUR, self::$DATE, 0, 23);
+            $adjuster = new Peach_DT_FieldAdjuster(self::$HOUR, self::$DATE, 0, 23);
         }
         return $adjuster;
     }
-
+    
     /**
      * 「分」フィールドを調整する Adjuster です
-     * @return DT_FieldAdjuster
+     * @return Peach_DT_FieldAdjuster
      */
     private function getMinuteAdjuster()
     {
-        static $adjuster;
+        static $adjuster = null;
         if (!isset($adjuster)) {
-            $adjuster = new DT_FieldAdjuster(self::$MINUTE, self::$HOUR, 0, 59);
+            $adjuster = new Peach_DT_FieldAdjuster(self::$MINUTE, self::$HOUR, 0, 59);
         }
         return $adjuster;
     }

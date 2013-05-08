@@ -23,7 +23,7 @@
 /** @package Util */
 /**
  * キーと値のマッピングを管理するインタフェースです. API は 
- * {@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html java.util.Map} 
+ * {@link http://docs.oracle.com/javase/jp/6/api/java/util/Map.html java.util.Map} 
  * を参考にして作られています.
  * 
  * このインタフェースを使うと, 今まで配列を使って
@@ -38,7 +38,7 @@
  * 
  * PHP の配列機能との違いはその他に以下のものがあります.
  * 
- * - 実装クラスによっては Java の Map のように任意のオブジェクトをキーとして利用できる. ({@link Util_HashMap} など)
+ * - 実装クラスによっては Java の Map のように任意のオブジェクトをキーとして利用できる. ({@link Peach_Util_HashMap} など)
  * - 値を取得する際, マッピングが存在しない場合にデフォルト値を適用できる.
  * - 配列の操作に多態性 (ポリモーフィズム) を持たせることが出来る.
  * 
@@ -47,7 +47,7 @@
  * 
  * @package Util
  */
-interface Util_Map
+interface Peach_Util_Map
 {
     /**
      * 指定されたキーにマッピングされている値を返します.
@@ -71,9 +71,9 @@ interface Util_Map
     /**
      * 指定されたマップのマッピングすべてを登録します.
      * 
-     * @param Util_Map $map 登録対象のマップ
+     * @param Peach_Util_Map $map 登録対象のマップ
      */
-    public function putAll(Util_Map $map);
+    public function putAll(Peach_Util_Map $map);
 
     /**
      * 指定されたキーによるマッピングが存在するかどうかを調べます.
@@ -116,10 +116,10 @@ interface Util_Map
     public function keys();
 
     /**
-     * このマップのすべてのエントリーを {@link Util_MapEntry} オブジェクトの配列で返します.
+     * このマップのすべてのエントリーを {@link Peach_Util_MapEntry} オブジェクトの配列で返します.
      * 
      * @return array
-     * @see    Util_EntryMap
+     * @see    Peach_Util_MapEntry
      */
     public function entryList();
 }

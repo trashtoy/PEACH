@@ -24,30 +24,27 @@
  * @package Util
  * @ignore
  */
-/** */
-require_once(dirname(__FILE__) . "/AbstractMapEntry.php");
-
 /**
- * {@link ArrayMap} の entryList() から生成されるオブジェクトです.
+ * {@link Peach_Util_ArrayMap} の entryList() から生成されるオブジェクトです.
  * 
  * @package Util
  */
-class Util_ArrayMapEntry extends Util_AbstractMapEntry
+class Peach_Util_ArrayMapEntry extends Peach_Util_AbstractMapEntry
 {
     /**
      * このエントリーが登録されている ArrayMap です.
-     * @var Util_ArrayMap
+     * @var Peach_Util_ArrayMap
      */
     private $map;
 
     /**
      * 新しい ArrayMapEntry を構築します.
      * 
-     * @param mixed         $key   キー
-     * @param mixed         $value キーに関連づけられた値
-     * @param Util_ArrayMap $map   このエントリーが属する ArrayMap
+     * @param mixed               $key   キー
+     * @param mixed               $value キーに関連づけられた値
+     * @param Peach_Util_ArrayMap $map   このエントリーが属する ArrayMap
      */
-    public function __construct($key, $value, Util_ArrayMap $map)
+    public function __construct($key, $value, Peach_Util_ArrayMap $map)
     {
         parent::__construct($key, $value);
         $this->map = $map;

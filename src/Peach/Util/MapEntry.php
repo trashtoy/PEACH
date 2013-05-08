@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -23,11 +23,11 @@
 /** @package Util */
 /**
  * マップに含まれるキーと値のペアをあらわすインタフェースです.
- * {@link Util_Map::entryList()} の返り値として使用されます.
+ * {@link Peach_Util_Map::entryList()} の返り値として使用されます.
  * 
  * @package Util
  */
-interface Util_MapEntry
+interface Peach_Util_MapEntry
 {
 
     /**

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,29 +21,26 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package Util */
-/** */
-require_once(dirname(__FILE__) . "/MapEntry.php");
-
 /**
- * デフォルトの {@link Util_MapEntry} の実装です.
+ * デフォルトの {@link Peach_Util_MapEntry} の実装です.
  * このクラスでは getKey(), getValue() のみ実装されています.
  * 
  * @package Util
  */
-abstract class Util_AbstractMapEntry implements Util_MapEntry
+abstract class Peach_Util_AbstractMapEntry implements Peach_Util_MapEntry
 {
     /**
      * マッピングのキーです.
      * @var mixed
      */
     protected $key;
-
+    
     /**
      * マッピングの値です.
      * @var mixed
      */
     protected $value;
-
+    
     /**
      * 新しいエントリーオブジェクトを構築します.
      * @param mixed キー
@@ -54,7 +51,7 @@ abstract class Util_AbstractMapEntry implements Util_MapEntry
         $this->key = $key;
         $this->value = $value;
     }
-
+    
     /**
      * このエントリーのキーを返します.
      * @return mixed このエントリーのキー
@@ -63,7 +60,7 @@ abstract class Util_AbstractMapEntry implements Util_MapEntry
     {
         return $this->key;
     }
-
+    
     /**
      * このエントリーの値を返します.
      * @return mixed このエントリーの値

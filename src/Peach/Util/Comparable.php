@@ -24,16 +24,15 @@
 /**
  * 相互に比較出来ることをあらわすインタフェースです. 
  * 
- * このインタフェースは, {@link Util_Arrays} のソート・大小比較関連の API で使用されます.
+ * このインタフェースは, {@link Peach_Util_Arrays} のソート・大小比較関連の API で使用されます.
  * Java における
- * {@link http://java.sun.com/j2se/1.5.0/ja/docs/ja/api/java/lang/Comparable.html java.lang.Comparable} 
+ * {@link http://docs.oracle.com/javase/jp/6/api/java/lang/Comparable.html java.lang.Comparable} 
  * と同じ用途で使われることを想定しています.
  * 
  * @package Util
  */
-interface Util_Comparable
+interface Peach_Util_Comparable
 {
-
     /**
      * このオブジェクトと引数の値を比較します.
      * 

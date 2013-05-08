@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -26,19 +26,19 @@
  * 
  * @package Util
  */
-class Util_Strings
+class Peach_Util_Strings
 {
     /**
      * このクラスはインスタンス化することができません.
      */
     private function __construct() {}
-
+    
     /**
      * 内部関数の {@link explode() explode()} のカスタム版です. 
      * 基本的にはオリジナルの explode() と同じですが, 以下の点が異なります.
      * 
      * - $separator が空文字列の場合に空の配列を返す (オリジナルは FALSE を返す)
-     * - $value が文字列以外の場合, {@link Util_Values::stringValue()} の結果を使用する
+     * - $value が文字列以外の場合, {@link Peach_Util_Values::stringValue()} の結果を使用する
      *   (オリジナルは単純に string にキャストした結果を使うため, 
      *    オブジェクトを引数に指定した時の挙動が PHP 5.1 と 5.2 以降で異なる)
      * 
@@ -52,14 +52,15 @@ class Util_Strings
     public static function explode($separator, $value)
     {
         if (!is_string($value)) {
-            return self::explode($separator, Util_Values::stringValue($value));
-        } else if (strlen($separator)) {
-            return explode($separator, $value);
-        } else {
-            return array();
+            return self::explode($separator, Peach_Util_Values::stringValue($value));
         }
+        if (strlen($separator)) {
+            return explode($separator, $value);
+        }
+        
+        return array();
     }
-
+    
     /**
      * 指定された文字列を行単位で分割します.
      * 引数の文字列を CR, LF, CRLF で分割し, 結果の配列を返します.
@@ -72,7 +73,7 @@ class Util_Strings
     {
         return preg_split("/\\r\\n|\\r|\\n/", $str);
     }
-
+    
     /**
      * 指定された文字列が空白文字の集合からなる文字列かどうかを返します.
      * @param  string
@@ -83,7 +84,7 @@ class Util_Strings
     {
         return !strlen($str) || !preg_match("/[^\\s]/", $str);
     }
-
+    
     /**
      * 指定された文字列を基底ディレクトリに変換します.
      * 引数が空文字列か, '/' で終わる文字列の場合は引数をそのまま返します.
@@ -95,16 +96,18 @@ class Util_Strings
     public static function basedir($basedir)
     {
         if (!is_string($basedir)) {
-            return self::basedir(Util_Values::stringValue($basedir));
-        } else if (!strlen($basedir)) {
-            return "";
-        } else if (substr($basedir, -1) === "/") {
-            return $basedir;
-        } else {
-            return $basedir . "/";
+            return self::basedir(Peach_Util_Values::stringValue($basedir));
         }
+        if (!strlen($basedir)) {
+            return "";
+        }
+        if (substr($basedir, -1) === "/") {
+            return $basedir;
+        }
+        
+        return $basedir . "/";
     }
-
+    
     /**
      * 指定された文字列の中で、"\" によるエスケープ処理のされていない文字列があらわれる
      * 最初のインデックスを返します.
@@ -113,9 +116,9 @@ class Util_Strings
      * スルーします. 以下に例を示します.
      * 
      * <pre>
-     * getRawIndex("AB=CD=EF", "=") : 2
-     * getRawIndex("AB\\=CD=EF", "=") : 6
-     * getRawIndex("AB\\\\=CD=EF", "=") : 4
+     * getRawIndex("AB=CD=EF", "=")     => 2
+     * getRawIndex("AB\\=CD=EF", "=")   => 6
+     * getRawIndex("AB\\\\=CD=EF", "=") => 4
      * </pre>
      * 
      * インデックスが存在しない場合は FALSE を返します.
@@ -126,8 +129,9 @@ class Util_Strings
      */
     public static function getRawIndex($text, $chr)
     {
-        $chr = str_replace("\\", "\\\\", $chr);
+        $chr     = str_replace("\\", "\\\\", $chr);
         $pattern = "/(?<!\\\\)(?:\\\\\\\\)*(" . $chr . ".*)$/";
+        $result  = array();
         preg_match($pattern, $text, $result);
         if (count($result)) {
             return strlen($text) - strlen($result[1]);
@@ -135,7 +139,7 @@ class Util_Strings
             return false;
         }
     }
-
+    
     /**
      * ある文字列が指定された文字列で始まっているかどうかを判別します.
      * $prefix が空文字列の場合は TRUE を返します.
@@ -148,20 +152,22 @@ class Util_Strings
     public static function startsWith($text, $prefix)
     {
         if (!is_string($text)) {
-            return self::startsWith(Util_Values::stringValue($text), $prefix);
-        } else if (!is_string($prefix)) {
-            return self::startsWith($text, Util_Values::stringValue($prefix));
-        } else if ($prefix === "") {
-            return true;
-        } else {
-            return (strpos($text, $prefix) === 0);
+            return self::startsWith(Peach_Util_Values::stringValue($text), $prefix);
         }
+        if (!is_string($prefix)) {
+            return self::startsWith($text, Peach_Util_Values::stringValue($prefix));
+        }
+        if ($prefix === "") {
+            return true;
+        }
+        
+        return (strpos($text, $prefix) === 0);
     }
-
+    
     /**
      * ある文字列が指定された文字列で終了しているかどうかを判別します.
      * $suffix が空文字列の場合は TRUE を返します.
-     * 引数が文字列以外の場合は {@link Util_Values::stringValue()} が適用されます.
+     * 引数が文字列以外の場合は {@link Peach_Util_Values::stringValue()} が適用されます.
      * 
      * @param  string 検査対象の文字列
      * @param  string 終了する文字列
@@ -170,17 +176,19 @@ class Util_Strings
     public static function endsWith($text, $suffix)
     {
         if (!is_string($text)) {
-            return self::endsWith(Util_Values::stringValue($text), $suffix);
-        } else if (!is_string($suffix)) {
-            return self::endsWith($text, Util_Values::stringValue($suffix));
-        } else if ($suffix === "") {
-            return true;
-        } else {
-            $index = strlen($text) - strlen($suffix);
-            return substr($text, $index) === $suffix;
+            return self::endsWith(Peach_Util_Values::stringValue($text), $suffix);
         }
+        if (!is_string($suffix)) {
+            return self::endsWith($text, Peach_Util_Values::stringValue($suffix));
+        }
+        if ($suffix === "") {
+            return true;
+        }
+        
+        $index = strlen($text) - strlen($suffix);
+        return substr($text, $index) === $suffix;
     }
-
+    
     /**
      * ある文字列が指定された文字で終了して, かつエスケープ処理されていないかを判別します.
      * 以下に例を示します.
@@ -200,7 +208,7 @@ class Util_Strings
         $result = preg_match($pattern, $text);
         return (0 < $result);
     }
-
+    
     /**
      * 文字列内に含まれる {0}, {1}, {2} などのテンプレート変数を, $args 内の各要素で置き換えます. 例えば
      * <code>template('My name is {0}. I am {1} years old', array('Taro', 18))</code>
@@ -218,7 +226,7 @@ class Util_Strings
         if (!isset($template)) {
             return null;
         }
-        $template = Util_Values::stringValue($template);
+        $template = Peach_Util_Values::stringValue($template);
         $replaces = array();
         foreach ($args as $key => $value) {
             $from = "{" . $key . "}";

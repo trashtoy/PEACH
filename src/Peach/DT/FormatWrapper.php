@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,94 +21,91 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package DT */
-/** */
-require_once(dirname(__FILE__) . "/Format.php");
-
 /**
- * 既存の DT_Format オブジェクトを機能拡張するためのラッパークラスです.
+ * 既存の Peach_DT_Format オブジェクトを機能拡張するためのラッパークラスです.
  * このクラスは Decorator パターンで設計されています.
  * @package DT
  */
-class DT_FormatWrapper implements DT_Format
+class Peach_DT_FormatWrapper implements Peach_DT_Format
 {
     /**
-     * ラップする DT_Format オブジェクトです.
-     * @var DT_Format
+     * ラップする Peach_DT_Format オブジェクトです.
+     * @var Peach_DT_Format
      */
     private $original;
-
+    
     /**
-     * 指定された DT_Format オブジェクトをラップする FormatWrapper を構築します.
-     * @param DT_Format $original ラップ対象のオブジェクト
+     * 指定された Peach_DT_Format オブジェクトをラップする FormatWrapper を構築します.
+     * @param Peach_DT_Format $original ラップ対象のオブジェクト
      */
-    public function __construct(DT_Format $original)
+    public function __construct(Peach_DT_Format $original)
     {
         $this->original = $original;
     }
-
+    
     /**
-     * ラップ対象の DT_Format オブジェクトを返します.
-     * @return DT_Format ラップ対象のオブジェクト
+     * ラップ対象の Peach_DT_Format オブジェクトを返します.
+     * @return Peach_DT_Format ラップ対象のオブジェクト
      */
     public function getOriginal()
     {
         return $this->original;
     }
-
+    
     /**
      * ラップ対象のオブジェクトの formatDate メソッドを実行します.
-     * @param  DT_Date $d 書式化対象の時間オブジェクト
+     * @param  Peach_DT_Date $d 書式化対象の時間オブジェクト
      * @return string オリジナルの formatDate の結果
      */
-    public function formatDate(DT_Date $d)
+    public function formatDate(Peach_DT_Date $d)
     {
         return $this->original->formatDate($d);
     }
-
+    
     /**
      * ラップ対象のオブジェクトの formatDatetime メソッドを実行します.
-     * @param  DT_Datetime $d 書式化対象の時間オブジェクト
+     * @param  Peach_DT_Datetime $d 書式化対象の時間オブジェクト
      * @return string オリジナルの formatDatetime の結果
      */
-    public function formatDatetime(DT_Datetime $d)
+    public function formatDatetime(Peach_DT_Datetime $d)
     {
         return $this->original->formatDatetime($d);
     }
-
+    
     /**
      * ラップ対象のオブジェクトの formatTimestamp メソッドを実行します.
-     * @param  DT_Timestamp $d 書式化対象の時間オブジェクト
+     * @param  Peach_DT_Timestamp $d 書式化対象の時間オブジェクト
      * @return string オリジナルの formatTimestamp の結果
      */
-    public function formatTimestamp(DT_Timestamp $d)
+    public function formatTimestamp(Peach_DT_Timestamp $d)
     {
         return $this->original->formatTimestamp($d);
     }
-
+    
     /**
      * ラップ対象のオブジェクトの parseDate メソッドを実行します.
      * @param  string $format 解析対象の文字列
-     * @return DT_Time オリジナルの parseDate の結果
+     * @return Peach_DT_Time オリジナルの parseDate の結果
      */
     public function parseDate($format)
     {
         return $this->original->parseDate($format);
     }
-
+    
     /**
      * ラップ対象のオブジェクトの parseDatetime メソッドを実行します.
      * @param  string $format 解析対象の文字列
-     * @return DT_Time オリジナルの parseDatetime の結果
+     * @return Peach_DT_Time オリジナルの parseDatetime の結果
      */
     public function parseDatetime($format)
     {
         return $this->original->parseDatetime($format);
     }
-
+    
     /**
      * ラップ対象のオブジェクトの parseTimestamp メソッドを実行します.
      * @param  string $format 解析対象の文字列
-     * @return DT_Time オリジナルの parseTimestamp の結果
+     * @return Peach_DT_Time オリジナルの parseTimestamp の結果
      */
     public function parseTimestamp($format)
     {

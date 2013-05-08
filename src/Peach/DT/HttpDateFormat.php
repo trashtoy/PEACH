@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,9 +21,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package DT */
-/** */
-require_once(dirname(__FILE__) . "/Format.php");
-
 /**
  * HTTP-Date の書式を扱うクラスです.
  * parse 系メソッドは, 以下の 3 種類のフォーマットを解釈することが出来ます.
@@ -41,7 +38,7 @@ require_once(dirname(__FILE__) . "/Format.php");
  * 
  * @package DT
  */
-class DT_HttpDateFormat implements DT_Format
+class Peach_DT_HttpDateFormat implements Peach_DT_Format
 {
     /**
      * システム時刻の時差です (単位は分)
@@ -55,15 +52,15 @@ class DT_HttpDateFormat implements DT_Format
      * 指定された時差の量だけ時刻に補正がかかります.
      * もしも時差に応じた自動変換が必要ない場合は $offset に 0 を指定してください.
      * 
-     * 引数を省略した場合は, システム時刻の時差 ({@link DT_Util::getTimeZoneOffset()} の返り値と等価)
+     * 引数を省略した場合は, システム時刻の時差 ({@link Peach_DT_Util::getTimeZoneOffset()} の返り値と等価)
      * を使用します. 特に必要がなければ引数なしのコンストラクタを使う代わりに
-     * {@link DT_HttpDateFormat::getInstance() getInstance()} を使ってください.
+     * {@link Peach_DT_HttpDateFormat::getInstance() getInstance()} を使ってください.
      * 
      * @param int $offset 時間オブジェクトの時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
     public function __construct($offset = null)
     {
-        $this->internalOffset = DT_Util::cleanTimeZoneOffset($offset);
+        $this->internalOffset = Peach_DT_Util::cleanTimeZoneOffset($offset);
     }
 
     /**
@@ -75,7 +72,7 @@ class DT_HttpDateFormat implements DT_Format
      * 引数 $clearCache に TRUE を指定して実行してください.
      * 
      * @param  bool $clearCache  キャッシュを破棄してインスタンスを再生成する場合は TRUE
-     * @return DT_HttpDateFormat デフォルトのインスタンス
+     * @return Peach_DT_HttpDateFormat デフォルトのインスタンス
      */
     public static function getInstance($clearCache = false)
     {
@@ -87,10 +84,10 @@ class DT_HttpDateFormat implements DT_Format
     }
 
     /**
-     * {@link DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を DT_Date にキャストします.
+     * {@link Peach_DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を Peach_DT_Date にキャストします.
      * 
      * @param  string       HTTP-date 形式の文字列
-     * @return DT_Date      変換結果
+     * @return Peach_DT_Date      変換結果
      * @throws Exception    フォーマットが不正な場合
      */
     public function parseDate($format)
@@ -99,10 +96,10 @@ class DT_HttpDateFormat implements DT_Format
     }
 
     /**
-     * {@link DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を DT_Datetime にキャストします.
+     * {@link Peach_DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を Peach_DT_Datetime にキャストします.
      * 
      * @param  string       HTTP-date 形式の文字列
-     * @return DT_Datetime  変換結果
+     * @return Peach_DT_Datetime  変換結果
      * @throws Exception    フォーマットが不正な場合
      */
     public function parseDatetime($format)
@@ -111,10 +108,10 @@ class DT_HttpDateFormat implements DT_Format
     }
 
     /**
-     * HTTP-date 形式のフォーマットを DT_Timestamp に変換します.
+     * HTTP-date 形式のフォーマットを Peach_DT_Timestamp に変換します.
      * 
      * @param  string       HTTP-date 形式の文字列
-     * @return DT_Timestamp 変換結果
+     * @return Peach_DT_Timestamp 変換結果
      * @throws Exception    フォーマットが不正な場合
      */
     public function parseTimestamp($format)
@@ -147,7 +144,7 @@ class DT_HttpDateFormat implements DT_Format
             $this->throwFormatException($format);
         }
 
-        $parsed = new DT_Timestamp($date["year"], $date["month"], $date["day"], $date["hour"], $date["minute"], $date["second"]);
+        $parsed = new Peach_DT_Timestamp($date["year"], $date["month"], $date["day"], $date["hour"], $date["minute"], $date["second"]);
         return $parsed->add("minute", - $this->internalOffset);
     }
 
@@ -155,10 +152,10 @@ class DT_HttpDateFormat implements DT_Format
      * この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.
      * 例えばシステム時刻の時差が UTC+9 だった場合, 前日の 15:00 の HTTP-date 表現を返り値とします.
      * 
-     * @param  DT_Date 書式化対象の時間オブジェクト
+     * @param  Peach_DT_Date 書式化対象の時間オブジェクト
      * @return string この日付の HTTP-date 表現
      */
-    public function formatDate(DT_Date $d)
+    public function formatDate(Peach_DT_Date $d)
     {
         return $this->formatDatetime($d->toDatetime());
     }
@@ -166,10 +163,10 @@ class DT_HttpDateFormat implements DT_Format
     /**
      * この時刻の HTTP-date 表現を返します.
      * 
-     * @param  DT_Datetime 書式化対象の時間オブジェクト
+     * @param  Peach_DT_Datetime 書式化対象の時間オブジェクト
      * @return string この時刻の HTTP-date 表現
      */
-    public function formatDatetime(DT_Datetime $d)
+    public function formatDatetime(Peach_DT_Datetime $d)
     {
         $d = $d->add("minute", $this->internalOffset);
 
@@ -186,10 +183,10 @@ class DT_HttpDateFormat implements DT_Format
     /**
      * この時刻の HTTP-date 表現を返します.
      * 
-     * @param  DT_Timestamp 書式化対象の時間オブジェクト
+     * @param  Peach_DT_Timestamp 書式化対象の時間オブジェクト
      * @return string この時刻の HTTP-date 表現
      */
-    public function formatTimestamp(DT_Timestamp $d)
+    public function formatTimestamp(Peach_DT_Timestamp $d)
     {
         return $this->formatDatetime($d);
     }
@@ -262,15 +259,15 @@ class DT_HttpDateFormat implements DT_Format
     private function getDayDescription($day)
     {
         switch ($day) {
-            case 0: return 'Sun';
-            case 1: return 'Mon';
-            case 2: return 'Tue';
-            case 3: return 'Wed';
-            case 4: return 'Thu';
-            case 5: return 'Fri';
-            case 6: return 'Sat';
+            case 0: return "Sun";
+            case 1: return "Mon";
+            case 2: return "Tue";
+            case 3: return "Wed";
+            case 4: return "Thu";
+            case 5: return "Fri";
+            case 6: return "Sat";
             default:
-                throw new Exception('');
+                throw new Exception("day: Out of range");
         }
     }
 }

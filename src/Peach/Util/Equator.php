@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -28,7 +28,7 @@
  * @todo いわゆる "Latitude Zero" と区別するため, 違うインタフェース名にしたい
  * @package Util
  */
-interface Util_Equator
+interface Peach_Util_Equator
 {
     /**
      * 引数 $var1 と $var2 が等しいと判断した場合に TRUE を返します.

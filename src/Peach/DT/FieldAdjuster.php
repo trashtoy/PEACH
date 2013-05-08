@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -26,13 +26,13 @@
  */
 /**
  * 日時の値調整を行うクラスです.
- * このクラスは DT_Date, DT_Datetime, DT_Timestamp の初期化処理のみで使用されることを
+ * このクラスは Peach_DT_Date, Peach_DT_Datetime, Peach_DT_Timestamp の初期化処理のみで使用されることを
  * 想定しています.
  * 
  * @package DT
  * @ignore
  */
-class DT_FieldAdjuster
+class Peach_DT_FieldAdjuster
 {
     /**
      * 調整対象のフィールドです.
@@ -77,12 +77,12 @@ class DT_FieldAdjuster
 
     /**
      * 指定された値の繰り上がり処理を行います.
-     * この関数は DT_Time::adjust() から呼び出されます.
+     * この関数は Peach_DT_Time::adjust() から呼び出されます.
      * 
-     * @param Util_Map $fields 調整対象のフィールド一覧
+     * @param Peach_Util_Map $fields 調整対象のフィールド一覧
      * @ignore
      */
-    public function moveUp(Util_Map $fields)
+    public function moveUp(Peach_Util_Map $fields)
     {
         $key        = $this->key;
         $upperKey   = $this->upperKey;
@@ -100,12 +100,12 @@ class DT_FieldAdjuster
 
     /**
      * 指定された値の繰り下がり処理を行います.
-     * この関数は DT_Time::adjust() から呼び出されます.
+     * この関数は Peach_DT_Time::adjust() から呼び出されます.
      * 
-     * @param Util_Map $fields 調整対象のフィールド一覧
+     * @param Peach_Util_Map $fields 調整対象のフィールド一覧
      * @ignore
      */
-    public function moveDown(Util_Map $fields)
+    public function moveDown(Peach_Util_Map $fields)
     {
         $key        = $this->key;
         $upperKey   = $this->upperKey;

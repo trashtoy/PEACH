@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,12 +21,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package Util */
-/** */
-require_once(dirname(__FILE__) . "/Map.php");
-
 /**
  * 任意の値やオブジェクトをキーに指定することが出来る Map です. 格納のアルゴリズムは
- * {@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html java.util.Map}
+ * {@link http://docs.oracle.com/javase/jp/6/api/java/util/HashMap.html java.util.HashMap}
  * を参考にしています.
  * キーに使用するオブジェクトは, 出来る限り不変 (イミュータブル) なものを使用してください.
  * キーに設定したオブジェクトに対して外部から変更が加わった場合,
@@ -34,11 +31,11 @@ require_once(dirname(__FILE__) . "/Map.php");
  * 
  * @package Util
  */
-class Util_HashMap implements Util_Map
+class Peach_Util_HashMap implements Peach_Util_Map
 {
     /**
      * このマップが持つエントリーの一覧です. 
-     * この値は以下のような構造となります. (値は HashMapEntry オブジェクト)
+     * この値は以下のような構造となります. (値は Peach_Util_HashMapEntry オブジェクト)
      * 
      * <pre>
      * array(
@@ -58,7 +55,7 @@ class Util_HashMap implements Util_Map
      * @var array
      */
     private $table;
-
+    
     /**
      * 格納先のインデックスの個数です.
      * 常に 2 の累乗の値になります.
@@ -66,42 +63,43 @@ class Util_HashMap implements Util_Map
      * @var int
      */
     private $capacity;
-
+    
     /**
      * キーの等価性のチェックを行うために使用する Equator です.
-     * @var Util_Equator
+     * @var Peach_Util_Equator
      */
     private $equator;
-
+    
     /**
      * put() や remove() などで内部構造に変化が加えられたことを示すフラグです.
-     * {@link Util_HashMap::entryList()} を呼び出した際にキャッシュを使用するかどうか
+     * {@link Peach_Util_HashMap::entryList()} を呼び出した際にキャッシュを使用するかどうか
      * 判断するために使用します.
      * 
      * @var bool
      */
     private $modFlag;
-
+    
     /**
-     * {@link Util_HashMap::entryList()} の返り値のキャッシュデータです.
+     * {@link Peach_Util_HashMap::entryList()} の返り値のキャッシュデータです.
      * この値はオブジェクトの内部構造が変化すると無効化されます.
      * 
      * @var array
      */
     private $cache;
-
+    
     /**
      * 新しい HashMap を構築します.
      * 引数で設定された容量は, オブジェクト構築後に変更することは出来ません.
      * 
-     * @param  Util_Map|array $map      デフォルトのマッピング (オプション)
-     * @param  Util_Equator   $e        オブジェクトの等価性を判断するための Equator (NULL の場合は {@link Util_DefaultEquator} が適用されます)
-     * @param  int            $capacity 容量 (デフォルトは 16, 最小で 2)
+     * @param  Peach_Util_Map|array $map      デフォルトのマッピング (オプション)
+     * @param  Peach_Util_Equator   $e        オブジェクトの等価性を判断するための Equator
+     *                                        (NULL の場合は {@link Peach_Util_DefaultEquator} が適用されます)
+     * @param  int                  $capacity 容量 (デフォルトは 16, 最小で 2)
      */
-    public function __construct(Util_Map $map = null, Util_Equator $e = null, $capacity = 16)
+    public function __construct(Peach_Util_Map $map = null, Peach_Util_Equator $e = null, $capacity = 16)
     {
         $this->table    = array();
-        $this->equator  = isset($e) ? $e : Util_DefaultEquator::getInstance();
+        $this->equator  = isset($e) ? $e : Peach_Util_DefaultEquator::getInstance();
         $this->capacity = self::detectCapacity($capacity);
         $this->modFlag  = true;
         $this->cache    = array();
@@ -109,29 +107,32 @@ class Util_HashMap implements Util_Map
             $this->initTable($map);
         }
     }
-
+    
     /**
      * コンストラクタの第一引数が指定された場合に実行される,
      * マッピングの初期化処理です.
      * 
-     * @param Util_Map|array $map 
+     * @param Peach_Util_Map|array $map 
      */
     private function initTable(&$map)
     {
-        if ($map instanceof Util_Map) {
+        if ($map instanceof Peach_Util_Map) {
             $entryList = $map->entryList();
             foreach ($entryList as $entry) {
                 $this->put($entry->getKey(), $entry->getValue());
             }
-        } else if (is_array($map)) {
+            return;
+        }
+        if (is_array($map)) {
             foreach ($map as $key => $value) {
                 $this->put($key, $value);
             }
-        } else {
-            throw new Exception("\$map must be Util_Map or array.");
+            return;
         }
+        
+        throw new Exception("\$map must be Peach_Util_Map or array.");
     }
-
+    
     /**
      * このマップの容量を計算します.
      * 引数以上で最小の 2 の累乗となる整数を返します.
@@ -142,13 +143,14 @@ class Util_HashMap implements Util_Map
         if ($capacity < 2) {
             return 2;
         }
+        
         $i = 2;
         while ($i < $capacity) {
             $i *= 2;
         }
         return $i;
     }
-
+    
     /**
      * 指定されたキーと値をこの Map に関連づけます.
      * @param mixed キー
@@ -172,22 +174,26 @@ class Util_HashMap implements Util_Map
     }
 
     /**
-     * @param Util_Map $map
-     * @see   Util_Map::putAll($map)
+     * 指定された Map の中身をすべて追加します。
+     * もしも引数の Map とこの Map に同じキーが存在していた場合, 
+     * 引数のマッピングで上書きされます.
+     * 
+     * @param Peach_Util_Map $map 格納される Map
+     * @see   Peach_Util_Map::putAll($map)
      */
-    public function putAll(Util_Map $map)
+    public function putAll(Peach_Util_Map $map)
     {
         $entryList = $map->entryList();
         foreach ($entryList as $entry) {
             $this->put($entry->getKey(), $entry->getValue());
         }
     }
-
+    
     /**
      * 指定されたキーにマッピングされている値を返します.
      * マッピングが存在しない場合は代替値 (デフォルトは NULL) を返します.
      * このメソッドの返り値が NULL (または指定した代替値) の場合, 必ずしもマッピングが存在しないとは限りません.
-     * マッピングの存在を確認する場合は {@link Util_HashMap::conainsKey($key)} を使用してください.
+     * マッピングの存在を確認する場合は {@link Peach_Util_HashMap::conainsKey($key)} を使用してください.
      * 
      * @param  mixed $key          マッピングのキー
      * @param  mixed $defaultValue マッピングが存在しない場合に返される代替値
@@ -197,16 +203,16 @@ class Util_HashMap implements Util_Map
     {
         $index = $this->getIndexOf($key);
         if (!isset($this->table[$index])) {
-            return null;
+            return $defaultValue;
         }
         foreach ($this->table[$index] as $entry) {
             if ($entry->keyEquals($key, $this->equator)) {
                 return $entry->getValue();
             }
         }
-        return null;
+        return $defaultValue;
     }
-
+    
     /**
      * マッピングを空にします.
      */
@@ -215,11 +221,11 @@ class Util_HashMap implements Util_Map
         $this->table = array();
         $this->modFlag = true;
     }
-
+    
     /**
      * この Map が持つマッピングの個数を返します.
      * @return int
-     * @see    Util_Map::size()
+     * @see    Peach_Util_Map::size()
      */
     public function size()
     {
@@ -231,9 +237,8 @@ class Util_HashMap implements Util_Map
     }
     
     /*
-     * (non-PHPdoc)
-     * @see Util_Map#keys()
-     * @ignore
+     * この HashMap に含まれるキーの一覧を返します.
+     * @return array
      */
     public function keys()
     {
@@ -245,7 +250,7 @@ class Util_HashMap implements Util_Map
         }
         return $result;
     }
-
+    
     /**
      * 指定されたキーによるマッピングが存在するかどうかを調べます.
      * マッピングが存在する場合に TRUE を返します.
@@ -266,7 +271,7 @@ class Util_HashMap implements Util_Map
         }
         return false;
     }
-
+    
     /**
      * 指定されたキーのマッピングを削除します.
      * @param mixed キー
@@ -286,7 +291,7 @@ class Util_HashMap implements Util_Map
         }
         return;
     }
-
+    
     /**
      * このマップに登録されているすべての値を配列で返します.
      * 返される配列に対する操作はこのマップには反映されません.
@@ -302,11 +307,11 @@ class Util_HashMap implements Util_Map
         }
         return $result;
     }
-
+    
     /**
      * この HashMap に登録されているすべてのエントリーを返します.
      * 
-     * @return array {@link Util_HashMapEntry} の配列
+     * @return array {@link Peach_Util_HashMapEntry} の配列
      */
     public function entryList()
     {
@@ -321,21 +326,21 @@ class Util_HashMap implements Util_Map
         }
         return $this->cache;
     }
-
+    
     /**
      * 指定されたキーと値をマッピングする, 新しいエントリーを構築します.
      * ユーザーは, 必要に応じてこのメソッドをオーバーライドし,
-     * 機能拡張した {@link Util_HashMapEntry HashMapEntry} を返すようにすることもできます.
+     * 機能拡張した {@link Peach_Util_HashMapEntry HashMapEntry} を返すようにすることもできます.
      * 
      * @param  mixed マッピングのキー.
      * @param  mixed マッピングの値.
-     * @return Util_HashMapEntry
+     * @return Peach_Util_HashMapEntry
      */
     protected function createEntry($key, $value)
     {
-        return new Util_HashMapEntry($key, $value);
+        return new Peach_Util_HashMapEntry($key, $value);
     }
-
+    
     /**
      * 指定されたキーのインデックスを返します.
      * @param  string $key

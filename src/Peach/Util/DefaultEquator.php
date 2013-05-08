@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -21,27 +21,23 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package Util */
-/** */
-require_once(dirname(__FILE__) . "/Equator.php");
-
 /**
  * デフォルトの Equator です.
  * @package Util
  */
-class Util_DefaultEquator implements Util_Equator
+class Peach_Util_DefaultEquator implements Peach_Util_Equator
 {
-
     /** このクラスはインスタンス化できません. */
     private function __construct() {}
 
     /**
      * このクラスの唯一のインスタンスを返します.
      * 
-     * @return Util_DefaultEquator
+     * @return Peach_Util_DefaultEquator
      */
     public static function getInstance()
     {
-        static $instance;
+        static $instance = null;
         if (!isset($instance)) {
             $instance = new self();
         }
@@ -49,11 +45,11 @@ class Util_DefaultEquator implements Util_Equator
     }
 
     /**
-     * 引数 $var1 と $var2 を比較します.
+     * 引数 $var1 と $var2 が等価かどうか調べます.
      * 
      * 引数の少なくともいずれか一方がオブジェクトまたは配列の場合は
      * print_r() の結果を比較します.
-     * (hashCode() メソッドで print_r() を使ってハッシュコードを生成するためです.)
+     * (hashCode が print_r() の結果を使ってハッシュコードを生成するためです.)
      * 
      * 引数の少なくともいずれか一方が文字列の場合は両引数を文字列として比較します.
      * 引数が両方とも数値の場合は == で,
@@ -67,19 +63,22 @@ class Util_DefaultEquator implements Util_Equator
     {
         if ($var1 === $var2) {
             return true;
-        } else if (is_object($var1) || is_object($var2) || is_array($var1) || is_array($var2)) {
+        }
+        if (is_object($var1) || is_object($var2) || is_array($var1) || is_array($var2)) {
             $str1 = print_r($var1, true);
             $str2 = print_r($var2, true);
             return $str1 === $str2;
-        } else if (is_string($var1) || is_string($var2)) {
-            return strcmp($var1, $var2) === 0;
-        } else if (is_numeric($var1) && is_numeric($var2)) {
-            return $var1 == $var2;
-        } else {
-            return $var1 === $var2;
         }
+        if (is_string($var1) || is_string($var2)) {
+            return strcmp($var1, $var2) === 0;
+        }
+        if (is_numeric($var1) && is_numeric($var2)) {
+            return $var1 == $var2;
+        }
+        
+        return $var1 === $var2;
     }
-
+    
     /**
      * 指定された値のハッシュ値を返します.
      * ハッシュ値の計算規則は以下のとおりです.
@@ -95,12 +94,13 @@ class Util_DefaultEquator implements Util_Equator
     {
         if (empty($var)) {
             return 0;
-        } else if (is_numeric($var)) {
-            return abs(intval($var));
-        } else {
-            $str = (is_object($var) || is_array($var)) ? print_r($var, true) : strval($var);
-            return hexdec(substr(md5($str), 22));
         }
+        if (is_numeric($var)) {
+            return abs(intval($var));
+        }
+        
+        $str = (is_object($var) || is_array($var)) ? print_r($var, true) : strval($var);
+        return hexdec(substr(md5($str), 22));
     }
 }
 ?>
