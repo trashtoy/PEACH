@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012 @trashtoy
-=======
  * Copyright (c) 2013 @trashtoy
->>>>>>> spike
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -25,12 +21,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 /** @package Util */
-<<<<<<< HEAD
-/** */
-require_once(dirname(__FILE__) . "/Map.php");
-
-=======
->>>>>>> spike
 /**
  * 任意の値やオブジェクトをキーに指定することが出来る Map です. 格納のアルゴリズムは
  * {@link http://docs.oracle.com/javase/jp/6/api/java/util/HashMap.html java.util.HashMap}

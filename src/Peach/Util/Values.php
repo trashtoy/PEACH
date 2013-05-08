@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012 @trashtoy
-=======
  * Copyright (c) 2013 @trashtoy
->>>>>>> spike
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -210,18 +206,6 @@ class Peach_Util_Values
      */
     public static function getType($var)
     {
-        return is_object($var) ? get_class($var) : gettype($var);
-    }
-    
-    /**
-     * 指定された値の型を返します.
-     * 内部関数の {@link gettype() gettype()} とほぼ同じ動作をしますが,
-     * 引数にオブジェクトを指定した場合に文字列 "object"
-     * ではなくその値のクラス名を返すところが異なります.
-     * 
-     * @param mixed $var 検査対象の値
-     */
-    public static function getType($var) {
         return is_object($var) ? get_class($var) : gettype($var);
     }
 }

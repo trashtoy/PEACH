@@ -1,12 +1,6 @@
 <?php
-<<<<<<< HEAD
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_HashMapEntryTest extends PHPUnit_Framework_TestCase {
-=======
 class Peach_Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
 {
->>>>>>> spike
     /**
      * @var Peach_Util_HashMapEntry
      */

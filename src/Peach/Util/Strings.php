@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< HEAD
- * Copyright (c) 2012 @trashtoy
-=======
  * Copyright (c) 2013 @trashtoy
->>>>>>> spike
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -30,12 +26,8 @@
  * 
  * @package Util
  */
-<<<<<<< HEAD
-class Util_Strings {
-=======
 class Peach_Util_Strings
 {
->>>>>>> spike
     /**
      * このクラスはインスタンス化することができません.
      */
@@ -46,11 +38,7 @@ class Peach_Util_Strings
      * 基本的にはオリジナルの explode() と同じですが, 以下の点が異なります.
      * 
      * - $separator が空文字列の場合に空の配列を返す (オリジナルは FALSE を返す)
-<<<<<<< HEAD
-     * - $value が文字列以外の場合, {@link Util_Values::stringValue()} の結果を使用する
-=======
      * - $value が文字列以外の場合, {@link Peach_Util_Values::stringValue()} の結果を使用する
->>>>>>> spike
      *   (オリジナルは単純に string にキャストした結果を使うため, 
      *    オブジェクトを引数に指定した時の挙動が PHP 5.1 と 5.2 以降で異なる)
      * 
@@ -61,18 +49,6 @@ class Peach_Util_Strings
      * @return array  セパレータが見つからないときは長さ 1 の配列, 
      *                対象が空文字列の場合は空の配列, それ以外は explode() と同じ.
      */
-<<<<<<< HEAD
-    public static function explode($separator, $value) {
-        if (!is_string($value)) {
-            return self::explode($separator, Util_Values::stringValue($value));
-        }
-        else if (strlen($separator)) {
-            return explode($separator, $value);
-        }
-        else {
-            return array();
-        }
-=======
     public static function explode($separator, $value)
     {
         if (!is_string($value)) {
@@ -83,7 +59,6 @@ class Peach_Util_Strings
         }
         
         return array();
->>>>>>> spike
     }
     
     /**
@@ -94,12 +69,8 @@ class Peach_Util_Strings
      * @param  string 分割対象の文字列
      * @return array  行単位で分割された文字列の配列
      */
-<<<<<<< HEAD
-    public static function getLines($str) {
-=======
     public static function getLines($str)
     {
->>>>>>> spike
         return preg_split("/\\r\\n|\\r|\\n/", $str);
     }
     
@@ -109,12 +80,8 @@ class Peach_Util_Strings
      * @return boolean 引数が NULL, 空文字列, "\r", "\n", "\t", 
      *                 半角スペースから成る文字列の場合に TRUE, それ以外は FALSE
      */
-<<<<<<< HEAD
-    public static function isWhitespace($str) {
-=======
     public static function isWhitespace($str)
     {
->>>>>>> spike
         return !strlen($str) || !preg_match("/[^\\s]/", $str);
     }
     
@@ -126,21 +93,6 @@ class Peach_Util_Strings
      * @param  string 変換対象の文字列
      * @return string 基底ディレクトリ名
      */
-<<<<<<< HEAD
-    public static function basedir($basedir) {
-        if (!is_string($basedir)) {
-            return self::basedir(Util_Values::stringValue($basedir));
-        }
-        else if (!strlen($basedir)) {
-            return "";
-        }
-        else if (substr($basedir, -1) === "/") {
-            return $basedir;
-        }
-        else {
-            return $basedir . "/";
-        }        
-=======
     public static function basedir($basedir)
     {
         if (!is_string($basedir)) {
@@ -154,7 +106,6 @@ class Peach_Util_Strings
         }
         
         return $basedir . "/";
->>>>>>> spike
     }
     
     /**
@@ -165,15 +116,9 @@ class Peach_Util_Strings
      * スルーします. 以下に例を示します.
      * 
      * <pre>
-<<<<<<< HEAD
-     * getRawIndex("AB=CD=EF", "=") : 2
-     * getRawIndex("AB\\=CD=EF", "=") : 6
-     * getRawIndex("AB\\\\=CD=EF", "=") : 4
-=======
      * getRawIndex("AB=CD=EF", "=")     => 2
      * getRawIndex("AB\\=CD=EF", "=")   => 6
      * getRawIndex("AB\\\\=CD=EF", "=") => 4
->>>>>>> spike
      * </pre>
      * 
      * インデックスが存在しない場合は FALSE を返します.
@@ -182,17 +127,6 @@ class Peach_Util_Strings
      * @param  string 検索対象の文字
      * @return int    インデックス. ただし存在しない場合は FALSE
      */
-<<<<<<< HEAD
-    public static function getRawIndex($text, $chr) {
-        $chr = str_replace("\\", "\\\\", $chr);
-        $pattern = "/(?<!\\\\)(?:\\\\\\\\)*(" . $chr . ".*)$/";
-        preg_match($pattern, $text, $result);
-        if (count($result)) {
-            return strlen($text) - strlen($result[1]);
-        }
-        else {
-            return FALSE;
-=======
     public static function getRawIndex($text, $chr)
     {
         $chr     = str_replace("\\", "\\\\", $chr);
@@ -203,7 +137,6 @@ class Peach_Util_Strings
             return strlen($text) - strlen($result[1]);
         } else {
             return false;
->>>>>>> spike
         }
     }
     
@@ -216,21 +149,6 @@ class Peach_Util_Strings
      * @param  string 開始する文字列
      * @return bool   引数 $text の先頭が $prefix である場合に TRUE
      */
-<<<<<<< HEAD
-    public static function startsWith($text, $prefix) {
-        if (!is_string($text)) {
-            return self::startsWith(Util_Values::stringValue($text), $prefix);
-        }
-        else if (!is_string($prefix)) {
-            return self::startsWith($text, Util_Values::stringValue($prefix));
-        }
-        else if ($prefix === "") {
-            return TRUE;
-        }
-        else {
-            return (strpos($text, $prefix) === 0);
-        }
-=======
     public static function startsWith($text, $prefix)
     {
         if (!is_string($text)) {
@@ -244,38 +162,17 @@ class Peach_Util_Strings
         }
         
         return (strpos($text, $prefix) === 0);
->>>>>>> spike
     }
     
     /**
      * ある文字列が指定された文字列で終了しているかどうかを判別します.
      * $suffix が空文字列の場合は TRUE を返します.
-<<<<<<< HEAD
-     * 引数が文字列以外の場合は {@link Util_Values::stringValue()} が適用されます.
-=======
      * 引数が文字列以外の場合は {@link Peach_Util_Values::stringValue()} が適用されます.
->>>>>>> spike
      * 
      * @param  string 検査対象の文字列
      * @param  string 終了する文字列
      * @return bool   引数 $text の末尾が $suffix に等しい場合に TRUE
      */
-<<<<<<< HEAD
-    public static function endsWith($text, $suffix) {
-        if (!is_string($text)) {
-            return self::endsWith(Util_Values::stringValue($text), $suffix);
-        }
-        else if (!is_string($suffix)) {
-            return self::endsWith($text, Util_Values::stringValue($suffix));
-        }
-        else if ($suffix === "") {
-            return TRUE;
-        }
-        else {
-            $index = strlen($text) - strlen($suffix);
-            return substr($text, $index) === $suffix;
-        }
-=======
     public static function endsWith($text, $suffix)
     {
         if (!is_string($text)) {
@@ -290,7 +187,6 @@ class Peach_Util_Strings
         
         $index = strlen($text) - strlen($suffix);
         return substr($text, $index) === $suffix;
->>>>>>> spike
     }
     
     /**
@@ -305,12 +201,8 @@ class Peach_Util_Strings
      * @param  string 検査対象の文字
      * @return bool   引数 $text の末尾が, '\' でエスケープされていない $chr で終了している場合のみ TRUE
      */
-<<<<<<< HEAD
-    public static function endsWithRawChar($text, $chr) {
-=======
     public static function endsWithRawChar($text, $chr)
     {
->>>>>>> spike
         $chr = str_replace("\\", "\\\\", $chr);
         $pattern = "/(?<!\\\\)(?:\\\\\\\\)*(" . $chr . ")$/";
         $result = preg_match($pattern, $text);
@@ -329,20 +221,12 @@ class Peach_Util_Strings
      * @param  array  置き換える内容の配列
      * @return string テンプレートの適用結果
      */
-<<<<<<< HEAD
-    public static function template($template, array $args = array()) {
-        if (!isset($template)) {
-            return NULL;
-        }
-        $template = Util_Values::stringValue($template);
-=======
     public static function template($template, array $args = array())
     {
         if (!isset($template)) {
             return null;
         }
         $template = Peach_Util_Values::stringValue($template);
->>>>>>> spike
         $replaces = array();
         foreach ($args as $key => $value) {
             $from = "{" . $key . "}";

@@ -1,16 +1,9 @@
 <?php
-<<<<<<< HEAD
-require_once dirname(__FILE__) . '/../../src/Util/load.php';
-
-class Util_ArrayMapTest extends PHPUnit_Framework_TestCase {
-
-=======
 /**
  * Test class for Peach_Util_ArrayMap.
  */
 class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
 {
->>>>>>> spike
     /**
      * @var Peach_Util_ArrayMap
      */
