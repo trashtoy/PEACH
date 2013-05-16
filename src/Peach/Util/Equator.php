@@ -45,8 +45,8 @@ interface Peach_Util_Equator
      * hashCode($var1) と hashCode($var2) が必ず同じ値を返すようにしなければなりません.
      * 
      * この制約条件は, Java で例えると
-     * {@link http://docs.oracle.com/javase/jp/6/api/java/lang/Object.html#equals(java.lang.Object) java.lang.Object#equals()}, 
-     * {@link http://docs.oracle.com/javase/jp/6/api/java/lang/Object.html#hashCode() java.lang.Object#hashCode()}
+     * {@link http://docs.oracle.com/javase/jp/7/api/java/lang/Object.html#equals(java.lang.Object) java.lang.Object#equals()}, 
+     * {@link http://docs.oracle.com/javase/jp/7/api/java/lang/Object.html#hashCode() java.lang.Object#hashCode()}
      * で定義されている規約に相当します.
      * 
      * また, このメソッドは不正な値が指定された場合に任意の例外を投げる必要があります.

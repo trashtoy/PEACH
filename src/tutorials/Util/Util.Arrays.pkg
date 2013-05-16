@@ -18,8 +18,8 @@
     <para>オブジェクトを含んだ配列をソートするための方法として, 一般的に {@link usort() usort} が利用されますが,
     このモジュールでは Java のコレクション・フレームワークのようなオブジェクト指向的なソート API を使うことができます.
     オブジェクトの配列をソートする際に利用する {@link Peach_Util_Comparator} および {@link Peach_Util_Comparable} は, それぞれ
-    {@link http://docs.oracle.com/javase/jp/6/api/java/util/Comparator.html java.util.Comparator}, 
-    {@link http://docs.oracle.com/javase/jp/6/api/java/util/Comparator.html java.util.Comparable}
+    {@link http://docs.oracle.com/javase/jp/7/api/java/util/Comparator.html java.util.Comparator}, 
+    {@link http://docs.oracle.com/javase/jp/7/api/java/lang/Comparable.html java.lang.Comparable}
     と同じような使い方をします. </para>
     <refsect2 id="{@id Util.Arrays.sort.Comparable}">
       <title>Peach_Util_Comparable の使用例</title>
@@ -150,9 +150,7 @@ class TestObjectComparator2 implements Peach_Util_Comparator {
 
 $c1 = new TestObjectComparator1();
 $c2 = new TestObjectComparator2();
-$r1 = new Util_ReverseComparator($c1);
-$r2 = new Util_ReverseComparator($c2);
-
+ 
 $arr = array(
     new TestObject(5, 100),
     new TestObject(3, 300),
@@ -160,11 +158,9 @@ $arr = array(
     new TestObject(4, 200),
     new TestObject(1, 300)
 );
-
-$result1 = Peach_Util_Arrays::sort($arr, $c1); // ID が 2(100), 5(100), 4(200), 1(300), 3(300) の順にソート
-$result2 = Peach_Util_Arrays::sort($arr, $r1); // ID が 3(300), 1(300), 4(200), 5(100), 2(100) の順にソート
-$result3 = Peach_Util_Arrays::sort($arr, $c2); // ID が 1, 2, 3, 4, 5 の順にソート
-$result4 = Peach_Util_Arrays::sort($arr, $r2); // ID が 5, 4, 3, 2, 1 の順にソート
+ 
+$result1 = Peach_Util_Arrays::sort($arr, $c1); // ID(value) が 2(100), 5(100), 4(200), 1(300), 3(300) の順にソート
+$result2 = Peach_Util_Arrays::sort($arr, $c2); // ID が 1, 2, 3, 4, 5 の順にソート
         ]]>
       </programlisting>
     </refsect2>

@@ -26,7 +26,7 @@
  * 
  * このインタフェースは, {@link Peach_Util_Arrays} のソート・大小比較関連の API で使用されます.
  * Java における
- * {@link http://docs.oracle.com/javase/jp/6/api/java/lang/Comparable.html java.lang.Comparable} 
+ * {@link http://docs.oracle.com/javase/jp/7/api/java/lang/Comparable.html java.lang.Comparable} 
  * と同じ用途で使われることを想定しています.
  * 
  * @package Util

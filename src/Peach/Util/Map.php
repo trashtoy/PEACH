@@ -23,7 +23,7 @@
 /** @package Util */
 /**
  * キーと値のマッピングを管理するインタフェースです. API は 
- * {@link http://docs.oracle.com/javase/jp/6/api/java/util/Map.html java.util.Map} 
+ * {@link http://docs.oracle.com/javase/jp/7/api/java/util/Map.html java.util.Map} 
  * を参考にして作られています.
  * 
  * このインタフェースを使うと, 今まで配列を使って

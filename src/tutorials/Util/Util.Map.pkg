@@ -11,7 +11,7 @@
     <title>Map インタフェースの概要</title>
     <para>{@link Peach_Util_Map} は, PHP の配列機能をオブジェクト指向化した, 連想配列 (キー・バリュー形式) のインタフェースです.
     Java の コレクションフレームワークの一部
-    ({@link http://java.sun.com/javase/ja/6/docs/ja/api/java/util/Map.html java.util.Map} 等)
+    ({@link http://docs.oracle.com/javase/jp/7/api/java/util/Map.html java.util.Map} 等)
     の API を取り入れつつ, 独自の付加機能を付け加えています.
     ある程度 Java プログラミングに慣れているユーザーはすんなり使いこなせるでしょう.</para>
     
@@ -22,7 +22,7 @@
     <para>Java の Map インタフェースと以下の相違点があります.</para>
     <itemizedlist>
       <listitem>キーが存在しない場合に返すデフォルト値の指定が出来る.</listitem>
-      <listitem>({@link Peach_Util_HashMap} について) put または get を行う際にキーの等価条件を独自に定義できる ({@link Util_Equator} を参照)</listitem>
+      <listitem>({@link Peach_Util_HashMap} について) put または get を行う際にキーの等価条件を独自に定義できる ({@link Peach_Util_Equator} を参照)</listitem>
       <listitem>capacity 値の動的な変更はサポートせず, 負荷係数などの概念が存在しない. (今後のバージョンでサポートする可能性はある)</listitem>
     </itemizedlist>
     <para>SPL をインストールしていない PHP5.2 以前の環境に対応するため, 
@@ -34,19 +34,19 @@
      <para>「もしも $arr["NAME"] があれば, $userName にその値を代入する. 
      なければ代替値として $userName に "anonymous" を代入する」という場合を考えてみます. 通常なら</para>
      <programlisting role="php">
-     <![CDATA[
+        <![CDATA[
 if (isset($arr["NAME"])) {
     $userName = $arr["NAME"];
 } else {
     $userName = "anonymous";
 }
-     ]]>
+        ]]>
      </programlisting>
      <para>となりますが, Map を利用する場合は</para>
      <programlisting role="php">
-     <![CDATA[
+        <![CDATA[
 $userName = $map->get("NAME", "anonymous");
-     ]]>
+        ]]>
      </programlisting>
      <para>のように, 第二引数に代替値を指定して get メソッドを実行することで, 同等のことができます.</para>
    </refsect1>

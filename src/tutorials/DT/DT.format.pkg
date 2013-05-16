@@ -80,7 +80,7 @@ $d3 = Peach_DT_Timestamp::parse(1337553045, $f3);
             クラス {@link  Peach_DT_SimpleFormat} を使うことで,
             ユーザー定義の日付・時刻パターンで文字列解析と書式化が出来ます.
             Java で例えると
-            {@link http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html SimpleDateFormat}
+            {@link http://docs.oracle.com/javase/jp/7/api/java/text/SimpleDateFormat.html SimpleDateFormat}
             と同じような役割のクラスです.
         </para>
         <programlisting role="php">

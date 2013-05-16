@@ -23,7 +23,7 @@
 /** @package Util */
 /**
  * 任意の値やオブジェクトをキーに指定することが出来る Map です. 格納のアルゴリズムは
- * {@link http://docs.oracle.com/javase/jp/6/api/java/util/HashMap.html java.util.HashMap}
+ * {@link http://docs.oracle.com/javase/jp/7/api/java/util/HashMap.html java.util.HashMap}
  * を参考にしています.
  * キーに使用するオブジェクトは, 出来る限り不変 (イミュータブル) なものを使用してください.
  * キーに設定したオブジェクトに対して外部から変更が加わった場合,
