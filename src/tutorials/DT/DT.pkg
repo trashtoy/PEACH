@@ -8,7 +8,7 @@
     </refsynopsisdiv>
     {@toc}
     <refsect1 id="{@id intro}">
-        <title>時間操作モジュール DT</title>
+        <title>やりたいことを, より簡単に.</title>
         <para>
             パッケージ DT は, 時間操作・入出力のためのライブラリです.
             PHP にはもともと {@link http://www.php.net/manual/ja/ref.datetime.php 日付・時刻関数}
@@ -16,168 +16,133 @@
             よりオブジェクト指向な設計となっています.
         </para>
         <para>
-            DT モジュールを利用することで, やりたかったことがより簡潔に実現することができます.
-            また拡張性の高い API となっているため, 
-            様々なニーズに対して低コストで対応することができます.
-            具体的な利点について以下で説明します.
+            DT モジュールを利用することで, 時間処理に関する様々な処理を, より簡潔に実現することができます.
+            拡張性の高い API となっているため, 様々なニーズに対して低コストで対応することができます.
+            このモジュールを使う利点については {@tutorial DT.features.pkg} を参照してください.
         </para>
     </refsect1>
-    <refsect1 id="{@id immutable}">
-        <title>イミュータブルなクラス設計</title>
-        <para>
-            このモジュールの時間オブジェクト (特定の日付や日時をあらわすオブジェクト)
-            は, イミュータブル (不変クラス) な設計となっています.
-            以下のサンプルコードは, 特定の日付とその前後の日付を出力します.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
-// 既存の方法
-$d = new DateTime("2012-05-21");
-echo $d->format("Y-m-d"); // 2012-05-21
-$d->modify("+1 day");
-echo $d->format("Y-m-d"); // 2012-05-22
-$d->modiry("-2 day");
-echo $d->format("Y-m-d"); // 2012-05-20
+    <refsect1 id="{@id examples}">
+        <title>使い方</title>
+        <para>このモジュールの使い勝手をお伝えするため, いくつかのコード例をお見せします.</para>
+        <refsect2 id="{@id init}">
+            <title>時間オブジェクトの生成</title>
+            <para>
+                ある特定の日付または時刻を表現するオブジェクト
+                (「<emphasis>時間オブジェクト</emphasis>」 と呼びます)
+                を生成するためには, 以下のように書きます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+// 指定された年月日 (2012/05/21) をあらわすオブジェクト
+$d1 = new Peach_DT_Date(2012, 5, 21);
 
-// DT モジュール
-$today     = new Peach_DT_Date(2012, 5, 21);
-$tomorrow  = $today->add("date", 1);
-$yesterday = $today->add("date", -1);
-echo $today;     // 2012-05-21
-echo $tomorrow;  // 2012-05-22
-echo $yesterday; // 2012-05-20
-            ]]>
-        </programlisting>
-        <para>
-            既存の方法では modify メソッドを実行するたびにオブジェクトの状態が変化します.
-            翌日の日付を出力するために「日」のフィールドを 1 進めた後,
-            今度は前日の日付を出力するために「日」を 2 戻す必要があります.
-            このようにオブジェクトに対する副作用を考慮しながらプログラミングする必要があります.
-        </para>
-        <para>
-            DT モジュールでは一度生成されたオブジェクトは変化することがありません.
-            add() や set() などでフィールドを操作するたびに新しいオブジェクトが生成されます.
-            プログラマはメソッドの副作用を気にする必要がなくなると共に,
-            操作後のオブジェクトに対して $yesterday や $tomorrow
-            などの変数名を付けて, 見通しの良いコードを書くことができます.
-        </para>
-        <para>
-            さらに, 「現在時刻の1年後の1週間前の10:30」といった複雑な操作を, 
-            メソッドチェインを使って簡潔に書くことができます.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
-$d = Peach_DT_Datetime::now()
-        ->add("year", 1)
-        ->add("date", -7)
-        ->setAll(array("hour" => 10, "minute" => 30));
-            ]]>
-        </programlisting>
+// 指定された年月日・時刻 (2012/05/21 07:34) をあらわすオブジェクト
+$d2 = new Peach_DT_Datetime(2012, 5, 21, 7, 34);
+
+// 指定された年月日・時刻 (2012/05/21 07:34:45) をあらわすオブジェクト
+$d3 = new Peach_DT_Timestamp(2012, 5, 21, 7, 34, 45);
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id get}">
+            <title>フィールドの参照</title>
+            <para>
+                時間オブジェクトから「日」や「分」など特定のフィールドを参照するのも簡単に出来ます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$date = new Peach_DT_Date(2012, 5, 21);
+var_dump($date->get("year"));  // int(2012)
+var_dump($date->get("month")); // int(5)
+var_dump($date->get("date"));  // int(21)
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id set_and_add}">
+            <title>フィールドの上書き</title>
+            <para>もちろん, 特定のフィールドを上書きしたり, 加算・減算することも出来ます.</para>
+            <para>以下のコードは, 日付の「月」の値を 7 から 10 に変更します.</para>
+            <programlisting role="php">
+                <![CDATA[
+$date = new Peach_DT_Datetime(2012, 5, 21, 7, 34);
+$test = $date->set("month", 10);
+var_dump($test->__toString()); // string(16) "2012-10-21 07:34"
+                ]]>
+            </programlisting>
+            
+            <para>以下のコードは 100 分後の時刻を計算します.</para>
+            <programlisting role="php">
+                <![CDATA[
+$date = new Peach_DT_Datetime(2012, 5, 21, 7, 34);
+$test = $date->add("minute", 100);
+var_dump($test->__toString()); // string(16) "2012-05-21 09:14"
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id format}">
+            <title>時間オブジェクトを文字列に変換</title>
+            <para>
+                文字列の出力方法も色々あります.
+                引数無しで format() を実行した場合は
+                <code>"YYYY-MM-DD hh:mm:ss"</code> 形式のフォーマットになるため,
+                SQL との連携が簡単にできます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$d1 = new Peach_DT_Date(2012, 5, 21);
+$d2 = new Peach_DT_Datetime(2012, 5, 21, 7, 34);
+$d3 = new Peach_DT_Timestamp(2012, 5, 21, 7, 34, 45);
+var_dump($d1->format());   // string(10) "2012-05-21"
+var_dump($d2->format());   // string(16) "2012-05-21 07:34"
+var_dump($d3->format());   // string(19) "2012-05-21 07:34:45"
+                ]]>
+            </programlisting>
+            <para>
+                出力のカスタマイズも簡単に出来ます.
+                format() の引数に {@link Peach_DT_Format} オブジェクトを指定してください.
+                Java の {@link http://docs.oracle.com/javase/jp/7/api/java/text/SimpleDateFormat.html SimpleDateFormat}
+                と同じような使い勝手で活用できます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$f  = new Peach_DT_SimpleFormat("Y/m/d H:i:s");
+
+$d1 = new Peach_DT_Date(2012, 5, 21);
+$d2 = new Peach_DT_Datetime(2012, 5, 21, 7, 34);
+$d3 = new Peach_DT_Timestamp(2012, 5, 21, 7, 34, 45);
+var_dump($d1->format($f)); // string(19) "2012/05/21 00:00:00"
+var_dump($d2->format($f)); // string(19) "2012/05/21 07:34:00"
+var_dump($d3->format($f)); // string(19) "2012/05/21 07:34:45"
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id parse}">
+            <title>文字列から時間オブジェクトへの変換</title>
+            <para>逆に、文字列から時間オブジェクトへの変換も同様に出来ます.</para>
+            <programlisting role="php">
+                <![CDATA[
+$d1 = Peach_DT_Date::parse("2012-05-21");
+$d2 = Peach_DT_Datetime::parse("2012-05-21 07:34");
+$d3 = Peach_DT_Timestamp::parse("2012-05-21 07:34:45");
+                ]]>
+            </programlisting>
+            <para>フォーマットを指定した変換も可能です.</para>
+            <programlisting role="php">
+                <![CDATA[
+$f    = new Peach_DT_SimpleFormat("Y/m/d H:i:s");
+$date = Peach_DT_Timestamp::parse("2012/05/21 07:34:45", $f);
+var_dump($date->get("second")); // int(45)
+                ]]>
+            </programlisting>
+        </refsect2>
     </refsect1>
-    <refsect1 id="{@id class_variation}">
-        <title>スコープによるクラスの使い分け</title>
-        <para>
-            日付だけを扱いたい場合は {@link Peach_DT_Date}, 
-            日付に加えて時刻も扱いたい場合は {@link Peach_DT_Datetime}
-            といった具合に, 用途に応じて使うクラスを選ぶことが出来ます.
-        </para>
-        <para>
-            クラスの使い分けが役に立つのは, 例えば日付同士を比較するようなケースです.
-            既存の方法では, 余計なフィールド同士で比較が行われないよう
-            setTime() で時・分・秒を 0 に揃えるなどの対処が必要でした.
-            DT モジュールの場合は Peach_DT_Date クラスを使うことで同じことが簡潔に表現できます.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
-// 既存の方法
-$subject = new DateTime("2012-05-21");
-$now     = new DateTime();
-$now->setTime(0, 0, 0); // 日付だけを比較したいので, 余計な時・分・秒を 0 に揃える
-if ($now == $subject) {
-    // something
-}
-
-// DT モジュール
-$subject = new Peach_DT_Date(2012, 5, 21);
-$now     = Peach_DT_Date::now();
-if ($now->equals($subject)) {
-    // something
-}
-            ]]>
-        </programlisting>
-    </refsect1>
-    <refsect1 id="{@id architecture}">
-        <title>時間操作の API と書式関連の API の分離</title>
-        <para>
-            書式関連 (parse や format) のロジックは全て {@link Peach_DT_Format} インタフェースに移譲しているため,
-            全体的にシンプルな設計となっています.
-        </para>
-        <para>
-            Peach_DT_Format の具象クラスをどのように利用するか, 以下のサンプルコードで例を示します.
-            まずは特定の時刻を Last-Modified ヘッダで出力するサンプルです.
-            HTTP-date を扱うクラス {@link Peach_DT_HttpDateFormat} を使います.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
-// タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
-
-$f    = Peach_DT_HttpDateFormat::getInstance();
-$time = new Peach_DT_Timestamp(2012, 4, 1, 15, 43, 21);
-header("Last-Modified: " . $time->format($f)); // "Last-Modified: Sun, 01 Apr 2012 06:43:21 GMT"
-            ]]>
-        </programlisting>
-        <para>
-            次に, サーバー上の任意のファイルの更新日時を時間オブジェクトに変換する例です.
-            今度は UNIX タイムスタンプを取り扱うためのクラス {@link Peach_DT_UnixTimeFormat} を使います.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
-// タイムゾーンが仮に Asia/Tokyo (UTC+9) に設定されているものとする
-
-$f = Peach_DT_UnixTimeFormat::getInstance();
-echo filemtime("/tmp/sample.txt"); // 1234567890
-$d = Peach_DT_Timestamp::parse(filemtime("/tmp/sample.txt"), $f);
-echo $d->format(); // "2009-02-14 08:31:30"
-            ]]>
-        </programlisting>
-        <para>今度は複数のフォーマットを使い分けてみましょう. 以下のようなプログラムを考えます.</para>
-        <orderedlist>
-            <listitem>とあるファイルの更新日時を調べる.</listitem>
-            <listitem>
-                もしもリクエストヘッダに If-Modified-Since が存在する場合は,
-                ファイルの更新日時と比較する.
-                2つが同じ時刻だった場合はステータスコード "304 Not Modified"
-                を出力して終了する.
-            </listitem>
-            <listitem>
-                それ以外は, そのファイルの更新日時を Last-Modified ヘッダとして出力し,
-                そのファイルの中身を出力する.
-            </listitem>
-        </orderedlist>
-        <para>
-            これを実現するためのコードは以下の通りです.
-            Peach_DT_HttpDateFormat が If-Modified-Since のパースと
-            Last-Modified の出力の 2 箇所で利用されていて,
-            Peach_DT_UnixTimeFormat がファイルの更新日時の取得に使われていることに注目してください.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
-$uFormat  = Peach_DT_UnixTimeFormat::getInstance();
-$hFormat  = Peach_DT_HttpDateFormat::getInstance();
-$filename = "/tmp/sample.txt";
-$modified = Peach_DT_Timestamp::parse(filemtime($filename), $uFormat);
-
-if (isset($_SERVER["HTTP_IF_MODIFIED_SINCE"])) {  
-    $since = Peach_DT_Timestamp::parse($_SERVER["HTTP_IF_MODIFIED_SINCE"], $hFormat);
-    if ($modified->equals($since)) {
-        header("304 Not Modified");
-        exit;
-    }
-}
-
-header("Last-Modified: " . $modified->format($hFormat));
-echo file_get_contents($filename);
-            ]]>
-        </programlisting>
+    <refsect1 id="{@id next}">
+        <title>APIの詳細について</title>
+        <para>詳しくはこちらをご覧ください。</para>
+        <itemizedlist>
+            <listitem>{@tutorial DT.basic.pkg}</listitem>
+            <listitem>{@tutorial DT.init.pkg}</listitem>
+            <listitem>{@tutorial DT.format.pkg}</listitem>
+        </itemizedlist>
     </refsect1>
 </refentry>

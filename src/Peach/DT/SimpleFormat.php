@@ -23,7 +23,7 @@
 /** @package DT */
 /**
  * Java の
- * {@link http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html SimpleDateFormat}
+ * {@link http://docs.oracle.com/javase/jp/7/api/java/text/SimpleDateFormat.html SimpleDateFormat}
  * と同じような使い勝手で, ユーザー定義の書式を扱うことができるクラスです.
  * 日付・時刻のパターンは {@link date() date()} の一部を採用しています.
  * 

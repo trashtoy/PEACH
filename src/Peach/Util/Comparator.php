@@ -25,7 +25,7 @@
  * 与えられた二つの値を比較するインタフェースです. 
  * このインタフェースは, {@link Peach_Util_Arrays::sort()} の引数として使われます.
  * Java における 
- * {@link http://docs.oracle.com/javase/jp/6/api/java/util/Comparator.html java.util.Comparator}
+ * {@link http://docs.oracle.com/javase/jp/7/api/java/util/Comparator.html java.util.Comparator}
  * と同じ用途で使われることを想定しています.
  * 
  * PHP には同様の働きをする {@link usort() usort()} などのビルトイン関数がありますが,
