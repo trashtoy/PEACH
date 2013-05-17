@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrays (配列操作)</title>
+    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <!--[if lt IE 9]>
+    <script src="../media/html5.js"></script>  
+    <![endif]-->
+</head>
+<body>
+<header>
+    <h1>Util</h1>
+    <nav>
+        <h1>グローバルナビゲーション</h1>
+        <ul>
+            <li><a href="../classtrees_Util.html">class tree: Util</a></li>
+            <li><a href="../elementindex_Util.html">index: Util</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<nav id="menu">
+    <h1>メニュー</h1>
+    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2 class="level">Package-level</h2>
+        <ul>
+            <li class="tutorial_tree"><a href="../Util/tutorial_Util.pkg.html">汎用モジュール群 Util</a>
+                <ul>
+                    <li class="tutorial_tree"><a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+                </ul>
+                <ul>
+                    <li class="tutorial_tree"><a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_Comparable.html">Peach_Util_Comparable</a></li>
+            <li><a href="../Util/Peach_Util_Comparator.html">Peach_Util_Comparator</a></li>
+            <li><a href="../Util/Peach_Util_Equator.html">Peach_Util_Equator</a></li>
+            <li><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a></li>
+            <li><a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_AbstractMapEntry.html">Peach_Util_AbstractMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMapEntry.html">Peach_Util_ArrayMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></li>
+            <li><a href="../Util/Peach_Util_DefaultComparator.html">Peach_Util_DefaultComparator</a></li>
+            <li><a href="../Util/Peach_Util_DefaultEquator.html">Peach_Util_DefaultEquator</a></li>
+            <li><a href="../Util/Peach_Util_HashMap.html">Peach_Util_HashMap</a></li>
+            <li><a href="../Util/Peach_Util_HashMapEntry.html">Peach_Util_HashMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Strings.html">Peach_Util_Strings</a></li>
+            <li><a href="../Util/Peach_Util_Values.html">Peach_Util_Values</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Util/_Peach---Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_Peach---Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_Peach---Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_Peach---Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_Peach---Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_Peach---Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_Peach---Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_Peach---Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_Peach---Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_Peach---Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_Peach---Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_Peach---Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_Peach---Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_Peach---Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_Peach---Util---Values.php.html">Values.php</a></li>
+        </ul>
+    </section>
+</nav>
+<section id="main">
+<h1 class="symbol">Arrays (配列操作)</h1>
+  <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+  <section id="toc">
+    <h1>Table of Contents</h1>
+    <ul>
+        <li><a href="../Util/tutorial_Util.Arrays.pkg.html#Util.Arrays.summary">Arrays クラスの概要</a></li>
+        <li><a href="../Util/tutorial_Util.Arrays.pkg.html#Util.Arrays.sort">オブジェクトの配列をソートする</a></li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Util/tutorial_Util.Arrays.pkg.html#Util.Arrays.sort.Util.Arrays.sort.Comparable">Peach_Util_Comparable の使用例</a></li>
+        <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Util/tutorial_Util.Arrays.pkg.html#Util.Arrays.sort.Util.Arrays.sort.Comparator">Peach_Util_Comparator の使用例</a></li>
+        <li><a href="../Util/tutorial_Util.Arrays.pkg.html#Util.Arrays.top">max, min の活用方法</a></li>
+    </ul>
+</section>
+
+  <!-- refsect1 --><section class="tutorial" id="Util.Arrays.summary"><h1>Arrays クラスの概要</h1><p><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a> は, 配列のソートや最大値・最小値の取得など, 
+    配列操作に関する汎用処理を集めたユーティリティクラスです.</p></section><!-- /refsect1 -->
+  
+  <!-- refsect1 --><section class="tutorial" id="Util.Arrays.sort"><h1>オブジェクトの配列をソートする</h1><p>オブジェクトを含んだ配列をソートするための方法として, 一般的に <a href="http://www.php.net/usort">usort</a> が利用されますが,
+    このモジュールでは Java のコレクション・フレームワークのようなオブジェクト指向的なソート API を使うことができます.
+    オブジェクトの配列をソートする際に利用する <a href="../Util/Peach_Util_Comparator.html">Peach_Util_Comparator</a> および <a href="../Util/Peach_Util_Comparable.html">Peach_Util_Comparable</a> は, それぞれ
+    <a href="http://docs.oracle.com/javase/jp/7/api/java/util/Comparator.html">java.util.Comparator</a>, 
+    <a href="http://docs.oracle.com/javase/jp/7/api/java/lang/Comparable.html">java.lang.Comparable</a>
+    と同じような使い方をします.</p>
+    <h2>Peach_Util_Comparable の使用例</h2><p>Peach_Util_Comparable を使ったソートの例を以下に示します.
+      ソート対象のクラスで implements Peach_Util_Comparable を宣言して,
+      compareTo() メソッド内にソート条件を定義します.</p>
+      <ol class="src"><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestObject&nbsp;</span><span class="src-key">implements&nbsp;</span><span class="src-id">Peach_Util_Comparable&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">,&nbsp;</span><span class="src-var">$value</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">id&nbsp;&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">value&nbsp;</span>=&nbsp;<span class="src-var">$value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">getId</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">getValue</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;引数の&nbsp;TestObject&nbsp;の&nbsp;value&nbsp;を比較します.</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;value&nbsp;が等しい場合は&nbsp;id&nbsp;を比較します.</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">compareTo</span><span class="src-sym">(</span><span class="src-var">$subject</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$subject&nbsp;</span>instanceof&nbsp;<span class="src-id">TestObject</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$comp&nbsp;</span>=&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">value&nbsp;</span>-&nbsp;<span class="src-var">$subject</span><span class="src-sym">-&gt;</span><span class="src-id">value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-num">0&nbsp;</span>&lt;&nbsp;<span class="src-var">$comp</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$comp&nbsp;</span>&lt;&nbsp;<span class="src-num">0</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span>-<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$comp2&nbsp;</span>=&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">id&nbsp;</span>-&nbsp;<span class="src-var">$subject</span><span class="src-sym">-&gt;</span><span class="src-id">id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-num">0&nbsp;</span>&lt;&nbsp;<span class="src-var">$comp2</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$comp2&nbsp;</span>&lt;&nbsp;<span class="src-num">0</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span>-<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-num">0</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">Exception</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">250</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">4</span><span class="src-sym">,&nbsp;</span><span class="src-num">400</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">320</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">2</span><span class="src-sym">,&nbsp;</span><span class="src-num">400</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></span><span class="src-sym">::</span><a href="../Util/Peach_Util_Arrays.html#methodsort">sort</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;=&gt;&nbsp;ID&nbsp;が&nbsp;5(100),&nbsp;1(250),&nbsp;3(320),&nbsp;2(400),&nbsp;4(400)&nbsp;の順にソートされる</span></div></li>
+</ol>
+    <h2>Peach_Util_Comparator の使用例</h2><p>Peach_Util_Comparable を使った例では既存のクラスに手を加えることでソートを実装しましたが,
+      他者が公開したクラスライブラリのように自由に改変することが難しいクラスをソートする場合や,
+      ソート条件を状況に応じて柔軟に切り替えたい場合には Peach_Util_Comparator を使ってください.
+      Peach_Util_Comparator を使ったソートの例を以下に示します. 
+      この例では一つの配列に対して, 4種類の Comparator を使ってソートを行います.
+      それぞれ別の順序でソートされることに着目してください.</p>
+      <ol class="src"><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestObject&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-var">$id</span><span class="src-sym">,&nbsp;</span><span class="src-var">$value</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">id&nbsp;&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">value&nbsp;</span>=&nbsp;<span class="src-var">$value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">getId</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">id</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">getValue</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">value</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;*&nbsp;1.value&nbsp;昇順,&nbsp;2.ID&nbsp;昇順の順番でソートします</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestObjectComparator1&nbsp;</span><span class="src-key">implements&nbsp;</span><span class="src-id">Peach_Util_Comparator&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">compare</span><span class="src-sym">(</span><span class="src-var">$var1</span><span class="src-sym">,&nbsp;</span><span class="src-var">$var2</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">((</span><span class="src-var">$var1&nbsp;</span>instanceof&nbsp;<span class="src-id">TestObject</span><span class="src-sym">)&nbsp;</span>&amp;&amp;&nbsp;<span class="src-sym">(</span><span class="src-var">$var2&nbsp;</span>instanceof&nbsp;<span class="src-id">TestObject</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$comp&nbsp;</span>=&nbsp;<span class="src-var">$var1</span><span class="src-sym">-&gt;</span><span class="src-id">getValue</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>-&nbsp;<span class="src-var">$var2</span><span class="src-sym">-&gt;</span><span class="src-id">getValue</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-num">0&nbsp;</span>&lt;&nbsp;<span class="src-var">$comp</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$comp&nbsp;</span>&lt;&nbsp;<span class="src-num">0</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span>-<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$comp2&nbsp;</span>=&nbsp;<span class="src-var">$var1</span><span class="src-sym">-&gt;</span><span class="src-id">getId</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>-&nbsp;<span class="src-var">$var2</span><span class="src-sym">-&gt;</span><span class="src-id">getId</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-num">0&nbsp;</span>&lt;&nbsp;<span class="src-var">$comp2</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$comp2&nbsp;</span>&lt;&nbsp;<span class="src-num">0</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span>-<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-num">0</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">Exception</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;*&nbsp;1.ID&nbsp;昇順,&nbsp;2.value&nbsp;昇順の順番でソートします</span></div></li>
+<li><div class="src-line"><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestObjectComparator2&nbsp;</span><span class="src-key">implements&nbsp;</span><span class="src-id">Peach_Util_Comparator&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">compare</span><span class="src-sym">(</span><span class="src-var">$var1</span><span class="src-sym">,&nbsp;</span><span class="src-var">$var2</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">((</span><span class="src-var">$var1&nbsp;</span>instanceof&nbsp;<span class="src-id">TestObject</span><span class="src-sym">)&nbsp;</span>&amp;&amp;&nbsp;<span class="src-sym">(</span><span class="src-var">$var2&nbsp;</span>instanceof&nbsp;<span class="src-id">TestObject</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$comp&nbsp;</span>=&nbsp;<span class="src-var">$var1</span><span class="src-sym">-&gt;</span><span class="src-id">getId</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>-&nbsp;<span class="src-var">$var2</span><span class="src-sym">-&gt;</span><span class="src-id">getId</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-num">0&nbsp;</span>&lt;&nbsp;<span class="src-var">$comp</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$comp&nbsp;</span>&lt;&nbsp;<span class="src-num">0</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span>-<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$comp2&nbsp;</span>=&nbsp;<span class="src-var">$var1</span><span class="src-sym">-&gt;</span><span class="src-id">getValue</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>-&nbsp;<span class="src-var">$var2</span><span class="src-sym">-&gt;</span><span class="src-id">getValue</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-num">0&nbsp;</span>&lt;&nbsp;<span class="src-var">$comp2</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-var">$comp2&nbsp;</span>&lt;&nbsp;<span class="src-num">0</span><span class="src-sym">)&nbsp;</span><span class="src-key">return&nbsp;</span>-<span class="src-num">1</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-num">0</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">Exception</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$c1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObjectComparator1</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$c2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObjectComparator2</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">300</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">2</span><span class="src-sym">,&nbsp;</span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">4</span><span class="src-sym">,&nbsp;</span><span class="src-num">200</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">300</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$result1&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></span><span class="src-sym">::</span><a href="../Util/Peach_Util_Arrays.html#methodsort">sort</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">,&nbsp;</span><span class="src-var">$c1</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;ID(value)&nbsp;が&nbsp;2(100),&nbsp;5(100),&nbsp;4(200),&nbsp;1(300),&nbsp;3(300)&nbsp;の順にソート</span></div></li>
+<li><div class="src-line"><span class="src-var">$result2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></span><span class="src-sym">::</span><a href="../Util/Peach_Util_Arrays.html#methodsort">sort</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">,&nbsp;</span><span class="src-var">$c2</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;ID&nbsp;が&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5&nbsp;の順にソート</span></div></li>
+</ol></section><!-- /refsect1 -->
+   
+  <!-- refsect1 --><section class="tutorial" id="Util.Arrays.top"><h1>max, min の活用方法</h1><p>配列の中から最大 (あるいは最小) の項目を抜き出すというケースはよくありますが, 普通は</p>
+    <ol><li>配列をソートする</li>
+      <li>配列の先頭 (あるいは末尾) の項目を取り出す</li></ol>
+    <p>という手順で実現されることが多いです.</p>
+    <p>そのようなケースでは <a href="../Util/Peach_Util_Arrays.html#methodmax">Peach_Util_Arrays::max()</a> あるいは <a href="../Util/Peach_Util_Arrays.html#methodmin">Peach_Util_Arrays::min()</a>
+    を使うことで簡単に最大・最小値を取り出すことが出来ます.</p>
+    <p>(数値の配列から最大・最小値を取り出す場合はビルトイン関数の
+    <a href="http://www.php.net/min">min()</a>, <a href="http://www.php.net/max">max()</a> を使ってください.
+    ただし, パフォーマンスは劣りますが Peach_Util_Arrays::max(), Peach_Util_Arrays::min()
+    でも同様の結果を得られます.)</p>
+    <ol class="src"><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestObject&nbsp;</span><span class="src-key">implements&nbsp;</span><span class="src-id">Peach_Util_Comparable&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;(中略)</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">250</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">100</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">4</span><span class="src-sym">,&nbsp;</span><span class="src-num">400</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">320</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">TestObject</span><span class="src-sym">(</span><span class="src-num">2</span><span class="src-sym">,&nbsp;</span><span class="src-num">400</span><span class="src-sym">)</span></div></li>
+<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$max&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></span><span class="src-sym">::</span><a href="../Util/Peach_Util_Arrays.html#methodmax">max</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;=&gt;&nbsp;ID&nbsp;=&nbsp;4,&nbsp;value&nbsp;=&nbsp;400&nbsp;のオブジェクトを取得する</span></div></li>
+</ol></section><!-- /refsect1 -->
+<ul class="direction">
+    <li class="prev"><a href="../Util/tutorial_Util.Map.pkg.html">Prev</a></li>
+    <li class="next">Next</li>
+</ul>
+<ul class="direction">
+    <li class="prev">Map (連想配列)</li>
+    <li class="next"></li>
+</ul>
+</section>
+<footer>
+    Documentation generated on Fri, 17 May 2013 09:37:36 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
+</footer>
+</body>
+</html>
