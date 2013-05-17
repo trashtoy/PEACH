@@ -51,7 +51,8 @@ Package | Description
 --------|------------
 Markup  | Assisting output of markup language such as HTML, RSS, XML and so on.
 RB      | Object-oriented i18n module. (RB represents ResourceBundle.)
-
+Db      | A reinvented O/R mapper.
+App     | Various components about web application development. (Forms, validations, etc.)
 
 Issues
 ------
