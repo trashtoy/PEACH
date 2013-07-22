@@ -38,6 +38,10 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
      */
     private $result;
     
+    /**
+     *
+     * @var bool
+     */
     private $echoMode;
     
     /**
@@ -138,6 +142,11 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
     public function handleCode(Peach_Markup_Code $node)
     {
         $this->append("Code");
+    }
+    
+    public function handleNone(Peach_Markup_None $none)
+    {
+        $this->append("None");
     }
 }
 ?>

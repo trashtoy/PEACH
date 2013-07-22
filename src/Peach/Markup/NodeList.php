@@ -51,7 +51,7 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
     
     /**
      * 
-     * @param Peach_Markup_NodeList|Peach_Markup_Node|array|string $var
+     * @param Peach_Markup_Component|array|string $var
      * @param Peach_Markup_Node $owner
      */
     public function __construct($var = null, Peach_Markup_Node $owner = null)
@@ -69,6 +69,9 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
      */
     private function getAppendee($var)
     {
+        if ($var instanceof Peach_Markup_None) {
+            return null;
+        }
         if ($var instanceof Peach_Markup_Node) {
             return $var;
         }
@@ -88,7 +91,7 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
             return $result;
         }
         if (!isset($var)) {
-            return array();
+            return null;
         }
         
         return new Peach_Markup_Text(Peach_Util_Values::stringValue($var));
@@ -111,6 +114,10 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
     public function append($var)
     {
         $appendee = $this->getAppendee($var);
+        if ($appendee === null) {
+            return;
+        }
+        
         if (isset($this->owner)) {
             $this->checkOwner($appendee);
         }

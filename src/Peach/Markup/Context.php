@@ -85,6 +85,12 @@ abstract class Peach_Markup_Context
     public abstract function handleNodeList(Peach_Markup_NodeList $node);
     
     /**
+     * None を処理します.
+     * @param Peach_Markup_None
+     */
+    public abstract function handleNone(Peach_Markup_None $none);
+    
+    /**
      * 処理結果を取得します. まだ handle() が実行されていない場合は NULL を返します.
      * 
      * @return mixed
