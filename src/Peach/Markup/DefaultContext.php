@@ -205,6 +205,11 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         }
     }
     
+    public function handleNone(Peach_Markup_None $none)
+    {
+        isset($none);
+    }
+    
     /**
      * 
      * @return string
