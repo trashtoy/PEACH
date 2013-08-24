@@ -31,21 +31,21 @@ class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
     
     /**
      * 
-     * @expectedException Exception
+     * @expectedException InvalidArgumentException
      */
     public function testConstructorFail()
     {
-        $map = new Peach_Util_ArrayMap("hoge");
+        new Peach_Util_ArrayMap("hoge");
     }
     
     public function testGet()
     {
-        $test = $this->object->get("key1");
-        $this->assertSame("foo", $test);
-        $test = $this->object->get("key4");
-        $this->assertNull($test);
-        $test = $this->object->get("key5", "DEF");
-        $this->assertSame("DEF", $test);
+        $test1 = $this->object->get("key1");
+        $this->assertSame("foo", $test1);
+        $test2 = $this->object->get("key4");
+        $this->assertNull($test2);
+        $test3 = $this->object->get("key5", "DEF");
+        $this->assertSame("DEF", $test3);
     }
     
     public function testPut()
