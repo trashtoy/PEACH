@@ -33,17 +33,16 @@ That's all.
 
 How to use
 ------------
-1. Upload 'src' directory to the web server.
-2. Include load.php of the module to use. Here is an example.  
-   `require_once("/path/to/PEACH/src/Module/load.php");`  
-   or  
-   `require_once("C:/path/to/PEACH/src/Module/load.php");`
+Require autoload.php  
+`require_once("/path/to/PEACH/src/autoload.php");`  
+or set up autoload manually.
 
 Documentation
 -------------
 
-See docs/index.html (Japanese version only.)
+See docs/index.html. (Japanese version only)
 
+[Online documentation](http://trashtoy.github.io/peach/) is also available.
 
 Roadmap
 -------
@@ -52,16 +51,17 @@ Package | Description
 --------|------------
 Markup  | Assisting output of markup language such as HTML, RSS, XML and so on.
 RB      | Object-oriented i18n module. (RB represents ResourceBundle.)
-
+Db      | A reinvented O/R mapper.
+App     | Various components about web application development. (Forms, validations, etc.)
 
 Issues
 ------
 
 English documentation is not available.
 
-今のところ、日本語版のドキュメントしか用意していません。英語版のドキュメントを作成するには
+今のところ, 日本語版のドキュメントしか用意していません. 英語版のドキュメントを作成するには
 
-1. 英語版ソースコードのブランチを作成し、コードはそのままでコメント行をすべて英語で書きなおす
-2. 編集したソースコードを phpDocumentor にかけてドキュメント一式を作成
+1. 英語版ソースコードのブランチを作成し, コードはそのままでコメント行をすべて英語で書きなおす.
+2. 編集したソースコードを phpDocumentor にかけてドキュメント一式を作成.
 
-という手順を踏む必要があります。英語版のソースコード内コメントを整備してくださる方を募集しています。
+という手順を踏む必要があります. 英語版のソースコード内コメントを整備してくださる方を募集しています.
