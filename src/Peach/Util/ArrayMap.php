@@ -121,7 +121,7 @@ class Peach_Util_ArrayMap implements Peach_Util_Map
      */
     public function containsKey($name)
     {
-        return isset($this->data[$name]);
+        return array_key_exists($name, $this->data);
     }
 
     /**

@@ -75,10 +75,20 @@ class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expected, $arr);
     }
     
+    /**
+     * containesKey() のテストです.
+     * 以下を確認します.
+     * 
+     * - 存在しないキー名を指定した場合は false を返す
+     * - 存在するキー名を指定した場合は true を返す
+     * - 値に null をセットしたエントリについても true を返す (Issue #1)
+     */
     public function testContainsKey()
     {
+        $this->object->put("test1", null);
         $this->assertFalse($this->object->containsKey("key4"));
         $this->assertTrue($this->object->containsKey("key2"));
+        $this->assertTrue($this->object->containsKey("test1"));
     }
     
     public function testRemove()
