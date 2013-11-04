@@ -5,7 +5,7 @@ class Peach_Markup_CodeTest extends PHPUnit_Framework_TestCase
      * @var Peach_Markup_Code
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -14,49 +14,45 @@ class Peach_Markup_CodeTest extends PHPUnit_Framework_TestCase
     {
         $this->object = new Peach_Markup_Code("THIS IS SAMPLE");
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
     protected function tearDown()
     {
-        
     }
-
+    
     /**
+     * コンストラクタに指定した文字列を返すことを確認します.
+     * 
      * @covers Peach_Markup_Code::getText
-     * @todo   Implement testGetText().
      */
     public function testGetText()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertSame("THIS IS SAMPLE", $this->object->getText());
     }
-
+    
     /**
+     * Context の handleCode() が呼び出されることを確認します.
+     * 
      * @covers Peach_Markup_Code::accept
-     * @todo   Implement testAccept().
      */
     public function testAccept()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $obj   = $this->object;
+        $debug = new Peach_Markup_DebugContext(false);
+        $obj->accept($debug);
+        $this->assertSame("Code\r\n", $debug->getResult());
     }
-
+    
     /**
+     * コンストラクタに指定した文字列を返すことを確認します.
+     * 
      * @covers Peach_Markup_Code::__toString
-     * @todo   Implement test__toString().
      */
     public function test__toString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertSame("THIS IS SAMPLE", $this->object->getText());
     }
 }
