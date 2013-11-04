@@ -5,82 +5,69 @@ class Peach_Markup_NodeListTest extends PHPUnit_Framework_TestCase
      * @var Peach_Markup_NodeList
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
-        $this->object = new Peach_Markup_NodeList;
+        $this->object = new Peach_Markup_NodeList();
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
     protected function tearDown()
     {
-        
     }
-
+    
     /**
+     * Container で定義されている append() の仕様通りに動作することを確認します.
+     * 
      * @covers Peach_Markup_NodeList::append
-     * @todo   Implement testAppend().
+     * @see    Peach_Markup_ContainerTestImpl::testAppend
      */
     public function testAppend()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
+        $test->testAppend();
     }
-
+    
     /**
+     * Context の handleNodeList() が呼び出されることを確認します.
+     * 
      * @covers Peach_Markup_NodeList::accept
-     * @todo   Implement testAccept().
      */
     public function testAccept()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $obj   = $this->object;
+        $debug = new Peach_Markup_DebugContext(false);
+        $obj->accept($debug);
+        $this->assertSame("NodeList {\r\n}\r\n", $debug->getResult());
     }
-
+    
     /**
-     * @covers Peach_Markup_NodeList::appendNode
-     * @todo   Implement testAppendNode().
-     */
-    public function testAppendNode()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
+     * 追加されたノードの個数を返すことを確認します.
+     * 
      * @covers Peach_Markup_NodeList::size
-     * @todo   Implement testSize().
      */
     public function testSize()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
+        $test->testSize();
     }
-
+    
     /**
-     * @covers Peach_Markup_NodeList::getChildNodes
-     * @todo   Implement testGetChildNodes().
+     * Container で定義されている getChildNodes() の仕様通りに動作することを確認します.
+     * 
+     * @covers Peach_Markup_ContainerElement::getChildNodes
+     * @see    Peach_Markup_ContainerTestImpl::testChildNodes
      */
     public function testGetChildNodes()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
+        $test->testGetChildNodes();
     }
 }

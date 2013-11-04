@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_ElementTest.php");
+require_once(__DIR__ . "/Peach_Markup_ContainerTestImpl.php");
 
 class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
 {
@@ -7,7 +8,7 @@ class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
      * @var Peach_Markup_ContainerElement
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -16,117 +17,69 @@ class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
     {
         $this->object = new Peach_Markup_ContainerElement("testTag");
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
     protected function tearDown()
     {
-        
     }
-
+    
     /**
+     * Container で定義されている append() の仕様通りに動作することを確認します.
+     * 
      * @covers Peach_Markup_ContainerElement::append
-     * @todo   Implement testAppend().
+     * @see    Peach_Markup_ContainerTestImpl::testAppend
      */
     public function testAppend()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
+        $test->testAppend();
     }
-
+    
     /**
+     * Container で定義されている getChildNodes() の仕様通りに動作することを確認します.
+     * 
      * @covers Peach_Markup_ContainerElement::getChildNodes
-     * @todo   Implement testGetChildNodes().
+     * @see    Peach_Markup_ContainerTestImpl::testChildNodes
      */
     public function testGetChildNodes()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
+        $test->testGetChildNodes();
     }
-
+    
     /**
+     * Context の handleContainerElement() が呼び出されることを確認します.
      * @covers Peach_Markup_ContainerElement::accept
-     * @todo   Implement testAccept().
      */
     public function testAccept()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $obj   = $this->object;
+        $debug = new Peach_Markup_DebugContext(false);
+        $obj->accept($debug);
+        $this->assertSame("ContainerElement(testTag) {\r\n}\r\n", $debug->getResult());
     }
-
+    
     /**
+     * 追加されたノードの個数を返すことを確認します.
+     * 
      * @covers Peach_Markup_ContainerElement::size
-     * @todo   Implement testSize().
      */
     public function testSize()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
+        $test->testSize();
     }
-
-    public function testGetAttribute()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    public function testGetAttributes()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
+    
+    /**
+     * コンストラクタに指定した文字列を返すことを確認します.
+     * @covers Peach_Markup_ContainerElement::getName
+     */
     public function testGetName()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    public function testHasAttribute()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    public function testRemoveAttribute()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    public function testSetAttribute()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    public function testSetAttributes()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $obj   = $this->object;
+        $this->assertSame("testTag", $obj->getName());
     }
 }
