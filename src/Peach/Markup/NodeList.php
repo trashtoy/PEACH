@@ -24,11 +24,11 @@
 /**
  * ノードの一覧をあらわすクラスです.
  * 
- * このクラスは Acceptable を実装しているため,
+ * このクラスは Component を実装しているため,
  * {@link Peach_Markup_Context::handle()} の引数に渡すことが出来ます.
  * (実際の処理は {@link Peach_Markup_Context::handleNodeList()} で行われます)
  * 
- * ある要素の中に NodeList が追加された場合, このオブジェクト自体ではなく,
+ * ある要素に対して NodeList を追加した場合, このオブジェクト自体ではなく,
  * このオブジェクトに含まれる各ノードが追加されます.
  * 
  * 例えるならば DOM の NodeList と NodeFragment を兼任するクラスです.
@@ -50,6 +50,8 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
     private $owner;
     
     /**
+     * 新しい NodeList を構築します.
+     * 第一引数に値を設定した場合, その値をリストに追加した状態で初期化します.
      * 
      * @param Peach_Markup_Component|array|string $var
      * @param Peach_Markup_Node $owner
@@ -137,15 +139,6 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
         $context->handleNodeList($this);
     }
     
-    /**
-     * 指定されたノードを追加します.
-     * @param Peach_Markup_Node $node
-     */
-    public function appendNode(Peach_Markup_Node $node)
-    {
-        $this->append($node);
-    }
-    
     private function checkOwner($var)
     {
         if (is_array($var)) {
@@ -159,7 +152,7 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
             $this->checkOwner($var->getChildNodes());
         }
         if ($var === $this->owner) {
-            throw new Exception("Tree-loop detected.");
+            throw new InvalidArgumentException("Tree-loop detected.");
         }
     }
     
@@ -167,7 +160,8 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
      * この NodeList に含まれるノードの個数を返します.
      * @return int ノードの個数
      */
-    public function size() {
+    public function size()
+    {
         return count($this->nodeList);
     }
     
@@ -180,4 +174,3 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
         return $this->nodeList;
     }
 }
-?>
