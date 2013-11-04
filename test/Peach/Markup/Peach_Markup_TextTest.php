@@ -5,7 +5,7 @@ class Peach_Markup_TextTest extends PHPUnit_Framework_TestCase
      * @var Peach_Markup_Text
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -14,49 +14,44 @@ class Peach_Markup_TextTest extends PHPUnit_Framework_TestCase
     {
         $this->object = new Peach_Markup_Text("THIS IS TEST");
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
     protected function tearDown()
     {
-        
     }
-
+    
     /**
+     * コンストラクタに指定した文字列を返すことを確認します.
+     * 
      * @covers Peach_Markup_Text::getText
-     * @todo   Implement testGetText().
      */
     public function testGetText()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertSame("THIS IS TEST", $this->object->getText());
     }
-
+    
     /**
+     * Context の handleText() を呼び出すことを確認します.
+     * 
      * @covers Peach_Markup_Text::accept
-     * @todo   Implement testAccept().
      */
     public function testAccept()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $context = new Peach_Markup_DebugContext(false);
+        $this->object->accept($context);
+        $this->assertSame("Text\r\n", $context->getResult());
     }
-
+    
     /**
+     * コンストラクタに指定した文字列を返すことを確認します.
+     * 
      * @covers Peach_Markup_Text::__toString
-     * @todo   Implement test__toString().
      */
     public function test__toString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertSame("THIS IS TEST", $this->object->__toString());
     }
 }
