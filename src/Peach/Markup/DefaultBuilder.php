@@ -54,27 +54,93 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     }
     
     /**
+     * この Builder にセットされている Indent オブジェクトを返します.
+     * もしも Indent オブジェクトがセットされていない場合は null を返します.
+     * 
+     * @return Peach_Markup_Indent Indent オブジェクト (セットされていない場合は null)
+     */
+    public function getIndent()
+    {
+        return $this->indent;
+    }
+    
+    /**
+     * この Builder に指定された Indent オブジェクトをセットします.
+     * null を指定した場合は設定を解除します.
+     * 
      * @param  Peach_Markup_Indent $indent
      */
-    public function setIndent(Peach_Markup_Indent $indent)
+    public function setIndent(Peach_Markup_Indent $indent = null)
     {
         $this->indent = $indent;
     }
     
     /**
+     * この Builder にセットされている Renderer オブジェクトを返します.
+     * もしも Renderer オブジェクトがセットされていない場合は null を返します.
      * 
-     * @param  Peach_Markup_Renderer $renderer
+     * @return Peach_Markup_Renderer Renderer オブジェクト (セットされていない場合は null)
      */
-    public function setRenderer(Peach_Markup_Renderer $renderer)
+    public function getRenderer()
     {
-        $this->renderer = $renderer;
+    }
+    
+    /**
+     * この Builder に指定された Renderer オブジェクトをセットします.
+     * 引数によって以下のように動作します.
+     * 
+     * - Peach_Markup_Renderer オブジェクトを指定した場合: そのオブジェクトをセットします
+     * - 文字列 "xml" または "xhtml" を指定した場合 (大小問わず) : {@link Peach_Markup_XmlRenderer} オブジェクトをセットします
+     * - 文字列 "sgml" または "html" を指定した場合 (大小問わず) : {@link Peach_Markup_SgmlRenderer} オブジェクトをセットします
+     * - null を指定した場合 : 現在セットされている Renderer を解除します.
+     * 
+     * @param  Peach_Markup_Renderer|string $renderer
+     */
+    public function setRenderer($renderer = null)
+    {
+        $this->renderer = $this->initRenderer($renderer);
+    }
+    
+    /**
+     * @param  Peach_Markup_Renderer|string $var
+     * @return Peach_Markup_Renderer
+     * @throws InvalidArgumentException
+     */
+    private function initRenderer($var)
+    {
+        if ($var instanceof Peach_Markup_Renderer) {
+            return $var;
+        }
+        if ($var === null) {
+            return null;
+        }
+        
+        $type     = strtolower(Peach_Util_Values::stringValue($var));
+        $xmlList  = array("xml", "xhtml");
+        if (in_array($type, $xmlList)) {
+            return Peach_Markup_XmlRenderer::getInstance();
+        }
+        $sgmlList = array("sgml", "html");
+        if (in_array($type, $sgmlList)) {
+            return Peach_Markup_SgmlRenderer::getInstance();
+        }
+        
+        throw new InvalidArgumentException("Invalid type name: {$type}.");
+    }
+    
+    /**
+     * @return Peach_Markup_BreakControl
+     */
+    public function getBreakControl()
+    {
     }
     
     /**
      * 
-     * @param Peach_Markup_BreakControl $breakControl
+     * @param  Peach_Markup_BreakControl $breakControl
      */
-    public function setBreakControl(Peach_Markup_BreakControl $breakControl) {
+    public function setBreakControl(Peach_Markup_BreakControl $breakControl)
+    {
         $this->breakControl = $breakControl;
     }
     
@@ -89,4 +155,3 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
         return new Peach_Markup_DefaultContext($renderer, $indent, $breakControl);
     }
 }
-?>

@@ -1,5 +1,7 @@
 <?php
-class Peach_Markup_DefaultBuilderTest extends PHPUnit_Framework_TestCase
+require_once(__DIR__ . "/Peach_Markup_BuilderTest.php");
+
+class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
 {
     /**
      * @var Peach_Markup_DefaultBuilder
@@ -53,6 +55,18 @@ class Peach_Markup_DefaultBuilderTest extends PHPUnit_Framework_TestCase
      * @todo   Implement testSetBreakControl().
      */
     public function testSetBreakControl()
+    {
+        // Remove the following lines when you implement this test.
+        $this->markTestIncomplete(
+                'This test has not been implemented yet.'
+        );
+    }
+    
+    /**
+     * @covers Peach_Markup_BuilderTest::build
+     * @todo   Implement testBuild()
+     */
+    public function testBuild()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
