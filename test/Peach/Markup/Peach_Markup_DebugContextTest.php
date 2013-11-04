@@ -1,5 +1,6 @@
 <?php
-class Peach_Markup_DebugContextTest extends PHPUnit_Framework_TestCase
+require_once(__DIR__ . "/Peach_Markup_ContextTest.php");
+class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
 {
     /**
      * @var Peach_Markup_DebugContext
@@ -12,7 +13,8 @@ class Peach_Markup_DebugContextTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Peach_Markup_DebugContext;
+        parent::setUp();
+        $this->object   = new Peach_Markup_DebugContext();
     }
 
     /**
@@ -21,33 +23,18 @@ class Peach_Markup_DebugContextTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        
     }
-
+    
     /**
      * @covers Peach_Markup_DebugContext::getResult
      * @todo   Implement testGetResult().
      */
     public function testGetResult()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
 
-    /**
-     * @covers Peach_Markup_DebugContext::handleCdataSection
-     * @todo   Implement testHandleCdataSection().
-     */
-    public function testHandleCdataSection()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $context = new Peach_Markup_DebugContext();
     }
-
+    
     /**
      * @covers Peach_Markup_DebugContext::handleComment
      * @todo   Implement testHandleComment().

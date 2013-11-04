@@ -85,11 +85,6 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         $this->result        = "";
     }
     
-    public function handleCdataSection(Peach_Markup_CdataSection $cdata)
-    {
-        $this->result .= $this->indent() . $this->renderer->formatCdataSection($cdata);
-    }
-    
     /**
      * @param Peach_Markup_Comment
      */
@@ -106,8 +101,10 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         $this->result .= $this->indent() . "<!--{$prefix}";
         if ($this->isIndentMode) {
             if ($this->checkBreakModeInComment($comment)) {
-                $this->result .= $this->breakCode();
+                $breakCode = $this->breakCode();
+                $this->result .= $breakCode;
                 $this->formatChildNodes($comment);
+                $this->result .= $breakCode;
                 $this->result .= $this->indent();
             } else {
                 $this->isIndentMode = false;
@@ -157,7 +154,6 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
-     * (non-PHPdoc)
      * @see Markup_Context::handleEmptyElement()
      */
     public function handleEmptyElement(Peach_Markup_EmptyElement $node) {
@@ -165,7 +161,6 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
-     * 
      * @see Peach_Markup_Context::handleContainerElement()
      */
     public function handleContainerElement(Peach_Markup_ContainerElement $element)
@@ -175,6 +170,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
             if ($this->breakControl->breaks($element)) {
                 $this->result .= $this->indent->stepUp();
                 $this->result .= $this->formatChildNodes($element);
+                $this->result .= $this->breakCode();
                 $this->result .= $this->indent->stepDown();
             } else {
                 $this->isIndentMode = false;
@@ -197,21 +193,36 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         return $this->result;
     }
     
+    /**
+     * 指定されたコンテナの子ノードを書式化します.
+     * 各子ノードの出力結果の末尾には, 改行コードで連結されます. (インデントモードが ON の場合)
+     * 末尾の子ノードの出力結果の後ろに改行コードは付きません.
+     * 
+     * @param Peach_Markup_Container $container
+     */
     private function formatChildNodes(Peach_Markup_Container $container)
     {
+        $nextBreak  = "";
+        $breakCode  = $this->breakCode();
         $childNodes = $container->getChildNodes();
         foreach ($childNodes as $child) {
-            $this->result .= $this->handle($child) . $this->breakCode();
+            $this->result .= $nextBreak;
+            $this->handle($child);
+            $nextBreak = $breakCode;
         }
     }
     
+    /**
+     * None を処理します. 何もせずに終了します.
+     * 
+     * @param Peach_Markup_None $none
+     */
     public function handleNone(Peach_Markup_None $none)
     {
         isset($none);
     }
     
     /**
-     * 
      * @return string
      */
     private function indent()

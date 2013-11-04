@@ -100,12 +100,6 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
         return $this->result;
     }
     
-    public function handleCdataSection(Peach_Markup_CdataSection $node)
-    {
-        $this->startNode("CDATA");
-        $this->endNode();
-    }
-
     public function handleComment(Peach_Markup_Comment $node)
     {
         $this->startNode("Comment");

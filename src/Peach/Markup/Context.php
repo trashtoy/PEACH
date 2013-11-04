@@ -73,12 +73,6 @@ abstract class Peach_Markup_Context
     public abstract function handleComment(Peach_Markup_Comment $node);
     
     /**
-     * CDATAセクションを処理します.
-     * @param  Peach_Markup_CdataSection
-     */
-    public abstract function handleCdataSection(Peach_Markup_CdataSection $node);
-    
-    /**
      * NodeList を処理します.
      * @param Peach_Markup_NodeList
      */
