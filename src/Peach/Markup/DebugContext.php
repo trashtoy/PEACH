@@ -47,11 +47,11 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
     /**
      * 
      */
-    public function __construct()
+    public function __construct($echoMode = true)
     {
         $this->indent   = new Peach_Markup_Indent();
         $this->result   = "";
-        $this->echoMode = true;
+        $this->echoMode = (bool) $echoMode;
     }
     
     /**
