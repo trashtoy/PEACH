@@ -124,7 +124,7 @@ abstract class Peach_Markup_Element implements Peach_Markup_Node
             return;
         }
         if (!is_array($attr)) {
-            throw new Exception("Array required.");
+            throw new InvalidArgumentException("Array required.");
         }
         foreach ($attr as $key => $value) {
             $this->setAttribute($key, $value);
