@@ -36,13 +36,19 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     private $nodeList;
     
     /**
-     *
+     * コメントの先頭に付与される文字列です.
+     * この値がセットされている場合, コメントの先頭は
+     * "<!--prefix" のようにレンダリングされます.
+     * 
      * @var string
      */
     private $prefix;
     
     /**
-     *
+     * コメントの末尾に付与される文字列です.
+     * この値がセットされている場合, コメントの末尾は
+     * "suffix-->" のようにレンダリングされます.
+     * 
      * @var string
      */
     private $suffix;
@@ -50,8 +56,8 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     public function __construct($prefix = "", $suffix = "")
     {
         $this->nodeList = new Peach_Markup_NodeList(null, $this);
-        $this->prefix   = $prefix;
-        $this->suffix   = $suffix;
+        $this->prefix   = Peach_Util_Values::stringValue($prefix);
+        $this->suffix   = Peach_Util_Values::stringValue($suffix);
     }
     
     /**
@@ -91,15 +97,7 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     }
     
     /**
-     * 
-     * @param string $text
-     */
-    public function appendText($text)
-    {
-        $this->appendNode(new Peach_Markup_Text($text));
-    }
-    
-    /**
+     * このコメントノードに含まれる子ノードの一覧を返します.
      * 
      * @return array
      */
@@ -108,4 +106,3 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
         return $this->nodeList->getChildNodes();
     }
 }
-?>
