@@ -22,6 +22,9 @@
  */
 /** @package Markup */
 /**
+ * 既存の BreakControl の振る舞いを拡張するためのラッパークラスです.
+ * このクラスを継承し, breaks() をオーバーライドするようにしてください.
+ * 
  * @package Markup
  */
 class Peach_Markup_BreakControlWrapper implements Peach_Markup_BreakControl
@@ -41,6 +44,15 @@ class Peach_Markup_BreakControlWrapper implements Peach_Markup_BreakControl
     }
     
     /**
+     * ラップ対象の BreakControl オブジェクトを返します.
+     * @return Peach_Markup_BreakControl
+     */
+    public function getOriginal()
+    {
+        return $this->original;
+    }
+    
+    /**
      * オリジナルの breaks() を呼び出します.
      * 
      * @param  Peach_Markup_ContainerElement $node
@@ -51,4 +63,3 @@ class Peach_Markup_BreakControlWrapper implements Peach_Markup_BreakControl
         return $this->original->breaks($node);
     }
 }
-?>
