@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -22,6 +22,9 @@
  */
 /** @package Markup */
 /**
+ * ノードツリーの構築を簡略化・省力化するためのオブジェクトです.
+ * 主に (MVC フレームワークで言うところの) View の範囲で使用されることを想定しています.
+ * 
  * @package Markup
  */
 class Peach_Markup_HelperObject implements Peach_Markup_Container
@@ -38,17 +41,35 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
      */
     private $node;
     
+    /**
+     * 指定された Helper オブジェクトに紐付けられた新しいインスタンスを構築します.
+     * このコンストラクタは {@link Peach_Markup_Helper::createObject()} から呼び出されます.
+     * 通常は, エンドユーザーがコンストラクタを直接呼び出す機会はありません.
+     * 
+     * @param Peach_Markup_Helper $helper
+     * @param mixed $var このオブジェクトがラップする値 (テキスト, Component など)
+     */
     public function __construct(Peach_Markup_Helper $helper, $var)
     {
         $this->helper = $helper;
         $this->node   = $helper->createNode($var);
     }
     
+    /**
+     * このオブジェクトがラップしているノードを返します.
+     * @return Peach_Markup_Component
+     */
     public function getNode()
     {
         return $this->node;
     }
     
+    /**
+     * このオブジェクトの子ノードとして, 指定された値を追加します.
+     * 
+     * @param  mixed $var                追加される値
+     * @return Peach_Markup_HelperObject 自分自身
+     */
     public function append($var)
     {
         $node = $this->node;
@@ -80,6 +101,7 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
      * 引数が 1 つ以上の文字列の場合は setAttribute() を実行します.
      * 
      * さらに jQuery のようなメソッドチェインを実現するため, このオブジェクト自身を返します.
+     * 
      * @param  string|array|Peach_Util_ArrayMap $var セットする属性
      * @return Peach_Markup_HelperObject この要素自身
      */
@@ -108,12 +130,20 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         return $this;
     }
     
+    /**
+     * 
+     * @return Peach_Markup_NodeList
+     */
     public function children()
     {
         return ($this->node instanceof Peach_Markup_Container) ?
             $this->node->getChildNodes() : new Peach_Markup_NodeList();
     }
     
+    /**
+     * 
+     * @return mixed
+     */
     public function write()
     {
         return $this->helper->write($this);
@@ -165,6 +195,10 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         $this->node->accept($context);
     }
     
+    /**
+     * 
+     * @return array
+     */
     public function getChildNodes()
     {
         $node = $this->node;
@@ -178,4 +212,3 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         return array();
     }
 }
-?>

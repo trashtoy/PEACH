@@ -22,6 +22,8 @@
  */
 /** @package Markup */
 /**
+ * HTML の出力に特化したユーティリティクラスです.
+ * 
  * @package Markup
  */
 class Peach_Markup_Html
@@ -32,6 +34,7 @@ class Peach_Markup_Html
      */
     private static $HELPER;
     
+    /** このクラスはインスタンス化できません. */
     private function __construct() {}
     
     public static function getBuilder($xml = false)
@@ -64,9 +67,15 @@ class Peach_Markup_Html
         return new Peach_Markup_Helper(self::getBuilder($xml), $emptyNodeNames);
     }
     
-    public static function init($xml = false)
+    /**
+     * このクラスで使用する Helper インスタンスを初期化します.
+     * HTML ではなく XHTML 形式でタグ出力したい場合は, 引数に true を指定してください.
+     * 
+     * @param bool $isXHTML XHTML 形式で出力する場合は true
+     */
+    public static function init($isXHTML = false)
     {
-        self::$HELPER = self::createHelper($xml);
+        self::$HELPER = self::createHelper($isXHTML);
     }
     
     /**
@@ -81,48 +90,103 @@ class Peach_Markup_Html
         return self::$HELPER;
     }
     
+    /**
+     * 
+     * @param  string $name 要素名
+     * @param  array  $attr 追加で指定する属性
+     * @return Peach_Markup_HelperObject
+     */
     public static function tag($name, array $attr = array())
     {
         return self::getHelper()->createObject($name, $attr);
     }
     
+    /**
+     * 
+     * @param  mixed  $contents
+     * @param  string $prefix
+     * @param  string $suffix
+     * @return Peach_Markup_HelperObject
+     */
     public static function comment($contents, $prefix = "", $suffix = "")
     {
         $comment = new Peach_Markup_Comment($prefix, $suffix);
         return self::getHelper()->createObject($comment)->append($contents);
     }
     
+    /**
+     * 
+     * @param  mixed  $contents
+     * @param  string $cond
+     * @return Peach_Markup_HelperObject
+     */
     public static function conditionalComment($contents, $cond)
     {
-        return self::comment($contents, "[{$cond}]>", "<![endif]");
+        return self::comment($contents, "[{$cond} ]>", "<![endif]");
     }
     
-    public static function select($current, array $candidates, array $attr = array())
+    /**
+     * HTML の select 要素を生成します.
+     * 第 1 引数にはデフォルトで選択されている値,
+     * 第 2 引数には選択肢を配列で指定します.
+     * キーがラベル, 値がそのラベルに割り当てられたデータとなります.
+     * 引数を二次元配列にすることで, 一次元目のキーを optgroup にすることが出来ます.
+     * 
+     * @param  string $current    デフォルト値
+     * @param  array  $candidates 選択肢の一覧
+     * @param  array  $attr       追加で指定する属性 (class, id, style など)
+     * @return Peach_Markup_ContainerElement HTML の select 要素
+     */
+    public static function createSelectElement($current, array $candidates, array $attr = array())
     {
-        $select      = self::tag("select", $attr);
         $currentText = Peach_Util_Values::stringValue($current);
-        return $select->append($this->createOptions($currentText, $candidates));
-    }
-    
+        $select      = new Peach_Markup_ContainerElement("select");
+        $select->setAttributes($attr);
+        $select->append(self::createOptions($currentText, $candidates));
+        return $select;
+    } 
+   
+    /**
+     * select 要素に含まれる option の一覧を作成します.
+     * 
+     * @param  string $current    デフォルト値
+     * @param  array  $candidates 選択肢の一覧
+     * @return Peach_Markup_NodeList option 要素の一覧
+     */
     private static function createOptions($current, array $candidates)
     {
-        $result = self::tag();
+        $result = new Peach_Markup_NodeList();
         foreach ($candidates as $key => $value) {
             if (is_array($value)) {
-                $result->append(
-                        tag("optgroup", array("label" => $key))
-                        ->append(self::createOptions($current, $value))
-                );
+                $optgroup = new Peach_Markup_ContainerElement("optgroup");
+                $optgroup->setAttribute("label", $key);
+                $optgroup->append(self::createOptions($current, $value));
+                $result->append($optgroup);
             } else {
-                $optAttr = array("value" => $value);
+                $option  = new Peach_Markup_ContainerElement("option");
+                $option->setAttribute("value", $value);
                 $value   = Peach_Util_Values::stringValue($value);
                 if ($current === $value) {
-                    $optAttr["selected"] = null;
+                    $option->setAttribute("selected");
                 }
-                $result->append(tag("option", $optAttr)->append($key));
+                $option->append($key);
+                $result->append($option);
             }
         }
         return $result;
     }
+    
+    /**
+     * select 要素をラップした HelperObject を返します.
+     * 
+     * @see    Peach_Markup_Html::createSelectElement
+     * @param  string $current
+     * @param  array  $candidates
+     * @param  array  $attr
+     * @return Peach_Markup_HelperObject
+     */
+    public static function select($current, array $candidates, array $attr = array())
+    {
+        return self::tag(self::createSelectElement($current, $candidates, $attr));
+    }
 }
-?>
