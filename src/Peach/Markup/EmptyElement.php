@@ -42,4 +42,3 @@ class Peach_Markup_EmptyElement extends Peach_Markup_Element
         $context->handleEmptyElement($this);
     }
 }
-?>
