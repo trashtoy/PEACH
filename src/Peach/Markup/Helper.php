@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright (c) 2012 @trashtoy
+ * Copyright (c) 2013 @trashtoy
  * https://github.com/trashtoy/
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -72,6 +71,24 @@ class Peach_Markup_Helper
     }
     
     /**
+     * 
+     * @return Peach_Markup_Builder
+     */
+    public function getBuilder()
+    {
+        return $this->builder;
+    }
+    
+    /**
+     * 
+     * @param Peach_Markup_Builder $builder
+     */
+    public function setBuilder(Peach_Markup_Builder $builder)
+    {
+        $this->builder = $builder;
+    }
+    
+    /**
      *  @param string
      */
     private function createElement($name)
@@ -80,4 +97,3 @@ class Peach_Markup_Helper
             new Peach_Markup_EmptyElement($name) : new Peach_Markup_ContainerElement($name);
     }
 }
-?>
