@@ -58,17 +58,4 @@ interface Peach_Markup_Renderer
      * @return string 空要素タグ
      */
     public function formatEmptyTag(Peach_Markup_Element $element);
-    
-    /**
-     * CDATA section をマークアップします.
-     * '<!CDATA[contents... ]]>' 形式の文字列を返します.
-     * XML 以外のマークアップ言語は CDATA section をサポートしていないため,
-     * CDATA section と等価なテキスト (特殊文字を適宜文字参照でエスケープしたもの)
-     * を返します.
-     * 
-     * @param  string $text CDATA で囲む対象の文字列
-     * @return string CDATA セクション
-     */
-    public function formatCdataSection(Peach_Markup_CdataSection $cdata);
 }
-?>

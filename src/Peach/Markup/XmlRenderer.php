@@ -55,26 +55,12 @@ class Peach_Markup_XmlRenderer extends Peach_Markup_AbstractRenderer
     }
     
     /**
+     * 値の省略された属性値を書式化します.
+     * attr="attr" 形式の文字列を返します.
      * 
-     * @param  string $value
-     * @return string
-     */
-    protected function formatCdataContents($value)
-    {
-        $parts = Peach_Util_Strings::explode("]]>", $value);
-        $cdata = array();
-        foreach ($parts as $part) {
-            if (strlen($part)) {
-                $cdata[] = "<![CDATA[" . $part . "]]>";
-            }
-        }
-        return implode($cdata, "]]>");
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see Markup_TagFormatter#formatBooleanAttribute($name)
-     * @ignore
+     * @see    Peach_Markup_AbstractRenderer::formatBooleanAttribute()
+     * @param  string $name 属性名
+     * @return string attr="attr" 形式の文字列
      */
     protected function formatBooleanAttribute($name)
     {
@@ -82,24 +68,26 @@ class Peach_Markup_XmlRenderer extends Peach_Markup_AbstractRenderer
     }
     
     /**
-     * (non-PHPdoc)
-     * @see Markup_TagFormatter#formatAttribute($name, $value)
-     * @ignore
+     * 指定された属性を書式化します. name="attr" 形式の文字列を返します.
+     * 
+     * @see    Peach_Markup_AbstractRenderer::formatAttribute()
+     * @param  string $name  属性名
+     * @param  string $value 属性値
+     * @return string name="value" 形式の文字列
      */
     protected function formatAttribute($name, $value)
     {
-        $v = htmlspecialchars($value);
-        return "{$name}=\"{$v}\"";
+        return $name . '="' . htmlspecialchars($value) . '"';
     }
     
     /**
-     * (non-PHPdoc)
-     * @see Markup_TagFormatter#formatEmptyTagSuffix()
-     * @ignore
+     * 空要素タグの末尾を書式化します. 文字列 " />" を返します.
+     * 
+     * @see    Markup_TagFormatter#formatEmptyTagSuffix()
+     * @return string 文字列 " />"
      */
     protected function formatEmptyTagSuffix()
     {
         return " />";
     }
 }
-?>

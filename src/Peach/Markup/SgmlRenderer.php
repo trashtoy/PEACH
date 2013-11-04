@@ -48,15 +48,10 @@ class Peach_Markup_SgmlRenderer extends Peach_Markup_AbstractRenderer
         return $instance;
     }
     
-    protected function formatCdataContents($value)
-    {
-        return htmlspecialchars($value);
-    }
-    
     /**
-     * (non-PHPdoc)
-     * @see Markup/Markup_TagFormatter#formatAbbrevAttribute($name)
-     * @ignore
+     * 値の省略された属性を書式化します.
+     * この実装は, 指定された属性名をそのまま返します.
+     * @see Peach_Markup_AbstractRenderer::formatBooleanAttribute()
      */
     protected function formatBooleanAttribute($name)
     {
@@ -64,9 +59,12 @@ class Peach_Markup_SgmlRenderer extends Peach_Markup_AbstractRenderer
     }
     
     /**
-     * (non-PHPdoc)
-     * @see Markup_TagFormatter#formatAttribute($name, $value)
-     * @ignore
+     * 指定された属性を書式化します. name="value" 形式の文字列を返します.
+     * 
+     * @see Peach_Markup_AbstractRenderer::formatAttribute()
+     * @param  string $name  属性名
+     * @param  string $value 属性値
+     * @return string name="value" 形式の文字列
      */
     protected function formatAttribute($name, $value)
     {
@@ -74,13 +72,13 @@ class Peach_Markup_SgmlRenderer extends Peach_Markup_AbstractRenderer
     }
     
     /**
-     * (non-PHPdoc)
-     * @see Markup_TagFormatter#formatEmptyTagSuffix()
-     * @ignore
+     * 空要素タグの末尾を書式化します. 文字列 ">" を返します.
+     * 
+     * @see Peach_Markup_AbstractRenderer::formatEmptyTagSuffix()
+     * @return string 文字列 ">"
      */
     protected function formatEmptyTagSuffix()
     {
         return ">";
     }
 }
-?>

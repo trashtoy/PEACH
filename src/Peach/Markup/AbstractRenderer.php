@@ -82,19 +82,6 @@ abstract class Peach_Markup_AbstractRenderer implements Peach_Markup_Renderer
     }
     
     /**
-     * 
-     * @param  Markup_CdataSection $cdata
-     * @return string
-     */
-    public final function formatCdataSection(Peach_Markup_CdataSection $cdata)
-    {
-        $value = $cdata->getValue();
-        return $this->formatCdataContents($value);
-    }
-    
-    protected abstract function formatCdataContents($value);
-    
-    /**
      * 指定された属性を書式化します.
      * 
      * @param  string $name  属性名
@@ -117,4 +104,3 @@ abstract class Peach_Markup_AbstractRenderer implements Peach_Markup_Renderer
      */
     protected abstract function formatEmptyTagSuffix();
 }
-?>
