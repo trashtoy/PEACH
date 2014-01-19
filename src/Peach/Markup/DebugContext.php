@@ -143,4 +143,3 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
         $this->append("None");
     }
 }
-?>

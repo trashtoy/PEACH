@@ -22,6 +22,13 @@
  */
 /** @package Markup */
 /**
+ * HTML や XML などを出力する際に使う, デフォルトの Builder です.
+ * このクラスは, 以下の条件をカスタマイズすることが出来ます.
+ * 
+ * - インデントの文字列 (半角スペース, タブ文字)
+ * - 改行コードの種類 (LF, CRLF, CR)
+ * - 空要素タグや boolean 属性の出力方法 (SGML, XML)
+ * 
  * @package Markup
  */
 class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
@@ -44,7 +51,7 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     private $breakControl;
     
     /**
-     * 
+     * デフォルトの設定を持つ DefaultBuilder インスタンスを生成します.
      */
     public function __construct()
     {

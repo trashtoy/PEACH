@@ -22,6 +22,11 @@
  */
 /** @package Markup */
 /**
+ * ノードを内部に含めることが出来るインタフェースです.
+ * このインタフェースを実装したクラスに
+ * {@link Peach_Markup_NodeList NodeList} や
+ * {@link Peach_Markup_ContainerElement ContainerElement} などがあります.
+ * 
  * @package Markup
  */
 interface Peach_Markup_Container extends Peach_Markup_Component

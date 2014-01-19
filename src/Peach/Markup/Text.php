@@ -23,6 +23,8 @@
 /** @package Markup */
 /**
  * 要素内に含まれるテキストをあらわすノードです.
+ * このノードに '&' などの特殊文字が含まれていた場合,
+ * レンダリングされる際に適切な文字参照に自動変換されます.
  * 
  * @package Markup
  */
@@ -63,9 +65,12 @@ class Peach_Markup_Text implements Peach_Markup_Node
         $context->handleText($this);
     }
     
+    /**
+     * このテキストノードが表現する文字列を返します.
+     * @return string
+     */
     public function __toString()
     {
         return $this->text;
     }
 }
-?>

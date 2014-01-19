@@ -35,6 +35,12 @@ class Peach_Markup_BreakControlWrapper implements Peach_Markup_BreakControl
      */
     private $original;
     
+    /**
+     * 指定された BreakControl をラップする BreakControlWrapper を構築します.
+     * 引数を省略した場合は DefaultBreakControl をラップします.
+     * 
+     * @param Peach_Markup_BreakControl $original 未指定の場合は DefaultBreakControl
+     */
     public function __construct(Peach_Markup_BreakControl $original = null)
     {
         if (!isset($original)) {

@@ -91,4 +91,3 @@ abstract class Peach_Markup_Context
      */
     public abstract function getResult();
 }
-?>

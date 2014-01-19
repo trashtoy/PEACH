@@ -53,6 +53,15 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
      */
     private $suffix;
     
+    /**
+     * 指定された prefix と suffix を持つ Comment オブジェクトを構築します.
+     * prefix と suffix は, 条件付きコメントの先頭 ("[if IE 6]>" など) と
+     * 末尾 ("<![endif]" など) に使用されます.
+     * 引数を指定しない場合は通常のコメントノードを生成します.
+     * 
+     * @param string $prefix 条件付きコメントの冒頭
+     * @param string $suffix 条件付きコメントの末尾
+     */
     public function __construct($prefix = "", $suffix = "")
     {
         $this->nodeList = new Peach_Markup_NodeList(null, $this);

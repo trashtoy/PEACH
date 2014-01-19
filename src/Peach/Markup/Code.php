@@ -38,12 +38,17 @@ class Peach_Markup_Code implements Peach_Markup_Node
      */
     private $text;
     
+    /**
+     * 引数の文字列を整形済テキストとする Code オブジェクトを生成します.
+     * @param string $text 整形済テキスト
+     */
     public function __construct($text)
     {
         $this->text = Peach_Util_Values::stringValue($text);
     }
     
     /**
+     * 整形済テキストの内容を返します.
      * 
      * @return string
      */
@@ -61,9 +66,13 @@ class Peach_Markup_Code implements Peach_Markup_Node
         $context->handleCode($this);
     }
     
+    /**
+     * このオブジェクトの文字列表現です.
+     * {@link Peach_Markup_Code::getText() getText()} と同じ結果を返します.
+     * @return string
+     */
     public function __toString()
     {
         return $this->text;
     }
 }
-?>

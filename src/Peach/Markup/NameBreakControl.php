@@ -22,6 +22,7 @@
  */
 /** @package Markup */
 /**
+ * 開始タグの名前をもとに, 改行するかどうかを判定する BreakControl です.
  * @package Markup
  */
 class Peach_Markup_NameBreakControl extends Peach_Markup_BreakControlWrapper
@@ -76,4 +77,3 @@ class Peach_Markup_NameBreakControl extends Peach_Markup_BreakControlWrapper
         return parent::breaks($node);
     }
 }
-?>

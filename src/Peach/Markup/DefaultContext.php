@@ -22,6 +22,7 @@
  */
 /** @package Markup */
 /**
+ * 与えられたノードを HTML や XML などの文字列に変換するクラスです.
  * @package Markup
  */
 class Peach_Markup_DefaultContext extends Peach_Markup_Context
@@ -86,6 +87,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
+     * コメントノードを読み込みます.
      * @param Peach_Markup_Comment
      */
     public function handleComment(Peach_Markup_Comment $comment)
@@ -136,10 +138,18 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         }
     }
     
+    /**
+     * Text ノードを読み込みます.
+     * @param Peach_Markup_Text $text
+     */
     public function handleText(Peach_Markup_Text $text) {
         $this->result .= $this->indent() . $this->escape($text->getText());
     }
     
+    /**
+     * Code を読み込みます.
+     * @param Peach_Markup_Code $code
+     */
     public function handleCode(Peach_Markup_Code $code)
     {
         $text   = $code->getText();
@@ -154,6 +164,8 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
+     * EmptyElement を読み込みます.
+     * @param Peach_Markup_EmptyElement
      * @see Markup_Context::handleEmptyElement()
      */
     public function handleEmptyElement(Peach_Markup_EmptyElement $node) {
@@ -161,6 +173,8 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
+     * ContainerElement を読み込みます.
+     * @param Peach_Markup_ContainerElement
      * @see Peach_Markup_Context::handleContainerElement()
      */
     public function handleContainerElement(Peach_Markup_ContainerElement $element)
@@ -183,11 +197,19 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         $this->result .= $this->renderer->formatEndTag($element);
     }
     
+    /**
+     * NodeList を変換します.
+     * @param Peach_Markup_NodeList $node
+     */
     public function handleNodeList(Peach_Markup_NodeList $node)
     {
         $this->formatChildNodes($node);
     }
     
+    /**
+     * マークアップされたコードを返します.
+     * @return string
+     */
     public function getResult()
     {
         return $this->result;
@@ -249,4 +271,3 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         return str_replace("-->", "--&gt;", $text);
     }
 }
-?>

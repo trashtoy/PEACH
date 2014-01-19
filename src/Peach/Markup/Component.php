@@ -34,4 +34,3 @@ interface Peach_Markup_Component
      */
     public function accept(Peach_Markup_Context $context);
 }
-?>

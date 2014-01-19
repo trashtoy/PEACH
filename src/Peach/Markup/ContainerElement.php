@@ -85,4 +85,3 @@ class Peach_Markup_ContainerElement extends Peach_Markup_Element implements Peac
         return $this->childNodes->size();
     }
 }
-?>
