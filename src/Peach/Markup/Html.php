@@ -22,7 +22,7 @@
  */
 /** @package Markup */
 /**
- * HTML ‚Ìo—Í‚É“Á‰»‚µ‚½ƒ†[ƒeƒBƒŠƒeƒBƒNƒ‰ƒX‚Å‚·.
+ * HTML ã®å‡ºåŠ›ã«ç‰¹åŒ–ã—ãŸãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã‚¯ãƒ©ã‚¹ã§ã™.
  * 
  * @package Markup
  */
@@ -34,7 +34,7 @@ class Peach_Markup_Html
      */
     private static $HELPER;
     
-    /** ‚±‚ÌƒNƒ‰ƒX‚ÍƒCƒ“ƒXƒ^ƒ“ƒX‰»‚Å‚«‚Ü‚¹‚ñ. */
+    /** ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã§ãã¾ã›ã‚“. */
     private function __construct() {}
     
     public static function getBuilder($xml = false)
@@ -68,10 +68,10 @@ class Peach_Markup_Html
     }
     
     /**
-     * ‚±‚ÌƒNƒ‰ƒX‚Åg—p‚·‚é Helper ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‰Šú‰»‚µ‚Ü‚·.
-     * HTML ‚Å‚Í‚È‚­ XHTML Œ`®‚Åƒ^ƒOo—Í‚µ‚½‚¢ê‡‚Í, ˆø”‚É true ‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢.
+     * ã“ã®ã‚¯ãƒ©ã‚¹ã§ä½¿ç”¨ã™ã‚‹ Helper ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã—ã¾ã™.
+     * HTML ã§ã¯ãªã XHTML å½¢å¼ã§ã‚¿ã‚°å‡ºåŠ›ã—ãŸã„å ´åˆã¯, å¼•æ•°ã« true ã‚’æŒ‡å®šã—ã¦ãã ã•ã„.
      * 
-     * @param bool $isXHTML XHTML Œ`®‚Åo—Í‚·‚éê‡‚Í true
+     * @param bool $isXHTML XHTML å½¢å¼ã§å‡ºåŠ›ã™ã‚‹å ´åˆã¯ true
      */
     public static function init($isXHTML = false)
     {
@@ -92,8 +92,8 @@ class Peach_Markup_Html
     
     /**
      * 
-     * @param  string $name —v‘f–¼
-     * @param  array  $attr ’Ç‰Á‚Åw’è‚·‚é‘®«
+     * @param  string $name è¦ç´ å
+     * @param  array  $attr è¿½åŠ ã§æŒ‡å®šã™ã‚‹å±æ€§
      * @return Peach_Markup_HelperObject
      */
     public static function tag($name, array $attr = array())
@@ -126,16 +126,16 @@ class Peach_Markup_Html
     }
     
     /**
-     * HTML ‚Ì select —v‘f‚ğ¶¬‚µ‚Ü‚·.
-     * ‘æ 1 ˆø”‚É‚ÍƒfƒtƒHƒ‹ƒg‚Å‘I‘ğ‚³‚ê‚Ä‚¢‚é’l,
-     * ‘æ 2 ˆø”‚É‚Í‘I‘ğˆ‚ğ”z—ñ‚Åw’è‚µ‚Ü‚·.
-     * ƒL[‚ªƒ‰ƒxƒ‹, ’l‚ª‚»‚Ìƒ‰ƒxƒ‹‚ÉŠ„‚è“–‚Ä‚ç‚ê‚½ƒf[ƒ^‚Æ‚È‚è‚Ü‚·.
-     * ˆø”‚ğ“ñŸŒ³”z—ñ‚É‚·‚é‚±‚Æ‚Å, ˆêŸŒ³–Ú‚ÌƒL[‚ğ optgroup ‚É‚·‚é‚±‚Æ‚ªo—ˆ‚Ü‚·.
+     * HTML ã® select è¦ç´ ã‚’ç”Ÿæˆã—ã¾ã™.
+     * ç¬¬ 1 å¼•æ•°ã«ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§é¸æŠã•ã‚Œã¦ã„ã‚‹å€¤,
+     * ç¬¬ 2 å¼•æ•°ã«ã¯é¸æŠè‚¢ã‚’é…åˆ—ã§æŒ‡å®šã—ã¾ã™.
+     * ã‚­ãƒ¼ãŒãƒ©ãƒ™ãƒ«, å€¤ãŒãã®ãƒ©ãƒ™ãƒ«ã«å‰²ã‚Šå½“ã¦ã‚‰ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã¨ãªã‚Šã¾ã™.
+     * å¼•æ•°ã‚’äºŒæ¬¡å…ƒé…åˆ—ã«ã™ã‚‹ã“ã¨ã§, ä¸€æ¬¡å…ƒç›®ã®ã‚­ãƒ¼ã‚’ optgroup ã«ã™ã‚‹ã“ã¨ãŒå‡ºæ¥ã¾ã™.
      * 
-     * @param  string $current    ƒfƒtƒHƒ‹ƒg’l
-     * @param  array  $candidates ‘I‘ğˆ‚Ìˆê——
-     * @param  array  $attr       ’Ç‰Á‚Åw’è‚·‚é‘®« (class, id, style ‚È‚Ç)
-     * @return Peach_Markup_ContainerElement HTML ‚Ì select —v‘f
+     * @param  string $current    ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
+     * @param  array  $candidates é¸æŠè‚¢ã®ä¸€è¦§
+     * @param  array  $attr       è¿½åŠ ã§æŒ‡å®šã™ã‚‹å±æ€§ (class, id, style ãªã©)
+     * @return Peach_Markup_ContainerElement HTML ã® select è¦ç´ 
      */
     public static function createSelectElement($current, array $candidates, array $attr = array())
     {
@@ -147,11 +147,11 @@ class Peach_Markup_Html
     } 
    
     /**
-     * select —v‘f‚ÉŠÜ‚Ü‚ê‚é option ‚Ìˆê——‚ğì¬‚µ‚Ü‚·.
+     * select è¦ç´ ã«å«ã¾ã‚Œã‚‹ option ã®ä¸€è¦§ã‚’ä½œæˆã—ã¾ã™.
      * 
-     * @param  string $current    ƒfƒtƒHƒ‹ƒg’l
-     * @param  array  $candidates ‘I‘ğˆ‚Ìˆê——
-     * @return Peach_Markup_NodeList option —v‘f‚Ìˆê——
+     * @param  string $current    ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤
+     * @param  array  $candidates é¸æŠè‚¢ã®ä¸€è¦§
+     * @return Peach_Markup_NodeList option è¦ç´ ã®ä¸€è¦§
      */
     private static function createOptions($current, array $candidates)
     {
@@ -177,7 +177,7 @@ class Peach_Markup_Html
     }
     
     /**
-     * select —v‘f‚ğƒ‰ƒbƒv‚µ‚½ HelperObject ‚ğ•Ô‚µ‚Ü‚·.
+     * select è¦ç´ ã‚’ãƒ©ãƒƒãƒ—ã—ãŸ HelperObject ã‚’è¿”ã—ã¾ã™.
      * 
      * @see    Peach_Markup_Html::createSelectElement
      * @param  string $current
