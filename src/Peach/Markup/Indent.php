@@ -159,4 +159,3 @@ class Peach_Markup_Indent
         return $this->indent($this->level);
     }
 }
-?>

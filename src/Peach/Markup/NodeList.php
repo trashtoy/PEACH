@@ -50,11 +50,10 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
     private $owner;
     
     /**
-     * 新しい NodeList を構築します.
-     * 第一引数に値を設定した場合, その値をリストに追加した状態で初期化します.
+     * 新しい NodeList を生成します.
+     * 引数に値を設定した場合, その値をリストに追加した状態で初期化します.
      * 
-     * @param Peach_Markup_Component|array|string $var
-     * @param Peach_Markup_Node $owner
+     * @param Peach_Markup_Component|array|string $var 追加するノード
      */
     public function __construct($var = null, Peach_Markup_Node $owner = null)
     {
@@ -131,6 +130,7 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
     }
     
     /**
+     * 指定された Context にこのノードを処理させます.
      * {@link Peach_Markup_Context::handleNodeList()} を呼び出します.
      * @param Peach_Markup_Context $context
      */
@@ -139,6 +139,16 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
         $context->handleNodeList($this);
     }
     
+    /**
+     * この NodeList に子ノードを追加する際に,
+     * 親子関係が無限ループしないかどうか検査します.
+     * 引数がこの NodeList のオーナーだった場合に InvalidArgumentException をスローします.
+     * 引数が配列もしくは {@link Peach_Markup_Container Container} だった場合は,
+     * その子ノードの一覧について再帰的に検査します.
+     * 
+     * @param  mixed $var 検査対象
+     * @throws InvalidArgumentException 検査対象にこの NodeList のオーナーが含まれていた場合
+     */
     private function checkOwner($var)
     {
         if (is_array($var)) {

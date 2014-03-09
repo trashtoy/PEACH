@@ -23,6 +23,7 @@
 /** @package Markup */
 /**
  * 「何もない」ことをあらわす Component です. (Null Object パターン)
+ *
  * この Component は以下の特徴を持ちます.
  * 
  * - コンテナに append しても何も追加されない
@@ -52,11 +53,11 @@ class Peach_Markup_None implements Peach_Markup_Component
     }
     
     /**
-     * Context の handleNone を呼び出します.
+     * 指定された Context にこのノードを処理させます.
+     * {@link Peach_Markup_Context::handleNone()} を呼び出します.
      * @param Peach_Markup_Context $context
      */
     public function accept(Peach_Markup_Context $context) {
         $context->handleNone($this);
     }
 }
-?>

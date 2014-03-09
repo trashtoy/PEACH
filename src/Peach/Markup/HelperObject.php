@@ -22,7 +22,7 @@
  */
 /** @package Markup */
 /**
- * ノードツリーの構築を簡略化・省力化するためのオブジェクトです.
+ * 既存の Component をラップして, ノードツリーの構築を簡略化・省力化するための糖衣構文を備えたクラスです.
  * 主に (MVC フレームワークで言うところの) View の範囲で使用されることを想定しています.
  * 
  * @package Markup
@@ -37,7 +37,7 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     
     /**
      *
-     * @var Peach_Markup_Acceptable
+     * @var Peach_Markup_Component
      */
     private $node;
     
@@ -83,6 +83,12 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         return $this;
     }
     
+    /**
+     * 指定された文字列を整形済コードとして追加します.
+     * 
+     * @param string|Peach_Markup_Code $code 追加対象の整形済文字列
+     * @return Peach_Markup_HelperObject このオブジェクト自身
+     */
     public function appendCode($code)
     {
         if (!($code instanceof Peach_Markup_Code)) {
@@ -103,7 +109,7 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
      * さらに jQuery のようなメソッドチェインを実現するため, このオブジェクト自身を返します.
      * 
      * @param  string|array|Peach_Util_ArrayMap $var セットする属性
-     * @return Peach_Markup_HelperObject この要素自身
+     * @return Peach_Markup_HelperObject このオブジェクト自身
      */
     public function attr()
     {
@@ -141,8 +147,9 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     }
     
     /**
+     * この HelperObject をレンダリングします.
      * 
-     * @return mixed
+     * @return mixed 出力結果. デフォルトではマークアップされた結果の文字列
      */
     public function write()
     {

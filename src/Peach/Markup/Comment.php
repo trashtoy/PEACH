@@ -70,7 +70,7 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     }
     
     /**
-     * 
+     * 条件付きコメントの冒頭の文字列を返します.
      * @return string
      */
     public function getPrefix()
@@ -79,7 +79,7 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     }
     
     /**
-     * 
+     * 条件付きコメントの末尾の文字列を返します.
      * @return string
      */
     public function getSuffix()
@@ -88,6 +88,8 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     }
     
     /**
+     * 指定された Context にこのノードを処理させます.
+     * {@link Peach_Markup_Context::handleComment()} を呼び出します.
      * 
      * @param Peach_Markup_Context $context
      */
@@ -97,8 +99,9 @@ class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
     }
     
     /**
-     * 
-     * @param mixed $var
+     * このコメントにテキストまたはノードを追加します.
+     * ノードを追加した場合, このコメントノードは引数のノードのコメントアウトとして働きます.
+     * @param mixed $var このコメントに追加するテキストまたはノード
      */
     public function append($var)
     {

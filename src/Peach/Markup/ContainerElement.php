@@ -69,7 +69,9 @@ class Peach_Markup_ContainerElement extends Peach_Markup_Element implements Peac
     }
     
     /**
+     * 指定された Context にこのノードを処理させます.
      * {@link Peach_Markup_Context::handleContainerElement()} を呼び出します.
+     * @param Peach_Markup_Context $context
      */
     public function accept(Peach_Markup_Context $context)
     {

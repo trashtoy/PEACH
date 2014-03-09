@@ -57,8 +57,9 @@ class Peach_Markup_Text implements Peach_Markup_Node
     }
     
     /**
+     * 指定された Context にこのノードを処理させます.
      * {@link Peach_Markup_Context::handleText()} を呼び出します.
-     * @see Markup_Node#accept($node)
+     * @param Peach_Markup_Context $context
      */
     public function accept(Peach_Markup_Context $context)
     {

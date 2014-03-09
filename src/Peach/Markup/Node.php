@@ -22,10 +22,18 @@
  */
 /** @package Markup */
 /**
- * ツリー構造の一部に含めることが出来ることをあらわすマーカーインタフェースです.
+ * マークアップ言語を構成するパーツであることを意味するマーカーインタフェースです.
+ * 具体的には以下のようなクラスが該当します.
+ * 
+ * - {@link Peach_Markup_Element Element}
+ * - {@link Peach_Markup_Comment Comment}
+ * - {@link Peach_Markup_Text Text}
+ * 
+ * {@link Peach_Markup_NodeList NodeList}
+ * などはマークアップの一部ではないので, このインタフェースを実装しません.
+ * 
  * @package Markup
  */
 interface Peach_Markup_Node extends Peach_Markup_Component
 {
 }
-?>

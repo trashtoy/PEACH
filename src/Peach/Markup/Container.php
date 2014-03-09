@@ -35,14 +35,11 @@ interface Peach_Markup_Container extends Peach_Markup_Component
      * このコンテナにノードを追加します.
      * 
      * このメソッドは, 引数の種類によって以下の挙動を取ります.
-     * 引数がノードの場合は, 引数をそのまま NodeList の末尾に追加します.
      * 
-     * 引数が Container の場合は, その Container に含まれる各ノードを追加します.
-     * (Container 自身は追加されません)
-     * 
-     * 引数が配列の場合は, 配列に含まれる各ノードをこの NodeList に追加します.
-     * 
-     * 引数がノードではない場合は, 引数の文字列表現をテキストノードとして追加します.
+     * - {@link Peach_Markup_Node Node} の場合, 引数をそのままこの Container に追加します.
+     * - {@link Peach_Markup_Container Container} でかつ Node ではない場合, 引数の Container に含まれるノードを追加します. (引数の Container 自身は追加されません)
+     * - 配列の場合, 配列に含まれる各ノードをこの Container に追加します.
+     * - 以上の条件に合致しない場合は, 引数の文字列表現を {@link Peach_Markup_Text Text} ノードに変換し, この Container に追加します.
      * 
      * @param Peach_Markup_Node|Peach_Markup_Container|array|string $var
      */

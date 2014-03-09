@@ -58,6 +58,8 @@ class Peach_Markup_Code implements Peach_Markup_Node
     }
     
     /**
+     * 指定された Context にこのノードを処理させます.
+     * {@link Peach_Markup_Context::handleCode()} を呼び出します.
      * 
      * @param Peach_Markup_Context $context
      */

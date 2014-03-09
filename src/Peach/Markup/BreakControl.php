@@ -30,9 +30,8 @@ interface Peach_Markup_BreakControl
     /**
      * 指定された要素の開始タグの直後に改行を付加するかどうかを決定します.
      * 
-     * @param  Peach_Markup_ContainerElement $node
+     * @param  Peach_Markup_ContainerElement $node 判定対象の要素
      * @return bool このノードの開始タグの後ろに改行をつける場合は TRUE
      */
     function breaks(Peach_Markup_ContainerElement $node);
 }
-?>

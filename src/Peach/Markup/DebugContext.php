@@ -22,6 +22,8 @@
  */
 /** @package Markup */
 /**
+ * デバッグのために使用される Context です.
+ * この Context の出力結果は, ノードツリーの構造を可視化した文字列となります.
  * @package Markup
  */
 class Peach_Markup_DebugContext extends Peach_Markup_Context

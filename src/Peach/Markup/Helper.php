@@ -22,28 +22,47 @@
  */
 /** @package Markup */
 /**
+ * ノードの生成を簡略化するための API を備えたヘルパーです.
+ * ノードの構築およびマークアップ出力の手間を省力化するためのクラスです.
  * @package Markup
  */
 class Peach_Markup_Helper
 {
     /**
-     *
+     * 出力の際に使用される Builder です
      * @var Peach_Markup_Builder
      */
     private $builder;
     
     /**
-     *
+     * 空要素として扱われる要素名の一覧です
      * @var array
      */
     private $emptyNodeNames;
     
+    /**
+     * 指定された Builder を使ってマークアップを行う, 新しい Helper インスタンスを生成します.
+     * 第二引数で, 空要素として扱われる要素名の一覧を指定することができます.
+     * @param Peach_Markup_Builder $builder マークアップに利用する Builder 
+     * @param array $emptyNodeNames 空要素の要素名一覧
+     */
     public function __construct(Peach_Markup_Builder $builder, array $emptyNodeNames = array())
     {
         $this->builder        = $builder;
         $this->emptyNodeNames = $emptyNodeNames;
     }
     
+    /**
+     * 新しい HelperObject を生成します.
+     * このメソッドが生成するオブジェクトは, 引数によって異なります.
+     * 
+     * - 文字列の場合, その文字列を要素名に持つ新しい要素を生成します.
+     * - Component オブジェクトの場合, そのオブジェクトをラップした HelperObject を返します.
+     * 
+     * @param  string|Peach_Markup_Component $var
+     * @param  array $attr
+     * @return Peach_Markup_HelperObject
+     */
     public function createObject($var, $attr = array())
     {
         $object = new Peach_Markup_HelperObject($this, $var);
@@ -53,6 +72,21 @@ class Peach_Markup_Helper
         return $object;
     }
     
+    /**
+     * 引数の値をノードに変換します. このメソッドは {@link Peach_Markup_HelperObject}
+     * から参照されます. エンドユーザーが直接使う機会はありません.
+     * 引数によって以下の挙動を取ります.
+     * 
+     * - {@link Peach_Markup_Node Node} 型オブジェクトの場合: 引数をそのまま返します
+     * - {@link Peach_Markup_HelperObject HelperObject} 型オブジェクトの場合: 引数がラップしているノードを返します
+     * - 文字列の場合: 引数の文字列を要素名に持つ新しい {@link Peach_Markup_Element Element} を生成して返します
+     * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList} を生成して返します
+     * 
+     * 上記に当てはまらない場合は, 引数を文字列に変換して適用します.
+     * 
+     * @param  mixed $var 変換対象の値
+     * @return Peach_Markup_Component 変換後のノード
+     */
     public function createNode($var)
     {
         if ($var instanceof Peach_Markup_Node) {
@@ -71,6 +105,8 @@ class Peach_Markup_Helper
     }
     
     /**
+     * この Helper にセットされている Builder オブジェクトを返します.
+     * 返り値の Builder に対する変更は, この Helper にも影響されます.
      * 
      * @return Peach_Markup_Builder
      */
@@ -80,6 +116,8 @@ class Peach_Markup_Helper
     }
     
     /**
+     * この Helper にセットされている Builder を,
+     * 引数の Builder オブジェクトで上書きします.
      * 
      * @param Peach_Markup_Builder $builder
      */
@@ -89,7 +127,8 @@ class Peach_Markup_Helper
     }
     
     /**
-     *  @param string
+     * @param  string
+     * @return Peach_Markup_Element
      */
     private function createElement($name)
     {
