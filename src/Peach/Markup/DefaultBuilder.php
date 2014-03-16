@@ -90,6 +90,7 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
      */
     public function getRenderer()
     {
+        return $this->renderer;
     }
     
     /**
@@ -136,10 +137,14 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     }
     
     /**
-     * @return Peach_Markup_BreakControl
+     * この Builder にセットされている BreakControl オブジェクトを返します.
+     * もしも BreakControl オブジェクトがセットされていない場合は null を返します.
+     * 
+     * @return Peach_Markup_BreakControl BreakControl オブジェクト (セットされていない場合は null)
      */
     public function getBreakControl()
     {
+        return $this->breakControl;
     }
     
     /**
