@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_ContextTest.php");
+require_once(__DIR__ . "/Peach_Markup_TestUtil.php");
 class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
 {
     /**
@@ -254,7 +255,7 @@ EOS;
      */
     public function testGetResult()
     {
-        $test    = $this->getTestNode();
+        $test    = Peach_Markup_TestUtil::getTestNode();
         $expect1 = implode("\r\n", array(
             '<html lang="ja">',
             '    <head>',
