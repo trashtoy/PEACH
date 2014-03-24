@@ -256,48 +256,12 @@ EOS;
     public function testGetResult()
     {
         $test    = Peach_Markup_TestUtil::getTestNode();
-        $expect1 = implode("\r\n", array(
-            '<html lang="ja">',
-            '    <head>',
-            '        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />',
-            '        <title>TEST PAGE</title>',
-            '    </head>',
-            '    <body>',
-            '        <form method="post" action="sample.php">',
-            '            Name',
-            '            <input type="text" name="param1" value="" />',
-            '            <br />',
-            '            <input type="checkbox" name="flag1" value="1" checked="checked" />',
-            '            Enable something',
-            '            <br />',
-            '            <input type="submit" name="submit" value="Send" />',
-            '        </form>',
-            '    </body>',
-            '</html>',
-        ));
+        $expect1 = Peach_Markup_TestUtil::getDefaultBuildResult();
         $obj1 = $this->object;
         $obj1->handle($test);
         $this->assertSame($expect1, $obj1->getResult());
         
-        $expect2 = implode("\n", array(
-            '<html lang="ja">',
-            '  <head>',
-            '    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">',
-            '    <title>TEST PAGE</title>',
-            '  </head>',
-            '  <body>',
-            '    <form method="post" action="sample.php">',
-            '      Name',
-            '      <input type="text" name="param1" value="">',
-            '      <br>',
-            '      <input type="checkbox" name="flag1" value="1" checked>',
-            '      Enable something',
-            '      <br>',
-            '      <input type="submit" name="submit" value="Send">',
-            '    </form>',
-            '  </body>',
-            '</html>',
-        ));
+        $expect2 = Peach_Markup_TestUtil::getCustomBuildResult();
         $indent = new Peach_Markup_Indent(0, "  ", Peach_Markup_Indent::LF);
         $obj2   = new Peach_Markup_DefaultContext(Peach_Markup_SgmlRenderer::getInstance(), $indent);
         $obj2->handle($test);

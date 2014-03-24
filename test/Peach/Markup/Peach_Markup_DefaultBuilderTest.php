@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_BuilderTest.php");
+require_once(__DIR__ . "/Peach_Markup_TestUtil.php");
 
 class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
 {
@@ -84,14 +85,18 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
     }
     
     /**
+     * Builder にセットした設定が, build 時に適用されることを確認します.
+     * @todo   BreakControl が適用されるかどうかのテスト
      * @covers Peach_Markup_BuilderTest::build
-     * @todo   Implement testBuild()
      */
     public function testBuild()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $builder = $this->object;
+        $node    = Peach_Markup_TestUtil::getTestNode();
+        $this->assertSame(Peach_Markup_TestUtil::getDefaultBuildResult(), $builder->build($node));
+        
+        $builder->setIndent(new Peach_Markup_Indent(0, "  ", Peach_Markup_Indent::LF));
+        $builder->setRenderer("HTML");
+        $this->assertSame(Peach_Markup_TestUtil::getCustomBuildResult(), $builder->build($node));
     }
 }
