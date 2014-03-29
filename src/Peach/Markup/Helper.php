@@ -54,10 +54,14 @@ class Peach_Markup_Helper
     
     /**
      * 新しい HelperObject を生成します.
-     * このメソッドが生成するオブジェクトは, 引数によって異なります.
+     * このメソッドが返す HelperObject は, 引数の型に応じて以下のように振る舞います.
      * 
-     * - 文字列の場合, その文字列を要素名に持つ新しい要素を生成します.
-     * - Component オブジェクトの場合, そのオブジェクトをラップした HelperObject を返します.
+     * - 文字列の場合: その文字列を要素名に持つ {@link Peach_Markup_Element Element}
+     * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList}
+     * - Node オブジェクトの場合: その Node 自身
+     * 
+     * 第 2 引数に配列を指定した場合, 生成された要素に対して属性をセットすることが出来ます.
+     * (生成された HelperObject が要素ではない場合, 第 2 引数は無視されます)
      * 
      * @param  string|Peach_Markup_Component $var
      * @param  array $attr
@@ -75,17 +79,17 @@ class Peach_Markup_Helper
     /**
      * 引数の値をノードに変換します. このメソッドは {@link Peach_Markup_HelperObject}
      * から参照されます. エンドユーザーが直接使う機会はありません.
-     * 引数によって以下の挙動を取ります.
+     * 返り値は, 引数によって以下のようになります.
      * 
-     * - {@link Peach_Markup_Node Node} 型オブジェクトの場合: 引数をそのまま返します
-     * - {@link Peach_Markup_HelperObject HelperObject} 型オブジェクトの場合: 引数がラップしているノードを返します
-     * - 文字列の場合: 引数の文字列を要素名に持つ新しい {@link Peach_Markup_Element Element} を生成して返します
-     * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList} を生成して返します
-     * 
-     * 上記に当てはまらない場合は, 引数を文字列に変換して適用します.
+     * - {@link Peach_Markup_Node Node} 型オブジェクトの場合: 引数自身
+     * - {@link Peach_Markup_HelperObject HelperObject} 型オブジェクトの場合: 引数のオブジェクトがラップしているノード
+     * - 文字列の場合: 引数の文字列を要素名に持つ新しい {@link Peach_Markup_Element Element}
+     * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList}
+     * - 上記に当てはまらない場合: 引数の文字列表現をあらわす {@link Peach_Markup_Text Text} ノード
      * 
      * @param  mixed $var 変換対象の値
      * @return Peach_Markup_Component 変換後のノード
+     * @ignore
      */
     public function createNode($var)
     {
@@ -95,10 +99,19 @@ class Peach_Markup_Helper
         if ($var instanceof Peach_Markup_HelperObject) {
             return $var->getNode();
         }
+        if (is_string($var) && strlen($var)) {
+            return $this->createElement($var);
+        }
         $nodeName = Peach_Util_Values::stringValue($var);
-        return strlen($nodeName) ? $this->createElement($nodeName) : new Peach_Markup_NodeList();
+        return strlen($nodeName) ? new Peach_Markup_Text($nodeName) : new Peach_Markup_NodeList();
     }
     
+    /**
+     * 指定された HelperObject の変換結果を返します.
+     * このヘルパーに設定されている Builder を使って, 引数の HelperObject を build した結果を返します.
+     * @param  Peach_Markup_HelperObject $object
+     * @return mixed
+     */
     public function write(Peach_Markup_HelperObject $object)
     {
         return $this->builder->build($object->getNode());

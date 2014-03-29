@@ -105,8 +105,10 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
      * の糖衣構文です.
      * 引数が配列の場合は setAttributes() を実行し,
      * 引数が 1 つ以上の文字列の場合は setAttribute() を実行します.
+     * もしもこのオブジェクトがラップしているノードが Element ではなかった場合,
+     * このメソッドは何も行いません.
      * 
-     * さらに jQuery のようなメソッドチェインを実現するため, このオブジェクト自身を返します.
+     * jQuery のようなメソッドチェインを実現するため, このオブジェクト自身を返します.
      * 
      * @param  string|array|Peach_Util_ArrayMap $var セットする属性
      * @return Peach_Markup_HelperObject このオブジェクト自身
@@ -115,8 +117,6 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     {
         $node  = $this->node;
         if (!($node instanceof Peach_Markup_Element)) {
-            $className = get_class($node);
-            trigger_error("This object ({$className}) cannot set attributes.");
             return $this;
         }
         
