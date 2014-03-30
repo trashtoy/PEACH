@@ -35,29 +35,9 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
      */
     public function testGetResult()
     {
-        $expected = implode("\r\n", array(
-            "ContainerElement(html) {",
-            "    ContainerElement(head) {",
-            "        EmptyElement(meta)",
-            "        ContainerElement(title) {",
-            "            Text",
-            "        }",
-            "    }",
-            "    ContainerElement(body) {",
-            "        ContainerElement(form) {",
-            "            Text",
-            "            EmptyElement(input)",
-            "            EmptyElement(br)",
-            "            EmptyElement(input)",
-            "            Text",
-            "            EmptyElement(br)",
-            "            EmptyElement(input)",
-            "        }",
-            "    }",
-            "}",
-        )) . "\r\n";
-        $node    = Peach_Markup_TestUtil::getTestNode();
-        $context = $this->object;
+        $expected = Peach_Markup_TestUtil::getDebugBuildResult();
+        $node     = Peach_Markup_TestUtil::getTestNode();
+        $context  = $this->object;
         $this->expectOutputString($expected);
         $context->handle($node);
         $this->assertSame($expected, $context->getResult());

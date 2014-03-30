@@ -3,6 +3,9 @@ class Peach_Markup_TestUtil
 {
     private function __construct() {}
     
+    /**
+     * @return Peach_Markup_ContainerElement
+     */
     public static function getTestNode()
     {
         static $html = null;
@@ -15,6 +18,9 @@ class Peach_Markup_TestUtil
         return $html;
     }
     
+    /**
+     * @return Peach_Markup_ContainerElement
+     */
     private static function createHead()
     {
         $meta   = new Peach_Markup_EmptyElement("meta");
@@ -28,6 +34,9 @@ class Peach_Markup_TestUtil
         return $head;
     }
     
+    /**
+     * @return Peach_Markup_ContainerElement
+     */
     private static function createBody()
     {
         $body   = new Peach_Markup_ContainerElement("body");
@@ -35,6 +44,9 @@ class Peach_Markup_TestUtil
         return $body;
     }
     
+    /**
+     * @return Peach_Markup_ContainerElement
+     */
     private static function createForm()
     {
         $text   = new Peach_Markup_EmptyElement("input");
@@ -126,6 +138,39 @@ class Peach_Markup_TestUtil
                 '  </body>',
                 '</html>',
             ));
+        }
+        return $expected;
+    }
+    
+    /**
+     * テストノードを DebugBuilder::build() で処理した場合の想定結果を返します.
+     * @return string
+     */
+    public static function getDebugBuildResult()
+    {
+        static $expected = null;
+        if ($expected === null) {
+            $expected = implode("\r\n", array(
+                "ContainerElement(html) {",
+                "    ContainerElement(head) {",
+                "        EmptyElement(meta)",
+                "        ContainerElement(title) {",
+                "            Text",
+                "        }",
+                "    }",
+                "    ContainerElement(body) {",
+                "        ContainerElement(form) {",
+                "            Text",
+                "            EmptyElement(input)",
+                "            EmptyElement(br)",
+                "            EmptyElement(input)",
+                "            Text",
+                "            EmptyElement(br)",
+                "            EmptyElement(input)",
+                "        }",
+                "    }",
+                "}",
+            )) . "\r\n";
         }
         return $expected;
     }
