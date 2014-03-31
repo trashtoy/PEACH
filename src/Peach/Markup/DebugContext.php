@@ -117,11 +117,11 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
      * Comment ノードのデバッグ文字列を出力します.
      * 出力内容は以下の通りです.
      * 
-     * <pre>
+     * <code>
      * Comment {
      *     # 子ノードの出力内容
      * }
-     * </pre>
+     * </code>
      * 
      * @param Peach_Markup_Comment $node
      */
@@ -136,11 +136,11 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
      * ContainerElement ノードのデバッグ文字列を出力します.
      * 出力内容は以下の通りです.
      * 
-     * <pre>
+     * <code>
      * ContainerElement(tagName) {
      *     # 子ノードの出力内容
      * }
-     * </pre>
+     * </code>
      * 
      * @param Peach_Markup_ContainerElement $node
      */
@@ -156,9 +156,9 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
      * EmptyElement ノードのデバッグ文字列を出力します.
      * 出力内容は以下の通りです.
      * 
-     * <pre>
+     * <code>
      * EmptyElement(tagName)
-     * </pre>
+     * </code>
      * 
      * @param Peach_Markup_EmptyElement $node
      */
@@ -172,11 +172,11 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
      * NodeList のデバッグ文字列を出力します.
      * 出力内容は以下の通りです.
      * 
-     * <pre>
+     * <code>
      * NodeList {
      *     # 子ノードの出力内容
      * }
-     * </pre>
+     * </code>
      * 
      * @param Peach_Markup_NodeList $node
      */

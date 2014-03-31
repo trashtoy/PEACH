@@ -54,8 +54,12 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
         case 1:
             $childNodes = $node->getChildNodes();
             $child      = $childNodes[0];
-            if ($child instanceof Peach_Markup_Code)             return true;
-            if ($child instanceof Peach_Markup_ContainerElement) return $this->breaks($child);
+            if ($child instanceof Peach_Markup_Code) {
+                return true;
+            }
+            if ($child instanceof Peach_Markup_ContainerElement) {
+                return $this->breaks($child);
+            }
             return false;
         default:
             return true;
@@ -69,10 +73,9 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
      */
     public static function getInstance() {
         static $instance = null;
-        if (!isset($instance)) {
+        if ($instance === null) {
             $instance = new self();
         }
         return $instance;
     }
 }
-?>
