@@ -71,6 +71,35 @@ class Peach_Markup_TestUtil
     }
     
     /**
+     * @param  Peach_Markup_Helper $h
+     * @return Peach_Markup_HelperObject
+     */
+    public static function createTestHelperObject(Peach_Markup_Helper $h)
+    {
+        return $h->createObject("html")
+            ->attr("lang", "ja")
+            ->append($h->createObject("head")
+                ->append($h->createObject("meta")->attr(array("http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8")))
+                ->append($h->createObject("title")->append("TEST PAGE"))
+            )
+            ->append($h->createObject("body")
+                ->append($h->createObject("form")
+                    ->attr(array("method" => "post", "action" => "sample.php"))
+                    ->append("Name")
+                    ->append($h->createObject("input")->attr(array("type" => "text", "name" => "param1", "value" => "")))
+                    ->append($h->createObject("br"))
+                    ->append($h->createObject("input")
+                        ->attr(array("type" => "checkbox", "name" => "flag1", "value" => "1"))
+                        ->attr("checked")
+                    )
+                    ->append("Enable something")
+                    ->append($h->createObject("br"))
+                    ->append($h->createObject("input")->attr(array("type" => "submit", "name" => "submit", "value" => "Send")))
+                )
+            );
+    }
+    
+    /**
      * テストノードをデフォルトの条件でマークアップした場合の想定結果を返します.
      * デフォルトの条件は以下の通りです.
      * - 文書型: XHTML

@@ -66,6 +66,7 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     
     /**
      * このオブジェクトの子ノードとして, 指定された値を追加します.
+     * このオブジェクトがラップしているオブジェクトが Container でない場合は何もしません.
      * 
      * @param  mixed $var                追加される値
      * @return Peach_Markup_HelperObject 自分自身
@@ -75,9 +76,6 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         $node = $this->node;
         if ($node instanceof Peach_Markup_Container) {
             $node->append($var);
-        } else {
-            $className = get_class($node);
-            trigger_error("This object ({$className}) cannot append elements.");
         }
         
         return $this;
@@ -156,11 +154,17 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         return $this->helper->write($this);
     }
     
+    /**
+     * この HelperObject をデバッグ出力します.
+     * @return string
+     */
     public function debug()
     {
-        $debug = new Peach_Markup_DebugContext();
-        $debug->handle($this->node);
-        return $debug->getResult();
+        static $debug = null;
+        if ($debug === null) {
+           $debug = new Peach_Markup_DebugBuilder();
+        }
+        return $debug->build($this);
     }
     
     public function prototype()
@@ -194,7 +198,7 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     }
     
     /**
-     * 
+     * このオブジェクトがラップしているノードの accept() を呼び出します.
      * @param Peach_Markup_Context $context
      */
     public function accept(Peach_Markup_Context $context)
