@@ -148,10 +148,12 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     }
     
     /**
+     * この Builder に指定された BreakControl をセットします.
+     * null を指定した場合は設定を解除します.
      * 
      * @param  Peach_Markup_BreakControl $breakControl
      */
-    public function setBreakControl(Peach_Markup_BreakControl $breakControl)
+    public function setBreakControl(Peach_Markup_BreakControl $breakControl = null)
     {
         $this->breakControl = $breakControl;
     }

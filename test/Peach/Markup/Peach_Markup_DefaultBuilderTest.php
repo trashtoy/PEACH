@@ -32,6 +32,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * 
      * - 初期状態では getIndent() が null を返すこと
      * - setIndent() でセットした Indent オブジェクトが getIndent() で取得できること
+     * - null を指定するとセットした Indent オブジェクトが解除されること
      * 
      * @covers Peach_Markup_DefaultBuilder::getIndent
      * @covers Peach_Markup_DefaultBuilder::setIndent
@@ -44,6 +45,9 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
         $subject = new Peach_Markup_Indent(-1, Peach_Markup_Indent::TAB, Peach_Markup_Indent::LF);
         $builder->setIndent($subject);
         $this->assertSame($subject, $builder->getIndent());
+        
+        $builder->setIndent(null);
+        $this->assertNull($builder->getIndent());
     }
     
     /**
@@ -51,6 +55,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * 
      * - 初期状態では getRenderer() が null を返すこと
      * - setRenderer() でセットした Renderer オブジェクトが getRenderer() で取得できること
+     * - null を指定するとセットした Renderer オブジェクトが解除されること
      * 
      * @covers Peach_Markup_DefaultBuilder::getRenderer
      * @covers Peach_Markup_DefaultBuilder::setRenderer
@@ -63,6 +68,9 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
         $subject = Peach_Markup_XmlRenderer::getInstance();
         $builder->setRenderer($subject);
         $this->assertSame($subject, $builder->getRenderer());
+        
+        $builder->setRenderer(null);
+        $this->assertNull($builder->getRenderer());
     }
     
     /**
@@ -70,6 +78,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * 
      * - 初期状態では getBreakControl() が null を返すこと
      * - setBreakControl() でセットした BreakControl オブジェクトが getBreakControl() で取得できること
+     * - null を指定するとセットした BreakControl オブジェクトが解除されること
      * 
      * @covers Peach_Markup_DefaultBuilder::setBreakControl
      * @covers Peach_Markup_DefaultBuilder::setBreakControl
@@ -82,6 +91,9 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
         $subject = new Peach_Markup_NameBreakControl(array(), array());
         $builder->setBreakControl($subject);
         $this->assertSame($subject, $builder->getBreakControl());
+        
+        $builder->setBreakControl(null);
+        $this->assertNull($builder->getBreakControl());
     }
     
     /**
