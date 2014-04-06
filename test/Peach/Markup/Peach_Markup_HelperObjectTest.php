@@ -223,14 +223,32 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * getChildNodes() のテストです. 以下を確認します.
+     * 
+     * - このオブジェクトがラップしているノードが Container だった場合はそのノードの childNodes() の結果を返すこと
+     * - それ以外は空配列を返すこと
+     * 
      * @covers Peach_Markup_HelperObject::getChildNodes
      * @todo   Implement testGetChildNodes().
      */
     public function testGetChildNodes()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $h        = $this->helper;
+        $expected = array(
+            new Peach_Markup_Text("First"),
+            new Peach_Markup_Text("Second"),
+            new Peach_Markup_Text("Third"),
         );
+        
+        $p        = new Peach_Markup_ContainerElement("p");
+        $p->append("First");
+        $p->append("Second");
+        $p->append("Third");
+        $obj1     = new Peach_Markup_HelperObject($h, $p);
+        $this->assertEquals($expected, $obj1->getChildNodes());
+        
+        $text     = new Peach_Markup_Text("This is test");
+        $obj2     = new Peach_Markup_HelperObject($h, $text);
+        $this->assertSame(array(), $obj2->getChildNodes());
     }
 }

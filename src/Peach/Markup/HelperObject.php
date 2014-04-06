@@ -75,7 +75,8 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     {
         $node = $this->node;
         if ($node instanceof Peach_Markup_Container) {
-            $node->append($var);
+            $appendee = ($var instanceof Peach_Markup_HelperObject) ? $var->getNode() : $var;
+            $node->append($appendee);
         }
         
         return $this;
@@ -207,19 +208,15 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     }
     
     /**
-     * 
+     * このオブジェクトの子ノードの一覧を取得します.
+     * もしもこのオブジェクトがラップしているノードが {@link Peach_Markup_Container Container}
+     * だった場合は, そのオブジェクトの子ノードの一覧を返します.
+     * それ以外は空の配列を返します.
      * @return array
      */
     public function getChildNodes()
     {
         $node = $this->node;
-        if ($node instanceof Peach_Markup_Node) {
-            return array($node);
-        }
-        if ($node instanceof Peach_Markup_Container) {
-            return $node->getChildNodes();
-        }
-        
-        return array();
+        return ($node instanceof Peach_Markup_Container) ? $node->getChildNodes() : array();
     }
 }
