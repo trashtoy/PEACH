@@ -155,15 +155,30 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * children() のテストです. 以下の結果が返ることを確認します.
+     * 
+     * - ラップしているオブジェクトが Container だった場合は, その子ノード一覧をあらわす HelperObject
+     * - それ以外は空の NodeList を表現する HelperObject
+     * 
      * @covers Peach_Markup_HelperObject::children
-     * @todo   Implement testChildren().
      */
     public function testChildren()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $h = $this->helper;
+        
+        $expected1 = new Peach_Markup_HelperObject($h, null);
+        $expected1->append("First")->append("Second")->append("Third");
+        $p         = new Peach_Markup_ContainerElement("p");
+        $p->append("First");
+        $p->append("Second");
+        $p->append("Third");
+        $obj1      = new Peach_Markup_HelperObject($h, $p);
+        $this->assertEquals($expected1, $obj1->children());
+        
+        $expected2 = new Peach_Markup_HelperObject($h, null);
+        $br        = new Peach_Markup_EmptyElement("br");
+        $obj2      = new Peach_Markup_HelperObject($h, $br);
+        $this->assertEquals($expected2, $obj2->children());
     }
     
     /**

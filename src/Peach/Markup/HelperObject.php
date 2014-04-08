@@ -136,13 +136,16 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     }
     
     /**
-     * 
-     * @return Peach_Markup_NodeList
+     * このオブジェクトの子ノード一覧をあらわす HelperObject を返します.
+     * @return Peach_Markup_HelperObject
      */
     public function children()
     {
-        return ($this->node instanceof Peach_Markup_Container) ?
-            $this->node->getChildNodes() : new Peach_Markup_NodeList();
+        $result = $this->helper->createObject(null);;
+        if ($this->node instanceof Peach_Markup_Container) {
+            $result->append($this->node->getChildNodes());
+        }
+        return $result;
     }
     
     /**
