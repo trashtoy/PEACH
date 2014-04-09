@@ -157,6 +157,7 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
     /**
      * children() のテストです. 以下の結果が返ることを確認します.
      * 
+     * - ラップしているオブジェクトが NodeList だった場合は, そのオブジェクト自身
      * - ラップしているオブジェクトが Container だった場合は, その子ノード一覧をあらわす HelperObject
      * - それ以外は空の NodeList を表現する HelperObject
      * 
@@ -166,19 +167,21 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
     {
         $h = $this->helper;
         
-        $expected1 = new Peach_Markup_HelperObject($h, null);
-        $expected1->append("First")->append("Second")->append("Third");
+        $obj1      = new Peach_Markup_HelperObject($h, null);
+        $obj1->append("First")->append("Second")->append("Third");
+        $this->assertSame($obj1, $obj1->children());
+        
         $p         = new Peach_Markup_ContainerElement("p");
         $p->append("First");
         $p->append("Second");
         $p->append("Third");
-        $obj1      = new Peach_Markup_HelperObject($h, $p);
-        $this->assertEquals($expected1, $obj1->children());
+        $obj2      = new Peach_Markup_HelperObject($h, $p);
+        $this->assertEquals($obj1, $obj2->children());
         
-        $expected2 = new Peach_Markup_HelperObject($h, null);
+        $expected  = new Peach_Markup_HelperObject($h, null);
         $br        = new Peach_Markup_EmptyElement("br");
-        $obj2      = new Peach_Markup_HelperObject($h, $br);
-        $this->assertEquals($expected2, $obj2->children());
+        $obj3      = new Peach_Markup_HelperObject($h, $br);
+        $this->assertEquals($expected, $obj3->children());
     }
     
     /**

@@ -63,6 +63,7 @@ class Peach_Markup_HelperTest extends PHPUnit_Framework_TestCase
      * createNode() のテストです. 引数によって, 以下の結果が返ることを確認します.
      * 
      * - {@link Peach_Markup_Node Node} 型オブジェクトの場合: 引数自身
+     * - {@link Peach_Markup_NodeList NodeList} 型オブジェクトの場合: 引数自身
      * - {@link Peach_Markup_HelperObject HelperObject} 型オブジェクトの場合: 引数のオブジェクトがラップしているノード
      * - 文字列の場合: 引数の文字列を要素名に持つ新しい {@link Peach_Markup_Element Element}
      * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList}
@@ -75,6 +76,9 @@ class Peach_Markup_HelperTest extends PHPUnit_Framework_TestCase
         $h = $this->object;
         $node = new Peach_Markup_EmptyElement("br");
         $this->assertSame($node, $h->createNode($node));
+        
+        $nodeList = new Peach_Markup_NodeList(array("First", "Second", "Third"));
+        $this->assertSame($nodeList, $h->createNode($nodeList));
         
         $div= new Peach_Markup_ContainerElement("div");
         $div->setAttribute("id", "test");

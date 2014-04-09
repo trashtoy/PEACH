@@ -141,7 +141,11 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
      */
     public function children()
     {
-        $result = $this->helper->createObject(null);;
+        if ($this->node instanceof Peach_Markup_NodeList) {
+            return $this;
+        }
+        
+        $result = $this->helper->createObject(null);
         if ($this->node instanceof Peach_Markup_Container) {
             $result->append($this->node->getChildNodes());
         }

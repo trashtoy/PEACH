@@ -82,6 +82,7 @@ class Peach_Markup_Helper
      * 返り値は, 引数によって以下のようになります.
      * 
      * - {@link Peach_Markup_Node Node} 型オブジェクトの場合: 引数自身
+     * - {@link Peach_Markup_NodeList NodeList} 型オブジェクトの場合: 引数自身
      * - {@link Peach_Markup_HelperObject HelperObject} 型オブジェクトの場合: 引数のオブジェクトがラップしているノード
      * - 文字列の場合: 引数の文字列を要素名に持つ新しい {@link Peach_Markup_Element Element}
      * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList}
@@ -94,6 +95,9 @@ class Peach_Markup_Helper
     public function createNode($var)
     {
         if ($var instanceof Peach_Markup_Node) {
+            return $var;
+        }
+        if ($var instanceof Peach_Markup_NodeList) {
             return $var;
         }
         if ($var instanceof Peach_Markup_HelperObject) {
