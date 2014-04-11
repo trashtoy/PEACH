@@ -175,11 +175,21 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         return $debug->build($this);
     }
     
+    /**
+     * この HelperObject がラップしている要素の属性をコピーして, 新しい要素を生成します.
+     * もしもラップしているオブジェクトが Element ではなかった場合は
+     * 空の NodeList をラップする HelperObject を返します.
+     * 
+     * @return Peach_Markup_HelperObject コピーされた要素をラップする HelperObject
+     */
     public function prototype()
     {
-        $this->helper->createObject($this->createPrototype());
+        return $this->helper->createObject($this->createPrototype());
     }
     
+    /**
+     * @return Peach_Markup_Element
+     */
     private function createPrototype()
     {
         $original = $this->node;
@@ -191,14 +201,6 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
         if ($original instanceof Peach_Markup_EmptyElement) {
             $node = new Peach_Markup_EmptyElement($original->getName());
             $node->setAttributes($original->getAttributes());
-            return $node;
-        }
-        if ($original instanceof Peach_Markup_Text) {
-            return new Peach_Markup_Text($original->getText());
-        }
-        if ($original instanceof Peach_Markup_NodeList) {
-            $node = new Peach_Markup_NodeList();
-            $node->appendNode($original);
             return $node;
         }
         

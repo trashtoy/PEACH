@@ -216,15 +216,35 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * prototype() のテストです.
+     * 返り値の HelperObject が以下の Component をラップしていることを確認します.
+     * 
+     * - ラップしているノードが ContainerElement だった場合, 同じ属性を持つ空の ContainerElement
+     * - ラップしているノードが EmptyElement だった場合, 同じ属性を持つ EmptyElement
+     * - それ以外は, 空の NodeList
+     * 
      * @covers Peach_Markup_HelperObject::prototype
-     * @todo   Implement testPrototype().
      */
     public function testPrototype()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $h = $this->helper;
+        
+        $e1   = new Peach_Markup_ContainerElement("div");
+        $e1->setAttributes(array("id" => "sample", "class" => "test"));
+        $obj1 = new Peach_Markup_HelperObject($h, "div");
+        $obj1->attr("id", "sample")->attr("class", "test")->append("First")->append("Second")->append("Third");
+        $this->assertEquals($e1, $obj1->prototype()->getNode());
+        
+        $e2   = new Peach_Markup_EmptyElement("input");
+        $e2->setAttributes(array("type" => "text", "name" => "subject", "value" => ""));
+        $obj2 = new Peach_Markup_HelperObject($h, "input");
+        $obj2->attr(array("type" => "text", "name" => "subject", "value" => ""));
+        $this->assertEquals($e2, $obj2->prototype()->getNode());
+        
+        $nl   = new Peach_Markup_NodeList();
+        $text = new Peach_Markup_Text("This is Test");
+        $obj3 = new Peach_Markup_HelperObject($h, $text);
+        $this->assertEquals($nl, $obj3->prototype()->getNode());
     }
     
     /**
