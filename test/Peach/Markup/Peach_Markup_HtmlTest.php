@@ -1,11 +1,13 @@
 <?php
+require_once(__DIR__ . "/Peach_Markup_TestUtil.php");
+
 class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Peach_Markup_Html
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -13,7 +15,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -22,43 +24,74 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     {
         
     }
-
+    
     /**
-     * @covers Peach_Markup_Html::getBuilder
-     * @todo   Implement testGetBuilder().
-     */
-    public function testGetBuilder()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
+     * init() のテストです. 以下を確認します.
+     * 
+     * - 引数に true を指定した場合は XHTML 形式, false を指定した場合は HTML 形式のグローバル Helper が初期化されること
+     * - 引数を省略した場合は HTML 形式で初期化されること
+     * 
      * @covers Peach_Markup_Html::init
-     * @todo   Implement testInit().
      */
     public function testInit()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $xr = Peach_Markup_XmlRenderer::getInstance();
+        $sr = Peach_Markup_SgmlRenderer::getInstance();
+        
+        Peach_Markup_Html::init(true);
+        $b1 = Peach_Markup_Html::getBuilder();
+        $this->assertSame($xr, $b1->getRenderer());
+        
+        Peach_Markup_Html::init(false);
+        $b2 = Peach_Markup_Html::getBuilder();
+        $this->assertSame($sr, $b2->getRenderer());
+        
+        Peach_Markup_Html::init();
+        $b3 = Peach_Markup_Html::getBuilder();
+        $this->assertSame($sr, $b3->getRenderer());
     }
-
+    
     /**
+     * getHelper() のテストです.
      * @covers Peach_Markup_Html::getHelper
-     * @todo   Implement testGetHelper().
      */
     public function testGetHelper()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $breakControl   = new Peach_Markup_NameBreakControl(
+            array("html", "head", "body", "ul", "ol", "dl", "table"),
+            array("pre", "code", "textarea")
         );
+        $emptyNodeNames = array("meta", "link", "img", "input", "br", "hr");
+        
+        $b1  = new Peach_Markup_DefaultBuilder();
+        $b1->setBreakControl($breakControl);
+        $b1->setRenderer("HTML");
+        $ex1 = new Peach_Markup_Helper($b1, $emptyNodeNames);
+        Peach_Markup_Html::init();
+        $this->assertEquals($ex1, Peach_Markup_Html::getHelper());
+        
+        $b2  = new Peach_Markup_DefaultBuilder();
+        $b2->setBreakControl($breakControl);
+        $b2->setRenderer("XHTML");
+        $ex2 = new Peach_Markup_Helper($b2, $emptyNodeNames);
+        Peach_Markup_Html::init(true);
+        $this->assertEquals($ex2, Peach_Markup_Html::getHelper());
     }
-
+    
+    /**
+     * getBuilder() のテストです.
+     * 返り値の Builder に対する変更が, グローバル Helper に適用されることを確認します.
+     * @covers Peach_Markup_Html::getBuilder
+     */
+    public function testGetBuilder()
+    {
+        $builder = Peach_Markup_Html::getBuilder();
+        $builder->setRenderer("html");
+        $builder->setIndent(new Peach_Markup_Indent(0, "  ", Peach_Markup_Indent::LF));
+        $result  = Peach_Markup_Html::tag(Peach_Markup_TestUtil::getTestNode())->write();
+        $this->assertSame(Peach_Markup_TestUtil::getCustomBuildResult(), $result);
+    }
+    
     /**
      * @covers Peach_Markup_Html::tag
      * @todo   Implement testTag().
@@ -70,7 +103,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
                 'This test has not been implemented yet.'
         );
     }
-
+    
     /**
      * @covers Peach_Markup_Html::comment
      * @todo   Implement testComment().
@@ -82,7 +115,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
                 'This test has not been implemented yet.'
         );
     }
-
+    
     /**
      * @covers Peach_Markup_Html::conditionalComment
      * @todo   Implement testConditionalComment().
@@ -94,7 +127,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
                 'This test has not been implemented yet.'
         );
     }
-
+    
     /**
      * @covers Peach_Markup_Html::select
      * @todo   Implement testSelect().

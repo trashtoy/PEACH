@@ -23,13 +23,15 @@
 /** @package Markup */
 /**
  * HTML の出力に特化したユーティリティクラスです.
+ * このクラスに紐付いているグローバルな {@link Peach_Markup_Helper Helper} オブジェクトを使って
+ * HTML のマークアップを行います.
  * 
  * @package Markup
  */
 class Peach_Markup_Html
 {
     /**
-     *
+     * HTML のマークアップに利用するグローバル Helper です.
      * @var Peach_Markup_Helper
      */
     private static $HELPER;
@@ -37,7 +39,11 @@ class Peach_Markup_Html
     /** このクラスはインスタンス化できません. */
     private function __construct() {}
     
-    public static function getBuilder($xml = false)
+    /**
+     * @param  bool $xml
+     * @return Peach_Markup_DefaultBuilder
+     */
+    private static function createBuilder($xml = false)
     {
         static $breakControl = null;
         if (!isset($breakControl)) {
@@ -54,7 +60,7 @@ class Peach_Markup_Html
     }
     
     /**
-     * 
+     * グローバル Helper を新規作成します.
      * @param  bool $xml
      * @return Peach_Markup_Helper
      */
@@ -64,11 +70,11 @@ class Peach_Markup_Html
         if (!isset($emptyNodeNames)) {
             $emptyNodeNames = array("meta", "link", "img", "input", "br", "hr");
         }
-        return new Peach_Markup_Helper(self::getBuilder($xml), $emptyNodeNames);
+        return new Peach_Markup_Helper(self::createBuilder($xml), $emptyNodeNames);
     }
     
     /**
-     * このクラスで使用する Helper インスタンスを初期化します.
+     * このクラスが使用するグローバル Helper を初期化します.
      * HTML ではなく XHTML 形式でタグ出力したい場合は, 引数に true を指定してください.
      * 
      * @param bool $isXHTML XHTML 形式で出力する場合は true
@@ -79,8 +85,11 @@ class Peach_Markup_Html
     }
     
     /**
+     * このクラスが使用するグローバル Helper を返します.
+     * もしも {@link Peach_Markup_Html::init() init()} が一度も実行されていない場合は,
+     * HTML 形式のマークアップを行う Helper オブジェクトをグローバル Helper として設定します.
      * 
-     * @return Peach_Markup_Helper
+     * @return Peach_Markup_Helper このクラスが使用するグローバル Helper
      */
     public static function getHelper()
     {
@@ -88,6 +97,17 @@ class Peach_Markup_Html
             self::init();
         }
         return self::$HELPER;
+    }
+    
+    /**
+     * このクラスが利用するグローバル Helper インスタンスに紐付いている
+     * {@link Peach_Markup_DefaultBuilder DefaultBuilder} オブジェクトを返します.
+     * 返り値の Builder に対する変更は, グローバル Helper にも影響します.
+     * @return Peach_Markup_DefaultBuilder 
+     */
+    public static function getBuilder()
+    {
+        return self::getHelper()->getBuilder();
     }
     
     /**
