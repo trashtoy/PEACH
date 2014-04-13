@@ -68,7 +68,8 @@ class Peach_Markup_Html
     {
         static $emptyNodeNames = null;
         if (!isset($emptyNodeNames)) {
-            $emptyNodeNames = array("meta", "link", "img", "input", "br", "hr");
+            // HTML4.01 および HTML5 (2014-02-04 勧告候補時点) の空要素一覧です
+            $emptyNodeNames = array("area", "base", "basefont", "br", "col", "command", "embed", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr");
         }
         return new Peach_Markup_Helper(self::createBuilder($xml), $emptyNodeNames);
     }
@@ -111,12 +112,20 @@ class Peach_Markup_Html
     }
     
     /**
+     * 指定された文字列を要素名とする要素を作成します.
+     * 第 2 引数を指定することで, 生成された要素に属性を付与することが出来ます.
+     * 生成された要素をラップする HelperObject を返します.
+     * 
+     * その他の使い方として, 以下のことが出来ます.
+     * 
+     * - 引数に null を指定したか, または引数を省略した場合, 空の NodeList をラップする HelperObject を返します.
+     * - 引数に任意の {@link Peach_Markup_Node Node} を指定した場合, 引数のノードをラップする HelperObject を返します.
      * 
      * @param  string $name 要素名
-     * @param  array  $attr 追加で指定する属性
+     * @param  array  $attr 追加で指定する属性の一覧 (キーが属性名, 値が属性値)
      * @return Peach_Markup_HelperObject
      */
-    public static function tag($name, array $attr = array())
+    public static function tag($name = null, array $attr = array())
     {
         return self::getHelper()->createObject($name, $attr);
     }

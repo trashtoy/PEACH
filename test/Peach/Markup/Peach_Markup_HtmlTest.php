@@ -61,7 +61,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
             array("html", "head", "body", "ul", "ol", "dl", "table"),
             array("pre", "code", "textarea")
         );
-        $emptyNodeNames = array("meta", "link", "img", "input", "br", "hr");
+        $emptyNodeNames = array("area", "base", "basefont", "br", "col", "command", "embed", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr");
         
         $b1  = new Peach_Markup_DefaultBuilder();
         $b1->setBreakControl($breakControl);
@@ -93,15 +93,43 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * tag() のテストです. 引数によって, 生成される HelperObject が以下の Component をラップすることを確認します.
+     * - 文字列の場合: 引数を要素名に持つ Element
+     * - null または引数なしの場合: 空の NodeList
+     * - Node オブジェクトの場合: 引数の Node 自身
+     * 
+     * また, HTML4.01 および最新の HTML5 の勧告候補 (2014-02-04 時点) の仕様を元に,
+     * 以下の要素が「空要素」として生成されることを確認します.
+     * - HTML4.01: area, base, basefont, br, col, frame, hr, img, input, isindex, link, meta, param
+     * - HTML5: area, base, br, col, command, embed, hr, img, input, keygen, link, meta, param, source, track, wbr
+     * 
      * @covers Peach_Markup_Html::tag
-     * @todo   Implement testTag().
      */
     public function testTag()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $containerExamples = array("html", "body", "div", "span");
+        foreach ($containerExamples as $name) {
+            $obj = Peach_Markup_Html::tag($name);
+            $this->assertInstanceOf("Peach_Markup_ContainerElement", $obj->getNode());
+        }
+        
+        $nodeList  = new Peach_Markup_NodeList();
+        $obj2      = Peach_Markup_Html::tag(null);
+        $this->assertEquals($nodeList, $obj2->getNode());
+        $obj3      = Peach_Markup_Html::tag();
+        $this->assertEquals($nodeList, $obj3->getNode());
+        
+        $text      = new Peach_Markup_Text("SAMPLE TEXT");
+        $obj4      = Peach_Markup_Html::tag($text);
+        $this->assertSame($text, $obj4->getNode());
+        
+        $emptyHtml4 = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "isindex", "link", "meta", "param");
+        $emptyHtml5 = array("area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr");
+        $emptyList  = array_unique(array_merge($emptyHtml4, $emptyHtml5));
+        foreach ($emptyList as $name) {
+            $obj = Peach_Markup_Html::tag($name);
+            $this->assertInstanceOf("Peach_Markup_EmptyElement", $obj->getNode());
+        }
     }
     
     /**
