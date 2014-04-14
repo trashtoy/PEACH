@@ -14,6 +14,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        Peach_Markup_Html::init();
     }
     
     /**
@@ -133,27 +134,72 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * comment() のテストです. 以下を確認します.
+     * 
+     * - 返り値の HelperObject が Comment ノードをラップしていること
+     * - 第 1 引数に指定した値が, ラップしている Comment オブジェクトの子ノードになること
+     * - 第 2, 第3 引数でコメントの接頭辞・接尾辞を指定できること
+     * 
      * @covers Peach_Markup_Html::comment
-     * @todo   Implement testComment().
      */
     public function testComment()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $c1  = Peach_Markup_Html::comment("SAMPLE COMMENT");
+        $this->assertInstanceOf("Peach_Markup_Comment", $c1->getNode());
+        $this->assertSame("<!--SAMPLE COMMENT-->", $c1->write());
+        
+        $obj = Peach_Markup_Html::tag("div")
+                ->append(Peach_Markup_Html::tag("h1")->append("TEST"))
+                ->append(Peach_Markup_Html::tag("p")->append("The Quick Brown Fox Jumps Over The Lazy Dogs"));
+        $ex1 = implode("\r\n", array(
+            "<!--",
+            "<div>",
+            "    <h1>TEST</h1>",
+            "    <p>The Quick Brown Fox Jumps Over The Lazy Dogs</p>",
+            "</div>",
+            "-->",
+        ));
+        $c2  = Peach_Markup_Html::comment($obj);
+        $this->assertSame($ex1, $c2->write());
+        
+        $ex2 = implode("\r\n", array(
+            "<!--[start]",
+            "<div>",
+            "    <h1>TEST</h1>",
+            "    <p>The Quick Brown Fox Jumps Over The Lazy Dogs</p>",
+            "</div>",
+            "[end]-->",
+        ));
+        $c3  = Peach_Markup_Html::comment($obj, "[start]", "[end]");
+        $this->assertSame($ex2, $c3->write());
     }
     
     /**
+     * conditionalComment() のテストです.
+     * 第 1 引数に指定された文字列またはノードに対して,
+     * 第 2 引数の内容で条件付きコメントが付加されることを確認します.
+     * 
      * @covers Peach_Markup_Html::conditionalComment
-     * @todo   Implement testConditionalComment().
      */
     public function testConditionalComment()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $ex1 = "<!--[if lt IE 7]>He died on April 9, 2014.<![endif]-->";
+        $c1  = Peach_Markup_Html::conditionalComment("He died on April 9, 2014.", "lt IE 7");
+        $this->assertSame($ex1, $c1->write());
+        
+        $ex2 = implode("\r\n", array(
+            "<!--[if IE 9]>",
+            "<div>",
+            "    <h1>TEST</h1>",
+            "    <p>The Quick Brown Fox Jumps Over The Lazy Dogs</p>",
+            "</div>",
+            "<![endif]-->",
+        ));
+        $obj = Peach_Markup_Html::tag("div")
+                ->append(Peach_Markup_Html::tag("h1")->append("TEST"))
+                ->append(Peach_Markup_Html::tag("p")->append("The Quick Brown Fox Jumps Over The Lazy Dogs"));
+        $c2  = Peach_Markup_Html::conditionalComment($obj, "IE 9");
+        $this->assertSame($ex2, $c2->write());
     }
     
     /**

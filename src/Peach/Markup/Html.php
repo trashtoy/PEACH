@@ -131,10 +131,14 @@ class Peach_Markup_Html
     }
     
     /**
+     * 指定された内容のコメントノードを作成します.
+     * 引数に文字列を指定した場合, 引数の文字列のコメントを作成します.
+     * 引数にノードを指定した場合, 引数のノードの出力内容をコメントアウトします.
+     * 第 2, 第 3 引数にコメントの接頭辞・接尾辞を含めることが出来ます.
      * 
-     * @param  mixed  $contents
-     * @param  string $prefix
-     * @param  string $suffix
+     * @param  string|Peach_Markup_Component $contents コメントにしたいテキストまたはノード
+     * @param  string $prefix コメントの接頭辞
+     * @param  string $suffix コメントの接尾辞
      * @return Peach_Markup_HelperObject
      */
     public static function comment($contents, $prefix = "", $suffix = "")
@@ -144,14 +148,23 @@ class Peach_Markup_Html
     }
     
     /**
+     * IE 9 以前の Internet Explorer で採用されている条件付きコメントを生成します.
+     * 使用例は以下の通りです.
+     * <code>
+     * echo Peach_Markup_Html::conditionalComment("He died on April 9, 2014.", "lt IE 7")->write();
+     * </code>
+     * このコードは次の文字列を出力します.
+     * <code>
+     * <!--[if lt IE 7]>He died on April 9, 2014.<![endif]-->
+     * </code>
      * 
-     * @param  mixed  $contents
-     * @param  string $cond
+     * @param  string|Peach_Markup_Component $contents 条件付きコメントで囲みたいテキストまたはノード
+     * @param  string                        $cond     条件付きコメントの内容
      * @return Peach_Markup_HelperObject
      */
     public static function conditionalComment($contents, $cond)
     {
-        return self::comment($contents, "[{$cond} ]>", "<![endif]");
+        return self::comment($contents, "[if {$cond}]>", "<![endif]");
     }
     
     /**
