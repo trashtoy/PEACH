@@ -232,4 +232,78 @@ class Peach_Markup_Html
     {
         return self::tag(self::createSelectElement($current, $candidates, $attr));
     }
+    
+    /**
+     * このクラスで定義されているメソッドを簡単に呼び出すためのエイリアスを定義します.
+     * 引数の配列では, キーに "tag", "comment", "conditionalComment", "select" のいずれか,
+     * 値にそのメソッド名のエイリアス (関数名) を指定してください.
+     * 
+     * 以下に例を挙げます.
+     * <code>
+     * Peach_Markup_Html(array("tag" => "t", "comment" => "co"));
+     * echo t("div")
+     *     ->append(co("TEST"))
+     *     ->append(t("h1")->append("Sample"))
+     *     ->append(t("p")->append("Hello World!"))
+     *     ->write();
+     * </code>
+     * このコードは以下の内容と等価です.
+     * <code>
+     * echo Peach_Markup_Html::tag("div")
+     *     ->append(Peach_Markup_Html::comment("TEST"))
+     *     ->append(Peach_Markup_Html::tag("h1")->append("Sample"))
+     *     ->append(Peach_Markup_Html::tag("p")->append("Hello World!"))
+     *     ->write();
+     * </code>
+     * いずれも以下の結果を出力します.
+     * <code>
+     * <div>
+     *     <!--TEST-->
+     *     <h1>Sample</h1>
+     *     <p>Hello world!</p>
+     * </div>
+     * </code>
+     * 
+     * 引数を省略した場合は, array("tag" => "tag") として扱います.
+     * 
+     * @param  array $options 定義するエイリアスの一覧
+     * @throws InvalidArgumentException 不適切なクラスメソッド名を指定した /
+     * 指定された関数名が既に存在していた / 関数名が不適切など
+     */
+    public static function alias(array $options = array())
+    {
+        static $validNames = array("tag", "comment", "conditionalComment", "select");
+        if (!count($options)) {
+            return self::alias(array("tag" => "tag"));
+        }
+        foreach ($options as $methodName => $funcName) {
+            if (!in_array($methodName, $validNames)) {
+                throw new InvalidArgumentException("Method '{$methodName}' is not found.");
+            }
+            if (function_exists($funcName)) {
+                throw new InvalidArgumentException("Function '{$funcName}' is already defined.");
+            }
+            // http://www.php.net/manual/ja/functions.user-defined.php を参考
+            if (!preg_match("/^[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/", $funcName)) {
+                throw new InvalidArgumentException("Invalid function name: '{$funcName}'");
+            }
+        }
+        
+        if (isset($options["tag"])) {
+            $tag = $options["tag"];
+            eval("function {$tag}(\$n = null, \$a = array()) { return Peach_Markup_Html::tag(\$n, \$a); }");
+        }
+        if (isset($options["comment"])) {
+            $comment = $options["comment"];
+            eval("function {$comment}(\$c, \$p = '', \$s = '') { return Peach_Markup_Html::comment(\$c, \$p, \$s); }");
+        }
+        if (isset($options["conditionalComment"])) {
+            $cond = $options["conditionalComment"];
+            eval("function {$cond}(\$c1, \$c2) { return Peach_Markup_Html::conditionalComment(\$c1, \$c2); }");
+        }
+        if (isset($options["select"])) {
+            $select = $options["select"];
+            eval("function {$select}(\$c1, \$c2, \$a = array()) { return Peach_Markup_Html::select(\$c1, \$c2, \$a); }");
+        }
+    }
 }

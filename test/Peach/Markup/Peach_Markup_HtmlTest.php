@@ -378,4 +378,91 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf("Peach_Markup_HelperObject", $select);
         $this->assertSame($expected, $select->write());
     }
+    
+    /**
+     * alias() のテストです. 以下を確認します.
+     * 
+     * - 引数を省略した場合は array("tag" => "tag") と同様の結果になること
+     * - 引数に指定した内容でエイリアスを定義できること
+     */
+    public function testAlias()
+    {
+        $this->assertFalse(function_exists("tag"));
+        Peach_Markup_Html::alias();
+        $this->assertTrue(function_exists("tag"));
+        $this->assertSame("<p>Hello World!</p>", tag("p")->append("Hello World!")->write());
+
+        $aliasList = array("t", "c", "cond", "s");
+        foreach ($aliasList as $name) {
+            $this->assertFalse(function_exists($name));
+        }
+        Peach_Markup_Html::alias(array("tag" => "t", "comment" => "c", "conditionalComment" => "cond", "select" => "s"));
+        foreach ($aliasList as $name) {
+            $this->assertTrue(function_exists($name));
+        }
+        $ex1 = implode("\r\n", array(
+            '<div>',
+            '    <!--TEST-->',
+            '    <p>Hello World!</p>',
+            '    <!--[if lt IE 9]>',
+            '    <script src="ieonly.js"></script>',
+            '    <![endif]-->',
+            '    <select name="foo">',
+            '        <option value="1">A</option>',
+            '        <option value="2" selected>B</option>',
+            '        <option value="3">C</option>',
+            '    </select>',
+            '</div>',
+        ));
+        $t = t("div")
+            ->append(c("TEST"))
+            ->append(t("p")->append("Hello World!"))
+            ->append(cond(t("script")->attr("src", "ieonly.js"), "lt IE 9"))
+            ->append(
+                s(2, array("A" => 1, "B" => 2, "C" => 3), array("name" => "foo"))
+            );
+        $this->assertSame($ex1, $t->write());
+    }
+    
+    /**
+     * alias() の引数で既に存在する関数名を指定した場合,
+     * InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     */
+    public function testAliasByAlreadyDefinedName()
+    {
+        $this->assertFalse(function_exists("t1"));
+        Peach_Markup_Html::alias(array("tag" => "t1"));
+        $this->assertTrue(function_exists("t1"));
+        Peach_Markup_Html::alias(array("tag" => "t1"));
+    }
+    
+    /**
+     * alias() の引数に関数名として使用できない名前を指定した場合,
+     * InvalidArgumentException をスローすることを確認します.
+     */
+    public function testAliasByInvalidName()
+    {
+        $invalidList = array(
+            "123invalid",
+            "hogehoge()",
+            "bad-function",
+        );
+        foreach ($invalidList as $name) {
+            try {
+                Peach_Markup_Html::alias(array("tag" => $name));
+                $this->fail();
+            } catch (InvalidArgumentException $e) {}
+        }
+    }
+    
+    /**
+     * alias() の引数に存在しないメソッド名を指定した場合,
+     * InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     */
+    public function testAliasByUndefinedMethod()
+    {
+        Peach_Markup_Html::alias(array("tag" => "valid1", "hogehoge" => "invalid1"));
+    }
 }
