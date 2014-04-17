@@ -204,16 +204,17 @@ class Peach_Markup_Html
                 $optgroup->setAttribute("label", $key);
                 $optgroup->append(self::createOptions($current, $value));
                 $result->append($optgroup);
-            } else {
-                $option  = new Peach_Markup_ContainerElement("option");
-                $option->setAttribute("value", $value);
-                $value   = Peach_Util_Values::stringValue($value);
-                if ($current === $value) {
-                    $option->setAttribute("selected");
-                }
-                $option->append($key);
-                $result->append($option);
+                continue;
             }
+            
+            $option  = new Peach_Markup_ContainerElement("option");
+            $option->setAttribute("value", $value);
+            $value   = Peach_Util_Values::stringValue($value);
+            if ($current === $value) {
+                $option->setAttribute("selected");
+            }
+            $option->append($key);
+            $result->append($option);
         }
         return $result;
     }

@@ -203,14 +203,179 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @covers Peach_Markup_Html::select
-     * @todo   Implement testSelect().
+     * createSelectElement() のテストです.
+     * 以下を確認します.
+     * 
+     * - 第 1 引数をデフォルト選択肢, 第 2 引数を項目の一覧とする select 要素を返すこと
+     * - 第 2 引数の値に配列が含まれる場合, その項目が optgroup になること
+     * - 第 3 引数で select 要素の属性を指定できること
+     * 
+     * @covers Peach_Markup_Html::createSelectElement
+     */
+    public function testCreateSelectElement()
+    {
+        $candidates = array(
+            "Apple"  => 1,
+            "Orange" => 2,
+            "Pear"   => 3,
+            "Peach"  => 4,
+        );
+        $select1    = Peach_Markup_Html::createSelectElement(null, $candidates);
+        $this->assertEquals($this->createSampleSelectNode(false, false), $select1);
+        $select2    = Peach_Markup_Html::createSelectElement("4", $candidates);
+        $this->assertEquals($this->createSampleSelectNode(true, false),  $select2);
+        $select3    = Peach_Markup_Html::createSelectElement("", $candidates, array("id" => "test", "name" => "favorite"));
+        $this->assertEquals($this->createSampleSelectNode(false, true), $select3);
+        
+        $candidates2 = array(
+            "Fruit"   => $candidates,
+            "Dessert" => array(
+                "Chocolate" => 5,
+                "Doughnut"  => 6,
+                "Ice cream" => 7,
+            ),
+            "Others" => 8,
+        );
+        $select4    = Peach_Markup_Html::createSelectElement(6, $candidates2);
+        $builder    = new Peach_Markup_DefaultBuilder();
+        $this->assertEquals($this->createSampleSelectNode2(), $select4);
+    }
+    
+    /**
+     * @param  bool $selectFlag
+     * @param  bool $attrFlag
+     * @return Peach_Markup_ContainerElement
+     */
+    private function createSampleSelectNode($selectFlag, $attrFlag)
+    {
+        $select = new Peach_Markup_ContainerElement("select");
+        
+        $opt1   = new Peach_Markup_ContainerElement("option");
+        $opt1->setAttribute("value", "1");
+        $opt1->append("Apple");
+        $select->append($opt1);
+        
+        $opt2   = new Peach_Markup_ContainerElement("option");
+        $opt2->setAttribute("value", "2");
+        $opt2->append("Orange");
+        $select->append($opt2);
+        
+        $opt3   = new Peach_Markup_ContainerElement("option");
+        $opt3->setAttribute("value", "3");
+        $opt3->append("Pear");
+        $select->append($opt3);
+        
+        $opt4   = new Peach_Markup_ContainerElement("option");
+        $opt4->setAttribute("value", "4");
+        $opt4->append("Peach");
+        $select->append($opt4);
+        if ($selectFlag) {
+            $opt4->setAttribute("selected");
+        }
+        
+        if ($attrFlag) {
+            $select->setAttributes(array("id" => "test", "name" => "favorite"));
+        }
+        return $select;
+    }
+    
+    /**
+     * @return Peach_Markup_ContainerElement
+     */
+    private function createSampleSelectNode2()
+    {
+        $select = new Peach_Markup_ContainerElement("select");
+        
+        $grp1   = new Peach_Markup_ContainerElement("optgroup");
+        $grp1->setAttribute("label", "Fruit");
+        $select->append($grp1);
+        $grp2   = new Peach_Markup_ContainerElement("optgroup");
+        $grp2->setAttribute("label", "Dessert");
+        $select->append($grp2);
+        $other  = new Peach_Markup_ContainerElement("option");
+        $other->setAttribute("value", "8");
+        $other->append("Others");
+        $select->append($other);
+        
+        $opt1   = new Peach_Markup_ContainerElement("option");
+        $opt1->setAttribute("value", "1");
+        $opt1->append("Apple");
+        $grp1->append($opt1);
+        
+        $opt2   = new Peach_Markup_ContainerElement("option");
+        $opt2->setAttribute("value", "2");
+        $opt2->append("Orange");
+        $grp1->append($opt2);
+        
+        $opt3   = new Peach_Markup_ContainerElement("option");
+        $opt3->setAttribute("value", "3");
+        $opt3->append("Pear");
+        $grp1->append($opt3);
+        
+        $opt4   = new Peach_Markup_ContainerElement("option");
+        $opt4->setAttribute("value", "4");
+        $opt4->append("Peach");
+        $grp1->append($opt4);
+        
+        $opt5   = new Peach_Markup_ContainerElement("option");
+        $opt5->setAttribute("value", "5");
+        $opt5->append("Chocolate");
+        $grp2->append($opt5);
+        
+        $opt6   = new Peach_Markup_ContainerElement("option");
+        $opt6->setAttribute("value", "6");
+        $opt6->setAttribute("selected");
+        $opt6->append("Doughnut");
+        $grp2->append($opt6);
+        
+        $opt7   = new Peach_Markup_ContainerElement("option");
+        $opt7->setAttribute("value", "7");
+        $opt7->append("Ice cream");
+        $grp2->append($opt7);
+        
+        return $select;
+    }
+    
+    /**
+     * select() のテストです. createSelectElement() の結果をラップした
+     * HelperObject を返すことを確認します.
+     * 
+     * @covers Peach_Markup_Html::seect
      */
     public function testSelect()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
+        $candidates = array(
+            "Fruit"   => array(
+                "Apple"  => 1,
+                "Orange" => 2,
+                "Pear"   => 3,
+                "Peach"  => 4,
+            ),
+            "Dessert" => array(
+                "Chocolate" => 5,
+                "Doughnut"  => 6,
+                "Ice cream" => 7,
+            ),
+            "Others" => 8,
         );
+        $expected = implode("\r\n", array(
+            '<select name="favorite">',
+            '    <optgroup label="Fruit">',
+            '        <option value="1">Apple</option>',
+            '        <option value="2">Orange</option>',
+            '        <option value="3">Pear</option>',
+            '        <option value="4">Peach</option>',
+            '    </optgroup>',
+            '    <optgroup label="Dessert">',
+            '        <option value="5">Chocolate</option>',
+            '        <option value="6" selected>Doughnut</option>',
+            '        <option value="7">Ice cream</option>',
+            '    </optgroup>',
+            '    <option value="8">Others</option>',
+            '</select>',
+        ));
+        $select = Peach_Markup_Html::select(6, $candidates, array("name" => "favorite"));
+        $this->assertInstanceOf("Peach_Markup_HelperObject", $select);
+        $this->assertSame($expected, $select->write());
     }
 }
