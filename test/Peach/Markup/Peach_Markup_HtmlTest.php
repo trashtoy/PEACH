@@ -175,16 +175,17 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * conditionalComment() のテストです.
-     * 第 1 引数に指定された文字列またはノードに対して,
-     * 第 2 引数の内容で条件付きコメントが付加されることを確認します.
+     * conditionalComment() のテストです. 以下を確認します.
+     * 
+     * - 第 1 引数に指定された条件付きコメントの中に, 第 2 引数に定された文字列またはノードが含まれること
+     * - 第 2 引数を省略した場合, 空の条件付きコメントが生成されること
      * 
      * @covers Peach_Markup_Html::conditionalComment
      */
     public function testConditionalComment()
     {
         $ex1 = "<!--[if lt IE 7]>He died on April 9, 2014.<![endif]-->";
-        $c1  = Peach_Markup_Html::conditionalComment("He died on April 9, 2014.", "lt IE 7");
+        $c1  = Peach_Markup_Html::conditionalComment("lt IE 7", "He died on April 9, 2014.");
         $this->assertSame($ex1, $c1->write());
         
         $ex2 = implode("\r\n", array(
@@ -198,8 +199,12 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
         $obj = Peach_Markup_Html::tag("div")
                 ->append(Peach_Markup_Html::tag("h1")->append("TEST"))
                 ->append(Peach_Markup_Html::tag("p")->append("The Quick Brown Fox Jumps Over The Lazy Dogs"));
-        $c2  = Peach_Markup_Html::conditionalComment($obj, "IE 9");
+        $c2  = Peach_Markup_Html::conditionalComment("IE 9", $obj);
         $this->assertSame($ex2, $c2->write());
+        
+        $ex3 = "<!--[if IE]><![endif]-->";
+        $c3  = Peach_Markup_Html::conditionalComment("IE");
+        $this->assertSame($ex3, $c3->write());
     }
     
     /**
@@ -417,7 +422,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
         $t = t("div")
             ->append(c("TEST"))
             ->append(t("p")->append("Hello World!"))
-            ->append(cond(t("script")->attr("src", "ieonly.js"), "lt IE 9"))
+            ->append(cond("lt IE 9", t("script")->attr("src", "ieonly.js")))
             ->append(
                 s(2, array("A" => 1, "B" => 2, "C" => 3), array("name" => "foo"))
             );

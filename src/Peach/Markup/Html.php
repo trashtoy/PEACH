@@ -151,18 +151,19 @@ class Peach_Markup_Html
      * IE 9 以前の Internet Explorer で採用されている条件付きコメントを生成します.
      * 使用例は以下の通りです.
      * <code>
-     * echo Peach_Markup_Html::conditionalComment("He died on April 9, 2014.", "lt IE 7")->write();
+     * echo Peach_Markup_Html::conditionalComment("lt IE 7", "He died on April 9, 2014.")->write();
      * </code>
      * このコードは次の文字列を出力します.
      * <code>
      * <!--[if lt IE 7]>He died on April 9, 2014.<![endif]-->
      * </code>
+     * 第 2 引数を省略した場合は空の条件付きコメントを生成します.
      * 
+     * @param  string                        $cond     条件文 ("lt IE 7" など)
      * @param  string|Peach_Markup_Component $contents 条件付きコメントで囲みたいテキストまたはノード
-     * @param  string                        $cond     条件付きコメントの内容
      * @return Peach_Markup_HelperObject
      */
-    public static function conditionalComment($contents, $cond)
+    public static function conditionalComment($cond, $contents = null)
     {
         return self::comment($contents, "[if {$cond}]>", "<![endif]");
     }
