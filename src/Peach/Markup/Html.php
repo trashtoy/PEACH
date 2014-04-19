@@ -101,7 +101,7 @@ class Peach_Markup_Html
     }
     
     /**
-     * このクラスが利用するグローバル Helper インスタンスに紐付いている
+     * このクラスが使用するグローバル Helper に紐付いている
      * {@link Peach_Markup_DefaultBuilder DefaultBuilder} オブジェクトを返します.
      * 返り値の Builder に対する変更は, グローバル Helper にも影響します.
      * @return Peach_Markup_DefaultBuilder 
@@ -113,8 +113,8 @@ class Peach_Markup_Html
     
     /**
      * 指定された文字列を要素名とする要素を作成します.
-     * 第 2 引数を指定することで, 生成された要素に属性を付与することが出来ます.
      * 生成された要素をラップする HelperObject を返します.
+     * 第 2 引数を指定することで, 生成された要素に属性を付与することが出来ます.
      * 
      * その他の使い方として, 以下のことが出来ます.
      * 
@@ -132,8 +132,8 @@ class Peach_Markup_Html
     
     /**
      * 指定された内容のコメントノードを作成します.
-     * 引数に文字列を指定した場合, 引数の文字列のコメントを作成します.
-     * 引数にノードを指定した場合, 引数のノードの出力内容をコメントアウトします.
+     * 引数にノードを指定した場合, そのノードの内容をコメントアウトします.
+     * 
      * 第 2, 第 3 引数にコメントの接頭辞・接尾辞を含めることが出来ます.
      * 
      * @param  string|Peach_Markup_Component $contents コメントにしたいテキストまたはノード
@@ -149,7 +149,7 @@ class Peach_Markup_Html
     
     /**
      * IE 9 以前の Internet Explorer で採用されている条件付きコメントを生成します.
-     * 使用例は以下の通りです.
+     * 以下にサンプルを挙げます.
      * <code>
      * echo Peach_Markup_Html::conditionalComment("lt IE 7", "He died on April 9, 2014.")->write();
      * </code>
@@ -161,7 +161,7 @@ class Peach_Markup_Html
      * 
      * @param  string                        $cond     条件文 ("lt IE 7" など)
      * @param  string|Peach_Markup_Component $contents 条件付きコメントで囲みたいテキストまたはノード
-     * @return Peach_Markup_HelperObject
+     * @return Peach_Markup_HelperObject 条件付きコメントを表現する HelperObject
      */
     public static function conditionalComment($cond, $contents = null)
     {
@@ -173,7 +173,43 @@ class Peach_Markup_Html
      * 第 1 引数にはデフォルトで選択されている値,
      * 第 2 引数には選択肢を配列で指定します.
      * キーがラベル, 値がそのラベルに割り当てられたデータとなります.
+     * 
      * 引数を二次元配列にすることで, 一次元目のキーを optgroup にすることが出来ます.
+     * 以下にサンプルを挙げます.
+     * <code>
+     * $candidates = array(
+     *     "Fruit"   => array(
+     *         "Apple"  => 1,
+     *         "Orange" => 2,
+     *         "Pear"   => 3,
+     *         "Peach"  => 4,
+     *     ),
+     *     "Dessert" => array(
+     *         "Chocolate" => 5,
+     *         "Doughnut"  => 6,
+     *         "Ice cream" => 7,
+     *     ),
+     *     "Others" => 8,
+     * );
+     * $select = Peach_Markup_Html::createSelectElement("6", $candidates, array("class" => "sample", "name" => "favorite"));
+     * </code>
+     * この要素を出力すると以下の結果が得られます.
+     * <code>
+     * <select class="sample" name="favorite">
+     *     <optgroup label="Fruit">
+     *         <option value="1">Apple</option>
+     *         <option value="2">Orange</option>
+     *         <option value="3">Pear</option>
+     *         <option value="4">Peach</option>
+     *     </optgroup>
+     *     <optgroup label="Dessert">
+     *         <option value="5">Chocolate</option>
+     *         <option value="6" selected>Doughnut</option>
+     *         <option value="7">Ice cream</option>
+     *     </optgroup>
+     *     <option value="8">Others</option>
+     * </select>
+     * </code>
      * 
      * @param  string $current    デフォルト値
      * @param  array  $candidates 選択肢の一覧
@@ -221,12 +257,15 @@ class Peach_Markup_Html
     }
     
     /**
-     * select 要素をラップした HelperObject を返します.
+     * HTML の select 要素を生成し, 結果を HelperObject として返します.
+     * 引数および処理内容は
+     * {@link Peach_Markup_Html::createSelectElement() createSelectElement()}
+     * と全く同じですが, 生成された要素を HelperObject でラップするところが異なります.
      * 
      * @see    Peach_Markup_Html::createSelectElement
-     * @param  string $current
-     * @param  array  $candidates
-     * @param  array  $attr
+     * @param  string $current    デフォルト値
+     * @param  array  $candidates 選択肢の一覧
+     * @param  array  $attr       追加で指定する属性 (class, id, style など)
      * @return Peach_Markup_HelperObject
      */
     public static function select($current, array $candidates, array $attr = array())
@@ -236,12 +275,17 @@ class Peach_Markup_Html
     
     /**
      * このクラスで定義されているメソッドを簡単に呼び出すためのエイリアスを定義します.
-     * 引数の配列では, キーに "tag", "comment", "conditionalComment", "select" のいずれか,
-     * 値にそのメソッド名のエイリアス (関数名) を指定してください.
+     * 引数の配列では, キーにメソッド名, 値にそのメソッドのエイリアス (関数名) を指定してください.
+     * キーに使用することが出来る文字列 (メソッド名) は以下の通りです.
      * 
-     * 以下に例を挙げます.
+     * - {@link Peach_Markup_Html::tag() tag}
+     * - {@link Peach_Markup_Html::comment() comment}
+     * - {@link Peach_Markup_Html::conditionalComment() conditionalComment}
+     * - {@link Peach_Markup_Html::select() select}
+     * 
+     * 使用例を挙げます.
      * <code>
-     * Peach_Markup_Html(array("tag" => "t", "comment" => "co"));
+     * Peach_Markup_Html::alias(array("tag" => "t", "comment" => "co"));
      * echo t("div")
      *     ->append(co("TEST"))
      *     ->append(t("h1")->append("Sample"))
@@ -267,7 +311,7 @@ class Peach_Markup_Html
      * 
      * 引数を省略した場合は, array("tag" => "tag") として扱います.
      * 
-     * @param  array $options 定義するエイリアスの一覧
+     * @param  array $options 定義するエイリアスの一覧. キーがメソッド, 値が新しく定義する関数名
      * @throws InvalidArgumentException 不適切なクラスメソッド名を指定した /
      * 指定された関数名が既に存在していた / 関数名が不適切など
      */
