@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup}">
+    <refnamediv>
+        <refname>XML, HTML 出力支援モジュール Markup</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id intro}">
+        <title>出力に特化したモジュールです</title>
+        <para>
+            パッケージ Markup は, XML や HTML などのマークアップ言語の出力を支援するライブラリです.
+            {@link http://www.w3.org/DOM/DOMTR DOM} に近い API を備えていますが, コンセプトは全く異なります.
+            インデントの方法やタグの書式といった, 出力時のフォーマットのカスタマイズを非常に柔軟に行うことが出来ますが,
+            ノードツリーの操作 (あるノードを別のノードの下に移動させたり, 特定のノードを削除させたりなど)
+            はほとんどサポートしていません.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id examples}">
+        <title>サンプルコード</title>
+        <para>このモジュールの使い方を以下のサンプルコードでお見せします.</para>
+        <programlisting role="php">
+            <![CDATA[
+$article = new Peach_Markup_ContainerElement("article");
+$article->setAttributes(array("id" => 42, "author" => "Thomas"));
+
+$summary = new Peach_Markup_ContainerElement("summary");
+$summary->append("Lorem ipsum dolor sit amet, consectetur adipisicing elit.");
+$article->append($summary);
+
+$category = new Peach_Markup_ContainerElement("category");
+$item1 = new Peach_Markup_EmptyElement("item");
+$item1->setAttribute("id", 3);
+$category->append($item1);
+$item2 = new Peach_Markup_EmptyElement("item");
+$item2->setAttribute("id", 7);
+$category->append($item2);
+$article->append($category);
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($article);
+            ]]>
+        </programlisting>
+        <para>このコードは以下の XML を出力します.</para>
+        <programlisting role="php">
+            <![CDATA[
+<article id="42" author="Thomas">
+    <summary>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</summary>
+    <category>
+        <item id="3" />
+        <item id="7" />
+    </category>
+</article>
+            ]]>
+        </programlisting>
+        <para>
+            HTML を出力する場合は {@link Peach_Markup_Html} を使ってさらに簡潔に書くことが出来ます.
+            (上の書き方でももちろん出来ます)
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+Peach_Markup_Html::alias(); // 関数 tag() を定義する
+echo tag("html", array("lang" => "ja"))
+    ->append(tag("head")
+        ->append(tag("meta")->attr(array("http-equiv" => "Content-Type", "content" => "text/html; charset=UTF-8")))
+        ->append(tag("title")->append("TEST PAGE"))
+    )
+    ->append(tag("body")
+        ->append(tag("form", array("method" => "post", "action" => "sample.php"))
+            ->append("Name")
+            ->append(tag("input")->attr(array("type" => "text", "name" => "param1", "value" => "")))
+            ->append(tag("br"))
+            ->append(tag("input")
+                ->attr(array("type" => "checkbox", "name" => "flag1", "value" => "1"))
+                ->attr("checked")
+            )
+            ->append("Enable something")
+            ->append(tag("br"))
+            ->append(tag("input")->attr(array("type" => "submit", "name" => "submit", "value" => "Send")))
+        )
+    )->write();
+            ]]>
+        </programlisting>
+        <para>このコードは以下の HTML を出力します.</para>
+        <programlisting role="php">
+            <![CDATA[
+<html lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>TEST PAGE</title>
+    </head>
+    <body>
+        <form method="post" action="sample.php">
+            Name
+            <input type="text" name="param1" value="">
+            <br>
+            <input type="checkbox" name="flag1" value="1" checked>
+            Enable something
+            <br>
+            <input type="submit" name="submit" value="Send">
+        </form>
+    </body>
+</html>
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id design_concept}">
+        <title>モジュールの基本構造</title>
+        <para>
+            このモジュールの基本となる型が
+            {@link Peach_Markup_Node Node} と {@link Peach_Markup_Builder Builder}
+            です. この 2 つの型の相互作用によりマークアップ言語の出力が行われます.
+        </para>
+        <refsect2 id="{@id node}">
+            <title>Node</title>
+            <para>
+                Node は, マークアップ言語を構成するパーツを表すインタフェースです.
+                例えば要素 (タグ)・テキスト・コメントなどが該当します.
+            </para>
+            <para>Node の実装クラスとして, 代表的なものを以下に挙げます.</para>
+            <itemizedlist>
+                <listitem>
+                    {@link Peach_Markup_ContainerElement ContainerElement}:
+                    開始タグと終了タグを伴う要素です.
+                </listitem>
+                <listitem>
+                    {@link Peach_Markup_EmptyElement EmptyElement}:
+                    空要素です. HTML における img や br などに相当します.
+                </listitem>
+                <listitem>
+                    {@link Peach_Markup_Text Text}:
+                    開始タグと終了タグに囲まれたテキスト部分を表します.
+                </listitem>
+                <listitem>
+                    {@link Peach_Markup_Comment Comment}:
+                    "&lt;--" と "--&gt;" によるコメントを表します.
+                </listitem>
+            </itemizedlist>
+        </refsect2>
+        <refsect2 id="{@id builder}">
+            <title>Builder</title>
+            <para>
+                Builder は, Component を XML (HTML) 文書を出力する際の整形ルールを表すクラスです.
+                例えばインデントの種類 (タブ文字 or スペース), 改行コード, タグの出力方法
+                ("&lt;br&gt;" か, それとも "&lt;br /&gt;" か) などを制御することが出来ます.
+            </para>
+        </refsect2>
+    </refsect1>
+</refentry>
