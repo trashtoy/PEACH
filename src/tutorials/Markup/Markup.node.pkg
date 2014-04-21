@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup}">
+    <refnamediv>
+        <refname>Node インタフェース</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id summary}">
+        <title>概要</title>
+        <para>
+            {@link Peach_Markup_Node Node} インタフェースは, 
+            マークアップ言語を構成するパーツを表す型です.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id element}">
+        <title>Element</title>
+        <para>
+            {@link Peach_Markup_Element Element} は,
+            マークアップ言語における「要素」を表現するクラスです.
+            Element には {@link Peach_Markup_ContainerElement ContainerElement}
+            と {@link Peach_Markup_EmptyElement EmptyElement} の 2 種類があります.
+        </para>
+        <refsect2 id="{@id container_element}">
+            <title>ContainerElement</title>
+            <para>
+                {@link Peach_Markup_ContainerElement ContainerElement}
+                は, 開始タグと終了タグから成る要素を表します.
+                {@link Peach_Markup_ContainerElement::append() append()}
+                メソッドを使ってテキストや任意のノードを子ノードとして追加することが出来ます.
+            </para>
+            <para>以下に ContainerElement を使ったサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
+$p = new Peach_Markup_ContainerElement("p");
+$p->setAttribute("class", "test");
+$p->append("The Quick Brown Fox Jumps Over The Lazy Dogs.");
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($p);
+                ]]>
+            </programlisting>
+            <para>このコードは以下の結果を出力します.</para>
+            <programlisting role="php">
+                <![CDATA[
+<p class="test">The Quick Brown Fox Jumps Over The Lazy Dogs.</p>
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id empty_element}">
+            <title>EmptyElement</title>
+            <para>
+                {@link Peach_Markup_EmptyElement EmptyElement}
+                は, 空要素 (終了タグを伴わないタグ) を表すクラスです.
+                以下にサンプルコードを掲載します.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$input = new Peach_Markup_EmptyElement("input");
+$input->setAttributes(array("type" => "text", "name" => "subject", "value" => ""));
+
+$builder = new Peach_Markup_DefaultBuilder();
+$builder->setRenderer("HTML");
+echo $builder->build($input); // Output: <input type="text" name="subject" value="">
+
+$builder->setRenderer("XHTML");
+echo $builder->build($input); // Output: <input type="text" name="subject" value="" />
+                ]]>
+            </programlisting>
+        </refsect2>
+    </refsect1>
+    <refsect1 id="{@id text}">
+        <title>Text</title>
+        <para>
+            {@link Peach_Markup_Text Text} は, 要素内のテキストを表します.
+            この Node は出力される際に自動的に {@link htmlspecialchars() htmlspecialchars()}
+            で特殊文字が変換されます.
+        </para>
+        <para>
+            {@link Peach_Markup_ContainerElement::append() append()}
+            メソッドの引数に文字列を指定した場合, 内部ではその文字列の内容をあらわす
+            Text ノードが生成され, そのノードが追加されるという仕組みになっています.
+        </para>
+        <para>以下にサンプルコードを掲載します.</para>
+        <programlisting role="php">
+            <![CDATA[
+$text = new Paach_Markup_Text("<Hello> & <World!>");
+$p1   = new Peach_Markup_ContainerElement("p");
+$p1->append($text);
+
+// 通常は, 以下のように文字列を直接 append してください (上の書き方と同じ処理です)
+$p2   = new Peach_Markup_ContainerElement("p");
+$p2->append("<Hello> & <World!>");
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($p1); // Output: <p>&lt;Hello&gt; &amp; &lt;World!&gt;</p>
+            ]]>
+        </programlisting>
+    </refsect1>
+</refentry>

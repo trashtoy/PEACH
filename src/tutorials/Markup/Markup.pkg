@@ -134,7 +134,7 @@ echo tag("html", array("lang" => "ja"))
                 </listitem>
                 <listitem>
                     {@link Peach_Markup_Comment Comment}:
-                    "&lt;--" と "--&gt;" によるコメントを表します.
+                    &lt;-- と --&gt; で囲まれたコメントを表します.
                 </listitem>
             </itemizedlist>
         </refsect2>
@@ -142,9 +142,13 @@ echo tag("html", array("lang" => "ja"))
             <title>Builder</title>
             <para>
                 Builder は, Component を XML (HTML) 文書を出力する際の整形ルールを表すクラスです.
-                例えばインデントの種類 (タブ文字 or スペース), 改行コード, タグの出力方法
-                ("&lt;br&gt;" か, それとも "&lt;br /&gt;" か) などを制御することが出来ます.
+                例えば以下の情報を制御することが出来ます.
             </para>
+            <itemizedlist>
+                <listitem>インデントの種類 (タブ文字 or スペース)</listitem>
+                <listitem>改行コード (CR, LF, CRLF)</listitem>
+                <listitem>タグの出力方法 ("&lt;br&gt;" か, それとも "&lt;br /&gt;" か)</listitem>
+            </itemizedlist>
         </refsect2>
     </refsect1>
 </refentry>
