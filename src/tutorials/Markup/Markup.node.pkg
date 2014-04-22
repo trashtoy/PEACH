@@ -10,15 +10,21 @@
     <refsect1 id="{@id summary}">
         <title>概要</title>
         <para>
-            {@link Peach_Markup_Node Node} インタフェースは, 
-            マークアップ言語を構成するパーツを表す型です.
+            {@link Peach_Markup_Node Node} インタフェースはマークアップ言語を構成するパーツをあらわします.
+            具体的には要素・テキスト・コメントなどに相当します.
+        </para>
+        <para>
+            API は {@link http://www.w3.org/DOM/ DOM} に似ている部分もありますが, それは表面的な相似に過ぎません.
+            このモジュールの目的はマークアップ言語のモデル化ではなく出力であるため,
+            DOM で定義されている一部のノードは意図的にサポートされていません.
+            逆に, DOM には無くこのモジュールのみに存在するノードもあります.
         </para>
     </refsect1>
     <refsect1 id="{@id element}">
         <title>Element</title>
         <para>
-            {@link Peach_Markup_Element Element} は,
-            マークアップ言語における「要素」を表現するクラスです.
+            {@link Peach_Markup_Element Element}
+            はマークアップ言語における「要素」を表現するクラスです.
             Element には {@link Peach_Markup_ContainerElement ContainerElement}
             と {@link Peach_Markup_EmptyElement EmptyElement} の 2 種類があります.
         </para>
@@ -26,7 +32,7 @@
             <title>ContainerElement</title>
             <para>
                 {@link Peach_Markup_ContainerElement ContainerElement}
-                は, 開始タグと終了タグから成る要素を表します.
+                は開始タグと終了タグから成る要素をあらわします.
                 {@link Peach_Markup_ContainerElement::append() append()}
                 メソッドを使ってテキストや任意のノードを子ノードとして追加することが出来ます.
             </para>
@@ -52,8 +58,15 @@ echo $builder->build($p);
             <title>EmptyElement</title>
             <para>
                 {@link Peach_Markup_EmptyElement EmptyElement}
-                は, 空要素 (終了タグを伴わないタグ) を表すクラスです.
+                は空要素 (終了タグを伴わないタグ) を表すクラスです.
+                HTML では img, input, br, hr などの要素が該当します.
+            </para>
+            <para>
+                このノードは {@link Peach_Markup_DefaultBuilder::setRenderer()}
+                で {@link Peach_Markup_Renderer Renderer} の種類を切り替えることで,
+                タグの書式を制御することが出来ます.
                 以下にサンプルコードを掲載します.
+                タグの末尾が ">" から "/>" に変化していることに注目してください.
             </para>
             <programlisting role="php">
                 <![CDATA[
@@ -73,9 +86,9 @@ echo $builder->build($input); // Output: <input type="text" name="subject" value
     <refsect1 id="{@id text}">
         <title>Text</title>
         <para>
-            {@link Peach_Markup_Text Text} は, 要素内のテキストを表します.
+            {@link Peach_Markup_Text Text} は要素内のテキストを表します.
             この Node は出力される際に自動的に {@link htmlspecialchars() htmlspecialchars()}
-            で特殊文字が変換されます.
+            で特殊文字を変換します.
         </para>
         <para>
             {@link Peach_Markup_ContainerElement::append() append()}
