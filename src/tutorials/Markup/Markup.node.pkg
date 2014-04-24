@@ -111,4 +111,148 @@ echo $builder->build($p1); // Output: <p>&lt;Hello&gt; &amp; &lt;World!&gt;</p>
             ]]>
         </programlisting>
     </refsect1>
+    <refsect1 id="{@id code}">
+        <title>Code</title>
+        <para>
+            {@link Peach_Markup_Code Code} は整形済のテキストをあらわすクラスです.
+            Text ノードと違い, 出力の際に特殊文字の変換 (エスケープ)
+            は一切せず, 与えられた文字列をそのまま出力します.
+            XML 宣言, DTD 宣言, CDATA セクション, PI (処理命令) など,
+            このモジュールでサポートされていない構文をノードの一部として扱いたい場合に使用してください.
+        </para>
+        <para>
+            以下に HTML の style 要素を出力するサンプルコードを掲載します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$str = <<<EOS
+body {
+    color: #000;
+    background-color: #fff;
+    width: 100%;
+}
+@media(min-width: 901px) {
+    body {
+        width: 900px;
+    }
+}
+EOS;
+
+$style = new Peach_Markup_ContainerElement("style");
+$style->setAttribute("type", "text/css");
+$style->append(new Peach_Markup_Code($str));
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($style);
+            ]]>
+        </programlisting>
+        <para>このコードは以下の文字列を出力します.</para>
+        <programlisting role="php">
+            <![CDATA[
+<style type="text/css">
+    body {
+        color: #000;
+        background-color: #fff;
+        width: 100%;
+    }
+    @media(min-width: 901px) {
+        body {
+            width: 900px;
+        }
+    }
+</style>
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id comment}">
+        <title>Comment</title>
+        <para>
+            {@link Peach_Markup_Comment Comment} は &lt;!-- と --&gt;
+            で囲まれたコメント部分を表現するクラスです.
+            以下にサンプルコードを掲載します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$comment = new Peach_Markup_Comment();
+$comment->append("Sample comment");
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($comment); // Output: <!--Sample comment-->
+            ]]>
+        </programlisting>
+        <refsect2 id="{@id commentout}">
+            <title>コメントアウト</title>
+            <para>
+                単純にテキストをコメントにするだけではなく,
+                任意のノードのコメントアウトも表現出来ます.
+                以下に例を挙げます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$h1 = new Peach_Markup_ContainerElement("h1");
+$h1->append("Sample");
+
+$p = new Peach_Markup_ContainerElement("p");
+$p->append("This paragraph is disabled.");
+
+$comment = new Peach_Markup_Comment();
+$comment->append($h1);
+$comment->append($p);
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($comment);
+                ]]>
+            </programlisting>
+            <para>このコードは以下の文字列を出力します.</para>
+            <programlisting role="php">
+                <![CDATA[
+<!--
+<h1>Sample</h1>
+<p>This paragraph is disabled.</p>
+-->
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id comment_prefix_suffix}">
+            <title>メタコメント</title>
+            <para>
+                以下のように, コメントの先頭と末尾に任意の文字列を付与することが出来ます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$h1 = new Peach_Markup_ContainerElement("h1");
+$h1->append("Sample");
+
+$p = new Peach_Markup_ContainerElement("p");
+$p->append("This paragraph is disabled.");
+
+$comment = new Peach_Markup_Comment("START", "END");
+$comment->append($h1);
+$comment->append($p);
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($comment);
+                ]]>
+            </programlisting>
+            <para>
+                このコードは以下の文字列を出力します.
+                先ほどの例と似ていますが, コメントの先頭と末尾に "START", "END"
+                という文字列が付与されていることに注目してください.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+<!--START
+<h1>Sample</h1>
+<p>This paragraph is disabled.</p>
+END-->
+                ]]>
+            </programlisting>
+            <para>
+                この機能を使って一部のブラウザに実装されている条件付きコメント
+                ("&lt;!--[if lt IE 7]&gt; ... &lt;![endif]--&gt;" など)
+                を表現することも出来ますが, 代わりに専用の API として
+                {@link Peach_Markup_Html::conditionalComment()}
+                が用意されているので, 通常はそちらを使用することを推奨します.
+            </para>
+        </refsect2>
+    </refsect1>
 </refentry>
