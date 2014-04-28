@@ -95,6 +95,27 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * 引数の Container の中に自分自身が追加されることを確認します.
+     * 
+     * @covers Peach_Markup_HelperObject::appendTo
+     */
+    public function testAppendTo()
+    {
+        $h = $this->helper;
+        
+        $div = new Peach_Markup_ContainerElement("div");
+        $obj = new Peach_Markup_HelperObject($h, "p");
+        $obj->append("Sample Text")->appendTo($div);
+        
+        $childNodes = $div->getChildNodes();
+        $this->assertNotEmpty($childNodes);
+        
+        $p = new Peach_Markup_ContainerElement("p");
+        $p->append("Sample Text");
+        $this->assertEquals($p, $childNodes[0]);
+    }
+    
+    /**
      * appendCode() のテストです. 以下を確認します.
      * 
      * - 引数に {@link Peach_Markup_Code Code} オブジェクトを指定した場合, 引数をそのまま子ノードとして追加すること

@@ -83,6 +83,25 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     }
     
     /**
+     * 指定された Container にこのオブジェクトを追加します.
+     * 以下の 2 つのコードは, どちらも $obj2 の中に $obj1 を追加しています.
+     * <code>
+     * $obj1->appendTo($obj2);
+     * $obj2->append($obj1);
+     * </code>
+     * {@link Peach_Markup_HelperObject::append() append()}
+     * との違いは, 返り値が $obj1 になるか $obj2 になるかという点にあります.
+     * 
+     * @param  Peach_Markup_Container    $container 追加先の Container
+     * @return Peach_Markup_HelperObject            自分自身
+     */
+    public function appendTo(Peach_Markup_Container $container)
+    {
+        $container->append($this->getNode());
+        return $this;
+    }
+    
+    /**
      * 指定された文字列を整形済コードとして追加します.
      * 
      * @param string|Peach_Markup_Code $code 追加対象の整形済文字列
