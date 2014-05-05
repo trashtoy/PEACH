@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<refentry id="{@id Markup}">
+<refentry id="{@id Markup.node}">
     <refnamediv>
         <refname>Node インタフェース</refname>
     </refnamediv>
@@ -32,7 +32,7 @@
             <title>ContainerElement</title>
             <para>
                 {@link Peach_Markup_ContainerElement ContainerElement}
-                は開始タグと終了タグから成る要素をあらわします.
+                は開始タグと終了タグから成る要素を表します.
                 {@link Peach_Markup_ContainerElement::append() append()}
                 メソッドを使ってテキストや任意のノードを子ノードとして追加することが出来ます.
             </para>
@@ -87,7 +87,7 @@ echo $builder->build($input); // Output: <input type="text" name="subject" value
         <title>Text</title>
         <para>
             {@link Peach_Markup_Text Text} は要素内のテキストを表します.
-            この Node は出力される際に自動的に {@link htmlspecialchars() htmlspecialchars()}
+            このノードは出力される際に自動的に {@link htmlspecialchars() htmlspecialchars()}
             で特殊文字を変換します.
         </para>
         <para>
@@ -114,7 +114,7 @@ echo $builder->build($p1); // Output: <p>&lt;Hello&gt; &amp; &lt;World!&gt;</p>
     <refsect1 id="{@id code}">
         <title>Code</title>
         <para>
-            {@link Peach_Markup_Code Code} は整形済のテキストをあらわすクラスです.
+            {@link Peach_Markup_Code Code} は整形済のテキストを表すクラスです.
             Text ノードと違い, 出力の際に特殊文字の変換 (エスケープ)
             は一切せず, 与えられた文字列をそのまま出力します.
             XML 宣言, DTD 宣言, CDATA セクション, PI (処理命令) など,
@@ -249,9 +249,9 @@ END-->
             <para>
                 この機能を使って一部のブラウザに実装されている条件付きコメント
                 ("&lt;!--[if lt IE 7]&gt; ... &lt;![endif]--&gt;" など)
-                を表現することも出来ますが, 代わりに専用の API として
+                を表現することも出来ますが, 条件付きコメント専用の API として
                 {@link Peach_Markup_Html::conditionalComment()}
-                が用意されているので, 通常はそちらを使用することを推奨します.
+                が既に用意されているので, 通常はそちらを使用することを推奨します.
             </para>
         </refsect2>
     </refsect1>
