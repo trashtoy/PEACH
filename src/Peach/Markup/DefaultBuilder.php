@@ -100,9 +100,11 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
      * - Peach_Markup_Renderer オブジェクトを指定した場合: そのオブジェクトをセットします
      * - 文字列 "xml" または "xhtml" を指定した場合 (大小問わず) : {@link Peach_Markup_XmlRenderer} オブジェクトをセットします
      * - 文字列 "sgml" または "html" を指定した場合 (大小問わず) : {@link Peach_Markup_SgmlRenderer} オブジェクトをセットします
-     * - null を指定した場合 : 現在セットされている Renderer を解除します.
+     * - null を指定した場合 : 現在セットされている Renderer を解除します
+     * - それ以外: InvalidArgumentException をスローします
      * 
      * @param  Peach_Markup_Renderer|string $renderer
+     * @throws InvalidArgumentException 不正な引数をセットした場合
      */
     public function setRenderer($renderer = null)
     {

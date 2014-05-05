@@ -56,6 +56,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * - 初期状態では getRenderer() が null を返すこと
      * - setRenderer() でセットした Renderer オブジェクトが getRenderer() で取得できること
      * - null を指定するとセットした Renderer オブジェクトが解除されること
+     * - 不正な値をセットした場合は InvalidArgumentException をスローすること
      * 
      * @covers Peach_Markup_DefaultBuilder::getRenderer
      * @covers Peach_Markup_DefaultBuilder::setRenderer
@@ -71,6 +72,9 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
         
         $builder->setRenderer(null);
         $this->assertNull($builder->getRenderer());
+        
+        $this->setExpectedException("InvalidArgumentException");
+        $builder->setRenderer("InvalidValue");
     }
     
     /**
