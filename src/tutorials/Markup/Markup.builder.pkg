@@ -1,0 +1,279 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup.builder}">
+    <refnamediv>
+        <refname>Builder (出力制御)</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id summary}">
+        <title>概要</title>
+        <para>
+            {@link Peach_Markup_Builder Builder} はノードを文字列に変換する処理を担当する抽象基底クラスです.
+            具象クラスとして {@link Peach_Markup_DefaultBuilder DefaultBuilder} と
+            {@link Peach_Markup_DebugBuilder DebugBuilder} の 2 種類が用意されています.
+            エンドユーザーが新しい Builder クラスを定義することも出来ますが,
+            よほど特殊な用途でもない限り DefaultBuilder のみで充分でしょう.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id default_builder}">
+        <title>DefaultBuilder</title>
+        <para>
+            {@link Peach_Markup_DefaultBuilder DefaultBuilder}
+            は Builder クラスの標準的な実装です.
+            DefaultBuilder には以下の 3 種類のオブジェクトがセットされています.
+        </para>
+        <itemizedlist>
+            <listitem>
+                {@link Peach_Markup_Renderer Renderer}:
+                タグの出力方法を制御します.
+            </listitem>
+            <listitem>
+                {@link Peach_Markup_Indent Indent}:
+                インデントと改行コードの文字列をカスタマイズすることが出来ます.
+                インデントレベルの初期値を変更することも出来ます.
+            </listitem>
+            <listitem>
+                {@link Peach_Markup_BreakControl BreakControl}:
+                コードを改行する場所を制御します.
+            </listitem>
+        </itemizedlist>
+        <para>
+            以下, DefaultBuilder の使い方のサンプルです.
+        </para>
+        <refsect2 id="{@id renderer}">
+            <title>Renderer</title>
+            <para>
+                {@link Peach_Markup_Renderer Renderer}
+                はタグの出力を制御するインタフェースです.
+                主に空要素タグや Boolean 属性の出力方法に関係します.
+            </para>
+            <para>
+                実装クラスとして
+                {@link Peach_Markup_SgmlRenderer SgmlRenderer} と
+                {@link Peach_Markup_XmlRenderer XmlRenderer} の
+                2 種類があります. デフォルトでは XmlRenderer がセットされています.
+                エンドユーザーが Renderer オブジェクトを直接使う機会はないため,
+                通常使用する分には特にこれらのクラスを意識する必要はないでしょう.
+                以下のように
+                {@link Peach_Markup_DefaultBuilder::setRenderer() setRenderer()}
+                の引数に文字列または Renderer オブジェクトを指定することで
+                Renderer を切り替えることが出来ます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$builder = new Peach_Markup_DefaultBuilder();
+
+// 以下の 2 つの書き方は等価です
+$builder->setRenderer("SGML");
+$builder->setRenderer(Peach_Markup_SgmlRenderer::getInstance());
+
+// 以下の 2 つの書き方は等価です
+$builder->setRenderer("XML");
+$builder->setRenderer(Peach_Markup_XmlRenderer::getInstance());
+                ]]>
+            </programlisting>
+            <para>
+                setRenderer() の引数に文字列を指定する場合, 有効な値は
+                "XML", "XHTML", "SGML", "HTML"
+                のいずれかとなります. 大文字・小文字は問いません.
+            </para>
+            <para>
+                Renderer を切り替えることにより, 以下のように出力が変化します.
+                input 要素の checked 属性や br 要素の出力の違いに注目してください.
+                (変数 $node を構築するコードは割愛します)
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$builder = new Peach_Markup_DefaultBuilder();
+$builder->setRenderer("XML");
+echo $builder->build($node);
+/*
+Output:
+<form method="post" action="sample.php">
+    Name
+    <input type="text" name="param1" value="" />
+    <br />
+    <input type="checkbox" name="flag1" value="1" checked="checked" />
+    Enable something
+    <br />
+    <input type="submit" name="submit" value="Send" />
+</form>
+ */
+
+$builder->setRenderer("SGML");
+echo $builder->build($node);
+/*
+Output:
+<form method="post" action="sample.php">
+    Name
+    <input type="text" name="param1" value="">
+    <br>
+    <input type="checkbox" name="flag1" value="1" checked>
+    Enable something
+    <br>
+    <input type="submit" name="submit" value="Send">
+</form>
+ */
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id indent}">
+            <title>Indent</title>
+            <para>
+                {@link Peach_Markup_Indent Indent}
+                は出力されるコードのインデントの文字列や改行コードの種類をカスタマイズするクラスです.
+                以下の要領で使用します.
+            </para>
+            <orderedlist>
+                <listitem>
+                    インデントレベル (初期値は 0 です), インデント文字列, 改行コード
+                    を指定して新しい Indent オブジェクトを生成します.
+                </listitem>
+                <listitem>
+                    生成した Indent オブジェクトを
+                    {@link Peach_Markup_DefaultBuilder::setIndent() setIndent()} の引数に指定して
+                    DefaultBuilder にセットします.
+                </listitem>
+                <listitem>DefaultBuilder の build() を実行します.</listitem>
+            </orderedlist>
+            <para>以下にサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
+$builder = new Peach_Markup_DefaultBuilder();
+$space   = Peach_Markup_Indent::TAB;
+$br      = Peach_Markup_Indent::LF;
+$builder->setIndent(new Peach_Markup_Indent(0, $space, $br));
+echo $builder->build($node);
+                ]]>
+            </programlisting>
+            <para>
+                Indent オブジェクトをセットしない場合,
+                デフォルトの設定で以下の条件でインデントが行われます.
+            </para>
+            <itemizedlist>
+                <listitem>インデントレベル: 0</listitem>
+                <listitem>インデント文字列: 半角スペース 4 個</listitem>
+                <listitem>改行コード: CRLF</listitem>
+            </itemizedlist>
+        </refsect2>
+        <refsect2 id="{@id break_control}">
+            <title>BreakControl</title>
+            <para>
+                {@link Peach_Markup_BreakControl BreakControl}
+                はコードを改行する箇所を制御するクラスです.
+                デフォルトでは手書きの HTML や XML のような自然な改行とインデントを自動で行いますが,
+                特定のタグだけ例外的に改行しない, といった細かなカスタマイズをすることが出来ます.
+            </para>
+            <para>
+                以下, {@link Peach_Markup_NameBreakControl} クラスを使って,
+                特定のタグのみ強制改行をするサンプルです.
+                NameBreakControl の引数に指定された tag2, tag4 要素が強制的に改行されます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$tag1 = new Peach_Markup_ContainerElement("tag1");
+$tag2 = new Peach_Markup_ContainerElement("tag2");
+$tag3 = new Peach_Markup_ContainerElement("tag3");
+$tag4 = new Peach_Markup_ContainerElement("tag4");
+
+$tag1->append("This is sample 1");
+$tag2->append("This is sample 2");
+$tag3->append("This is sample 3");
+$tag4->append("This is sample 4");
+
+$root = new Peach_Markup_ContainerElement("root");
+$root->append($tag1);
+$root->append($tag2);
+$root->append($tag3);
+$root->append($tag4);
+
+$builder = new Peach_Markup_DefaultBuilder();
+$builder->setBreakControl(new Peach_Markup_NameBreakControl(array("tag2", "tag4"), array()));
+echo $builder->build($root);
+
+/*
+Output:
+<root>
+    <tag1>This is sample 1</tag1>
+    <tag2>
+        This is sample 2
+    </tag2>
+    <tag3>This is sample 3</tag3>
+    <tag4>
+        This is sample 4
+    </tag4>
+</root>
+ */
+                ]]>
+            </programlisting>
+            <para>
+                インデントをなくして出力データをできるだけ削減したい場合は
+                {@link Peach_Markup_MinimalBreakControl} を使用してください.
+                以下, さきほどのノードを MinimalBreakControl を使って build
+                した場合のサンプルコードです.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$builder = new Peach_Markup_DefaultBuilder();
+$builder->setBreakControl(Peach_Markup_MinimalBreakControl::getInstance());
+echo $builder->build($root);
+/*
+Output:
+<root><tag1>This is sample 1</tag1><tag2>This is sample 2</tag2><tag3>This is sample 3</tag3><tag4>This is sample 4</tag4></root>
+ */
+                ]]>
+            </programlisting>
+        </refsect2>
+    </refsect1>
+    <refsect1 id="{@id debug_builder}">
+        <title>DebugBuilder</title>
+        <para>
+            {@link Peach_Markup_DebugBuilder DebugBuilder} はノードのツリー構造を可視化するための Builder です.
+            名前の通りデバッグ用途に使用します.
+        </para>
+        <para>
+            例えば HTML (XML) コードの断片を {@link Peach_Markup_Code Code}
+            オブジェクトとしてノードの中に組み込む場合に役に立つでしょう.
+            以下にサンプルコードを掲載します.
+            DefaultBuilder で build した場合に 2 つの p 要素が同じように出力されますが,
+            DebugBuilder で build した場合は
+            1 番目の p 要素が Code オブジェクトで
+            2 番目の p 要素が ContainerElement であることが分かります.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$code = new Peach_Markup_Code("<p>This is a Code object.</p>");
+$p    = new Peach_Markup_ContainerElement("p");
+$p->append("This is a Text object.");
+
+$div = new Peach_Markup_ContainerElement("div");
+$div->append($code);
+$div->append($p);
+
+$b1 = new Peach_Markup_DefaultBuilder();
+echo $b1->build($div);
+/*
+Output:
+<div>
+    <p>This is a Code object.</p>
+    <p>This is a Text object.</p>
+</div>
+ */
+
+$b2 = new Peach_Markup_DebugBuilder();
+$b2->build($div);
+/*
+Output:
+ContainerElement(div) {
+    Code
+    ContainerElement(p) {
+        Text
+    }
+}
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+ </refentry>
