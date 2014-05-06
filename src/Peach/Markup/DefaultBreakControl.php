@@ -42,7 +42,7 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
      * - 子要素を一つだけ含み, 上記以外のノードの場合は改行なし
      * - 子要素が二つ以上の場合は改行あり
      * 
-     * @param  Markup_ContainerElement 
+     * @param  Peach_Markup_ContainerElement 
      * @return bool
      */
     public function breaks(Peach_Markup_ContainerElement $node)
@@ -69,9 +69,10 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
     /**
      * 唯一のインスタンスを取得します.
      * 
-     * @return Markup_DefaultBreakControl
+     * @return Peach_Markup_DefaultBreakControl
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         static $instance = null;
         if ($instance === null) {
             $instance = new self();
