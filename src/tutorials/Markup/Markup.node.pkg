@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <refentry id="{@id Markup.node}">
     <refnamediv>
-        <refname>Node インタフェース</refname>
+        <refname>Node (各種パーツ)</refname>
     </refnamediv>
     <refsynopsisdiv>
         Author : <author>trashtoy</author>
@@ -117,11 +117,11 @@ echo $builder->build($p1); // Output: <p>&lt;Hello&gt; &amp; &lt;World!&gt;</p>
             {@link Peach_Markup_Code Code} は整形済のテキストを表すクラスです.
             Text ノードと違い, 出力の際に特殊文字の変換 (エスケープ)
             は一切せず, 与えられた文字列をそのまま出力します.
-            XML 宣言, DTD 宣言, CDATA セクション, PI (処理命令) など,
+            XML 宣言, DOCTYPE 宣言, CDATA セクション, PI (処理命令) など,
             このモジュールでサポートされていない構文をノードの一部として扱いたい場合に使用してください.
         </para>
         <para>
-            以下に HTML の style 要素を出力するサンプルコードを掲載します.
+            以下は HTML の style 要素を出力するサンプルコードです.
         </para>
         <programlisting role="php">
             <![CDATA[
