@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup.helper}">
+    <refnamediv>
+        <refname>Helper / HelperObject</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id summary}">
+        <title>概要</title>
+        <para>
+            {@link Peach_Markup_Helper Helper} および
+            {@link Peach_Markup_HelperObject HelperObject}
+            はノードの構築と出力をさらに簡略化するための API です.
+            例えば REST API を提供する Web サービスを開発する場合など,
+            似たようなフォーマットの XML
+            出力をする機能が多数存在するようなケースで役に立つでしょう.
+        </para>
+        <para>
+            HTML を生成する場合は {@link Peach_Markup_Html Html}
+            という専用のユーティリティクラスが存在するので, そちらを使うことをお勧めします.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id usage}">
+        <title>基本的な使い方</title>
+        <para>以下のような流れでノードを生成・出力します.</para>
+        <orderedlist>
+            <listitem>Builder オブジェクトを指定して Helper オブジェクトを作成します.</listitem>
+            <listitem>
+                Helper の {@link Peach_Markup_Helper::createObject() createObject()}
+                メソッドを使い, HelperObject オブジェクトを作成します.
+            </listitem>
+            <listitem>
+                生成した HelperObject の
+                {@link Peach_Markup_HelperObject::append() append()} や
+                {@link Peach_Markup_HelperObject::append() attr()}
+                などのメソッドを使ってノードの中身を構築します.
+                jQuery のようにメソッドチェインを利用して簡潔な記述が出来ます.
+            </listitem>
+            <listitem>
+                {@link Peach_Markup_HelperObject::write() write()}
+                メソッドでそのノードをマークアップして出力します.
+            </listitem>
+        </orderedlist>
+        <para>
+            HelperObject とは任意のノードをラップして糖衣構文を備えた Component です.
+            {@link Peach_Markup_Helper::createObject() createObject()}
+            の引数に文字列を指定することで, その文字列を要素名とする要素をあらわす HelperObject が生成されます.
+        </para>
+        <para>サンプルコードを以下に掲載します.</para>
+        <programlisting role="php">
+            <![CDATA[
+$helper = new Peach_Markup_Helper(new Peach_Markup_DefaultBuilder());
+$tag1   = $helper->createObject("tag")->attr("id", 1)->append("First")->append("Second")->append("Third");
+$tag2   = $helper->createObject("tag")->attr("id", 2)->append("Fourth")->append("Fifth");
+$root   = $helper->createObject("root")->append($tag1)->append($tag2);
+echo $root->write();
+/*
+Output:
+<root>
+    <tag id="1">
+        First
+        Second
+        Third
+    </tag>
+    <tag id="2">
+        Fourth
+        Fifth
+    </tag>
+</root>
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id empty_and_container}">
+        <title>EmptyElement と ContainerElement の出し分け</title>
+        <para>
+            Helper を生成する際の引数で, 要素名によって空要素にするかどうかを設定することが出来ます.
+            以下のサンプルでは tag2, tag4 のみ空要素として扱うようにしています.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$helper = new Peach_Markup_Helper(new Peach_Markup_DefaultBuilder(), array("tag2", "tag4"));
+echo $helper->createObject("root")
+    ->append($helper->createObject("tag1"))
+    ->append($helper->createObject("tag2"))
+    ->append($helper->createObject("tag3"))
+    ->append($helper->createObject("tag4"))
+    ->write();
+/*
+Output:
+<root>
+    <tag1></tag1>
+    <tag2 />
+    <tag3></tag3>
+    <tag4 />
+</root>
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id append_and_appendto}">
+        <title>append と appendTo の違い</title>
+        <para>
+            HelperObject にはノードを追加する手段として
+            {@link Peach_Markup_HelperObject::append() append()} と
+            {@link Peach_Markup_HelperObject::append() appendTo()} の 2 種類があります.
+            append() が呼び出し元のノードの中に引数のノードを追加するのに対して,
+            appendTo() は引数のノードの中に呼び出し元のノードを追加します.
+            以下の 2 種類のコードは同じ結果となります.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$helper = new Peach_Markup_Helper(new Peach_Markup_DefaultBuilder());
+
+// append を使う場合
+$tag1   = $helper->createObject("tag")->append("Test 1")->append("Test 2");
+$tag2   = $helper->createObject("tag")->append("Test 3")->append("Test 4");
+$root   = $helper->createObject("root")->append($tag1)->append($tag2);
+
+// appendTo を使う場合
+$root   = $helper->createObject("root");
+$tag1   = $helper->createObject("tag")->append("Test 1")->append("Test 2")->appendTo($root);
+$tag2   = $helper->createObject("tag")->append("Test 3")->append("Test 4")->appendTo($root);
+            ]]>
+        </programlisting>
+    </refsect1>
+ </refentry>
