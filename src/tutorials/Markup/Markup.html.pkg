@@ -143,4 +143,79 @@ Peach_Markup_Html::alias(array(
             </programlisting>
         </refsect2>
     </refsect1>
+    <refsect1 id="{@id select}">
+        <title>select</title>
+        <para>
+            PHP で動的に HTML コードを出力する際, 特に select 要素はロジックが複雑になりがちです.
+            Html クラスには select 要素を出力するための専用のメソッド
+            {@link Peach_Markup_Html::select() select()} が用意されています.
+            このメソッドを使うことで select 要素の出力がより直感的に出来るでしょう.
+        </para>
+        <para>
+            以下に select() メソッドのサンプルコードを掲載します.
+            1 番目の引数にはデフォルトで選択されている値,
+            2 番目の引数には選択肢の一覧を配列形式,
+            3 番目の引数には select 要素にセットする属性を指定してください.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$candidates = array(
+    "Apple"  => 1,
+    "Orange" => 2,
+    "Pear"   => 3,
+    "Peach"  => 4,
+);
+echo Peach_Markup_Html::select(4, $candidates, array("name" => "favorite"))->write();
+/*
+Output:
+<select name="favorite">
+    <option value="1">Apple</option>
+    <option value="2">Orange</option>
+    <option value="3">Pear</option>
+    <option value="4" selected>Peach</option>
+</select>
+ */
+            ]]>
+        </programlisting>
+        <para>
+            2 番目の引数を二次元配列にすることで, optgroup を含む select 要素を表現することも出来ます.
+            以下にサンプルコードを掲載します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$candidates = array(
+    "Fruit"   => array(
+        "Apple"  => "1",
+        "Orange" => "2",
+        "Pear"   => "3",
+        "Peach"  => "4",
+    ),
+    "Dessert" => array(
+        "Chocolate" => "5",
+        "Doughnut"  => "6",
+        "Ice cream" => "7",
+    ),
+    "Others" => "8",
+);
+echo Peach_Markup_Html::select(4, $candidates, array("name" => "favorite"))->write();
+/*
+Output:
+<select name="favorite">
+    <optgroup label="Fruit">
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Pear</option>
+        <option value="4" selected>Peach</option>
+    </optgroup>
+    <optgroup label="Dessert">
+        <option value="5">Chocolate</option>
+        <option value="6">Doughnut</option>
+        <option value="7">Ice cream</option>
+    </optgroup>
+    <option value="8">Others</option>
+</select>
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
  </refentry>
