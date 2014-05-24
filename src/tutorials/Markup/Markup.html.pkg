@@ -218,4 +218,67 @@ Output:
             ]]>
         </programlisting>
     </refsect1>
+    <refsect1 id="{@id comment}">
+        <title>comment</title>
+        <para>
+            {@link Peach_Markup_Html::comment() comment()} は文字通りコメントを生成するためのメソッドです.
+            このメソッドは {@link Peach_Markup_Comment Comment} ノードをラップした
+            HelperObject を生成して返します.
+        </para>
+        <para>以下に comment() メソッドのサンプルコードを掲載します.</para>
+        <programlisting role="php">
+            <![CDATA[
+echo Peach_Markup_Html::comment("This is test")->write();
+// Output: <!--This is test-->
+            ]]>
+        </programlisting>
+        <para>
+            引数に任意のノードを指定するか, または append() で任意のノードを追加することで,
+            そのノードをコメントアウトした状態で出力することができます.
+            以下に例を挙げます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$p1      = Peach_Markup_Html::tag("p")->append("First text");
+$p2      = Peach_Markup_Html::tag("p")->append("Second text");
+$comment = Peach_Markup_Html::comment()->append($p1)->append($p2);
+echo $comment->write();
+/*
+Output:
+<!--
+<p>First text</p>
+<p>Second text</p>
+-->
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id conditional_comment}">
+        <title>conditionalComment</title>
+        <para>
+            {@link Peach_Markup_Html::conditionalComment() conditionalComment()}
+            は一部のブラウザで実装されている条件付きコメント
+            ("&lt;!--[if lt IE 7]&gt;...&lt;![endif]--&gt;" など)
+            を出力するためのメソッドです.
+        </para>
+        <para>
+            1 番目の引数にはコメントの条件 ("lt IE 7" など),
+            2 番目の引数には条件付きコメントの内容を指定してください.
+            2 番目の引数は省略することも出来ます.
+            以下に例を挙げます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$p       = Peach_Markup_Html::tag("p")->append("R.I.P. Windows XP 2001 - 2014");
+$comment = Peach_Markup_Html::conditionalComment("lt IE 7", $p);
+echo $comment->write();
+/*
+Output:
+<!--[if lt IE 7]>
+<p>R.I.P. Windows XP 2001 - 2014</p>
+<![endif]-->
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
  </refentry>
