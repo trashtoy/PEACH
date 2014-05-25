@@ -115,6 +115,9 @@ abstract class Peach_Markup_Element implements Peach_Markup_Node
      * <code>$element->setAttributes(array("id" => "foo", "class" => "bar"));</code>
      * のように, キーに属性名, 値に属性の値を指定してください.
      * 
+     * キーが省略された場合 (具体的にはキーに整数が指定された場合) は,
+     * その値を属性名とする Boolean 属性を設定します.
+     * 
      * @param array|Peach_Util_ArrayMap 属性の一覧
      */
     public function setAttributes($attr)
@@ -127,7 +130,14 @@ abstract class Peach_Markup_Element implements Peach_Markup_Node
             throw new InvalidArgumentException("Array required.");
         }
         foreach ($attr as $key => $value) {
-            $this->setAttribute($key, $value);
+            if (is_numeric($key)) {
+                $attrName  = $value;
+                $attrValue = null;
+            } else {
+                $attrName  = $key;
+                $attrValue = $value;
+            }
+            $this->setAttribute($attrName, $attrValue);
         }
     }
     
@@ -153,4 +163,3 @@ abstract class Peach_Markup_Element implements Peach_Markup_Node
         return $this->attributes->asArray();
     }
 }
-?>

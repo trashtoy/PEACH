@@ -71,7 +71,13 @@ abstract class Peach_Markup_ElementTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * setAttributes() および getAttributes() のテストです. 以下を確認します.
+     * - 引数に指定した配列が属性としてセットされること
+     * - 引数に指定した Map オブジェクトが属性としてセットされること
+     * - 配列のキーに整数が指定されている場合, その値が Boolean 属性としてセットされること
+     * 
      * @covers Peach_Markup_Element::setAttributes
+     * @covers Peach_Markup_Element::getAttributes
      */
     public function testGetAndSetAttributes()
     {
@@ -94,6 +100,27 @@ abstract class Peach_Markup_ElementTest extends PHPUnit_Framework_TestCase
         $obj = $this->object;
         $obj->setAttributes($arr);
         $obj->setAttributes($map);
+        $this->assertSame($expected, $obj->getAttributes());
+    }
+    
+    /**
+     * setAttributes() の配列のキーに整数を指定した場合,
+     * キーは無視されて値が Boolean 属性として登録されることを確認します.
+     * 
+     * @covers Peach_Markup_Element::setAttributes
+     * @covers Peach_Markup_Element::getAttributes
+     */
+    public function testAccessBooleanAttributes()
+    {
+        $arr      = array("type" => "checkbox", "checked", "name" => "flag", "value" => 1);
+        $expected = array(
+            "type"    => "checkbox",
+            "checked" => null,
+            "name"    => "flag",
+            "value"   => "1",
+        );
+        $obj = $this->object;
+        $obj->setAttributes($arr);
         $this->assertSame($expected, $obj->getAttributes());
     }
     
