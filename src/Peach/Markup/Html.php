@@ -141,7 +141,7 @@ class Peach_Markup_Html
      * @param  string $suffix コメントの接尾辞
      * @return Peach_Markup_HelperObject
      */
-    public static function comment($contents, $prefix = "", $suffix = "")
+    public static function comment($contents = null, $prefix = "", $suffix = "")
     {
         $comment = new Peach_Markup_Comment($prefix, $suffix);
         return self::getHelper()->createObject($comment)->append($contents);

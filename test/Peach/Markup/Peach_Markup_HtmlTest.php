@@ -138,6 +138,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * 
      * - 返り値の HelperObject が Comment ノードをラップしていること
      * - 第 1 引数に指定した値が, ラップしている Comment オブジェクトの子ノードになること
+     * - 第 1 引数を省略した場合は空の Comment ノードが生成されること
      * - 第 2, 第3 引数でコメントの接頭辞・接尾辞を指定できること
      * 
      * @covers Peach_Markup_Html::comment
@@ -162,6 +163,8 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
         $c2  = Peach_Markup_Html::comment($obj);
         $this->assertSame($ex1, $c2->write());
         
+        $c3  = Peach_Markup_Html::comment();
+        $this->assertSame("<!---->", $c3->write());
         $ex2 = implode("\r\n", array(
             "<!--[start]",
             "<div>",
@@ -170,8 +173,8 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
             "</div>",
             "[end]-->",
         ));
-        $c3  = Peach_Markup_Html::comment($obj, "[start]", "[end]");
-        $this->assertSame($ex2, $c3->write());
+        $c4  = Peach_Markup_Html::comment($obj, "[start]", "[end]");
+        $this->assertSame($ex2, $c4->write());
     }
     
     /**
