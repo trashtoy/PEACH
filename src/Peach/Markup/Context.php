@@ -22,8 +22,14 @@
  */
 /** @package Markup */
 /**
- * ノードを処理するクラスです.
- * このクラスは Visitor パターンにより設計されています. (Visitor クラスに相当します)
+ * 各ノードを変換する処理を担当するクラスです.
+ * このクラスは Visitor パターンにより設計されています (Visitor クラスに相当します).
+ * {@link Peach_Markup_Builder Builder} クラスと連携して以下のように動作します.
+ * 
+ * 1. エンドユーザーが Builder オブジェクトの {@link Peach_Markup_Builder::build() build()} メソッドを実行します
+ * 2. build() メソッドの内部で新しい Context オブジェクトが生成されます
+ * 3. Context オブジェクトの {@link Peach_Markup_Context::handle() handle()} メソッドが呼び出され, build() の引数に指定されたノードを変換します
+ * 4. 変換結果を {@link Peach_Markup_Context::getResult() getResult()} から取り出し, build() メソッドの返り値として返します
  * 
  * @package Markup
  */

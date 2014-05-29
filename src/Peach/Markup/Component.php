@@ -22,8 +22,11 @@
  */
 /** @package Markup */
 /**
- * このオブジェクトが {@link Peach_Markup_Context Context}
- * オブジェクトで処理可能であることをあらわすインタフェースです.
+ * Builder で処理可能なパーツであることを示すインタフェースです.
+ * このインタフェースを実装したオブジェクトは
+ * {@link Peach_Markup_Builder::build()} メソッドの引数に指定して
+ * HTML コードなどに加工することが出来ます.
+ * 
  * @package Markup
  */
 interface Peach_Markup_Component

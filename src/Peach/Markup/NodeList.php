@@ -22,7 +22,7 @@
  */
 /** @package Markup */
 /**
- * ノードの一覧をあらわすクラスです.
+ * ノードの配列をあらわすクラスです.
  * 
  * このクラスは Component を実装しているため,
  * {@link Peach_Markup_Context::handle()} の引数に渡すことが出来ます.
