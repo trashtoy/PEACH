@@ -82,6 +82,64 @@ echo $builder->build($input); // Output: <input type="text" name="subject" value
                 ]]>
             </programlisting>
         </refsect2>
+        <refsect2 id="{@id attributes}">
+            <title>属性の設定方法</title>
+            <para>
+                要素に属性をセットするためのメソッドとして
+                {@link Peach_Markup_Element::setAttribute() setAttribute()} と
+                {@link Peach_Markup_Element::setAttributes() setAttributes()}
+                の 2 種類があります.
+                属性を 1 つだけセットする場合は setAttribute(),
+                複数の属性を一度にセットしたい場合は setAttributes()
+                といった具合に使い分けると良いでしょう.
+            </para>
+            <para>以下にサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
+// setAttribute() で属性をセットします
+$script = new Peach_Markup_ContainerElement("script");
+$script->setAttribute("type", "text/javascript");
+$script->setAttribute("src", "sample.js");
+
+// 以下のように setAttributes() で複数の属性を一度にセットすることも出来ます
+$script = new Peach_Markup_ContainerElement("script");
+$script->setAttributes(array("type" => "text/javascript", "src" => "sample.js"));
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id boolean_attributes}">
+            <title>Boolean 属性の設定方法</title>
+            <para>
+                例えば HTML における input 要素の readonly 属性のような,
+                値を持たない属性のことを Boolean 属性と呼びます.
+                要素に Boolean 属性をセットするには以下の方法があります.
+            </para>
+            <itemizedlist>
+                <listitem>setAttribute() の第 2 引数に null を指定する (または第 2 引数を省略する)</listitem>
+                <listitem>setAttributes() の引数の配列で, キーに属性名, 値に null を設定する</listitem>
+                <listitem>setAttributes() の引数の配列で, キーを省略し, 値に属性名を設定する</listitem>
+            </itemizedlist>
+            <para>
+                input 要素に readonly 属性を付加するサンプルコードを掲載します.
+                以下に挙げるコードはすべて同じ意味になります.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+// setAttribute() の第 2 引数を省略する場合
+$input = new Peach_Markup_EmptyElement("input");
+$input->setAttributes(array("type" => "text", "name" => "subject", "value" => "Sample"));
+$input->setAttribute("readonly");
+
+// キーに属性名, 値に null を指定する場合
+$input = new Peach_Markup_EmptyElement("input");
+$input->setAttributes(array("type" => "text", "name" => "subject", "value" => "Sample", "readonly" => null));
+
+// キーを省略する場合
+$input = new Peach_Markup_EmptyElement("input");
+$input->setAttributes(array("type" => "text", "name" => "subject", "value" => "Sample", "readonly"));
+                ]]>
+            </programlisting>
+        </refsect2>
     </refsect1>
     <refsect1 id="{@id text}">
         <title>Text</title>
