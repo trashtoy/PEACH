@@ -309,7 +309,11 @@ class Peach_Markup_Html
      * </div>
      * </code>
      * 
-     * 引数を省略した場合は, array("tag" => "tag") として扱います.
+     * 引数を省略した場合は array("tag" => "tag") が指定されたものとして扱います.
+     * ({@link Peach_Markup_Html::tag()} のエイリアスとして関数 tag() が定義されます)
+     * 
+     * 同じメソッドと別名の組み合わせで alias を複数回実行した場合,
+     * 二度目以降のものは無視されます.
      * 
      * @param  array $options 定義するエイリアスの一覧. キーがメソッド, 値が新しく定義する関数名
      * @throws InvalidArgumentException 不適切なクラスメソッド名を指定した /
@@ -317,10 +321,28 @@ class Peach_Markup_Html
      */
     public static function alias(array $options = array())
     {
-        static $validNames = array("tag", "comment", "conditionalComment", "select");
         if (!count($options)) {
             return self::alias(array("tag" => "tag"));
         }
+        
+        static $definedList = array();
+        $newOptions = array();
+        foreach ($options as $methodName => $funcName) {
+            if (!isset($definedList[$funcName]) || $definedList[$funcName] !== $methodName) {
+                $newOptions[$methodName] = $funcName;
+                $definedList[$funcName]  = $methodName;
+            }
+        }
+        self::handleAlias($newOptions);
+    }
+    
+    /**
+     * @param  array $options
+     * @throws InvalidArgumentException
+     */
+    private static function handleAlias(array $options)
+    {
+        static $validNames = array("tag", "comment", "conditionalComment", "select");
         foreach ($options as $methodName => $funcName) {
             if (!in_array($methodName, $validNames)) {
                 throw new InvalidArgumentException("Method '{$methodName}' is not found.");

@@ -439,10 +439,25 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      */
     public function testAliasByAlreadyDefinedName()
     {
-        $this->assertFalse(function_exists("t1"));
-        Peach_Markup_Html::alias(array("tag" => "t1"));
-        $this->assertTrue(function_exists("t1"));
-        Peach_Markup_Html::alias(array("tag" => "t1"));
+        $this->assertFalse(function_exists("func1"));
+        Peach_Markup_Html::alias(array("tag" => "func1"));
+        $this->assertTrue(function_exists("func1"));
+        Peach_Markup_Html::alias(array("comment" => "func1"));
+    }
+    
+    /**
+     * 同じ引数 (クラスメソッドと関数名の組み合わせ) で alias() を実行した場合,
+     * InvalidArgumentException がスローされずに正常終了することを確認します.
+     */
+    public function testAliasBySameArguments()
+    {
+        $this->assertFalse(function_exists("func2"));
+        $this->assertFalse(function_exists("func3"));
+        Peach_Markup_Html::alias(array("tag" => "func2", "comment" => "func3"));
+        $this->assertTrue(function_exists("func2"));
+        $this->assertTrue(function_exists("func3"));
+        Peach_Markup_Html::alias(array("tag" => "func2"));
+        Peach_Markup_Html::alias(array("comment" => "func3", "tag" => "func2"));
     }
     
     /**
