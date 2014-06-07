@@ -152,6 +152,7 @@ echo tag("html", array("lang" => "ja"))
                     &lt;-- と --&gt; で囲まれたコメントを表します.
                 </listitem>
             </itemizedlist>
+            <para>詳しくは {@tutorial Markup.node.pkg} を参照してください.</para>
         </refsect2>
         <refsect2 id="{@id builder}">
             <title>Builder</title>
@@ -164,6 +165,7 @@ echo tag("html", array("lang" => "ja"))
                 <listitem>改行コード (CR, LF, CRLF)</listitem>
                 <listitem>空要素タグの出力方法</listitem>
             </itemizedlist>
+            <para>詳しくは {@tutorial Markup.builder.pkg} を参照してください.</para>
         </refsect2>
     </refsect1>
 </refentry>
