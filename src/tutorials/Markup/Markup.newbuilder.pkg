@@ -1,0 +1,257 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup.builder}">
+    <refnamediv>
+        <refname>Builder を自作する方法</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id summary}">
+        <title>概要</title>
+        <para>
+            新しい Builder クラスを自作するには
+            {@link Peach_Markup_Builder Builder} と
+            {@link Peach_Markup_Context Context} のそれぞれのサブクラスを作る必要があります.
+        </para>
+        <para>
+            Context とはノードを変換する際に使われる中間生成物を表すクラスです.
+            以下の機能を持ちます.
+        </para>
+        <itemizedlist>
+            <listitem>各種 handle メソッド: 各ノードを文字列などに変換するためのロジックを定義します.</listitem>
+            <listitem>
+                {@link Peach_Markup_Context::getResult() getResult()}:
+                ノードの変換結果を取り出すメソッドです. このメソッドの返り値がそのまま
+                {@link Peach_Markup_Builder::build()} の結果として返されます.
+            </listitem>
+        </itemizedlist>
+        <para>以下に, 引数のノードのクラス名をそのまま返すだけの簡単な Builder を作るチュートリアルを掲載します.</para>
+    </refsect1>
+    <refsect1 id="{@id context}">
+        <title>新しい Context クラスの作成</title>
+        <para>
+            まずは {@link Peach_Markup_Context Context} クラスを継承して独自の
+            Context クラスを定義します.
+            Context クラスで定義されている抽象メソッドすべてを実装する必要があります.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+class MyContext extends Peach_Markup_Context
+{
+    private $result = "";
+
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    public function handleCode(Peach_Markup_Code $node)
+    {
+        $this->result .= get_class($node);
+    }
+
+    public function handleComment(Peach_Markup_Comment $node)
+    {
+        $this->result .= get_class($node);
+    }
+
+    public function handleContainerElement(Peach_Markup_ContainerElement $node)
+    {
+        $this->result .= get_class($node);
+    }
+
+    public function handleEmptyElement(Peach_Markup_EmptyElement $node)
+    {
+        $this->result .= get_class($node);
+    }
+
+    public function handleNodeList(Peach_Markup_NodeList $node)
+    {
+        $this->result .= get_class($node);
+    }
+
+    public function handleNone(Peach_Markup_None $none)
+    {
+        $this->result .= get_class($none);
+    }
+
+    public function handleText(Peach_Markup_Text $node)
+    {
+        $this->result .= get_class($node);
+    }
+}
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id builder}">
+        <title>新しい Builder クラスの作成</title>
+        <para>
+            次に先ほど作成した MyContext に処理を渡すための新しい
+            Builder クラスを作成します. 以下のように
+            {@link Peach_Markup_Builder::createContext() createContext()}
+            メソッドの中で新しい MyContext オブジェクトを生成して返すようにします.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+class MyBuilder extends Peach_Markup_Builder
+{
+    protected function createContext()
+    {
+        return new MyContext();
+    }
+}
+            ]]>
+        </programlisting>
+        <para>
+            それではこの MyBuilder クラスを使ってノードを変換してみましょう.
+            以下のような結果が得られます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$builder = new MyBuilder();
+echo $builder->build(new Peach_Markup_Text("sample text")) . PHP_EOL;
+echo $builder->build(new Peach_Markup_ContainerElement("element1")) . PHP_EOL;
+echo $builder->build(new Peach_Markup_EmptyElement("element2")) . PHP_EOL;
+
+/*
+Output:
+Peach_Markup_Text
+Peach_Markup_ContainerElement
+Peach_Markup_EmptyElement
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id recursive}">
+        <title>再帰的にノードを処理する方法</title>
+        <para>
+            先ほど作った MyContext は, 内部に子ノードを含むノード
+            ({@link Peach_Markup_Container Container} と呼びます)
+            を再帰的に処理することが出来ません.
+            子ノードを再帰的に処理するには以下のようにしてください.
+        </para>
+        <orderedlist>
+            <listitem>{@link Peach_Markup_Container::getChildNodes() getChildNodes()} で子ノードの一覧を取得します</listitem>
+            <listitem>取得した各子ノードについて {@link Peach_Markup_Context::handle() handle()} メソッドを適用します</listitem>
+        </orderedlist>
+        <para>
+            handle() は引数のノードの種類に応じて
+            handleText() や handleContainerElement() など適切なメソッドに処理を割り振るメソッドです.
+            (Visitor パターンにおける visit() メソッドに相当します)
+        </para>
+        <para>以下にサンプルコードを掲載します.</para>
+        <programlisting role="php">
+            <![CDATA[
+class MyContext2 extends Peach_Markup_Context
+{
+    private $result;
+    private $indent;
+
+    public function __construct()
+    {
+        $this->result = "";
+        $this->indent = new Peach_Markup_Indent();
+    }
+
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    private function handleCommon(Peach_Markup_Component $c)
+    {
+        $this->result .= $this->indent->indent() . get_class($c) . PHP_EOL;
+        if ($c instanceof Peach_Markup_Container) {
+            $this->indent->stepUp();
+            $childNodes = $c->getChildNodes();
+            array_walk($childNodes, array($this, "handle"));
+            $this->indent->stepDown();
+        }
+    }
+
+    public function handleCode(Peach_Markup_Code $node)
+    {
+        $this->handleCommon($node);
+    }
+
+    public function handleComment(Peach_Markup_Comment $node)
+    {
+        $this->handleCommon($node);
+    }
+
+    public function handleContainerElement(Peach_Markup_ContainerElement $node)
+    {
+        $this->handleCommon($node);
+    }
+
+    public function handleEmptyElement(Peach_Markup_EmptyElement $node)
+    {
+        $this->handleCommon($node);
+    }
+
+    public function handleNodeList(Peach_Markup_NodeList $node)
+    {
+        $this->handleCommon($node);
+    }
+
+    public function handleNone(Peach_Markup_None $none)
+    {
+        $this->handleCommon($none);
+    }
+
+    public function handleText(Peach_Markup_Text $node)
+    {
+        $this->handleCommon($node);
+    }
+}
+
+class MyBuilder2 extends Peach_Markup_Builder
+{
+    protected function createContext()
+    {
+        return new MyContext2();
+    }
+}
+            ]]>
+        </programlisting>
+        <para>
+            MyBuilder2 を実際に使用したサンプルコードを以下に掲載します.
+            はじめに作成した MyBuilder とは違い, 子ノードについても再帰的に処理出来ていることが確認できます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$root = new Peach_Markup_ContainerElement("root");
+$root->append("Text 1");
+$root->append("Text 2");
+$sub  = new Peach_Markup_ContainerElement("sub");
+$sub->append("Text 3");
+$sub->append("Text 4");
+$root->append($sub);
+$root->append("Text 5");
+
+echo "Test: MyBuilder" . PHP_EOL;
+$b1 = new MyBuilder();
+echo $b1->build($root) . PHP_EOL;
+
+echo "Test: MyBuilder2" . PHP_EOL;
+$b2 = new MyBuilder2();
+echo $b2->build($root) . PHP_EOL;
+
+/*
+Output:
+Test: MyBuilder
+Peach_Markup_ContainerElement
+Test: MyBuilder2
+Peach_Markup_ContainerElement
+    Peach_Markup_Text
+    Peach_Markup_Text
+    Peach_Markup_ContainerElement
+        Peach_Markup_Text
+        Peach_Markup_Text
+    Peach_Markup_Text
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+ </refentry>
