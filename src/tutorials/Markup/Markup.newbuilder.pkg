@@ -26,13 +26,12 @@
                 {@link Peach_Markup_Builder::build()} の結果として返されます.
             </listitem>
         </itemizedlist>
-        <para>以下に, 引数のノードのクラス名をそのまま返すだけの簡単な Builder を作るチュートリアルを掲載します.</para>
+        <para>引数の Component のクラス名をそのまま返すだけの簡単な Builder を作るチュートリアルを以下に掲載します.</para>
     </refsect1>
     <refsect1 id="{@id context}">
         <title>新しい Context クラスの作成</title>
         <para>
-            まずは {@link Peach_Markup_Context Context} クラスを継承して独自の
-            Context クラスを定義します.
+            まずは {@link Peach_Markup_Context Context} クラスを継承して独自の Context を定義します.
             Context クラスで定義されている抽象メソッドすべてを実装する必要があります.
         </para>
         <programlisting role="php">

@@ -13,8 +13,12 @@
             {@link Peach_Markup_Builder Builder} はノードを文字列に変換する処理を担当する抽象基底クラスです.
             具象クラスとして {@link Peach_Markup_DefaultBuilder DefaultBuilder} と
             {@link Peach_Markup_DebugBuilder DebugBuilder} の 2 種類が用意されています.
+        </para>
+        <para>
             エンドユーザーが新しい Builder クラスを定義することも出来ますが,
             よほど特殊な用途でもない限り DefaultBuilder のみで充分でしょう.
+            独自の Builder を新たに作成する方法については
+            {@tutorial Markup.newbuilder.pkg} を参照してください.
         </para>
     </refsect1>
     <refsect1 id="{@id default_builder}">
@@ -167,9 +171,9 @@ echo $builder->build($node);
                 特定のタグだけ例外的に改行しない, といった細かなカスタマイズをすることが出来ます.
             </para>
             <para>
-                以下, {@link Peach_Markup_NameBreakControl} クラスを使って,
-                特定のタグのみ強制改行をするサンプルです.
-                NameBreakControl の引数に指定された tag2, tag4 要素が強制的に改行されます.
+                例として {@link Peach_Markup_NameBreakControl}
+                クラスを使って特定のタグのみ強制改行をするサンプルコードを掲載します.
+                NameBreakControl のコンストラクタ引数に指定された tag2, tag4 要素が強制的に改行されます.
             </para>
             <programlisting role="php">
                 <![CDATA[
@@ -211,8 +215,8 @@ Output:
             <para>
                 インデントをなくして出力データをできるだけ削減したい場合は
                 {@link Peach_Markup_MinimalBreakControl} を使用してください.
-                以下, さきほどのノードを MinimalBreakControl を使って build
-                した場合のサンプルコードです.
+                さきほどのノードを MinimalBreakControl を使って build
+                した場合のサンプルコードを掲載します.
             </para>
             <programlisting role="php">
                 <![CDATA[
