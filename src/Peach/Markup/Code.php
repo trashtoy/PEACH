@@ -27,6 +27,7 @@
  * 
  * - HTML の style 要素, script 要素の中身
  * - あらかじめ文字列として出力されている HTML コード片
+ * - DOCTYPE 宣言, CDATA セクションなど, このモジュールがサポートしていない XML 構文
  * 
  * @package Markup
  */

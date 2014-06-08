@@ -22,7 +22,7 @@
  */
 /** @package Markup */
 /**
- * Builder で処理可能なパーツであることを示すインタフェースです.
+ * {@link Peach_Markup_Builder Builder} で処理可能なパーツであることを示すインタフェースです.
  * このインタフェースを実装したオブジェクトは
  * {@link Peach_Markup_Builder::build()} メソッドの引数に指定して
  * HTML コードなどに加工することが出来ます.
