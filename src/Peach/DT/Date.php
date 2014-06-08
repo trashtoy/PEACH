@@ -209,7 +209,9 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     {
         $year = $fields->get(self::$YEAR);
         $year %= 10000;
-        if ($year < 0) $year += 10000;
+        if ($year < 0) {
+            $year += 10000;
+        }
         $fields->put(self::$YEAR, $year);
     }
     
@@ -244,18 +246,30 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     {
         $className = __CLASS__;
         if ($time instanceof $className) {
-            if ($this->year  !== $time->year)  return $this->year  - $time->year;
-            if ($this->month !== $time->month) return $this->month - $time->month;
-            if ($this->date  !== $time->date)  return $this->date  - $time->date;
+            if ($this->year  !== $time->year) {
+                return $this->year  - $time->year;
+            }
+            if ($this->month !== $time->month) {
+                return $this->month - $time->month;
+            }
+            if ($this->date  !== $time->date) {
+                return $this->date  - $time->date;
+            }
             return 0;
         }
         else {
             $y = $time->get("year");
             $m = $time->get("month");
             $d = $time->get("date");
-            if ($this->year  !== $y) return (isset($y) ? $this->year  - $y : 0);
-            if ($this->month !== $m) return (isset($m) ? $this->month - $m : 0);
-            if ($this->date  !== $d) return (isset($d) ? $this->date  - $d : 0);
+            if ($this->year  !== $y) {
+                return (isset($y) ? $this->year  - $y : 0);
+            }
+            if ($this->month !== $m) {
+                return (isset($m) ? $this->month - $m : 0);
+            }
+            if ($this->date  !== $d) {
+                return (isset($d) ? $this->date  - $d : 0);
+            }
             return 0;
         }
     }
@@ -340,8 +354,8 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
      *
      * うるう年の判別ルールは以下の通りです.
      * - 4 で割り切れるはうるう年である
-     * - ただし、100 で割り切れる年はうるう年ではない
-     * - ただし、400 で割り切れる年はうるう年である
+     * - ただし 100 で割り切れる年はうるう年ではない
+     * - ただし 400 で割り切れる年はうるう年である
      * 
      * @return bool うるう年である場合に TRUE, それ以外は FALSE
      */
@@ -357,8 +371,12 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
      */
     private static function checkLeapYear($year)
     {
-        if($year % 4 != 0)   return false;
-        if($year % 100 != 0) return true;
+        if ($year % 4 != 0) {
+            return false;
+        }
+        if ($year % 100 != 0) {
+            return true;
+        }
         return ($year % 400 == 0);
     }
     
@@ -397,4 +415,3 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
         }
     }
 }
-?>
