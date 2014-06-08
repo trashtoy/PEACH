@@ -120,7 +120,9 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
     protected function compareFields(Peach_DT_Time $time)
     {
         $c = parent::compareFields($time);
-        if (!isset($c) || $c != 0) return $c;
+        if (!isset($c) || $c != 0) {
+            return $c;
+        }
         $className = __CLASS__;
         if ($time instanceof $className) {
             return $this->second - $time->second;
@@ -205,4 +207,3 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
         return $adjuster;
     }
 }
-?>
