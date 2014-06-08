@@ -1,0 +1,356 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup.html}">
+    <refnamediv>
+        <refname>Html (HTML 出力専用クラス)</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id summary}">
+        <title>概要</title>
+        <para>
+            {@link Peach_Markup_Html Html} は HTML の出力に特化したユーティリティクラスです.
+            このクラスは HTML 出力専用の {@link Peach_Markup_Helper Helper}
+            オブジェクトをクラス変数として保持しています.
+            各クラスメソッドではその Helper オブジェクトを使って HTML コードを出力します.
+            (この Helper オブジェクトのことを以下「グローバル Helper」と呼びます)
+        </para>
+    </refsect1>
+    <refsect1 id="{@id usage}">
+        <title>基本的な使い方</title>
+        <refsect2 id="{@id tag}">
+            <title>tag</title>
+            <para>
+                このクラスで最も使用頻度の高いメソッドは {@link Peach_Markup_Html::tag() tag()}
+                です. tag() は引数に要素名を取り, 指定された要素を
+                {@link Peach_Markup_HelperObject HelperObject} として返すメソッドです.
+                HelperObject クラスの詳細については {@tutorial Markup.helper.pkg}
+                を参照してください.
+            </para>
+            <para>以下に tag() を用いたサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
+echo Peach_Markup_Html::tag("p")
+    ->attr("class", "sample")
+    ->append(Peach_Markup_Html::tag("span")->append("This is test"))
+    ->append(Peach_Markup_Html::tag("br"))
+    ->append("This is a sample text.")
+    ->append(Peach_Markup_Html::tag("img", array("src" => "test.jpg", "alt" => "")))
+    ->write();
+/*
+Output:
+<p class="sample">
+    <span>This is test</span>
+    <br>
+    This is a sample text.
+    <img src="test.jpg" alt="">
+</p>
+ */
+            ]]>
+            </programlisting>
+            <para>以下のように tag() の第 2 引数に配列を指定することで, 属性をセットすることも出来ます.</para>
+            <programlisting role="php">
+                <![CDATA[
+$p = Peach_Markup_Html::tag("p", array("class" => "sample"))->append("Sample text");
+echo $p->write(); // Output: <p class="sample">Sample text</p>
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id format}">
+            <title>書式のカスタマイズ</title>
+            <para>
+                デフォルトでは HTML 形式でコードを出力しますが,
+                XHTML 形式で出力したい場合には, 以下のように引数に true を指定して
+                {@link Peach_Markup_Html::init() init()} メソッドを実行してください.
+                これによりグローバル Helper が XHTML 用に初期化されます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+Peach_Markup_Html::init(true);
+echo Peach_Markup_Html::tag("p")
+    ->attr("class", "sample")
+    ->append(Peach_Markup_Html::tag("span")->append("This is test"))
+    ->append(Peach_Markup_Html::tag("br"))
+    ->append("This is a sample text.")
+    ->append(Peach_Markup_Html::tag("img", array("src" => "test.jpg", "alt" => "")))
+    ->write();
+/*
+Output:
+<p class="sample">
+    <span>This is test</span>
+    <br />
+    This is a sample text.
+    <img src="test.jpg" alt="" />
+</p>
+ */
+                ]]>
+            </programlisting>
+            <para>
+                インデントや改行文字など, その他の書式をカスタマイズする場合は
+                {@link Peach_Markup_Html::getBuilder() getBuilder()} を使用してください.
+                返り値の {@link Peach_Markup_DefaultBuilder DefaultBuilder}
+                オブジェクトに対して変更を加えることで,
+                このクラスの出力をカスタマイズすることが出来ます.
+            </para>
+            <para>以下にサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
+$builder = Peach_Markup_Html::getBuilder();
+$builder->setRenderer("XHTML");
+$builder->setIndent(new Peach_Markup_Indent(0, "  ", Peach_Markup_Indent::LF));
+echo Peach_Markup_Html::tag("p")
+    ->attr("class", "sample")
+    ->append(Peach_Markup_Html::tag("span")->append("This is test"))
+    ->append(Peach_Markup_Html::tag("br"))
+    ->append("This is a sample text.")
+    ->append(Peach_Markup_Html::tag("img", array("src" => "test.jpg", "alt" => "")))
+    ->write();
+/*
+Output:
+<p class="sample">
+  <span>This is test</span>
+  <br />
+  This is a sample text.
+  <img src="test.jpg" alt="" />
+</p>
+ */
+                ]]>
+            </programlisting>
+        </refsect2>
+    </refsect1>
+    <refsect1 id="{@id alias}">
+        <title>alias</title>
+        <para>
+            tag() のような使用頻度の高いクラスメソッドを記述するために,
+            毎回 "Peach_Markup_Html::tag" というコードを書くのは面倒かもしれません.
+            Html クラスには, 定義されている各種クラスメソッドに対して任意の名前の関数を割り当てる
+            {@link Peach_Markup_Html::alias() alias()} というメソッドがあります.
+            事前に alias() を実行することで, 各種クラスメソッドを簡潔に記述することが出来ます.
+        </para>
+        <refsect2 id="{@id alias_default}">
+            <title>デフォルトの挙動</title>
+            <para>
+                以下のように引数なしで実行すると "tag" という名前の関数が新たに定義されます.
+                定義された関数は "Peach_Markup_Html::tag" と全く同じように動作します.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+Peach_Markup_Html::alias(); // 関数 tag() が生成される
+echo tag("p")
+    ->attr("class", "sample")
+    ->append(tag("span")->append("This is test"))
+    ->append(tag("br"))
+    ->append("This is a sample text.")
+    ->append(tag("img", array("src" => "test.jpg", "alt" => "")))
+    ->write();
+/*
+Output:
+<p class="sample">
+    <span>This is test</span>
+    <br>
+    This is a sample text.
+    <img src="test.jpg" alt="">
+</p>
+ */
+                ]]>
+            </programlisting>
+            <para>
+                注意事項として, Symfony など一部の PHP フレームワークでは,
+                デフォルトで同名のヘルパー関数が定義されている場合があります.
+                関数名が被ることにより予期せぬエラーが発生する原因となるので,
+                特定のフレームワークに組み込んだりその他のベンダーの
+                PHP クラスライブラリを導入する場合には,
+                安易に alias() を使わないようにするか,
+                後述の方法で被らないような関数名を定義してください.
+            </para>
+        </refsect2>
+        <refsect2 id="{@id alias_custom}">
+            <title>関数名を指定して別名を定義</title>
+            <para>
+                alias() の引数にメソッド名と関数名を指定することで,
+                任意の名前で関数を定義することが出来ます.
+                以下のサンプルコードでは tag() メソッドに "t" という関数名を割り当てています.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+Peach_Markup_Html::alias(array("tag" => "t")); // 関数 t() が生成される
+echo t("p")
+    ->attr("class", "sample")
+    ->append(t("span")->append("This is test"))
+    ->append(t("br"))
+    ->append("This is a sample text.")
+    ->append(t("img", array("src" => "test.jpg", "alt" => "")))
+    ->write();
+/*
+Output:
+<p class="sample">
+    <span>This is test</span>
+    <br>
+    This is a sample text.
+    <img src="test.jpg" alt="">
+</p>
+ */
+                ]]>
+            </programlisting>
+            <para>
+                alias の引数には, キーにメソッド名, 値にそのメソッドの別名となる配列を指定してください.
+                キーとして使える文字列 (メソッド名) は以下の通りです.
+            </para>
+            <itemizedlist>
+                <listitem>{@link Peach_Markup_Html::tag() tag}</listitem>
+                <listitem>{@link Peach_Markup_Html::select() select}</listitem>
+                <listitem>{@link Peach_Markup_Html::comment() comment}</listitem>
+                <listitem>{@link Peach_Markup_Html::conditionalComment() conditionalComment}</listitem>
+            </itemizedlist>
+            <para>以下のように複数の関数を同時に定義することも出来ます.</para>
+            <programlisting role="php">
+                <![CDATA[
+Peach_Markup_Html::alias(array(
+    "tag"     => "t",
+    "comment" => "c",
+    "select"  => "s"
+));
+                ]]>
+            </programlisting>
+        </refsect2>
+    </refsect1>
+    <refsect1 id="{@id select}">
+        <title>select</title>
+        <para>
+            PHP で動的に HTML コードを出力する際, 特に select 要素はロジックが複雑になりがちです.
+            Html クラスには select 要素を出力するための専用のメソッド
+            {@link Peach_Markup_Html::select() select()} が用意されています.
+            このメソッドを使うことで select 要素の出力がより直感的に出来るでしょう.
+        </para>
+        <para>
+            以下に select() メソッドのサンプルコードを掲載します.
+            1 番目の引数にはデフォルトで選択されている値,
+            2 番目の引数には選択肢の一覧を配列形式,
+            3 番目の引数には select 要素にセットする属性を指定してください.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$candidates = array(
+    "Apple"  => 1,
+    "Orange" => 2,
+    "Pear"   => 3,
+    "Peach"  => 4,
+);
+echo Peach_Markup_Html::select(4, $candidates, array("name" => "favorite"))->write();
+/*
+Output:
+<select name="favorite">
+    <option value="1">Apple</option>
+    <option value="2">Orange</option>
+    <option value="3">Pear</option>
+    <option value="4" selected>Peach</option>
+</select>
+ */
+            ]]>
+        </programlisting>
+        <para>
+            2 番目の引数を二次元配列にすることで, optgroup を含む select 要素を表現することも出来ます.
+            以下にサンプルコードを掲載します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$candidates = array(
+    "Fruit"   => array(
+        "Apple"  => "1",
+        "Orange" => "2",
+        "Pear"   => "3",
+        "Peach"  => "4",
+    ),
+    "Dessert" => array(
+        "Chocolate" => "5",
+        "Doughnut"  => "6",
+        "Ice cream" => "7",
+    ),
+    "Others" => "8",
+);
+echo Peach_Markup_Html::select(4, $candidates, array("name" => "favorite"))->write();
+/*
+Output:
+<select name="favorite">
+    <optgroup label="Fruit">
+        <option value="1">Apple</option>
+        <option value="2">Orange</option>
+        <option value="3">Pear</option>
+        <option value="4" selected>Peach</option>
+    </optgroup>
+    <optgroup label="Dessert">
+        <option value="5">Chocolate</option>
+        <option value="6">Doughnut</option>
+        <option value="7">Ice cream</option>
+    </optgroup>
+    <option value="8">Others</option>
+</select>
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id comment}">
+        <title>comment</title>
+        <para>
+            {@link Peach_Markup_Html::comment() comment()} は文字通りコメントを生成するためのメソッドです.
+            このメソッドは {@link Peach_Markup_Comment Comment} ノードをラップした
+            HelperObject を生成して返します.
+        </para>
+        <para>以下に comment() メソッドのサンプルコードを掲載します.</para>
+        <programlisting role="php">
+            <![CDATA[
+echo Peach_Markup_Html::comment("This is test")->write();
+// Output: <!--This is test-->
+            ]]>
+        </programlisting>
+        <para>
+            引数に任意のノードを指定するか, または append() で任意のノードを追加することで,
+            そのノードをコメントアウトした状態で出力することができます.
+            以下に例を挙げます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$p1      = Peach_Markup_Html::tag("p")->append("First text");
+$p2      = Peach_Markup_Html::tag("p")->append("Second text");
+$comment = Peach_Markup_Html::comment()->append($p1)->append($p2);
+echo $comment->write();
+/*
+Output:
+<!--
+<p>First text</p>
+<p>Second text</p>
+-->
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id conditional_comment}">
+        <title>conditionalComment</title>
+        <para>
+            {@link Peach_Markup_Html::conditionalComment() conditionalComment()}
+            は一部のブラウザで実装されている条件付きコメント
+            ("&lt;!--[if lt IE 7]&gt;...&lt;![endif]--&gt;" など)
+            を出力するためのメソッドです.
+        </para>
+        <para>
+            1 番目の引数にはコメントの条件 ("lt IE 7" など),
+            2 番目の引数には条件付きコメントの内容を指定してください.
+            2 番目の引数は省略することも出来ます.
+            以下に例を挙げます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$p       = Peach_Markup_Html::tag("p")->append("R.I.P. Windows XP 2001 - 2014");
+$comment = Peach_Markup_Html::conditionalComment("lt IE 7", $p);
+echo $comment->write();
+/*
+Output:
+<!--[if lt IE 7]>
+<p>R.I.P. Windows XP 2001 - 2014</p>
+<![endif]-->
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
+ </refentry>

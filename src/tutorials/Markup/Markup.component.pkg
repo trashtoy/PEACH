@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<refentry id="{@id Markup.component}">
+    <refnamediv>
+        <refname>Component (その他のパーツ)</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id component}">
+        <title>Component の概要</title>
+        <para>
+            {@link Peach_Markup_Element Element}, {@link Peach_Markup_Text Text},
+            {@link Peach_Markup_Comment Comment} などのクラスは
+            {@link Peach_Markup_Node Node} インタフェースを実装していますが, Node にはさらに
+            {@link Peach_Markup_Component Component} という親のインタフェースが存在します.
+        </para>
+        <para>
+            Component とは Builder で
+            {@link Peach_Markup_Builder::build() build} したり, 要素の中に
+            {@link Peach_Markup_ContainerElement::append() append}
+            したりすることが可能なインタフェースです. Node とは Component
+            の中でも特にマークアップ言語のパーツとしてツリー構造を構成することが出来る型を指します.
+        </para>
+        <para>このページでは Component を実装しているその他のクラスについて紹介します.</para>
+    </refsect1>
+    <refsect1 id="{@id container}">
+        <title>Container</title>
+        <para>
+            {@link Peach_Markup_Container Container} は Component を継承したサブインタフェースで,
+            内部に子ノードを持つことが出来る Component をあらわします.
+            {@link Peach_Markup_Container::append() append()} や
+            {@link Peach_Markup_Container::getChildNodes() getChildNodes()}
+            などのメソッドを持ちます.
+        </para>
+        <para>
+            このインタフェースを実装したクラスとして
+            {@link Peach_Markup_ContainerElement ContainerElement},
+            {@link Peach_Markup_Comment Comment}, 後述の
+            {@link Peach_Markup_NodeList NodeList} などがあります.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id nodelist}">
+        <title>NodeList</title>
+        <para>
+            {@link Peach_Markup_NodeList NodeList} はノードの順序付き集合をあらわすクラスです.
+            DOM における NodeList と NodeFragment を兼任するような役割を持ちます.
+        </para>
+        <refsect2 id="{@id nodelist_build}">
+            <title>build した場合</title>
+            <para>
+                DefaultBuilder の {@link Peach_Markup_Builder::build() build()}
+                メソッドの引数に指定した場合, NodeList に含まれるノード一覧を改行文字区切りで出力します.
+                以下にサンプルコードを掲載します.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$p       = new Peach_Markup_ContainerElement("p");
+$p->append("Sample paragraph");
+$text    = new Peach_Markup_Text("Sample text");
+$comment = new Peach_Markup_Comment();
+$comment->append("Sample comment");
+
+$nodeList = new Peach_Markup_NodeList();
+$nodeList->append($p);
+$nodeList->append($text);
+$nodeList->append($comment);
+
+$builder = new Peach_Markup_DefaultBuilder();
+echo $builder->build($nodeList);
+/*
+Output:
+<p>Sample paragraph</p>
+Sample text
+<!--Sample comment-->
+ */
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id nodelist_append}">
+            <title>append した場合</title>
+            <para>
+                Container の {@link Peach_Markup_Container::append() append()}
+                メソッドの引数に指定された場合, その NodeList
+                に含まれる子ノードが追加されます. NodeList 自身は追加されません.
+                以下にサンプルコードを掲載します.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$p       = new Peach_Markup_ContainerElement("p");
+$p->append("Sample paragraph");
+$text    = new Peach_Markup_Text("Sample text");
+$comment = new Peach_Markup_Comment();
+$comment->append("Sample comment");
+
+$nodeList = new Peach_Markup_NodeList();
+$nodeList->append($p);
+$nodeList->append($text);
+$nodeList->append($comment);
+
+$div = new Peach_Markup_ContainerElement("div");
+$div->append($nodeList); // この行は以下の記述と全く結果になります
+
+$div = new Peach_Markup_ContainerElement("div");
+$div->append($p);
+$div->append($text);
+$div->append($comment);
+                ]]>
+            </programlisting>
+        </refsect2>
+    </refsect1>
+    <refsect1 id="{@id none}">
+        <title>None</title>
+        <para>
+            {@link Peach_Markup_None None} は文字通り「何もない」ことをあらわす Component です.
+            このクラスはいわゆる Null Object として機能します.
+            例えば返り値に Component を返す関数を実装する際に, 適切な返り値がなかった場合の例外値として
+            null や false などを返す代わりに None オブジェクトを返すようにすると良いでしょう.
+        </para>
+        <refsect2 id="{@id none_build}">
+            <title>build した場合</title>
+            <para>
+                DefaultBuilder で build した場合は空文字列を返します.
+                DebugBuilder で build した場合は文字列 "None" を生成します.
+            </para>
+        </refsect2>
+        <refsect2 id="{@id none_append}">
+            <title>append した場合</title>
+            <para>Container に append した場合は何も処理が行われず, Container の状態は変化しません.</para>
+        </refsect2>
+    </refsect1>
+ </refentry>
