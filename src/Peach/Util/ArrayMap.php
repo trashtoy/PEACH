@@ -60,7 +60,7 @@ class Peach_Util_ArrayMap implements Peach_Util_Map
         } elseif (is_array($var)) {
             $this->data = $var;
         } else {
-            throw new Exception("Argument (" . Peach_Util_Values::getType($var) . ") must be array or Peach_Util_Map");
+            throw new InvalidArgumentException("Argument (" . Peach_Util_Values::getType($var) . ") must be array or Peach_Util_Map");
         }
     }
 
@@ -121,7 +121,7 @@ class Peach_Util_ArrayMap implements Peach_Util_Map
      */
     public function containsKey($name)
     {
-        return isset($this->data[$name]);
+        return array_key_exists($name, $this->data);
     }
 
     /**

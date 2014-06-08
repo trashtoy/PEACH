@@ -31,21 +31,21 @@ class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
     
     /**
      * 
-     * @expectedException Exception
+     * @expectedException InvalidArgumentException
      */
     public function testConstructorFail()
     {
-        $map = new Peach_Util_ArrayMap("hoge");
+        new Peach_Util_ArrayMap("hoge");
     }
     
     public function testGet()
     {
-        $test = $this->object->get("key1");
-        $this->assertSame("foo", $test);
-        $test = $this->object->get("key4");
-        $this->assertNull($test);
-        $test = $this->object->get("key5", "DEF");
-        $this->assertSame("DEF", $test);
+        $test1 = $this->object->get("key1");
+        $this->assertSame("foo", $test1);
+        $test2 = $this->object->get("key4");
+        $this->assertNull($test2);
+        $test3 = $this->object->get("key5", "DEF");
+        $this->assertSame("DEF", $test3);
     }
     
     public function testPut()
@@ -75,10 +75,20 @@ class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expected, $arr);
     }
     
+    /**
+     * containesKey() のテストです.
+     * 以下を確認します.
+     * 
+     * - 存在しないキー名を指定した場合は false を返す
+     * - 存在するキー名を指定した場合は true を返す
+     * - 値に null をセットしたエントリについても true を返す (Issue #1)
+     */
     public function testContainsKey()
     {
+        $this->object->put("test1", null);
         $this->assertFalse($this->object->containsKey("key4"));
         $this->assertTrue($this->object->containsKey("key2"));
+        $this->assertTrue($this->object->containsKey("test1"));
     }
     
     public function testRemove()

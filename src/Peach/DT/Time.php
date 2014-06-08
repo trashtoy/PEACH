@@ -50,7 +50,8 @@
  * このクラスはイミュータブルであるため, 各種フィールド操作メソッド (add, set, setAll) 
  * は新しい時間オブジェクトを返すことに注意してください.
  * 
- * このクラスは {@link Util_Comparable} を実装しているため, {@link Util_Arrays::sort()} でソートすることが出来ます.
+ * このクラスは {@link Peach_Util_Comparable} を実装しているため,
+ * {@link Peach_Util_Arrays::sort()} でソートすることが出来ます.
  * 
  * @package DT
  */
@@ -213,8 +214,8 @@ interface Peach_DT_Time extends Peach_Util_Comparable
      *
      * うるう年の判別ルールは以下の通りです.
      * - 4 で割り切れるはうるう年である
-     * - ただし、100 で割り切れる年はうるう年ではない
-     * - ただし、400 で割り切れる年はうるう年である
+     * - ただし 100 で割り切れる年はうるう年ではない
+     * - ただし 400 で割り切れる年はうるう年である
      * 
      * @return bool うるう年である場合に TRUE, それ以外は FALSE
      */
@@ -293,4 +294,3 @@ interface Peach_DT_Time extends Peach_Util_Comparable
      */
     public function formatTime();
 }
-?>

@@ -77,20 +77,24 @@ $map->get("key4"); // => NULL
      以下に利用例を挙げます.</para>
      <programlisting role="php">
      <![CDATA[
-class TestKey {
+class TestKey
+{
     private $id;
     private $name;
 
-    public function __construct($id, $name) {
+    public function __construct($id, $name)
+    {
         $this->id   = $id;
         $this->name = $name;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 }
@@ -112,15 +116,18 @@ echo $map->get(new TestKey(2, "xxx"), "undef"); // "undef"
      <para>以下に, 独自に作成した Equator の例を示します.</para>
      <programlisting role="php">
      <![CDATA[
-class TestKeyEquator implements Util_Equator {
+class TestKeyEquator implements Peach_Util_Equator
+{
     /**
      * 2つの TestKey オブジェクトの id, name がそれぞれ等しい場合に TRUE を返します.
      */
-    public function equate($var1, $var2) {
+    public function equate($var1, $var2)
+    {
         return ($var1->getId() === $var2->getId() && $var1->getName() === $var2->getName());
     }
     
-    public function hashCode($var) {
+    public function hashCode($var)
+    {
         return intval($var->getId());
     }
 }
@@ -135,15 +142,18 @@ class TestKeyEquator implements Util_Equator {
       </para>
      <programlisting role="php">
      <![CDATA[
-class TestKeyEquator2 implements Util_Equator {
+class TestKeyEquator2 implements Peach_Util_Equator
+{
     /**
      * 2つの TestKey オブジェクトの id がそれぞれ等しい場合に TRUE を返します.
      */
-    public function equate($var1, $var2) {
+    public function equate($var1, $var2)
+    {
         return ($var1->getId() === $var2->getId());
     }
     
-    public function hashCode($var) {
+    public function hashCode($var)
+    {
         return intval($var->getId());
     }
 }
