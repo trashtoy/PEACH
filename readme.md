@@ -23,6 +23,13 @@ Object-oriented datetime management API.
 - Library which is designed by immutable classes.
 - Loosely-coupled API between datetime manipulation and format/parse.
 
+### Markup
+This module helps you to markup HTML or XML dynamically.
+
+- DOM-like usability.
+- Various output customization.
+- Helper class enables more simple coding.
+
 Requirements
 ------------
 
@@ -49,9 +56,8 @@ Roadmap
 
 Package | Description
 --------|------------
-Markup  | Assisting output of markup language such as HTML, RSS, XML and so on.
 RB      | Object-oriented i18n module. (RB represents ResourceBundle.)
-Db      | A reinvented O/R mapper.
+DB      | A reinvented O/R mapper.
 App     | Various components about web application development. (Forms, validations, etc.)
 
 Issues
