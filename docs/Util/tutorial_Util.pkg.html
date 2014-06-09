@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>汎用モジュール群 Util</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Util</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Util.html">class tree: Util</a></li>
+            <li><a href="../elementindex_Util.html">index: Util</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>汎用モジュール群 Util</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../Util/tutorial_Util.pkg.html#intro">汎用モジュール群 Util</a></li>
+                <li><a href="../Util/tutorial_Util.pkg.html#map">Map インタフェースの概要</a></li>
+                <li><a href="../Util/tutorial_Util.pkg.html#arrays">配列操作用ユーティリティクラス Arrays</a></li>
+                <li><a href="../Util/tutorial_Util.pkg.html#etc">その他のユーティリティクラス</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="intro"><h1>汎用モジュール群 Util</h1><p>パッケージ Util は, プログラム内で汎用的に用いられる機能を集めたものです.
+                    各種ユーティリティクラスなどが揃っています.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="map"><h1>Map インタフェースの概要</h1><p>このモジュールの各種 Map クラスのコンセプトは,
+                    PHP の配列操作を簡潔なコードに置き換えることです.</p>
+                <p>PHP で配列を連想配列として利用する際, 以下のようなコーディングをする必要がありました.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">null</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$bar&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">null</span><span class="src-sym">;</span></div></li>
+        </ol></div>
+                <p>あるいは, コーディング規約で三項演算子が禁止されているようなプロジェクトでは</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-id">null</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-sym">}</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span>isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">]</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-id">null</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-sym">}</span></div></li>
+        </ol></div>
+                <p>ここまで冗長なコードを書かなければなりません.
+                    このモジュールで定義されている <a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a> クラスを利用すると,
+                    このコードを以下のように表現することが出来ます.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$map&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a></span><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$foo&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;foo&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$bar&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;bar&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        </ol></div>
+                <p>配列を使った操作では, キーが存在しない場合の代替処理を三項演算子や if 文で行う必要がありますが, 
+                    Map を利用すればこれらの代替処理がすべて get() メソッドに吸収されるため,
+                    非常にシンプルな記述となります.</p>
+                <p>詳しくは <a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a> を参照してください.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="arrays"><h1>配列操作用ユーティリティクラス Arrays</h1><p><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a> は, Java のコレクション・フレームワークのようなオブジェクト指向的な配列のソートや, 
+                    その他様々な配列操作を行うためのユーティリティクラスです.</p>
+                <p>詳しくは <a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a> を参照してください.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="etc"><h1>その他のユーティリティクラス</h1><p>上記に挙げた以外で, ちょっとした処理を簡単に実現するための
+                    <a href="../Util/Peach_Util_Values.html">Peach_Util_Values</a>, <a href="../Util/Peach_Util_Strings.html">Peach_Util_Strings</a> などのユーティリティクラスがあります.
+                    詳しくは各クラスの詳細ページを参照してください.</p></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../Markup/tutorial_Markup.newbuilder.pkg.html">Builder を自作する方法</a></li>
+            <li>Next: <a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:48 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Util/tutorial_Util.pkg.html">汎用モジュール群 Util</a>
+                <ul>
+                    <li><a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+                    <li><a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_Comparable.html">Peach_Util_Comparable</a></li>
+            <li><a href="../Util/Peach_Util_Comparator.html">Peach_Util_Comparator</a></li>
+            <li><a href="../Util/Peach_Util_Equator.html">Peach_Util_Equator</a></li>
+            <li><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a></li>
+            <li><a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_AbstractMapEntry.html">Peach_Util_AbstractMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMapEntry.html">Peach_Util_ArrayMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></li>
+            <li><a href="../Util/Peach_Util_DefaultComparator.html">Peach_Util_DefaultComparator</a></li>
+            <li><a href="../Util/Peach_Util_DefaultEquator.html">Peach_Util_DefaultEquator</a></li>
+            <li><a href="../Util/Peach_Util_HashMap.html">Peach_Util_HashMap</a></li>
+            <li><a href="../Util/Peach_Util_HashMapEntry.html">Peach_Util_HashMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Strings.html">Peach_Util_Strings</a></li>
+            <li><a href="../Util/Peach_Util_Values.html">Peach_Util_Values</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Util/_src---Peach---Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Values.php.html">Values.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+</body>
+</html>

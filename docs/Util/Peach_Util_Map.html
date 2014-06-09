@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_Util_Map</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Util</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Util.html">class tree: Util</a></li>
+            <li><a href="../elementindex_Util.html">index: Util</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>インタフェース: Peach_Util_Map</h1>
+        <p id="src_location">定義: <code>/src/Peach/Util/Map.php</code></p>
+        <div id="description">
+            <p>キーと値のマッピングを管理するインタフェースです. API は  <a href="http://docs.oracle.com/javase/jp/7/api/java/util/Map.html">java.util.Map</a>  を参考にして作られています.</p>
+            <p>このインタフェースを使うと, 今まで配列を使って</p><ol class="src"><li><div class="src-line"><span class="src-var">$value&nbsp;</span>=&nbsp;isset<span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;</span>?&nbsp;<span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-var">$name</span><span class="src-sym">]&nbsp;</span>:&nbsp;<span class="src-id">NULL</span><span class="src-sym">;</span></div></li>
+            </ol><p>と書かなければならなかったコードが</p><ol class="src"><li><div class="src-line"><span class="src-var">$value&nbsp;</span>=&nbsp;<span class="src-var">$map</span><span class="src-sym">-&gt;</span><a href="../Util/Peach_Util_Map.html#methodget">get</a><span class="src-sym">(</span><span class="src-var">$name</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+            </ol><p>に簡略化できます. (※ E_NOTICE を無視する場合はこの限りではありません)</p><p>PHP の配列機能との違いはその他に以下のものがあります.</p><ul><li>実装クラスによっては Java の Map のように任意のオブジェクトをキーとして利用できる. (<a href="../Util/Peach_Util_HashMap.html">Peach_Util_HashMap</a> など)</li><li>値を取得する際, マッピングが存在しない場合にデフォルト値を適用できる.</li><li>配列の操作に多態性 (ポリモーフィズム) を持たせることが出来る.</li></ul><p>原則として, キーに可変オブジェクトを使わないでください.  キーに設定した可変オブジェクトが外部から変更された場合の動作は保証されません.</p>
+        </div>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../Util/Peach_Util_Map.html#methodclear">clear</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodcontainsKey">containsKey</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodentryList">entryList</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodget">get</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodkeys">keys</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodput">put</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodputAll">putAll</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodremove">remove</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodsize">size</a></li>
+                <li><a href="../Util/Peach_Util_Map.html#methodvalues">values</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="methodclear">
+                <h1><b>clear</b></h1>
+                <p class="linenumber">line 96</p>
+                <div class="signature">
+                    <code>void clear()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップを空にします.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodcontainsKey">
+                <h1><b>containsKey</b></h1>
+                <p class="linenumber">line 85</p>
+                <div class="signature">
+                    <code>boolean containsKey(mixed $key)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキーによるマッピングが存在するかどうかを調べます.</p>
+                    <p>マッピングが存在する場合に TRUE を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : マッピングが存在する場合に TRUE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td>キー</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodentryList">
+                <h1><b>entryList</b></h1>
+                <p class="linenumber">line 124</p>
+                <div class="signature">
+                    <code>array entryList()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップのすべてのエントリーを <a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a> オブジェクトの配列で返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>see : <a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a></li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodget">
+                <h1><b>get</b></h1>
+                <p class="linenumber">line 62</p>
+                <div class="signature">
+                    <code>mixed get(mixed $key, [mixed $defaultValue = null])</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキーにマッピングされている値を返します.</p>
+                    <p>マッピングが存在しない場合は $defaultValue を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 指定したキーに関連づけられた値.                              存在しない場合は引数のデフォルト値.</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td>キー</td>
+                        </tr>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$defaultValue</b>&nbsp;&nbsp;</td>
+                            <td>マッピングが存在しない場合の代替値                              (デフォルトは NULL)</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodkeys">
+                <h1><b>keys</b></h1>
+                <p class="linenumber">line 116</p>
+                <div class="signature">
+                    <code>array keys()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップに登録されているすべてのキーを配列で返します.</p>
+                    <p>返される配列に対する操作はこのオブジェクトに反映されません.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodput">
+                <h1><b>put</b></h1>
+                <p class="linenumber">line 69</p>
+                <div class="signature">
+                    <code>void put(mixed $key, mixed $value)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキーと値を関連づけます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td>キー</td>
+                        </tr>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$value</b>&nbsp;&nbsp;</td>
+                            <td>指定されたキーに関連づける値</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodputAll">
+                <h1><b>putAll</b></h1>
+                <p class="linenumber">line 76</p>
+                <div class="signature">
+                    <code>void putAll(<a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a> $map)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたマップのマッピングすべてを登録します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>&nbsp;&nbsp;</td>
+                            <td><b>$map</b>&nbsp;&nbsp;</td>
+                            <td>登録対象のマップ</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodremove">
+                <h1><b>remove</b></h1>
+                <p class="linenumber">line 91</p>
+                <div class="signature">
+                    <code>void remove(mixed $key)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキー名によるマッピングが存在する場合に, そのマッピングを削除します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td>キー</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodsize">
+                <h1><b>size</b></h1>
+                <p class="linenumber">line 102</p>
+                <div class="signature">
+                    <code>int size()</code>
+                </div>
+                <div class="docblock">
+                    <p>登録されているマッピングの個数を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodvalues">
+                <h1><b>values</b></h1>
+                <p class="linenumber">line 109</p>
+                <div class="signature">
+                    <code>array values()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップに登録されているすべての値を配列で返します.</p>
+                    <p>返される配列に対する操作はこのオブジェクトに反映されません.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:58 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Util/tutorial_Util.pkg.html">汎用モジュール群 Util</a>
+                <ul>
+                    <li><a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+                    <li><a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_Comparable.html">Peach_Util_Comparable</a></li>
+            <li><a href="../Util/Peach_Util_Comparator.html">Peach_Util_Comparator</a></li>
+            <li><a href="../Util/Peach_Util_Equator.html">Peach_Util_Equator</a></li>
+            <li><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a></li>
+            <li><a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_AbstractMapEntry.html">Peach_Util_AbstractMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMapEntry.html">Peach_Util_ArrayMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></li>
+            <li><a href="../Util/Peach_Util_DefaultComparator.html">Peach_Util_DefaultComparator</a></li>
+            <li><a href="../Util/Peach_Util_DefaultEquator.html">Peach_Util_DefaultEquator</a></li>
+            <li><a href="../Util/Peach_Util_HashMap.html">Peach_Util_HashMap</a></li>
+            <li><a href="../Util/Peach_Util_HashMapEntry.html">Peach_Util_HashMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Strings.html">Peach_Util_Strings</a></li>
+            <li><a href="../Util/Peach_Util_Values.html">Peach_Util_Values</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Util/_src---Peach---Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Values.php.html">Values.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_Util_ArrayMap</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Util</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Util.html">class tree: Util</a></li>
+            <li><a href="../elementindex_Util.html">index: Util</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_Util_ArrayMap</h1>
+        <p id="src_location">定義: <code>/src/Peach/Util/ArrayMap.php</code></p>
+        <div id="description">
+            <p>PHP の配列機能を使った Map の実装です.</p>
+            <p>このマップはキーに整数または文字列しか使えないという制限があります.</p>
+        </div>
+        <section class="meta tags">
+            <h1>すべての実装されたインタフェース</h1>
+            <ul>
+                <li><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a></li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#method__construct">__construct</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodasArray">asArray</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodclear">clear</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodcontainsKey">containsKey</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodentryList">entryList</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodget">get</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodkeys">keys</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodput">put</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodputAll">putAll</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodremove">remove</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodsize">size</a></li>
+                <li><a href="../Util/Peach_Util_ArrayMap.html#methodvalues">values</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="method__construct">
+                <h1>constructor <b>__construct</b></h1>
+                <p class="linenumber">line 42</p>
+                <div class="signature">
+                    <code>Peach_Util_ArrayMap __construct([<a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>|array $var = null])</code>
+                </div>
+                <div class="docblock">
+                    <p>新しいインスタンスを構築します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>|array&nbsp;&nbsp;</td>
+                            <td><b>$var</b>&nbsp;&nbsp;</td>
+                            <td>指定された配列またはマッピングでこのマップを初期化します.</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodasArray">
+                <h1><b>asArray</b></h1>
+                <p class="linenumber">line 196</p>
+                <div class="signature">
+                    <code>array asArray()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップに登録されているエントリーを配列として返します.</p>
+                    <p>返される配列に対する操作はこのマップには反映されません.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : このマップの配列表現</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodclear">
+                <h1><b>clear</b></h1>
+                <p class="linenumber">line 141</p>
+                <div class="signature">
+                    <code>void clear()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップを空にします.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodclear">Peach_Util_Map::clear()</a></dt>
+                            <dd>このマップを空にします.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodcontainsKey">
+                <h1><b>containsKey</b></h1>
+                <p class="linenumber">line 122</p>
+                <div class="signature">
+                    <code>boolean containsKey(string $name)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキー名によるマッピングが存在するかどうかを調べます.</p>
+                    <p>マッピングが存在する場合に TRUE を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : マッピングが存在する場合に TRUE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$name</b>&nbsp;&nbsp;</td>
+                            <td>キー名</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodcontainsKey">Peach_Util_Map::containsKey()</a></dt>
+                            <dd>指定されたキーによるマッピングが存在するかどうかを調べます.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodentryList">
+                <h1><b>entryList</b></h1>
+                <p class="linenumber">line 181</p>
+                <div class="signature">
+                    <code>array entryList()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップに含まれるすべてのエントリーを返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : <a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a> の配列</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodentryList">Peach_Util_Map::entryList()</a></dt>
+                            <dd>このマップのすべてのエントリーを <a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a> オブジェクトの配列で返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodget">
+                <h1><b>get</b></h1>
+                <p class="linenumber">line 77</p>
+                <div class="signature">
+                    <code>mixed get(string $name, [mixed $defaultValue = null])</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキー名にマッピングされている値を返します.</p>
+                    <p>マッピングが存在しない場合は代替値 (デフォルトは NULL) を返します.  このメソッドの返り値が NULL (または指定した代替値) の場合, 必ずしもマッピングが存在しないとは限りません.  マッピングが存在するかどうかを調べる場合は <a href="../Util/Peach_Util_ArrayMap.html#methodcontainsKey">Peach_Util_ArrayMap::containsKey()</a> を使用してください.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 指定したキーに関連づけられた値. 存在しない場合は $defaultValue を返す</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$name</b>&nbsp;&nbsp;</td>
+                            <td>キー名</td>
+                        </tr>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$defaultValue</b>&nbsp;&nbsp;</td>
+                            <td>デフォルト値</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodget">Peach_Util_Map::get()</a></dt>
+                            <dd>指定されたキーにマッピングされている値を返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodkeys">
+                <h1><b>keys</b></h1>
+                <p class="linenumber">line 161</p>
+                <div class="signature">
+                    <code>array keys()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップに登録されているすべてのキーを配列で返します.</p>
+                    <p>返される配列に対する操作はこのマップには反映されません.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodkeys">Peach_Util_Map::keys()</a></dt>
+                            <dd>このマップに登録されているすべてのキーを配列で返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodput">
+                <h1><b>put</b></h1>
+                <p class="linenumber">line 92</p>
+                <div class="signature">
+                    <code>void put(string $key, mixed $value)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキー名と値を関連づけます.</p>
+                    <p>この実装では, 内部に保存されている配列に対して</p><ol class="src"><li><div class="src-line"><span class="src-var">$arr</span><span class="src-sym">[</span><span class="src-var">$key</span><span class="src-sym">]&nbsp;</span>=&nbsp;<span class="src-var">$value</span><span class="src-sym">;</span></div></li>
+                    </ol><p>を実行するのと同等の操作を行います.  もしも $key に非スカラー値 (オブジェクトや配列など) が指定された場合は,  <a href="../Util/Peach_Util_Values.html#methodstringValue">Peach_Util_Values::stringValue()</a> で string 型に変換した結果をキーとします.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td>キー名</td>
+                        </tr>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$value</b>&nbsp;&nbsp;</td>
+                            <td>指定されたキーに関連づける値</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodput">Peach_Util_Map::put()</a></dt>
+                            <dd>指定されたキーと値を関連づけます.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodputAll">
+                <h1><b>putAll</b></h1>
+                <p class="linenumber">line 107</p>
+                <div class="signature">
+                    <code>void putAll(<a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a> $map)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された Map のマッピングをすべて登録します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>see : Peach_Util_Map::putAll($map)</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>&nbsp;&nbsp;</td>
+                            <td><b>$map</b>&nbsp;&nbsp;</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodputAll">Peach_Util_Map::putAll()</a></dt>
+                            <dd>指定されたマップのマッピングすべてを登録します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodremove">
+                <h1><b>remove</b></h1>
+                <p class="linenumber">line 131</p>
+                <div class="signature">
+                    <code>void remove(string $key)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたキー名によるマッピングが存在する場合に, そのマッピングを削除します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td>キー名</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodremove">Peach_Util_Map::remove()</a></dt>
+                            <dd>指定されたキー名によるマッピングが存在する場合に, そのマッピングを削除します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodsize">
+                <h1><b>size</b></h1>
+                <p class="linenumber">line 150</p>
+                <div class="signature">
+                    <code>int size()</code>
+                </div>
+                <div class="docblock">
+                    <p>登録されているマッピングの個数を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodsize">Peach_Util_Map::size()</a></dt>
+                            <dd>登録されているマッピングの個数を返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodvalues">
+                <h1><b>values</b></h1>
+                <p class="linenumber">line 171</p>
+                <div class="signature">
+                    <code>array values()</code>
+                </div>
+                <div class="docblock">
+                    <p>このマップに登録されているすべての値を配列で返します.</p>
+                    <p>返される配列に対する操作はこのマップには反映されません.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Map.html#methodvalues">Peach_Util_Map::values()</a></dt>
+                            <dd>このマップに登録されているすべての値を配列で返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:52 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Util/tutorial_Util.pkg.html">汎用モジュール群 Util</a>
+                <ul>
+                    <li><a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+                    <li><a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_Comparable.html">Peach_Util_Comparable</a></li>
+            <li><a href="../Util/Peach_Util_Comparator.html">Peach_Util_Comparator</a></li>
+            <li><a href="../Util/Peach_Util_Equator.html">Peach_Util_Equator</a></li>
+            <li><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a></li>
+            <li><a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_AbstractMapEntry.html">Peach_Util_AbstractMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMapEntry.html">Peach_Util_ArrayMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></li>
+            <li><a href="../Util/Peach_Util_DefaultComparator.html">Peach_Util_DefaultComparator</a></li>
+            <li><a href="../Util/Peach_Util_DefaultEquator.html">Peach_Util_DefaultEquator</a></li>
+            <li><a href="../Util/Peach_Util_HashMap.html">Peach_Util_HashMap</a></li>
+            <li><a href="../Util/Peach_Util_HashMapEntry.html">Peach_Util_HashMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Strings.html">Peach_Util_Strings</a></li>
+            <li><a href="../Util/Peach_Util_Values.html">Peach_Util_Values</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Util/_src---Peach---Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Values.php.html">Values.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+</body>
+</html>

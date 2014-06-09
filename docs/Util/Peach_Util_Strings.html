@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_Util_Strings</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Util</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Util.html">class tree: Util</a></li>
+            <li><a href="../elementindex_Util.html">index: Util</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_Util_Strings</h1>
+        <p id="src_location">定義: <code>/src/Peach/Util/Strings.php</code></p>
+        <div id="description">
+            <p>文字列処理に関するユーティリティクラスです</p>
+        </div>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../Util/Peach_Util_Strings.html#methodbasedir">basedir</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodendsWith">endsWith</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodendsWithRawChar">endsWithRawChar</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodexplode">explode</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodgetLines">getLines</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodgetRawIndex">getRawIndex</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodisWhitespace">isWhitespace</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodstartsWith">startsWith</a></li>
+                <li><a href="../Util/Peach_Util_Strings.html#methodtemplate">template</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="methodbasedir">
+                <h1>static <b>basedir</b></h1>
+                <p class="linenumber">line 96</span></p>
+                <div class="signature">
+                    <code>static string basedir(string $basedir)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列を基底ディレクトリに変換します.</p>
+                    <p>引数が空文字列か, '/' で終わる文字列の場合は引数をそのまま返します.  それ以外の場合は, 引数の末尾に '/' を連結した文字列を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 基底ディレクトリ名</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$basedir</td>
+                            <td>変換対象の文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodendsWith">
+                <h1>static <b>endsWith</b></h1>
+                <p class="linenumber">line 176</span></p>
+                <div class="signature">
+                    <code>static bool endsWith(string $text, string $suffix)</code>
+                </div>
+                <div class="docblock">
+                    <p>ある文字列が指定された文字列で終了しているかどうかを判別します.</p>
+                    <p>$suffix が空文字列の場合は TRUE を返します.  引数が文字列以外の場合は <a href="../Util/Peach_Util_Values.html#methodstringValue">Peach_Util_Values::stringValue()</a> が適用されます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数 $text の末尾が $suffix に等しい場合に TRUE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$text</td>
+                            <td>検査対象の文字列</td>
+                        </tr>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$suffix</td>
+                            <td>終了する文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodendsWithRawChar">
+                <h1>static <b>endsWithRawChar</b></h1>
+                <p class="linenumber">line 204</span></p>
+                <div class="signature">
+                    <code>static bool endsWithRawChar(string $text, string $chr)</code>
+                </div>
+                <div class="docblock">
+                    <p>ある文字列が指定された文字で終了して, かつエスケープ処理されていないかを判別します.</p>
+                    <p>以下に例を示します.</p><ul><li>(&quot;[ABC]&quot;, &quot;]&quot;) =&gt; TRUE</li><li>(&quot;[ABC\\]&quot;, &quot;]&quot;) =&gt; FALSE (&quot;\\&quot; がその後ろの &quot;]&quot; をエスケープしているとみなされる)</li><li>(&quot;[ABC\\\\]&quot;, &quot;]&quot;) =&gt; TRUE (&quot;\\\\&quot; が一つの文字として扱われるため, 直後の &quot;]&quot; に影響しない)</li></ul>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数 $text の末尾が, '\' でエスケープされていない $chr で終了している場合のみ TRUE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$text</td>
+                            <td>検査対象の文字列</td>
+                        </tr>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$chr</td>
+                            <td>検査対象の文字</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodexplode">
+                <h1>static <b>explode</b></h1>
+                <p class="linenumber">line 52</span></p>
+                <div class="signature">
+                    <code>static array explode(string $separator, string $value)</code>
+                </div>
+                <div class="docblock">
+                    <p>内部関数の <a href="http://www.php.net/explode">explode()</a> のカスタム版です.</p>
+                    <p>基本的にはオリジナルの explode() と同じですが, 以下の点が異なります.</p><ul><li>$separator が空文字列の場合に空の配列を返す (オリジナルは FALSE を返す)</li><li>$value が文字列以外の場合, <a href="../Util/Peach_Util_Values.html#methodstringValue">Peach_Util_Values::stringValue()</a> の結果を使用する
+                       (オリジナルは単純に string にキャストした結果を使うため,
+                        オブジェクトを引数に指定した時の挙動が PHP 5.1 と 5.2 以降で異なる)</li></ul><p>引数をどのように指定しても, 返り値が必ず配列型になることが特徴です.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : セパレータが見つからないときは長さ 1 の配列,                 対象が空文字列の場合は空の配列, それ以外は explode() と同じ.</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$separator</td>
+                            <td>セパレータ</td>
+                        </tr>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$value</td>
+                            <td>対象文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodgetLines">
+                <h1>static <b>getLines</b></h1>
+                <p class="linenumber">line 72</span></p>
+                <div class="signature">
+                    <code>static array getLines(string $str)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列を行単位で分割します.</p>
+                    <p>引数の文字列を CR, LF, CRLF で分割し, 結果の配列を返します.  結果の配列の各要素に改行コードは含まれません.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 行単位で分割された文字列の配列</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$str</td>
+                            <td>分割対象の文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodgetRawIndex">
+                <h1>static <b>getRawIndex</b></h1>
+                <p class="linenumber">line 130</span></p>
+                <div class="signature">
+                    <code>static int getRawIndex(string $text, string $chr)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列の中で、&quot;\&quot; によるエスケープ処理のされていない文字列があらわれる  最初のインデックスを返します.</p>
+                    <p>偶数個の &quot;\&quot; が続いた後に対象の文字列が出現した場合に、そのインデックスを返り値とします.  奇数個の &quot;\&quot; の後の文字については, その直前の &quot;\&quot; によってエスケープされているとみなして  スルーします. 以下に例を示します.</p><pre> getRawIndex("AB=CD=EF", "=")     => 2
+                     getRawIndex("AB\\=CD=EF", "=")   => 6
+                     getRawIndex("AB\\\\=CD=EF", "=") => 4</pre><p>インデックスが存在しない場合は FALSE を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : インデックス. ただし存在しない場合は FALSE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$text</td>
+                            <td>検索文字列</td>
+                        </tr>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$chr</td>
+                            <td>検索対象の文字</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodisWhitespace">
+                <h1>static <b>isWhitespace</b></h1>
+                <p class="linenumber">line 83</span></p>
+                <div class="signature">
+                    <code>static boolean isWhitespace(string $str)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列が空白文字の集合からなる文字列かどうかを返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数が NULL, 空文字列, &quot;\r&quot;, &quot;\n&quot;, &quot;\t&quot;,                  半角スペースから成る文字列の場合に TRUE, それ以外は FALSE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$str</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodstartsWith">
+                <h1>static <b>startsWith</b></h1>
+                <p class="linenumber">line 152</span></p>
+                <div class="signature">
+                    <code>static bool startsWith(string $text, string $prefix)</code>
+                </div>
+                <div class="docblock">
+                    <p>ある文字列が指定された文字列で始まっているかどうかを判別します.</p>
+                    <p>$prefix が空文字列の場合は TRUE を返します.  引数が文字列以外の場合は Util_Strings::stringValue() が適用されます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数 $text の先頭が $prefix である場合に TRUE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$text</td>
+                            <td>検査対象の文字列</td>
+                        </tr>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$prefix</td>
+                            <td>開始する文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodtemplate">
+                <h1>static <b>template</b></h1>
+                <p class="linenumber">line 224</span></p>
+                <div class="signature">
+                    <code>static string template(string $template, [array $args = array()])</code>
+                </div>
+                <div class="docblock">
+                    <p>文字列内に含まれる {0}, {1}, {2} などのテンプレート変数を, $args 内の各要素で置き換えます. 例えば  <ol class="src"><li><div class="src-line"><span class="src-id">template</span><span class="src-sym">(</span><span class="src-str">'My&nbsp;name&nbsp;is&nbsp;{0}.&nbsp;I&nbsp;am&nbsp;{1}&nbsp;years&nbsp;old'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'Taro'</span><span class="src-sym">,&nbsp;</span><span class="src-num">18</span><span class="src-sym">))</span></div></li>
+                </ol>  の結果は次のようになります.</p>
+                    <ol class="src"><li><div class="src-line"><span class="src-str">&quot;My&nbsp;name&nbsp;is&nbsp;Taro.&nbsp;I&nbsp;am&nbsp;18&nbsp;years&nbsp;old&quot;</span></div></li>
+                    </ol><p>$template が NULL の場合は NULL を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : テンプレートの適用結果</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string</td>
+                            <td class="varname">$template</td>
+                            <td>テンプレート</td>
+                        </tr>
+                        <tr>
+                            <td class="type">array</td>
+                            <td class="varname">$args</td>
+                            <td>置き換える内容の配列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:29:04 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Util/tutorial_Util.pkg.html">汎用モジュール群 Util</a>
+                <ul>
+                    <li><a href="../Util/tutorial_Util.Map.pkg.html">Map (連想配列)</a></li>
+                    <li><a href="../Util/tutorial_Util.Arrays.pkg.html">Arrays (配列操作)</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_Comparable.html">Peach_Util_Comparable</a></li>
+            <li><a href="../Util/Peach_Util_Comparator.html">Peach_Util_Comparator</a></li>
+            <li><a href="../Util/Peach_Util_Equator.html">Peach_Util_Equator</a></li>
+            <li><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a></li>
+            <li><a href="../Util/Peach_Util_MapEntry.html">Peach_Util_MapEntry</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Util/Peach_Util_AbstractMapEntry.html">Peach_Util_AbstractMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMap.html">Peach_Util_ArrayMap</a></li>
+            <li><a href="../Util/Peach_Util_ArrayMapEntry.html">Peach_Util_ArrayMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></li>
+            <li><a href="../Util/Peach_Util_DefaultComparator.html">Peach_Util_DefaultComparator</a></li>
+            <li><a href="../Util/Peach_Util_DefaultEquator.html">Peach_Util_DefaultEquator</a></li>
+            <li><a href="../Util/Peach_Util_HashMap.html">Peach_Util_HashMap</a></li>
+            <li><a href="../Util/Peach_Util_HashMapEntry.html">Peach_Util_HashMapEntry</a></li>
+            <li><a href="../Util/Peach_Util_Strings.html">Peach_Util_Strings</a></li>
+            <li><a href="../Util/Peach_Util_Values.html">Peach_Util_Values</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Util/_src---Peach---Util---AbstractMapEntry.php.html">AbstractMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMap.php.html">ArrayMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---ArrayMapEntry.php.html">ArrayMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Arrays.php.html">Arrays.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparable.php.html">Comparable.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Comparator.php.html">Comparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultComparator.php.html">DefaultComparator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---DefaultEquator.php.html">DefaultEquator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Equator.php.html">Equator.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMap.php.html">HashMap.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---HashMapEntry.php.html">HashMapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Map.php.html">Map.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---MapEntry.php.html">MapEntry.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Strings.php.html">Strings.php</a></li>
+            <li><a href="../Util/_src---Peach---Util---Values.php.html">Values.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+</body>
+</html>

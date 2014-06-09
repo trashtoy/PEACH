@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>オブジェクトの生成方法</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DT</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DT.html">class tree: DT</a></li>
+            <li><a href="../elementindex_DT.html">index: DT</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>オブジェクトの生成方法</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../DT/tutorial_DT.init.pkg.html#DT.init.constructor">コンストラクタから</a></li>
+                <li><a href="../DT/tutorial_DT.init.pkg.html#DT.init.now">クラスメソッド now</a></li>
+                <li><a href="../DT/tutorial_DT.init.pkg.html#DT.init.parse">クラスメソッド parse</a></li>
+                <li><a href="../DT/tutorial_DT.init.pkg.html#DT.init.cast">キャスト用メソッド</a></li>
+            </ul>
+        </section>
+        
+            <p>時間オブジェクトの生成方法には, 主に以下の種類があります.
+                それぞれについて簡単に説明します.</p>
+            <!-- refsect1 --><section class="tutorial" id="DT.init.constructor"><h1>コンストラクタから</h1><p>時間オブジェクトの最も基本的な生成方法は, コンストラクタを使用したものです.
+                    以下に例を示します.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">7</span><span class="src-sym">,&nbsp;</span><span class="src-num">30</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">7</span><span class="src-sym">,&nbsp;</span><span class="src-num">30</span><span class="src-sym">,&nbsp;</span><span class="src-num">45</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d1</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d2</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21&nbsp;07:30</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d3</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21&nbsp;07:30:45</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DT.init.now"><h1>クラスメソッド now</h1><p><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a>, <a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a>, <a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a>
+                    はそれぞれ now() というクラスメソッドを持っています.
+                    現在時刻を取得するには now() メソッドを使ってください.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Date.html#methodnow">now</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Datetime.html#methodnow">now</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Timestamp.html#methodnow">now</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DT.init.parse"><h1>クラスメソッド parse</h1><p><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a>, <a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a>, <a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a>
+                    それぞれに定義されている parse() というクラスメソッドを使うことで,
+                    文字列を時間オブジェクトに変換することができます.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Date.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;2012-05-21&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Datetime.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;2012-05-21&nbsp;07:30&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Timestamp.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;2012-05-21&nbsp;07:30:45&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;フォーマットを指定する場合</span></div></li>
+        <li><div class="src-line"><span class="src-var">$f&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_SimpleFormat.html">Peach_DT_SimpleFormat</a></span><span class="src-sym">(</span><span class="src-str">&quot;Ymd_His&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Date.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;20120521_073045&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$f</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Datetime.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;20120521_073045&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$f</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">::</span><a href="../DT/Peach_DT_Timestamp.html#methodparse">parse</a><span class="src-sym">(</span><span class="src-str">&quot;20120521_073045&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$f</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d1</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-21&quot;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d2</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-21&nbsp;07:30&quot;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d3</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-21&nbsp;07:30:45&quot;</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DT.init.cast"><h1>キャスト用メソッド</h1><p>各種キャスト用メソッド (toDate, toDatetime, toTimestamp)
+                    を使い, とある時間オブジェクトを別の型に変換することができます.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">toDatetime</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">toTimestamp</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d1</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-21&quot;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d2</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-21&nbsp;00:00&quot;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d3</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;2012-05-21&nbsp;00:00:00&quot;</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+            <li>Next: <a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:43 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
+                    <li><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                    <li><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                    <li><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></li>
+            <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DT/Peach_DT_AbstractTime.html">Peach_DT_AbstractTime</a></li>
+            <li><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></li>
+            <li><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></li>
+            <li><a href="../DT/Peach_DT_FormatWrapper.html">Peach_DT_FormatWrapper</a></li>
+            <li><a href="../DT/Peach_DT_HttpDateFormat.html">Peach_DT_HttpDateFormat</a></li>
+            <li><a href="../DT/Peach_DT_ShiftFormat.html">Peach_DT_ShiftFormat</a></li>
+            <li><a href="../DT/Peach_DT_SimpleFormat.html">Peach_DT_SimpleFormat</a></li>
+            <li><a href="../DT/Peach_DT_TimeEquator.html">Peach_DT_TimeEquator</a></li>
+            <li><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></li>
+            <li><a href="../DT/Peach_DT_TimeWrapper.html">Peach_DT_TimeWrapper</a></li>
+            <li><a href="../DT/Peach_DT_UnixTimeFormat.html">Peach_DT_UnixTimeFormat</a></li>
+            <li><a href="../DT/Peach_DT_Util.html">Peach_DT_Util</a></li>
+            <li><a href="../DT/Peach_DT_W3cDatetimeFormat.html">Peach_DT_W3cDatetimeFormat</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DT/_src---Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+</body>
+</html>
