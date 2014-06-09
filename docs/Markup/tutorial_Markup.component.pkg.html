@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Component (その他のパーツ)</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Markup</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Markup.html">class tree: Markup</a></li>
+            <li><a href="../elementindex_Markup.html">index: Markup</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>Component (その他のパーツ)</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../Markup/tutorial_Markup.component.pkg.html#component">Component の概要</a></li>
+                <li><a href="../Markup/tutorial_Markup.component.pkg.html#container">Container</a></li>
+                <li><a href="../Markup/tutorial_Markup.component.pkg.html#nodelist">NodeList</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Markup/tutorial_Markup.component.pkg.html#nodelist.nodelist_build">build した場合</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Markup/tutorial_Markup.component.pkg.html#nodelist.nodelist_append">append した場合</a></li>
+                <li><a href="../Markup/tutorial_Markup.component.pkg.html#none">None</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Markup/tutorial_Markup.component.pkg.html#none.none_build">build した場合</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../Markup/tutorial_Markup.component.pkg.html#none.none_append">append した場合</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="component"><h1>Component の概要</h1><p><a href="../Markup/Peach_Markup_Element.html">Element</a>, <a href="../Markup/Peach_Markup_Text.html">Text</a>,
+                    <a href="../Markup/Peach_Markup_Comment.html">Comment</a> などのクラスは
+                    <a href="../Markup/Peach_Markup_Node.html">Node</a> インタフェースを実装していますが, Node にはさらに
+                    <a href="../Markup/Peach_Markup_Component.html">Component</a> という親のインタフェースが存在します.</p>
+                <p>Component とは Builder で
+                    <a href="../Markup/Peach_Markup_Builder.html#methodbuild">build</a> したり, 要素の中に
+                    <a href="../Markup/Peach_Markup_ContainerElement.html#methodappend">append</a>
+                    したりすることが可能なインタフェースです. Node とは Component
+                    の中でも特にマークアップ言語のパーツとしてツリー構造を構成することが出来る型を指します.</p>
+                <p>このページでは Component を実装しているその他のクラスについて紹介します.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="container"><h1>Container</h1><p><a href="../Markup/Peach_Markup_Container.html">Container</a> は Component を継承したサブインタフェースで,
+                    内部に子ノードを持つことが出来る Component をあらわします.
+                    <a href="../Markup/Peach_Markup_Container.html#methodappend">append()</a> や
+                    <a href="../Markup/Peach_Markup_Container.html#methodgetChildNodes">getChildNodes()</a>
+                    などのメソッドを持ちます.</p>
+                <p>このインタフェースを実装したクラスとして
+                    <a href="../Markup/Peach_Markup_ContainerElement.html">ContainerElement</a>,
+                    <a href="../Markup/Peach_Markup_Comment.html">Comment</a>, 後述の
+                    <a href="../Markup/Peach_Markup_NodeList.html">NodeList</a> などがあります.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="nodelist"><h1>NodeList</h1><p><a href="../Markup/Peach_Markup_NodeList.html">NodeList</a> はノードの順序付き集合をあらわすクラスです.
+                    DOM における NodeList と NodeFragment を兼任するような役割を持ちます.</p>
+                <h2>build した場合</h2><p>DefaultBuilder の <a href="../Markup/Peach_Markup_Builder.html#methodbuild">build()</a>
+                        メソッドの引数に指定した場合, NodeList に含まれるノード一覧を改行文字区切りで出力します.
+                        以下にサンプルコードを掲載します.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$p&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></span><span class="src-sym">(</span><span class="src-str">&quot;p&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$p</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Sample&nbsp;paragraph&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$text&nbsp;&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a></span><span class="src-sym">(</span><span class="src-str">&quot;Sample&nbsp;text&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$comment&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$comment</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Sample&nbsp;comment&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$text</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$comment</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$builder&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$builder</span><span class="src-sym">-&gt;</span><span class="src-id">build</span><span class="src-sym">(</span><span class="src-var">$nodeList</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">Output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&lt;p&gt;Sample&nbsp;paragraph&lt;/p&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">Sample&nbsp;text</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&lt;!--Sample&nbsp;comment--&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div>
+                <h2>append した場合</h2><p>Container の <a href="../Markup/Peach_Markup_Container.html#methodappend">append()</a>
+                        メソッドの引数に指定された場合, その NodeList
+                        に含まれる子ノードが追加されます. NodeList 自身は追加されません.
+                        以下にサンプルコードを掲載します.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$p&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></span><span class="src-sym">(</span><span class="src-str">&quot;p&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$p</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Sample&nbsp;paragraph&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$text&nbsp;&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a></span><span class="src-sym">(</span><span class="src-str">&quot;Sample&nbsp;text&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$comment&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$comment</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Sample&nbsp;comment&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$text</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$nodeList</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$comment</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$div&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></span><span class="src-sym">(</span><span class="src-str">&quot;div&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$div</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$nodeList</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;この行は以下の記述と全く結果になります</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$div&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></span><span class="src-sym">(</span><span class="src-str">&quot;div&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$div</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$div</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$text</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$div</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$comment</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="none"><h1>None</h1><p><a href="../Markup/Peach_Markup_None.html">None</a> は文字通り「何もない」ことをあらわす Component です.
+                    このクラスはいわゆる Null Object として機能します.
+                    例えば返り値に Component を返す関数を実装する際に, 適切な返り値がなかった場合の例外値として
+                    null や false などを返す代わりに None オブジェクトを返すようにすると良いでしょう.</p>
+                <h2>build した場合</h2><p>DefaultBuilder で build した場合は空文字列を返します.
+                        DebugBuilder で build した場合は文字列 &quot;None&quot; を生成します.</p>
+                <h2>append した場合</h2><p>Container に append した場合は何も処理が行われず, Container の状態は変化しません.</p></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../Markup/tutorial_Markup.builder.pkg.html">Builder (出力制御)</a></li>
+            <li>Next: <a href="../Markup/tutorial_Markup.helper.pkg.html">Helper / HelperObject</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:46 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Markup/tutorial_Markup.pkg.html">XML, HTML 出力支援モジュール Markup</a>
+                <ul>
+                    <li><a href="../Markup/tutorial_Markup.node.pkg.html">Node (各種パーツ)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.builder.pkg.html">Builder (出力制御)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.component.pkg.html">Component (その他のパーツ)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.helper.pkg.html">Helper / HelperObject</a></li>
+                    <li><a href="../Markup/tutorial_Markup.html.pkg.html">Html (HTML 出力専用クラス)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.newbuilder.pkg.html">Builder を自作する方法</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Markup/Peach_Markup_BreakControl.html">Peach_Markup_BreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_Component.html">Peach_Markup_Component</a></li>
+            <li><a href="../Markup/Peach_Markup_Container.html">Peach_Markup_Container</a></li>
+            <li><a href="../Markup/Peach_Markup_Node.html">Peach_Markup_Node</a></li>
+            <li><a href="../Markup/Peach_Markup_Renderer.html">Peach_Markup_Renderer</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Markup/Peach_Markup_AbstractRenderer.html">Peach_Markup_AbstractRenderer</a></li>
+            <li><a href="../Markup/Peach_Markup_BreakControlWrapper.html">Peach_Markup_BreakControlWrapper</a></li>
+            <li><a href="../Markup/Peach_Markup_Builder.html">Peach_Markup_Builder</a></li>
+            <li><a href="../Markup/Peach_Markup_Code.html">Peach_Markup_Code</a></li>
+            <li><a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a></li>
+            <li><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></li>
+            <li><a href="../Markup/Peach_Markup_Context.html">Peach_Markup_Context</a></li>
+            <li><a href="../Markup/Peach_Markup_DebugBuilder.html">Peach_Markup_DebugBuilder</a></li>
+            <li><a href="../Markup/Peach_Markup_DebugContext.html">Peach_Markup_DebugContext</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultBreakControl.html">Peach_Markup_DefaultBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultContext.html">Peach_Markup_DefaultContext</a></li>
+            <li><a href="../Markup/Peach_Markup_Element.html">Peach_Markup_Element</a></li>
+            <li><a href="../Markup/Peach_Markup_EmptyElement.html">Peach_Markup_EmptyElement</a></li>
+            <li><a href="../Markup/Peach_Markup_Helper.html">Peach_Markup_Helper</a></li>
+            <li><a href="../Markup/Peach_Markup_HelperObject.html">Peach_Markup_HelperObject</a></li>
+            <li><a href="../Markup/Peach_Markup_Html.html">Peach_Markup_Html</a></li>
+            <li><a href="../Markup/Peach_Markup_Indent.html">Peach_Markup_Indent</a></li>
+            <li><a href="../Markup/Peach_Markup_MinimalBreakControl.html">Peach_Markup_MinimalBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_NameBreakControl.html">Peach_Markup_NameBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a></li>
+            <li><a href="../Markup/Peach_Markup_None.html">Peach_Markup_None</a></li>
+            <li><a href="../Markup/Peach_Markup_SgmlRenderer.html">Peach_Markup_SgmlRenderer</a></li>
+            <li><a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a></li>
+            <li><a href="../Markup/Peach_Markup_XmlRenderer.html">Peach_Markup_XmlRenderer</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Markup/_src---Peach---Markup---AbstractRenderer.php.html">AbstractRenderer.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---BreakControl.php.html">BreakControl.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---BreakControlWrapper.php.html">BreakControlWrapper.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Builder.php.html">Builder.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Code.php.html">Code.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Comment.php.html">Comment.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Component.php.html">Component.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Container.php.html">Container.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---ContainerElement.php.html">ContainerElement.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Context.php.html">Context.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---DebugBuilder.php.html">DebugBuilder.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---DebugContext.php.html">DebugContext.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---DefaultBreakControl.php.html">DefaultBreakControl.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---DefaultBuilder.php.html">DefaultBuilder.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---DefaultContext.php.html">DefaultContext.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Element.php.html">Element.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---EmptyElement.php.html">EmptyElement.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Helper.php.html">Helper.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---HelperObject.php.html">HelperObject.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Html.php.html">Html.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Indent.php.html">Indent.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---MinimalBreakControl.php.html">MinimalBreakControl.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---NameBreakControl.php.html">NameBreakControl.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Node.php.html">Node.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---NodeList.php.html">NodeList.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---None.php.html">None.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Renderer.php.html">Renderer.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---SgmlRenderer.php.html">SgmlRenderer.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---Text.php.html">Text.php</a></li>
+            <li><a href="../Markup/_src---Peach---Markup---XmlRenderer.php.html">XmlRenderer.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+</body>
+</html>

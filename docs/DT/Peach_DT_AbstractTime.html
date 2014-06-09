@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Docs For Class Peach_DT_AbstractTime</title>
-    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
     <!--[if lt IE 9]>
-    <script src="../media/html5.js"></script>  
+    <script type="text/javascript" src="../media/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
 </head>
 <body>
+<div id="wrapper">
 <header>
     <h1>DT</h1>
     <nav>
-        <h1>グローバルナビゲーション</h1>
+        <h1>Navigation</h1>
         <ul>
             <li><a href="../classtrees_DT.html">class tree: DT</a></li>
             <li><a href="../elementindex_DT.html">index: DT</a></li>
@@ -21,44 +27,499 @@
         </ul>
     </nav>
 </header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_DT_AbstractTime</h1>
+        <p id="src_location">定義: <code>/src/Peach/DT/AbstractTime.php</code></p>
+        <div id="description">
+            <p>時間を表す抽象基底クラスです.</p>
+            <p><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a>, <a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a>, <a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a>  の共通部分の実装です.</p>
+        </div>
+        <section class="meta tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>abstract</li>
+            </ul>
+        </section>
+        <section class="meta tags">
+            <h1>すべての実装されたインタフェース</h1>
+            <ul>
+                <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodadd">add</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodafter">after</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodbefore">before</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodcompareTo">compareTo</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodequals">equals</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodformat">format</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodformatTime">formatTime</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodget">get</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodset">set</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#methodsetAll">setAll</a></li>
+                <li><a href="../DT/Peach_DT_AbstractTime.html#method__toString">__toString</a></li>
+            </ul>
+        </section>
+        <section class="meta">
+            <h1>直系の既知のサブクラス</h1>
+            <dl>
+                <dt><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></dt>
+                <dd>DATE 型の時間オブジェクトです.</dd>
+            </dl>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="methodadd">
+                <h1><b>add</b></h1>
+                <p class="linenumber">line 141</p>
+                <div class="signature">
+                    <code><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> add(string $field, int $amount)</code>
+                </div>
+                <div class="docblock">
+                    <p>引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 設定後の時間オブジェクト</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$field</b>&nbsp;&nbsp;</td>
+                            <td>対象のフィールド</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int&nbsp;&nbsp;</td>
+                            <td><b>$amount</b>&nbsp;&nbsp;</td>
+                            <td>加算する量. マイナスの場合は過去方向に移動する.</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodadd">Peach_DT_Time::add()</a></dt>
+                            <dd>引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodafter">
+                <h1><b>after</b></h1>
+                <p class="linenumber">line 226</p>
+                <div class="signature">
+                    <code>bool after(<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された時間とこの時間を比較します.</p>
+                    <p>もしもこのオブジェクトが持つ時間フィールドすべてが  引数のオブジェクトの時間フィールドと一致した場合,  より多くの時間フィールドを持つほうが「後」となります.</p><p>例: 2012-05-21 (Peach_DT_Date) &lt; 2012-05-21T00:00 (Peach_DT_Datetime) &lt; 2012-05-21T00:00:00 (Peach_DT_Timestamp)</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : この時間のほうが未来である場合は TRUE, それ以外は FALSE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a>&nbsp;&nbsp;</td>
+                            <td><b>$time</b>&nbsp;&nbsp;</td>
+                            <td>比較対象の時間</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodafter">Peach_DT_Time::after()</a></dt>
+                            <dd>指定された時間とこの時間を比較します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodbefore">
+                <h1><b>before</b></h1>
+                <p class="linenumber">line 208</p>
+                <div class="signature">
+                    <code>bool before(<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された時間とこの時間を比較します.</p>
+                    <p>もしもこのオブジェクトが持つ時間フィールドすべてが  引数のオブジェクトの時間フィールドと一致した場合,  より多くの時間フィールドを持つほうが「後」となります.</p><p>例: 2012-05-21 (Peach_DT_Date) &lt; 2012-05-21T00:00 (Peach_DT_Datetime) &lt; 2012-05-21T00:00:00 (Peach_DT_Timestamp)</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : この時間のほうが過去である場合は TRUE, それ以外は FALSE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a>&nbsp;&nbsp;</td>
+                            <td><b>$time</b>&nbsp;&nbsp;</td>
+                            <td>比較対象の時間</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodbefore">Peach_DT_Time::before()</a></dt>
+                            <dd>指定された時間とこの時間を比較します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodcompareTo">
+                <h1><b>compareTo</b></h1>
+                <p class="linenumber">line 162</p>
+                <div class="signature">
+                    <code>int compareTo(mixed $obj)</code>
+                </div>
+                <div class="docblock">
+                    <p>この時間と指定された時間を比較します.</p>
+                    <p>このメソッドは, 自身と引数の時間オブジェクトが共通で持っているフィールドについて比較を行います.  比較の結果すべてのフィールドの値が等しかった場合,  より多くの時間フィールドを持つほうが「後」となります.</p><p>例: 2012-05-21 (Peach_DT_Date) &lt; 2012-05-21T00:00 (Peach_DT_Datetime) &lt; 2012-05-21T00:00:00 (Peach_DT_Timestamp)</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : この時間のほうが過去の場合は負の値, 未来の場合は正の値, 等しい場合は 0.                 ただし, 引数が時間オブジェクトでない場合は NULL</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$obj</b>&nbsp;&nbsp;</td>
+                            <td>比較対象のオブジェクト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../Util/Peach_Util_Comparable.html#methodcompareTo">Peach_Util_Comparable::compareTo()</a></dt>
+                            <dd>このオブジェクトと引数の値を比較します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodequals">
+                <h1><b>equals</b></h1>
+                <p class="linenumber">line 190</p>
+                <div class="signature">
+                    <code>bool equals(mixed $obj)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたオブジェクトとこのオブジェクトを比較します.</p>
+                    <p>compareTo による比較結果が 0 を返し, かつクラスが同じ場合に TRUE を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 二つのオブジェクトが等しい場合に TRUE, それ以外は FALSE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$obj</b>&nbsp;&nbsp;</td>
+                            <td>比較対象のオブジェクト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodequals">Peach_DT_Time::equals()</a></dt>
+                            <dd>指定されたオブジェクトとこのオブジェクトを比較します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformat">
+                <h1><b>format</b></h1>
+                <p class="linenumber">line 178</p>
+                <div class="signature">
+                    <code>string format([<a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a> $format = null])</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたフォーマットを使ってこの時間オブジェクトを書式化します.</p>
+                    <p>フォーマットを指定しない場合はデフォルトの方法 (SQL などで使われる慣用表現) で書式化を行ないます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a>&nbsp;&nbsp;</td>
+                            <td><b>$format</b>&nbsp;&nbsp;</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodformat">Peach_DT_Time::format()</a></dt>
+                            <dd>指定されたフォーマットを使ってこの時間オブジェクトを書式化します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformatTime">
+                <h1><b>formatTime</b></h1>
+                <p class="linenumber">line 238</p>
+                <div class="signature">
+                    <code>string formatTime()</code>
+                </div>
+                <div class="docblock">
+                    <p>この時間の時刻 (時・分・秒) 部分を書式化します.</p>
+                    <p>時・分・秒をサポートしていないオブジェクトの場合は空文字列を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : &quot;hh:mm:ss&quot; 形式の文字列. このオブジェクトが時刻をサポートしない場合は空文字列.</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodformatTime">Peach_DT_Time::formatTime()</a></dt>
+                            <dd>この時間の時刻 (時・分・秒) 部分を書式化します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodget">
+                <h1><b>get</b></h1>
+                <p class="linenumber">line 88</p>
+                <div class="signature">
+                    <code>int get(string $field)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたフィールドの値を取得します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 対象フィールドの値. ただしフィールド名が不正な場合は NULL</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$field</b>&nbsp;&nbsp;</td>
+                            <td>フィールド名</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodget">Peach_DT_Time::get()</a></dt>
+                            <dd>指定されたフィールドの値を取得します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodset">
+                <h1><b>set</b></h1>
+                <p class="linenumber">line 101</p>
+                <div class="signature">
+                    <code><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> set(string $field, int $value)</code>
+                </div>
+                <div class="docblock">
+                    <p>この時間オブジェクトの指定されたフィールドを上書きします.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 設定後の時間オブジェクト</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$field</b>&nbsp;&nbsp;</td>
+                            <td>フィールド名</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int&nbsp;&nbsp;</td>
+                            <td><b>$value</b>&nbsp;&nbsp;</td>
+                            <td>設定する値</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodset">Peach_DT_Time::set()</a></dt>
+                            <dd>この時間オブジェクトの指定されたフィールドを上書きします.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodsetAll">
+                <h1><b>setAll</b></h1>
+                <p class="linenumber">line 118</p>
+                <div class="signature">
+                    <code><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> setAll(<a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>|array $subject)</code>
+                </div>
+                <div class="docblock">
+                    <p>この時間オブジェクトの複数のフィールドを一度に上書きします.</p>
+                    <p>引数には,</p><ol class="src"><li><div class="src-line"><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;year&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">2010</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;month&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">8</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;date&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">31</span><span class="src-sym">)</span></div></li>
+                    </ol><p>などの配列か, または同様の Map オブジェクトを指定してください.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 設定後の時間オブジェクト</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>|array&nbsp;&nbsp;</td>
+                            <td><b>$subject</b>&nbsp;&nbsp;</td>
+                            <td>フィールドと値の一覧</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Time.html#methodsetAll">Peach_DT_Time::setAll()</a></dt>
+                            <dd>この時間オブジェクトの複数のフィールドを一度に上書きします.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="method__toString">
+                <h1><b>__toString</b></h1>
+                <p class="linenumber">line 248</p>
+                <div class="signature">
+                    <code>string __toString()</code>
+                </div>
+                <div class="docblock">
+                    <p>このオブジェクトが指す時刻を, SQL などで使われる慣用表現に変換して返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : このオブジェクトの文字列表現 (&quot;YYYY-MM-DD&quot;, &quot;YYYY-MM-DD hh:mm&quot; など)</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
 
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:52 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
 <nav id="menu">
-    <h1>メニュー</h1>
-    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <h1>Menu</h1>
     <section>
         <h1>パッケージ</h1>
         <ul>
             <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
             <li><a href="../li_Util.html">Util</a></li>
         </ul>
     </section>
     <section>
         <h1>チュートリアル/マニュアル</h1>
-        <h2 class="level">Package-level</h2>
+        <h2>Package-level</h2>
         <ul>
-            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+            <li>
+                <a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
                 <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                    <li><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
+                    <li><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                    <li><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                    <li><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+            
                 </ul>
             </li>
-        </ul>
 
+        </ul>
     </section>
     <section>
         <h1>インタフェース</h1>
         <ul>
             <li><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></li>
             <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
-        </ul>
+         </ul>
     </section>
     <section>
         <h1>クラス</h1>
@@ -76,440 +537,32 @@
             <li><a href="../DT/Peach_DT_UnixTimeFormat.html">Peach_DT_UnixTimeFormat</a></li>
             <li><a href="../DT/Peach_DT_Util.html">Peach_DT_Util</a></li>
             <li><a href="../DT/Peach_DT_W3cDatetimeFormat.html">Peach_DT_W3cDatetimeFormat</a></li>
-        </ul>
+         </ul>
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
-            <li><a href="../DT/_Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
-            <li><a href="../DT/_Peach---DT---Date.php.html">Date.php</a></li>
-            <li><a href="../DT/_Peach---DT---Datetime.php.html">Datetime.php</a></li>
-            <li><a href="../DT/_Peach---DT---Format.php.html">Format.php</a></li>
-            <li><a href="../DT/_Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
-            <li><a href="../DT/_Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---Time.php.html">Time.php</a></li>
-            <li><a href="../DT/_Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
-            <li><a href="../DT/_Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
-            <li><a href="../DT/_Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
-            <li><a href="../DT/_Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---Util.php.html">Util.php</a></li>
-            <li><a href="../DT/_Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
-        </ul>
+            <li><a href="../DT/_src---Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
     </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
 </nav>
-<section id="main">
-<h1 class="symbol">クラス: Peach_DT_AbstractTime</h1>
-<p class="src_location">定義: <code>/Peach/DT/AbstractTime.php</code></p>
-<div class="docblock"><p>時間を表す抽象基底クラスです.</p><p><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a>, <a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a>, <a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a>  の共通部分の実装です.</p></div>
-<section class="tags">
-    <h1>Tags</h1>
-    <ul>
-        <li>abstract</li>
-    </ul>
-</section>
-
-
-
-<section id="implements_interfaces">
-    <h1>すべての実装されたインタフェース</h1>
-    <ul class="enums">
-        <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
-    </ul>
-</section>
-
-<section id="methods">
-    <h1><a href="#class_methods">メソッド</a></h1>
-    <ul class="enums">
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodadd">add</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodafter">after</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodbefore">before</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodcompareTo">compareTo</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodequals">equals</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodformat">format</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodformatTime">formatTime</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodget">get</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodset">set</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#methodsetAll">setAll</a></li>
-        <li><a href="../DT/Peach_DT_AbstractTime.html#method__toString">__toString</a></li>
-    </ul>
-</section>
-
-<section id="children">
-    <h1>直系の既知のサブクラス</h1>
-    <dl>
-        <dt><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></dt>
-        <dd>DATE 型の時間オブジェクトです.</dd>
-    </dl>
-</section>
-
-
-<section class="class_fields" id="class_methods">
-<h1>メソッド 詳細</h1>
-<section id="methodadd">
-    <h1 class="symbol"><b>add</b> <span class="smalllinenumber">[line 141]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> add(string $field, int $amount)</code>
-        </div>
-        <div class="docblock"><p>引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 設定後の時間オブジェクト</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">string</td>
-                    <td class="varname">$field</td>
-                    <td>対象のフィールド</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$amount</td>
-                    <td>加算する量. マイナスの場合は過去方向に移動する.</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodadd">Peach_DT_Time::add()</a> (引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodafter">
-    <h1 class="symbol"><b>after</b> <span class="smalllinenumber">[line 226]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>bool after(<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time)</code>
-        </div>
-        <div class="docblock"><p>指定された時間とこの時間を比較します.</p><p>もしもこのオブジェクトが持つ時間フィールドすべてが  引数のオブジェクトの時間フィールドと一致した場合,  より多くの時間フィールドを持つほうが「後」となります.</p><p>例: 2012-05-21 (Peach_DT_Date) &lt; 2012-05-21T00:00 (Peach_DT_Datetime) &lt; 2012-05-21T00:00:00 (Peach_DT_Timestamp)</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : この時間のほうが未来である場合は TRUE, それ以外は FALSE</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
-                    <td class="varname">$time</td>
-                    <td>比較対象の時間</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodafter">Peach_DT_Time::after()</a> (指定された時間とこの時間を比較します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodbefore">
-    <h1 class="symbol"><b>before</b> <span class="smalllinenumber">[line 208]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>bool before(<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time)</code>
-        </div>
-        <div class="docblock"><p>指定された時間とこの時間を比較します.</p><p>もしもこのオブジェクトが持つ時間フィールドすべてが  引数のオブジェクトの時間フィールドと一致した場合,  より多くの時間フィールドを持つほうが「後」となります.</p><p>例: 2012-05-21 (Peach_DT_Date) &lt; 2012-05-21T00:00 (Peach_DT_Datetime) &lt; 2012-05-21T00:00:00 (Peach_DT_Timestamp)</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : この時間のほうが過去である場合は TRUE, それ以外は FALSE</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
-                    <td class="varname">$time</td>
-                    <td>比較対象の時間</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodbefore">Peach_DT_Time::before()</a> (指定された時間とこの時間を比較します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodcompareTo">
-    <h1 class="symbol"><b>compareTo</b> <span class="smalllinenumber">[line 162]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>int compareTo(mixed $obj)</code>
-        </div>
-        <div class="docblock"><p>この時間と指定された時間を比較します.</p><p>このメソッドは, 自身と引数の時間オブジェクトが共通で持っているフィールドについて比較を行います.  比較の結果すべてのフィールドの値が等しかった場合,  より多くの時間フィールドを持つほうが「後」となります.</p><p>例: 2012-05-21 (Peach_DT_Date) &lt; 2012-05-21T00:00 (Peach_DT_Datetime) &lt; 2012-05-21T00:00:00 (Peach_DT_Timestamp)</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : この時間のほうが過去の場合は負の値, 未来の場合は正の値, 等しい場合は 0.                 ただし, 引数が時間オブジェクトでない場合は NULL</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">mixed</td>
-                    <td class="varname">$obj</td>
-                    <td>比較対象のオブジェクト</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../Util/Peach_Util_Comparable.html#methodcompareTo">Peach_Util_Comparable::compareTo()</a> (このオブジェクトと引数の値を比較します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodequals">
-    <h1 class="symbol"><b>equals</b> <span class="smalllinenumber">[line 190]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>bool equals(mixed $obj)</code>
-        </div>
-        <div class="docblock"><p>指定されたオブジェクトとこのオブジェクトを比較します.</p><p>compareTo による比較結果が 0 を返し, かつクラスが同じ場合に TRUE を返します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 二つのオブジェクトが等しい場合に TRUE, それ以外は FALSE</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">mixed</td>
-                    <td class="varname">$obj</td>
-                    <td>比較対象のオブジェクト</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodequals">Peach_DT_Time::equals()</a> (指定されたオブジェクトとこのオブジェクトを比較します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodformat">
-    <h1 class="symbol"><b>format</b> <span class="smalllinenumber">[line 178]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>string format([<a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a> $format = null])</code>
-        </div>
-        <div class="docblock"><p>指定されたフォーマットを使ってこの時間オブジェクトを書式化します.</p><p>フォーマットを指定しない場合はデフォルトの方法 (SQL などで使われる慣用表現) で書式化を行ないます.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type"><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></td>
-                    <td class="varname">$format</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodformat">Peach_DT_Time::format()</a> (指定されたフォーマットを使ってこの時間オブジェクトを書式化します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodformatTime">
-    <h1 class="symbol"><b>formatTime</b> <span class="smalllinenumber">[line 238]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>string formatTime()</code>
-        </div>
-        <div class="docblock"><p>この時間の時刻 (時・分・秒) 部分を書式化します.</p><p>時・分・秒をサポートしていないオブジェクトの場合は空文字列を返します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : &quot;hh:mm:ss&quot; 形式の文字列. このオブジェクトが時刻をサポートしない場合は空文字列.</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodformatTime">Peach_DT_Time::formatTime()</a> (この時間の時刻 (時・分・秒) 部分を書式化します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodget">
-    <h1 class="symbol"><b>get</b> <span class="smalllinenumber">[line 88]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>int get(string $field)</code>
-        </div>
-        <div class="docblock"><p>指定されたフィールドの値を取得します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 対象フィールドの値. ただしフィールド名が不正な場合は NULL</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">string</td>
-                    <td class="varname">$field</td>
-                    <td>フィールド名</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodget">Peach_DT_Time::get()</a> (指定されたフィールドの値を取得します.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodset">
-    <h1 class="symbol"><b>set</b> <span class="smalllinenumber">[line 101]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> set(string $field, int $value)</code>
-        </div>
-        <div class="docblock"><p>この時間オブジェクトの指定されたフィールドを上書きします.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 設定後の時間オブジェクト</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">string</td>
-                    <td class="varname">$field</td>
-                    <td>フィールド名</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$value</td>
-                    <td>設定する値</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodset">Peach_DT_Time::set()</a> (この時間オブジェクトの指定されたフィールドを上書きします.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="methodsetAll">
-    <h1 class="symbol"><b>setAll</b> <span class="smalllinenumber">[line 118]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> setAll(<a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>|array $subject)</code>
-        </div>
-        <div class="docblock"><p>この時間オブジェクトの複数のフィールドを一度に上書きします.</p><p>引数には,</p><ol class="src"><li><div class="src-line"><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;year&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">2010</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;month&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">8</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;date&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">31</span><span class="src-sym">)</span></div></li>
-</ol><p>などの配列か, または同様の Map オブジェクトを指定してください.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 設定後の時間オブジェクト</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type"><a href="../Util/Peach_Util_Map.html">Peach_Util_Map</a>|array</td>
-                    <td class="varname">$subject</td>
-                    <td>フィールドと値の一覧</td>
-                </tr>
-            </table>
-        </section>
-        <section class="tags">
-            <h1>定義</h1>
-            <ul>
-                <li><a href="../DT/Peach_DT_Time.html#methodsetAll">Peach_DT_Time::setAll()</a> (この時間オブジェクトの複数のフィールドを一度に上書きします.)</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-<section id="method__toString">
-    <h1 class="symbol"><b>__toString</b> <span class="smalllinenumber">[line 248]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>string __toString()</code>
-        </div>
-        <div class="docblock"><p>このオブジェクトが指す時刻を, SQL などで使われる慣用表現に変換して返します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : このオブジェクトの文字列表現 (&quot;YYYY-MM-DD&quot;, &quot;YYYY-MM-DD hh:mm&quot; など)</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-</section>
-
-</section>
-<footer>
-    Documentation generated on Fri, 17 May 2013 09:37:37 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
-</footer>
+</div>
 </body>
 </html>

@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>基本的な使用方法</title>
-    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
     <!--[if lt IE 9]>
-    <script src="../media/html5.js"></script>  
+    <script type="text/javascript" src="../media/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
 </head>
 <body>
+<div id="wrapper">
 <header>
     <h1>DT</h1>
     <nav>
-        <h1>グローバルナビゲーション</h1>
+        <h1>Navigation</h1>
         <ul>
             <li><a href="../classtrees_DT.html">class tree: DT</a></li>
             <li><a href="../elementindex_DT.html">index: DT</a></li>
@@ -21,44 +27,163 @@
         </ul>
     </nav>
 </header>
-
+<div id="main">
+    <article>
+        <h1>基本的な使用方法</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.about">時間オブジェクトとは</a></li>
+                <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.usage">時間操作メソッド</a></li>
+                <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.field">フィールド指定方法</a></li>
+                <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.comp">ソート・比較</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="DT.basic.about"><h1>時間オブジェクトとは</h1><p>特定の日付・時刻を指すインタフェース <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a>
+                    の実装クラスのことを「時間オブジェクト」と呼びます.
+                    時間オブジェクトには以下の種類があります.</p>
+                <ul><li><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a> : ある特定の日付を表現します</li>
+                    <li><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a> : ある特定の時刻 (分まで) を表現します</li>
+                    <li><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a> : ある特定の時刻 (秒を含む) を表現します</li></ul></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DT.basic.usage"><h1>時間操作メソッド</h1><p>時間オブジェクトの各フィールドの値を得るには
+                    <a href="../DT/Peach_DT_Time.html#methodget">get</a> メソッドを使用します.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;year&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;int(2012)</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;month&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;int(5)</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;date&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;int(21)</span></div></li>
+        </ol></div>
+                <p>時刻の計算方法 (特定のフィールドを足したり引いたりする) には
+                    <a href="../DT/Peach_DT_Time.html#methodadd">add</a>, <a href="../DT/Peach_DT_Time.html#methodset">set</a>, 
+                    <a href="../DT/Peach_DT_Time.html#methodsetAll">setAll</a> などの種類があります.
+                    これらのメソッドは新しい時間オブジェクトを返します.
+                    (既存の時間オブジェクトの内部状態は変化しません)</p>
+                <p>以下に使い方の例を挙げます.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-str">&quot;date&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">15</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d1</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-06-05</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-str">&quot;month&quot;</span><span class="src-sym">,&nbsp;</span>-<span class="src-num">3</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d2</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-02-21</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;year&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">2000</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d3</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2000-05-21</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$d4&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">setAll</span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;month&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">12</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;date&quot;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">24</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$d4</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-12-24</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DT.basic.field"><h1>フィールド指定方法</h1><p>各メソッドの引数には
+                    &quot;year&quot;, &quot;month&quot;, &quot;date&quot;, &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot; などを指定します.
+                    具体的には以下の規則に従って解釈されます. (大文字・小文字は区別しません)</p>
+                <ul><li>先頭が &quot;Y&quot; で始まる場合 : 年</li>
+                    <li>先頭が &quot;MO&quot; で始まる場合 : 月</li>
+                    <li>先頭が &quot;D&quot; で始まる場合 : 日</li>
+                    <li>先頭が &quot;H&quot; で始まる場合 : 時</li>
+                    <li>先頭が &quot;M&quot; で始まり, 直後に &quot;O&quot; が続かない場合 : 分</li>
+                    <li>先頭が &quot;S&quot; で始まる場合 : 秒</li></ul>
+                <p>無効なフィールド名を指定した場合, その指定は無視されます.</p>
+                <p>例えば, 時・分・秒のフィールドを持たない Peach_DT_Date オブジェクトに対して,
+                    引数に &quot;hour&quot; を指定して add メソッドを実行した場合, 
+                    元のオブジェクトと同じオブジェクトを返します.</p>
+                <p>get の引数に無効な引数を指定した場合は NULL が返ります.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">7</span><span class="src-sym">,&nbsp;</span><span class="src-num">30</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21&nbsp;07:30</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;無効な設定なので何も変化しない.&nbsp;$d1&nbsp;==&nbsp;$d3&nbsp;となる</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d4&nbsp;</span>=&nbsp;<span class="src-var">$d2</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21&nbsp;10:30&nbsp;になる</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;NULL</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;int(7)</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d3</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;NULL</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d4</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;int(10)</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DT.basic.comp"><h1>ソート・比較</h1><p>時間オブジェクトの配列は, <a href="../Util/Peach_Util_Arrays.html#methodsort">Peach_Util_Arrays::sort()</a>
+                    を使って簡単にソートすることが出来ます.
+                    以下に例を示します.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">11</span><span class="src-sym">,&nbsp;</span><span class="src-num">23</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">11</span><span class="src-sym">,&nbsp;</span><span class="src-num">23</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">8</span><span class="src-sym">,&nbsp;</span><span class="src-num">31</span><span class="src-sym">,&nbsp;</span><span class="src-num">12</span><span class="src-sym">,&nbsp;</span><span class="src-num">34</span><span class="src-sym">,&nbsp;</span><span class="src-num">56</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">10</span><span class="src-sym">,&nbsp;</span><span class="src-num">20</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">11</span><span class="src-sym">,&nbsp;</span><span class="src-num">22</span><span class="src-sym">,&nbsp;</span><span class="src-num">33</span><span class="src-sym">)</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$arr2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></span><span class="src-sym">::</span><a href="../Util/Peach_Util_Arrays.html#methodsort">sort</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-key">foreach&nbsp;</span><span class="src-sym">(</span><span class="src-var">$arr2&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$d</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">format</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-sym">}</span></div></li>
+        </ol></div>
+                <p>このコードは以下を出力します.</p>
+                <div class="src-code"><pre>
+        2012-01-01
+        2012-03-03 11:22:33
+        2012-05-03 10:20
+        2012-08-31 12:34:56
+        2012-11-23
+        2012-11-23 21:00
+                    </pre></div>
+                <p><a href="../DT/Peach_DT_Time.html#methodbefore">before()</a>,
+                    <a href="../DT/Peach_DT_Time.html#methodafter">after()</a> を使って時間オブジェクト同士の比較をすることができます.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">31</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">after</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;bool(true)</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">before</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;bool(false)</span></div></li>
+        </ol></div>
+                <p>異なる型の時間オブジェクト同士も比較することができますが,
+                    もしも共通するフィールドがすべて等しい場合は, 上位の型のほうが「後」とみなされることに注意してください.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">after</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;bool(false)</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">before</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;bool(true)</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
+            <li>Next: <a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:28:42 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
 <nav id="menu">
-    <h1>メニュー</h1>
-    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <h1>Menu</h1>
     <section>
         <h1>パッケージ</h1>
         <ul>
             <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
             <li><a href="../li_Util.html">Util</a></li>
         </ul>
     </section>
     <section>
         <h1>チュートリアル/マニュアル</h1>
-        <h2 class="level">Package-level</h2>
+        <h2>Package-level</h2>
         <ul>
-            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+            <li>
+                <a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
                 <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                    <li><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
+                    <li><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                    <li><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                    <li><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+            
                 </ul>
             </li>
-        </ul>
 
+        </ul>
     </section>
     <section>
         <h1>インタフェース</h1>
         <ul>
             <li><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></li>
             <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
-        </ul>
+         </ul>
     </section>
     <section>
         <h1>クラス</h1>
@@ -76,153 +201,32 @@
             <li><a href="../DT/Peach_DT_UnixTimeFormat.html">Peach_DT_UnixTimeFormat</a></li>
             <li><a href="../DT/Peach_DT_Util.html">Peach_DT_Util</a></li>
             <li><a href="../DT/Peach_DT_W3cDatetimeFormat.html">Peach_DT_W3cDatetimeFormat</a></li>
-        </ul>
+         </ul>
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
-            <li><a href="../DT/_Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
-            <li><a href="../DT/_Peach---DT---Date.php.html">Date.php</a></li>
-            <li><a href="../DT/_Peach---DT---Datetime.php.html">Datetime.php</a></li>
-            <li><a href="../DT/_Peach---DT---Format.php.html">Format.php</a></li>
-            <li><a href="../DT/_Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
-            <li><a href="../DT/_Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---Time.php.html">Time.php</a></li>
-            <li><a href="../DT/_Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
-            <li><a href="../DT/_Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
-            <li><a href="../DT/_Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
-            <li><a href="../DT/_Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---Util.php.html">Util.php</a></li>
-            <li><a href="../DT/_Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
-        </ul>
+            <li><a href="../DT/_src---Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
     </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
 </nav>
-<section id="main">
-<h1 class="symbol">基本的な使用方法</h1>
-    <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
-    <section id="toc">
-    <h1>Table of Contents</h1>
-    <ul>
-        <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.about">時間オブジェクトとは</a></li>
-        <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.usage">時間操作メソッド</a></li>
-        <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.field">フィールド指定方法</a></li>
-        <li><a href="../DT/tutorial_DT.basic.pkg.html#DT.basic.comp">ソート・比較</a></li>
-    </ul>
-</section>
-
-    <!-- refsect1 --><section class="tutorial" id="DT.basic.about"><h1>時間オブジェクトとは</h1><p>特定の日付・時刻を指すインタフェース <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a>
-            の実装クラスのことを「時間オブジェクト」と呼びます.
-            時間オブジェクトには以下の種類があります.</p>
-        <ul><li><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a> : ある特定の日付を表現します</li>
-            <li><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a> : ある特定の時刻 (分まで) を表現します</li>
-            <li><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a> : ある特定の時刻 (秒を含む) を表現します</li></ul></section><!-- /refsect1 -->
-    <!-- refsect1 --><section class="tutorial" id="DT.basic.usage"><h1>時間操作メソッド</h1><p>時間オブジェクトの各フィールドの値を得るには
-            <a href="../DT/Peach_DT_Time.html#methodget">get</a> メソッドを使用します.</p>
-        <ol class="src"><li><div class="src-line"><span class="src-var">$d&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;year&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;int(2012)</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;month&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;int(5)</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;date&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;int(21)</span></div></li>
-</ol>
-        <p>時刻の計算方法 (特定のフィールドを足したり引いたりする) には
-            <a href="../DT/Peach_DT_Time.html#methodadd">add</a>, <a href="../DT/Peach_DT_Time.html#methodset">set</a>, 
-            <a href="../DT/Peach_DT_Time.html#methodsetAll">setAll</a> などの種類があります.
-            これらのメソッドは新しい時間オブジェクトを返します.
-            (既存の時間オブジェクトの内部状態は変化しません)</p>
-        <p>以下に使い方の例を挙げます.</p>
-        <ol class="src"><li><div class="src-line"><span class="src-var">$d&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-str">&quot;date&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">15</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">echo&nbsp;<span class="src-var">$d1</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-06-05</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">add</span><span class="src-sym">(</span><span class="src-str">&quot;month&quot;</span><span class="src-sym">,&nbsp;</span>-<span class="src-num">3</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">echo&nbsp;<span class="src-var">$d2</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-02-21</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;year&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">2000</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">echo&nbsp;<span class="src-var">$d3</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2000-05-21</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><span class="src-var">$d4&nbsp;</span>=&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">setAll</span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;month&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">12</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;date&quot;&nbsp;&nbsp;</span>=&gt;&nbsp;<span class="src-num">24</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">echo&nbsp;<span class="src-var">$d4</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-12-24</span></div></li>
-</ol></section><!-- /refsect1 -->
-    <!-- refsect1 --><section class="tutorial" id="DT.basic.field"><h1>フィールド指定方法</h1><p>各メソッドの引数には
-            &quot;year&quot;, &quot;month&quot;, &quot;date&quot;, &quot;hour&quot;, &quot;minute&quot;, &quot;second&quot; などを指定します.
-            具体的には以下の規則に従って解釈されます. (大文字・小文字は区別しません)</p>
-        <ul><li>先頭が &quot;Y&quot; で始まる場合 : 年</li>
-            <li>先頭が &quot;MO&quot; で始まる場合 : 月</li>
-            <li>先頭が &quot;D&quot; で始まる場合 : 日</li>
-            <li>先頭が &quot;H&quot; で始まる場合 : 時</li>
-            <li>先頭が &quot;M&quot; で始まり, 直後に &quot;O&quot; が続かない場合 : 分</li>
-            <li>先頭が &quot;S&quot; で始まる場合 : 秒</li></ul>
-        <p>無効なフィールド名を指定した場合, その指定は無視されます.</p>
-        <p>例えば, 時・分・秒のフィールドを持たない Peach_DT_Date オブジェクトに対して,
-            引数に &quot;hour&quot; を指定して add メソッドを実行した場合, 
-            元のオブジェクトと同じオブジェクトを返します.</p>
-        <p>get の引数に無効な引数を指定した場合は NULL が返ります.</p>
-        <ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21</span></div></li>
-<li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">7</span><span class="src-sym">,&nbsp;</span><span class="src-num">30</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21&nbsp;07:30</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><span class="src-var">$d3&nbsp;</span>=&nbsp;<span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;無効な設定なので何も変化しない.&nbsp;$d1&nbsp;==&nbsp;$d3&nbsp;となる</span></div></li>
-<li><div class="src-line"><span class="src-var">$d4&nbsp;</span>=&nbsp;<span class="src-var">$d2</span><span class="src-sym">-&gt;</span><span class="src-id">set</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">10</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;2012-05-21&nbsp;10:30&nbsp;になる</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;NULL</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;int(7)</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d3</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;NULL</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d4</span><span class="src-sym">-&gt;</span><span class="src-id">get</span><span class="src-sym">(</span><span class="src-str">&quot;hour&quot;</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;int(10)</span></div></li>
-</ol></section><!-- /refsect1 -->
-    <!-- refsect1 --><section class="tutorial" id="DT.basic.comp"><h1>ソート・比較</h1><p>時間オブジェクトの配列は, <a href="../Util/Peach_Util_Arrays.html#methodsort">Peach_Util_Arrays::sort()</a>
-            を使って簡単にソートすることが出来ます.
-            以下に例を示します.</p>
-        <ol class="src"><li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">11</span><span class="src-sym">,&nbsp;</span><span class="src-num">23</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">11</span><span class="src-sym">,&nbsp;</span><span class="src-num">23</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">8</span><span class="src-sym">,&nbsp;</span><span class="src-num">31</span><span class="src-sym">,&nbsp;</span><span class="src-num">12</span><span class="src-sym">,&nbsp;</span><span class="src-num">34</span><span class="src-sym">,&nbsp;</span><span class="src-num">56</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">10</span><span class="src-sym">,&nbsp;</span><span class="src-num">20</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">11</span><span class="src-sym">,&nbsp;</span><span class="src-num">22</span><span class="src-sym">,&nbsp;</span><span class="src-num">33</span><span class="src-sym">)</span></div></li>
-<li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><span class="src-var">$arr2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../Util/Peach_Util_Arrays.html">Peach_Util_Arrays</a></span><span class="src-sym">::</span><a href="../Util/Peach_Util_Arrays.html#methodsort">sort</a><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><span class="src-key">foreach&nbsp;</span><span class="src-sym">(</span><span class="src-var">$arr2&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$d</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
-<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-var">$d</span><span class="src-sym">-&gt;</span><span class="src-id">format</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>.&nbsp;<span class="src-str">&quot;\n&quot;</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><span class="src-sym">}</span></div></li>
-</ol>
-        <p>このコードは以下を出力します.</p>
-        <div class="src-code"><pre>
-2012-01-01
-2012-03-03 11:22:33
-2012-05-03 10:20
-2012-08-31 12:34:56
-2012-11-23
-2012-11-23 21:00
-            </pre></div>
-        <p><a href="../DT/Peach_DT_Time.html#methodbefore">before()</a>,
-            <a href="../DT/Peach_DT_Time.html#methodafter">after()</a> を使って時間オブジェクト同士の比較をすることができます.</p>
-        <ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">3</span><span class="src-sym">,&nbsp;</span><span class="src-num">31</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">after</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;bool(true)</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">before</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;bool(false)</span></div></li>
-</ol>
-        <p>異なる型の時間オブジェクト同士も比較することができますが,
-            もしも共通するフィールドがすべて等しい場合は, 上位の型のほうが「後」とみなされることに注意してください.</p>
-        <ol class="src"><li><div class="src-line"><span class="src-var">$d1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line"><span class="src-var">$d2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></span><span class="src-sym">(</span><span class="src-num">2012</span><span class="src-sym">,&nbsp;</span><span class="src-num">5</span><span class="src-sym">,&nbsp;</span><span class="src-num">21</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0</span><span class="src-sym">;</span></div></li>
-<li><div class="src-line">&nbsp;</div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">after</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;bool(false)</span></div></li>
-<li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$d1</span><span class="src-sym">-&gt;</span><span class="src-id">before</span><span class="src-sym">(</span><span class="src-var">$d2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;bool(true)</span></div></li>
-</ol></section><!-- /refsect1 -->
-<ul class="direction">
-    <li class="prev"><a href="../DT/tutorial_DT.features.pkg.html">Prev</a></li>
-    <li class="next"><a href="../DT/tutorial_DT.init.pkg.html">Next</a></li>
-</ul>
-<ul class="direction">
-    <li class="prev">コンセプト・特徴など</li>
-    <li class="next">オブジェクトの生成方法</li>
-</ul>
-</section>
-<footer>
-    Documentation generated on Fri, 17 May 2013 09:37:34 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
-</footer>
+</div>
 </body>
 </html>

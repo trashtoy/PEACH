@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Docs For Class Peach_DT_Util</title>
-    <link rel="stylesheet" type="text/css" href="../media/style.css">
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
     <!--[if lt IE 9]>
-    <script src="../media/html5.js"></script>  
+    <script type="text/javascript" src="../media/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
 </head>
 <body>
+<div id="wrapper">
 <header>
     <h1>DT</h1>
     <nav>
-        <h1>グローバルナビゲーション</h1>
+        <h1>Navigation</h1>
         <ul>
             <li><a href="../classtrees_DT.html">class tree: DT</a></li>
             <li><a href="../elementindex_DT.html">index: DT</a></li>
@@ -21,44 +27,278 @@
         </ul>
     </nav>
 </header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_DT_Util</h1>
+        <p id="src_location">定義: <code>/src/Peach/DT/Util.php</code></p>
+        <div id="description">
+            <p>時間関連のユーティリティクラスです.</p>
+        </div>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../DT/Peach_DT_Util.html#methodcleanTimeZoneOffset">cleanTimeZoneOffset</a></li>
+                <li><a href="../DT/Peach_DT_Util.html#methodcompareTime">compareTime</a></li>
+                <li><a href="../DT/Peach_DT_Util.html#methodgetTimeZoneOffset">getTimeZoneOffset</a></li>
+                <li><a href="../DT/Peach_DT_Util.html#methodlatest">latest</a></li>
+                <li><a href="../DT/Peach_DT_Util.html#methodoldest">oldest</a></li>
+                <li><a href="../DT/Peach_DT_Util.html#methodvalidate">validate</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="methodcleanTimeZoneOffset">
+                <h1>static <b>cleanTimeZoneOffset</b></h1>
+                <p class="linenumber">line 146</span></p>
+                <div class="signature">
+                    <code>static int cleanTimeZoneOffset(int $offset)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された時差 (分単位) の値が妥当かどうかを調べ, 必要に応じて値を丸めた結果を返します.</p>
+                    <p>世界で実際に使用されているタイムゾーンは UTC-12 から UTC+14 ですが,  このメソッドでは -23:45 から +23:45 を妥当なタイムゾーンとみなします.  もしも -23:45 以前の時差が指定された場合は -23:45 (1425),  +23:45 以降の時差が指定された場合は +23:45 (-1425) に丸めた結果を返します.</p><p>もしも NULL が指定された場合は <a href="../DT/Peach_DT_Util.html#methodgetTimeZoneOffset">Peach_DT_Util::getTimeZoneOffset()</a> の結果を返します.  それ以外の数値以外の値が指定された場合は, 整数にキャストした値を使用します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数を -1425 以上 1425 以下に丸めた値</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$offset</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodcompareTime">
+                <h1>static <b>compareTime</b></h1>
+                <p class="linenumber">line 48</span></p>
+                <div class="signature">
+                    <code>static int compareTime(<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time1, <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time2)</code>
+                </div>
+                <div class="docblock">
+                    <p>2つの時間オブジェクトを比較します. 一つめの引数のほうが後 (未来) の場合は正の値,  前 (過去) の場合は負の値, 同じ場合は 0 を返します.</p>
+                    <p>このメソッドは, 一つ目の時間オブジェクトの Peach_DT_Time::compareTo() メソッドを呼び出し  二つ目の時間オブジェクトと比較した結果を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 1つ目の時間を2つ目の時間と比較した結果</li>
+                        <li>see : Peach_DT_Time::compareTo()</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
+                            <td class="varname">$time1</td>
+                            <td>1つ目の時間</td>
+                        </tr>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
+                            <td class="varname">$time2</td>
+                            <td>2つ目の時間</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodgetTimeZoneOffset">
+                <h1>static <b>getTimeZoneOffset</b></h1>
+                <p class="linenumber">line 126</span></p>
+                <div class="signature">
+                    <code>static int getTimeZoneOffset()</code>
+                </div>
+                <div class="docblock">
+                    <p>システム時刻と GMT との時差を, 分単位で返します.</p>
+                    <p>システム時刻が GMT よりも未来の場合 (UTC + 1 以上) は負の値,  システム時刻が GMT よりも過去の場合 (UTF - 1 以下) は正の値を返します.  例えばタイムゾーンが &quot;Asia/Tokyo&quot; (+09:00) の場合,  返り値は -540 となります.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodlatest">
+                <h1>static <b>latest</b></h1>
+                <p class="linenumber">line 80</span></p>
+                <div class="signature">
+                    <code>static <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> latest(array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time...)</code>
+                </div>
+                <div class="docblock">
+                    <p>引数に渡された時間オブジェクトの中で最新のものを返します.</p>
+                    <p>引数に Peach_DT_Time 型オブジェクトを羅列するか, Peach_DT_Time 型オブジェクトの配列を指定してください.  引数に Peach_DT_Time が一つも存在しない場合は NULL を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数の中で最新の Peach_DT_Time オブジェクト.                              引数が空か, Peach_DT_Time オブジェクトが含まれていないの場合は NULL</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
+                            <td class="varname">$time...</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodoldest">
+                <h1>static <b>oldest</b></h1>
+                <p class="linenumber">line 62</span></p>
+                <div class="signature">
+                    <code>static <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> oldest(array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time...)</code>
+                </div>
+                <div class="docblock">
+                    <p>引数に渡された時間オブジェクトの中で最も古いものを返します.</p>
+                    <p>引数に Peach_DT_Time 型オブジェクトを羅列するか, Peach_DT_Time 型オブジェクトの配列を指定してください.  引数に Peach_DT_Time が一つも存在しない場合は NULL を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 引数の中で最も古い Peach_DT_Time オブジェクト.                             引数が空か, Peach_DT_Time オブジェクトが含まれていない場合は NULL</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
+                            <td class="varname">$time...</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodvalidate">
+                <h1>static <b>validate</b></h1>
+                <p class="linenumber">line 104</span></p>
+                <div class="signature">
+                    <code>static bool validate(int $year, int $month, int $date, [int $hour = 0], [int $minute = 0], [int $second = 0])</code>
+                </div>
+                <div class="docblock">
+                    <p>引数に指定された年・月・日 (オプションで時・分・秒) の妥当性を検証します.</p>
+                    <p>妥当な組み合わせの場合は TRUE, それ以外は FALSE を返します.  引数に数値以外の型が含まれていた場合, それが数値文字列  (<a href="http://www.php.net/is_numeric">is_numeric()</a> が TRUE を返す)  の場合のみ妥当とみなします.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 組み合わせが妥当な場合に TRUE, それ以外は FALSE</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>Parameters</h1>
+                    <table>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$year</td>
+                            <td>年</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$month</td>
+                            <td>月</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$date</td>
+                            <td>日</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$hour</td>
+                            <td>時</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$minute</td>
+                            <td>分</td>
+                        </tr>
+                        <tr>
+                            <td class="type">int</td>
+                            <td class="varname">$second</td>
+                            <td>秒</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
 
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Mon, 09 Jun 2014 20:29:07 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
 <nav id="menu">
-    <h1>メニュー</h1>
-    <p id="todolist"><a href="../todolist.html">Todo List</a></p>
+    <h1>Menu</h1>
     <section>
         <h1>パッケージ</h1>
         <ul>
             <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
             <li><a href="../li_Util.html">Util</a></li>
         </ul>
     </section>
     <section>
         <h1>チュートリアル/マニュアル</h1>
-        <h2 class="level">Package-level</h2>
+        <h2>Package-level</h2>
         <ul>
-            <li class="tutorial_tree"><a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+            <li>
+                <a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
                 <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
-                </ul>
-                <ul>
-                    <li class="tutorial_tree"><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+                    <li><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
+                    <li><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                    <li><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                    <li><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+            
                 </ul>
             </li>
-        </ul>
 
+        </ul>
     </section>
     <section>
         <h1>インタフェース</h1>
         <ul>
             <li><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></li>
             <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
-        </ul>
+         </ul>
     </section>
     <section>
         <h1>クラス</h1>
@@ -76,256 +316,32 @@
             <li><a href="../DT/Peach_DT_UnixTimeFormat.html">Peach_DT_UnixTimeFormat</a></li>
             <li><a href="../DT/Peach_DT_Util.html">Peach_DT_Util</a></li>
             <li><a href="../DT/Peach_DT_W3cDatetimeFormat.html">Peach_DT_W3cDatetimeFormat</a></li>
-        </ul>
+         </ul>
     </section>
     <section>
         <h1>ファイル</h1>
         <ul>
-            <li><a href="../DT/_Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
-            <li><a href="../DT/_Peach---DT---Date.php.html">Date.php</a></li>
-            <li><a href="../DT/_Peach---DT---Datetime.php.html">Datetime.php</a></li>
-            <li><a href="../DT/_Peach---DT---Format.php.html">Format.php</a></li>
-            <li><a href="../DT/_Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
-            <li><a href="../DT/_Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---Time.php.html">Time.php</a></li>
-            <li><a href="../DT/_Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
-            <li><a href="../DT/_Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
-            <li><a href="../DT/_Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
-            <li><a href="../DT/_Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
-            <li><a href="../DT/_Peach---DT---Util.php.html">Util.php</a></li>
-            <li><a href="../DT/_Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
-        </ul>
+            <li><a href="../DT/_src---Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_src---Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
     </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
 </nav>
-<section id="main">
-<h1 class="symbol">クラス: Peach_DT_Util</h1>
-<p class="src_location">定義: <code>/Peach/DT/Util.php</code></p>
-<div class="docblock"><p>時間関連のユーティリティクラスです.</p></div>
-
-
-
-<section id="methods">
-    <h1><a href="#class_methods">メソッド</a></h1>
-    <ul class="enums">
-        <li><a href="../DT/Peach_DT_Util.html#methodcleanTimeZoneOffset">cleanTimeZoneOffset</a></li>
-        <li><a href="../DT/Peach_DT_Util.html#methodcompareTime">compareTime</a></li>
-        <li><a href="../DT/Peach_DT_Util.html#methodgetTimeZoneOffset">getTimeZoneOffset</a></li>
-        <li><a href="../DT/Peach_DT_Util.html#methodlatest">latest</a></li>
-        <li><a href="../DT/Peach_DT_Util.html#methodoldest">oldest</a></li>
-        <li><a href="../DT/Peach_DT_Util.html#methodvalidate">validate</a></li>
-    </ul>
-</section>
-
-
-<section class="class_fields" id="class_methods">
-<h1>メソッド 詳細</h1>
-<section id="methodcleanTimeZoneOffset">
-    <h1 class="symbol">static <b>cleanTimeZoneOffset</b> <span class="smalllinenumber">[line 146]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>
-                static int cleanTimeZoneOffset(int $offset)
-            </code>
-        </div>
-        <div class="docblock"><p>指定された時差 (分単位) の値が妥当かどうかを調べ, 必要に応じて値を丸めた結果を返します.</p><p>世界で実際に使用されているタイムゾーンは UTC-12 から UTC+14 ですが,  このメソッドでは -23:45 から +23:45 を妥当なタイムゾーンとみなします.  もしも -23:45 以前の時差が指定された場合は -23:45 (1425),  +23:45 以降の時差が指定された場合は +23:45 (-1425) に丸めた結果を返します.</p><p>もしも NULL が指定された場合は <a href="../DT/Peach_DT_Util.html#methodgetTimeZoneOffset">Peach_DT_Util::getTimeZoneOffset()</a> の結果を返します.  それ以外の数値以外の値が指定された場合は, 整数にキャストした値を使用します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 引数を -1425 以上 1425 以下に丸めた値</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$offset</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-<section id="methodcompareTime">
-    <h1 class="symbol">static <b>compareTime</b> <span class="smalllinenumber">[line 48]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>
-                static int compareTime(<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time1, <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time2)
-            </code>
-        </div>
-        <div class="docblock"><p>2つの時間オブジェクトを比較します. 一つめの引数のほうが後 (未来) の場合は正の値,  前 (過去) の場合は負の値, 同じ場合は 0 を返します.</p><p>このメソッドは, 一つ目の時間オブジェクトの Peach_DT_Time::compareTo() メソッドを呼び出し  二つ目の時間オブジェクトと比較した結果を返します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 1つ目の時間を2つ目の時間と比較した結果</li>
-                <li>see : Peach_DT_Time::compareTo()</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
-                    <td class="varname">$time1</td>
-                    <td>1つ目の時間</td>
-                </tr>
-                <tr>
-                    <td class="type"><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
-                    <td class="varname">$time2</td>
-                    <td>2つ目の時間</td>
-                </tr>
-            </table>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-<section id="methodgetTimeZoneOffset">
-    <h1 class="symbol">static <b>getTimeZoneOffset</b> <span class="smalllinenumber">[line 126]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>
-                static int getTimeZoneOffset()
-            </code>
-        </div>
-        <div class="docblock"><p>システム時刻と GMT との時差を, 分単位で返します.</p><p>システム時刻が GMT よりも未来の場合 (UTC + 1 以上) は負の値,  システム時刻が GMT よりも過去の場合 (UTF - 1 以下) は正の値を返します.  例えばタイムゾーンが &quot;Asia/Tokyo&quot; (+09:00) の場合,  返り値は -540 となります.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-<section id="methodlatest">
-    <h1 class="symbol">static <b>latest</b> <span class="smalllinenumber">[line 80]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>
-                static <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> latest(array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time...)
-            </code>
-        </div>
-        <div class="docblock"><p>引数に渡された時間オブジェクトの中で最新のものを返します.</p><p>引数に Peach_DT_Time 型オブジェクトを羅列するか, Peach_DT_Time 型オブジェクトの配列を指定してください.  引数に Peach_DT_Time が一つも存在しない場合は NULL を返します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 引数の中で最新の Peach_DT_Time オブジェクト.                              引数が空か, Peach_DT_Time オブジェクトが含まれていないの場合は NULL</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
-                    <td class="varname">$time...</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-<section id="methodoldest">
-    <h1 class="symbol">static <b>oldest</b> <span class="smalllinenumber">[line 62]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>
-                static <a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> oldest(array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a> $time...)
-            </code>
-        </div>
-        <div class="docblock"><p>引数に渡された時間オブジェクトの中で最も古いものを返します.</p><p>引数に Peach_DT_Time 型オブジェクトを羅列するか, Peach_DT_Time 型オブジェクトの配列を指定してください.  引数に Peach_DT_Time が一つも存在しない場合は NULL を返します.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 引数の中で最も古い Peach_DT_Time オブジェクト.                             引数が空か, Peach_DT_Time オブジェクトが含まれていない場合は NULL</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">array|<a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></td>
-                    <td class="varname">$time...</td>
-                    <td>&nbsp;</td>
-                </tr>
-            </table>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-<section id="methodvalidate">
-    <h1 class="symbol">static <b>validate</b> <span class="smalllinenumber">[line 104]</span></h1>
-    <div class="class_field">
-        <div class="signature">
-            <code>
-                static bool validate(int $year, int $month, int $date, [int $hour = 0], [int $minute = 0], [int $second = 0])
-            </code>
-        </div>
-        <div class="docblock"><p>引数に指定された年・月・日 (オプションで時・分・秒) の妥当性を検証します.</p><p>妥当な組み合わせの場合は TRUE, それ以外は FALSE を返します.  引数に数値以外の型が含まれていた場合, それが数値文字列  (<a href="http://www.php.net/is_numeric">is_numeric()</a> が TRUE を返す)  の場合のみ妥当とみなします.</p></div>
-        <section class="tags">
-            <h1>Tags</h1>
-            <ul>
-                <li>return : 組み合わせが妥当な場合に TRUE, それ以外は FALSE</li>
-                <li>access : public</li>
-            </ul>
-        </section>
-        <section class="parameters">
-            <h1>引数</h1>
-            <table>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$year</td>
-                    <td>年</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$month</td>
-                    <td>月</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$date</td>
-                    <td>日</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$hour</td>
-                    <td>時</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$minute</td>
-                    <td>分</td>
-                </tr>
-                <tr>
-                    <td class="type">int</td>
-                    <td class="varname">$second</td>
-                    <td>秒</td>
-                </tr>
-            </table>
-        </section>
-        <div class="top">[ <a href="#main">Top</a> ]</div>
-    </div>
-</section>
-
-
-
-
-
-
-</section>
-
-</section>
-<footer>
-    Documentation generated on Fri, 17 May 2013 09:37:43 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a>
-</footer>
+</div>
 </body>
 </html>
