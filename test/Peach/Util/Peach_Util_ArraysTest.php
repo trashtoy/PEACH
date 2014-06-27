@@ -1,6 +1,9 @@
 <?php
 class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var resource
+     */
     private static $fp;
     
     public static function setUpBeforeClass()
@@ -84,6 +87,12 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * pickup() をテストします. 以下を確認します.
+     * 
+     * - string, numeric, bool など各キーワードを解釈すること (文字の大小は問わず)
+     * - その他の文字列はクラス / インタフェース名として解釈すること
+     * - 第 3 引数に true を指定した場合は元の配列の添字を維持すること
+     * 
      * @covers Peach_Util_Arrays::pickup
      */
     public function testPickup()
@@ -145,6 +154,12 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * sort() をテストします. 以下を確認します.
+     * 
+     * - 空の配列, 長さが 1 の配列の場合はそのまま返すこと
+     * - 第 2 引数を指定しない場合, DefaultComparator のソート基準に従ってソートが行われること
+     * - 返り値の添字が連番で初期化されること
+     * 
      * @covers Peach_Util_Arrays::sort
      */
     public function testSort()
@@ -178,6 +193,12 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * asort() をテストします. 以下を確認します.
+     * 
+     * - 空の配列, 長さが 1 の配列の場合はそのまま返すこと
+     * - 第 2 引数を指定しない場合, DefaultComparator のソート基準に従ってソートが行われること
+     * - 返り値の添字が維持されること
+     * 
      * @covers Peach_Util_Arrays::asort
      */
     public function testAsort()
@@ -211,6 +232,8 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * 引数に指定された配列と値が連結されて 1 つの配列として返されることを確認します.
+     * 
      * @covers Peach_Util_Arrays::concat
      */
     public function testConcat()
@@ -236,6 +259,11 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * unique() をテストします. 以下を確認します.
+     * 
+     * - 2 度目以降に出現した値が取り除いた配列を返すこと
+     * - 配列のキーが維持されていること
+     * 
      * @covers Peach_Util_Arrays::unique
      */
     public function testUnique()
@@ -247,7 +275,6 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 
      * @return array
      */
     private static function getSampleArray()
@@ -269,7 +296,6 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 
      * @return array
      */
     private static function getSampleReverseArray()
@@ -279,7 +305,6 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 
      * @return array
      */
     private static function getSampleShuffleArray()
@@ -343,4 +368,3 @@ class Peach_Util_ArraysTest_Comparable implements Peach_Util_Comparable
         }
     }
 }
-?>

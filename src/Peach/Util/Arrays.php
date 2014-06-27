@@ -345,4 +345,3 @@ class Peach_Util_Arrays
         return $arr;
     }
 }
-?>

@@ -117,4 +117,3 @@ class Peach_Util_DefaultComparatorTest_C implements Peach_Util_Comparable
         return strcmp($this->name, $subject->name);
     }
 }
-?>

@@ -69,4 +69,3 @@ class Peach_Util_ArrayMapEntry extends Peach_Util_AbstractMapEntry
         return "[{$this->key}={$this->value}]";
     }
 }
-?>

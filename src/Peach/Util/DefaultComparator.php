@@ -163,4 +163,3 @@ class Peach_Util_DefaultComparator implements Peach_Util_Comparator
         return $instance;
     }
 }
-?>

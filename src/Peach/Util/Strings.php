@@ -143,7 +143,7 @@ class Peach_Util_Strings
     /**
      * ある文字列が指定された文字列で始まっているかどうかを判別します.
      * $prefix が空文字列の場合は TRUE を返します.
-     * 引数が文字列以外の場合は {@link Util_Strings::stringValue()} が適用されます.
+     * 引数が文字列以外の場合は {@link Peach_Util_Strings::stringValue()} が適用されます.
      * 
      * @param  string 検査対象の文字列
      * @param  string 開始する文字列
@@ -235,4 +235,3 @@ class Peach_Util_Strings
         return strtr($template, $replaces);
     }
 }
-?>

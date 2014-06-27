@@ -103,4 +103,3 @@ class Peach_Util_DefaultEquator implements Peach_Util_Equator
         return hexdec(substr(md5($str), 22));
     }
 }
-?>

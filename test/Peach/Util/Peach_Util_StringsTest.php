@@ -18,6 +18,12 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * explode() をテストします. 以下を確認します.
+     * 
+     * - オジリナルの explode() と同様の動作をすること
+     * - 第 1 引数が空文字列の場合に空配列を返すこと
+     * - 第 2 引数が文字列以外の値だった場合は stringValue() の結果が適用されること
+     * 
      * @covers Peach_Util_Strings::explode
      */
     public function testExplode()
@@ -29,6 +35,7 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * 文字列が "\r", "\n", "\r\n" で分割されることを確認します.
      * @covers Peach_Util_Strings::getLines
      */
     public function testGetLines()
@@ -39,6 +46,13 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * isWhitespace() をテストします. 以下を確認します.
+     * 
+     * - 空文字列, null, false の場合 true を返す
+     * - 半角スペース, TAB, 改行文字のみで構成された文字列の場合 true を返す
+     * - 0 を含む数値型の値の場合 false を返す
+     * - その他の文字が 1 文字以上含まれる場合 false を返す
+     * 
      * @covers Peach_Util_Strings::isWhitespace
      */
     public function testIsWhitespace()
@@ -53,6 +67,13 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * basedir() をテストします. 以下を確認します.
+     * 
+     * - 引数が "/" 以外の文字列で終了している場合は末尾に "/" を付けた文字列を返す
+     * - 引数が "/" で終了している場合は引数をそのまま返す
+     * - 引数が空文字列の場合は空文字列を返す
+     * - 引数が文字列型でない場合は文字列型に変換してから適用する
+     * 
      * @covers Peach_Util_Strings::basedir
      */
     public function testBasedir()
@@ -66,6 +87,12 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * getRawIndex() をテストします. 以下を確認します.
+     * 
+     * - 第 1 引数の中で第 2 引数の文字が出現する位置を返す
+     * - ヒットした文字が "\" でエスケープされている場合は無視する
+     * - 見つからない場合は false を返す
+     * 
      * @covers Peach_Util_Strings::getRawIndex
      */
     public function testGetRawIndex()
@@ -78,6 +105,12 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * startsWith() をテストします. 以下を確認します.
+     * 
+     * - 第 1 引数の文字列の先頭が第 2 引数の文字列に合致した場合に true, それ以外は false を返す
+     * - 第 2 引数が空文字列の場合は true を返す
+     * - 引数が文字列型でない場合は文字列に変換してから適用する
+     * 
      * @covers Peach_Util_Strings::startsWith
      */
     public function testStartsWith()
@@ -108,6 +141,11 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * endsWithRawChar() をテストします. 以下を確認します.
+     * 
+     * - 第 1 引数の文字列の末尾が第 2 引数の文字列に合致した場合に true, それ以外は false を返す
+     * - ヒットした文字列が "\" でエスケープされている場合は false を返す
+     * 
      * @covers Peach_Util_Strings::endsWithRawChar
      */
     public function testEndsWithRawChar()
@@ -120,8 +158,12 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * template() をテストします. 以下を確認します.
+     * 
+     * - 第 2 引数に空の配列を指定した場合は第 1 引数をそのまま返すこと
+     * - 第 2 引数に指定した配列で第 1 引数のテンプレートが置換されること
+     * 
      * @covers Peach_Util_Strings::template
-     * @todo   Implement testTemplate().
      */
     public function testTemplate()
     {
@@ -166,4 +208,3 @@ class Peach_Util_StringsTest_Object
         return $this->value;
     }
 }
-?>

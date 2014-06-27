@@ -58,4 +58,3 @@ class Peach_Util_HashMapEntry extends Peach_Util_AbstractMapEntry
         $this->value = $value;
     }
 }
-?>

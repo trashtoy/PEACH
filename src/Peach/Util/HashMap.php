@@ -352,4 +352,3 @@ class Peach_Util_HashMap implements Peach_Util_Map
         return ($this->capacity - 1) & $hash;
     }
 }
-?>

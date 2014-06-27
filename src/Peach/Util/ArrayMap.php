@@ -198,4 +198,3 @@ class Peach_Util_ArrayMap implements Peach_Util_Map
         return $this->data;
     }
 }
-?>

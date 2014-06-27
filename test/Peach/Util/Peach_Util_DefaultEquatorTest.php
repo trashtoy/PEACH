@@ -24,6 +24,11 @@ class Peach_Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * getInstance() をテストします. 以下を確認します.
+     * 
+     * - 返り値が DefaultEquator 型であること
+     * - 何回実行しても同一のオブジェクトを返すこと
+     * 
      * @covers Peach_Util_DefaultEquator::getInstance
      */
     public function testGetInstance()
@@ -33,8 +38,17 @@ class Peach_Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame("Peach_Util_DefaultEquator", get_class($obj1));
         $this->assertTrue($obj1 === $obj2);
     }
-
+    
     /**
+     * equate() をテストします. 返り値が以下のようになることを確認します.
+     * 
+     * - 等価な整数と浮動小数点数 (-10 と -10.0 など) を比較した場合 true
+     * - とある数値とその数値の文字列表現 (15 と "15" など) を比較した場合 true
+     * - 「2a問題」("2a" と 2 など) の比較は false
+     * - 論理値と数値 (true と 1 など) を比較した場合 false
+     * - 等価なオブジェクト同士は true (そうでない場合 false)
+     * - 同じキーと値から成り立つ配列同士は true (そうでない場合 false)
+     * 
      * @covers Peach_Util_DefaultEquator::equate
      */
     public function testEquate()
@@ -55,8 +69,14 @@ class Peach_Util_DefaultEquatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($e->equate($arr1, $arr2));
         $this->assertTrue($e->equate($arr2,  $arr3));
     }
-
+    
     /**
+     * hashCode() をテストします. 返り値が以下のようになることを確認します.
+     * 
+     * - null, false, 空の配列 は 0
+     * - 数値の場合, その数値の整数部分の絶対値
+     * - 等価な値 (またはオブジェクト) の場合は同じハッシュ値となること
+     * 
      * @covers Peach_Util_DefaultEquator::hashCode
      */
     public function testHashCode()
@@ -84,4 +104,3 @@ class Peach_Util_DefaultEquatorTest_Object
         $this->value = $value;
     }
 }
-?>
