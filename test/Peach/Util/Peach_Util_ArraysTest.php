@@ -40,6 +40,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - Peach_Util_Comparable を実装しているオブジェクトの場合, 
      *   compareTo() メソッドを使って大小を比較すること
      * - 空の配列が指定された場合は null を返すこと
+     * - Comparator が指定された場合はその Comparator の仕様に従って比較すること
      * 
      * @covers Peach_Util_Arrays::max
      */
@@ -57,6 +58,10 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($test2[2], Peach_Util_Arrays::max($test2));
         
         $this->assertNull(Peach_Util_Arrays::max(array()));
+        
+        $comparator = new Peach_Util_ArraysTest_Comparator();
+        $result     = Peach_Util_Arrays::max(array("three", "one", "five", "two", "four"), $comparator);
+        $this->assertSame("five", $result);
     }
 
     /**
@@ -67,6 +72,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - Peach_Util_Comparable を実装しているオブジェクトの場合, 
      *   compareTo() メソッドを使って大小を比較すること
      * - 空の配列が指定された場合は null を返すこと
+     * - Comparator が指定された場合はその Comparator の仕様に従って比較すること
      * 
      * @covers Peach_Util_Arrays::min
      */
@@ -84,6 +90,10 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($test2[1], Peach_Util_Arrays::min($test2));
         
         $this->assertNull(Peach_Util_Arrays::max(array()));
+        
+        $comparator = new Peach_Util_ArraysTest_Comparator();
+        $result     = Peach_Util_Arrays::min(array("three", "one", "five", "two", "four"), $comparator);
+        $this->assertSame("one", $result);
     }
 
     /**
@@ -366,5 +376,34 @@ class Peach_Util_ArraysTest_Comparable implements Peach_Util_Comparable
         } else {
             throw new Exception();
         }
+    }
+}
+
+class Peach_Util_ArraysTest_Comparator implements Peach_Util_Comparator
+{
+    /**
+     * @param  string $var1
+     * @param  string $var2
+     * @return int
+     */
+    public function compare($var1, $var2)
+    {
+        return $this->convert($var1) - $this->convert($var2);
+    }
+    
+    /**
+     * @param  string $var
+     * @return int
+     */
+    private function convert($var)
+    {
+        static $names = array(
+            "one"   => 1,
+            "two"   => 2,
+            "three" => 3,
+            "four"  => 4,
+            "five"  => 5,
+        );
+        return array_key_exists($var, $names) ? $names[$var] : 0;
     }
 }
