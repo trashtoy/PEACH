@@ -89,7 +89,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($test2[1], Peach_Util_Arrays::min($test2));
         
-        $this->assertNull(Peach_Util_Arrays::max(array()));
+        $this->assertNull(Peach_Util_Arrays::min(array()));
         
         $comparator = new Peach_Util_ArraysTest_Comparator();
         $result     = Peach_Util_Arrays::min(array("three", "one", "five", "two", "four"), $comparator);
