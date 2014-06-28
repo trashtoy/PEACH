@@ -28,6 +28,41 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * コンストラクタをテストします. 以下を確認します.
+     * 
+     * - 引数を指定しない場合は空の HashMap が生成されること
+     * - 引数に配列を指定した場合, その配列のキーと値をマッピングした HashMap が生成されること
+     * - 引数に Map を指定した場合, その Map と同じマッピングの HashMap が生成されること
+     */
+    public function test__construct()
+    {
+        $map1 = new Peach_Util_ArrayMap();
+        $this->assertSame(0, $map1->size());
+        
+        $arr  = array("first" => 1, "second" => 2, "third" => 3);
+        $map2 = new Peach_Util_HashMap($arr);
+        $this->assertSame(3, $map2->size());
+        $this->assertSame(1, $map2->get("first"));
+        
+        $map3 = new Peach_Util_HashMap($map2);
+        $this->assertSame(3, $map3->size());
+        $map3->put("second", 20);
+        $this->assertSame(20, $map3->get("second"));
+        $this->assertSame(2,  $map2->get("second"));
+    }
+    
+    /**
+     * 引数に Map, 配列以外の型を指定した場合
+     * InvalidArgumentException をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     */
+    public function test__constructFail()
+    {
+        new Peach_Util_HashMap("Invalid type");
+    }
+    
+    /**
      * {@link Peach_Util_HashMap::put()} をテストします.
      * 以下を確認します.
      * 

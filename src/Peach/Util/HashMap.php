@@ -96,7 +96,7 @@ class Peach_Util_HashMap implements Peach_Util_Map
      *                                        (NULL の場合は {@link Peach_Util_DefaultEquator} が適用されます)
      * @param  int                  $capacity 容量 (デフォルトは 16, 最小で 2)
      */
-    public function __construct(Peach_Util_Map $map = null, Peach_Util_Equator $e = null, $capacity = 16)
+    public function __construct($map = null, Peach_Util_Equator $e = null, $capacity = 16)
     {
         $this->table    = array();
         $this->equator  = isset($e) ? $e : Peach_Util_DefaultEquator::getInstance();
@@ -130,7 +130,7 @@ class Peach_Util_HashMap implements Peach_Util_Map
             return;
         }
         
-        throw new Exception("\$map must be Peach_Util_Map or array.");
+        throw new InvalidArgumentException("Argument (" . Peach_Util_Values::getType($map) . ") must be array or Peach_Util_Map");
     }
     
     /**
