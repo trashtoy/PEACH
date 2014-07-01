@@ -70,7 +70,15 @@ class Peach_Util_DefaultComparator implements Peach_Util_Comparator
         var_dump($var);
         $data = ob_get_contents();
         ob_end_clean();
-        return preg_replace("/^object\\((\\w+)\\)#(\\d+)/", "object($1)", $data);
+        
+        $classNamePattern = "([a-zA-Z_\\x7f-\\xff][a-zA-Z0-9\\\\_\\x7f-\\xff]*)";
+        if (preg_match("/^object\\({$classNamePattern}\\)#(\\d+)/", $data)) {
+            return preg_replace("/^object\\({$classNamePattern}\\)#(\\d+)/", "$1", $data);
+        }
+        if (preg_match("/^class {$classNamePattern}#(\\d+)/", $data)) {
+            return preg_replace("/^class {$classNamePattern}#(\\d+)/", "$1", $data);
+        }
+        return $data;
     }
     
     /**
