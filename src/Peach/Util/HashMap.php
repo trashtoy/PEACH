@@ -256,7 +256,7 @@ class Peach_Util_HashMap implements Peach_Util_Map
      * マッピングが存在する場合に TRUE を返します.
      * 
      * @param  mixed   キー
-     * @return boolean マッピングが存在する場合に TRUE
+     * @return bool    マッピングが存在する場合に TRUE
      */
     public function containsKey($key)
     {

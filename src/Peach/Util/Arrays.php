@@ -160,7 +160,7 @@ class Peach_Util_Arrays
     /**
      * @param  string  $value
      * @param  string  $type
-     * @return boolean
+     * @return bool
      */
     private static function pickupMatch($value, $type)
     {

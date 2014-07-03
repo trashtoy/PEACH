@@ -77,7 +77,7 @@ class Peach_Util_Strings
     /**
      * 指定された文字列が空白文字の集合からなる文字列かどうかを返します.
      * @param  string
-     * @return boolean 引数が NULL, 空文字列, "\r", "\n", "\t", 
+     * @return bool    引数が NULL, 空文字列, "\r", "\n", "\t",
      *                 半角スペースから成る文字列の場合に TRUE, それ以外は FALSE
      */
     public static function isWhitespace($str)
