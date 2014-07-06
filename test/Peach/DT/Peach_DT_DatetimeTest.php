@@ -41,8 +41,7 @@ class Peach_DT_DatetimeTest extends Peach_DT_AbstractTimeTest
     }
     
     /**
-     * parse に成功した場合に Peach_DT_Datetime オブジェクト,
-     * 失敗した場合に Exception をスローすることを確認します.
+     * parse に成功した場合に Peach_DT_Datetime オブジェクト を返すことを確認します.
      * 
      * @covers Peach_DT_Datetime::parse
      */
@@ -50,14 +49,18 @@ class Peach_DT_DatetimeTest extends Peach_DT_AbstractTimeTest
     {
         $d = Peach_DT_Datetime::parse("2011-05-21 07:30");
         $this->assertEquals(new Peach_DT_Datetime(2011, 5, 21, 7, 30), $d);
-        try {
-            Peach_DT_Datetime::parse("Illegal Format");
-            $this->fail(); // Exception が発生しなかった場合は FAIL
-        } catch (Exception $e) {
-            $this->assertTrue($e instanceof Exception);
-        }
     }
-
+    
+    /**
+     * parse に失敗した場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_Datetime::parse
+     */
+    public function testParseFail()
+    {
+        Peach_DT_Datetime::parse("Illegal Format");
+    }
+    
     /**
      * {@link Peach_DT_Time::TYPE_DATETIME} を返すことを確認します.
      * @covers Peach_DT_Datetime::getType

@@ -64,10 +64,8 @@ class Peach_DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * parseDate() のテストです. 以下を確認します.
-     * 
-     * - "YYYY-MM-DD" 形式の文字列を, 対応する Peach_DT_Date オブジェクトに変換すること
-     * - 不正なフォーマットの場合に Exception をスローすること
+     * "YYYY-MM-DD" 形式の文字列を,
+     * 対応する Peach_DT_Date オブジェクトに変換することを確認します.
      * 
      * @covers Peach_DT_W3cDatetimeFormat::parseDate
      */
@@ -78,20 +76,23 @@ class Peach_DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->objects as $obj) {
             $this->assertEquals($expect, $obj->parseDate($format));
         }
-        try {
-            $obj = $this->objects[0];
-            $obj->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
     }
     
     /**
-     * parseDatetime() のテストです. 以下を確認します.
+     * 不正なフォーマットの場合に InvalidArgumentException をスローすることを確認します.
      * 
-     * - "YYYY-MM-DD?hh:mm" 形式の文字列を, 対応する Peach_DT_Datetime オブジェクトに変換すること
-     * - 不正なフォーマットの場合に Exception をスローすること
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_W3cDatetimeFormat::parseDate
+     */
+    public function testParseDateFail()
+    {
+        $obj = $this->objects[0];
+        $obj->parseDate("foobar");
+    }
+    
+    /**
+     * "YYYY-MM-DD?hh:mm" 形式の文字列を,
+     * 対応する Peach_DT_Datetime オブジェクトに変換することを確認します.
      * 
      * @covers Peach_DT_W3cDatetimeFormat::parseDatetime
      */
@@ -107,19 +108,23 @@ class Peach_DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase
         foreach ($format as $f) {
             $this->assertEquals($expect, $obj->parseDatetime($f));
         }
-        try {
-            $obj->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
     }
     
     /**
-     * 以下を確認します.
+     * 不正なフォーマットの場合に InvalidArgumentException をスローすることを確認します.
      * 
-     * - "YYYY-MM-DD?hh:mm:ss" 形式の文字列を, 対応する Peach_DT_Timestamp オブジェクトに変換すること
-     * - 不正なフォーマットの場合に Exception をスローすること
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_W3cDatetimeFormat::parseDatetime
+     */
+    public function testParseDatetimeFail()
+    {
+        $obj = $this->objects[0];
+        $obj->parseDatetime("foobar");
+    }
+    
+    /**
+     * "YYYY-MM-DD?hh:mm:ss" 形式の文字列を,
+     * 対応する Peach_DT_Timestamp オブジェクトに変換することを確認します
      * 
      * @covers Peach_DT_W3cDatetimeFormat::parseTimestamp
      */
@@ -135,12 +140,18 @@ class Peach_DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase
         foreach ($format as $f) {
             $this->assertEquals($expect, $obj->parseTimestamp($f));
         }
-        try {
-            $obj->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 不正なフォーマットの場合に InvalidArgumentException をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_W3cDatetimeFormat::parseTimestamp
+     */
+    public function testParseTimestampFail()
+    {
+        $obj = $this->objects[0];
+        $obj->parseTimestamp("foobar");
     }
     
     /**

@@ -256,9 +256,14 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
         return $this->formatDatetime($d);
     }
     
+    /**
+     * @param  string $format
+     * @param  string $expected
+     * @throws InvalidArgumentException
+     */
     private function throwFormatException($format, $expected)
     {
-        throw new Exception("Illegal format({$format}). Expected: {$expected}");
+        throw new InvalidArgumentException("Illegal format({$format}). Expected: {$expected}");
     }
     
     /**

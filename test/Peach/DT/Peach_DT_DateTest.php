@@ -39,8 +39,7 @@ class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
     }
     
     /**
-     * parse に成功した場合に Peach_DT_Date オブジェクト,
-     * 失敗した場合に Exception をスローすることを確認します.
+     * parse に成功した場合に Peach_DT_Date オブジェクト を返すことを確認します.
      * 
      * @covers Peach_DT_Date::parse
      */
@@ -48,12 +47,16 @@ class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
     {
         $d = Peach_DT_Date::parse("2011-05-21");
         $this->assertEquals(new Peach_DT_Date(2011, 5, 21), $d);
-        try {
-            Peach_DT_Date::parse("Illegal Format");
-            $this->fail(); // Exception が発生しなかった場合は FAIL
-        } catch (Exception $e) {
-            $this->assertTrue($e instanceof Exception);
-        }
+    }
+    
+    /**
+     * parse に失敗した場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_Date::parse
+     */
+    public function testParseFail()
+    {
+        Peach_DT_Date::parse("Illegal Format");
     }
     
     /**
@@ -342,7 +345,7 @@ class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
         }
         foreach ($invalid as $key) {
             $this->assertNull($time->get($key));
-        };
+        }
     }
     
     /**
@@ -407,7 +410,7 @@ class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
      * 以下を確認します.
      * 
      * - 配列を引数にして日付の設定が出来ること
-     * - Util_Map を引数にして日付の設定が出来ること
+     * - Peach_Util_Map を引数にして日付の設定が出来ること
      * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
      * - 配列・Map 以外の型を指定した場合に例外をスローすること
      */
