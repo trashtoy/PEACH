@@ -143,4 +143,3 @@ class Peach_DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
         }
     }
 }
-?>

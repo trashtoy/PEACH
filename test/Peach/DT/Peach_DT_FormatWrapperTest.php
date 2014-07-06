@@ -93,4 +93,3 @@ class Peach_DT_FormatWrapperTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 15), $this->object->parseTimestamp("2012-05-21T07:30:15"));
     }
 }
-?>

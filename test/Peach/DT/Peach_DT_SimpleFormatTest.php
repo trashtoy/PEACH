@@ -216,4 +216,3 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         }
     }
 }
-?>

@@ -21,4 +21,3 @@ abstract class Peach_DT_AbstractTimeTest extends PHPUnit_Framework_TestCase
     
     public abstract function testFormatTime();
 }
-?>

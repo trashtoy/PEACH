@@ -195,7 +195,7 @@ class Peach_Util_ArrayMapTest extends PHPUnit_Framework_TestCase
     /**
      * 返される配列が ArrayMap の各マッピングと同じキー・値を持つことを確認します.
      *  
-     * @covers Peach\Util\ArrayMap::asArray
+     * @covers Peach_Util_ArrayMap::asArray
      */
     public function testAsArray()
     {

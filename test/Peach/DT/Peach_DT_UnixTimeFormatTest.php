@@ -106,4 +106,3 @@ class Peach_DT_UnixTimeFormatTest extends PHPUnit_Framework_TestCase
         $this->assertSame($this->testTime, $this->object->formatTimestamp(new Peach_DT_Timestamp(2009, 2, 14, 8, 31, 30)));
     }
 }
-?>

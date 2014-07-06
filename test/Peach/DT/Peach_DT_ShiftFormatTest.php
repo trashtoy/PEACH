@@ -107,4 +107,3 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
         $this->assertSame("2012.05.20 17:30:45", $this->object->formatTimestamp(new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 45)));
     }
 }
-?>

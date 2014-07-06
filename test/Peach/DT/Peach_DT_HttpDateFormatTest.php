@@ -150,4 +150,3 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         $this->assertSame("Fri, 13 Feb 2009 23:31:30 GMT", $this->object->formatTimestamp($d));
     }
 }
-?>
