@@ -271,4 +271,3 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
         }
     }
 }
-?>

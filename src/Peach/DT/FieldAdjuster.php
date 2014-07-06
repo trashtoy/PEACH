@@ -90,8 +90,10 @@ class Peach_DT_FieldAdjuster
         $min        = $this->min;
         $field      = $fields->get($key);
         $upperField = $fields->get($upperKey);
-        if ($field <= $max) return;
-
+        if ($field <= $max) {
+            return;
+        }
+        
         $range  = $max - $min + 1;
         $amount = intval(($field - $min) / $range);
         $fields->put($upperKey, $upperField + $amount);
@@ -113,12 +115,13 @@ class Peach_DT_FieldAdjuster
         $min        = $this->min;
         $field      = $fields->get($key);
         $upperField = $fields->get($upperKey);
-        if ($min <= $field) return;
-
+        if ($min <= $field) {
+            return;
+        }
+        
         $range  = $max - $min + 1;
         $amount = intval(($min - $field - 1) / $range) + 1;
         $fields->put($upperKey, $upperField - $amount);
         $fields->put($key, $max - ($min - $field - 1) % $range);
     }
 }
-?>

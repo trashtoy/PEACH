@@ -150,7 +150,7 @@ interface Peach_DT_Time extends Peach_Util_Comparable
      * <code>array("year" => 2010, "month" => 8, "date" => 31)</code>
      * などの配列か, または同様の Map オブジェクトを指定してください.
      * 
-     * @param  Peach_Util_Map|array フィールドと値の一覧
+     * @param  Peach_Util_Map|array $subject フィールドと値の一覧
      * @return Peach_DT_Time        設定後の時間オブジェクト
      */
     public function setAll($subject);

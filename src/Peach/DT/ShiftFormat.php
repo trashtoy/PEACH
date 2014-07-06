@@ -147,4 +147,3 @@ class Peach_DT_ShiftFormat extends Peach_DT_FormatWrapper
         return $d->add("minute", $this->internalOffset - $this->externalOffset);
     }
 }
-?>

@@ -172,4 +172,3 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
             $var->get("second") * 28629151;   // 31^5
     }
 }
-?>

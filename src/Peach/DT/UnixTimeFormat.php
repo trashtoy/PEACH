@@ -53,8 +53,8 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     /**
      * 指定されたタイムスタンプを Peach_DT_Date に変換します.
      * 
-     * @param  string  タイムスタンプ
-     * @return Peach_DT_Date 変換結果
+     * @param  string $format タイムスタンプ
+     * @return Peach_DT_Date  変換結果
      */
     public function parseDate($format)
     {
@@ -68,7 +68,7 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     /**
      * 指定されたタイムスタンプを Peach_DT_Datetime に変換します.
      * 
-     * @param  string      タイムスタンプ
+     * @param  string $format    タイムスタンプ
      * @return Peach_DT_Datetime 変換結果
      */
     public function parseDatetime($format)
@@ -84,7 +84,7 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     
     /**
      * 指定されたタイムスタンプを Peach_DT_Timestamp に変換します.
-     * @param  string       タイムスタンプ
+     * @param  string $format     タイムスタンプ
      * @return Peach_DT_Timestamp 変換結果
      */
     public function parseTimestamp($format)
@@ -148,4 +148,3 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
         return strval(mktime($hour, $min, $sec, $month, $date, $year));
     }
 }
-?>

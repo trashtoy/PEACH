@@ -69,9 +69,9 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
      * を使って解析を行います.
      * ("YYYY-MM-DD" 形式の文字列を受理します.)
      * 
-     * @param  string    変換対象の文字列
-     * @param  Peach_DT_Format 変換に使用するフォーマット
-     * @return Peach_DT_Date   変換結果の Peach_DT_Date オブジェクト
+     * @param  string          $text   変換対象の文字列
+     * @param  Peach_DT_Format $format 変換に使用するフォーマット
+     * @return Peach_DT_Date           変換結果の Peach_DT_Date オブジェクト
      */
     public static function parse($text, Peach_DT_Format $format = null)
     {

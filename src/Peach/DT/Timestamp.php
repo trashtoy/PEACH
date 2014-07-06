@@ -58,9 +58,9 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
      * ("YYYY-MM-DD hh:mm:ss" 形式の文字列を受理します. 
      * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
      * 
-     * @param  string       変換対象の文字列
-     * @param  Peach_DT_Format    変換に使用するフォーマット
-     * @return Peach_DT_Timestamp 変換結果
+     * @param  string             $text   変換対象の文字列
+     * @param  Peach_DT_Format    $format 変換に使用するフォーマット
+     * @return Peach_DT_Timestamp         変換結果
      */
     public static function parse($text, Peach_DT_Format $format = null)
     {
@@ -113,8 +113,8 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
     /**
      * この時間と指定された時間を比較します. 
      * 
-     * @param  Peach_DT_Time 比較対象の時間
-     * @return int     この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
+     * @param  Peach_DT_Time $time 比較対象の時間
+     * @return int                 この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
      * @ignore
      */
     protected function compareFields(Peach_DT_Time $time)
@@ -154,7 +154,7 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
     
     /**
      * (non-PHPdoc)
-     * @see DT/Peach_DT_Time#newInstance($fields)
+     * @see Peach_DT_Time::newInstance()
      * @ignore
      */
     protected function newInstance(Peach_Util_Map $fields)

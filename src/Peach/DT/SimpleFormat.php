@@ -338,4 +338,3 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         throw new Exception("Illegal format({$format}). Expected: {$expected}");
     }
 }
-?>

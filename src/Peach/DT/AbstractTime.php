@@ -189,7 +189,9 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      */
     public function equals($obj)
     {
-        if (get_class($this) != get_class($obj)) return false;
+        if (get_class($this) != get_class($obj)) {
+            return false;
+        }
         return $this->compareTo($obj) === 0;
     }
     
@@ -329,7 +331,9 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
     protected static function getDayOf($y, $m, $d)
     {
         static $m_sub = array(0, 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4);
-        if ($m < 3) $y --;
+        if ($m < 3) {
+            $y --;
+        }
         return ($y + intval($y / 4) - intval($y / 100) + intval($y / 400) + $m_sub[$m] + $d) % 7;
     }
     
@@ -370,4 +374,3 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
         return -1;
     }
 }
-?>

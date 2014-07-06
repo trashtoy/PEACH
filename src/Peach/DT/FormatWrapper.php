@@ -112,4 +112,3 @@ class Peach_DT_FormatWrapper implements Peach_DT_Format
         return $this->original->parseTimestamp($format);
     }
 }
-?>
