@@ -286,7 +286,8 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * - 配列を引数にして日付の設定が出来ること
      * - Util_Map を引数にして日付の設定が出来ること
      * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
-     * - 配列・Map 以外の型を指定した場合に例外をスローすること
+     * 
+     * @covers Peach_DT_Timestamp::setAll
      */
     public function testSetAll()
     {
@@ -303,12 +304,16 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
         
         // 2012-05-21T-3:131:-85 => 2012-05-20T21:131:-85 => 2012-05-20T23:11:-85 => 2012-05-20T23:09:45
         $this->assertEquals(new Peach_DT_Timestamp(2012, 5, 20, 23, 9, 35), $d->setAll(array("hour" => -3, "min" => 131, "sec" => -85)));
-        
-        try {
-            $d->setAll("hoge");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 配列・Map 以外の型を指定した場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_Timestamp::setAll
+     */
+    public function testSetAllFail()
+    {
+        $d = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $d->setAll("hoge");
     }
 }

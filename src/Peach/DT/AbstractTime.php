@@ -121,7 +121,7 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
             $subject = new Peach_Util_ArrayMap($subject);
         }
         if (!($subject instanceof Peach_Util_Map)) {
-            throw new Exception();
+            throw new InvalidArgumentException("Argument (" . Peach_Util_Values::getType($subject) . ") must be array or Peach_Util_Map");
         }
         $newFields = new Peach_Util_ArrayMap($this->fields);
         $entryList = $subject->entryList();
