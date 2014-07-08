@@ -269,7 +269,7 @@ class Peach_DT_DatetimeTest extends Peach_DT_AbstractTimeTest
         }
         foreach ($invalid as $key) {
             $this->assertNull($time->get($key));
-        };
+        }
     }
     
     /**

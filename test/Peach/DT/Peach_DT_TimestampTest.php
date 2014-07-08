@@ -284,7 +284,7 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * 以下を確認します.
      * 
      * - 配列を引数にして日付の設定が出来ること
-     * - Util_Map を引数にして日付の設定が出来ること
+     * - Peach_Util_Map を引数にして日付の設定が出来ること
      * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
      * 
      * @covers Peach_DT_Timestamp::setAll
