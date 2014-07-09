@@ -316,4 +316,14 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
         $d = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 15);
         $d->setAll("hoge");
     }
+    
+    /**
+     * 形式が "YYYY-MM-DD hh:mm:ss" 形式になっていることを確認します.
+     * @covers Peach_DT_Timestamp::__toString
+     */
+    public function test__toString()
+    {
+        $t = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertSame("2012-05-21 07:30:15", $t->__toString());
+    }
 }
