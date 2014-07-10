@@ -11,6 +11,11 @@ class Peach_DT_W3cDatetimeFormatTest extends PHPUnit_Framework_TestCase
     protected $objects;
     
     /**
+     * @var string
+     */
+    private $defaultTZ;
+    
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */

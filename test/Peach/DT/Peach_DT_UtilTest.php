@@ -5,6 +5,11 @@
 class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @var string
+     */
+    private $defaultTZ;
+    
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
