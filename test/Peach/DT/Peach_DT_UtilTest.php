@@ -33,16 +33,20 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      */
     private function getTestArray()
     {
-        $d   = array();
-        $d[] = new Peach_DT_Date(     2012, 3,  29);
-        $d[] = new Peach_DT_Datetime( 2012, 3,  29, 21, 59);
-        $d[] = new Peach_DT_Timestamp(2012, 3,  29, 21, 59, 59);
-        $d[] = new Peach_DT_Date(     2012, 5,  21);
-        $d[] = new Peach_DT_Datetime( 2012, 5,  21,  7, 30);
-        $d[] = new Peach_DT_Timestamp(2012, 5,  21,  7, 30, 15);
-        $d[] = new Peach_DT_Date(     2012, 10,  5);
-        $d[] = new Peach_DT_Datetime( 2012, 10,  5, 19,  0);
-        $d[] = new Peach_DT_Timestamp(2012, 10,  5, 19,  0, 30);
+        static $d = null;
+        if ($d === null) {
+            $d = array(
+                new Peach_DT_Date     (2012, 3,  29),
+                new Peach_DT_Datetime (2012, 3,  29, 21, 59),
+                new Peach_DT_Timestamp(2012, 3,  29, 21, 59, 59),
+                new Peach_DT_Date     (2012, 5,  21),
+                new Peach_DT_Datetime (2012, 5,  21,  7, 30),
+                new Peach_DT_Timestamp(2012, 5,  21,  7, 30, 15),
+                new Peach_DT_Date     (2012, 10,  5),
+                new Peach_DT_Datetime (2012, 10,  5, 19,  0),
+                new Peach_DT_Timestamp(2012, 10,  5, 19,  0, 30),
+            );
+        }
         return $d;
     }
     
@@ -78,14 +82,17 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
         /*
          * ラッパーオブジェクトを含めたテスト
          */
-        $d2   = array();
-        $d2[] = new Peach_DT_Date(2012, 5, 21);
-        $d2[] = new Peach_DT_Datetime(2012, 5, 21, 0, 0);
-        $d2[] = new Peach_DT_Timestamp(2012, 5, 21, 0, 0, 0);
-        $d2[] = new Peach_DT_TimeWrapper($d2[0]);
-        $d2[] = new Peach_DT_TimeWrapper($d2[1]);
-        $d2[] = new Peach_DT_TimeWrapper($d2[2]);
-        
+        $obj1 = new Peach_DT_Date(2012, 5, 21);
+        $obj2 = new Peach_DT_Datetime(2012, 5, 21, 0, 0);
+        $obj3 = new Peach_DT_Timestamp(2012, 5, 21, 0, 0, 0);
+        $d2   = array(
+            $obj1,
+            $obj2,
+            $obj3,
+            new Peach_DT_TimeWrapper($obj1),
+            new Peach_DT_TimeWrapper($obj2),
+            new Peach_DT_TimeWrapper($obj3),
+        );
         $zeroTest1 = array(0, 1, 2, 3, 4, 5);
         $zeroTest2 = array(3, 4, 5, 0, 1, 2);
         $subTest1  = array(1, 2, 2, 4, 5, 5);
