@@ -112,8 +112,8 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      * <code>array("year" => 2010, "month" => 8, "date" => 31)</code>
      * などの配列か, または同様の Map オブジェクトを指定してください.
      * 
-     * @param  Peach_Util_Map|array フィールドと値の一覧
-     * @return Peach_DT_Time        設定後の時間オブジェクト
+     * @param  Peach_Util_Map|array $subject フィールドと値の一覧
+     * @return Peach_DT_Time                 設定後の時間オブジェクト
      */
     public final function setAll($subject)
     {
@@ -134,9 +134,9 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
     
     /**
      * 引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.
-     * @param  string  対象のフィールド
-     * @param  int     加算する量. マイナスの場合は過去方向に移動する.
-     * @return Peach_DT_Time 設定後の時間オブジェクト
+     * @param  string $field  対象のフィールド
+     * @param  int    $amount 加算する量. マイナスの場合は過去方向に移動する.
+     * @return Peach_DT_Time  設定後の時間オブジェクト
      */
     public final function add($field, $amount)
     {
@@ -155,9 +155,9 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      * 
      * 例: 2012-05-21 (Peach_DT_Date) < 2012-05-21T00:00 (Peach_DT_Datetime) < 2012-05-21T00:00:00 (Peach_DT_Timestamp)
      * 
-     * @param  mixed  比較対象のオブジェクト
-     * @return int    この時間のほうが過去の場合は負の値, 未来の場合は正の値, 等しい場合は 0.
-     *                ただし, 引数が時間オブジェクトでない場合は NULL
+     * @param  mixed $obj 比較対象のオブジェクト
+     * @return int        この時間のほうが過去の場合は負の値, 未来の場合は正の値, 等しい場合は 0.
+     *                    ただし, 引数が時間オブジェクトでない場合は NULL
      */
     public final function compareTo($obj)
     {
@@ -272,7 +272,7 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      * 
      * このメソッドはサブクラスのコンストラクタ内で参照されます.
      * 
-     * @param Peach_Util_Map フィールド一覧
+     * @param Peach_Util_Map $fields フィールド一覧
      * @ignore
      */
     protected abstract function adjust(Peach_Util_Map $fields);
@@ -280,8 +280,8 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
     /**
      * 指定されたフィールドを持つ新しいインスタンスを構築します.
      * 
-     * @param  Peach_Util_Map 各種フィールド
-     * @return Peach_DT_Time
+     * @param  Peach_Util_Map $fields 各種フィールド
+     * @return Peach_DT_Time          新しいインスタンス
      * @ignore
      */
     protected abstract function newInstance(Peach_Util_Map $fields);

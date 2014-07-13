@@ -60,7 +60,7 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     
     /**
      * フォーマットの時差です (単位は分)
-     * @var type 
+     * @var int
      */
     private $externalOffset;
     

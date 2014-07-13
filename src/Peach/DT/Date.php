@@ -391,8 +391,8 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     
     /**
      * 指定された月の日数を返します.
-     * @param  int 年
-     * @param  int 月
+     * @param  int $year  年
+     * @param  int $month 月
      * @return int 引数で指定された月の日数. すなわち, 28 から 31 までの整数.
      */
     private static function getDateCountOf($year, $month)
