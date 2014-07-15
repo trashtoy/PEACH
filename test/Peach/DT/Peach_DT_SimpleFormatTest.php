@@ -5,7 +5,6 @@
 class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
 {
     /**
-     *
      * @var array
      */
     private $testFormats;
@@ -16,11 +15,13 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->testFormats = array(
-            array("YmdHis", "Y年n月j日G時f分b秒", "\\Y=Y \\n=n \\j=j \\H=H \\i=i \\s=s"),
-            array("Y/m/d",  "Y.n.j"),
-            array("H:i:s",  "G時f分b秒")
-        );
+        if ($this->testFormats === null) {
+            $this->testFormats = $this->createObject(array(
+                array("YmdHis", "Y年n月j日G時f分b秒", "\\Y=Y \\n=n \\j=j \\H=H \\i=i \\s=s"),
+                array("Y/m/d",  "Y.n.j"),
+                array("H:i:s",  "G時f分b秒")
+            ));
+        }
     }
     
     /**
@@ -29,14 +30,6 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-    }
-    
-    /**
-     * @return array
-     */
-    private function getObjectList()
-    {
-        return array_map("Peach_DT_SimpleFormatTest::createObject", $this->testFormats);
     }
     
     public static function createObject($arg)
@@ -115,7 +108,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         );
         for ($i = 0; $i < 3; $i++) {
             foreach ($testData[$i] as $entry) {
-                $object  = $entry->getObject();
+                $object  = $entry->getFormat();
                 $valid   = $entry->getValidText();
                 $invalid = $entry->getInvalidText();
                 $this->assertEquals($expected[$i], $object->parseDate($valid));
@@ -140,7 +133,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         );
         for ($i = 0; $i < 3; $i++) {
             foreach ($testData[$i] as $entry) {
-                $object  = $entry->getObject();
+                $object  = $entry->getFormat();
                 $valid   = $entry->getValidText();
                 $invalid = $entry->getInvalidText();
                 $this->assertEquals($expected[$i], $object->parseDatetime($valid));
@@ -165,7 +158,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         );
         for ($i = 0; $i < 3; $i ++) {
             foreach ($testData[$i] as $entry) {
-                $object  = $entry->getObject();
+                $object  = $entry->getFormat();
                 $valid   = $entry->getValidText();
                 $invalid = $entry->getInvalidText();
                 $this->assertEquals($expected[$i], $object->parseTimestamp($valid));
@@ -183,7 +176,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     public function testFormatDate()
     {
         $d    = new Peach_DT_Date(2012, 5, 21);
-        $obj  = $this->getObjectList();
+        $obj  = $this->testFormats;
         $test = array(
             array("20120521000000", "2012年5月21日0時0分0秒", "Y=2012 n=5 j=21 H=00 i=00 s=00"),
             array("2012/05/21",  "2012.5.21"),
@@ -202,7 +195,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     public function testFormatDatetime()
     {
         $d    = new Peach_DT_Datetime(2012, 5, 21, 7, 30);
-        $obj  = $this->getObjectList();
+        $obj  = $this->testFormats;
         $test = array(
             array("20120521073000", "2012年5月21日7時30分0秒", "Y=2012 n=5 j=21 H=07 i=30 s=00"),
             array("2012/05/21",  "2012.5.21"),
@@ -221,7 +214,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     public function testFormatTimestamp()
     {
         $d    = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 9);
-        $obj  = $this->getObjectList();
+        $obj  = $this->testFormats;
         $test = array(
             array("20120521073009", "2012年5月21日7時30分9秒", "Y=2012 n=5 j=21 H=07 i=30 s=09"),
             array("2012/05/21",  "2012.5.21"),
@@ -239,11 +232,6 @@ class Peach_DT_SimpleFormatTest_Entry
 {
     /**
      * @var Peach_DT_SimpleFormat
-     */
-    private $object;
-    
-    /**
-     * @var string
      */
     private $format;
     
@@ -264,7 +252,6 @@ class Peach_DT_SimpleFormatTest_Entry
      */
     public function __construct($format, $validText, $invalidText)
     {
-        $this->object      = new Peach_DT_SimpleFormat($format);
         $this->format      = $format;
         $this->validText   = $validText;
         $this->invalidText = $invalidText;
@@ -273,15 +260,6 @@ class Peach_DT_SimpleFormatTest_Entry
     /**
      * テスト対象の SimpleFormat です
      * @return Peach_DT_SimpleFormat
-     */
-    public function getObject()
-    {
-        return $this->object;
-    }
-    
-    /**
-     * SimpleFormat の初期化時に指定するフォーマットです
-     * @return string
      */
     public function getFormat()
     {
