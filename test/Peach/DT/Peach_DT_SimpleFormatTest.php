@@ -31,6 +31,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     {
     }
     
+    /**
+     * @return array
+     */
     private function getObjectList()
     {
         return array_map("Peach_DT_SimpleFormatTest::createObject", $this->testFormats);
@@ -45,6 +48,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         }
     }
     
+    /**
+     * @return array
+     */
     private function getParseDataList()
     {
         static $parseDataList = array(
@@ -65,25 +71,28 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         return array_map("Peach_DT_SimpleFormatTest::createTestDataList", $parseDataList, $this->testFormats);
     }
     
+    /**
+     * @param  array $dataList array(array(0 => テスト用のパース文字列, 1 => 失敗するパース文字列), ...)
+     * @param  array $formats  テストに使うフォーマットの一覧
+     * @return array Peach_DT_SimpleFormatTest_Entry の配列
+     */
     public static function createTestDataList($dataList, $formats)
     {
         return array_map("Peach_DT_SimpleFormatTest::createTestData", $dataList, $formats);
     }
     
     /*
-     * array(
-     *     0 => Peach_DT_SimpleFormat オブジェクト
-     *     1 => フォーマット
-     *     2 => テスト用のパース文字列
-     *     3 => 失敗するパース文字列
-     * )
+     * @param  array  $testData array(0 => テスト用のパース文字列, 1 => 失敗するパース文字列)
+     * @param  string $format   フォーマット
+     * @return Peach_DT_SimpleFormatTest_Entry
      */
     public static function createTestData($testData, $format)
     {
-        return array_merge(array(new Peach_DT_SimpleFormat($format), $format), $testData);
+        return new Peach_DT_SimpleFormatTest_Entry($format, $testData[0], $testData[1]);
     }
     
     /**
+     * コンストラクタの引数に指定した値を返すことを確認します.
      * @covers Peach_DT_SimpleFormat::getFormat
      */
     public function testGetFormat()
@@ -105,10 +114,13 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
             Peach_DT_Date::now()
         );
         for ($i = 0; $i < 3; $i++) {
-            foreach ($testData[$i] as $formats) {
-                $this->assertEquals($expected[$i], $formats[0]->parseDate($formats[2]));
+            foreach ($testData[$i] as $entry) {
+                $object  = $entry->getObject();
+                $valid   = $entry->getValidText();
+                $invalid = $entry->getInvalidText();
+                $this->assertEquals($expected[$i], $object->parseDate($valid));
                 try {
-                    $formats[0]->parseDate($formats[3]);
+                    $object->parseDate($invalid);
                     $this->fail();
                 } catch (Exception $e) {}
             }
@@ -127,10 +139,13 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
             Peach_DT_Datetime::now()->setAll(array("hour" => 8, "minute" => 6)),
         );
         for ($i = 0; $i < 3; $i++) {
-            foreach ($testData[$i] as $formats) {
-                $this->assertEquals($expected[$i], $formats[0]->parseDatetime($formats[2]));
+            foreach ($testData[$i] as $entry) {
+                $object  = $entry->getObject();
+                $valid   = $entry->getValidText();
+                $invalid = $entry->getInvalidText();
+                $this->assertEquals($expected[$i], $object->parseDatetime($valid));
                 try {
-                    $formats[0]->parseDatetime($formats[3]);
+                    $object->parseDatetime($invalid);
                     $this->fail();
                 } catch (Exception $e) {}
             }
@@ -149,10 +164,13 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
             Peach_DT_Timestamp::now()->setAll(array("hour" => 8, "minute" => 6, "second" => 4)),
         );
         for ($i = 0; $i < 3; $i ++) {
-            foreach ($testData[$i] as $formats) {
-                $this->assertEquals($expected[$i], $formats[0]->parseTimestamp($formats[2]));
+            foreach ($testData[$i] as $entry) {
+                $object  = $entry->getObject();
+                $valid   = $entry->getValidText();
+                $invalid = $entry->getInvalidText();
+                $this->assertEquals($expected[$i], $object->parseTimestamp($valid));
                 try {
-                    $formats[0]->parseTimestamp($formats[3]);
+                    $formats[0]->parseTimestamp($invalid);
                     $this->fail();
                 } catch (Exception $e) {}
             }
@@ -214,5 +232,77 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
                 $this->assertSame($test[$i][$j], $obj[$i][$j]->formatTimestamp($d));
             }
         }
+    }
+}
+
+class Peach_DT_SimpleFormatTest_Entry
+{
+    /**
+     * @var Peach_DT_SimpleFormat
+     */
+    private $object;
+    
+    /**
+     * @var string
+     */
+    private $format;
+    
+    /**
+     * @var string
+     */
+    private $validText;
+    
+    /**
+     * @var string
+     */
+    private $invalidText;
+    
+    /**
+     * @param string $format
+     * @param string $validText
+     * @param string $invalidText
+     */
+    public function __construct($format, $validText, $invalidText)
+    {
+        $this->object      = new Peach_DT_SimpleFormat($format);
+        $this->format      = $format;
+        $this->validText   = $validText;
+        $this->invalidText = $invalidText;
+    }
+    
+    /**
+     * テスト対象の SimpleFormat です
+     * @return Peach_DT_SimpleFormat
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
+    
+    /**
+     * SimpleFormat の初期化時に指定するフォーマットです
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+    
+    /**
+     * 妥当なフォーマットです
+     * @return string
+     */
+    public function getValidText()
+    {
+        return $this->validText;
+    }
+    
+    /**
+     * 例外をスローするフォーマットです
+     * @return string
+     */
+    public function getInvalidText()
+    {
+        return $this->invalidText;
     }
 }
