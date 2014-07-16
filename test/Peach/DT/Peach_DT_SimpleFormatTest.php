@@ -46,32 +46,35 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
      */
     private function getParseDataList()
     {
-        static $parseDataList = array(
-            array(
-                array("20120521073009",                 "2012052112345"),
-                array("2012年5月21日7時30分9秒",        "2012年05月21日07時30分09秒"),
-                array("Y=2012 n=5 j=21 H=07 i=30 s=09", "Y=2012 n=5 j=21 H=7 i=30 s=9"),
-            ),
-            array(
-                array("2012/03/07", "2012-03-07"),
-                array("2012.3.7",   "hogehoge"),
-            ),
-            array(
-                array("08:06:04",   "8:06:04"),
-                array("8時6分4秒",  "8じ6分4秒"),
-            ),
-        );
-        return array_map("Peach_DT_SimpleFormatTest::createTestDataList", $parseDataList, $this->testFormats);
+        static $parseDataList = null;
+        if ($parseDataList === null) {
+            $parseDataList = array(
+                array(
+                    new Peach_DT_SimpleFormatTest_Data("20120521073009",                 "2012052112345"),
+                    new Peach_DT_SimpleFormatTest_Data("2012年5月21日7時30分9秒",        "2012年05月21日07時30分09秒"),
+                    new Peach_DT_SimpleFormatTest_Data("Y=2012 n=5 j=21 H=07 i=30 s=09", "Y=2012 n=5 j=21 H=7 i=30 s=9"),
+                ),
+                array(
+                    new Peach_DT_SimpleFormatTest_Data("2012/03/07", "2012-03-07"),
+                    new Peach_DT_SimpleFormatTest_Data("2012.3.7",   "hogehoge"),
+                ),
+                array(
+                    new Peach_DT_SimpleFormatTest_Data("08:06:04",   "8:06:04"),
+                    new Peach_DT_SimpleFormatTest_Data("8時6分4秒",  "8じ6分4秒"),
+                ),
+            );
+        }
+        return array_map("Peach_DT_SimpleFormatTest::createTestDataList", $this->testFormats, $parseDataList);
     }
     
     /**
-     * @param  array $dataList array(array(0 => テスト用のパース文字列, 1 => 失敗するパース文字列), ...)
      * @param  array $formats  テストに使うフォーマットの一覧
+     * @param  array $dataList Peach_DT_SimpleFormatTest_Data オブジェクトの配列
      * @return array Peach_DT_SimpleFormatTest_Entry の配列
      */
-    public static function createTestDataList($dataList, $formats)
+    public static function createTestDataList($formats, $dataList)
     {
-        return array_map("Peach_DT_SimpleFormatTest::createTestData", $dataList, $formats);
+        return array_map("Peach_DT_SimpleFormatTest::createTestData", $formats, $dataList);
     }
     
     /*
@@ -79,9 +82,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
      * @param  string $format   フォーマット
      * @return Peach_DT_SimpleFormatTest_Entry
      */
-    public static function createTestData($testData, $format)
+    public static function createTestData($format, $testData)
     {
-        return new Peach_DT_SimpleFormatTest_Entry($format, $testData[0], $testData[1]);
+        return new Peach_DT_SimpleFormatTest_Entry($format, $testData);
     }
     
     /**
@@ -228,6 +231,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     }
 }
 
+/**
+ * parse のテストに使用するクラスです
+ */
 class Peach_DT_SimpleFormatTest_Entry
 {
     /**
@@ -235,6 +241,51 @@ class Peach_DT_SimpleFormatTest_Entry
      */
     private $format;
     
+    /**
+     * @var Peach_DT_SimpleFormatTest_Data
+     */
+    private $data;
+    
+    /**
+     * @param string $format
+     * @param Peach_DT_SimpleFormatTest_Data $data
+     */
+    public function __construct($format, $data)
+    {
+        $this->format = $format;
+        $this->data   = $data;
+    }
+    
+    /**
+     * テスト対象の SimpleFormat です
+     * @return Peach_DT_SimpleFormat
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+    
+    /**
+     * 妥当なフォーマットです
+     * @return string
+     */
+    public function getValidText()
+    {
+        return $this->data->getValidText();
+    }
+    
+    /**
+     * 例外をスローするフォーマットです
+     * @return string
+     */
+    public function getInvalidText()
+    {
+        return $this->data->getInvalidText();
+    }
+}
+
+class Peach_DT_SimpleFormatTest_Data
+{
     /**
      * @var string
      */
@@ -245,25 +296,10 @@ class Peach_DT_SimpleFormatTest_Entry
      */
     private $invalidText;
     
-    /**
-     * @param string $format
-     * @param string $validText
-     * @param string $invalidText
-     */
-    public function __construct($format, $validText, $invalidText)
+    public function __construct($validText, $invalidText)
     {
-        $this->format      = $format;
         $this->validText   = $validText;
         $this->invalidText = $invalidText;
-    }
-    
-    /**
-     * テスト対象の SimpleFormat です
-     * @return Peach_DT_SimpleFormat
-     */
-    public function getFormat()
-    {
-        return $this->format;
     }
     
     /**
