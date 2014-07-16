@@ -70,7 +70,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @param  array $formats  テストに使うフォーマットの一覧
      * @param  array $dataList Peach_DT_SimpleFormatTest_Data オブジェクトの配列
-     * @return array Peach_DT_SimpleFormatTest_Entry の配列
+     * @return array Peach_DT_SimpleFormatTest_ParseProfile の配列
      */
     public static function createTestDataList($formats, $dataList)
     {
@@ -80,11 +80,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /*
      * @param  array  $testData array(0 => テスト用のパース文字列, 1 => 失敗するパース文字列)
      * @param  string $format   フォーマット
-     * @return Peach_DT_SimpleFormatTest_Entry
+     * @return Peach_DT_SimpleFormatTest_ParseProfile
      */
     public static function createTestData($format, $testData)
     {
-        return new Peach_DT_SimpleFormatTest_Entry($format, $testData);
+        return new Peach_DT_SimpleFormatTest_ParseProfile($format, $testData);
     }
     
     /**
@@ -234,7 +234,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
 /**
  * parse のテストに使用するクラスです
  */
-class Peach_DT_SimpleFormatTest_Entry
+class Peach_DT_SimpleFormatTest_ParseProfile
 {
     /**
      * @var Peach_DT_SimpleFormat
@@ -247,10 +247,10 @@ class Peach_DT_SimpleFormatTest_Entry
     private $data;
     
     /**
-     * @param string $format
+     * @param Peach_DT_SimpleFormat          $format
      * @param Peach_DT_SimpleFormatTest_Data $data
      */
-    public function __construct($format, $data)
+    public function __construct(Peach_DT_SimpleFormat $format, Peach_DT_SimpleFormatTest_Data $data)
     {
         $this->format = $format;
         $this->data   = $data;
@@ -296,6 +296,10 @@ class Peach_DT_SimpleFormatTest_Data
      */
     private $invalidText;
     
+    /**
+     * @param string $validText
+     * @param string $invalidText
+     */
     public function __construct($validText, $invalidText)
     {
         $this->validText   = $validText;
