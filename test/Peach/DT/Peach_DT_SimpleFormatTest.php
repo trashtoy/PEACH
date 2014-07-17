@@ -50,17 +50,17 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
         if ($parseDataList === null) {
             $parseDataList = array(
                 array(
-                    new Peach_DT_SimpleFormatTest_Data("20120521073009",                 "2012052112345"),
-                    new Peach_DT_SimpleFormatTest_Data("2012年5月21日7時30分9秒",        "2012年05月21日07時30分09秒"),
-                    new Peach_DT_SimpleFormatTest_Data("Y=2012 n=5 j=21 H=07 i=30 s=09", "Y=2012 n=5 j=21 H=7 i=30 s=9"),
+                    new Peach_DT_SimpleFormatTest_ParseData("20120521073009",                 "2012052112345"),
+                    new Peach_DT_SimpleFormatTest_ParseData("2012年5月21日7時30分9秒",        "2012年05月21日07時30分09秒"),
+                    new Peach_DT_SimpleFormatTest_ParseData("Y=2012 n=5 j=21 H=07 i=30 s=09", "Y=2012 n=5 j=21 H=7 i=30 s=9"),
                 ),
                 array(
-                    new Peach_DT_SimpleFormatTest_Data("2012/03/07", "2012-03-07"),
-                    new Peach_DT_SimpleFormatTest_Data("2012.3.7",   "hogehoge"),
+                    new Peach_DT_SimpleFormatTest_ParseData("2012/03/07", "2012-03-07"),
+                    new Peach_DT_SimpleFormatTest_ParseData("2012.3.7",   "hogehoge"),
                 ),
                 array(
-                    new Peach_DT_SimpleFormatTest_Data("08:06:04",   "8:06:04"),
-                    new Peach_DT_SimpleFormatTest_Data("8時6分4秒",  "8じ6分4秒"),
+                    new Peach_DT_SimpleFormatTest_ParseData("08:06:04",   "8:06:04"),
+                    new Peach_DT_SimpleFormatTest_ParseData("8時6分4秒",  "8じ6分4秒"),
                 ),
             );
         }
@@ -69,7 +69,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @param  array $formats  テストに使うフォーマットの一覧
-     * @param  array $dataList Peach_DT_SimpleFormatTest_Data オブジェクトの配列
+     * @param  array $dataList Peach_DT_SimpleFormatTest_ParseData オブジェクトの配列
      * @return array Peach_DT_SimpleFormatTest_ParseProfile の配列
      */
     public static function createTestDataList($formats, $dataList)
@@ -242,15 +242,15 @@ class Peach_DT_SimpleFormatTest_ParseProfile
     private $format;
     
     /**
-     * @var Peach_DT_SimpleFormatTest_Data
+     * @var Peach_DT_SimpleFormatTest_ParseData
      */
     private $data;
     
     /**
      * @param Peach_DT_SimpleFormat          $format
-     * @param Peach_DT_SimpleFormatTest_Data $data
+     * @param Peach_DT_SimpleFormatTest_ParseData $data
      */
-    public function __construct(Peach_DT_SimpleFormat $format, Peach_DT_SimpleFormatTest_Data $data)
+    public function __construct(Peach_DT_SimpleFormat $format, Peach_DT_SimpleFormatTest_ParseData $data)
     {
         $this->format = $format;
         $this->data   = $data;
@@ -284,7 +284,7 @@ class Peach_DT_SimpleFormatTest_ParseProfile
     }
 }
 
-class Peach_DT_SimpleFormatTest_Data
+class Peach_DT_SimpleFormatTest_ParseData
 {
     /**
      * @var string
