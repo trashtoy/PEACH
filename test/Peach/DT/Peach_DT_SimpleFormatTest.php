@@ -106,7 +106,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
             try {
                 $object->parseDate($invalid);
                 $this->fail();
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+                $this->assertInstanceOf("InvalidArgumentException", $e);
+            }
         }
     }
     
@@ -124,7 +126,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
             try {
                 $object->parseDatetime($invalid);
                 $this->fail();
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+                $this->assertInstanceOf("InvalidArgumentException", $e);
+            }
         }
     }
     
@@ -142,7 +146,9 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
             try {
                 $object->parseTimestamp($invalid);
                 $this->fail();
-            } catch (Exception $e) {}
+            } catch (Exception $e) {
+                $this->assertInstanceOf("InvalidArgumentException", $e);
+            }
         }
     }
     

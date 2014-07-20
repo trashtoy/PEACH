@@ -302,11 +302,12 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         $input       = $text;
         $patternList = $this->getPatternList();
         $result      = array();
+        $matched     = null;
         foreach ($this->context as $part) {
             if (array_key_exists($part, $patternList)) {
                 $reg  = $patternList[$part];
                 $test = preg_match("/^{$reg}/", $input, $matched);
-                if ($test === false) {
+                if (!$test) {
                     $this->throwFormatException($input, $this->format);
                 }
 
@@ -335,6 +336,6 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      */
     private function throwFormatException($format, $expected)
     {
-        throw new Exception("Illegal format({$format}). Expected: {$expected}");
+        throw new InvalidArgumentException("Illegal format({$format}). Expected: {$expected}");
     }
 }
