@@ -9,6 +9,9 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      */
     protected $object;
     
+    /**
+     * @var array
+     */
     private $inputFormat = array(
         "Fri, 13 Feb 2009 23:31:30 GMT",
         "Friday, 13-Feb-09 23:31:30 GMT",
@@ -67,7 +70,9 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-14 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14 をあらわす
+     * Date オブジェクトに変換されることを確認します.
+     * 
      * @covers Peach_DT_HttpDateFormat::parseDate
      */
     public function testParseDate()
@@ -85,7 +90,9 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-14T08:31 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14T08:31 をあらわす
+     * Datetime オブジェクトに変換されることを確認します.
+     * 
      * @covers Peach_DT_HttpDateFormat::parseDatetime
      */
     public function testParseDatetime()
@@ -103,7 +110,9 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-14T08:31:30 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14T08:31:30 をあらわす
+     * Timestamp に変換されることを確認します.
+     * 
      * @covers Peach_DT_HttpDateFormat::parseTimestamp
      */
     public function testParseTimestamp()

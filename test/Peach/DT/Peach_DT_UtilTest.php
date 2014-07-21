@@ -123,7 +123,7 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      * 
      * - 配列を引数にして実行できること
      * - 引数を羅列して実行できること
-     * - 引数に不正な型を含む場合でも正常に動作すること
+     * - 引数に不正な型を含む場合, その値が無視されること
      * 
      * @covers Peach_DT_Util::oldest
      */
@@ -140,7 +140,7 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      * 
      * - 配列を引数にして実行できること
      * - 引数を羅列して実行できること
-     * - 引数に不正な型を含む場合でも正常に動作すること
+     * - 引数に不正な型を含む場合, その値が無視されること
      * 
      * @covers Peach_DT_Util::latest
      */
