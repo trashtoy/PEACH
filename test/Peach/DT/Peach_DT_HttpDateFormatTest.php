@@ -81,12 +81,18 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseDate($f));
         }
-        try {
-            $this->object->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 不正なフォーマットを parse した場合に InvalidArgumentException
+     * をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_HttpDateFormat::parseDate
+     */
+    public function testParseDateFail()
+    {
+        $this->object->parseDate("foobar");
     }
     
     /**
@@ -101,12 +107,18 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseDatetime($f));
         }
-        try {
-            $this->object->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 不正なフォーマットを parse した場合に InvalidArgumentException
+     * をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_HttpDateFormat::parseDatetime
+     */
+    public function testParseDatetimeFail()
+    {
+        $this->object->parseDatetime("foobar");
     }
     
     /**
@@ -121,12 +133,18 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseTimestamp($f));
         }
-        try {
-            $this->object->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 不正なフォーマットを parse した場合に InvalidArgumentException
+     * をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_HttpDateFormat::parseTimestamp
+     */
+    public function testParseTimestampFail()
+    {
+        $this->object->parseTimestamp("foobar");
     }
     
     /**
@@ -140,7 +158,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * その時刻の HTTP-date で書式化されることを確認します.
+     * その時刻が HTTP-date で書式化されることを確認します.
      * @covers Peach_DT_HttpDateFormat::formatDatetime
      */
     public function testFormatDatetime()
@@ -150,7 +168,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * その時刻の HTTP-date で書式化されることを確認します.
+     * その時刻が HTTP-date で書式化されることを確認します.
      * @covers Peach_DT_HttpDateFormat::formatTimestamp
      */
     public function testFormatTimestamp()
