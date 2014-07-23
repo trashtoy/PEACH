@@ -24,7 +24,7 @@
 /**
  * システム内部の時差とフォーマットの時差を自動で調整するためのフォーマットです.
  * 「閲覧しているユーザーのタイムゾーンに合わせて表示する時刻を調整したい」
- * といったケースで, 既存のフォーマットにかぶせる形で利用します.
+ * といったケースで, 既存の Format オブジェクトを上書きする形で利用します.
  * 
  * サンプルとして, 日本語のサイトがニューヨークのサーバーで管理されているというシナリオを考えます.
  * サーバー側ではタイムゾーンを America/New_York (UTC-5) として時間の管理をしているが,
@@ -64,19 +64,19 @@ class Peach_DT_ShiftFormat extends Peach_DT_FormatWrapper
 
     /**
      * フォーマットの時差です (単位は分)
-     * @var type 
+     * @var int
      */
     private $externalOffset;
 
     /**
-     * フォーマットの時差とシステム時刻の時差を指定して, 
+     * フォーマットの時差とシステム時刻の時差を指定して,
      * 新しい ShiftFormat を構築します.
      * 引数の単位は分です. UTC+1 以降の場合は負の値,
      * UTC-1 以前の場合は正の値を指定してください.
      * 
-     * @param Peach_DT_Format $original  調整対象のフォーマット
-     * @param type $externalOffset フォーマットの時差 (単位は分)
-     * @param type $internalOffset システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)
+     * @param Peach_DT_Format $original 調整対象のフォーマット
+     * @param int $externalOffset フォーマットの時差 (単位は分)
+     * @param int $internalOffset システム時刻の時差 (単位は分, 省略した場合はシステム設定の値を使用)
      */
     public function __construct(Peach_DT_Format $original, $externalOffset, $internalOffset = null)
     {
@@ -87,8 +87,8 @@ class Peach_DT_ShiftFormat extends Peach_DT_FormatWrapper
 
     /**
      * オリジナルの parseDatetime で得られた結果をシステム時刻に変換して返します.
-     * @param  string $format 解析対象の文字列 
-     * @return Peach_DT_Time 変換結果
+     * @param  string $format 解析対象の文字列
+     * @return Peach_DT_Time  変換結果
      */
     public function parseDatetime($format)
     {
@@ -98,7 +98,7 @@ class Peach_DT_ShiftFormat extends Peach_DT_FormatWrapper
     /**
      * オリジナルの parseTimestamp で得られた結果をシステム時刻に変換して返します.
      * @param  string $format 解析対象の文字列
-     * @return Peach_DT_Time 変換結果
+     * @return Peach_DT_Time  変換結果
      */
     public function parseTimestamp($format)
     {

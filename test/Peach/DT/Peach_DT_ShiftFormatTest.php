@@ -19,6 +19,11 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
     protected $object;
     
     /**
+     * @var string
+     */
+    private $defaultTZ;
+    
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
@@ -41,6 +46,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * 第二引数を省略した場合に, システム時刻の時差が設定されることを確認します.
+     * @covers Peach_DT_ShiftFormat::__construct
      */
     public function test__construct()
     {
@@ -52,6 +58,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * parseDate のテストです. オリジナルと同じ結果になることを確認します.
+     * @covers Peach_DT_ShiftFormat::parseDate
      */
     public function testParseDate()
     {
@@ -69,7 +76,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * parseTimestamp のテストです. 
+     * parseTimestamp のテストです.
      * 表示時刻の 14 時間後の時間オブジェクトが生成されることを確認します.
      * @covers Peach_DT_ShiftFormat::parseTimestamp
      */
@@ -81,6 +88,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
     /**
      * formatDate のテストです.
      * オリジナルと同じ結果を返すことを確認します.
+     * @covers Peach_DT_ShiftFormat::formatDate
      */
     public function testFormatDate()
     {
