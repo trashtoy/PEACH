@@ -25,7 +25,7 @@
  * Unix time ({@link time() time()} の返り値や {@link date() date()} の引数として使用される整数) 
  * と時間オブジェクトの相互変換を行うクラスです.
  * 
- * このクラスはシングルトンです. {@link DT_HttpDateFormat::getInstance() getInstance()}
+ * このクラスはシングルトンです. {@link Peach_DT_UnixTimeFormat::getInstance() getInstance()}
  * からオブジェクトを取得してください.
  * 
  * @package DT
@@ -101,7 +101,7 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     
     /**
      * 指定されたオブジェクトを Peach_DT_Timestamp 型にキャストして
-     * {@link DT_HttpDateFormat::formatTimestamp() formatTimestamp()}
+     * {@link Peach_DT_UnixTimeFormat::formatTimestamp() formatTimestamp()}
      * を実行した結果を返します.
      * 
      * @param  Peach_DT_Date $d 書式化する時間オブジェクト
@@ -114,7 +114,7 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     
     /**
      * 指定されたオブジェクトを Peach_DT_Timestamp 型にキャストして
-     * {@link DT_HttpDateFormat::formatTimestamp() formatTimestamp()}
+     * {@link Peach_DT_UnixTimeFormat::formatTimestamp() formatTimestamp()}
      * を実行した結果を返します.
      * 
      * @param  Peach_DT_Datetime $d 書式化する時間オブジェクト

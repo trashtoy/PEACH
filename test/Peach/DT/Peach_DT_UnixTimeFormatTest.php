@@ -4,7 +4,14 @@
  */
 class Peach_DT_UnixTimeFormatTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
     private $defaultTZ;
+    
+    /**
+     * @var int
+     */
     private $testTime;
     
     /**
@@ -34,7 +41,7 @@ class Peach_DT_UnixTimeFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 以下を確認します.
+     * getInstance() のテストです. 以下を確認します.
      * 
      * - Peach_DT_UnixTimeFormat オブジェクトを返す
      * - 複数回実行した際に同一のオブジェクトを返す
