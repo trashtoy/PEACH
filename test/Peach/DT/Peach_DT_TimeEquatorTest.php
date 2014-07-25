@@ -120,10 +120,46 @@ class Peach_DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * equate() の引数のうち Peach_DT_Time オブジェクトでないものが
+     * 1 つ以上ある場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_TimeEquator::equate
+     */
+    public function testEquateFail1()
+    {
+        $d1 = new Peach_DT_Timestamp(2012,  5, 21, 7, 30, 45);
+        $e  = new Peach_DT_TimeEquator();
+        $e->equate($d1, "foobar");
+    }
+    
+    /**
+     * equate() の引数のうち Peach_DT_Time オブジェクトでないものが
+     * 1 つ以上ある場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_TimeEquator::equate
+     */
+    public function testEquateFail2()
+    {
+        $d1 = new Peach_DT_Timestamp(2012,  5, 21, 7, 30, 45);
+        $e  = new Peach_DT_TimeEquator();
+        $e->equate("foobar", $d1);
+    }
+    
+    /**
+     * equate() の引数のうち Peach_DT_Time オブジェクトでないものが
+     * 1 つ以上ある場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_TimeEquator::equate
+     */
+    public function testEquateFail3()
+    {
+        $e  = new Peach_DT_TimeEquator();
+        $e->equate("foo", "bar");
+    }
+    
+    /**
      * Peach_DT_Date, Peach_DT_Datetime, Peach_DT_Timestamp それぞれについて
      * 期待されたハッシュ値を算出していることを確認します.
-     * 
-     * また, Peach_DT_Time オブジェクト以外の引数を指定した場合に例外をスローすることを確認します.
      * 
      * @covers Peach_DT_TimeEquator::hashCode
      */
@@ -137,11 +173,17 @@ class Peach_DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame(22348, $e->hashCode($d1));
         $this->assertSame(27936515, $e->hashCode($d2));
         $this->assertSame(1316248310, $e->hashCode($d3));
-        try {
-            $e->hashCode("asdf");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * Peach_DT_Time オブジェクト以外の引数を指定した場合に
+     * InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_TimeEquator::hashCode
+     */
+    public function testHashCodeFail()
+    {
+        $e  = Peach_DT_TimeEquator::getDefault();
+        $e->hashCode("asdf");
     }
 }
