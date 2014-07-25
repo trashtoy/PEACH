@@ -31,6 +31,8 @@ class Peach_DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
      *   array("year", "month", "date", "hour", "minute", "second")
      *   が同一視されること
      * - 文字列と array(文字列) が同一視されること
+     * 
+     * @covers Peach_DT_TimeEquator::__construct
      */
     public function test__construct()
     {

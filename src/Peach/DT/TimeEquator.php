@@ -105,7 +105,7 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
     }
 
     /**
-     * デフォルトの DT_Equator オブジェクトを返します.
+     * デフォルトの Peach_DT_Equator オブジェクトを返します.
      * このオブジェクトは {@link Peach_DT_Time::equals()} を使って等値性を調べます.
      * @return Peach_DT_TimeEquator
      */
@@ -125,7 +125,7 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
      * 
      * @param  Peach_DT_Time $var1 比較対象の時間オブジェクト
      * @param  Peach_DT_Time $var2 比較対象の時間オブジェクト
-     * @return bool          2 つの時間オブジェクトが等しいと判断された場合のみ TRUE
+     * @return bool                2 つの時間オブジェクトが等しいと判断された場合のみ TRUE
      * @throws Exception 引数に Peach_DT_Time インスタンス以外の値が指定された場合
      */
     public function equate($var1, $var2)
