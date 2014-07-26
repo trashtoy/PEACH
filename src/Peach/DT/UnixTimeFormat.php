@@ -59,9 +59,9 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     public function parseDate($format)
     {
         $time  = intval($format);
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
         return new Peach_DT_Date($year, $month, $date);
     }
     
@@ -74,11 +74,11 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     public function parseDatetime($format)
     {
         $time  = intval($format);
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
         return new Peach_DT_Datetime($year, $month, $date, $hour, $min);
     }
     
@@ -90,12 +90,12 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     public function parseTimestamp($format)
     {
         $time  = intval($format);
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
-        $sec   = @date("s", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
+        $sec   = date("s", $time);
         return new Peach_DT_Timestamp($year, $month, $date, $hour, $min, $sec);
     }
     

@@ -51,11 +51,11 @@ class Peach_DT_Datetime extends Peach_DT_Date
     public static function now()
     {
         $time  = time();
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
         return new self($year, $month, $date, $hour, $min);
     }
     

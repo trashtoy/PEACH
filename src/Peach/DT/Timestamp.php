@@ -42,12 +42,12 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
     public static function now()
     {
         $time  = time();
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
-        $sec   = @date("s", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
+        $sec   = date("s", $time);
         return new self($year, $month, $date, $hour, $min, $sec);
     }
     

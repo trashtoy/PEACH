@@ -57,9 +57,9 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     public static function now()
     {
         $time  = time();
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
         return new self($year, $month, $date);
     }
     
