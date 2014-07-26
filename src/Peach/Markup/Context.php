@@ -41,7 +41,6 @@ abstract class Peach_Markup_Context
      * Visitor パターンの visit メソッドに相当します.
      * 
      * @param  Peach_Markup_Component
-     * @return string
      */
     public final function handle(Peach_Markup_Component $node)
     {
