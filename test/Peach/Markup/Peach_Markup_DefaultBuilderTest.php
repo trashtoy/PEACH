@@ -103,7 +103,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
     /**
      * Builder にセットした設定が, build 時に適用されることを確認します.
      * @todo   BreakControl が適用されるかどうかのテスト
-     * @covers Peach_Markup_BuilderTest::build
+     * @covers Peach_Markup_Builder::build
      */
     public function testBuild()
     {

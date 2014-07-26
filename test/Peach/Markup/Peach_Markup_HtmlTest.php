@@ -348,7 +348,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * select() のテストです. createSelectElement() の結果をラップした
      * HelperObject を返すことを確認します.
      * 
-     * @covers Peach_Markup_Html::seect
+     * @covers Peach_Markup_Html::select
      */
     public function testSelect()
     {
