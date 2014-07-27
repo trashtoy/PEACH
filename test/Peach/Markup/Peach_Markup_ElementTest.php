@@ -43,7 +43,7 @@ abstract class Peach_Markup_ElementTest extends PHPUnit_Framework_TestCase
      * @covers Peach_Markup_Element::getAttribute
      * @covers Peach_Markup_Element::setAttribute
      */
-    public function testGetAndSetAttribute()
+    public function testAccessAttribute()
     {
         $obj = $this->object;
         $obj->setAttribute("option");
@@ -79,7 +79,7 @@ abstract class Peach_Markup_ElementTest extends PHPUnit_Framework_TestCase
      * @covers Peach_Markup_Element::setAttributes
      * @covers Peach_Markup_Element::getAttributes
      */
-    public function testGetAndSetAttributes()
+    public function testAccessAttributes()
     {
         $arr = array("first" => 1, "second" => 2, "third" => 3);
         
