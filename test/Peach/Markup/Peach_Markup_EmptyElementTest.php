@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_ElementTest.php");
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
 
 class Peach_Markup_EmptyElementTest extends Peach_Markup_ElementTest
 {
@@ -32,10 +33,9 @@ class Peach_Markup_EmptyElementTest extends Peach_Markup_ElementTest
      */
     public function testAccept()
     {
-        $obj   = $this->object;
-        $debug = new Peach_Markup_DebugContext(false);
-        $obj->accept($debug);
-        $this->assertSame("EmptyElement(testTag)\r\n", $debug->getResult());
+        $context = new Peach_Markup_TestContext();
+        $this->object->accept($context);
+        $this->assertSame("handleEmptyElement", $context->getResult());
     }
     
     /**

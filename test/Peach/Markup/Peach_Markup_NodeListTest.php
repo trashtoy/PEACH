@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
+
 class Peach_Markup_NodeListTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -42,10 +44,9 @@ class Peach_Markup_NodeListTest extends PHPUnit_Framework_TestCase
      */
     public function testAccept()
     {
-        $obj   = $this->object;
-        $debug = new Peach_Markup_DebugContext(false);
-        $obj->accept($debug);
-        $this->assertSame("NodeList {\r\n}\r\n", $debug->getResult());
+        $context = new Peach_Markup_TestContext();
+        $this->object->accept($context);
+        $this->assertSame("handleNodeList", $context->getResult());
     }
     
     /**
