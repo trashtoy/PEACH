@@ -26,7 +26,7 @@ class Peach_Markup_NoneTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * getInstance() のテストです.
+     * getInstance() のテストです. 以下を確認します.
      * 
      * - Peach_Markup_None のインスタンスを返すことを確認します.
      * - 常に同一のオブジェクトを返すことを確認します.

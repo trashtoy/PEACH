@@ -57,7 +57,8 @@ class Peach_Markup_None implements Peach_Markup_Component
      * {@link Peach_Markup_Context::handleNone()} を呼び出します.
      * @param Peach_Markup_Context $context
      */
-    public function accept(Peach_Markup_Context $context) {
+    public function accept(Peach_Markup_Context $context)
+    {
         $context->handleNone($this);
     }
 }
