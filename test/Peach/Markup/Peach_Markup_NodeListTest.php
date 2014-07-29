@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_TestContext.php");
+require_once(__DIR__ . "/Peach_Markup_ContainerTestImpl.php");
 
 class Peach_Markup_NodeListTest extends PHPUnit_Framework_TestCase
 {
