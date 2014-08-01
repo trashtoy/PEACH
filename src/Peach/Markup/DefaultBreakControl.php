@@ -35,6 +35,7 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
     
     /**
      * 指定された要素の開始タグの後ろに改行を付けるかどうかを決定します.
+     * 条件は以下の通りです.
      * 
      * - もしも指定された要素に子要素がない場合は改行なし
      * - 子要素を一つだけ含み, それが整形済テキストの場合は改行あり
@@ -42,7 +43,7 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
      * - 子要素を一つだけ含み, 上記以外のノードの場合は改行なし
      * - 子要素が二つ以上の場合は改行あり
      * 
-     * @param  Peach_Markup_ContainerElement 
+     * @param  Peach_Markup_ContainerElement $node
      * @return bool
      */
     public function breaks(Peach_Markup_ContainerElement $node)

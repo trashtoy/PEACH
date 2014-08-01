@@ -44,7 +44,7 @@ class Peach_Markup_XmlRendererTest extends Peach_Markup_AbstractRendererTest
     
     /**
      * 空要素タグの出力をテストします.
-     * @covers Peach_Markup_AbstractRenderer::formatEmptyTag
+     * @covers Peach_Markup_XmlRenderer::formatEmptyTag
      */
     public function testFormatEmptyTag()
     {
@@ -60,7 +60,7 @@ class Peach_Markup_XmlRendererTest extends Peach_Markup_AbstractRendererTest
     
     /**
      * 終了タグの出力をテストします.
-     * @covers Peach_Markup_AbstractRenderer::formatEndTag
+     * @covers Peach_Markup_XmlRenderer::formatEndTag
      */
     public function testFormatEndTag()
     {
@@ -70,7 +70,7 @@ class Peach_Markup_XmlRendererTest extends Peach_Markup_AbstractRendererTest
     
     /**
      * 開始タグの出力をテストします.
-     * @covers Peach_Markup_AbstractRenderer::formatStartTag
+     * @covers Peach_Markup_XmlRenderer::formatStartTag
      */
     public function testFormatStartTag()
     {

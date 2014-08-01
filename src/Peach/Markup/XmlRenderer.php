@@ -83,7 +83,7 @@ class Peach_Markup_XmlRenderer extends Peach_Markup_AbstractRenderer
     /**
      * 空要素タグの末尾を書式化します. 文字列 " />" を返します.
      * 
-     * @see    Markup_TagFormatter#formatEmptyTagSuffix()
+     * @see    Peach_Markup_AbstractRenderer::formatEmptyTagSuffix()
      * @return string 文字列 " />"
      */
     protected function formatEmptyTagSuffix()

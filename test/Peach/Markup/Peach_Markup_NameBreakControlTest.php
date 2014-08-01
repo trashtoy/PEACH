@@ -5,7 +5,7 @@ class Peach_Markup_NameBreakControlTest extends PHPUnit_Framework_TestCase
      * @var Peach_Markup_NameBreakControl
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -14,7 +14,7 @@ class Peach_Markup_NameBreakControlTest extends PHPUnit_Framework_TestCase
     {
         $this->object = new Peach_Markup_NameBreakControl(array("A", "B", "C", "Q"), array("Q", "X", "Y", "Z"));
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -23,7 +23,7 @@ class Peach_Markup_NameBreakControlTest extends PHPUnit_Framework_TestCase
     {
         
     }
-
+    
     /**
      * break() のテストです. 以下を確認します.
      * 
@@ -51,6 +51,10 @@ class Peach_Markup_NameBreakControlTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($c->breaks($this->createNoBreakNode("T")));
     }
     
+    /**
+     * @param  string $name
+     * @return Peach_Markup_ContainerElement
+     */
     private function createBreakNode($name)
     {
         $test = new Peach_Markup_ContainerElement($name);
@@ -59,6 +63,10 @@ class Peach_Markup_NameBreakControlTest extends PHPUnit_Framework_TestCase
         return $test;
     }
     
+    /**
+     * @param  string $name
+     * @return Peach_Markup_ContainerElement
+     */
     private function createNoBreakNode($name)
     {
         $test = new Peach_Markup_ContainerElement($name);

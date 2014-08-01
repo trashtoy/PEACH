@@ -17,6 +17,9 @@ class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
         $this->object = $this->getTestObject();
     }
     
+    /**
+     * @return Peach_Markup_DefaultContext
+     */
     private function getTestObject()
     {
         return new Peach_Markup_DefaultContext(Peach_Markup_XmlRenderer::getInstance());
@@ -32,6 +35,7 @@ class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
     
     /**
      * handleComment のテストです. 以下を確認します.
+     * 
      * - ノードが 1 つの場合 "<!--comment text-->" 形式になること
      * - ノードが複数の場合, コメントが改行されること
      * - 接頭辞および接尾辞が指定された場合は改行されること
@@ -249,7 +253,7 @@ EOS;
         $this->object->handleNodeList($nodeList);
         $this->assertSame($expected, $this->object->getResult());
     }
-
+    
     /**
      * @covers Peach_Markup_DefaultContext::getResult
      */
