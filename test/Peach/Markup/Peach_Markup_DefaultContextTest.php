@@ -255,6 +255,19 @@ EOS;
     }
     
     /**
+     * 結果に何も追加されないことを確認します。
+     * 
+     * @covers Peach_Markup_DefaultContext::handleNone
+     */
+    public function testHandleNone()
+    {
+        $none = Peach_Markup_None::getInstance();
+        $obj  = $this->object;
+        $obj->handle($none);
+        $this->assertSame("", $obj->getResult());
+    }
+    
+    /**
      * @covers Peach_Markup_DefaultContext::getResult
      */
     public function testGetResult()
