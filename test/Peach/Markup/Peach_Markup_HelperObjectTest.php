@@ -153,7 +153,6 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
      * - 引数に配列を指定した場合, キーを属性名, 値を属性値とする属性が追加されること
      * 
      * @covers Peach_Markup_HelperObject::attr
-     * @todo   Implement testAttr().
      */
     public function testAttr()
     {
@@ -288,7 +287,6 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
      * - それ以外は空配列を返すこと
      * 
      * @covers Peach_Markup_HelperObject::getChildNodes
-     * @todo   Implement testGetChildNodes().
      */
     public function testGetChildNodes()
     {

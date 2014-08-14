@@ -35,7 +35,6 @@ class Peach_Markup_HelperTest extends PHPUnit_Framework_TestCase
      * - 第 2 引数を指定したが, 生成される HelperObject が要素ではない場合は無視されること
      * 
      * @covers Peach_Markup_Helper::createObject
-     * @todo   Implement testCreateObject().
      */
     public function testCreateObject()
     {
