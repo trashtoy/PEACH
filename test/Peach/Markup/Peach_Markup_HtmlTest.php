@@ -4,11 +4,6 @@ require_once(__DIR__ . "/Peach_Markup_TestUtil.php");
 class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Peach_Markup_Html
-     */
-    protected $object;
-    
-    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
@@ -54,6 +49,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     
     /**
      * getHelper() のテストです.
+     * 
      * @covers Peach_Markup_Html::getHelper
      */
     public function testGetHelper()
@@ -82,6 +78,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     /**
      * getBuilder() のテストです.
      * 返り値の Builder に対する変更が, グローバル Helper に適用されることを確認します.
+     * 
      * @covers Peach_Markup_Html::getBuilder
      */
     public function testGetBuilder()
@@ -95,12 +92,14 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     
     /**
      * tag() のテストです. 引数によって, 生成される HelperObject が以下の Component をラップすることを確認します.
+     * 
      * - 文字列の場合: 引数を要素名に持つ Element
      * - null または引数なしの場合: 空の NodeList
      * - Node オブジェクトの場合: 引数の Node 自身
      * 
      * また, HTML4.01 および最新の HTML5 の勧告候補 (2014-02-04 時点) の仕様を元に,
      * 以下の要素が「空要素」として生成されることを確認します.
+     * 
      * - HTML4.01: area, base, basefont, br, col, frame, hr, img, input, isindex, link, meta, param
      * - HTML5: area, base, br, col, command, embed, hr, img, input, keygen, link, meta, param, source, track, wbr
      * 
@@ -392,6 +391,8 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * 
      * - 引数を省略した場合は array("tag" => "tag") と同様の結果になること
      * - 引数に指定した内容でエイリアスを定義できること
+     * 
+     * @covers Peach_Markup_Html::alias
      */
     public function testAlias()
     {
@@ -435,7 +436,9 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     /**
      * alias() の引数で既に存在する関数名を指定した場合,
      * InvalidArgumentException をスローすることを確認します.
+     * 
      * @expectedException InvalidArgumentException
+     * @covers Peach_Markup_Html::alias
      */
     public function testAliasByAlreadyDefinedName()
     {
@@ -448,6 +451,8 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     /**
      * 同じ引数 (クラスメソッドと関数名の組み合わせ) で alias() を実行した場合,
      * InvalidArgumentException がスローされずに正常終了することを確認します.
+     * 
+     * @covers Peach_Markup_Html::alias
      */
     public function testAliasBySameArguments()
     {
@@ -463,6 +468,8 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     /**
      * alias() の引数に関数名として使用できない名前を指定した場合,
      * InvalidArgumentException をスローすることを確認します.
+     * 
+     * @covers Peach_Markup_Html::alias
      */
     public function testAliasByInvalidName()
     {
@@ -482,7 +489,9 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     /**
      * alias() の引数に存在しないメソッド名を指定した場合,
      * InvalidArgumentException をスローすることを確認します.
+     * 
      * @expectedException InvalidArgumentException
+     * @covers Peach_Markup_Html::alias
      */
     public function testAliasByUndefinedMethod()
     {
