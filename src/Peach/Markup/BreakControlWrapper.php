@@ -23,7 +23,9 @@
 /** @package Markup */
 /**
  * 既存の BreakControl の振る舞いを拡張するためのラッパークラスです.
- * このクラスを継承し, breaks() をオーバーライドするようにしてください.
+ * このクラスは Decorator パターンで設計されています.
+ * このクラスを継承して新しい BreakControl クラスを作り,
+ * breaks() をオーバーライドして利用してください.
  * 
  * @package Markup
  */

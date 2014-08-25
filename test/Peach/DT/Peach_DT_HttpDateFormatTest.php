@@ -9,6 +9,9 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      */
     protected $object;
     
+    /**
+     * @var array
+     */
     private $inputFormat = array(
         "Fri, 13 Feb 2009 23:31:30 GMT",
         "Friday, 13-Feb-09 23:31:30 GMT",
@@ -67,7 +70,9 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-14 に変換されることを確認します.
+     * どのテスト用フォーマットも 2009-02-14 をあらわす
+     * Date オブジェクトに変換されることを確認します.
+     * 
      * @covers Peach_DT_HttpDateFormat::parseDate
      */
     public function testParseDate()
@@ -76,16 +81,24 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseDate($f));
         }
-        try {
-            $this->object->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-14T08:31 に変換されることを確認します.
+     * 不正なフォーマットを parse した場合に InvalidArgumentException
+     * をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_HttpDateFormat::parseDate
+     */
+    public function testParseDateFail()
+    {
+        $this->object->parseDate("foobar");
+    }
+    
+    /**
+     * どのテスト用フォーマットも 2009-02-14T08:31 をあらわす
+     * Datetime オブジェクトに変換されることを確認します.
+     * 
      * @covers Peach_DT_HttpDateFormat::parseDatetime
      */
     public function testParseDatetime()
@@ -94,16 +107,24 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseDatetime($f));
         }
-        try {
-            $this->object->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
     }
     
     /**
-     * どのテスト用フォーマットも 2009-02-14T08:31:30 に変換されることを確認します.
+     * 不正なフォーマットを parse した場合に InvalidArgumentException
+     * をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_HttpDateFormat::parseDatetime
+     */
+    public function testParseDatetimeFail()
+    {
+        $this->object->parseDatetime("foobar");
+    }
+    
+    /**
+     * どのテスト用フォーマットも 2009-02-14T08:31:30 をあらわす
+     * Timestamp に変換されることを確認します.
+     * 
      * @covers Peach_DT_HttpDateFormat::parseTimestamp
      */
     public function testParseTimestamp()
@@ -112,12 +133,18 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         foreach ($this->inputFormat as $f) {
             $this->assertEquals($expected, $this->object->parseTimestamp($f));
         }
-        try {
-            $this->object->parseDate("foobar");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 不正なフォーマットを parse した場合に InvalidArgumentException
+     * をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_HttpDateFormat::parseTimestamp
+     */
+    public function testParseTimestampFail()
+    {
+        $this->object->parseTimestamp("foobar");
     }
     
     /**
@@ -131,7 +158,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * その時刻の HTTP-date で書式化されることを確認します.
+     * その時刻が HTTP-date で書式化されることを確認します.
      * @covers Peach_DT_HttpDateFormat::formatDatetime
      */
     public function testFormatDatetime()
@@ -141,7 +168,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * その時刻の HTTP-date で書式化されることを確認します.
+     * その時刻が HTTP-date で書式化されることを確認します.
      * @covers Peach_DT_HttpDateFormat::formatTimestamp
      */
     public function testFormatTimestamp()
@@ -150,4 +177,3 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
         $this->assertSame("Fri, 13 Feb 2009 23:31:30 GMT", $this->object->formatTimestamp($d));
     }
 }
-?>

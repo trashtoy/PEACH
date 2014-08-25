@@ -36,8 +36,8 @@ interface Peach_Util_Comparable
     /**
      * このオブジェクトと引数の値を比較します.
      * 
-     * このオブジェクトが $subject より小さい場合は負の整数, 
-     * このオブジェクトが $subject より大きい場合は正の整数, 
+     * このオブジェクトが $subject より小さい場合は負の整数,
+     * このオブジェクトが $subject より大きい場合は正の整数,
      * このオブジェクトと $subject が等しい場合は 0 を返します.
      * 
      * もしも このオブジェクトが $subject と比較できない場合は
@@ -48,4 +48,3 @@ interface Peach_Util_Comparable
      */
     public function compareTo($subject);
 }
-?>

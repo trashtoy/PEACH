@@ -5,7 +5,7 @@
 class Peach_Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Util_ArrayMap
+     * @var Peach_Util_ArrayMap
      */
     private $map;
     
@@ -35,16 +35,34 @@ class Peach_Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
     {
     }
     
+    /**
+     * この MapEntry にセットされているキーを返すことを確認します.
+     * 
+     * @covers Peach_Util_ArrayMapEntry::getKey
+     */
     public function testGetKey()
     {
         $this->assertSame("key2", $this->entryList[1]->getKey());
     }
     
+    /**
+     * この MapEntry にセットされている値を返すことを確認します.
+     * 
+     * @covers Peach_Util_ArrayMapEntry::getValue
+     */
     public function testGetValue()
     {
         $this->assertSame("baz", $this->entryList[2]->getValue());
     }
     
+    /**
+     * setValue() をテストします. 以下を確認します.
+     * 
+     * - 引数に指定した値で EntrySet の値が更新されること
+     * - 元の ArrayMap の該当するマッピングが上書きされること
+     * 
+     * @covers Peach_Util_ArrayMapEntry::setValue
+     */
     public function testSetValue()
     {
         $this->entryList[0]->setValue("hoge");
@@ -53,9 +71,13 @@ class Peach_Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expected, $this->map->asArray());
     }
     
+    /**
+     * "[キー=値]" 形式の文字列を返すことを確認します.
+     * 
+     * @covers Peach_Util_ArrayMapEntry::__toString
+     */
     public function test__toString()
     {
         $this->assertSame("[key3=baz]", $this->entryList[2]->__toString());
     }
 }
-?>

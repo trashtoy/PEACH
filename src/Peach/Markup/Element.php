@@ -44,6 +44,7 @@ abstract class Peach_Markup_Element implements Peach_Markup_Node
      * 指定された要素名を持つ Element を構築します.
      * 
      * @param string $name 要素名
+     * @throws InvalidArgumentException 要素名が空文字列だった場合
      */
     public function __construct($name)
     {
@@ -54,12 +55,14 @@ abstract class Peach_Markup_Element implements Peach_Markup_Node
     
     /**
      * 要素名が適切かどうかを判断します.
-     * @param string 要素名
+     * @param  string 要素名
+     * @throws InvalidArgumentException
+     * @todo   バリデーションを厳格化
      */
     private static function validateName($name)
     {
         if (!strlen($name)) {
-            throw new Exception();
+            throw new InvalidArgumentException();
         }
     }
     

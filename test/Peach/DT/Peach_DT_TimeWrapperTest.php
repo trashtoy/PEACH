@@ -243,4 +243,3 @@ class Peach_DT_TimeWrapperTest extends Peach_DT_AbstractTimeTest
         $this->assertSame("2012-05-21 07:30:15", $d->__toString());
     }
 }
-?>

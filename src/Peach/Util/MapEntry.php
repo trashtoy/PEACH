@@ -53,4 +53,3 @@ interface Peach_Util_MapEntry
      */
     public function setValue($value);
 }
-?>

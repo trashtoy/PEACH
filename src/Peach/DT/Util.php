@@ -32,7 +32,7 @@ class Peach_DT_Util
      * このクラスはインスタンス化できません.
      */
     private function __construct() {}
-        
+    
     /**
      * 2つの時間オブジェクトを比較します. 一つめの引数のほうが後 (未来) の場合は正の値,
      * 前 (過去) の場合は負の値, 同じ場合は 0 を返します.
@@ -75,7 +75,7 @@ class Peach_DT_Util
      * 
      * @param  array|Peach_DT_Time $time...
      * @return Peach_DT_Time       引数の中で最新の Peach_DT_Time オブジェクト. 
-     *                             引数が空か, Peach_DT_Time オブジェクトが含まれていないの場合は NULL
+     *                             引数が空か, Peach_DT_Time オブジェクトが含まれていない場合は NULL
      */
     public static function latest()
     {
@@ -150,4 +150,3 @@ class Peach_DT_Util
             Peach_DT_Util::getTimeZoneOffset();
     }
 }
-?>

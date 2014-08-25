@@ -25,7 +25,8 @@
  * 与えられた Component を加工して HTML コードなどに変換するためのクラスです.
  * @package Markup
  */
-abstract class Peach_Markup_Builder {
+abstract class Peach_Markup_Builder
+{
     /**
      * 指定されたノードを加工します. 返り値の型は具象クラスによって異なります.
      * @param  Peach_Markup_Component

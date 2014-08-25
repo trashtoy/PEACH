@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_ContainerTestImpl.php");
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
 
 class Peach_Markup_CommentTest extends PHPUnit_Framework_TestCase
 {
@@ -77,10 +78,9 @@ class Peach_Markup_CommentTest extends PHPUnit_Framework_TestCase
      */
     public function testAccept()
     {
-        $obj   = $this->object1;
-        $debug = new Peach_Markup_DebugContext(false);
-        $obj->accept($debug);
-        $this->assertSame("Comment {\r\n}\r\n", $debug->getResult());
+        $context = new Peach_Markup_TestContext();
+        $this->object1->accept($context);
+        $this->assertSame("handleComment", $context->getResult());
     }
     
     /**

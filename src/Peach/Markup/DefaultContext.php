@@ -28,19 +28,16 @@
 class Peach_Markup_DefaultContext extends Peach_Markup_Context
 {
     /**
-     * 
      * @var Peach_Markup_Indent
      */
     private $indent;
     
     /**
-     * 
      * @var Peach_Markup_Renderer
      */
     private $renderer;
     
     /**
-     * 
      * @var Peach_Markup_BreakControl
      */
     private $breakControl;
@@ -59,12 +56,14 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     private $isCommentMode;
     
     /**
-     * 
+     * handle() メソッド実行時の処理結果が格納されます.
      * @var string
      */
     private $result;
     
     /**
+     * 指定された Renderer, Indent, BreakControl オブジェクトを使って
+     * マークアップを行う DefaultContext オブジェクトを構築します.
      * 
      * @param Peach_Markup_Renderer     $renderer
      * @param Peach_Markup_Indent       $indent
@@ -166,7 +165,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     /**
      * EmptyElement を読み込みます.
      * @param Peach_Markup_EmptyElement
-     * @see Markup_Context::handleEmptyElement()
+     * @see Peach_Markup_Context::handleEmptyElement()
      */
     public function handleEmptyElement(Peach_Markup_EmptyElement $node) {
         $this->result .= $this->indent() . $this->renderer->formatEmptyTag($node);
@@ -261,11 +260,19 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         return $this->isIndentMode ? $this->indent->breakCode() : "";
     }
     
+    /**
+     * @param  string $text
+     * @return string
+     */
     private function escape($text)
     {
         return preg_replace("/\\r\\n|\\r|\\n/", "&#xa;", htmlspecialchars($text));
     }
     
+    /**
+     * @param  string $text
+     * @return string
+     */
     private function escapeEndComment($text)
     {
         return str_replace("-->", "--&gt;", $text);

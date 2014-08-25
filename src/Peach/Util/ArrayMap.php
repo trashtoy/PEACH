@@ -117,7 +117,7 @@ class Peach_Util_ArrayMap implements Peach_Util_Map
      * マッピングが存在する場合に TRUE を返します.
      *
      * @param  string  $name キー名
-     * @return boolean マッピングが存在する場合に TRUE
+     * @return bool    マッピングが存在する場合に TRUE
      */
     public function containsKey($name)
     {
@@ -198,4 +198,3 @@ class Peach_Util_ArrayMap implements Peach_Util_Map
         return $this->data;
     }
 }
-?>

@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
+
 class Peach_Markup_NoneTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -24,7 +26,7 @@ class Peach_Markup_NoneTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * getInstance() のテストです.
+     * getInstance() のテストです. 以下を確認します.
      * 
      * - Peach_Markup_None のインスタンスを返すことを確認します.
      * - 常に同一のオブジェクトを返すことを確認します.
@@ -45,10 +47,8 @@ class Peach_Markup_NoneTest extends PHPUnit_Framework_TestCase
      */
     public function testAccept()
     {
-        $obj   = $this->object;
-        $debug = new Peach_Markup_DebugContext(false);
-        
-        $obj->accept($debug);
-        $this->assertSame("None\r\n", $debug->getResult());
+        $context = new Peach_Markup_TestContext();
+        $this->object->accept($context);
+        $this->assertSame("handleNone", $context->getResult());
     }
 }

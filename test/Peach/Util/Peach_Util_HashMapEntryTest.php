@@ -33,8 +33,9 @@ class Peach_Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * 引数の Equator で等価と判断される場合のみ true を返すことを確認します.
+     * 
      * @covers Peach_Util_HashMapEntry::keyEquals
-     * @todo   Implement testKeyEquals().
      */
     public function testKeyEquals()
     {
@@ -61,4 +62,3 @@ class Peach_Util_HashMapEntryTest extends PHPUnit_Framework_TestCase
         $this->assertSame(100, $this->map->get("First"));
     }
 }
-?>

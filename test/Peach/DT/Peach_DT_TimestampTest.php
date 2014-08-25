@@ -39,8 +39,7 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
     }
     
     /**
-     * parse に成功した場合に Peach_DT_Timestamp オブジェクト,
-     * 失敗した場合に Exception をスローすることを確認します.
+     * parse に成功した場合に Peach_DT_Timestamp オブジェクトを返すことを確認します.
      * 
      * @covers Peach_DT_Timestamp::parse
      */
@@ -48,12 +47,16 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
     {
         $d = Peach_DT_Timestamp::parse("2011-05-21 07:30:15");
         $this->assertEquals(new Peach_DT_Timestamp(2011, 5, 21, 7, 30, 15), $d);
-        try {
-            Peach_DT_Timestamp::parse("Illegal Format");
-            $this->fail(); // Exception が発生しなかった場合は FAIL
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * parse に失敗した場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_Timestamp::parse
+     */
+    public function testParseFail()
+    {
+        Peach_DT_Timestamp::parse("Illegal Format");
     }
     
     /**
@@ -250,7 +253,7 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
         }
         foreach ($invalid as $key) {
             $this->assertNull($time->get($key));
-        };
+        }
     }
     
     /**
@@ -281,9 +284,10 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * 以下を確認します.
      * 
      * - 配列を引数にして日付の設定が出来ること
-     * - Util_Map を引数にして日付の設定が出来ること
+     * - Peach_Util_Map を引数にして日付の設定が出来ること
      * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
-     * - 配列・Map 以外の型を指定した場合に例外をスローすること
+     * 
+     * @covers Peach_DT_Timestamp::setAll
      */
     public function testSetAll()
     {
@@ -300,13 +304,26 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
         
         // 2012-05-21T-3:131:-85 => 2012-05-20T21:131:-85 => 2012-05-20T23:11:-85 => 2012-05-20T23:09:45
         $this->assertEquals(new Peach_DT_Timestamp(2012, 5, 20, 23, 9, 35), $d->setAll(array("hour" => -3, "min" => 131, "sec" => -85)));
-        
-        try {
-            $d->setAll("hoge");
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertSame("Exception", get_class($e));
-        }
+    }
+    
+    /**
+     * 配列・Map 以外の型を指定した場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_DT_Timestamp::setAll
+     */
+    public function testSetAllFail()
+    {
+        $d = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $d->setAll("hoge");
+    }
+    
+    /**
+     * 形式が "YYYY-MM-DD hh:mm:ss" 形式になっていることを確認します.
+     * @covers Peach_DT_Timestamp::__toString
+     */
+    public function test__toString()
+    {
+        $t = new Peach_DT_Timestamp(2012, 5, 21, 7, 30, 15);
+        $this->assertSame("2012-05-21 07:30:15", $t->__toString());
     }
 }
-?>

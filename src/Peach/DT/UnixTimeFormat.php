@@ -25,7 +25,7 @@
  * Unix time ({@link time() time()} の返り値や {@link date() date()} の引数として使用される整数) 
  * と時間オブジェクトの相互変換を行うクラスです.
  * 
- * このクラスはシングルトンです. {@link DT_HttpDateFormat::getInstance() getInstance()}
+ * このクラスはシングルトンです. {@link Peach_DT_UnixTimeFormat::getInstance() getInstance()}
  * からオブジェクトを取得してください.
  * 
  * @package DT
@@ -53,55 +53,55 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     /**
      * 指定されたタイムスタンプを Peach_DT_Date に変換します.
      * 
-     * @param  string  タイムスタンプ
-     * @return Peach_DT_Date 変換結果
+     * @param  string $format タイムスタンプ
+     * @return Peach_DT_Date  変換結果
      */
     public function parseDate($format)
     {
         $time  = intval($format);
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
         return new Peach_DT_Date($year, $month, $date);
     }
     
     /**
      * 指定されたタイムスタンプを Peach_DT_Datetime に変換します.
      * 
-     * @param  string      タイムスタンプ
+     * @param  string $format    タイムスタンプ
      * @return Peach_DT_Datetime 変換結果
      */
     public function parseDatetime($format)
     {
         $time  = intval($format);
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
         return new Peach_DT_Datetime($year, $month, $date, $hour, $min);
     }
     
     /**
      * 指定されたタイムスタンプを Peach_DT_Timestamp に変換します.
-     * @param  string       タイムスタンプ
+     * @param  string $format     タイムスタンプ
      * @return Peach_DT_Timestamp 変換結果
      */
     public function parseTimestamp($format)
     {
         $time  = intval($format);
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
-        $sec   = @date("s", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
+        $sec   = date("s", $time);
         return new Peach_DT_Timestamp($year, $month, $date, $hour, $min, $sec);
     }
     
     /**
      * 指定されたオブジェクトを Peach_DT_Timestamp 型にキャストして
-     * {@link DT_HttpDateFormat::formatTimestamp() formatTimestamp()}
+     * {@link Peach_DT_UnixTimeFormat::formatTimestamp() formatTimestamp()}
      * を実行した結果を返します.
      * 
      * @param  Peach_DT_Date $d 書式化する時間オブジェクト
@@ -114,7 +114,7 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
     
     /**
      * 指定されたオブジェクトを Peach_DT_Timestamp 型にキャストして
-     * {@link DT_HttpDateFormat::formatTimestamp() formatTimestamp()}
+     * {@link Peach_DT_UnixTimeFormat::formatTimestamp() formatTimestamp()}
      * を実行した結果を返します.
      * 
      * @param  Peach_DT_Datetime $d 書式化する時間オブジェクト
@@ -148,4 +148,3 @@ class Peach_DT_UnixTimeFormat implements Peach_DT_Format
         return strval(mktime($hour, $min, $sec, $month, $date, $year));
     }
 }
-?>

@@ -195,11 +195,11 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
      * parse に失敗した場合に呼び出されます.
      * 
      * @param  string $format parse に失敗した文字列
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     private function throwFormatException($format)
     {
-        throw new Exception("Illegal format({$format}). HTTP-date format required.");
+        throw new InvalidArgumentException("Illegal format({$format}). HTTP-date format required.");
     }
 
     /**
@@ -271,4 +271,3 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
         }
     }
 }
-?>

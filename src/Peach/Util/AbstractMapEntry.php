@@ -70,4 +70,3 @@ abstract class Peach_Util_AbstractMapEntry implements Peach_Util_MapEntry
         return $this->value;
     }
 }
-?>

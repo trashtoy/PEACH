@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_ElementTest.php");
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
 
 class Peach_Markup_EmptyElementTest extends Peach_Markup_ElementTest
 {
@@ -27,15 +28,24 @@ class Peach_Markup_EmptyElementTest extends Peach_Markup_ElementTest
     }
     
     /**
+     * 要素名が空文字列だった場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_Markup_EmptyElement::__construct
+     */
+    public function test__constructFail()
+    {
+        new Peach_Markup_EmptyElement("");
+    }
+    
+    /**
      * Context の handleEmptyElement() が呼び出されることを確認します.
      * @covers Peach_Markup_EmptyElement::accept
      */
     public function testAccept()
     {
-        $obj   = $this->object;
-        $debug = new Peach_Markup_DebugContext(false);
-        $obj->accept($debug);
-        $this->assertSame("EmptyElement(testTag)\r\n", $debug->getResult());
+        $context = new Peach_Markup_TestContext();
+        $this->object->accept($context);
+        $this->assertSame("handleEmptyElement", $context->getResult());
     }
     
     /**

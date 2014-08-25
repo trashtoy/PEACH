@@ -60,7 +60,7 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     
     /**
      * フォーマットの時差です (単位は分)
-     * @var type 
+     * @var int
      */
     private $externalOffset;
     
@@ -179,8 +179,9 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
      */
     public function parseDatetime($format)
     {
-        $dp  = self::$datePattern;
-        $tzp = self::$timeZonePattern;
+        $dp     = self::$datePattern;
+        $tzp    = self::$timeZonePattern;
+        $result = null;
         if (!preg_match("/^{$dp}[^0-9][0-9]{2}:[0-9]{2}{$tzp}/", $format, $result)) {
             $this->throwFormatException($format, "YYYY-MM-DD hh:mm[timezone]");
         }
@@ -202,8 +203,9 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
      */
     public function parseTimestamp($format)
     {
-        $dp  = self::$datePattern;
-        $tzp = self::$timeZonePattern;
+        $dp     = self::$datePattern;
+        $tzp    = self::$timeZonePattern;
+        $result = null;
         if (!preg_match("/^{$dp}[^0-9][0-9]{2}:[0-9]{2}:[0-9]{2}{$tzp}/", $format, $result)) {
             $this->throwFormatException($format, "YYYY-MM-DD hh:mm:ss");
         }
@@ -254,9 +256,14 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
         return $this->formatDatetime($d);
     }
     
+    /**
+     * @param  string $format
+     * @param  string $expected
+     * @throws InvalidArgumentException
+     */
     private function throwFormatException($format, $expected)
     {
-        throw new Exception("Illegal format({$format}). Expected: {$expected}");
+        throw new InvalidArgumentException("Illegal format({$format}). Expected: {$expected}");
     }
     
     /**
@@ -324,4 +331,3 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
         return $format;
     }
 }
-?>

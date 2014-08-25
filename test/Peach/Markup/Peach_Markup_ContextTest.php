@@ -7,12 +7,6 @@ abstract class Peach_Markup_ContextTest extends PHPUnit_Framework_TestCase
     protected $object;
     
     /**
-     * @var Peach_Markup_Node
-     */
-    protected $testNode;
-    
-    
-    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */

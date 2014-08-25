@@ -213,4 +213,3 @@ class Peach_Util_ValuesTest_Object
         return "test value=" . $this->value;
     }
 }
-?>

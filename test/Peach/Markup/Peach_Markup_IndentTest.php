@@ -5,7 +5,7 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
      * @var Peach_Markup_Indent
      */
     protected $object;
-
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -14,7 +14,7 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
     {
         $this->object = new Peach_Markup_Indent();
     }
-
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -23,7 +23,7 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
     {
         
     }
-
+    
     /**
      * getLevel(), stepUp(), stepDown() のテストです. 以下を確認します.
      * 
@@ -54,7 +54,7 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
         }
         $this->assertSame(2, $i3->getLevel());
     }
-
+    
     /**
      * getUnit() のテストです. 以下を確認します.
      * - コンストラクタに指定した文字列を返すこと
@@ -69,9 +69,10 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
         $i2 = $this->object;
         $this->assertSame("    ", $i2->getUnit());
     }
-
+    
     /**
      * indent() のテストです. 以下を確認します.
+     * 
      * - unit に指定された文字列を, 現在の level の回数だけ繰り返した文字列を返すこと
      * - 現在の level が 0 以下の場合は空文字列を返すこと
      * 
@@ -88,11 +89,13 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
         $i3 = new Peach_Markup_Indent(-3, "  ");
         $this->assertSame("", $i3->indent());
     }
-
+    
     /**
      * breakCode() のテストです. 以下を確認します.
+     * 
      * - コンストラクタに指定した文字列を返すこと
      * - コンストラクタ引数を省略した場合は, CRLF を返すこと
+     * 
      * @covers Peach_Markup_Indent::breakCode
      */
     public function testBreakCode()

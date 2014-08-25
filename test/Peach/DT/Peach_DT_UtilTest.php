@@ -5,6 +5,11 @@
 class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @var string
+     */
+    private $defaultTZ;
+    
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
@@ -28,16 +33,20 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      */
     private function getTestArray()
     {
-        $d   = array();
-        $d[] = new Peach_DT_Date(     2012, 3,  29);
-        $d[] = new Peach_DT_Datetime( 2012, 3,  29, 21, 59);
-        $d[] = new Peach_DT_Timestamp(2012, 3,  29, 21, 59, 59);
-        $d[] = new Peach_DT_Date(     2012, 5,  21);
-        $d[] = new Peach_DT_Datetime( 2012, 5,  21,  7, 30);
-        $d[] = new Peach_DT_Timestamp(2012, 5,  21,  7, 30, 15);
-        $d[] = new Peach_DT_Date(     2012, 10,  5);
-        $d[] = new Peach_DT_Datetime( 2012, 10,  5, 19,  0);
-        $d[] = new Peach_DT_Timestamp(2012, 10,  5, 19,  0, 30);
+        static $d = null;
+        if ($d === null) {
+            $d = array(
+                new Peach_DT_Date     (2012, 3,  29),
+                new Peach_DT_Datetime (2012, 3,  29, 21, 59),
+                new Peach_DT_Timestamp(2012, 3,  29, 21, 59, 59),
+                new Peach_DT_Date     (2012, 5,  21),
+                new Peach_DT_Datetime (2012, 5,  21,  7, 30),
+                new Peach_DT_Timestamp(2012, 5,  21,  7, 30, 15),
+                new Peach_DT_Date     (2012, 10,  5),
+                new Peach_DT_Datetime (2012, 10,  5, 19,  0),
+                new Peach_DT_Timestamp(2012, 10,  5, 19,  0, 30),
+            );
+        }
         return $d;
     }
     
@@ -51,36 +60,39 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      */
     public function testCompareTime()
     {
-        $d = $this->getTestArray();
+        $d1 = $this->getTestArray();
         
         // 同じオブジェクト同士の比較は 0 を返します
         for ($i = 0; $i < 9; $i++) {
-            $this->assertSame(0, Peach_DT_Util::compareTime($d[$i], $d[$i]));
+            $this->assertSame(0, Peach_DT_Util::compareTime($d1[$i], $d1[$i]));
         }
         // 同じ型同士の比較が正しく出来ることを確認します
         for ($i = 0; $i < 3; $i ++) {
-            $this->assertLessThan(0, Peach_DT_Util::compareTime($d[$i],     $d[$i + 3]));
-            $this->assertLessThan(0, Peach_DT_Util::compareTime($d[$i + 3], $d[$i + 6]));
-            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d[$i + 6], $d[$i]));
+            $this->assertLessThan(0, Peach_DT_Util::compareTime($d1[$i],     $d1[$i + 3]));
+            $this->assertLessThan(0, Peach_DT_Util::compareTime($d1[$i + 3], $d1[$i + 6]));
+            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d1[$i + 6], $d1[$i]));
         }
         // 異なる型同士で正しく比較できることを確認します
         // 共通フィールドすべてが等しい場合は、より多くのフィールドを持つほうが大となります
         for ($i = 0; $i < 8; $i ++) {
-            $this->assertLessThan(0, Peach_DT_Util::compareTime($d[$i], $d[$i + 1]));
-            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d[$i + 1], $d[$i]));
+            $this->assertLessThan(0, Peach_DT_Util::compareTime($d1[$i], $d1[$i + 1]));
+            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d1[$i + 1], $d1[$i]));
         }
         
         /*
          * ラッパーオブジェクトを含めたテスト
          */
-        $d   = array();
-        $d[] = new Peach_DT_Date(2012, 5, 21);
-        $d[] = new Peach_DT_Datetime(2012, 5, 21, 0, 0);
-        $d[] = new Peach_DT_Timestamp(2012, 5, 21, 0, 0, 0);
-        $d[] = new Peach_DT_TimeWrapper($d[0]);
-        $d[] = new Peach_DT_TimeWrapper($d[1]);
-        $d[] = new Peach_DT_TimeWrapper($d[2]);
-        
+        $obj1 = new Peach_DT_Date(2012, 5, 21);
+        $obj2 = new Peach_DT_Datetime(2012, 5, 21, 0, 0);
+        $obj3 = new Peach_DT_Timestamp(2012, 5, 21, 0, 0, 0);
+        $d2   = array(
+            $obj1,
+            $obj2,
+            $obj3,
+            new Peach_DT_TimeWrapper($obj1),
+            new Peach_DT_TimeWrapper($obj2),
+            new Peach_DT_TimeWrapper($obj3),
+        );
         $zeroTest1 = array(0, 1, 2, 3, 4, 5);
         $zeroTest2 = array(3, 4, 5, 0, 1, 2);
         $subTest1  = array(1, 2, 2, 4, 5, 5);
@@ -95,14 +107,14 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
             $i5 = $subTest3[$i];
             
             // あるオブジェクトと、そのオブジェクトのラッパーオブジェクトの比較は 0 を返します
-            $this->assertSame(0, Peach_DT_Util::compareTime($d[$i1], $d[$i2]));
-            $this->assertSame(0, Peach_DT_Util::compareTime($d[$i2], $d[$i1]));
+            $this->assertSame(0, Peach_DT_Util::compareTime($d2[$i1], $d2[$i2]));
+            $this->assertSame(0, Peach_DT_Util::compareTime($d2[$i2], $d2[$i1]));
             
             // 共通フィールドがすべて等しい場合、より多くのフィールドを持つほうが大となります
-            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d[$i3], $d[$i4]));
-            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d[$i3], $d[$i5]));
-            $this->assertLessThan(0, Peach_DT_Util::compareTime($d[$i4], $d[$i3]));
-            $this->assertLessThan(0, Peach_DT_Util::compareTime($d[$i5], $d[$i3]));
+            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d2[$i3], $d2[$i4]));
+            $this->assertGreaterThan(0, Peach_DT_Util::compareTime($d2[$i3], $d2[$i5]));
+            $this->assertLessThan(0, Peach_DT_Util::compareTime($d2[$i4], $d2[$i3]));
+            $this->assertLessThan(0, Peach_DT_Util::compareTime($d2[$i5], $d2[$i3]));
         }
     }
     
@@ -111,7 +123,7 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      * 
      * - 配列を引数にして実行できること
      * - 引数を羅列して実行できること
-     * - 引数に不正な型を含む場合でも正常に動作すること
+     * - 引数に不正な型を含む場合, その値が無視されること
      * 
      * @covers Peach_DT_Util::oldest
      */
@@ -128,7 +140,7 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
      * 
      * - 配列を引数にして実行できること
      * - 引数を羅列して実行できること
-     * - 引数に不正な型を含む場合でも正常に動作すること
+     * - 引数に不正な型を含む場合, その値が無視されること
      * 
      * @covers Peach_DT_Util::latest
      */
@@ -190,4 +202,3 @@ class Peach_DT_UtilTest extends PHPUnit_Framework_TestCase
         }
     }
 }
-?>

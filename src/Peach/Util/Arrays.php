@@ -39,7 +39,7 @@ class Peach_Util_Arrays
      * @param  bool                  $isMax
      * @return mixed
      */
-    private static function getTop(array $arr, Util_Comparator $c = null, $isMax = false)
+    private static function getTop(array $arr, Peach_Util_Comparator $c = null, $isMax = false)
     {
         if (!isset($c)) {
             $c = Peach_Util_DefaultComparator::getInstance();
@@ -160,7 +160,7 @@ class Peach_Util_Arrays
     /**
      * @param  string  $value
      * @param  string  $type
-     * @return boolean
+     * @return bool
      */
     private static function pickupMatch($value, $type)
     {
@@ -345,4 +345,3 @@ class Peach_Util_Arrays
         return $arr;
     }
 }
-?>

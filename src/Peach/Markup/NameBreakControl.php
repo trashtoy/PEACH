@@ -43,7 +43,7 @@ class Peach_Markup_NameBreakControl extends Peach_Markup_BreakControlWrapper
      * 
      * @param array $breakNames   強制的に改行する要素名
      * @param array $noBreakNames 強制的に改行しない要素名
-     * @param Peach_Markup_BreakControl $original
+     * @param Peach_Markup_BreakControl $original オリジナルの BreakControl
      */
     public function __construct(array $breakNames, array $noBreakNames, Peach_Markup_BreakControl $original = null)
     {
@@ -55,7 +55,7 @@ class Peach_Markup_NameBreakControl extends Peach_Markup_BreakControlWrapper
     /**
      * 強制的に改行する (または強制的に改行しない) 要素名のリストをもとに,
      * 指定された要素を改行するかどうかを決定します.
-     * 改行リスト・非改行リストの両方に含まれている要素名の場合は, 
+     * 改行リスト・非改行リストの両方に含まれている要素名の場合は,
      * 改行リストのほうが優先されます. (つまり常に改行されます)
      * 
      * 改行リスト・非改行リストのいずれにも含まれない場合は,

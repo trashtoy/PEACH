@@ -57,9 +57,9 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     public static function now()
     {
         $time  = time();
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
         return new self($year, $month, $date);
     }
     
@@ -69,9 +69,9 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
      * を使って解析を行います.
      * ("YYYY-MM-DD" 形式の文字列を受理します.)
      * 
-     * @param  string    変換対象の文字列
-     * @param  Peach_DT_Format 変換に使用するフォーマット
-     * @return Peach_DT_Date   変換結果の Peach_DT_Date オブジェクト
+     * @param  string          $text   変換対象の文字列
+     * @param  Peach_DT_Format $format 変換に使用するフォーマット
+     * @return Peach_DT_Date           変換結果の Peach_DT_Date オブジェクト
      */
     public static function parse($text, Peach_DT_Format $format = null)
     {
@@ -391,8 +391,8 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     
     /**
      * 指定された月の日数を返します.
-     * @param  int 年
-     * @param  int 月
+     * @param  int $year  年
+     * @param  int $month 月
      * @return int 引数で指定された月の日数. すなわち, 28 から 31 までの整数.
      */
     private static function getDateCountOf($year, $month)

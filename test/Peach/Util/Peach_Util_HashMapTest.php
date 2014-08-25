@@ -28,12 +28,47 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * コンストラクタをテストします. 以下を確認します.
+     * 
+     * - 引数を指定しない場合は空の HashMap が生成されること
+     * - 引数に配列を指定した場合, その配列のキーと値をマッピングした HashMap が生成されること
+     * - 引数に Map を指定した場合, その Map と同じマッピングの HashMap が生成されること
+     */
+    public function test__construct()
+    {
+        $map1 = new Peach_Util_ArrayMap();
+        $this->assertSame(0, $map1->size());
+        
+        $arr  = array("first" => 1, "second" => 2, "third" => 3);
+        $map2 = new Peach_Util_HashMap($arr);
+        $this->assertSame(3, $map2->size());
+        $this->assertSame(1, $map2->get("first"));
+        
+        $map3 = new Peach_Util_HashMap($map2);
+        $this->assertSame(3, $map3->size());
+        $map3->put("second", 20);
+        $this->assertSame(20, $map3->get("second"));
+        $this->assertSame(2,  $map2->get("second"));
+    }
+    
+    /**
+     * 引数に Map, 配列以外の型を指定した場合
+     * InvalidArgumentException をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     */
+    public function test__constructFail()
+    {
+        new Peach_Util_HashMap("Invalid type");
+    }
+    
+    /**
      * {@link Peach_Util_HashMap::put()} をテストします.
      * 以下を確認します.
      * 
-     * - put したマッピングが get で取得できることを確認する.
-     * - 同一ではない, 等価なオブジェクトは同じキーとして扱われることを確認する.
-     * - 存在しないマッピングの場合は NULL を返すことを確認する.
+     * - put したマッピングが get で取得できること
+     * - 同一ではない, 等価なオブジェクトは同じキーとして扱われること
+     * - 存在しないマッピングの場合は NULL を返すこと
      * 
      * @covers Peach_Util_HashMap::put
      */
@@ -53,6 +88,8 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * 引数に指定したマッピングが追加されることを確認します.
+     * 
      * @covers Peach_Util_HashMap::putAll
      */
     public function testPutAll()
@@ -65,6 +102,11 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * get() をテストします. 以下を確認します.
+     * 
+     * - 該当するマッピングの値を返すこと
+     * - 該当するマッピングが存在しない場合に null を返すこと
+     * 
      * @covers Peach_Util_HashMap::get
      */
     public function testGet()
@@ -74,6 +116,8 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * マッピングの個数が 0 になることを確認します.
+     * 
      * @covers Peach_Util_HashMap::clear
      */
     public function testClear()
@@ -83,6 +127,8 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * マッピングの個数を整数で返すことを確認します.
+     * 
      * @covers Peach_Util_HashMap::size
      */
     public function testSize()
@@ -91,6 +137,8 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * マッピングのキーの一覧を配列で返すことを確認します.
+     * 
      * @covers Peach_Util_HashMap::keys
      */
     public function testKeys()
@@ -105,6 +153,8 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * 引数のキーが存在する場合に true, それ以外は false を返すことを確認します.
+     * 
      * @covers Peach_Util_HashMap::containsKey
      */
     public function testContainsKey()
@@ -116,6 +166,11 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * remove() をテストします. 以下を確認します.
+     * 
+     * - 存在しないキーを指定した場合, 何も変化せず正常終了すること
+     * - 指定されたキーのマッピングが削除されること
+     * 
      * @covers Peach_Util_HashMap::remove
      */
     public function testRemove()
@@ -131,6 +186,8 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * マッピングの値の一覧を配列で返すことを確認します.
+     * 
      * @covers Peach_Util_HashMap::values
      */
     public function testValues()
@@ -146,6 +203,11 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * entryList() をテストします. 以下を確認します.
+     * 
+     * - 返り値が MapEntry の配列であること
+     * - 各 MapEntry のキーと値が HashMap にセットしたものに等しいこと
+     * 
      * @covers Peach_Util_HashMap::entryList
      */
     public function testEntryList()
@@ -160,6 +222,9 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
         }
     }
     
+    /**
+     * @return array
+     */
     private function getTestObjectList()
     {
         static $objList = null;
@@ -172,6 +237,9 @@ class Peach_Util_HashMapTest extends PHPUnit_Framework_TestCase
         return $objList;
     }
     
+    /**
+     * @return Peach_Util_HashMap
+     */
     private function getTestMap()
     {
         $map = new Peach_Util_HashMap();
@@ -222,4 +290,3 @@ class Peach_Util_HashMapTest_C implements Peach_Util_Comparable
         return "KEY:{$this->value}";
     }
 }
-?>

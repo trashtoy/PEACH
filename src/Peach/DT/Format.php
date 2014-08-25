@@ -86,4 +86,3 @@ interface Peach_DT_Format
      */
     public function formatTimestamp(Peach_DT_Timestamp $d);
 }
-?>

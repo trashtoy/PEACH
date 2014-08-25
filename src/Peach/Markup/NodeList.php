@@ -66,7 +66,7 @@ class Peach_Markup_NodeList implements Peach_Markup_Container
      * この NodeList に実際に追加される値を返します.
      * 
      * @param  mixed $var
-     * @return Peach_Markup_Node|array 追加されるノード (またはノードの配列)
+     * @return Peach_Markup_Component|array 追加されるノード (またはノードの配列)
      */
     private function getAppendee($var)
     {

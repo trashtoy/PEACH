@@ -177,7 +177,9 @@ class Peach_DT_TimeWrapper implements Peach_DT_Time
      */
     public function equals($obj)
     {
-        if (get_class($this) != get_class($obj)) return false;
+        if (get_class($this) != get_class($obj)) {
+            return false;
+        }
         return $this->compareTo($obj) === 0;
     }
     
@@ -245,4 +247,3 @@ class Peach_DT_TimeWrapper implements Peach_DT_Time
         return $this->original->__toString();
     }
 }
-?>

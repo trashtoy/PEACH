@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
+
 class Peach_Markup_TextTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -40,9 +42,9 @@ class Peach_Markup_TextTest extends PHPUnit_Framework_TestCase
      */
     public function testAccept()
     {
-        $context = new Peach_Markup_DebugContext(false);
+        $context = new Peach_Markup_TestContext();
         $this->object->accept($context);
-        $this->assertSame("Text\r\n", $context->getResult());
+        $this->assertSame("handleText", $context->getResult());
     }
     
     /**

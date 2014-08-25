@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/Peach_Markup_ElementTest.php");
 require_once(__DIR__ . "/Peach_Markup_ContainerTestImpl.php");
+require_once(__DIR__ . "/Peach_Markup_TestContext.php");
 
 class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
 {
@@ -24,6 +25,16 @@ class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
      */
     protected function tearDown()
     {
+    }
+    
+    /**
+     * 要素名が空文字列だった場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_Markup_ContainerElement::__construct
+     */
+    public function test__constructFail()
+    {
+        new Peach_Markup_ContainerElement("");
     }
     
     /**
@@ -56,10 +67,9 @@ class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
      */
     public function testAccept()
     {
-        $obj   = $this->object;
-        $debug = new Peach_Markup_DebugContext(false);
-        $obj->accept($debug);
-        $this->assertSame("ContainerElement(testTag) {\r\n}\r\n", $debug->getResult());
+        $context = new Peach_Markup_TestContext();
+        $this->object->accept($context);
+        $this->assertSame("handleContainerElement", $context->getResult());
     }
     
     /**

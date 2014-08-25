@@ -22,7 +22,7 @@
  */
 /** @package Util */
 /**
- * 与えられた二つの値を比較するインタフェースです. 
+ * 与えられた二つの値を比較するインタフェースです.
  * このインタフェースは, {@link Peach_Util_Arrays::sort()} の引数として使われます.
  * Java における 
  * {@link http://docs.oracle.com/javase/jp/7/api/java/util/Comparator.html java.util.Comparator}
@@ -55,4 +55,3 @@ interface Peach_Util_Comparator
      */
     public function compare($var1, $var2);
 }
-?>

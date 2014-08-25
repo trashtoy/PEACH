@@ -105,7 +105,7 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
     }
 
     /**
-     * デフォルトの DT_Equator オブジェクトを返します.
+     * デフォルトの Peach_DT_Equator オブジェクトを返します.
      * このオブジェクトは {@link Peach_DT_Time::equals()} を使って等値性を調べます.
      * @return Peach_DT_TimeEquator
      */
@@ -123,17 +123,17 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
      * この Equator に設定されているフィールドについて比較を行い,
      * 全て等しい場合のみ TRUE を返します.
      * 
-     * @param  Peach_DT_Time $var1 比較対象の時間オブジェクト
-     * @param  Peach_DT_Time $var2 比較対象の時間オブジェクト
-     * @return bool          2 つの時間オブジェクトが等しいと判断された場合のみ TRUE
-     * @throws Exception 引数に Peach_DT_Time インスタンス以外の値が指定された場合
+     * @param  Peach_DT_Time $var1      比較対象の時間オブジェクト
+     * @param  Peach_DT_Time $var2      比較対象の時間オブジェクト
+     * @return bool                     2 つの時間オブジェクトが等しいと判断された場合のみ TRUE
+     * @throws InvalidArgumentException 引数に Peach_DT_Time インスタンス以外の値が指定された場合
      */
     public function equate($var1, $var2)
     {
         if (!($var1 instanceof Peach_DT_Time) || !($var2 instanceof Peach_DT_Time)) {
             $arg1 = Peach_Util_Values::getType($var1);
             $arg2 = Peach_Util_Values::getType($var2);
-            throw new Exception("arguments must be Peach_DT_Time instance.({$arg1}, {$arg2})");
+            throw new InvalidArgumentException("arguments must be Peach_DT_Time instance.({$arg1}, {$arg2})");
         }
 
         $fields = $this->fields;
@@ -160,7 +160,7 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
     {
         if (!($var instanceof Peach_DT_Time)) {
             $type = Peach_Util_Values::getType($var);
-            throw new Exception("The value must be Peach_DT_Time instance.({$type})");
+            throw new InvalidArgumentException("The value must be Peach_DT_Time instance.({$type})");
         }
         
         return
@@ -172,4 +172,3 @@ class Peach_DT_TimeEquator implements Peach_Util_Equator
             $var->get("second") * 28629151;   // 31^5
     }
 }
-?>

@@ -51,11 +51,11 @@ class Peach_DT_Datetime extends Peach_DT_Date
     public static function now()
     {
         $time  = time();
-        $year  = @date("Y", $time);
-        $month = @date("n", $time);
-        $date  = @date("d", $time);
-        $hour  = @date("H", $time);
-        $min   = @date("i", $time);
+        $year  = date("Y", $time);
+        $month = date("n", $time);
+        $date  = date("d", $time);
+        $hour  = date("H", $time);
+        $min   = date("i", $time);
         return new self($year, $month, $date, $hour, $min);
     }
     
@@ -66,9 +66,9 @@ class Peach_DT_Datetime extends Peach_DT_Date
      * ("YYYY-MM-DD hh:mm" 形式の文字列を受理します.
      * 日付と時刻のセパレータは, 数字以外の ASCII 1 文字であれば何でも構いません.)
      * 
-     * @param  string      変換対象の文字列
-     * @param  Peach_DT_Format   変換に使用するフォーマット
-     * @return Peach_DT_Datetime 変換結果
+     * @param  string            $text   変換対象の文字列
+     * @param  Peach_DT_Format   $format 変換に使用するフォーマット
+     * @return Peach_DT_Datetime         変換結果
      */
     public static function parse($text, Peach_DT_Format $format = null)
     {
@@ -148,7 +148,7 @@ class Peach_DT_Datetime extends Peach_DT_Date
      * (non-PHPdoc)
      * 
      * @return Peach_DT_Datetime
-     * @see DT_AbstractTime::newInstance()
+     * @see    Peach_DT_AbstractTime::newInstance()
      * @ignore
      */
     protected function newInstance(Peach_Util_Map $fields)
@@ -171,25 +171,36 @@ class Peach_DT_Datetime extends Peach_DT_Date
      * 引数のオブジェクトに対して get("year"), get("month"), get("date"), get("hour"), get("minute")
      * を呼び出した結果を比較対象のフィールドとします.
      * 
-     * @param  Util_Time 比較対象の時間
-     * @return int       この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
+     * @param  Peach_DT_Time $time 比較対象の時間
+     * @return int                 この時間のほうが過去の場合は負の値, 未来の場合は正の値, それ以外は 0
      * @ignore
      */
     protected function compareFields(Peach_DT_Time $time)
     {
         $c = parent::compareFields($time);
-        if ($c !== 0) return $c;
+        if ($c !== 0) {
+            return $c;
+        }
+        
         $className = __CLASS__;
         if ($time instanceof $className) {
-            if ($this->hour   !== $time->hour)   return $this->hour   - $time->hour;
-            if ($this->minute !== $time->minute) return $this->minute - $time->minute;
+            if ($this->hour   !== $time->hour) {
+                return $this->hour   - $time->hour;
+            }
+            if ($this->minute !== $time->minute) {
+                return $this->minute - $time->minute;
+            }
             return 0;
         }
         else {
             $h = $time->get("hour");
             $m = $time->get("minute");
-            if ($this->hour   !== $h) return (isset($h) ? $this->hour   - $h : 0);
-            if ($this->minute !== $m) return (isset($m) ? $this->minute - $m : 0);
+            if ($this->hour   !== $h) {
+                return (isset($h) ? $this->hour   - $h : 0);
+            }
+            if ($this->minute !== $m) {
+                return (isset($m) ? $this->minute - $m : 0);
+            }
             return 0;
         }
     }
@@ -254,7 +265,7 @@ class Peach_DT_Datetime extends Peach_DT_Date
      */
     private function getHourAdjuster()
     {
-        static $adjuster;
+        static $adjuster = null;
         if (!isset($adjuster)) {
             $adjuster = new Peach_DT_FieldAdjuster(self::$HOUR, self::$DATE, 0, 23);
         }
@@ -274,4 +285,3 @@ class Peach_DT_Datetime extends Peach_DT_Date
         return $adjuster;
     }
 }
-?>

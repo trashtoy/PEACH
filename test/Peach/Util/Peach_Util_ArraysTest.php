@@ -1,6 +1,9 @@
 <?php
 class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var resource
+     */
     private static $fp;
     
     public static function setUpBeforeClass()
@@ -37,6 +40,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - Peach_Util_Comparable を実装しているオブジェクトの場合, 
      *   compareTo() メソッドを使って大小を比較すること
      * - 空の配列が指定された場合は null を返すこと
+     * - Comparator が指定された場合はその Comparator の仕様に従って比較すること
      * 
      * @covers Peach_Util_Arrays::max
      */
@@ -54,6 +58,10 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($test2[2], Peach_Util_Arrays::max($test2));
         
         $this->assertNull(Peach_Util_Arrays::max(array()));
+        
+        $comparator = new Peach_Util_ArraysTest_Comparator();
+        $result     = Peach_Util_Arrays::max(array("three", "one", "five", "two", "four"), $comparator);
+        $this->assertSame("five", $result);
     }
 
     /**
@@ -64,6 +72,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - Peach_Util_Comparable を実装しているオブジェクトの場合, 
      *   compareTo() メソッドを使って大小を比較すること
      * - 空の配列が指定された場合は null を返すこと
+     * - Comparator が指定された場合はその Comparator の仕様に従って比較すること
      * 
      * @covers Peach_Util_Arrays::min
      */
@@ -80,10 +89,20 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($test2[1], Peach_Util_Arrays::min($test2));
         
-        $this->assertNull(Peach_Util_Arrays::max(array()));
+        $this->assertNull(Peach_Util_Arrays::min(array()));
+        
+        $comparator = new Peach_Util_ArraysTest_Comparator();
+        $result     = Peach_Util_Arrays::min(array("three", "one", "five", "two", "four"), $comparator);
+        $this->assertSame("one", $result);
     }
 
     /**
+     * pickup() をテストします. 以下を確認します.
+     * 
+     * - string, numeric, bool など各キーワードを解釈すること (文字の大小は問わず)
+     * - その他の文字列はクラス / インタフェース名として解釈すること
+     * - 第 3 引数に true を指定した場合は元の配列の添字を維持すること
+     * 
      * @covers Peach_Util_Arrays::pickup
      */
     public function testPickup()
@@ -145,6 +164,12 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * sort() をテストします. 以下を確認します.
+     * 
+     * - 空の配列, 長さが 1 の配列の場合はそのまま返すこと
+     * - 第 2 引数を指定しない場合, DefaultComparator のソート基準に従ってソートが行われること
+     * - 返り値の添字が連番で初期化されること
+     * 
      * @covers Peach_Util_Arrays::sort
      */
     public function testSort()
@@ -178,6 +203,12 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * asort() をテストします. 以下を確認します.
+     * 
+     * - 空の配列, 長さが 1 の配列の場合はそのまま返すこと
+     * - 第 2 引数を指定しない場合, DefaultComparator のソート基準に従ってソートが行われること
+     * - 返り値の添字が維持されること
+     * 
      * @covers Peach_Util_Arrays::asort
      */
     public function testAsort()
@@ -211,6 +242,8 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * 引数に指定された配列と値が連結されて 1 つの配列として返されることを確認します.
+     * 
      * @covers Peach_Util_Arrays::concat
      */
     public function testConcat()
@@ -236,6 +269,11 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * unique() をテストします. 以下を確認します.
+     * 
+     * - 2 度目以降に出現した値が取り除いた配列を返すこと
+     * - 配列のキーが維持されていること
+     * 
      * @covers Peach_Util_Arrays::unique
      */
     public function testUnique()
@@ -247,7 +285,6 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 
      * @return array
      */
     private static function getSampleArray()
@@ -269,7 +306,6 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 
      * @return array
      */
     private static function getSampleReverseArray()
@@ -279,7 +315,6 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * 
      * @return array
      */
     private static function getSampleShuffleArray()
@@ -343,4 +378,32 @@ class Peach_Util_ArraysTest_Comparable implements Peach_Util_Comparable
         }
     }
 }
-?>
+
+class Peach_Util_ArraysTest_Comparator implements Peach_Util_Comparator
+{
+    /**
+     * @param  string $var1
+     * @param  string $var2
+     * @return int
+     */
+    public function compare($var1, $var2)
+    {
+        return $this->convert($var1) - $this->convert($var2);
+    }
+    
+    /**
+     * @param  string $var
+     * @return int
+     */
+    private function convert($var)
+    {
+        static $names = array(
+            "one"   => 1,
+            "two"   => 2,
+            "three" => 3,
+            "four"  => 4,
+            "five"  => 5,
+        );
+        return array_key_exists($var, $names) ? $names[$var] : 0;
+    }
+}

@@ -46,6 +46,8 @@ class Peach_Util_Values
      * 最小値が最大値より大きい場合, 最大値の指定は無視されます.
      * 最大値のみ指定したい場合は, 最小値を NULL にしてください.
      * 
+     * 引数にオブジェクトが指定された場合は 1 として扱います.
+     * 
      * @param  mixed $value 変換元の値
      * @param  int   $min   最小値 (省略可). 変換後の値がこの値よりも小さい場合は, この値を返す.
      * @param  int   $max   最大値 (省略可). 変換後の値がこの値よりも大きい場合は, この値を返す.
@@ -53,8 +55,11 @@ class Peach_Util_Values
      */
     public static function intValue($value, $min = null, $max = null)
     {
+        if (is_object($value)) {
+            return self::intValue(1, $min, $max);
+        }
         if (!is_int($value)) {
-            $iValue = @intval($value);
+            $iValue = intval($value);
             return self::intValue($iValue, $min, $max);
         }
         if (isset($min) && isset($max) && $max < $min) {

@@ -80,7 +80,7 @@ interface Peach_Util_Map
      * マッピングが存在する場合に TRUE を返します.
      *
      * @param  mixed   $key キー
-     * @return boolean      マッピングが存在する場合に TRUE
+     * @return bool         マッピングが存在する場合に TRUE
      */
     public function containsKey($key);
 
@@ -123,4 +123,3 @@ interface Peach_Util_Map
      */
     public function entryList();
 }
-?>

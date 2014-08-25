@@ -83,7 +83,7 @@ class Peach_Util_DefaultEquator implements Peach_Util_Equator
      * 指定された値のハッシュ値を返します.
      * ハッシュ値の計算規則は以下のとおりです.
      * 
-     * - boolean 型にキャストした結果 FALSE となるような引数については 0
+     * - bool 型にキャストした結果 FALSE となるような引数については 0
      * - 引数が数値表現の場合はその絶対値
      * - それ以外の値の場合は, 引数の文字列表現の {@link md5() md5()} ハッシュの一部
      * 
@@ -103,4 +103,3 @@ class Peach_Util_DefaultEquator implements Peach_Util_Equator
         return hexdec(substr(md5($str), 22));
     }
 }
-?>
