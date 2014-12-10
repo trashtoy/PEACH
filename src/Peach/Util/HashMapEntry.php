@@ -51,7 +51,7 @@ class Peach_Util_HashMapEntry extends Peach_Util_AbstractMapEntry
     /**
      * このエントリーの値を新しい値に更新します.
      * 
-     * @param mixed 新しい値
+     * @param mixed $value 新しい値
      */
     public function setValue($value)
     {
