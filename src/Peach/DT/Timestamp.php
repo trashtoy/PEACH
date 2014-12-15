@@ -198,6 +198,10 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
         return new Peach_DT_Timestamp($this->year, $this->month, $this->date, $this->hour, $this->minute, $this->second);
     }
     
+    /**
+     * このクラスのフィールドを調整するための FieldAdjuster を返します.
+     * @return Peach_DT_FieldAdjuster
+     */
     private function getAdjuster()
     {
         static $adjuster = null;

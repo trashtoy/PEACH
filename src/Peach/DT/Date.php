@@ -171,6 +171,7 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     
     /**
      * 年と月の不整合を調整します.
+     * @param Peach_Util_Map $fields 調整対象のフィールド一覧
      */
     private function adjustMonth(Peach_Util_Map $fields)
     {
@@ -204,6 +205,7 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     
     /**
      * 年の値を4桁に調整します. (10000年問題に対応するまでの暫定的処置です.)
+     * @param Peach_Util_Map $fields 調整対象のフィールド一覧
      */
     private function adjustYear(Peach_Util_Map $fields)
     {
@@ -367,7 +369,8 @@ class Peach_DT_Date extends Peach_DT_AbstractTime
     /**
      * 指定された年がうるう年かどうかを判定します.
      * 
-     * @return bool うるう年である場合に TRUE, それ以外は FALSE
+     * @param  int $year 判定対象の年
+     * @return bool      うるう年である場合に TRUE, それ以外は FALSE
      */
     private static function checkLeapYear($year)
     {

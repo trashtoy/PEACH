@@ -341,8 +341,8 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      * 指定されたフィールド名を $fields のインデックスに変換します.
      * 不正なフィールド名の場合は -1 を返します.
      * 
-     * @param  string フィールド名
-     * @return int    インデックス
+     * @param  string $field フィールド名
+     * @return int           インデックス
      * 
      * @see    Peach_DT_Time::$YEAR
      * @see    Peach_DT_Time::$MONTH
