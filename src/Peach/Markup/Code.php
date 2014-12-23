@@ -34,7 +34,7 @@
 class Peach_Markup_Code implements Peach_Markup_Node
 {
     /**
-     *
+     * 整形済テキスト
      * @var string
      */
     private $text;

@@ -33,19 +33,19 @@
  */
 class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     /**
-     * 
+     * DefaultContext のコンストラクタに渡される Indent オブジェクトです.
      * @var Peach_Markup_Indent
      */
     private $indent;
     
     /**
-     * 
+     * DefaultContext のコンストラクタに渡される Renderer オブジェクトです.
      * @var Peach_Markup_Renderer
      */
     private $renderer;
     
     /**
-     * 
+     * DefaultContext のコンストラクタに渡される BreakControl オブジェクトです.
      * @var Peach_Markup_BreakControl
      */
     private $breakControl;
@@ -112,6 +112,8 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     }
     
     /**
+     * 指定された引数で Renderer オブジェクトを初期化します.
+     * 
      * @param  Peach_Markup_Renderer|string $var
      * @return Peach_Markup_Renderer
      * @throws InvalidArgumentException
@@ -161,6 +163,9 @@ class Peach_Markup_DefaultBuilder extends Peach_Markup_Builder {
     }
     
     /**
+     * この Builder にセットされている Indent, Renderer, BreakControl
+     * を使って新しい DefaultContext を生成します.
+     * 
      * @return Markup_Context
      */
     protected function createContext()

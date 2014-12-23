@@ -40,59 +40,59 @@ abstract class Peach_Markup_Context
      * オブジェクトの種類に応じて, このクラスの具象クラスで定義された各 handle メソッドに処理が割り当てられます.
      * Visitor パターンの visit メソッドに相当します.
      * 
-     * @param  Peach_Markup_Component
+     * @param  Peach_Markup_Component $c 処理対象の Component
      */
-    public final function handle(Peach_Markup_Component $node)
+    public final function handle(Peach_Markup_Component $c)
     {
-        $node->accept($this);
+        $c->accept($this);
     }
     
     /**
      * コンテナ要素を処理します.
-     * @param  Peach_Markup_ContainerElement
+     * @param  Peach_Markup_ContainerElement $node 処理対象のコンテナ要素
      */
     public abstract function handleContainerElement(Peach_Markup_ContainerElement $node);
     
     /**
      * 空要素タグを処理します.
-     * @param  Peach_Markup_EmptyElement
+     * @param  Peach_Markup_EmptyElement $node 処理対象の空要素
      */
     public abstract function handleEmptyElement(Peach_Markup_EmptyElement $node);
     
     /**
      * テキストノードを処理します.
-     * @param  Peach_Markup_Text
+     * @param  Peach_Markup_Text $node 処理対象のテキスト
      */
     public abstract function handleText(Peach_Markup_Text $node);
     
     /**
      * 整形済テキストを処理します.
-     * @param  Peach_Markup_Code
+     * @param  Peach_Markup_Code $node 処理対象の整形済テキスト
      */
     public abstract function handleCode(Peach_Markup_Code $node);
     
     /**
      * コメントノードを処理します.
-     * @param  Peach_Markup_Comment
+     * @param  Peach_Markup_Comment $node 処理対象のコメント
      */
     public abstract function handleComment(Peach_Markup_Comment $node);
     
     /**
      * NodeList を処理します.
-     * @param Peach_Markup_NodeList
+     * @param Peach_Markup_NodeList $node 処理対象の NodeList
      */
     public abstract function handleNodeList(Peach_Markup_NodeList $node);
     
     /**
      * None を処理します.
-     * @param Peach_Markup_None
+     * @param Peach_Markup_None $none 処理対象の None オブジェクト
      */
     public abstract function handleNone(Peach_Markup_None $none);
     
     /**
      * 処理結果を取得します. まだ handle() が実行されていない場合は NULL を返します.
      * 
-     * @return mixed
+     * @return mixed 処理結果
      */
     public abstract function getResult();
 }

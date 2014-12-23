@@ -28,16 +28,19 @@
 class Peach_Markup_DefaultContext extends Peach_Markup_Context
 {
     /**
+     * マークアップ時の改行やインデント処理を担当します.
      * @var Peach_Markup_Indent
      */
     private $indent;
     
     /**
+     * タグの出力方式 (空要素や boolean 属性などの扱い) を制御します.
      * @var Peach_Markup_Renderer
      */
     private $renderer;
     
     /**
+     * 開始タグの直後に改行するかどうかの判定を行います.
      * @var Peach_Markup_BreakControl
      */
     private $breakControl;
@@ -87,7 +90,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     
     /**
      * コメントノードを読み込みます.
-     * @param Peach_Markup_Comment
+     * @param Peach_Markup_Comment $comment
      */
     public function handleComment(Peach_Markup_Comment $comment)
     {
@@ -119,6 +122,12 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
         $this->isCommentMode = false;
     }
     
+    /**
+     * コメントノードを 1 行 ("<--foobar-->") で記述するか改行するかの判定を行います.
+     * 
+     * @param  Peach_Markup_Comment $comment
+     * @return bool
+     */
     private function checkBreakModeInComment(Peach_Markup_Comment $comment)
     {
         $nodes = $comment->getChildNodes();
@@ -164,16 +173,16 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     
     /**
      * EmptyElement を読み込みます.
-     * @param Peach_Markup_EmptyElement
+     * @param Peach_Markup_EmptyElement $node
      * @see Peach_Markup_Context::handleEmptyElement()
-     */
+     */ 
     public function handleEmptyElement(Peach_Markup_EmptyElement $node) {
         $this->result .= $this->indent() . $this->renderer->formatEmptyTag($node);
     }
     
     /**
      * ContainerElement を読み込みます.
-     * @param Peach_Markup_ContainerElement
+     * @param Peach_Markup_ContainerElement $element
      * @see Peach_Markup_Context::handleContainerElement()
      */
     public function handleContainerElement(Peach_Markup_ContainerElement $element)
@@ -244,6 +253,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
+     * インデントモードが ON の場合は空白文字, OFF の場合は空文字列を返します.
      * @return string
      */
     private function indent()
@@ -252,7 +262,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
-     * 
+     * インデントモードが ON の場合は改行コード, OFF の場合は空文字列を返します.
      * @return string
      */
     private function breakCode()
@@ -261,6 +271,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
+     * 予期しないインデントを回避するため, 改行コードを文字参照に置き換えます.
      * @param  string $text
      * @return string
      */
@@ -270,6 +281,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
     }
     
     /**
+     * 意図しないタイミングでコメントノードが終了するのを防ぐため, "-->" を文字参照に置き換えます.
      * @param  string $text
      * @return string
      */

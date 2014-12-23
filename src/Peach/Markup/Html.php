@@ -40,6 +40,7 @@ class Peach_Markup_Html
     private function __construct() {}
     
     /**
+     * 新しい DefaultBuilder を生成します.
      * @param  bool $xml
      * @return Peach_Markup_DefaultBuilder
      */
@@ -337,6 +338,7 @@ class Peach_Markup_Html
     }
     
     /**
+     * alias() の本処理です.
      * @param  array $options
      * @throws InvalidArgumentException
      */

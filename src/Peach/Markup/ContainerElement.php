@@ -40,7 +40,7 @@ class Peach_Markup_ContainerElement extends Peach_Markup_Element implements Peac
     /**
      * 指定された要素名を持つコンテナ要素を構築します.
      * 
-     * @param string 要素名
+     * @param string $name 要素名
      */
     public function __construct($name)
     {
@@ -51,8 +51,8 @@ class Peach_Markup_ContainerElement extends Peach_Markup_Element implements Peac
     /**
      * この要素に子ノードを追加します.
      * 
-     * @param  mixed 追加する値
-     * @throws Exception 指定されたノードの中にこのノードが存在している場合
+     * @param  mixed $var 追加する値
+     * @throws InvalidArgumentException 指定されたノードの中にこのノードが存在している場合
      */
     public function append($var)
     {
