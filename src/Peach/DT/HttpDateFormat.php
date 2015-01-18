@@ -86,9 +86,9 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
     /**
      * {@link Peach_DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を Peach_DT_Date にキャストします.
      * 
-     * @param  string       HTTP-date 形式の文字列
-     * @return Peach_DT_Date      変換結果
-     * @throws Exception    フォーマットが不正な場合
+     * @param  string $format           HTTP-date 形式の文字列
+     * @return Peach_DT_Date            変換結果
+     * @throws InvalidArgumentException フォーマットが不正な場合
      */
     public function parseDate($format)
     {
@@ -98,9 +98,9 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
     /**
      * {@link Peach_DT_HttpDateFormat::parseTimestamp() parseTimestamp()} の実行結果を Peach_DT_Datetime にキャストします.
      * 
-     * @param  string       HTTP-date 形式の文字列
-     * @return Peach_DT_Datetime  変換結果
-     * @throws Exception    フォーマットが不正な場合
+     * @param  string $format           HTTP-date 形式の文字列
+     * @return Peach_DT_Datetime        変換結果
+     * @throws InvalidArgumentException フォーマットが不正な場合
      */
     public function parseDatetime($format)
     {
@@ -110,9 +110,9 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
     /**
      * HTTP-date 形式のフォーマットを Peach_DT_Timestamp に変換します.
      * 
-     * @param  string       HTTP-date 形式の文字列
-     * @return Peach_DT_Timestamp 変換結果
-     * @throws Exception    フォーマットが不正な場合
+     * @param  string $format           HTTP-date 形式の文字列
+     * @return Peach_DT_Timestamp       変換結果
+     * @throws InvalidArgumentException フォーマットが不正な場合
      */
     public function parseTimestamp($format)
     {
@@ -152,8 +152,8 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
      * この日付の 00:00 の時刻を GMT に変換した結果を Http-date にして返します.
      * 例えばシステム時刻の時差が UTC+9 だった場合, 前日の 15:00 の HTTP-date 表現を返り値とします.
      * 
-     * @param  Peach_DT_Date 書式化対象の時間オブジェクト
-     * @return string この日付の HTTP-date 表現
+     * @param  Peach_DT_Date $d 書式化対象の時間オブジェクト
+     * @return string           この日付の HTTP-date 表現
      */
     public function formatDate(Peach_DT_Date $d)
     {
@@ -163,8 +163,8 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
     /**
      * この時刻の HTTP-date 表現を返します.
      * 
-     * @param  Peach_DT_Datetime 書式化対象の時間オブジェクト
-     * @return string この時刻の HTTP-date 表現
+     * @param  Peach_DT_Datetime $d 書式化対象の時間オブジェクト
+     * @return string               この時刻の HTTP-date 表現
      */
     public function formatDatetime(Peach_DT_Datetime $d)
     {
@@ -183,8 +183,8 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
     /**
      * この時刻の HTTP-date 表現を返します.
      * 
-     * @param  Peach_DT_Timestamp 書式化対象の時間オブジェクト
-     * @return string この時刻の HTTP-date 表現
+     * @param  Peach_DT_Timestamp $d 書式化対象の時間オブジェクト
+     * @return string                この時刻の HTTP-date 表現
      */
     public function formatTimestamp(Peach_DT_Timestamp $d)
     {
@@ -214,8 +214,8 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
 
     /**
      * 月の略称を書式化します.
-     * @param  int    月
-     * @return string 引数の月の略称
+     * @param  int $month 月
+     * @return string     引数の月の略称
      */
     private function getMonthDescription($month)
     {
@@ -252,9 +252,9 @@ class Peach_DT_HttpDateFormat implements Peach_DT_Format
     }
 
     /**
-     * 曜日の略称を(ry
-     * @param  int    曜日の値
-     * @return string 曜日の略称
+     * 曜日の略称を書式化します.
+     * @param  int $day 曜日の値
+     * @return string   曜日の略称
      */
     private function getDayDescription($day)
     {

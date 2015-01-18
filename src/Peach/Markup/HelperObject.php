@@ -30,13 +30,14 @@
 class Peach_Markup_HelperObject implements Peach_Markup_Container
 {
     /**
-     *
+     * このオブジェクトを生成した Helper オブジェクトです.
+     * このオブジェクトの prototype を生成する場合などに使用されます.
      * @var Peach_Markup_Helper
      */
     private $helper;
     
     /**
-     *
+     * このオブジェクトがラップしている Component です.
      * @var Peach_Markup_Component
      */
     private $node;
@@ -207,6 +208,8 @@ class Peach_Markup_HelperObject implements Peach_Markup_Container
     }
     
     /**
+     * このオブジェクトをプロトタイプとして, 新しい HelperObject を生成します.
+     * 
      * @return Peach_Markup_Element
      */
     private function createPrototype()

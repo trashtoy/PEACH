@@ -59,6 +59,8 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
     }
     
     /**
+     * ノードの開始を書式化します.
+     * 
      * @param string $name
      */
     private function startNode($name)
@@ -83,6 +85,7 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
     }
     
     /**
+     * 指定された文字列をインデントして追記します.
      * @param string $contents
      */
     private function append($contents)
@@ -95,6 +98,8 @@ class Peach_Markup_DebugContext extends Peach_Markup_Context
     }
     
     /**
+     * 指定された Container の子ノードを再帰的に処理します.
+     * 
      * @param Peach_Markup_Container $container
      */
     private function handleContainer(Peach_Markup_Container $container)

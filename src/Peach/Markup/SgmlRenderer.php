@@ -51,6 +51,8 @@ class Peach_Markup_SgmlRenderer extends Peach_Markup_AbstractRenderer
     /**
      * 値の省略された属性を書式化します.
      * この実装は, 指定された属性名をそのまま返します.
+     * @param  string $name 属性名
+     * @return string       引数と同じ文字列
      * @see Peach_Markup_AbstractRenderer::formatBooleanAttribute()
      */
     protected function formatBooleanAttribute($name)

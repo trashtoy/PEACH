@@ -158,9 +158,11 @@ class Peach_Util_Arrays
     }
 
     /**
-     * @param  string  $value
-     * @param  string  $type
-     * @return bool
+     * 指定された値が第 2 引数で指定した型にマッチするかどうかを調べます.
+     * 
+     * @param  string  $value 検査対象の値
+     * @param  string  $type  型
+     * @return bool           引数 $value の型が $type に合致する場合に true
      */
     private static function pickupMatch($value, $type)
     {
@@ -318,7 +320,7 @@ class Peach_Util_Arrays
      * 重複かどうかの判定は, 引数に指定されたコンパレータを使って行われます.
      * コンパレータが指定されなかった場合は {@link Peach_Util_DefaultComparator} が適用されます.
      * 
-     * @param  array                 Peach_$arr
+     * @param  array                 $arr
      * @param  Peach_Util_Comparator $c   コンパレータ
      * @return array 
      */

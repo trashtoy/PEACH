@@ -144,8 +144,10 @@ class Peach_Markup_Helper
     }
     
     /**
-     * @param  string
-     * @return Peach_Markup_Element
+     * 指定された要素名を持つ新しい Element オブジェクトを返します.
+     * 
+     * @param  string $name         要素名
+     * @return Peach_Markup_Element 指定された要素名を持つ Element
      */
     private function createElement($name)
     {

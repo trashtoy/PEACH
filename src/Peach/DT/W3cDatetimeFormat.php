@@ -154,8 +154,9 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     /**
      * "YYYY-MM-DD" 形式の文字列を解析します.
      * 
-     * @return Peach_DT_Date
-     * @see Peach_DT_Format::parseDate()
+     * @param  string $format 解析対象の文字列
+     * @return Peach_DT_Date  解析結果
+     * @see    Peach_DT_Format::parseDate()
      */
     public function parseDate($format)
     {
@@ -174,8 +175,9 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
      * "YYYY-MM-DDThh:mm" 形式の文字列を解析します.
      * 文字列の末尾にタイムゾーン (+hh:mm や -hh:mm など) を含む場合は, システム時刻への変換を行います.
      * 
+     * @param  string $format    解析対象の文字列
      * @return Peach_DT_Datetime 解析結果
-     * @see Peach_DT_Format::parseDatetime()
+     * @see    Peach_DT_Format::parseDatetime()
      */
     public function parseDatetime($format)
     {
@@ -198,8 +200,10 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     
     /**
      * "YYYY-MM-DDThh:mm:ss" 形式の文字列を解析します.
+     * 
+     * @param  string $format     解析対象の文字列
      * @return Peach_DT_Timestamp 解析結果
-     * @see Peach_DT_Format::parseTimestamp()
+     * @see    Peach_DT_Format::parseTimestamp()
      */
     public function parseTimestamp($format)
     {
@@ -223,7 +227,9 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     
     /**
      * 指定された時間オブジェクトを "YYYY-MM-DD" 形式の文字列に変換します.
-     * @return string "YYYY-MM-DD" 形式の文字列
+     * 
+     * @param  Peach_DT_Date $d 解析対象の Date オブジェクト
+     * @return string           "YYYY-MM-DD" 形式の文字列
      * @see    Peach_DT_Format::formatDate()
      */
     public function formatDate(Peach_DT_Date $d)
@@ -235,7 +241,8 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
      * 指定された時間オブジェクトを "YYYY-MM-DDThh:mm" 形式の文字列に変換します.
      * このインスタンスがタイムゾーンに対応している場合, 末尾にタイムゾーン文字列も付加します.
      * 
-     * @return string "YYYY-MM-DDThh:mm" 形式の文字列
+     * @param  Peach_DT_Datetime $d 変換対象の Datetime オブジェクト
+     * @return string               "YYYY-MM-DDThh:mm" 形式の文字列
      * @see    Peach_DT_Format::formatDatetime()
      */
     public function formatDatetime(Peach_DT_Datetime $d)
@@ -248,7 +255,8 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
      * 指定された時間オブジェクトを "YYYY-MM-DDThh:mm:ss" 形式の文字列に変換します.
      * このインスタンスがタイムゾーンに対応している場合, 末尾にタイムゾーン文字列も付加します.
      * 
-     * @return string "YYYY-MM-DDThh:mm:ss" 形式の文字列
+     * @param  Peach_DT_Timestamp $d 変換対象の Timestamp オブジェクト
+     * @return string                "YYYY-MM-DDThh:mm:ss" 形式の文字列
      * @see    Peach_DT_Format::formatTimestamp()
      */
     public function formatTimestamp(Peach_DT_Timestamp $d)
@@ -257,6 +265,8 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     }
     
     /**
+     * 指定された文字列が想定されたフォーマットでなかった際に呼ばれるメソッドです.
+     * 
      * @param  string $format
      * @param  string $expected
      * @throws InvalidArgumentException
@@ -292,10 +302,9 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
      * フォーマットのタイムゾーンと, 時間オブジェクトのタイムゾーンを元に
      * 指定された時間オブジェクトの補正処理を行います.
      * 
-     * @param  Peach_DT_Datetime $d
-     * @param  string      $tz      タイムゾーン文字列
-     * @param  bool        $toParse parse の場合は TRUE, format の場合は FALSE
-     * @return Peach_DT_Datetime 補正結果の時間オブジェクト
+     * @param  Peach_DT_Datetime $d  補正対象の時間オブジェクト
+     * @param  string            $tz タイムゾーン文字列
+     * @return Peach_DT_Datetime     補正結果の時間オブジェクト
      */
     private function adjustFromParse(Peach_DT_Datetime $d, $tz)
     {
@@ -303,6 +312,14 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
         return $d->add("minute", $externalOffset - $this->internalOffset);
     }
     
+    /**
+     * フォーマットのタイムゾーンと, 時間オブジェクトのタイムゾーンを元に
+     * 指定された時間オブジェクトの補正処理を行います.
+     * 
+     * @param  Peach_DT_Datetime $d  補正対象の時間オブジェクト
+     * @param  string            $tz タイムゾーン文字列
+     * @return Peach_DT_Datetime     補正結果の時間オブジェクト
+     */
     private function adjustFromFormat(Peach_DT_Datetime $d)
     {
         return $this->usingTz ? $d->add("minute", $this->internalOffset - $this->externalOffset) : $d;
@@ -310,6 +327,7 @@ class Peach_DT_W3cDatetimeFormat implements Peach_DT_Format
     
     /**
      * タイムゾーンを書式化します.
+     * @return string
      */
     private function formatTimezone()
     {

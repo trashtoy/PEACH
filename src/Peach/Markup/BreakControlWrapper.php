@@ -32,7 +32,7 @@
 class Peach_Markup_BreakControlWrapper implements Peach_Markup_BreakControl
 {
     /**
-     *
+     * ラップ対象の BreakControl
      * @var Peach_Markup_BreakControl
      */
     private $original;

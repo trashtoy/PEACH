@@ -34,7 +34,7 @@ abstract class Peach_Markup_AbstractRenderer implements Peach_Markup_Renderer
     /**
      * 開始タグをマークアップします.
      * この書式化ルールは SGML, XML 共通です.
-     * @param  Peach_Markup_Element
+     * @param  Peach_Markup_Element $element 要素
      * @return string
      */
     public final function formatStartTag(Peach_Markup_Element $element)
@@ -45,7 +45,7 @@ abstract class Peach_Markup_AbstractRenderer implements Peach_Markup_Renderer
     /**
      * 終了タグをマークアップします.
      * この書式化ルールは SGML, XML 共通です.
-     * @param  Peach_Markup_Element
+     * @param  Peach_Markup_Element $element 要素
      * @return string
      */
     public final function formatEndTag(Peach_Markup_Element $element)
@@ -56,7 +56,7 @@ abstract class Peach_Markup_AbstractRenderer implements Peach_Markup_Renderer
     /**
      * 空要素タグをマークアップします.
      * タグの末尾の書式化方法は各サブクラスに依存します.
-     * @param  Peach_Markup_Element
+     * @param  Peach_Markup_Element $element 要素
      * @return string
      */
     public final function formatEmptyTag(Peach_Markup_Element $element)

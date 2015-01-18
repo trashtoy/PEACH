@@ -174,6 +174,12 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         return $result;
     }
 
+    /**
+     * 正規表現のパターン一覧を返します.
+     * キーが変換文字, 値がその文字に対応するパターン文字列となります.
+     * 
+     * @return array
+     */
     private function getPatternList()
     {
         static $patterns = null;
@@ -201,6 +207,15 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         return $patterns;
     }
 
+    /**
+     * 指定された文字が, 時間オブジェクトのどのフィールドに対応するかを調べます.
+     * "year", "month", "date", "hour", "minute", "second"
+     * のいずれかの文字列を返します.
+     * 
+     * @param  string $pattern パターン文字 ("Y", "m", "d" など)
+     * @return string          引数のパターン文字に対応するフィールド名称
+     * @throws Exception       不正なパターン文字が指定された場合
+     */
     private function getKey($pattern)
     {
         static $keyList = array(
@@ -219,6 +234,14 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         throw new Exception("Illegal pattern: " . $pattern);
     }
 
+    /**
+     * 指定されたパターン文字を, 対応するフィールドの値に変換します.
+     * 
+     * @param  Time   $d   変換対象の時間オブジェクト
+     * @param  string $key パターン文字 ("Y", "m", "d" など)
+     * @return int         変換結果
+     * @throws Exception   不正なパターン文字が指定された場合
+     */
     private function formatKey(Peach_DT_Time $d, $key)
     {
         $year  = $d->get("year");
@@ -257,9 +280,10 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
     }
     
     /**
+     * 指定されたパターン文字列 (例えば "Y/m/d" など) を構文解析します.
      * 
-     * @param  string $format
-     * @return array
+     * @param  string $format パターン文字列
+     * @return array          解析結果
      */
     private function createContext($format)
     {
@@ -329,10 +353,11 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
     }
 
     /**
+     * 文字列を時間オブジェクトに変換する際に, 不正な文字列が指定された場合に例外をスローします.
      * 
-     * @param  string $format
-     * @param  string $expected
-     * @throws Exception
+     * @param  string $format   指定された文字列
+     * @param  string $expected 想定されるパターン文字列
+     * @throws InvalidArgumentException
      */
     private function throwFormatException($format, $expected)
     {

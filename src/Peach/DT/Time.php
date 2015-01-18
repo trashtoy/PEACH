@@ -157,9 +157,9 @@ interface Peach_DT_Time extends Peach_Util_Comparable
     
     /**
      * 引数のフィールドを, $amount だけ増加 (負の場合は減少) させます.
-     * @param  string  対象のフィールド
-     * @param  int     加算する量. マイナスの場合は過去方向に移動する.
-     * @return Peach_DT_Time 設定後の時間オブジェクト
+     * @param  string $field  対象のフィールド
+     * @param  int    $amount 加算する量. マイナスの場合は過去方向に移動する.
+     * @return Peach_DT_Time  設定後の時間オブジェクト
      */
     public function add($field, $amount);
     

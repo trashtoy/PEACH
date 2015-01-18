@@ -34,7 +34,7 @@ class Peach_Markup_EmptyElement extends Peach_Markup_Element
      * 指定された Context にこのノードを処理させます. 
      * {@link Peach_Markup_Context::handleEmptyElement()} を呼び出します.
      * 
-     * @param Peach_Markup_Context
+     * @param Peach_Markup_Context $context このノードを処理する Context
      * @see   Peach_Markup_Node::accept()
      */
     public function accept(Peach_Markup_Context $context)

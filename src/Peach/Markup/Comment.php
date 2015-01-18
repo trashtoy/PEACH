@@ -30,7 +30,7 @@
 class Peach_Markup_Comment implements Peach_Markup_Container, Peach_Markup_Node
 {
     /**
-     *
+     * 子ノードの一覧です.
      * @var Peach_Markup_NodeList
      */
     private $nodeList;

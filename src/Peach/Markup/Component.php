@@ -33,7 +33,7 @@ interface Peach_Markup_Component
 {
     /**
      * 指定された Context にこのノードを処理させます. Visitor パターンの accept() に相当します.
-     * @param Peach_Markup_Context
+     * @param Peach_Markup_Context $context この Component を処理する Context
      */
     public function accept(Peach_Markup_Context $context);
 }

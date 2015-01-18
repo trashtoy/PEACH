@@ -29,7 +29,7 @@ abstract class Peach_Markup_Builder
 {
     /**
      * 指定されたノードを加工します. 返り値の型は具象クラスによって異なります.
-     * @param  Peach_Markup_Component
+     * @param  Peach_Markup_Component $node 加工対象の Component
      * @return mixed
      */
     public final function build(Peach_Markup_Component $node)
