@@ -227,15 +227,16 @@ class Peach_Util_Strings
      */
     public static function template($template, array $args = array())
     {
-        if (!isset($template)) {
+        if ($template === null) {
             return null;
         }
-        $template = Peach_Util_Values::stringValue($template);
+        
+        $subject  = Peach_Util_Values::stringValue($template);
         $replaces = array();
         foreach ($args as $key => $value) {
             $from = "{" . $key . "}";
             $replaces[$from] = $value;
         }
-        return strtr($template, $replaces);
+        return strtr($subject, $replaces);
     }
 }
