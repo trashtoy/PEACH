@@ -34,6 +34,7 @@ class Peach_Util_DefaultEquator implements Peach_Util_Equator
      * このクラスの唯一のインスタンスを返します.
      * 
      * @return Peach_Util_DefaultEquator
+     * @codeCoverageIgnore
      */
     public static function getInstance()
     {
