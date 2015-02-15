@@ -43,6 +43,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - Comparator が指定された場合はその Comparator の仕様に従って比較すること
      * 
      * @covers Peach_Util_Arrays::max
+     * @covers Peach_Util_Arrays::getTop
      */
     public function testMax()
     {
@@ -75,6 +76,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - Comparator が指定された場合はその Comparator の仕様に従って比較すること
      * 
      * @covers Peach_Util_Arrays::min
+     * @covers Peach_Util_Arrays::getTop
      */
     public function testMin()
     {
@@ -104,6 +106,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
      * - 第 3 引数に true を指定した場合は元の配列の添字を維持すること
      * 
      * @covers Peach_Util_Arrays::pickup
+     * @covers Peach_Util_Arrays::pickupMatch
      */
     public function testPickup()
     {
