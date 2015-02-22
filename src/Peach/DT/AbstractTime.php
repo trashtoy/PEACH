@@ -246,6 +246,7 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      * このオブジェクトが指す時刻を, SQL などで使われる慣用表現に変換して返します.
      *
      * @return string このオブジェクトの文字列表現 ("YYYY-MM-DD", "YYYY-MM-DD hh:mm" など)
+     * @codeCoverageIgnore
      */
     public function __toString()
     {
@@ -350,11 +351,12 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
      * @see    Peach_DT_Time::$HOUR
      * @see    Peach_DT_Time::$MINUTE
      * @see    Peach_DT_Time::$SECOND
+     * @codeCoverageIgnore
      */
     private function getFieldIndex($field)
     {
         static $mapping = null;
-        if (!isset($mapping)) {
+        if ($mapping === null) {
             $mapping = array(
                 "y"  => self::$YEAR,
                 "mo" => self::$MONTH,
@@ -365,9 +367,9 @@ abstract class Peach_DT_AbstractTime implements Peach_DT_Time
             );
         }
         
-        $field = strtolower($field);
+        $f = strtolower($field);
         foreach ($mapping as $key => $index) {
-            if (Peach_Util_Strings::startsWith($field, $key)) {
+            if (Peach_Util_Strings::startsWith($f, $key)) {
                 return $index;
             }
         }
