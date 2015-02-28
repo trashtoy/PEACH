@@ -262,11 +262,12 @@ class Peach_DT_Datetime extends Peach_DT_Date
     /**
      * 「時」フィールドを調整する Adjuster です
      * @return Peach_DT_FieldAdjuster
+     * @codeCoverageIgnore
      */
     private function getHourAdjuster()
     {
         static $adjuster = null;
-        if (!isset($adjuster)) {
+        if ($adjuster === null) {
             $adjuster = new Peach_DT_FieldAdjuster(self::$HOUR, self::$DATE, 0, 23);
         }
         return $adjuster;
@@ -275,11 +276,12 @@ class Peach_DT_Datetime extends Peach_DT_Date
     /**
      * 「分」フィールドを調整する Adjuster です
      * @return Peach_DT_FieldAdjuster
+     * @codeCoverageIgnore
      */
     private function getMinuteAdjuster()
     {
         static $adjuster = null;
-        if (!isset($adjuster)) {
+        if ($adjuster === null) {
             $adjuster = new Peach_DT_FieldAdjuster(self::$MINUTE, self::$HOUR, 0, 59);
         }
         return $adjuster;
