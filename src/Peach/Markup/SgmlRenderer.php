@@ -37,12 +37,12 @@ class Peach_Markup_SgmlRenderer extends Peach_Markup_AbstractRenderer
     
     /**
      * このクラスの唯一のインスタンスを取得します.
-     * @return Markup_SgmlTagFormatter 唯一のインスタンス.
+     * @return Peach_Markup_SgmlRenderer 唯一のインスタンス.
      */
     public static function getInstance()
     {
         static $instance = null;
-        if (!isset($instance)) {
+        if ($instance === null) {
             $instance = new self();
         }
         return $instance;
