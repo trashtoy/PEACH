@@ -118,6 +118,13 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * 
      * - フィールドの加減が正常に出来ること.
      * - 不正なフィールド名を指定した場合に無視されること.
+     * 
+     * @covers Peach_DT_Timestamp::add
+     * @covers Peach_DT_Timestamp::newInstance
+     * @covers Peach_DT_Timestamp::adjust
+     * @covers Peach_DT_FieldAdjuster::__construct
+     * @covers Peach_DT_FieldAdjuster::moveUp
+     * @covers Peach_DT_FieldAdjuster::moveDown
      */
     public function testAdd()
     {
@@ -189,17 +196,30 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * 以下の確認を行います.
      * 
      * - 比較が正常に出来る
+     * - 対象オブジェクトが Timestamp 型でない場合でも比較が出来る
+     * - 引数に時間オブジェクト以外の値を指定した場合は null を返す
      */
     public function testCompareTo()
     {
         $d = array(
             new Peach_DT_Timestamp(2012, 3, 12, 23, 59, 59),
-            new Peach_DT_Timestamp(2012, 5, 21,  7, 30, 0),
+            new Peach_DT_Timestamp(2012, 5, 21,  7, 30, 10),
+            new Peach_DT_Timestamp(2012, 5, 21,  7, 30, 30),
+            new Peach_DT_Timestamp(2012, 5, 21,  7, 30, 50),
             new Peach_DT_Timestamp(2013, 1, 23,  1, 23, 45),
         );
-        $this->assertGreaterThan(0, $d[1]->compareTo($d[0]));
-        $this->assertLessThan(0, $d[1]->compareTo($d[2]));
-        $this->assertSame(0, $d[1]->compareTo($d[1]));
+        $this->assertGreaterThan(0, $d[2]->compareTo($d[0]));
+        $this->assertGreaterThan(0, $d[2]->compareTo($d[1]));
+        $this->assertSame(0, $d[2]->compareTo($d[2]));
+        $this->assertLessThan(0, $d[2]->compareTo($d[3]));
+        $this->assertLessThan(0, $d[2]->compareTo($d[4]));
+        
+        $w1 = new Peach_DT_TimeWrapper($d[2]);
+        $w2 = $w1->add("sec", -15);
+        $this->assertGreaterThan(0, $d[2]->compareTo($w2));
+        $this->assertSame(0, $d[2]->compareTo($w1));
+        
+        $this->assertNull($d[2]->compareTo("foobar"));
     }
     
     /**
@@ -261,6 +281,11 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * 
      * - 秒のフィールドの設定が出来る
      * - 不正な引数を指定した場合は同じオブジェクトを返す
+     * 
+     * @covers Peach_DT_Timestamp::set
+     * @covers Peach_DT_FieldAdjuster::__construct
+     * @covers Peach_DT_FieldAdjuster::moveUp
+     * @covers Peach_DT_FieldAdjuster::moveDown
      */
     public function testSet()
     {
@@ -288,6 +313,9 @@ class Peach_DT_TimestampTest extends Peach_DT_AbstractTimeTest
      * - 範囲外のフィールドが指定された場合に, 上位のフィールドから順に調整されること
      * 
      * @covers Peach_DT_Timestamp::setAll
+     * @covers Peach_DT_FieldAdjuster::__construct
+     * @covers Peach_DT_FieldAdjuster::moveUp
+     * @covers Peach_DT_FieldAdjuster::moveDown
      */
     public function testSetAll()
     {

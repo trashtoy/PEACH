@@ -201,11 +201,12 @@ class Peach_DT_Timestamp extends Peach_DT_Datetime
     /**
      * このクラスのフィールドを調整するための FieldAdjuster を返します.
      * @return Peach_DT_FieldAdjuster
+     * @codeCoverageIgnore
      */
     private function getAdjuster()
     {
         static $adjuster = null;
-        if (!isset($adjuster)) {
+        if ($adjuster === null) {
             $adjuster = new Peach_DT_FieldAdjuster(self::$SECOND, self::$MINUTE, 0, 59);
         }
         return $adjuster;
