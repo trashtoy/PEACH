@@ -31,6 +31,7 @@ class Peach_DT_FormatWrapperTest extends PHPUnit_Framework_TestCase
     /**
      * コンストラクタの引数と等しい時間オブジェクトを返すことを確認します.
      * @covers Peach_DT_FormatWrapper::getOriginal
+     * @covers Peach_DT_FormatWrapper::__construct
      */
     public function testGetOriginal()
     {
