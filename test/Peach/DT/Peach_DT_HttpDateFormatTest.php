@@ -89,6 +89,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException InvalidArgumentException
      * @covers Peach_DT_HttpDateFormat::parseDate
+     * @covers Peach_DT_HttpDateFormat::throwFormatException
      */
     public function testParseDateFail()
     {
@@ -100,6 +101,8 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      * Datetime オブジェクトに変換されることを確認します.
      * 
      * @covers Peach_DT_HttpDateFormat::parseDatetime
+     * @covers Peach_DT_HttpDateFormat::parseMonthDescription
+     * @covers Peach_DT_HttpDateFormat::getFullYear
      */
     public function testParseDatetime()
     {
@@ -115,6 +118,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException InvalidArgumentException
      * @covers Peach_DT_HttpDateFormat::parseDatetime
+     * @covers Peach_DT_HttpDateFormat::throwFormatException
      */
     public function testParseDatetimeFail()
     {
@@ -126,6 +130,8 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      * Timestamp に変換されることを確認します.
      * 
      * @covers Peach_DT_HttpDateFormat::parseTimestamp
+     * @covers Peach_DT_HttpDateFormat::parseMonthDescription
+     * @covers Peach_DT_HttpDateFormat::getFullYear
      */
     public function testParseTimestamp()
     {
@@ -141,6 +147,7 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException InvalidArgumentException
      * @covers Peach_DT_HttpDateFormat::parseTimestamp
+     * @covers Peach_DT_HttpDateFormat::throwFormatException
      */
     public function testParseTimestampFail()
     {
@@ -150,6 +157,8 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     /**
      * その日の0時0分の時刻を GMT に変換した結果を返します.
      * @covers Peach_DT_HttpDateFormat::formatDate
+     * @covers Peach_DT_HttpDateFormat::getMonthDescription
+     * @covers Peach_DT_HttpDateFormat::getDayDescription
      */
     public function testFormatDate()
     {
@@ -160,6 +169,8 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     /**
      * その時刻が HTTP-date で書式化されることを確認します.
      * @covers Peach_DT_HttpDateFormat::formatDatetime
+     * @covers Peach_DT_HttpDateFormat::getMonthDescription
+     * @covers Peach_DT_HttpDateFormat::getDayDescription
      */
     public function testFormatDatetime()
     {
@@ -170,6 +181,8 @@ class Peach_DT_HttpDateFormatTest extends PHPUnit_Framework_TestCase
     /**
      * その時刻が HTTP-date で書式化されることを確認します.
      * @covers Peach_DT_HttpDateFormat::formatTimestamp
+     * @covers Peach_DT_HttpDateFormat::getMonthDescription
+     * @covers Peach_DT_HttpDateFormat::getDayDescription
      */
     public function testFormatTimestamp()
     {
