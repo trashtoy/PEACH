@@ -179,6 +179,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      * キーが変換文字, 値がその文字に対応するパターン文字列となります.
      * 
      * @return array
+     * @codeCoverageIgnore
      */
     private function getPatternList()
     {
@@ -215,6 +216,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      * @param  string $pattern パターン文字 ("Y", "m", "d" など)
      * @return string          引数のパターン文字に対応するフィールド名称
      * @throws Exception       不正なパターン文字が指定された場合
+     * @codeCoverageIgnore
      */
     private function getKey($pattern)
     {
@@ -274,9 +276,11 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
                 return str_pad($sec,   2, "0", STR_PAD_LEFT);
             case "b":
                 return $sec;
-            default:
-                throw new Exception("Illegal pattern: " . $key);
         }
+        
+        // @codeCoverageIgnoreStart
+        throw new Exception("Illegal pattern: " . $key);
+        // @codeCoverageIgnoreEnd
     }
     
     /**
