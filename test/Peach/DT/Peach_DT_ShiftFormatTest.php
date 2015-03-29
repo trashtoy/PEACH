@@ -69,6 +69,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
      * parseDatetime のテストです.
      * 表示時刻の 14 時間後の時間オブジェクトが生成されることを確認します.
      * @covers Peach_DT_ShiftFormat::parseDatetime
+     * @covers Peach_DT_ShiftFormat::adjustFromParse
      */
     public function testParseDatetime()
     {
@@ -79,6 +80,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
      * parseTimestamp のテストです.
      * 表示時刻の 14 時間後の時間オブジェクトが生成されることを確認します.
      * @covers Peach_DT_ShiftFormat::parseTimestamp
+     * @covers Peach_DT_ShiftFormat::adjustFromParse
      */
     public function testParseTimestamp()
     {
@@ -99,6 +101,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
      * formatDatetime のテストです.
      * 表示時刻の 14 時間前のフォーマットが出力されることを確認します.
      * @covers Peach_DT_ShiftFormat::formatDatetime
+     * @covers Peach_DT_ShiftFormat::adjustFromFormat
      */
     public function testFormatDatetime()
     {
@@ -109,6 +112,7 @@ class Peach_DT_ShiftFormatTest extends PHPUnit_Framework_TestCase
      * formatTimestamp のテストです.
      * 表示時刻の 14 時間前のフォーマットが出力されることを確認します.
      * @covers Peach_DT_ShiftFormat::formatTimestamp
+     * @covers Peach_DT_ShiftFormat::adjustFromFormat
      */
     public function testFormatTimestamp()
     {
