@@ -41,11 +41,12 @@ class Peach_Markup_None implements Peach_Markup_Component
     /**
      * このクラスの唯一のインスタンスを返します.
      * @return Peach_Markup_None
+     * @codeCoverageIgnore
      */
     public static function getInstance()
     {
         static $instance = null;
-        if (!isset($instance)) {
+        if ($instance === null) {
             $instance = new self();
         }
         
