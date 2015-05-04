@@ -32,6 +32,7 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
      * - stepUp() を行うたびに level が 1 ずつ増加すること
      * - stepDown() を行うたびに level が 1 ずつ減少すること
      * 
+     * @covers Peach_Markup_Indent::__construct
      * @covers Peach_Markup_Indent::getLevel
      * @covers Peach_Markup_Indent::stepUp
      * @covers Peach_Markup_Indent::stepDown
@@ -77,6 +78,7 @@ class Peach_Markup_IndentTest extends PHPUnit_Framework_TestCase
      * - 現在の level が 0 以下の場合は空文字列を返すこと
      * 
      * @covers Peach_Markup_Indent::indent
+     * @covers Peach_Markup_Indent::handleIndent
      */
     public function testIndent()
     {
