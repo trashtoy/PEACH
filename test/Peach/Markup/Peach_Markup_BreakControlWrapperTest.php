@@ -24,7 +24,12 @@ class Peach_Markup_BreakControlWrapperTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * コンストラクタの引数にしたものと同じオブジェクトを返すことを確認します.
+     * getOriginal() のテストです. 以下を確認します.
+     * 
+     * - コンストラクタの引数にしたものと同じオブジェクトを返すこと
+     * - コンストラクタの引数を省略した場合は DefaultBreakControl を返すこと
+     * 
+     * @covers Peach_Markup_BreakControlWrapper::__construct
      * @covers Peach_Markup_BreakControlWrapper::getOriginal
      */
     public function testGetOriginal()
@@ -32,6 +37,9 @@ class Peach_Markup_BreakControlWrapperTest extends PHPUnit_Framework_TestCase
         $original = Peach_Markup_DefaultBreakControl::getInstance();
         $wrapper  = new Peach_Markup_BreakControlWrapper($original);
         $this->assertSame($original, $wrapper->getOriginal());
+        
+        $defaultObj = new Peach_Markup_BreakControlWrapper();
+        $this->assertSame($original, $defaultObj->getOriginal());
     }
     
     /**
