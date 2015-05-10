@@ -71,6 +71,7 @@ class Peach_Markup_DefaultBreakControl implements Peach_Markup_BreakControl
      * 唯一のインスタンスを取得します.
      * 
      * @return Peach_Markup_DefaultBreakControl
+     * @codeCoverageIgnore
      */
     public static function getInstance()
     {
