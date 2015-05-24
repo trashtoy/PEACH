@@ -33,7 +33,10 @@ class Peach_Markup_DebugBuilderTest extends Peach_Markup_BuilderTest
      * - ノードの構造をあらわすデバッグ文字列を返すこと
      * - 返り値と同じ文字列が自動的に echo されること
      * 
+     * @covers Peach_Markup_DebugBuilder::__construct
      * @covers Peach_Markup_DebugBuilder::build
+     * @covers Peach_Markup_DebugBuilder::createContext
+     * @covers Peach_Markup_Context::handle
      */
     public function testBuild()
     {
@@ -48,7 +51,10 @@ class Peach_Markup_DebugBuilderTest extends Peach_Markup_BuilderTest
      * コンストラクタ引数に false を指定して DebugBuilder を初期化した場合,
      * 自動 echo がされないことを確認します.
      * 
+     * @covers Peach_Markup_DebugBuilder::__construct
      * @covers Peach_Markup_DebugBuilder::build
+     * @covers Peach_Markup_DebugBuilder::createContext
+     * @covers Peach_Markup_Context::handle
      */
     public function testBuildNotEcho()
     {
