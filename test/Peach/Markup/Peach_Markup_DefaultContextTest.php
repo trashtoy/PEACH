@@ -39,8 +39,14 @@ class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
      * - ノードが 1 つの場合 "<!--comment text-->" 形式になること
      * - ノードが複数の場合, コメントが改行されること
      * - 接頭辞および接尾辞が指定された場合は改行されること
+     * - 内部に別のコメントノードがあった場合, そのノードの中にあるオブジェクトだけを処理すること
+     * - 要素の中に 1 つだけコメントノードが含まれている場合 (indentMode が false の場合) に改行されないこと
      * 
      * @covers Peach_Markup_DefaultContext::handleComment
+     * @covers Peach_Markup_DefaultContext::checkBreakModeInComment
+     * @covers Peach_Markup_DefaultContext::formatChildNodes
+     * @covers Peach_Markup_DefaultContext::breakCode
+     * @covers Peach_Markup_DefaultContext::escapeEndComment
      */
     public function testHandleComment()
     {
@@ -79,6 +85,24 @@ class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
         $obj4      = $this->getTestObject();
         $obj4->handleComment($comment2);
         $this->assertSame($expected4, $obj4->getResult());
+        
+        $expected5 = "<!--TEST-->";
+        $comment3  = new Peach_Markup_Comment();
+        $comment3->append("TEST");
+        $comment4  = new Peach_Markup_Comment();
+        $comment4->append($comment3);
+        $obj5      = $this->getTestObject();
+        $obj5->handleComment($comment4);
+        $this->assertSame($expected5, $obj5->getResult());
+        
+        $expected6 = "<div><!--TEST--></div>";
+        $div       = new Peach_Markup_ContainerElement("div");
+        $comment5  = new Peach_Markup_Comment();
+        $comment5->append("TEST");
+        $div->append($comment5);
+        $obj6      = $this->getTestObject();
+        $obj6->handle($div);
+        $this->assertSame($expected6, $obj6->getResult());
     }
     
     /**
@@ -88,6 +112,8 @@ class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
      * - 特殊文字がエスケープされること
      * 
      * @covers Peach_Markup_DefaultContext::handleText
+     * @covers Peach_Markup_DefaultContext::indent
+     * @covers Peach_Markup_DefaultContext::escape
      */
     public function testHandleText()
     {
@@ -111,6 +137,8 @@ class Peach_Markup_DefaultContextTest extends Peach_Markup_ContextTest
      * 指定されたコードがインデントされた状態でマークアップされることを確認します.
      * 
      * @covers Peach_Markup_DefaultContext::handleCode
+     * @covers Peach_Markup_DefaultContext::indent
+     * @covers Peach_Markup_DefaultContext::breakCode
      */
     public function testHandleCode()
     {
@@ -154,12 +182,32 @@ EOS;
     }
 
     /**
+     * 空文字列の Code オブジェクトについては何も出力しないことを確認します.
+     * 
+     * @covers Peach_Markup_DefaultContext::handleCode
+     */
+    public function testHandleCodeByEmptyString()
+    {
+        $container = new Peach_Markup_NodeList();
+        $container->append(new Peach_Markup_Text("First"));
+        $container->append(new Peach_Markup_Code(""));
+        $container->append(new Peach_Markup_Text("Second"));
+        
+        $obj = $this->object;
+        $obj->handle($container);
+        
+        $expected = "First\r\n\r\nSecond";
+        $this->assertSame($expected, $obj->getResult());
+    }
+    
+    /**
      * handleEmptyElement のテストです. 以下を確認します.
      * 
      * - SGML 形式の場合 "<tagName>" となること
      * - XML 形式の場合 "<tagName />" となること
      * 
      * @covers Peach_Markup_DefaultContext::handleEmptyElement
+     * @covers Peach_Markup_DefaultContext::indent
      */
     public function testHandleEmptyElement()
     {
@@ -186,6 +234,8 @@ EOS;
      * - 複数のノードを持つ子孫ノードが存在する場合は, 改行してインデントすること
      * 
      * @covers Peach_Markup_DefaultContext::handleContainerElement
+     * @covers Peach_Markup_DefaultContext::formatChildNodes
+     * @covers Peach_Markup_DefaultContext::breakCode
      */
     public function testHandleContainerElement()
     {
@@ -234,6 +284,8 @@ EOS;
      * NodeList に含まれる各子ノードを handle することを確認します.
      * 
      * @covers Peach_Markup_DefaultContext::handleNodeList
+     * @covers Peach_Markup_DefaultContext::formatChildNodes
+     * @covers Peach_Markup_DefaultContext::breakCode
      */
     public function testHandleNodeList()
     {
@@ -268,6 +320,7 @@ EOS;
     }
     
     /**
+     * @covers Peach_Markup_DefaultContext::__construct
      * @covers Peach_Markup_DefaultContext::getResult
      */
     public function testGetResult()
