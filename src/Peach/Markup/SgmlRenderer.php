@@ -37,7 +37,9 @@ class Peach_Markup_SgmlRenderer extends Peach_Markup_AbstractRenderer
     
     /**
      * このクラスの唯一のインスタンスを取得します.
+     * 
      * @return Peach_Markup_SgmlRenderer 唯一のインスタンス.
+     * @codeCoverageIgnore
      */
     public static function getInstance()
     {
