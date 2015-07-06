@@ -69,6 +69,7 @@ class Peach_Markup_HelperTest extends PHPUnit_Framework_TestCase
      * - それ以外: 引数の文字列表現のテキストノード
      * 
      * @covers Peach_Markup_Helper::createNode
+     * @covers Peach_Markup_Helper::createElement
      */
     public function testCreateNode()
     {
@@ -106,5 +107,28 @@ class Peach_Markup_HelperTest extends PHPUnit_Framework_TestCase
         $h = $this->object;
         $o = $h->createObject(Peach_Markup_TestUtil::getTestNode());
         $this->assertSame(Peach_Markup_TestUtil::getDefaultBuildResult(), $h->write($o));
+    }
+    
+    /**
+     * getBuilder() と setBuilder() のテストです. 以下について確認します.
+     * 
+     * - getBuilder() がコンストラクタの引数に指定した Builder オブジェクトと同一のものを返すこと
+     * - setBuilder() で指定した Builder オブジェクトが getBuilder() から取得できること
+     * 
+     * @covers Peach_Markup_Helper::__construct
+     * @covers Peach_Markup_Helper::getBuilder
+     * @covers Peach_Markup_Helper::setBuilder
+     */
+    public function testAccessBuilder()
+    {
+        $b1 = new Peach_Markup_DefaultBuilder();
+        $b1->setIndent(new Peach_Markup_Indent(0, Peach_Markup_Indent::TAB, Peach_Markup_Indent::LF));
+        $b2 = new Peach_Markup_DefaultBuilder();
+        $b2->setBreakControl(Peach_Markup_MinimalBreakControl::getInstance());
+        
+        $h = new Peach_Markup_Helper($b1);
+        $this->assertSame($b1, $h->getBuilder());
+        $h->setBuilder($b2);
+        $this->assertSame($b2, $h->getBuilder());
     }
 }
