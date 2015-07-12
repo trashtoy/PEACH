@@ -1,0 +1,8 @@
+<phpunit>
+    <filter>
+        <blacklist>
+            <file>../src/autoload.php</file>
+            <file>../src/SplClassLoader.php</file>
+        </blacklist>
+    </filter>
+</phpunit>
