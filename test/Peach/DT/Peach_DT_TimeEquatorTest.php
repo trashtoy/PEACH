@@ -33,6 +33,7 @@ class Peach_DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
      * - 文字列と array(文字列) が同一視されること
      * 
      * @covers Peach_DT_TimeEquator::__construct
+     * @covers Peach_DT_TimeEquator::initFields
      */
     public function test__construct()
     {
@@ -56,6 +57,8 @@ class Peach_DT_TimeEquatorTest extends PHPUnit_Framework_TestCase
     /**
      * 引数なしのコンストラクタで生成したインスタンスと等価のオブジェクトを返すことを確認します.
      * @covers Peach_DT_TimeEquator::getDefault
+     * @covers Peach_DT_TimeEquator::__construct
+     * @covers Peach_DT_TimeEquator::initFields
      */
     public function testGetDefault()
     {

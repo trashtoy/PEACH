@@ -131,6 +131,8 @@ class Peach_Util_ValuesTest extends PHPUnit_Framework_TestCase
      * - "F", "N" (大小問わず) で始まる文字列は false を返す.
      * 
      * @covers Peach_Util_Values::boolValue
+     * @covers Peach_Util_Values::handleBoolValue
+     * @covers Peach_Util_Values::stringToBool
      */
     public function testBoolValue()
     {

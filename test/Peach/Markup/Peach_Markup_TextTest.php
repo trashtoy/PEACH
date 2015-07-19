@@ -28,11 +28,13 @@ class Peach_Markup_TextTest extends PHPUnit_Framework_TestCase
     /**
      * コンストラクタに指定した文字列を返すことを確認します.
      * 
+     * @covers Peach_Markup_Text::__construct
      * @covers Peach_Markup_Text::getText
      */
     public function testGetText()
     {
-        $this->assertSame("THIS IS TEST", $this->object->getText());
+        $obj = new Peach_Markup_Text("THIS IS TEST");
+        $this->assertSame("THIS IS TEST", $obj->getText());
     }
     
     /**

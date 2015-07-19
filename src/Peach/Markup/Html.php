@@ -46,6 +46,7 @@ class Peach_Markup_Html
      */
     private static function createBuilder($xml = false)
     {
+        // @codeCoverageIgnoreStart
         static $breakControl = null;
         if (!isset($breakControl)) {
             $breakControl = new Peach_Markup_NameBreakControl(
@@ -53,6 +54,8 @@ class Peach_Markup_Html
                 array("pre", "code", "textarea")
             );
         }
+        // @codeCoverageIgnoreEnd
+        
         $renderer = $xml ? Peach_Markup_XmlRenderer::getInstance() : Peach_Markup_SgmlRenderer::getInstance();
         $builder  = new Peach_Markup_DefaultBuilder();
         $builder->setBreakControl($breakControl);
@@ -67,11 +70,14 @@ class Peach_Markup_Html
      */
     private static function createHelper($xml = false)
     {
+        // @codeCoverageIgnoreStart
         static $emptyNodeNames = null;
         if (!isset($emptyNodeNames)) {
             // HTML4.01 および HTML5 (2014-02-04 勧告候補時点) の空要素一覧です
             $emptyNodeNames = array("area", "base", "basefont", "br", "col", "command", "embed", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr");
         }
+        // @codeCoverageIgnoreEnd
+        
         return new Peach_Markup_Helper(self::createBuilder($xml), $emptyNodeNames);
     }
     
@@ -92,6 +98,7 @@ class Peach_Markup_Html
      * HTML 形式のマークアップを行う Helper オブジェクトをグローバル Helper として設定します.
      * 
      * @return Peach_Markup_Helper このクラスが使用するグローバル Helper
+     * @codeCoverageIgnore
      */
     public static function getHelper()
     {

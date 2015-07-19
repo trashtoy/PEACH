@@ -84,6 +84,8 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * コンストラクタの引数に指定した値を返すことを確認します.
      * @covers Peach_DT_SimpleFormat::getFormat
+     * @covers Peach_DT_SimpleFormat::__construct
+     * @covers Peach_DT_SimpleFormat::createContext
      */
     public function testGetFormat()
     {
@@ -94,6 +96,8 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers Peach_DT_SimpleFormat::parseDate
+     * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseDate()
     {
@@ -114,6 +118,8 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers Peach_DT_SimpleFormat::parseDatetime
+     * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseDatetime()
     {
@@ -134,6 +140,8 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers Peach_DT_SimpleFormat::parseTimestamp
+     * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseTimestamp()
     {
@@ -154,6 +162,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers Peach_DT_SimpleFormat::formatDate
+     * @covers Peach_DT_SimpleFormat::formatKey
      */
     public function testFormatDate()
     {
@@ -168,6 +177,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers Peach_DT_SimpleFormat::formatDatetime
+     * @covers Peach_DT_SimpleFormat::formatKey
      */
     public function testFormatDatetime()
     {
@@ -182,6 +192,7 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     
     /**
      * @covers Peach_DT_SimpleFormat::formatTimestamp
+     * @covers Peach_DT_SimpleFormat::formatKey
      */
     public function testFormatTimestamp()
     {

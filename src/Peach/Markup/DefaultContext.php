@@ -137,7 +137,7 @@ class Peach_Markup_DefaultContext extends Peach_Markup_Context
             case 1:
                 $node = $nodes[0];
                 if ($node instanceof Peach_Markup_Comment) {
-                    return $this->checkBreakModeInComment($node->getChildNodes());
+                    return $this->checkBreakModeInComment($node);
                 }
                 
                 return ($node instanceof Peach_Markup_Element);

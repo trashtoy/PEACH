@@ -27,15 +27,50 @@ class Peach_Markup_NodeListTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * コンストラクタのテストです. 以下を確認します.
+     * 
+     * - 引数なしで初期化した場合, 子ノードを持たないインスタンスが生成されること
+     * - 引数を指定して初期化した場合, 引数のノードを子ノードとして持つインスタンスが生成されること
+     * 
+     * @covers Peach_Markup_NodeList::__construct
+     */
+    public function test__construct()
+    {
+        $l1 = new Peach_Markup_NodeList();
+        $this->assertSame(array(), $l1->getChildNodes());
+        
+        $l2         = new Peach_Markup_NodeList(array("foo", "bar", "baz"));
+        $childNodes = $l2->getChildNodes();
+        $this->assertEquals(new Peach_Markup_Text("baz"), $childNodes[2]);
+    }
+    
+    /**
      * Container で定義されている append() の仕様通りに動作することを確認します.
      * 
      * @covers Peach_Markup_NodeList::append
+     * @covers Peach_Markup_NodeList::getAppendee
      * @see    Peach_Markup_ContainerTestImpl::testAppend
      */
     public function testAppend()
     {
         $test = new Peach_Markup_ContainerTestImpl($this, $this->object);
         $test->testAppend();
+    }
+    
+    /**
+     * 自分自身を含むノードを append しようとした場合に例外をスローすることを確認します.
+     * 
+     * @covers Peach_Markup_NodeList::append
+     * @covers Peach_Markup_NodeList::checkOwner
+     * @expectedException InvalidArgumentException
+     */
+    public function testAppendFail()
+    {
+        $a        = new Peach_Markup_ContainerElement("a");
+        $b        = new Peach_Markup_ContainerElement("b");
+        $c        = new Peach_Markup_ContainerElement("c");
+        $nodeList = new Peach_Markup_NodeList(array($a, $b, $c));
+        $c->append($nodeList);
     }
     
     /**
@@ -64,7 +99,7 @@ class Peach_Markup_NodeListTest extends PHPUnit_Framework_TestCase
     /**
      * Container で定義されている getChildNodes() の仕様通りに動作することを確認します.
      * 
-     * @covers Peach_Markup_ContainerElement::getChildNodes
+     * @covers Peach_Markup_NodeList::getChildNodes
      * @see    Peach_Markup_ContainerTestImpl::testChildNodes
      */
     public function testGetChildNodes()

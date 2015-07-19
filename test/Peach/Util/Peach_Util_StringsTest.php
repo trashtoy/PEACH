@@ -191,6 +191,8 @@ class Peach_Util_StringsTest extends PHPUnit_Framework_TestCase
         $test5 = "I am {name}, {age} years old.";
         $arr5 = array("name" => "John", "age" => 20);
         $this->assertSame($exp5, Peach_Util_Strings::template($test5, $arr5));
+        
+        $this->assertNull(Peach_Util_Strings::template(null, $arr5));
     }
 }
 

@@ -40,6 +40,7 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
      * - null または空文字列の場合: 空の {@link Peach_Markup_NodeList NodeList}
      * - それ以外: 引数の文字列表現のテキストノード
      * 
+     * @covers Peach_Markup_HelperObject::__construct
      * @covers Peach_Markup_HelperObject::getNode
      */
     public function testGetNode()
@@ -148,6 +149,7 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
      * attr() のテストです. 以下を確認します.
      * 
      * - このオブジェクトがラップしているノードが Element ではなかった場合, 何も変化しないこと
+     * - 引数が空の場合, 何も変化しないこと
      * - 引数に文字列を 1 つ指定した場合, 指定された名前の boolean 属性が追加されること
      * - 引数に文字列を 2 つ指定した場合, 指定された属性名および属性値を持つ属性が追加されること
      * - 引数に配列を指定した場合, キーを属性名, 値を属性値とする属性が追加されること
@@ -162,6 +164,9 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new Peach_Markup_NodeList(), $obj1->getNode());
         
         $obj2 = new Peach_Markup_HelperObject($h, "input");
+        $obj2->attr();
+        $this->assertEquals(array(), $obj2->getNode()->getAttributes());
+        
         $obj2->attr("readonly");
         $obj2->attr("class", "test");
         $obj2->attr(array("name" => "age", "value" => 18));
@@ -244,6 +249,7 @@ class Peach_Markup_HelperObjectTest extends PHPUnit_Framework_TestCase
      * - それ以外は, 空の NodeList
      * 
      * @covers Peach_Markup_HelperObject::prototype
+     * @covers Peach_Markup_HelperObject::createPrototype
      */
     public function testPrototype()
     {

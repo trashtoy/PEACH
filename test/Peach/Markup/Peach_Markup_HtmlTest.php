@@ -28,6 +28,8 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * - 引数を省略した場合は HTML 形式で初期化されること
      * 
      * @covers Peach_Markup_Html::init
+     * @covers Peach_Markup_Html::createHelper
+     * @covers Peach_Markup_Html::createBuilder
      */
     public function testInit()
     {
@@ -218,6 +220,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * - 第 3 引数で select 要素の属性を指定できること
      * 
      * @covers Peach_Markup_Html::createSelectElement
+     * @covers Peach_Markup_Html::createOptions
      */
     public function testCreateSelectElement()
     {
@@ -348,6 +351,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * HelperObject を返すことを確認します.
      * 
      * @covers Peach_Markup_Html::select
+     * @covers Peach_Markup_Html::createOptions
      */
     public function testSelect()
     {
@@ -393,6 +397,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * - 引数に指定した内容でエイリアスを定義できること
      * 
      * @covers Peach_Markup_Html::alias
+     * @covers Peach_Markup_Html::handleAlias
      */
     public function testAlias()
     {
@@ -439,6 +444,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException InvalidArgumentException
      * @covers Peach_Markup_Html::alias
+     * @covers Peach_Markup_Html::handleAlias
      */
     public function testAliasByAlreadyDefinedName()
     {
@@ -453,6 +459,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * InvalidArgumentException がスローされずに正常終了することを確認します.
      * 
      * @covers Peach_Markup_Html::alias
+     * @covers Peach_Markup_Html::handleAlias
      */
     public function testAliasBySameArguments()
     {
@@ -470,6 +477,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * InvalidArgumentException をスローすることを確認します.
      * 
      * @covers Peach_Markup_Html::alias
+     * @covers Peach_Markup_Html::handleAlias
      */
     public function testAliasByInvalidName()
     {
@@ -492,6 +500,7 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
      * 
      * @expectedException InvalidArgumentException
      * @covers Peach_Markup_Html::alias
+     * @covers Peach_Markup_Html::handleAlias
      */
     public function testAliasByUndefinedMethod()
     {

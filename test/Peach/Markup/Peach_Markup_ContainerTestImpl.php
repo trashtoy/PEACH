@@ -37,11 +37,12 @@ class Peach_Markup_ContainerTestImpl
         $test  = $this->test;
         $obj   = $this->object;
         $obj->append(null);
-        $obj->append("TEXT");
-        $obj->append(new Peach_Markup_EmptyElement("test"));
-        $obj->append(Peach_Markup_None::getInstance()); // added none
-        $obj->append($nList); // added 3 nodes
-        $test->assertSame(5, count($obj->getChildNodes()));
+        $obj->append("TEXT");                                // (count: 1)
+        $obj->append(new Peach_Markup_EmptyElement("test")); // (count: 2)
+        $obj->append(Peach_Markup_None::getInstance());      // added nothing (count: 2)
+        $obj->append($nList);                                // added 3 nodes (count: 5)
+        $obj->append(array("A", "B", array("C", "D")));      // added 4 nodes (count: 9)
+        $test->assertSame(9, count($obj->getChildNodes()));
     }
     
     /**

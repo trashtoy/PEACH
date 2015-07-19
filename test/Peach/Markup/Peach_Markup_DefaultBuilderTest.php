@@ -28,6 +28,18 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
     }
     
     /**
+     * インスタンス生成直後はすべてのフィールドが null となっていることを確認します.
+     * @covers Peach_Markup_DefaultBuilder::__construct
+     */
+    public function test__construct()
+    {
+        $obj = new Peach_Markup_DefaultBuilder();
+        $this->assertNull($obj->getBreakControl());
+        $this->assertNull($obj->getIndent());
+        $this->assertNull($obj->getRenderer());
+    }
+    
+    /**
      * getIndent() と setIndent() のテストです. 以下について確認します.
      * 
      * - 初期状態では getIndent() が null を返すこと
@@ -36,6 +48,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * 
      * @covers Peach_Markup_DefaultBuilder::getIndent
      * @covers Peach_Markup_DefaultBuilder::setIndent
+     * @covers Peach_Markup_DefaultBuilder::initRenderer
      */
     public function testAccessIndent()
     {
@@ -60,6 +73,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * 
      * @covers Peach_Markup_DefaultBuilder::getRenderer
      * @covers Peach_Markup_DefaultBuilder::setRenderer
+     * @covers Peach_Markup_DefaultBuilder::initRenderer
      */
     public function testAccessRenderer()
     {
@@ -73,6 +87,11 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
         $builder->setRenderer(null);
         $this->assertNull($builder->getRenderer());
         
+        $builder->setRenderer("xhtml");
+        $this->assertSame($subject, $builder->getRenderer());
+        $builder->setRenderer("sgml");
+        $this->assertSame(Peach_Markup_SgmlRenderer::getInstance(), $builder->getRenderer());
+        
         $this->setExpectedException("InvalidArgumentException");
         $builder->setRenderer("InvalidValue");
     }
@@ -84,7 +103,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
      * - setBreakControl() でセットした BreakControl オブジェクトが getBreakControl() で取得できること
      * - null を指定するとセットした BreakControl オブジェクトが解除されること
      * 
-     * @covers Peach_Markup_DefaultBuilder::setBreakControl
+     * @covers Peach_Markup_DefaultBuilder::getBreakControl
      * @covers Peach_Markup_DefaultBuilder::setBreakControl
      */
     public function testAccessBreakControl()
@@ -103,6 +122,7 @@ class Peach_Markup_DefaultBuilderTest extends Peach_Markup_BuilderTest
     /**
      * Builder にセットした設定が, build 時に適用されることを確認します.
      * @todo   BreakControl が適用されるかどうかのテスト
+     * @covers Peach_Markup_DefaultBuilder::createContext
      * @covers Peach_Markup_Builder::build
      */
     public function testBuild()

@@ -43,7 +43,9 @@ class Peach_Markup_XmlRenderer extends Peach_Markup_AbstractRenderer
     
     /**
      * このクラスのインスタンスを取得します.
+     * 
      * @return Peach_Markup_XmlRenderer このクラスの唯一のインスタンス
+     * @codeCoverageIgnore
      */
     public static function getInstance()
     {

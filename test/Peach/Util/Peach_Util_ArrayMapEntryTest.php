@@ -36,6 +36,18 @@ class Peach_Util_ArrayMapEntryTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * ArrayMap に値を put した際に ArrayMapEntry オブジェクトが生成されることを確認します.
+     * @covers Peach_Util_ArrayMapEntry::__construct
+     */
+    public function test__construct()
+    {
+        $map = new Peach_Util_ArrayMap();
+        $map->put("key", "value");
+        $entryList = $map->entryList();
+        $this->assertInstanceOf("Peach_Util_ArrayMapEntry", $entryList[0]);
+    }
+    
+    /**
      * この MapEntry にセットされているキーを返すことを確認します.
      * 
      * @covers Peach_Util_ArrayMapEntry::getKey

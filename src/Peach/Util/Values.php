@@ -172,11 +172,13 @@ class Peach_Util_Values
      */
     private static function stringToBool($value, $defaultValue = null)
     {
+        // @codeCoverageIgnoreStart
         static $tPrefix = null, $fPrefix = null;
         if (!isset($tPrefix)) {
             $tPrefix = array("t", "y", "o");
             $fPrefix = array("f", "n");
         }
+        // @codeCoverageIgnoreEnd
         
         $prefix = strtolower(substr($value, 0, 1));
         if (in_array($prefix, $tPrefix)) {

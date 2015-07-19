@@ -28,6 +28,33 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     }
     
     /**
+     * 引数に true を指定して初期化した場合に自動で echo が行われることを確認します.
+     * 
+     * @covers Peach_Markup_DebugContext::__construct
+     */
+    public function test__constructByEchoModeOn()
+    {
+        ob_start();
+        $obj = new Peach_Markup_DebugContext(true);
+        $obj->handleText(new Peach_Markup_Text("foobar"));
+        $actual = ob_get_contents();
+        ob_end_clean();
+        $this->assertSame("Text\r\n", $actual);
+    }
+    
+    /**
+     * 引数に false を指定して初期化した場合は echo が行われないことを確認します.
+     * 
+     * @covers Peach_Markup_DebugContext::__construct
+     */
+    public function test__constructByEchoModeOff()
+    {
+        $obj = new Peach_Markup_DebugContext(false);
+        $obj->handleText(new Peach_Markup_Text("foobar"));
+        $this->assertFalse($this->hasOutput());
+    }
+    
+    /**
      * getResult() のテストです.
      * 各ノードのクラス名とその入れ子構造が出力されることを確認します.
      * 
@@ -46,6 +73,9 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleComment() のテストです.
      * @covers Peach_Markup_DebugContext::handleComment
+     * @covers Peach_Markup_DebugContext::startNode
+     * @covers Peach_Markup_DebugContext::handleContainer
+     * @covers Peach_Markup_DebugContext::endNode
      */
     public function testHandleComment()
     {
@@ -65,6 +95,9 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleContainerElement() のテストです.
      * @covers Peach_Markup_DebugContext::handleContainerElement
+     * @covers Peach_Markup_DebugContext::startNode
+     * @covers Peach_Markup_DebugContext::handleContainer
+     * @covers Peach_Markup_DebugContext::endNode
      */
     public function testHandleContainerElement()
     {
@@ -84,6 +117,7 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleEmptyElement() のテストです.
      * @covers Peach_Markup_DebugContext::handleEmptyElement
+     * @covers Peach_Markup_DebugContext::append
      */
     public function testHandleEmptyElement()
     {
@@ -98,6 +132,9 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleNodeList() のテストです.
      * @covers Peach_Markup_DebugContext::handleNodeList
+     * @covers Peach_Markup_DebugContext::startNode
+     * @covers Peach_Markup_DebugContext::handleContainer
+     * @covers Peach_Markup_DebugContext::endNode
      */
     public function testHandleNodeList()
     {
@@ -128,6 +165,7 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleText() のテストです.
      * @covers Peach_Markup_DebugContext::handleText
+     * @covers Peach_Markup_DebugContext::append
      */
     public function testHandleText()
     {
@@ -142,6 +180,7 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleCode() のテストです.
      * @covers Peach_Markup_DebugContext::handleCode
+     * @covers Peach_Markup_DebugContext::append
      */
     public function testHandleCode()
     {
@@ -161,6 +200,7 @@ class Peach_Markup_DebugContextTest extends Peach_Markup_ContextTest
     /**
      * handleNone() のテストです.
      * @covers Peach_Markup_DebugContext::handleNone
+     * @covers Peach_Markup_DebugContext::append
      */
     public function testHandleNone()
     {

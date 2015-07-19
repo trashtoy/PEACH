@@ -98,6 +98,7 @@ class Peach_DT_TimeWrapper implements Peach_DT_Time
      * 
      * @param  Peach_DT_Time $instance ラップ対象のオブジェクト
      * @return Peach_DT_TimeWrapper
+     * @codeCoverageIgnore
      */
     protected function newInstance(Peach_DT_Time $instance)
     {

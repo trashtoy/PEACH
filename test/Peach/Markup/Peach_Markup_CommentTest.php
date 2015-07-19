@@ -45,13 +45,17 @@ class Peach_Markup_CommentTest extends PHPUnit_Framework_TestCase
      * - コンストラクタ引数を省略した場合は空文字列となる
      * - コンストラクタの第一引数に指定した文字列を返す
      * 
+     * @covers Peach_Markup_Comment::__construct
      * @covers Peach_Markup_Comment::getPrefix
      */
     public function testGetPrefix()
     {
-        $this->assertSame("",            $this->object1->getPrefix());
-        $this->assertSame("test-prefix", $this->object2->getPrefix());
-        $this->assertSame("test-prefix", $this->object3->getPrefix());
+        $obj1 = new Peach_Markup_Comment();
+        $obj2 = new Peach_Markup_comment("test-prefix");
+        $obj3 = new Peach_Markup_Comment("test-prefix", "test-suffix");
+        $this->assertSame("",            $obj1->getPrefix());
+        $this->assertSame("test-prefix", $obj2->getPrefix());
+        $this->assertSame("test-prefix", $obj3->getPrefix());
     }
     
     /**

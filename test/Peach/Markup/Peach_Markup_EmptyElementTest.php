@@ -31,6 +31,7 @@ class Peach_Markup_EmptyElementTest extends Peach_Markup_ElementTest
      * 要素名が空文字列だった場合に InvalidArgumentException をスローすることを確認します.
      * @expectedException InvalidArgumentException
      * @covers Peach_Markup_EmptyElement::__construct
+     * @covers Peach_Markup_Element::validateName
      */
     public function test__constructFail()
     {
