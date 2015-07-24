@@ -209,21 +209,10 @@ class Peach_Util_Arrays
         if (!isset($c)) {
             $c = Peach_Util_DefaultComparator::getInstance();
         }
-        reset($arr);
-        $upper = array();
-        $lower = array();
-        $first = array_shift($arr);
-        foreach ($arr as $value) {
-            $compValue = $c->compare($first, $value);
-            if (0 < $compValue) {
-                $lower[] = $value;
-            } else {
-                $upper[] = $value;
-            }
-        }
-        return self::concat(self::sort($lower, $c), $first, self::sort($upper, $c));
+        usort($arr, array($c, "compare"));
+        return $arr;
     }
-
+    
     /**
      * 配列のキーと値のマッピングを保持しながら, 指定された配列をソートします.
      * コンパレータが指定されなかった場合は {@link Util_DefaultComparator} が適用されます.
@@ -240,21 +229,10 @@ class Peach_Util_Arrays
         if (!isset($c)) {
             $c = Peach_Util_DefaultComparator::getInstance();
         }
-        reset($arr);
-        list($firstKey, $firstValue) = each($arr);
-        $upper = array();
-        $lower = array();
-        while (false !== (list($key, $value) = each($arr))) {
-            $compValue = $c->compare($firstValue, $value);
-            if (0 < $compValue) {
-                $lower[$key] = $value;
-            } else {
-                $upper[$key] = $value;
-            }
-        }
-        return self::asort($lower, $c) + array($firstKey => $firstValue) + self::asort($upper, $c);
+        uasort($arr, array($c, "compare"));
+        return $arr;
     }
-
+    
     /**
      * 引数の配列または値を連結して, 一つの配列として返します.
      * 
