@@ -203,6 +203,10 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         $subject6 = self::getSampleShuffleArray();
         $test6    = Peach_Util_Arrays::sort($subject6);
         $this->assertSame($expected, $test6);
+        
+        $expected2 = range(1, 200);
+        $largeArr  = Peach_Util_Arrays::concat(array_reverse(range(2, 200, 2)), range(1, 199, 2));
+        $this->assertSame($expected2, Peach_Util_Arrays::sort($largeArr));
     }
 
     /**
@@ -242,8 +246,15 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
         $subject6 = self::getSampleShuffleArray();
         $test6    = Peach_Util_Arrays::asort($subject6);
         $this->assertSame($expected, $test6);
+        
+        $ranges    = range(1, 200);
+        $expected2 = array_combine($ranges, $ranges);
+        $reversed  = array_reverse($ranges);
+        $subject7  = array_combine($reversed, $reversed);
+        $test7     = Peach_Util_Arrays::asort($subject7);
+        $this->assertSame($expected2, $test7);
     }
-
+    
     /**
      * 引数に指定された配列と値が連結されて 1 つの配列として返されることを確認します.
      * 
@@ -274,7 +285,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     /**
      * unique() をテストします. 以下を確認します.
      * 
-     * - 2 度目以降に出現した値が取り除いた配列を返すこと
+     * - 2 度目以降に出現した値が取り除かれた配列を返すこと
      * - 配列のキーが維持されていること
      * 
      * @covers Peach_Util_Arrays::unique
@@ -282,7 +293,7 @@ class Peach_Util_ArraysTest extends PHPUnit_Framework_TestCase
     public function testUnique()
     {
         $test     = array(1, 3, "2", 7, 5, 0, 8, "3", 2, 9, 3, 6, "5", 4);
-        $expected = array(0 => 1, 1 => 3, 2 => "2", 3 => 7, 4 => 5, 5 => 0, 6 => 8, 9 => 9, 11 => 6, 13 => 4);
+        $expected = array(0 => 1, 3 => 7, 4 => 5, 5 => 0, 6 => 8, 7 => "3", 8 => 2, 9 => 9, 11 => 6, 13 => 4);
         $result   = Peach_Util_Arrays::unique($test);
         $this->assertSame($expected, $result);
     }
