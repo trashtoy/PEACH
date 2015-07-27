@@ -95,7 +95,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         $this->format  = $format;
         $this->context = $this->createContext($format);
     }
-
+    
     /**
      * このオブジェクトのパターン文字列を返します.
      * @return string パターン文字列
@@ -176,7 +176,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
 
     /**
      * 正規表現のパターン一覧を返します.
-     * キーが変換文字, 値がその文字に対応するパターン文字列となります.
+     * キーが変換文字, 値がその文字に対応する Pattern オブジェクトとなります.
      * 
      * @return array
      * @codeCoverageIgnore
@@ -192,57 +192,42 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
             $varD     = "3[0-1]|[1-2][0-9]|[0-9]";
             $varH     = "2[0-4]|1[0-9]|[0-9]";
             $patterns = array(
-                "Y" => $fixed4,
-                "m" => $fixed2,
-                "n" => $varM,
-                "d" => $fixed2,
-                "j" => $varD,
-                "H" => $fixed2,
-                "G" => $varH,
-                "i" => $fixed2,
-                "f" => $var2,
-                "s" => $fixed2,
-                "b" => $var2,
+                "Y" => new Peach_DT_SimpleFormat_Numbers("year",   $fixed4),
+                "m" => new Peach_DT_SimpleFormat_Numbers("month",  $fixed2),
+                "n" => new Peach_DT_SimpleFormat_Numbers("month",  $varM),
+                "d" => new Peach_DT_SimpleFormat_Numbers("date",   $fixed2),
+                "j" => new Peach_DT_SimpleFormat_Numbers("date",   $varD),
+                "H" => new Peach_DT_SimpleFormat_Numbers("hour",   $fixed2),
+                "G" => new Peach_DT_SimpleFormat_Numbers("hour",   $varH),
+                "i" => new Peach_DT_SimpleFormat_Numbers("minute", $fixed2),
+                "f" => new Peach_DT_SimpleFormat_Numbers("minute", $var2),
+                "s" => new Peach_DT_SimpleFormat_Numbers("second", $fixed2),
+                "b" => new Peach_DT_SimpleFormat_Numbers("second", $var2),
             );
         }
         return $patterns;
     }
 
     /**
-     * 指定された文字が, 時間オブジェクトのどのフィールドに対応するかを調べます.
-     * "year", "month", "date", "hour", "minute", "second"
-     * のいずれかの文字列を返します.
+     * 指定された文字列に相当する Pattern オブジェクトを返します.
      * 
-     * @param  string $pattern パターン文字 ("Y", "m", "d" など)
-     * @return string          引数のパターン文字に対応するフィールド名称
-     * @throws Exception       不正なパターン文字が指定された場合
+     * @param  string $part
+     * @return Pattern
      * @codeCoverageIgnore
      */
-    private function getKey($pattern)
+    private function getPatternByPart($part)
     {
-        static $keyList = array(
-            "year"   => array("Y"),
-            "month"  => array("m", "n"),
-            "date"   => array("d", "j"),
-            "hour"   => array("H", "G"),
-            "minute" => array("i", "f"),
-            "second" => array("s", "b"),
-        );
-        foreach ($keyList as $key => $pList) {
-            if (in_array($pattern, $pList)) {
-                return $key;
-            }
-        }
-        throw new Exception("Illegal pattern: " . $pattern);
+        $patterns = $this->getPatternList();
+        return array_key_exists($part, $patterns) ? $patterns[$part] : new Peach_DT_SimpleFormat_Raw(array(stripslashes($part)));
     }
-
+    
     /**
      * 指定されたパターン文字を, 対応するフィールドの値に変換します.
      * 
-     * @param  Time   $d   変換対象の時間オブジェクト
-     * @param  string $key パターン文字 ("Y", "m", "d" など)
-     * @return int         変換結果
-     * @throws Exception   不正なパターン文字が指定された場合
+     * @param  Peach_DT_Time $d   変換対象の時間オブジェクト
+     * @param  string        $key パターン文字 ("Y", "m", "d" など)
+     * @return int                変換結果
+     * @throws Exception          不正なパターン文字が指定された場合
      */
     private function formatKey(Peach_DT_Time $d, $key)
     {
@@ -322,37 +307,23 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
     /**
      * 指定されたテキストを構文解析します.
      * 
-     * @param  string $text
-     * @return array 構文解析した結果
+     * @param  string $text 解析対象の文字列
+     * @return array        構文解析した結果
      */
     private function interpret($text)
     {
         $input       = $text;
-        $patternList = $this->getPatternList();
-        $result      = array();
+        $result      = new Peach_Util_ArrayMap();
         $matched     = null;
         foreach ($this->context as $part) {
-            if (array_key_exists($part, $patternList)) {
-                $reg  = $patternList[$part];
-                $test = preg_match("/^{$reg}/", $input, $matched);
-                if (!$test) {
-                    $this->throwFormatException($input, $this->format);
-                }
-
-                $key          = $this->getKey($part);
-                $result[$key] = intval($matched[0]);
-                $input        = substr($input, strlen($matched[0]));
-            } else {
-                $text   = stripslashes($part);
-                $length = strlen($text);
-                if (substr($input, 0, $length) !== $text) {
-                    $this->throwFormatException($text, $this->format);
-                }
-
-                $input = substr($input, $length);
+            $pattern = $this->getPatternByPart($part);
+            $matched = $pattern->match($input);
+            if ($matched === null) {
+                $this->throwFormatException($input, $this->format);
             }
+            $pattern->apply($result, $matched);
+            $input = substr($input, strlen($matched));
         }
-
         return $result;
     }
 

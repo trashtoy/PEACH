@@ -97,6 +97,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Peach_DT_SimpleFormat::parseDate
      * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat_Numbers::match
+     * @covers Peach_DT_SimpleFormat_Numbers::apply
+     * @covers Peach_DT_SimpleFormat_Raw::__construct
+     * @covers Peach_DT_SimpleFormat_Raw::match
+     * @covers Peach_DT_SimpleFormat_Raw::apply
      * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseDate()
@@ -119,6 +124,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Peach_DT_SimpleFormat::parseDatetime
      * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat_Numbers::match
+     * @covers Peach_DT_SimpleFormat_Numbers::apply
+     * @covers Peach_DT_SimpleFormat_Raw::__construct
+     * @covers Peach_DT_SimpleFormat_Raw::match
+     * @covers Peach_DT_SimpleFormat_Raw::apply
      * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseDatetime()
@@ -141,6 +151,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Peach_DT_SimpleFormat::parseTimestamp
      * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat_Numbers::match
+     * @covers Peach_DT_SimpleFormat_Numbers::apply
+     * @covers Peach_DT_SimpleFormat_Raw::__construct
+     * @covers Peach_DT_SimpleFormat_Raw::match
+     * @covers Peach_DT_SimpleFormat_Raw::apply
      * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseTimestamp()
