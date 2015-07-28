@@ -76,7 +76,13 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      * @var string
      */
     private $format;
-
+    
+    /**
+     * 曜日文字列の一覧を表す, 長さ 7 の配列です.
+     * @var array
+     */
+    private $dayList;
+    
     /**
      * パターン文字列を分解した結果をあらわします.
      * 
@@ -88,12 +94,38 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      * 指定されたパターン文字列で SimpleFormat を初期化します.
      * 
      * @param string $pattern パターン文字列
+     * @param array  $dayList 曜日文字列の配列. デフォルトは array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
      */
-    public function __construct($pattern)
+    public function __construct($pattern, array $dayList = array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"))
     {
         $format        = strval($pattern);
         $this->format  = $format;
+        $this->dayList = $this->initDayList($dayList);
         $this->context = $this->createContext($format);
+    }
+    
+    /**
+     * 曜日文字列を初期化します.
+     * もしも配列の長さが 7 より大きかった場合, 8 個目以降の要素は無視されます.
+     * 
+     * @param  array $dayList 引数
+     * @return array          曜日文字列の配列
+     * @throws \InvalidArgumentException 配列の長さが 7 未満であるか, または空文字列が含まれている場合
+     */
+    private function initDayList(array $dayList)
+    {
+        $values = array_slice(array_values($dayList), 0, 7);
+        $count  = count($values);
+        if ($count !== 7) {
+            throw new InvalidArgumentException("Invalid array count({$count}). Expected: 7");
+        }
+        for ($i = 0; $i < 7; $i++) {
+            $value = $values[$i];
+            if (!strlen($value)) {
+                throw new InvalidArgumentException("Daystring is empty at index {$i}");
+            }
+        }
+        return $values;
     }
     
     /**
