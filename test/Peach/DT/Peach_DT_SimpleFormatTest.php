@@ -69,6 +69,12 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
                     new Peach_DT_SimpleFormatTest_FormatData($d2, "7時30分0秒"),
                     new Peach_DT_SimpleFormatTest_FormatData($d3, "7時30分9秒")
                 ),
+                new Peach_DT_SimpleFormatTest_Sample("Y年n月j日(E)",
+                    new Peach_DT_SimpleFormatTest_ParseData("2012年3月7日(水)", "2012年3月7日(無)", $d4, $d5, $d6),
+                    new Peach_DT_SimpleFormatTest_FormatData($d1, "2012年5月21日(月)"),
+                    new Peach_DT_SimpleFormatTest_FormatData($d2, "2012年5月21日(月)"),
+                    new Peach_DT_SimpleFormatTest_FormatData($d3, "2012年5月21日(月)")
+                ),
             );
         }
     }
@@ -111,6 +117,8 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
      * コンストラクタの引数に指定した値を返すことを確認します.
      * @covers Peach_DT_SimpleFormat::getFormat
      * @covers Peach_DT_SimpleFormat::__construct
+     * @covers Peach_DT_SimpleFormat::initDayList
+     * @covers Peach_DT_SimpleFormat::initPatternList
      * @covers Peach_DT_SimpleFormat::createContext
      */
     public function testGetFormat()
@@ -280,7 +288,7 @@ class Peach_DT_SimpleFormatTest_Sample
         Peach_DT_SimpleFormatTest_FormatData $fDatetime,
         Peach_DT_SimpleFormatTest_FormatData $fTimestamp)
     {
-        $this->format    = new Peach_DT_SimpleFormat($format);
+        $this->format    = new Peach_DT_SimpleFormat($format, array("日", "月", "火", "水", "木", "金", "土"));
         $this->parseData = $parseData;
         $this->formatDataList = array(
             "date"      => $fDate,

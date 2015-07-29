@@ -84,6 +84,15 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
     private $dayList;
     
     /**
+     * Pattern オブジェクトの配列です.
+     * キーが "Y", "n" などのパターン文字, 値がその文字に該当する
+     * Pattern オブジェクトとなります.
+     * 
+     * @var array
+     */
+    private $patternList;
+    
+    /**
      * パターン文字列を分解した結果をあらわします.
      * 
      * @var array
@@ -101,6 +110,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
         $format        = strval($pattern);
         $this->format  = $format;
         $this->dayList = $this->initDayList($dayList);
+        $this->patternList = $this->initPatternList($this->dayList);
         $this->context = $this->createContext($format);
     }
     
@@ -126,6 +136,18 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
             }
         }
         return $values;
+    }
+    
+    /**
+     * パターン文字の一覧を作成します.
+     * @param  array $dayList 曜日文字列の配列
+     * @return array          Pattern オブジェクトの配列
+     */
+    private function initPatternList(array $dayList)
+    {
+        $patternList = $this->getDefaultPatternList();
+        $patternList["E"] = new Peach_DT_SimpleFormat_Raw($dayList);
+        return $patternList;
     }
     
     /**
@@ -197,7 +219,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      */
     public function formatTimestamp(Peach_DT_Timestamp $d)
     {
-        $patternList = $this->getPatternList();
+        $patternList = $this->patternList;
         $result      = "";
         foreach ($this->context as $part) {
             $buf = array_key_exists($part, $patternList) ? $this->formatKey($d, $part) : stripslashes($part);
@@ -213,7 +235,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      * @return array
      * @codeCoverageIgnore
      */
-    private function getPatternList()
+    private function getDefaultPatternList()
     {
         static $patterns = null;
         if (!isset($patterns)) {
@@ -249,7 +271,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      */
     private function getPatternByPart($part)
     {
-        $patterns = $this->getPatternList();
+        $patterns = $this->patternList;
         return array_key_exists($part, $patterns) ? $patterns[$part] : new Peach_DT_SimpleFormat_Raw(array(stripslashes($part)));
     }
     
@@ -293,6 +315,8 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
                 return str_pad($sec,   2, "0", STR_PAD_LEFT);
             case "b":
                 return $sec;
+            case "E":
+                return $this->dayList[$d->getDay()];
         }
         
         // @codeCoverageIgnoreStart
@@ -308,7 +332,7 @@ class Peach_DT_SimpleFormat implements Peach_DT_Format
      */
     private function createContext($format)
     {
-        $patternList = $this->getPatternList();
+        $patternList = $this->patternList;
         $result      = array();
         $current     = "";
         $escaped     = false;
