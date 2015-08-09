@@ -69,6 +69,12 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
                     new Peach_DT_SimpleFormatTest_FormatData($d2, "7時30分0秒"),
                     new Peach_DT_SimpleFormatTest_FormatData($d3, "7時30分9秒")
                 ),
+                new Peach_DT_SimpleFormatTest_Sample("Y年n月j日(E)",
+                    new Peach_DT_SimpleFormatTest_ParseData("2012年3月7日(水)", "2012年3月7日(無)", $d4, $d5, $d6),
+                    new Peach_DT_SimpleFormatTest_FormatData($d1, "2012年5月21日(月)"),
+                    new Peach_DT_SimpleFormatTest_FormatData($d2, "2012年5月21日(月)"),
+                    new Peach_DT_SimpleFormatTest_FormatData($d3, "2012年5月21日(月)")
+                ),
             );
         }
     }
@@ -82,9 +88,37 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * コンストラクタの第 2 引数に長さ 7 未満の配列を指定した場合,
+     * InvalidArgumentException をスローすることを確認します.
+     * 
+     * @covers Peach_DT_SimpleFormat::__construct
+     * @covers Peach_DT_SimpleFormat::initDayList
+     * @expectedException InvalidArgumentException
+     */
+    public function test__constructFailByTooShortArray()
+    {
+        new Peach_DT_SimpleFormat("Y.m.d (E)", array("Sun", "Mon", "Tue", "Wed"));
+    }
+    
+    /**
+     * コンストラクタの第 2 引数に空文字列を含む配列を指定した場合,
+     * InvalidArgumentException をスローすることを確認します.
+     * 
+     * @covers Peach_DT_SimpleFormat::__construct
+     * @covers Peach_DT_SimpleFormat::initDayList
+     * @expectedException InvalidArgumentException
+     */
+    public function test__constructFailByEmptyString()
+    {
+        new Peach_DT_SimpleFormat("Y.m.d (E)", array("Sun", "Mon", "Tue", "Wed", "", "Fri", "Sat"));
+    }
+    
+    /**
      * コンストラクタの引数に指定した値を返すことを確認します.
      * @covers Peach_DT_SimpleFormat::getFormat
      * @covers Peach_DT_SimpleFormat::__construct
+     * @covers Peach_DT_SimpleFormat::initDayList
+     * @covers Peach_DT_SimpleFormat::initPatternList
      * @covers Peach_DT_SimpleFormat::createContext
      */
     public function testGetFormat()
@@ -97,6 +131,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Peach_DT_SimpleFormat::parseDate
      * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat_Numbers::match
+     * @covers Peach_DT_SimpleFormat_Numbers::apply
+     * @covers Peach_DT_SimpleFormat_Raw::__construct
+     * @covers Peach_DT_SimpleFormat_Raw::match
+     * @covers Peach_DT_SimpleFormat_Raw::apply
      * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseDate()
@@ -119,6 +158,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Peach_DT_SimpleFormat::parseDatetime
      * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat_Numbers::match
+     * @covers Peach_DT_SimpleFormat_Numbers::apply
+     * @covers Peach_DT_SimpleFormat_Raw::__construct
+     * @covers Peach_DT_SimpleFormat_Raw::match
+     * @covers Peach_DT_SimpleFormat_Raw::apply
      * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseDatetime()
@@ -141,6 +185,11 @@ class Peach_DT_SimpleFormatTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Peach_DT_SimpleFormat::parseTimestamp
      * @covers Peach_DT_SimpleFormat::interpret
+     * @covers Peach_DT_SimpleFormat_Numbers::match
+     * @covers Peach_DT_SimpleFormat_Numbers::apply
+     * @covers Peach_DT_SimpleFormat_Raw::__construct
+     * @covers Peach_DT_SimpleFormat_Raw::match
+     * @covers Peach_DT_SimpleFormat_Raw::apply
      * @covers Peach_DT_SimpleFormat::throwFormatException
      */
     public function testParseTimestamp()
@@ -239,7 +288,7 @@ class Peach_DT_SimpleFormatTest_Sample
         Peach_DT_SimpleFormatTest_FormatData $fDatetime,
         Peach_DT_SimpleFormatTest_FormatData $fTimestamp)
     {
-        $this->format    = new Peach_DT_SimpleFormat($format);
+        $this->format    = new Peach_DT_SimpleFormat($format, array("日", "月", "火", "水", "木", "金", "土"));
         $this->parseData = $parseData;
         $this->formatDataList = array(
             "date"      => $fDate,
