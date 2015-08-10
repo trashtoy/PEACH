@@ -9,7 +9,7 @@ Features
 
 ### Util
 Object-oriented array manipulation modules like 
-[Java Collections Framework](http://docs.oracle.com/javase/7/docs/technotes/guides/collections/index.html).
+[Java Collections Framework](http://docs.oracle.com/javase/8/docs/technotes/guides/collections/).
 
 - Map interface like java.util.HashMap. You can use objects as key.
 - Sorting arrays which contain objects.
@@ -41,7 +41,7 @@ That's all.
 How to use
 ------------
 Require autoload.php  
-`require_once("/path/to/PEACH/src/autoload.php");`  
+`require_once("/path/to/PEACH/autoload.php");`  
 or set up autoload manually.
 
 Documentation
@@ -56,6 +56,7 @@ Roadmap
 
 Package | Description
 --------|------------
+DF      | Data format encoding / decoding API.
 RB      | Object-oriented i18n module. (RB represents ResourceBundle.)
 DB      | A reinvented O/R mapper.
 App     | Various components about web application development. (Forms, validations, etc.)
