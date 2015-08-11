@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Helper / HelperObject</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Markup</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Markup.html">class tree: Markup</a></li>
+            <li><a href="../elementindex_Markup.html">index: Markup</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>Helper / HelperObject</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../Markup/tutorial_Markup.helper.pkg.html#summary">概要</a></li>
+                <li><a href="../Markup/tutorial_Markup.helper.pkg.html#usage">基本的な使い方</a></li>
+                <li><a href="../Markup/tutorial_Markup.helper.pkg.html#empty_and_container">EmptyElement と ContainerElement の出し分け</a></li>
+                <li><a href="../Markup/tutorial_Markup.helper.pkg.html#append_and_appendto">append と appendTo の違い</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="summary"><h1>概要</h1><p><a href="../Markup/Peach_Markup_Helper.html">Helper</a> および
+                    <a href="../Markup/Peach_Markup_HelperObject.html">HelperObject</a>
+                    はノードの構築と出力をさらに簡略化するための API です.
+                    例えば REST API を提供する Web サービスを開発する場合など,
+                    似たようなフォーマットの XML
+                    出力をする機能が多数存在するようなケースで役に立つでしょう.</p>
+                <p>HTML を生成する場合は <a href="../Markup/Peach_Markup_Html.html">Html</a>
+                    という専用のユーティリティクラスが存在するので, そちらを使うことをお勧めします.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="usage"><h1>基本的な使い方</h1><p>以下のような流れでノードを生成・出力します.</p>
+                <ol><li>Builder オブジェクトを指定して Helper オブジェクトを作成します.</li>
+                    <li>Helper の <a href="../Markup/Peach_Markup_Helper.html#methodcreateObject">createObject()</a>
+                        メソッドを使い, HelperObject オブジェクトを作成します.</li>
+                    <li>生成した HelperObject の
+                        <a href="../Markup/Peach_Markup_HelperObject.html#methodappend">append()</a> や
+                        <a href="../Markup/Peach_Markup_HelperObject.html#methodappend">attr()</a>
+                        などのメソッドを使ってノードの中身を構築します.
+                        jQuery のようにメソッドチェインを利用して簡潔な記述が出来ます.</li>
+                    <li><a href="../Markup/Peach_Markup_HelperObject.html#methodwrite">write()</a>
+                        メソッドでそのノードをマークアップして出力します.</li></ol>
+                <p>HelperObject とは任意のノードをラップして糖衣構文を備えた Component です.
+                    <a href="../Markup/Peach_Markup_Helper.html#methodcreateObject">createObject()</a>
+                    の引数に文字列を指定することで, その文字列を要素名とする要素をあらわす HelperObject が生成されます.</p>
+                <p>サンプルコードを以下に掲載します.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$helper&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Helper.html">Peach_Markup_Helper</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$tag1&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">attr</span><span class="src-sym">(</span><span class="src-str">&quot;id&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;First&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Second&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Third&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$tag2&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">attr</span><span class="src-sym">(</span><span class="src-str">&quot;id&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-num">2</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Fourth&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Fifth&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$root&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;root&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$tag1</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$tag2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$root</span><span class="src-sym">-&gt;</span><span class="src-id">write</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">Output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&lt;root&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tag&nbsp;id=&quot;1&quot;&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tag&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tag&nbsp;id=&quot;2&quot;&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fourth</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fifth</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/tag&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&lt;/root&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="empty_and_container"><h1>EmptyElement と ContainerElement の出し分け</h1><p>Helper を生成する際の引数で, 要素名によって空要素にするかどうかを設定することが出来ます.
+                    以下のサンプルでは tag2, tag4 のみ空要素として扱うようにしています.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$helper&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Helper.html">Peach_Markup_Helper</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;tag2&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;tag4&quot;</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;root&quot;</span><span class="src-sym">)</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag1&quot;</span><span class="src-sym">))</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag2&quot;</span><span class="src-sym">))</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag3&quot;</span><span class="src-sym">))</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag4&quot;</span><span class="src-sym">))</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">-&gt;</span><span class="src-id">write</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">Output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&lt;root&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tag1&gt;&lt;/tag1&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tag2&nbsp;/&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tag3&gt;&lt;/tag3&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&lt;tag4&nbsp;/&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&lt;/root&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="append_and_appendto"><h1>append と appendTo の違い</h1><p>HelperObject にはノードを追加する手段として
+                    <a href="../Markup/Peach_Markup_HelperObject.html#methodappend">append()</a> と
+                    <a href="../Markup/Peach_Markup_HelperObject.html#methodappend">appendTo()</a> の 2 種類があります.
+                    append() が呼び出し元のノードの中に引数のノードを追加するのに対して,
+                    appendTo() は引数のノードの中に呼び出し元のノードを追加します.
+                    以下の 2 種類のコードは同じ結果となります.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$helper&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_Helper.html">Peach_Markup_Helper</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;append&nbsp;を使う場合</span></div></li>
+        <li><div class="src-line"><span class="src-var">$tag1&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;1&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;2&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$tag2&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;3&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;4&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$root&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;root&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$tag1</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$tag2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;appendTo&nbsp;を使う場合</span></div></li>
+        <li><div class="src-line"><span class="src-var">$root&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;root&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$tag1&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;1&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;2&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">appendTo</span><span class="src-sym">(</span><span class="src-var">$root</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$tag2&nbsp;&nbsp;&nbsp;</span>=&nbsp;<span class="src-var">$helper</span><span class="src-sym">-&gt;</span><span class="src-id">createObject</span><span class="src-sym">(</span><span class="src-str">&quot;tag&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;3&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;4&quot;</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><span class="src-id">appendTo</span><span class="src-sym">(</span><span class="src-var">$root</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../Markup/tutorial_Markup.component.pkg.html">Component (その他のパーツ)</a></li>
+            <li>Next: <a href="../Markup/tutorial_Markup.html.pkg.html">Html (HTML 出力専用クラス)</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Tue, 11 Aug 2015 12:48:20 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Markup/tutorial_Markup.pkg.html">XML, HTML 出力支援モジュール Markup</a>
+                <ul>
+                    <li><a href="../Markup/tutorial_Markup.node.pkg.html">Node (各種パーツ)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.builder.pkg.html">Builder (出力制御)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.component.pkg.html">Component (その他のパーツ)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.helper.pkg.html">Helper / HelperObject</a></li>
+                    <li><a href="../Markup/tutorial_Markup.html.pkg.html">Html (HTML 出力専用クラス)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.newbuilder.pkg.html">Builder を自作する方法</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Markup/Peach_Markup_BreakControl.html">Peach_Markup_BreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_Component.html">Peach_Markup_Component</a></li>
+            <li><a href="../Markup/Peach_Markup_Container.html">Peach_Markup_Container</a></li>
+            <li><a href="../Markup/Peach_Markup_Node.html">Peach_Markup_Node</a></li>
+            <li><a href="../Markup/Peach_Markup_Renderer.html">Peach_Markup_Renderer</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Markup/Peach_Markup_AbstractRenderer.html">Peach_Markup_AbstractRenderer</a></li>
+            <li><a href="../Markup/Peach_Markup_BreakControlWrapper.html">Peach_Markup_BreakControlWrapper</a></li>
+            <li><a href="../Markup/Peach_Markup_Builder.html">Peach_Markup_Builder</a></li>
+            <li><a href="../Markup/Peach_Markup_Code.html">Peach_Markup_Code</a></li>
+            <li><a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a></li>
+            <li><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></li>
+            <li><a href="../Markup/Peach_Markup_Context.html">Peach_Markup_Context</a></li>
+            <li><a href="../Markup/Peach_Markup_DebugBuilder.html">Peach_Markup_DebugBuilder</a></li>
+            <li><a href="../Markup/Peach_Markup_DebugContext.html">Peach_Markup_DebugContext</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultBreakControl.html">Peach_Markup_DefaultBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultContext.html">Peach_Markup_DefaultContext</a></li>
+            <li><a href="../Markup/Peach_Markup_Element.html">Peach_Markup_Element</a></li>
+            <li><a href="../Markup/Peach_Markup_EmptyElement.html">Peach_Markup_EmptyElement</a></li>
+            <li><a href="../Markup/Peach_Markup_Helper.html">Peach_Markup_Helper</a></li>
+            <li><a href="../Markup/Peach_Markup_HelperObject.html">Peach_Markup_HelperObject</a></li>
+            <li><a href="../Markup/Peach_Markup_Html.html">Peach_Markup_Html</a></li>
+            <li><a href="../Markup/Peach_Markup_Indent.html">Peach_Markup_Indent</a></li>
+            <li><a href="../Markup/Peach_Markup_MinimalBreakControl.html">Peach_Markup_MinimalBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_NameBreakControl.html">Peach_Markup_NameBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a></li>
+            <li><a href="../Markup/Peach_Markup_None.html">Peach_Markup_None</a></li>
+            <li><a href="../Markup/Peach_Markup_SgmlRenderer.html">Peach_Markup_SgmlRenderer</a></li>
+            <li><a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a></li>
+            <li><a href="../Markup/Peach_Markup_XmlRenderer.html">Peach_Markup_XmlRenderer</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Markup/_Peach---Markup---AbstractRenderer.php.html">AbstractRenderer.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---BreakControl.php.html">BreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---BreakControlWrapper.php.html">BreakControlWrapper.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Builder.php.html">Builder.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Code.php.html">Code.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Comment.php.html">Comment.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Component.php.html">Component.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Container.php.html">Container.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---ContainerElement.php.html">ContainerElement.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Context.php.html">Context.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DebugBuilder.php.html">DebugBuilder.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DebugContext.php.html">DebugContext.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DefaultBreakControl.php.html">DefaultBreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DefaultBuilder.php.html">DefaultBuilder.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DefaultContext.php.html">DefaultContext.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Element.php.html">Element.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---EmptyElement.php.html">EmptyElement.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Helper.php.html">Helper.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---HelperObject.php.html">HelperObject.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Html.php.html">Html.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Indent.php.html">Indent.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---MinimalBreakControl.php.html">MinimalBreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---NameBreakControl.php.html">NameBreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Node.php.html">Node.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---NodeList.php.html">NodeList.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---None.php.html">None.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Renderer.php.html">Renderer.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---SgmlRenderer.php.html">SgmlRenderer.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Text.php.html">Text.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---XmlRenderer.php.html">XmlRenderer.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

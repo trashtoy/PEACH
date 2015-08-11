@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_Markup_Context</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>Markup</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_Markup.html">class tree: Markup</a></li>
+            <li><a href="../elementindex_Markup.html">index: Markup</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_Markup_Context</h1>
+        <p id="src_location">定義: <code>/Peach/Markup/Context.php</code></p>
+        <div id="description">
+            <p>各ノードを変換する処理を担当するクラスです.</p>
+            <p>このクラスは Visitor パターンにより設計されています (Visitor クラスに相当します).  <a href="../Markup/Peach_Markup_Builder.html">Builder</a> クラスと連携して以下のように動作します.</p><ol><li>エンドユーザーが Builder オブジェクトの <a href="../Markup/Peach_Markup_Builder.html#methodbuild">build()</a> メソッドを実行します</li><li>build() メソッドの内部で新しい Context オブジェクトが生成されます</li><li>Context オブジェクトの <a href="../Markup/Peach_Markup_Context.html#methodhandle">handle()</a> メソッドが呼び出され, build() の引数に指定されたノードを変換します</li><li>変換結果を <a href="../Markup/Peach_Markup_Context.html#methodgetResult">getResult()</a> から取り出し, build() メソッドの返り値として返します</li></ol>
+        </div>
+        <section class="meta tags">
+            <h1>Tags</h1>
+            <ul>
+                <li>abstract</li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodgetResult">getResult</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandle">handle</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleCode">handleCode</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleComment">handleComment</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleContainerElement">handleContainerElement</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleEmptyElement">handleEmptyElement</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleNodeList">handleNodeList</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleNone">handleNone</a></li>
+                <li><a href="../Markup/Peach_Markup_Context.html#methodhandleText">handleText</a></li>
+            </ul>
+        </section>
+        <section class="meta">
+            <h1>直系の既知のサブクラス</h1>
+            <dl>
+                <dt><a href="../Markup/Peach_Markup_DebugContext.html">Peach_Markup_DebugContext</a></dt>
+                <dd>デバッグのために使用される Context です.</dd>
+                <dt><a href="../Markup/Peach_Markup_DefaultContext.html">Peach_Markup_DefaultContext</a></dt>
+                <dd>与えられたノードを HTML や XML などの文字列に変換するクラスです.</dd>
+            </dl>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="methodgetResult">
+                <h1><b>getResult</b></h1>
+                <p class="linenumber">line 97</p>
+                <div class="signature">
+                    <code>mixed getResult()</code>
+                </div>
+                <div class="docblock">
+                    <p>処理結果を取得します. まだ handle() が実行されていない場合は NULL を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 処理結果</li>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandle">
+                <h1><b>handle</b></h1>
+                <p class="linenumber">line 45</p>
+                <div class="signature">
+                    <code>void handle(<a href="../Markup/Peach_Markup_Component.html">Peach_Markup_Component</a> $c)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたオブジェクトを処理します.</p>
+                    <p>オブジェクトの種類に応じて, このクラスの具象クラスで定義された各 handle メソッドに処理が割り当てられます.  Visitor パターンの visit メソッドに相当します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_Component.html">Peach_Markup_Component</a>&nbsp;&nbsp;</td>
+                            <td><b>$c</b>&nbsp;&nbsp;</td>
+                            <td>処理対象の Component</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleCode">
+                <h1><b>handleCode</b></h1>
+                <p class="linenumber">line 72</p>
+                <div class="signature">
+                    <code>void handleCode(<a href="../Markup/Peach_Markup_Code.html">Peach_Markup_Code</a> $node)</code>
+                </div>
+                <div class="docblock">
+                    <p>整形済テキストを処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_Code.html">Peach_Markup_Code</a>&nbsp;&nbsp;</td>
+                            <td><b>$node</b>&nbsp;&nbsp;</td>
+                            <td>処理対象の整形済テキスト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleComment">
+                <h1><b>handleComment</b></h1>
+                <p class="linenumber">line 78</p>
+                <div class="signature">
+                    <code>void handleComment(<a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a> $node)</code>
+                </div>
+                <div class="docblock">
+                    <p>コメントノードを処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a>&nbsp;&nbsp;</td>
+                            <td><b>$node</b>&nbsp;&nbsp;</td>
+                            <td>処理対象のコメント</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleContainerElement">
+                <h1><b>handleContainerElement</b></h1>
+                <p class="linenumber">line 54</p>
+                <div class="signature">
+                    <code>void handleContainerElement(<a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a> $node)</code>
+                </div>
+                <div class="docblock">
+                    <p>コンテナ要素を処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a>&nbsp;&nbsp;</td>
+                            <td><b>$node</b>&nbsp;&nbsp;</td>
+                            <td>処理対象のコンテナ要素</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleEmptyElement">
+                <h1><b>handleEmptyElement</b></h1>
+                <p class="linenumber">line 60</p>
+                <div class="signature">
+                    <code>void handleEmptyElement(<a href="../Markup/Peach_Markup_EmptyElement.html">Peach_Markup_EmptyElement</a> $node)</code>
+                </div>
+                <div class="docblock">
+                    <p>空要素タグを処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_EmptyElement.html">Peach_Markup_EmptyElement</a>&nbsp;&nbsp;</td>
+                            <td><b>$node</b>&nbsp;&nbsp;</td>
+                            <td>処理対象の空要素</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleNodeList">
+                <h1><b>handleNodeList</b></h1>
+                <p class="linenumber">line 84</p>
+                <div class="signature">
+                    <code>void handleNodeList(<a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a> $node)</code>
+                </div>
+                <div class="docblock">
+                    <p>NodeList を処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a>&nbsp;&nbsp;</td>
+                            <td><b>$node</b>&nbsp;&nbsp;</td>
+                            <td>処理対象の NodeList</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleNone">
+                <h1><b>handleNone</b></h1>
+                <p class="linenumber">line 90</p>
+                <div class="signature">
+                    <code>void handleNone(<a href="../Markup/Peach_Markup_None.html">Peach_Markup_None</a> $none)</code>
+                </div>
+                <div class="docblock">
+                    <p>None を処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_None.html">Peach_Markup_None</a>&nbsp;&nbsp;</td>
+                            <td><b>$none</b>&nbsp;&nbsp;</td>
+                            <td>処理対象の None オブジェクト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodhandleText">
+                <h1><b>handleText</b></h1>
+                <p class="linenumber">line 66</p>
+                <div class="signature">
+                    <code>void handleText(<a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a> $node)</code>
+                </div>
+                <div class="docblock">
+                    <p>テキストノードを処理します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>abstract</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a>&nbsp;&nbsp;</td>
+                            <td><b>$node</b>&nbsp;&nbsp;</td>
+                            <td>処理対象のテキスト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Tue, 11 Aug 2015 12:48:23 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../Markup/tutorial_Markup.pkg.html">XML, HTML 出力支援モジュール Markup</a>
+                <ul>
+                    <li><a href="../Markup/tutorial_Markup.node.pkg.html">Node (各種パーツ)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.builder.pkg.html">Builder (出力制御)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.component.pkg.html">Component (その他のパーツ)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.helper.pkg.html">Helper / HelperObject</a></li>
+                    <li><a href="../Markup/tutorial_Markup.html.pkg.html">Html (HTML 出力専用クラス)</a></li>
+                    <li><a href="../Markup/tutorial_Markup.newbuilder.pkg.html">Builder を自作する方法</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../Markup/Peach_Markup_BreakControl.html">Peach_Markup_BreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_Component.html">Peach_Markup_Component</a></li>
+            <li><a href="../Markup/Peach_Markup_Container.html">Peach_Markup_Container</a></li>
+            <li><a href="../Markup/Peach_Markup_Node.html">Peach_Markup_Node</a></li>
+            <li><a href="../Markup/Peach_Markup_Renderer.html">Peach_Markup_Renderer</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../Markup/Peach_Markup_AbstractRenderer.html">Peach_Markup_AbstractRenderer</a></li>
+            <li><a href="../Markup/Peach_Markup_BreakControlWrapper.html">Peach_Markup_BreakControlWrapper</a></li>
+            <li><a href="../Markup/Peach_Markup_Builder.html">Peach_Markup_Builder</a></li>
+            <li><a href="../Markup/Peach_Markup_Code.html">Peach_Markup_Code</a></li>
+            <li><a href="../Markup/Peach_Markup_Comment.html">Peach_Markup_Comment</a></li>
+            <li><a href="../Markup/Peach_Markup_ContainerElement.html">Peach_Markup_ContainerElement</a></li>
+            <li><a href="../Markup/Peach_Markup_Context.html">Peach_Markup_Context</a></li>
+            <li><a href="../Markup/Peach_Markup_DebugBuilder.html">Peach_Markup_DebugBuilder</a></li>
+            <li><a href="../Markup/Peach_Markup_DebugContext.html">Peach_Markup_DebugContext</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultBreakControl.html">Peach_Markup_DefaultBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultBuilder.html">Peach_Markup_DefaultBuilder</a></li>
+            <li><a href="../Markup/Peach_Markup_DefaultContext.html">Peach_Markup_DefaultContext</a></li>
+            <li><a href="../Markup/Peach_Markup_Element.html">Peach_Markup_Element</a></li>
+            <li><a href="../Markup/Peach_Markup_EmptyElement.html">Peach_Markup_EmptyElement</a></li>
+            <li><a href="../Markup/Peach_Markup_Helper.html">Peach_Markup_Helper</a></li>
+            <li><a href="../Markup/Peach_Markup_HelperObject.html">Peach_Markup_HelperObject</a></li>
+            <li><a href="../Markup/Peach_Markup_Html.html">Peach_Markup_Html</a></li>
+            <li><a href="../Markup/Peach_Markup_Indent.html">Peach_Markup_Indent</a></li>
+            <li><a href="../Markup/Peach_Markup_MinimalBreakControl.html">Peach_Markup_MinimalBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_NameBreakControl.html">Peach_Markup_NameBreakControl</a></li>
+            <li><a href="../Markup/Peach_Markup_NodeList.html">Peach_Markup_NodeList</a></li>
+            <li><a href="../Markup/Peach_Markup_None.html">Peach_Markup_None</a></li>
+            <li><a href="../Markup/Peach_Markup_SgmlRenderer.html">Peach_Markup_SgmlRenderer</a></li>
+            <li><a href="../Markup/Peach_Markup_Text.html">Peach_Markup_Text</a></li>
+            <li><a href="../Markup/Peach_Markup_XmlRenderer.html">Peach_Markup_XmlRenderer</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../Markup/_Peach---Markup---AbstractRenderer.php.html">AbstractRenderer.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---BreakControl.php.html">BreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---BreakControlWrapper.php.html">BreakControlWrapper.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Builder.php.html">Builder.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Code.php.html">Code.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Comment.php.html">Comment.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Component.php.html">Component.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Container.php.html">Container.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---ContainerElement.php.html">ContainerElement.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Context.php.html">Context.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DebugBuilder.php.html">DebugBuilder.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DebugContext.php.html">DebugContext.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DefaultBreakControl.php.html">DefaultBreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DefaultBuilder.php.html">DefaultBuilder.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---DefaultContext.php.html">DefaultContext.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Element.php.html">Element.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---EmptyElement.php.html">EmptyElement.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Helper.php.html">Helper.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---HelperObject.php.html">HelperObject.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Html.php.html">Html.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Indent.php.html">Indent.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---MinimalBreakControl.php.html">MinimalBreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---NameBreakControl.php.html">NameBreakControl.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Node.php.html">Node.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---NodeList.php.html">NodeList.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---None.php.html">None.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Renderer.php.html">Renderer.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---SgmlRenderer.php.html">SgmlRenderer.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---Text.php.html">Text.php</a></li>
+            <li><a href="../Markup/_Peach---Markup---XmlRenderer.php.html">XmlRenderer.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

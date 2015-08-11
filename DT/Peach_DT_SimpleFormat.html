@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_DT_SimpleFormat</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DT</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DT.html">class tree: DT</a></li>
+            <li><a href="../elementindex_DT.html">index: DT</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_DT_SimpleFormat</h1>
+        <p id="src_location">定義: <code>/Peach/DT/SimpleFormat.php</code></p>
+        <div id="description">
+            <p>Java の  <a href="http://docs.oracle.com/javase/jp/7/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a>  と同じような使い勝手で, ユーザー定義の書式を扱うことができるクラスです.</p>
+            <p>日付・時刻のパターンは <a href="http://www.php.net/date">date()</a> の一部を採用しています.</p><ul><li>Y: 年 (4桁固定)</li><li>m: 月 (2桁固定)</li><li>n: 月 (1～2桁)</li><li>d: 日 (2桁固定)</li><li>j: 日 (1～2桁)</li><li>H: 時 (2桁固定)</li><li>G: 時 (1～2桁)</li><li>i: 分 (2桁固定)</li><li>s: 秒 (2桁固定)</li></ul><p>以下は, このクラス独自の拡張パターンです.</p><ul><li>f: 分 (1～2桁)</li><li>b: 秒 (1～2桁)</li></ul><p>パターンを繋げて記述する場合は (例: &quot;Ymd_His&quot; など)  必ず固定長のパターンを使用してください.  可変長 (n, j, G など) のパターンは常に最長一致でマッチングするため,  繋げて記述した際にパースに失敗する可能性があります.</p><p>このクラスは, 曜日や月の文字列表記のためのパターンをサポートしません.  そのようなフォーマットが必要となった場合は, 独自の Peach_DT_Format クラスを定義する必要があります.</p><p>パースまたは書式化を行う際, 情報が足りない場合はデフォルト値が指定されます.  年・月・日については現在の日付, 時・分・秒については 0 が適用されます.  具体的には, 以下のような状況が相当します.</p><ol><li>パースする際, オブジェクトを構成するために必要な情報をパターン文字列が網羅していなかった.
+                (例: &quot;m/d&quot; というパターンをパースした場合,
+               「年」の情報がパターン文字列に含まれていないため, 現在の年が適用されます)</li><li>時間オブジェクトを書式化する際に, パターン文字列に含まれるフィールドを
+                そのオブジェクトが持っていなかった.
+                (例: &quot;Y/m/d H:i:s&quot; というパターンで Peach_DT_Date オブジェクトを書式化した場合,
+                Peach_DT_Date は時刻の情報を持たないため, 時刻部分は 00:00:00 となります.)</li></ol><p>PHP の date() 関数の実装と同様に,  バックスラッシュをつけることでパターン文字列が展開されるのを抑制することができます.</p><p>このクラスはイミュータブルです. 一つのオブジェクトを複数の箇所で使いまわすことが出来ます.</p>
+        </div>
+        <section class="meta tags">
+            <h1>すべての実装されたインタフェース</h1>
+            <ul>
+                <li><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#method__construct">__construct</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodformatDate">formatDate</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodformatDatetime">formatDatetime</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodformatTimestamp">formatTimestamp</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodgetFormat">getFormat</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodparseDate">parseDate</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodparseDatetime">parseDatetime</a></li>
+                <li><a href="../DT/Peach_DT_SimpleFormat.html#methodparseTimestamp">parseTimestamp</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="method__construct">
+                <h1>constructor <b>__construct</b></h1>
+                <p class="linenumber">line 92</p>
+                <div class="signature">
+                    <code>Peach_DT_SimpleFormat __construct(string $pattern)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたパターン文字列で SimpleFormat を初期化します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$pattern</b>&nbsp;&nbsp;</td>
+                            <td>パターン文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformatDate">
+                <h1><b>formatDate</b></h1>
+                <p class="linenumber">line 146</p>
+                <div class="signature">
+                    <code>string formatDate(<a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a> $d)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された Peach_DT_Date オブジェクトを書式化します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : このフォーマットによる文字列表現</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a>&nbsp;&nbsp;</td>
+                            <td><b>$d</b>&nbsp;&nbsp;</td>
+                            <td>書式化対象の時間オブジェクト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Format.html#methodformatDate">Peach_DT_Format::formatDate()</a></dt>
+                            <dd>指定された Peach_DT_Date オブジェクトを書式化します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformatDatetime">
+                <h1><b>formatDatetime</b></h1>
+                <p class="linenumber">line 156</p>
+                <div class="signature">
+                    <code>string formatDatetime(<a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a> $d)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された Peach_DT_Datetime オブジェクトを書式化します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : このフォーマットによる文字列表現</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a>&nbsp;&nbsp;</td>
+                            <td><b>$d</b>&nbsp;&nbsp;</td>
+                            <td>書式化対象の時間オブジェクト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Format.html#methodformatDatetime">Peach_DT_Format::formatDatetime()</a></dt>
+                            <dd>指定された Peach_DT_Datetime オブジェクトを書式化します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformatTimestamp">
+                <h1><b>formatTimestamp</b></h1>
+                <p class="linenumber">line 166</p>
+                <div class="signature">
+                    <code>string formatTimestamp(<a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a> $d)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された Peach_DT_Timestamp オブジェクトを書式化します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : このフォーマットによる文字列表現</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type"><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a>&nbsp;&nbsp;</td>
+                            <td><b>$d</b>&nbsp;&nbsp;</td>
+                            <td>書式化対象の時間オブジェクト</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Format.html#methodformatTimestamp">Peach_DT_Format::formatTimestamp()</a></dt>
+                            <dd>指定された Peach_DT_Timestamp オブジェクトを書式化します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodgetFormat">
+                <h1><b>getFormat</b></h1>
+                <p class="linenumber">line 103</p>
+                <div class="signature">
+                    <code>string getFormat()</code>
+                </div>
+                <div class="docblock">
+                    <p>このオブジェクトのパターン文字列を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : パターン文字列</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodparseDate">
+                <h1><b>parseDate</b></h1>
+                <p class="linenumber">line 113</p>
+                <div class="signature">
+                    <code><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a> parseDate(string $format)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列を解析し, Peach_DT_Date に変換します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 解析結果</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$format</b>&nbsp;&nbsp;</td>
+                            <td>解析対象の文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Format.html#methodparseDate">Peach_DT_Format::parseDate()</a></dt>
+                            <dd>指定された文字列を解析して DATE 型の時間オブジェクトに変換します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodparseDatetime">
+                <h1><b>parseDatetime</b></h1>
+                <p class="linenumber">line 124</p>
+                <div class="signature">
+                    <code><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a> parseDatetime(string $format)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列を解析し, Peach_DT_Datetime に変換します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 解析結果</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$format</b>&nbsp;&nbsp;</td>
+                            <td>解析対象の文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Format.html#methodparseDatetime">Peach_DT_Format::parseDatetime()</a></dt>
+                            <dd>指定された文字列を解析して DATETIME 型の時間オブジェクトに変換します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodparseTimestamp">
+                <h1><b>parseTimestamp</b></h1>
+                <p class="linenumber">line 135</p>
+                <div class="signature">
+                    <code><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a> parseTimestamp(string $format)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された文字列を解析し, Peach_DT_Timestamp に変換します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 解析結果</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$format</b>&nbsp;&nbsp;</td>
+                            <td>解析対象の文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DT/Peach_DT_Format.html#methodparseTimestamp">Peach_DT_Format::parseTimestamp()</a></dt>
+                            <dd>指定された文字列を解析して TIMESTAMP 型の時間オブジェクトに変換します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Tue, 11 Aug 2015 12:48:25 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a>
+                <ul>
+                    <li><a href="../DT/tutorial_DT.features.pkg.html">コンセプト・特徴など</a></li>
+                    <li><a href="../DT/tutorial_DT.basic.pkg.html">基本的な使用方法</a></li>
+                    <li><a href="../DT/tutorial_DT.init.pkg.html">オブジェクトの生成方法</a></li>
+                    <li><a href="../DT/tutorial_DT.format.pkg.html">文字列の入出力方法</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DT/Peach_DT_Format.html">Peach_DT_Format</a></li>
+            <li><a href="../DT/Peach_DT_Time.html">Peach_DT_Time</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DT/Peach_DT_AbstractTime.html">Peach_DT_AbstractTime</a></li>
+            <li><a href="../DT/Peach_DT_Date.html">Peach_DT_Date</a></li>
+            <li><a href="../DT/Peach_DT_Datetime.html">Peach_DT_Datetime</a></li>
+            <li><a href="../DT/Peach_DT_FormatWrapper.html">Peach_DT_FormatWrapper</a></li>
+            <li><a href="../DT/Peach_DT_HttpDateFormat.html">Peach_DT_HttpDateFormat</a></li>
+            <li><a href="../DT/Peach_DT_ShiftFormat.html">Peach_DT_ShiftFormat</a></li>
+            <li><a href="../DT/Peach_DT_SimpleFormat.html">Peach_DT_SimpleFormat</a></li>
+            <li><a href="../DT/Peach_DT_TimeEquator.html">Peach_DT_TimeEquator</a></li>
+            <li><a href="../DT/Peach_DT_Timestamp.html">Peach_DT_Timestamp</a></li>
+            <li><a href="../DT/Peach_DT_TimeWrapper.html">Peach_DT_TimeWrapper</a></li>
+            <li><a href="../DT/Peach_DT_UnixTimeFormat.html">Peach_DT_UnixTimeFormat</a></li>
+            <li><a href="../DT/Peach_DT_Util.html">Peach_DT_Util</a></li>
+            <li><a href="../DT/Peach_DT_W3cDatetimeFormat.html">Peach_DT_W3cDatetimeFormat</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DT/_Peach---DT---AbstractTime.php.html">AbstractTime.php</a></li>
+            <li><a href="../DT/_Peach---DT---Date.php.html">Date.php</a></li>
+            <li><a href="../DT/_Peach---DT---Datetime.php.html">Datetime.php</a></li>
+            <li><a href="../DT/_Peach---DT---Format.php.html">Format.php</a></li>
+            <li><a href="../DT/_Peach---DT---FormatWrapper.php.html">FormatWrapper.php</a></li>
+            <li><a href="../DT/_Peach---DT---HttpDateFormat.php.html">HttpDateFormat.php</a></li>
+            <li><a href="../DT/_Peach---DT---ShiftFormat.php.html">ShiftFormat.php</a></li>
+            <li><a href="../DT/_Peach---DT---SimpleFormat.php.html">SimpleFormat.php</a></li>
+            <li><a href="../DT/_Peach---DT---Time.php.html">Time.php</a></li>
+            <li><a href="../DT/_Peach---DT---TimeEquator.php.html">TimeEquator.php</a></li>
+            <li><a href="../DT/_Peach---DT---Timestamp.php.html">Timestamp.php</a></li>
+            <li><a href="../DT/_Peach---DT---TimeWrapper.php.html">TimeWrapper.php</a></li>
+            <li><a href="../DT/_Peach---DT---UnixTimeFormat.php.html">UnixTimeFormat.php</a></li>
+            <li><a href="../DT/_Peach---DT---Util.php.html">Util.php</a></li>
+            <li><a href="../DT/_Peach---DT---W3cDatetimeFormat.php.html">W3cDatetimeFormat.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>
