@@ -1,0 +1,1 @@
+{"first":{"test01":0,"test02":100,"test03":-50},"second":[1.5,-1.5,1.25E-16],"third":"hogehoge","fourth":{"test04":{"true":true,"false":false,"null":null}}}
