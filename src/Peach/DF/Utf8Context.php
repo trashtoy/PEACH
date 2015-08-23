@@ -20,12 +20,16 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/** @package DF */
+/**
+ * @package DF
+ * @ignore
+ */
 /**
  * UTF-8 文字列を Unicode 符号点に変換します.
  * このクラスは Utf8Codec からのみ使用されることを想定しています.
  * エンドユーザーがこのクラスのインスタンスを直接操作する機会はありません.
  * 
+ * @package DF
  * @ignore
  */
 class Peach_DF_Utf8Context
