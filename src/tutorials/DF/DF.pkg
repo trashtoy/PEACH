@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF}">
+    <refnamediv>
+        <refname>データ変換モジュール DF</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id intro}">
+        <title>オブジェクト指向な encode/decode API</title>
+        <para>
+            パッケージ DF は, とあるデータを別の形式に変換したり, または戻したりするための API です.
+            PHP にはもともと
+            {@link http://php.net/manual/function.json-encode.php json_encode},
+            {@link http://php.net/manual/function.json-decode.php json_decode},
+            {@link http://php.net/manual/function.base64-encode.php base64_encode},
+            {@link http://php.net/manual/function.base64-decode.php base64_decode}
+            など, 各種 encode/decode 用の API が用意されていますが,
+            このモジュールを使用することで, オブジェクト指向の利点を活かしたデータ変換機能を実装することができます.
+        </para>
+    </refsect1>
+</refentry>
