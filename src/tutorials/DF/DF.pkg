@@ -11,13 +11,46 @@
         <title>オブジェクト指向な encode/decode API</title>
         <para>
             パッケージ DF は, とあるデータを別の形式に変換したり, または戻したりするための API です.
-            PHP にはもともと
+        </para>
+        <para>
+            このモジュールは, PHP の標準関数としてはじめから用意されている
             {@link http://php.net/manual/function.json-encode.php json_encode},
             {@link http://php.net/manual/function.json-decode.php json_decode},
             {@link http://php.net/manual/function.base64-encode.php base64_encode},
             {@link http://php.net/manual/function.base64-decode.php base64_decode}
-            など, 各種 encode/decode 用の API が用意されていますが,
-            このモジュールを使用することで, オブジェクト指向の利点を活かしたデータ変換機能を実装することができます.
+            などの各種 encode/decode 用 API と同等の機能を提供します.
         </para>
+        <para>
+            標準関数の代わりにこのモジュールを使用することで, 以下に挙げるような恩恵が受けられます.
+        </para>
+        <refsect2 id="{@id oop}">
+            <title>オブジェクト指向の利点を活かしたデータ変換</title>
+            <para>
+                このモジュールは, インタフェース Codec とそれを実装した各具象クラス
+                ({@link Peach_DF_JsonCodec}, {@link Peach_DF_Base64Codec}, {@link Peach_DF_SerializationCodec}
+                など) から成り立っています.
+            </para>
+            <para>
+                例えば以下のように, とある関数で使用する Codec の種類を自由に指定 (依存性の注入)
+                できるようにすることで, ある値をどの形式でデータ変換するのか動的に制御することができます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+function convertData($var, Peach_DF_Codec $codec) {
+    return $codec->encode($var);
+}
+
+$arr = array(
+    "foo" => 100,
+    "bar" => 200,
+    "baz" => 300,
+);
+$c1 = new Peach_DF_JsonCodec();
+$c2 = Peach_DF_SerializationCodec::getInstance();
+var_dump(convertData($arr, $c1)); // string(31) "{"foo":100,"bar":200,"baz":300}"
+var_dump(convertData($arr, $c2)); // string(54) "a:3:{s:3:"foo";i:100;s:3:"bar";i:200;s:3:"baz";i:300;}"
+                ]]>
+            </programlisting>
+        </refsect2>
     </refsect1>
 </refentry>
