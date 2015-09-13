@@ -52,5 +52,47 @@ var_dump(convertData($arr, $c2)); // string(54) "a:3:{s:3:"foo";i:100;s:3:"bar";
                 ]]>
             </programlisting>
         </refsect2>
+        <refsect2 id="{@id json}">
+            <title>PHP のバージョンや環境に依存しない JSON の入出力</title>
+            <para>
+                PHP で JSON を取り扱う際に利用するものといえば
+                json_encode(), json_decode() が一般的ですが, 以下のように移植性・互換性の点で注意する必要があります.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    PHP のバージョンによって, サポートされているオプションが異なる
+                    ({@link http://php.net/manual/json.constants.php JSON モジュールの定義済み定数}
+                    を参考のこと)
+                </listitem>
+                <listitem>
+                    PHP 5.1 系ではそもそも json_encode() と json_decode() がサポートされていない
+                </listitem>
+                <listitem>
+                    {@link http://cpplover.blogspot.jp/2012/03/json.html ライセンス上の問題} により,
+                    {@link http://jre655.com/2013/11/12/ubuntu-13-10%E4%BB%A5%E9%99%8D%E3%81%AEphp%E3%81%A7%E3%81%AFjson%E3%81%AF%E5%BE%8C%E4%BB%98/ Ubuntu} や
+                    {@link http://boscono.hatenablog.com/entry/2013/08/21/233628 Debian}
+                    など一部の環境では使用できない可能性がある
+                </listitem>
+            </itemizedlist>
+            <para>
+                このモジュールを使用することで, PHP 5.1.1 以上のすべての環境で
+                JSON の入出力機能が利用できるようになります.
+                さらに PHP 5.6.6 までに導入された以下のオプションすべてと同等の機能を提供しています.
+            </para>
+            <itemizedlist>
+                <listitem>JSON_HEX_TAG</listitem>
+                <listitem>JSON_HEX_AMP</listitem>
+                <listitem>JSON_HEX_APOS</listitem>
+                <listitem>JSON_HEX_QUOT</listitem>
+                <listitem>JSON_FORCE_OBJECT</listitem>
+                <listitem>JSON_NUMERIC_CHECK</listitem>
+                <listitem>JSON_BIGINT_AS_STRING</listitem>
+                <listitem>JSON_PRETTY_PRINT</listitem>
+                <listitem>JSON_UNESCAPED_SLASHES</listitem>
+                <listitem>JSON_UNESCAPED_UNICODE</listitem>
+                <listitem>JSON_PARTIAL_OUTPUT_ON_ERROR</listitem>
+                <listitem>JSON_PRESERVE_ZERO_FRACTION</listitem>
+            </itemizedlist>
+        </refsect2>
     </refsect1>
 </refentry>
