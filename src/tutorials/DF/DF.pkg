@@ -75,9 +75,9 @@ var_dump(convertData($arr, $c2)); // string(54) "a:3:{s:3:"foo";i:100;s:3:"bar";
                 </listitem>
             </itemizedlist>
             <para>
-                このモジュールを使用することで, PHP 5.1.1 以上のすべての環境で
-                JSON の入出力機能が利用できるようになります.
-                さらに PHP 5.6.6 までに導入された以下のオプションすべてと同等の機能を提供しています.
+                このモジュール内の {@link Peach_DF_JsonCodec JsonCodec}
+                クラスを使用することで, 以上の問題点を気にすることなく PHP 5.1.1 以上のすべての環境で JSON の入出力機能が実現できます.
+                さらに JsonCodec では PHP 5.3.0 から 5.6.6 までに導入された以下のオプションすべてと同等の機能が使用できます.
             </para>
             <itemizedlist>
                 <listitem>JSON_HEX_TAG</listitem>
