@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF.json}">
+    <refnamediv>
+        <refname>JSON の入出力</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id DF.json.about}">
+        <title>JsonCodec の概要</title>
+        <para>
+            このモジュールには JSON 入出力用の Codec として
+            {@link Peach_DF_JsonCodec} が用意されています.
+            この Codec は PHP5.1.1 以上のすべてのバージョンで
+            {@link json_encode() json_encode()}, {@link json_decode() json_decode()}
+            と同等の機能を利用できるようにするために存在しています.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id DF.json.usage}">
+        <title>使い方およびサンプル</title>
+        <para>(WIP)</para>
+    </refsect1>
+</refentry>
