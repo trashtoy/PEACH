@@ -19,13 +19,19 @@
     </refsect1>
     <refsect1 id="{@id DF.json.usage}">
         <title>使い方およびサンプル</title>
-        <para>
-            コンストラクタ引数にエンコードオプション・デコードオプションを指定して
-            JsonCodec クラスを初期化してください.
-            以下にサンプルコードを掲載します.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
+        <para>JsonCodec は以下のように使用します.</para>
+        <orderedlist>
+            <listitem>コンストラクタ引数にエンコードオプション・デコードオプションを指定して JsonCodec オブジェクトを生成します</listitem>
+            <listitem>
+                生成した JsonCodec オブジェクトの encode() または decode() メソッドを実行し,
+                任意の値の JSON 文字列への変換または JSON 文字列から値への変換を行います.
+            </listitem>
+        </orderedlist>
+        <refsect2>
+            <title>encode() のサンプル</title>
+            <para>以下に encode() のサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
 $encodeOptions = array(
     Peach_DF_JsonCodec::PRETTY_PRINT => true,
     Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION => true,
@@ -42,13 +48,13 @@ output:
     "c": "テスト"
 }
  */
-            ]]>
-        </programlisting>
-        <para>
-            このコードは, json_encode() を用いた以下のコードと等価です.
-        </para>
-        <programlisting role="php">
-            <![CDATA[
+                ]]>
+            </programlisting>
+            <para>
+                このコードは, json_encode() を用いた以下のコードと等価です.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
 $encodeOptions =
     JSON_PRETTY_PRINT |
     JSON_PRESERVE_ZERO_FRACTION |
@@ -63,16 +69,17 @@ output:
     "c": "テスト"
 }
  */
-            ]]>
-        </programlisting>
-        <para>
-            ただし, JsonCodec を使った前者のサンプルが PHP 5.1.1 以上のすべてのバージョンで動作するのに対し,
-            json_encode() を使った後者のコードは PHP 5.6.6 以上でないと動作しません.
-            (それより前のバージョンが JSON_PRESERVE_ZERO_FRACTION をサポートしていないため)
-        </para>
-        <para>
-            json_encode の各オプションを活用しつつ, できるだけ幅広いバージョンで動作させたい場合は
-            json_encode の代わりに JsonCodec を使うことをおすすめします.
-        </para>
+                ]]>
+            </programlisting>
+            <para>
+                ただし, JsonCodec を使った前者のサンプルが PHP 5.1.1 以上のすべてのバージョンで動作するのに対し,
+                json_encode() を使った後者のコードは PHP 5.6.6 以上でないと動作しません.
+                (それより前のバージョンが JSON_PRESERVE_ZERO_FRACTION をサポートしていないため)
+            </para>
+            <para>
+                json_encode() の各オプションを活用しつつ, できるだけ幅広いバージョンで動作させたい場合は
+                json_encode() の代わりに JsonCodec を使うことをおすすめします.
+            </para>
+        </refsect2>
     </refsect1>
 </refentry>
