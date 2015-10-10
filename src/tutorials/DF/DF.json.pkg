@@ -11,7 +11,9 @@
         <title>JsonCodec の概要</title>
         <para>
             このモジュールには JSON 入出力用の Codec として
-            {@link Peach_DF_JsonCodec} が用意されています.
+            {@link Peach_DF_JsonCodec} クラスが用意されています.
+        </para>
+        <para>
             この Codec は PHP5.1.1 以上のすべてのバージョンで
             {@link json_encode() json_encode()}, {@link json_decode() json_decode()}
             と同等の機能を利用できるようにするためのものです.
@@ -79,6 +81,90 @@ output:
             <para>
                 json_encode() の各オプションを活用しつつ, できるだけ幅広いバージョンで動作させたい場合は
                 json_encode() の代わりに JsonCodec を使うことをおすすめします.
+            </para>
+        </refsect2>
+        <refsect2>
+            <title>decode() のサンプル</title>
+            <para>
+                decode() の結果をカスタマイズするには, 以下のように第 2 引数にオプションを指定します.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$json = <<<EOS
+{
+    "a": "test",
+    "b": 12345678901234567890,
+    "c": [100, 200, 300]
+}
+EOS;
+
+$decodeOptions = array(
+    Peach_DF_JsonCodec::OBJECT_AS_ARRAY => true,
+    Peach_DF_JsonCodec::BIGINT_AS_STRING => true,
+);
+$codec = new Peach_DF_JsonCodec(array(), $decodeOptions);
+var_dump($codec->decode($json));
+
+/*
+output:
+array(3) {
+  ["a"]=>
+  string(4) "test"
+  ["b"]=>
+  string(20) "12345678901234567890"
+  ["c"]=>
+  array(3) {
+    [0]=>
+    int(100)
+    [1]=>
+    int(200)
+    [2]=>
+    int(300)
+  }
+}
+ */
+                ]]>
+            </programlisting>
+            <para>
+                このコードは, json_decode() を用いた以下のコードとほぼ等価です.
+                (ただし JsonCodec にはネストの深さを指定するオプションがありません)
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$json = <<<EOS
+{
+    "a": "test",
+    "b": 12345678901234567890,
+    "c": [100, 200, 300]
+}
+EOS;
+
+$decodeOptions = JSON_BIGINT_AS_STRING;
+var_dump(json_decode($json, true, 512, $decodeOptions));
+
+/*
+output:
+array(3) {
+  'a' =>
+  string(4) "test"
+  'b' =>
+  string(20) "12345678901234567890"
+  'c' =>
+  array(3) {
+    [0] =>
+    int(100)
+    [1] =>
+    int(200)
+    [2] =>
+    int(300)
+  }
+}
+*/
+                ]]>
+            </programlisting>
+            <para>
+                さきほどと同様, JsonCodec を使った前者の例では PHP 5.1.1 以上のすべてのバージョンで動作しますが,
+                json_decode() を使ったコードは PHP 5.4.0 以上でないとエラーとなります.
             </para>
         </refsect2>
     </refsect1>
