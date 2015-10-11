@@ -167,5 +167,44 @@ array(3) {
                 json_decode() を使ったコードは PHP 5.4.0 以上でないとエラーとなります.
             </para>
         </refsect2>
+        <refsect2>
+            <title>オプションの指定方法</title>
+            <para>
+                コンストラクタ引数のオプションの形式は, 以下の 2 通りがあります.
+            </para>
+            <refsect3>
+                <title>配列</title>
+                <para>
+                    サンプルコードにあるように, キーにオプション定数・値に ON/OFF をあらわす bool 型の値を取るような配列を指定します.
+                </para>
+            </refsect3>
+            <refsect3>
+                <title>整数</title>
+                <para>
+                    json_encode() のオプション引数のように, 各定数のビットマスクによる整数も受付けます.
+                </para>
+            </refsect3>
+            <para>以下のコードにおける 2 種類の JsonCodec ($c1, $c2) は等価なオブジェクトとなります.</para>
+            <programlisting role="php">
+                <![CDATA[
+$encodeOptions = array(
+    Peach_DF_JsonCodec::PRETTY_PRINT => true,
+    Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION => true,
+    Peach_DF_JsonCodec::UNESCAPED_UNICODE => true,
+);
+$decodeOptions = array(
+    Peach_DF_JsonCodec::OBJECT_AS_ARRAY => true,
+    Peach_DF_JsonCodec::BIGINT_AS_STRING => true,
+);
+$c1 = new Peach_DF_JsonCodec($encodeOptions, $decodeOptions);
+
+$opt1 = Peach_DF_JsonCodec::PRETTY_PRINT |
+        Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION |
+        Peach_DF_JsonCodec::UNESCAPED_UNICODE;
+$opt2 = Peach_DF_JsonCodec::OBJECT_AS_ARRAY | Peach_DF_JsonCodec::BIGINT_AS_STRING;
+$c2 = new Peach_DF_JsonCodec($opt1, $opt2);
+                ]]>
+            </programlisting>
+        </refsect2>
     </refsect1>
 </refentry>
