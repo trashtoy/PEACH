@@ -29,7 +29,7 @@
                 任意の値の JSON 文字列への変換または JSON 文字列から値への変換を行います.
             </listitem>
         </orderedlist>
-        <refsect2>
+        <refsect2 id="{@id DF.json.encode}">
             <title>encode() のサンプル</title>
             <para>以下に encode() のサンプルコードを掲載します.</para>
             <programlisting role="php">
@@ -83,7 +83,7 @@ output:
                 json_encode() の代わりに JsonCodec を使うことをおすすめします.
             </para>
         </refsect2>
-        <refsect2>
+        <refsect2 id="{@id DF.json.decode}">
             <title>decode() のサンプル</title>
             <para>
                 decode() の結果をカスタマイズするには, 以下のように第 2 引数にオプションを指定します.
