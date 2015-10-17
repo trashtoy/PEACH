@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF.utf8}">
+    <refnamediv>
+        <refname>UTF-8 文字列を取り扱う</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id DF.utf8.about}">
+        <title>Utf8Codec の概要</title>
+        <para>
+            UTF-8 でエンコードされた文字列を取り扱うための Codec として
+            {@link Peach_DF_Utf8Codec Utf8Codec} というクラスがあります.
+            このクラスの encode(), decode() は以下のように振る舞います.
+        </para>
+        <itemizedlist>
+            <listitem>decode: UTF-8 の文字列を文字単位で分解し, Unicode 符号点の配列を生成する</listitem>
+            <listitem>encode: Unicode 符号点の配列から UTF-8 文字列を生成する</listitem>
+        </itemizedlist>
+        <para>このクラスは以下のような用途で使用されることを想定しています.</para>
+        <itemizedlist>
+            <listitem>Unicode 符号点と UTF-8 文字列の相互変換</listitem>
+            <listitem>正規表現だと煩雑になりそうな, マルチバイト文字を含む文字列のバリデーション</listitem>
+            <listitem>不正なバイト列が含まれた UTF-8 文字列の正規化 (任意の文字列をデコードした後に再度エンコードすることで可能)</listitem>
+        </itemizedlist>
+    </refsect1>
+</refentry>
