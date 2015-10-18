@@ -25,4 +25,57 @@
             <listitem>不正なバイト列が含まれた UTF-8 文字列の正規化 (任意の文字列をデコードした後に再度エンコードすることで可能)</listitem>
         </itemizedlist>
     </refsect1>
+    <refsect1 id="{@id DF.utf8.usage}">
+        <title>使い方およびサンプル</title>
+        <para>
+            以下に Utf8Codec の encode() および decode() のサンプルコードを掲載します.
+            まずは decode() を使って文字列を Unicode 符号点の配列に変換します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$codec  = new Peach_DF_Utf8Codec();
+$result = $codec->decode("Test テスト");
+var_dump($result);
+
+/*
+output:
+array(8) {
+  [0]=>
+  int(84)
+  [1]=>
+  int(101)
+  [2]=>
+  int(115)
+  [3]=>
+  int(116)
+  [4]=>
+  int(32)
+  [5]=>
+  int(12486)
+  [6]=>
+  int(12473)
+  [7]=>
+  int(12488)
+}
+ */
+            ]]>
+        </programlisting>
+        <para>
+            次に encode() を使って Unicode 符号点の配列から文字列を生成します.
+            以下のサンプルコードではひらがなをリストアップします.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$codec  = new Peach_DF_Utf8Codec();
+$source = range(0x3041, 0x3096); // "ぁ" から "ゖ" までの Unicode 符号点
+$result = $codec->encode($source);
+var_dump($result);
+
+/*
+output:
+string(258) "ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんゔゕゖ"
+ */
+            ]]>
+        </programlisting>
+    </refsect1>
 </refentry>
