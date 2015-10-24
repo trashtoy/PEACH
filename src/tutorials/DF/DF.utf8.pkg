@@ -77,5 +77,21 @@ string(258) "ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざ�
  */
             ]]>
         </programlisting>
+        <para>
+            encode() の引数には, 配列だけでなく整数を指定することも可能です.
+            整数の場合は, 引数の Unicode 符号点を持つ 1 文字分の UTF-8 文字列を生成します.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$codec  = new Peach_DF_Utf8Codec();
+$result = $codec->encode(0x3042);
+var_dump($result);
+
+/*
+output:
+string(3) "あ"
+ */
+            ]]>
+        </programlisting>
     </refsect1>
 </refentry>
