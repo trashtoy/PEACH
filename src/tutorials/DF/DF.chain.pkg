@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF.chain}">
+    <refnamediv>
+        <refname>複数の Codec を連結させる</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id DF.chain.about}">
+        <title>CodecChain の概要</title>
+        <para>
+            例えばとある値を JSON に変換した後それを Base64 エンコードするといった具合に,
+            複数のエンコード処理を連続して施す場合に役立つのが
+            {@link Peach_DF_CodecChain CodecChain} というクラスです.
+            CodecChain を利用することで, 複数の Codec を連結させて 1 つの Codec として扱うことができます.
+        </para>
+    </refsect1>
+</refentry>
