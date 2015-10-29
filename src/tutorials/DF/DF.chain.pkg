@@ -16,4 +16,16 @@
             CodecChain を利用することで, 複数の Codec を連結させて 1 つの Codec として扱うことができます.
         </para>
     </refsect1>
+    <refsect id="{@id DF.chain.example}">
+        <title>CodecChain の適用例</title>
+        <para>
+            冒頭にあげたような JSON 化と Base64 エンコードを組み合わせた CodecChain を例として作成します.
+            この Codec は以下のような挙動を行います.
+        </para>
+        <itemizedlist>
+            <listitem>encode: 任意の値を JSON エンコードし, その結果を Base64 でエンコードした結果を返す</listitem>
+            <listitem>decode: 与えられた Base64 文字列をデコードし, その結果を JSON としてデコードする</listitem>
+        </itemizedlist>
+        <para>これを実現するコードは以下の通りです.</para>
+    </refsect>
 </refentry>
