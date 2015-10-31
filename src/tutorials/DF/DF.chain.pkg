@@ -16,7 +16,7 @@
             CodecChain を利用することで, 複数の Codec を連結させて 1 つの Codec として扱うことができます.
         </para>
     </refsect1>
-    <refsect id="{@id DF.chain.example}">
+    <refsect1 id="{@id DF.chain.example}">
         <title>CodecChain の適用例</title>
         <para>
             冒頭にあげたような JSON 化と Base64 エンコードを組み合わせた CodecChain を例として作成します.
@@ -27,6 +27,13 @@
             <listitem>decode: 与えられた Base64 文字列をデコードし, その結果を JSON としてデコードする</listitem>
         </itemizedlist>
         <para>これを実現するコードは以下の通りです.</para>
+        <para>
+            CodecChain クラスのコンストラクタには「エンコードする順番」通りに
+            Codec オブジェクトを指定します.
+            今回の場合は
+            第 1 引数に {@link Peach_DF_JsonCodec JsonCodec},
+            第 2 引数に {@link Peach_DF_Base64Codec Base64Codec} オブジェクトとなります.
+        </para>
         <programlisting role="php">
             <![CDATA[
 // $jsonCodec: 任意の値と JSON の相互変換を行う
@@ -80,5 +87,5 @@ array(3) {
 }
             ]]>
         </programlisting>
-    </refsect>
+    </refsect1>
 </refentry>
