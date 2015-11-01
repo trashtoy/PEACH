@@ -88,4 +88,16 @@ array(3) {
             ]]>
         </programlisting>
     </refsect1>
+    <refsect1 id="{@id DF.chain.prepend_append}">
+        <title>さらに別の Codec を追加で連結させる</title>
+        <para>
+            サンプルコードでは 2 種類の Codec を連結させた例を記載しましたが,
+            さらに別の Codec を前後に連結させることもできます.
+            そのためのメソッドが
+            {@link Peach_DF_CodecChain::append() append()}
+            および
+            {@link Peach_DF_CodecChain::prepend() prepend()}
+            です.
+        </para>
+    </refsect1>
 </refentry>
