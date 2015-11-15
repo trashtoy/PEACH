@@ -99,5 +99,18 @@ array(3) {
             {@link Peach_DF_CodecChain::prepend() prepend()}
             です.
         </para>
+        <para>
+            以下に append() および prepend() を使用したサンプルコードを挙げます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$chain1 = new CodecChain($c1, $c2);
+$chain2 = $chain1->prepend($c0);     // $c0, $c1, $c2 の順に連結された CodecChain
+$chain3 = $chain1->append($c3);      // $c1, $c2, $c3 の順に連結された CodecChain
+            ]]>
+        </programlisting>
+        <para>
+            $chain2, $chain3 に対して同様の操作でさらに別の Codec を追加することも可能です.
+        </para>
     </refsect1>
 </refentry>
