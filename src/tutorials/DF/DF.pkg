@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF}">
+    <refnamediv>
+        <refname>データ変換モジュール DF</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id intro}">
+        <title>オブジェクト指向な encode/decode API</title>
+        <para>
+            パッケージ DF は, とあるデータを別の形式に変換したり, または戻したりするための API です.
+        </para>
+        <para>
+            このモジュールは, PHP の標準関数としてはじめから用意されている
+            {@link http://php.net/manual/function.json-encode.php json_encode},
+            {@link http://php.net/manual/function.json-decode.php json_decode},
+            {@link http://php.net/manual/function.base64-encode.php base64_encode},
+            {@link http://php.net/manual/function.base64-decode.php base64_decode}
+            などの各種 encode/decode 用 API と同等の機能を提供します.
+        </para>
+        <para>
+            標準関数の代わりにこのモジュールを使用することで, 以下に挙げるような恩恵が受けられます.
+        </para>
+        <refsect2 id="{@id oop}">
+            <title>オブジェクト指向の利点を活かしたデータ変換</title>
+            <para>
+                このモジュールは, インタフェース Codec とそれを実装した各具象クラス
+                ({@link Peach_DF_JsonCodec}, {@link Peach_DF_Base64Codec}, {@link Peach_DF_SerializationCodec}
+                など) から成り立っています.
+            </para>
+            <para>
+                例えば以下のように, とある関数で使用する Codec の種類を自由に指定 (依存性の注入)
+                できるようにすることで, ある値をどの形式でデータ変換するのか動的に制御することができます.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+function convertData($var, Peach_DF_Codec $codec) {
+    return $codec->encode($var);
+}
+
+$arr = array(
+    "foo" => 100,
+    "bar" => 200,
+    "baz" => 300,
+);
+$c1 = new Peach_DF_JsonCodec();
+$c2 = Peach_DF_SerializationCodec::getInstance();
+var_dump(convertData($arr, $c1)); // string(31) "{"foo":100,"bar":200,"baz":300}"
+var_dump(convertData($arr, $c2)); // string(54) "a:3:{s:3:"foo";i:100;s:3:"bar";i:200;s:3:"baz";i:300;}"
+                ]]>
+            </programlisting>
+        </refsect2>
+        <refsect2 id="{@id json}">
+            <title>PHP のバージョンや環境に依存しない JSON の入出力</title>
+            <para>
+                PHP で JSON を取り扱う際に利用するものといえば
+                json_encode(), json_decode() が一般的ですが, 以下のように移植性・互換性の点で注意する必要があります.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    PHP のバージョンによって, サポートされているオプションが異なる
+                    ({@link http://php.net/manual/json.constants.php JSON モジュールの定義済み定数}
+                    を参考のこと)
+                </listitem>
+                <listitem>
+                    PHP 5.1 系ではそもそも json_encode() と json_decode() がサポートされていない
+                </listitem>
+                <listitem>
+                    {@link http://cpplover.blogspot.jp/2012/03/json.html ライセンス上の問題} により,
+                    {@link http://jre655.com/2013/11/12/ubuntu-13-10%E4%BB%A5%E9%99%8D%E3%81%AEphp%E3%81%A7%E3%81%AFjson%E3%81%AF%E5%BE%8C%E4%BB%98/ Ubuntu} や
+                    {@link http://boscono.hatenablog.com/entry/2013/08/21/233628 Debian}
+                    など一部の環境では使用できない可能性がある
+                </listitem>
+            </itemizedlist>
+            <para>
+                このモジュール内の {@link Peach_DF_JsonCodec JsonCodec}
+                クラスを使用することで, 以上の問題点を気にすることなく PHP 5.1.1 以上のすべての環境で JSON の入出力機能が実現できます.
+                さらに JsonCodec では PHP 5.3.0 から 5.6.6 までに導入された以下のオプションすべてと同等の機能が使用できます.
+            </para>
+            <itemizedlist>
+                <listitem>JSON_HEX_TAG</listitem>
+                <listitem>JSON_HEX_AMP</listitem>
+                <listitem>JSON_HEX_APOS</listitem>
+                <listitem>JSON_HEX_QUOT</listitem>
+                <listitem>JSON_FORCE_OBJECT</listitem>
+                <listitem>JSON_NUMERIC_CHECK</listitem>
+                <listitem>JSON_BIGINT_AS_STRING</listitem>
+                <listitem>JSON_PRETTY_PRINT</listitem>
+                <listitem>JSON_UNESCAPED_SLASHES</listitem>
+                <listitem>JSON_UNESCAPED_UNICODE</listitem>
+                <listitem>JSON_PARTIAL_OUTPUT_ON_ERROR</listitem>
+                <listitem>JSON_PRESERVE_ZERO_FRACTION</listitem>
+            </itemizedlist>
+        </refsect2>
+    </refsect1>
+</refentry>

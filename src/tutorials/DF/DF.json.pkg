@@ -1,0 +1,210 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF.json}">
+    <refnamediv>
+        <refname>JSON の入出力</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id DF.json.about}">
+        <title>JsonCodec の概要</title>
+        <para>
+            このモジュールには JSON 入出力用の Codec として
+            {@link Peach_DF_JsonCodec} クラスが用意されています.
+        </para>
+        <para>
+            この Codec は PHP5.1.1 以上のすべてのバージョンで
+            {@link json_encode() json_encode()}, {@link json_decode() json_decode()}
+            と同等の機能を利用できるようにするためのものです.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id DF.json.usage}">
+        <title>使い方およびサンプル</title>
+        <para>JsonCodec は以下のように使用します.</para>
+        <orderedlist>
+            <listitem>コンストラクタ引数にエンコードオプション・デコードオプションを指定して JsonCodec オブジェクトを生成します</listitem>
+            <listitem>
+                生成した JsonCodec オブジェクトの encode() または decode() メソッドを実行し,
+                任意の値の JSON 文字列への変換または JSON 文字列から値への変換を行います.
+            </listitem>
+        </orderedlist>
+        <refsect2 id="{@id DF.json.encode}">
+            <title>encode() のサンプル</title>
+            <para>以下に encode() のサンプルコードを掲載します.</para>
+            <programlisting role="php">
+                <![CDATA[
+$encodeOptions = array(
+    Peach_DF_JsonCodec::PRETTY_PRINT => true,
+    Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION => true,
+    Peach_DF_JsonCodec::UNESCAPED_UNICODE => true,
+);
+$codec  = new Peach_DF_JsonCodec($encodeOptions);
+echo $codec->encode(array("a" => 2.0, "b" => 3.14, "c" => "テスト"));
+
+/*
+output:
+{
+    "a": 2.0,
+    "b": 3.14,
+    "c": "テスト"
+}
+ */
+                ]]>
+            </programlisting>
+            <para>
+                このコードは, json_encode() を用いた以下のコードと等価です.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$encodeOptions =
+    JSON_PRETTY_PRINT |
+    JSON_PRESERVE_ZERO_FRACTION |
+    JSON_UNESCAPED_UNICODE;
+echo json_encode(array("a" => 2.0, "b" => 3.14, "c" => "テスト"), $encodeOptions);
+
+/*
+output:
+{
+    "a": 2.0,
+    "b": 3.14,
+    "c": "テスト"
+}
+ */
+                ]]>
+            </programlisting>
+            <para>
+                ただし, JsonCodec を使った前者のサンプルが PHP 5.1.1 以上のすべてのバージョンで動作するのに対し,
+                json_encode() を使った後者のコードは PHP 5.6.6 以上でないと動作しません.
+                (それより前のバージョンが JSON_PRESERVE_ZERO_FRACTION をサポートしていないため)
+            </para>
+            <para>
+                json_encode() の各オプションを活用しつつ, できるだけ幅広いバージョンで動作させたい場合は
+                json_encode() の代わりに JsonCodec を使うことをおすすめします.
+            </para>
+        </refsect2>
+        <refsect2 id="{@id DF.json.decode}">
+            <title>decode() のサンプル</title>
+            <para>
+                decode() の結果をカスタマイズするには, 以下のように第 2 引数にオプションを指定します.
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$json = <<<EOS
+{
+    "a": "test",
+    "b": 12345678901234567890,
+    "c": [100, 200, 300]
+}
+EOS;
+
+$decodeOptions = array(
+    Peach_DF_JsonCodec::OBJECT_AS_ARRAY => true,
+    Peach_DF_JsonCodec::BIGINT_AS_STRING => true,
+);
+$codec = new Peach_DF_JsonCodec(array(), $decodeOptions);
+var_dump($codec->decode($json));
+
+/*
+output:
+array(3) {
+  ["a"]=>
+  string(4) "test"
+  ["b"]=>
+  string(20) "12345678901234567890"
+  ["c"]=>
+  array(3) {
+    [0]=>
+    int(100)
+    [1]=>
+    int(200)
+    [2]=>
+    int(300)
+  }
+}
+ */
+                ]]>
+            </programlisting>
+            <para>
+                このコードは, json_decode() を用いた以下のコードとほぼ等価です.
+                (ただし JsonCodec にはネストの深さを指定するオプションがありません)
+            </para>
+            <programlisting role="php">
+                <![CDATA[
+$json = <<<EOS
+{
+    "a": "test",
+    "b": 12345678901234567890,
+    "c": [100, 200, 300]
+}
+EOS;
+
+$decodeOptions = JSON_BIGINT_AS_STRING;
+var_dump(json_decode($json, true, 512, $decodeOptions));
+
+/*
+output:
+array(3) {
+  'a' =>
+  string(4) "test"
+  'b' =>
+  string(20) "12345678901234567890"
+  'c' =>
+  array(3) {
+    [0] =>
+    int(100)
+    [1] =>
+    int(200)
+    [2] =>
+    int(300)
+  }
+}
+*/
+                ]]>
+            </programlisting>
+            <para>
+                さきほどと同様, JsonCodec を使った前者の例では PHP 5.1.1 以上のすべてのバージョンで動作しますが,
+                json_decode() を使ったコードは PHP 5.4.0 以上でないとエラーとなります.
+            </para>
+        </refsect2>
+        <refsect2>
+            <title>オプションの指定方法</title>
+            <para>
+                コンストラクタ引数のオプションの形式は, 以下の 2 通りがあります.
+            </para>
+            <refsect3>
+                <title>配列</title>
+                <para>
+                    サンプルコードにあるように, キーにオプション定数・値に ON/OFF をあらわす bool 型の値を取るような配列を指定します.
+                </para>
+            </refsect3>
+            <refsect3>
+                <title>整数</title>
+                <para>
+                    json_encode() のオプション引数のように, 各定数のビットマスクによる整数も受付けます.
+                </para>
+            </refsect3>
+            <para>以下のコードにおける 2 種類の JsonCodec ($c1, $c2) は等価なオブジェクトとなります.</para>
+            <programlisting role="php">
+                <![CDATA[
+$encodeOptions = array(
+    Peach_DF_JsonCodec::PRETTY_PRINT => true,
+    Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION => true,
+    Peach_DF_JsonCodec::UNESCAPED_UNICODE => true,
+);
+$decodeOptions = array(
+    Peach_DF_JsonCodec::OBJECT_AS_ARRAY => true,
+    Peach_DF_JsonCodec::BIGINT_AS_STRING => true,
+);
+$c1 = new Peach_DF_JsonCodec($encodeOptions, $decodeOptions);
+
+$opt1 = Peach_DF_JsonCodec::PRETTY_PRINT |
+        Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION |
+        Peach_DF_JsonCodec::UNESCAPED_UNICODE;
+$opt2 = Peach_DF_JsonCodec::OBJECT_AS_ARRAY | Peach_DF_JsonCodec::BIGINT_AS_STRING;
+$c2 = new Peach_DF_JsonCodec($opt1, $opt2);
+                ]]>
+            </programlisting>
+        </refsect2>
+    </refsect1>
+</refentry>
