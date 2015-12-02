@@ -506,4 +506,17 @@ class Peach_Markup_HtmlTest extends PHPUnit_Framework_TestCase
     {
         Peach_Markup_Html::alias(array("tag" => "valid1", "hogehoge" => "invalid1"));
     }
+    
+    /**
+     * alias() の引数にキーが 0 となるようなメソッド名を指定した場合,
+     * InvalidArgumentException をスローすることを確認します.
+     * 
+     * @expectedException InvalidArgumentException
+     * @covers Peach_Markup_Html::alias
+     * @covers Peach_Markup_Html::handleAlias
+     */
+    public function testAliasByZeroKey()
+    {
+        Peach_Markup_Html::alias(array("hogehoge"));
+    }
 }
