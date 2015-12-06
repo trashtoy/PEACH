@@ -24,10 +24,16 @@ abstract class Peach_Markup_ElementTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+     * コンストラクタに空文字列を指定した場合に
+     * InvalidArgumentException をスローすることを確認します.
+     */
+    abstract public function test__constructFailByEmptyName();
+    
+    /**
      * コンストラクタに要素名として不正な値を指定した場合に
      * InvalidArgumentException をスローすることを確認します.
      */
-    abstract public function test__constructFail();
+    abstract public function test__constructFailByInvalidName();
     
     /**
      * @covers Peach_Markup_Element::getName

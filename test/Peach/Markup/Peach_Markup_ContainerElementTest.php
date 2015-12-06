@@ -31,11 +31,23 @@ class Peach_Markup_ContainerElementTest extends Peach_Markup_ElementTest
      * 要素名が空文字列だった場合に InvalidArgumentException をスローすることを確認します.
      * @expectedException InvalidArgumentException
      * @covers Peach_Markup_ContainerElement::__construct
-     * @covers Peach_Markup_Element::validateName
+     * @covers Peach_Markup_EmptyElement::cleanNameString
      */
-    public function test__constructFail()
+    public function test__constructFailByEmptyName()
     {
         new Peach_Markup_ContainerElement("");
+    }
+    
+    /**
+     * 要素名が不正だった場合に InvalidArgumentException をスローすることを確認します.
+     * @expectedException InvalidArgumentException
+     * @covers Peach_Markup_ContainerElement::__construct
+     * @covers Peach_Markup_Element::cleanNameString
+     * @covers Peach_Markup_Element::cleanString
+     */
+    public function test__constructFailByInvalidName()
+    {
+        new Peach_Markup_ContainerElement("*invalid");
     }
     
     /**
