@@ -30,6 +30,17 @@ This module helps you to markup HTML or XML dynamically.
 - Various output customization.
 - Helper class enables more simple coding.
 
+### DF
+Data format encoding / decoding API.
+All the classes of this module implement interface Codec.
+
+- Utf8Codec: dealing with the interconversion of unicode codepoints and UTF-8 string
+    - example: `'süß'` (byte sequence: 73 C3 BC C3 9F) => decode => `array(0x73, 0xFC, 0xDF)` => encode => `'süß'`
+- JsonCodec: alternative of [json_encode](http://php.net/manual/function.json-encode.php) and [json_decode](http://php.net/manual/function.json-decode.php)
+- Base64Codec: wrapping [base64_encode](http://php.net/manual/function.base64-encode.php) and [base64_decode](http://php.net/manual/function.base64-decode.php)
+- SerializationCodec: wrapping [serialize](http://php.net/manual/function.serialize.php) and [unserialize](http://php.net/manual/function.unserialize.php)
+- CodecChain: concatenating multiple Codec instances
+
 Requirements
 ------------
 
@@ -56,7 +67,6 @@ Roadmap
 
 Package | Description
 --------|------------
-DF      | Data format encoding / decoding API.
 RB      | Object-oriented i18n module. (RB represents ResourceBundle.)
 DB      | A reinvented O/R mapper.
 App     | Various components about web application development. (Forms, validations, etc.)
