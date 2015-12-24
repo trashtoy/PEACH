@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>JSON の入出力</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DF</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DF.html">class tree: DF</a></li>
+            <li><a href="../elementindex_DF.html">index: DF</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>JSON の入出力</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../DF/tutorial_DF.json.pkg.html#DF.json.about">JsonCodec の概要</a></li>
+                <li><a href="../DF/tutorial_DF.json.pkg.html#DF.json.usage">使い方およびサンプル</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../DF/tutorial_DF.json.pkg.html#DF.json.usage.DF.json.encode">encode() のサンプル</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../DF/tutorial_DF.json.pkg.html#DF.json.usage.DF.json.decode">decode() のサンプル</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="DF.json.about"><h1>JsonCodec の概要</h1><p>このモジュールには JSON 入出力用の Codec として
+                    <a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a> クラスが用意されています.</p>
+                <p>この Codec は PHP5.1.1 以上のすべてのバージョンで
+                    <a href="http://www.php.net/json_encode">json_encode()</a>, <a href="http://www.php.net/json_decode">json_decode()</a>
+                    と同等の機能を利用できるようにするためのものです.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DF.json.usage"><h1>使い方およびサンプル</h1><p>JsonCodec は以下のように使用します.</p>
+                <ol><li>コンストラクタ引数にエンコードオプション・デコードオプションを指定して JsonCodec オブジェクトを生成します</li>
+                    <li>生成した JsonCodec オブジェクトの encode() または decode() メソッドを実行し,
+                        任意の値の JSON 文字列への変換または JSON 文字列から値への変換を行います.</li></ol>
+                <h2>encode() のサンプル</h2><p>以下に encode() のサンプルコードを掲載します.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$encodeOptions&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRETTY_PRINT&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRESERVE_ZERO_FRACTION&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">UNESCAPED_UNICODE&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$codec&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">(</span><span class="src-var">$encodeOptions</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-var">$codec</span><span class="src-sym">-&gt;</span><span class="src-id">encode</span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;a&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">2.0</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;b&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">3.14</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;c&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;テスト&quot;</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&quot;a&quot;:&nbsp;2.0,</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&quot;b&quot;:&nbsp;3.14,</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&quot;c&quot;:&nbsp;&quot;テスト&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div>
+                    <p>このコードは, json_encode() を用いた以下のコードと等価です.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$encodeOptions&nbsp;</span>=</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">JSON_PRETTY_PRINT&nbsp;</span>|</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">JSON_PRESERVE_ZERO_FRACTION&nbsp;</span>|</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">JSON_UNESCAPED_UNICODE</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<a href="http://www.php.net/json_encode">json_encode</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;a&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">2.0</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;b&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">3.14</span><span class="src-sym">,&nbsp;</span><span class="src-str">&quot;c&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;テスト&quot;</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-var">$encodeOptions</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&quot;a&quot;:&nbsp;2.0,</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&quot;b&quot;:&nbsp;3.14,</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;&quot;c&quot;:&nbsp;&quot;テスト&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div>
+                    <p>ただし, JsonCodec を使った前者のサンプルが PHP 5.1.1 以上のすべてのバージョンで動作するのに対し,
+                        json_encode() を使った後者のコードは PHP 5.6.6 以上でないと動作しません.
+                        (それより前のバージョンが JSON_PRESERVE_ZERO_FRACTION をサポートしていないため)</p>
+                    <p>json_encode() の各オプションを活用しつつ, できるだけ幅広いバージョンで動作させたい場合は
+                        json_encode() の代わりに JsonCodec を使うことをおすすめします.</p>
+                <h2>decode() のサンプル</h2><p>decode() の結果をカスタマイズするには, 以下のように第 2 引数にオプションを指定します.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$json&nbsp;</span>=&nbsp;&lt;&lt;&lt;EOS</div></li>
+        <li><div class="src-line">{</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;a&quot;:&nbsp;&quot;test&quot;,</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;b&quot;:&nbsp;12345678901234567890,</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;c&quot;:&nbsp;[100,&nbsp;200,&nbsp;300]</div></li>
+        <li><div class="src-line">}</div></li>
+        <li><div class="src-line">EOS<span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$decodeOptions&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">OBJECT_AS_ARRAY&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">BIGINT_AS_STRING&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$codec&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-var">$decodeOptions</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$codec</span><span class="src-sym">-&gt;</span><span class="src-id">decode</span><span class="src-sym">(</span><span class="src-var">$json</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">array(3)&nbsp;{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[&quot;a&quot;]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;string(4)&nbsp;&quot;test&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[&quot;b&quot;]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;string(20)&nbsp;&quot;12345678901234567890&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[&quot;c&quot;]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;array(3)&nbsp;{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;[0]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;int(100)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;[1]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;int(200)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;[2]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;int(300)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div>
+                    <p>このコードは, json_decode() を用いた以下のコードとほぼ等価です.
+                        (ただし JsonCodec にはネストの深さを指定するオプションがありません)</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$json&nbsp;</span>=&nbsp;&lt;&lt;&lt;EOS</div></li>
+        <li><div class="src-line">{</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;a&quot;:&nbsp;&quot;test&quot;,</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;b&quot;:&nbsp;12345678901234567890,</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&quot;c&quot;:&nbsp;[100,&nbsp;200,&nbsp;300]</div></li>
+        <li><div class="src-line">}</div></li>
+        <li><div class="src-line">EOS<span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$decodeOptions&nbsp;</span>=&nbsp;<span class="src-id">JSON_BIGINT_AS_STRING</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><a href="http://www.php.net/json_decode">json_decode</a><span class="src-sym">(</span><span class="src-var">$json</span><span class="src-sym">,&nbsp;</span><span class="src-id">true</span><span class="src-sym">,&nbsp;</span><span class="src-num">512</span><span class="src-sym">,&nbsp;</span><span class="src-var">$decodeOptions</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">array(3)&nbsp;{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;'a'&nbsp;=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;string(4)&nbsp;&quot;test&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;'b'&nbsp;=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;string(20)&nbsp;&quot;12345678901234567890&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;'c'&nbsp;=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;array(3)&nbsp;{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;[0]&nbsp;=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;int(100)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;[1]&nbsp;=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;int(200)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;[2]&nbsp;=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;&nbsp;&nbsp;int(300)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">*/</span></div></li>
+        </ol></div>
+                    <p>さきほどと同様, JsonCodec を使った前者の例では PHP 5.1.1 以上のすべてのバージョンで動作しますが,
+                        json_decode() を使ったコードは PHP 5.4.0 以上でないとエラーとなります.</p>
+                <h2>オプションの指定方法</h2><p>コンストラクタ引数のオプションの形式は, 以下の 2 通りがあります.</p>
+                    <h3>配列</h3><p>サンプルコードにあるように, キーにオプション定数・値に ON/OFF をあらわす bool 型の値を取るような配列を指定します.</p>
+                    <h3>整数</h3><p>json_encode() のオプション引数のように, 各定数のビットマスクによる整数も受付けます.</p>
+                    <p>以下のコードにおける 2 種類の JsonCodec ($c1, $c2) は等価なオブジェクトとなります.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$encodeOptions&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRETTY_PRINT&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRESERVE_ZERO_FRACTION&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">UNESCAPED_UNICODE&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$decodeOptions&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">OBJECT_AS_ARRAY&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">BIGINT_AS_STRING&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$c1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">(</span><span class="src-var">$encodeOptions</span><span class="src-sym">,&nbsp;</span><span class="src-var">$decodeOptions</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$opt1&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRETTY_PRINT&nbsp;</span>|</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRESERVE_ZERO_FRACTION&nbsp;</span>|</div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">UNESCAPED_UNICODE</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$opt2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">OBJECT_AS_ARRAY&nbsp;</span>|&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">BIGINT_AS_STRING</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$c2&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">(</span><span class="src-var">$opt1</span><span class="src-sym">,&nbsp;</span><span class="src-var">$opt2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+            <li>Next: <a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Thu, 24 Dec 2015 19:18:31 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DF.html">DF</a></li>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a>
+                <ul>
+                    <li><a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+                    <li><a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+                    <li><a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></li>
+            <li><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></li>
+            <li><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></li>
+            <li><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></li>
+            <li><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DF/_Peach---DF---Base64Codec.php.html">Base64Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Codec.php.html">Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---CodecChain.php.html">CodecChain.php</a></li>
+            <li><a href="../DF/_Peach---DF---JsonCodec.php.html">JsonCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---SerializationCodec.php.html">SerializationCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Utf8Codec.php.html">Utf8Codec.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

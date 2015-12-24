@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>データ変換モジュール DF</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DF</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DF.html">class tree: DF</a></li>
+            <li><a href="../elementindex_DF.html">index: DF</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>データ変換モジュール DF</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../DF/tutorial_DF.pkg.html#intro">オブジェクト指向な encode/decode API</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../DF/tutorial_DF.pkg.html#intro.oop">オブジェクト指向の利点を活かしたデータ変換</a></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="../DF/tutorial_DF.pkg.html#intro.json">PHP のバージョンや環境に依存しない JSON の入出力</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="intro"><h1>オブジェクト指向な encode/decode API</h1><p>パッケージ DF は, とあるデータを別の形式に変換したり, または戻したりするための API です.</p>
+                <p>このモジュールは, PHP の標準関数としてはじめから用意されている
+                    <a href="http://php.net/manual/function.json-encode.php">json_encode</a>,
+                    <a href="http://php.net/manual/function.json-decode.php">json_decode</a>,
+                    <a href="http://php.net/manual/function.base64-encode.php">base64_encode</a>,
+                    <a href="http://php.net/manual/function.base64-decode.php">base64_decode</a>
+                    などの各種 encode/decode 用 API と同等の機能を提供します.</p>
+                <p>標準関数の代わりにこのモジュールを使用することで, 以下に挙げるような恩恵が受けられます.</p>
+                <h2>オブジェクト指向の利点を活かしたデータ変換</h2><p>このモジュールは, インタフェース Codec とそれを実装した各具象クラス
+                        (<a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a>, <a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a>, <a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a>
+                        など) から成り立っています.</p>
+                    <p>例えば以下のように, とある関数で使用する Codec の種類を自由に指定 (依存性の注入)
+                        できるようにすることで, ある値をどの形式でデータ変換するのか動的に制御することができます.</p>
+                    <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-key">function&nbsp;</span><span class="src-id">convertData</span><span class="src-sym">(</span><span class="src-var">$var</span><span class="src-sym">,&nbsp;</span><span class="src-id">Peach_DF_Codec&nbsp;</span><span class="src-var">$codec</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-var">$codec</span><span class="src-sym">-&gt;</span><span class="src-id">encode</span><span class="src-sym">(</span><span class="src-var">$var</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-sym">}</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$arr&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;foo&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">100</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;bar&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">200</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;baz&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">300</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$c1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$c2&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></span><span class="src-sym">::</span><a href="../DF/Peach_DF_SerializationCodec.html#methodgetInstance">getInstance</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-id">convertData</span><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">,&nbsp;</span><span class="src-var">$c1</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;string(31)&nbsp;&quot;{&quot;foo&quot;:100,&quot;bar&quot;:200,&quot;baz&quot;:300}&quot;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-id">convertData</span><span class="src-sym">(</span><span class="src-var">$arr</span><span class="src-sym">,&nbsp;</span><span class="src-var">$c2</span><span class="src-sym">))</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;string(54)&nbsp;&quot;a:3:{s:3:&quot;foo&quot;;i:100;s:3:&quot;bar&quot;;i:200;s:3:&quot;baz&quot;;i:300;}&quot;</span></div></li>
+        </ol></div>
+                <h2>PHP のバージョンや環境に依存しない JSON の入出力</h2><p>PHP で JSON を取り扱う際に利用するものといえば
+                        json_encode(), json_decode() が一般的ですが, 以下のように移植性・互換性の点で注意する必要があります.</p>
+                    <ul><li>PHP のバージョンによって, サポートされているオプションが異なる
+                            (<a href="http://php.net/manual/json.constants.php">JSON モジュールの定義済み定数</a>
+                            を参考のこと)</li>
+                        <li>PHP 5.1 系ではそもそも json_encode() と json_decode() がサポートされていない</li>
+                        <li><a href="http://cpplover.blogspot.jp/2012/03/json.html">ライセンス上の問題</a> により,
+                            <a href="http://jre655.com/2013/11/12/ubuntu-13-10%E4%BB%A5%E9%99%8D%E3%81%AEphp%E3%81%A7%E3%81%AFjson%E3%81%AF%E5%BE%8C%E4%BB%98/">Ubuntu</a> や
+                            <a href="http://boscono.hatenablog.com/entry/2013/08/21/233628">Debian</a>
+                            など一部の環境では使用できない可能性がある</li></ul>
+                    <p>このモジュール内の <a href="../DF/Peach_DF_JsonCodec.html">JsonCodec</a>
+                        クラスを使用することで, 以上の問題点を気にすることなく PHP 5.1.1 以上のすべての環境で JSON の入出力機能が実現できます.
+                        さらに JsonCodec では PHP 5.3.0 から 5.6.6 までに導入された以下のオプションすべてと同等の機能が使用できます.</p>
+                    <ul><li>JSON_HEX_TAG</li>
+                        <li>JSON_HEX_AMP</li>
+                        <li>JSON_HEX_APOS</li>
+                        <li>JSON_HEX_QUOT</li>
+                        <li>JSON_FORCE_OBJECT</li>
+                        <li>JSON_NUMERIC_CHECK</li>
+                        <li>JSON_BIGINT_AS_STRING</li>
+                        <li>JSON_PRETTY_PRINT</li>
+                        <li>JSON_UNESCAPED_SLASHES</li>
+                        <li>JSON_UNESCAPED_UNICODE</li>
+                        <li>JSON_PARTIAL_OUTPUT_ON_ERROR</li>
+                        <li>JSON_PRESERVE_ZERO_FRACTION</li></ul></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Next: <a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Thu, 24 Dec 2015 19:18:29 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DF.html">DF</a></li>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a>
+                <ul>
+                    <li><a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+                    <li><a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+                    <li><a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></li>
+            <li><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></li>
+            <li><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></li>
+            <li><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></li>
+            <li><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DF/_Peach---DF---Base64Codec.php.html">Base64Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Codec.php.html">Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---CodecChain.php.html">CodecChain.php</a></li>
+            <li><a href="../DF/_Peach---DF---JsonCodec.php.html">JsonCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---SerializationCodec.php.html">SerializationCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Utf8Codec.php.html">Utf8Codec.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

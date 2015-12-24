@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_DF_JsonCodec</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DF</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DF.html">class tree: DF</a></li>
+            <li><a href="../elementindex_DF.html">index: DF</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_DF_JsonCodec</h1>
+        <p id="src_location">定義: <code>/Peach/DF/JsonCodec.php</code></p>
+        <div id="description">
+            <p>JSON 形式の文字列を扱う Codec です.</p>
+            <p>このクラスは <a href="http://tools.ietf.org/html/rfc7159">RFC 7159</a>  の仕様に基いて JSON のデコード (JSON を値に変換) とエンコード (値を JSON に変換)  を行います.</p><p>RFC 7159 によると JSON 文字列のエンコーディングは UTF-8, UTF-16, UTF-32  のいずれかであると定義されていますが, この実装は UTF-8 でエンコーディングされていることを前提とします.  UTF-8 以外の文字列をデコードした場合はエラーとなります.</p>
+        </div>
+        <section class="meta tags">
+            <h1>すべての実装されたインタフェース</h1>
+            <ul>
+                <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_consts">クラス定数</a></h1>
+            <ul>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constBIGINT_AS_STRING">BIGINT_AS_STRING</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constFORCE_OBJECT">FORCE_OBJECT</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constHEX_AMP">HEX_AMP</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constHEX_APOS">HEX_APOS</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constHEX_QUOT">HEX_QUOT</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constHEX_TAG">HEX_TAG</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constNUMERIC_CHECK">NUMERIC_CHECK</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constOBJECT_AS_ARRAY">OBJECT_AS_ARRAY</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constPRESERVE_ZERO_FRACTION">PRESERVE_ZERO_FRACTION</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constPRETTY_PRINT">PRETTY_PRINT</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constUNESCAPED_SLASHES">UNESCAPED_SLASHES</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#constUNESCAPED_UNICODE">UNESCAPED_UNICODE</a></li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#method__construct">__construct</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#methoddecode">decode</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#methodencode">encode</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#methodformatArrayValue">formatArrayValue</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#methodformatObjectValue">formatObjectValue</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#methodgetDecodeOption">getDecodeOption</a></li>
+                <li><a href="../DF/Peach_DF_JsonCodec.html#methodgetEncodeOption">getEncodeOption</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_consts">
+            <h1>クラス定数 詳細</h1>
+            <section class="item" id="constBIGINT_AS_STRING">
+                <h1><b>BIGINT_AS_STRING</b> = <span class="value">&#x20;2</span></h1>
+                <p class="linenumber">line 141</p>
+                <div class="docblock">
+                    <p>定数 JSON_BIGINT_AS_STRING に相当するオプションです.</p>
+                    <p>巨大整数をデコードする際に, int の範囲に収まらない値を文字列に変換します.  (デフォルトでは float 型となります)</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constFORCE_OBJECT">
+                <h1><b>FORCE_OBJECT</b> = <span class="value">&#x20;16</span></h1>
+                <p class="linenumber">line 81</p>
+                <div class="docblock">
+                    <p>定数 JSON_FORCE_OBJECT に相当するオプションです.</p>
+                    <p>通常は array 形式でエンコードされる配列を object 形式でエンコードします.  具体的には以下の配列の出力に影響します.</p><ul><li>空の配列</li><li>添字が 0 から始まる整数の連続 (0, 1, 2, ...) となっている配列</li></ul>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constHEX_AMP">
+                <h1><b>HEX_AMP</b> = <span class="value">&#x20;2</span></h1>
+                <p class="linenumber">line 53</p>
+                <div class="docblock">
+                    <p>定数 JSON_HEX_AMP に相当するオプションです.</p>
+                    <p>文字 &quot;&amp;&quot; を &quot;\u0026&quot; にエンコードします.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constHEX_APOS">
+                <h1><b>HEX_APOS</b> = <span class="value">&#x20;4</span></h1>
+                <p class="linenumber">line 61</p>
+                <div class="docblock">
+                    <p>定数 JSON_HEX_APOS に相当するオプションです.</p>
+                    <p>文字 &quot;'&quot; を &quot;\u0027&quot; にエンコードします.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constHEX_QUOT">
+                <h1><b>HEX_QUOT</b> = <span class="value">&#x20;8</span></h1>
+                <p class="linenumber">line 69</p>
+                <div class="docblock">
+                    <p>定数 JSON_HEX_QUOT に相当するオプションです.</p>
+                    <p>文字 '&quot;' を &quot;\u0022&quot; にエンコードします.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constHEX_TAG">
+                <h1><b>HEX_TAG</b> = <span class="value">&#x20;1</span></h1>
+                <p class="linenumber">line 45</p>
+                <div class="docblock">
+                    <p>定数 JSON_HEX_TAG に相当するオプションです.</p>
+                    <p>文字 %x3c (LESS-THAN SIGN) および %x3e (GREATER-THAN SIGN)  をそれぞれ &quot;\u003C&quot; および &quot;\u003E&quot; にエンコードします</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constNUMERIC_CHECK">
+                <h1><b>NUMERIC_CHECK</b> = <span class="value">&#x20;32</span></h1>
+                <p class="linenumber">line 87</p>
+                <div class="docblock">
+                    <p>定数 JSON_NUMERIC_CHECK に相当するオプションです.</p>
+                    <p>数値表現の文字列を数値としてエンコードします.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constOBJECT_AS_ARRAY">
+                <h1><b>OBJECT_AS_ARRAY</b> = <span class="value">&#x20;1</span></h1>
+                <p class="linenumber">line 132</p>
+                <div class="docblock">
+                    <p><a href="http://php.net/manual/function.json-decode.php">json_decode()</a>  の第 2 引数に相当する, このクラス独自のオプションです.</p>
+                    <p>このオプションが ON の場合, object 形式の値をデコードする際に配列に変換します.  (デフォルトでは stdClass オブジェクトとなります)</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constPRESERVE_ZERO_FRACTION">
+                <h1><b>PRESERVE_ZERO_FRACTION</b> = <span class="value">&#x20;1024</span></h1>
+                <p class="linenumber">line 122</p>
+                <div class="docblock">
+                    <p>定数 JSON_PRESERVE_ZERO_FRACTION に相当するオプションです.</p>
+                    <p>float 型の値を常に float 値としてエンコードします.  このオプションが OFF の場合, 小数部が 0 の数値 (2.0 など) は  整数としてエンコードされます.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constPRETTY_PRINT">
+                <h1><b>PRETTY_PRINT</b> = <span class="value">&#x20;128</span></h1>
+                <p class="linenumber">line 104</p>
+                <div class="docblock">
+                    <p>定数 JSON_PRETTY_PRINT に相当するオプションです.</p>
+                    <p>object, array 形式の書式でエンコードする際に,  半角スペース 4 個でインデントして整形します.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constUNESCAPED_SLASHES">
+                <h1><b>UNESCAPED_SLASHES</b> = <span class="value">&#x20;64</span></h1>
+                <p class="linenumber">line 95</p>
+                <div class="docblock">
+                    <p>定数 JSON_UNESCAPED_SLASHES に相当するオプションです.</p>
+                    <p>エンコードの際に &quot;/&quot; をエスケープしないようにします.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="constUNESCAPED_UNICODE">
+                <h1><b>UNESCAPED_UNICODE</b> = <span class="value">&#x20;256</span></h1>
+                <p class="linenumber">line 112</p>
+                <div class="docblock">
+                    <p>定数 JSON_UNESCAPED_UNICODE に相当するオプションです.</p>
+                    <p>エンコードの際にマルチバイト文字を UTF-8 文字として表現します.</p>
+                </div>
+            
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="method__construct">
+                <h1>constructor <b>__construct</b></h1>
+                <p class="linenumber">line 175</p>
+                <div class="signature">
+                    <code>Peach_DF_JsonCodec __construct([array|int $encodeOptions = null], [array|int $decodeOptions = null])</code>
+                </div>
+                <div class="docblock">
+                    <p>新しい JsonCodec を構築します.</p>
+                    <p>引数に encode() および decode() の出力のカスタマイズオプションを指定することが出来ます.  引数は配列または整数を指定することが出来ます.</p><ul><li>配列の場合: キーにオプション定数, 値に true または false を指定してください.</li><li>整数の場合: 各オプションのビットマスクを指定してください. 例えば Peach_DF_JsonCodec::HEX_TAG | Peach_DF_JsonCodec::HEX_AMP のような形式となります.</li></ul>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">array|int&nbsp;&nbsp;</td>
+                            <td><b>$encodeOptions</b>&nbsp;&nbsp;</td>
+                            <td>encode() のカスタマイズオプション</td>
+                        </tr>
+                        <tr>
+                            <td class="type">array|int&nbsp;&nbsp;</td>
+                            <td><b>$decodeOptions</b>&nbsp;&nbsp;</td>
+                            <td>decode() のカスタマイズオプション</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methoddecode">
+                <h1><b>decode</b></h1>
+                <p class="linenumber">line 253</p>
+                <div class="signature">
+                    <code>mixed decode(string $text)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された JSON 文字列を値に変換します.</p>
+                    <p>引数が空白文字列 (または null, false) の場合は null を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 変換結果</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$text</b>&nbsp;&nbsp;</td>
+                            <td>変換対象の JSON 文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DF/Peach_DF_Codec.html#methoddecode">Peach_DF_Codec::decode()</a></dt>
+                            <dd>指定された文字列を複合し, 別のデータ形式に変換します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodencode">
+                <h1><b>encode</b></h1>
+                <p class="linenumber">line 274</p>
+                <div class="signature">
+                    <code>string encode(mixed $var)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された値を JSON 文字列に変換します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : JSON 文字列</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">mixed&nbsp;&nbsp;</td>
+                            <td><b>$var</b>&nbsp;&nbsp;</td>
+                            <td>変換対象の値</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DF/Peach_DF_Codec.html#methodencode">Peach_DF_Codec::encode()</a></dt>
+                            <dd>指定された値を符号化し, 変換結果の文字列を返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformatArrayValue">
+                <h1><b>formatArrayValue</b></h1>
+                <p class="linenumber">line 453</p>
+                <div class="signature">
+                    <code>void formatArrayValue( $value)</code>
+                </div>
+                <div class="docblock">
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">&nbsp;&nbsp;</td>
+                            <td><b>$value</b>&nbsp;&nbsp;</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodformatObjectValue">
+                <h1><b>formatObjectValue</b></h1>
+                <p class="linenumber">line 480</p>
+                <div class="signature">
+                    <code>void formatObjectValue( $key,  $value)</code>
+                </div>
+                <div class="docblock">
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">&nbsp;&nbsp;</td>
+                            <td><b>$key</b>&nbsp;&nbsp;</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="type">&nbsp;&nbsp;</td>
+                            <td><b>$value</b>&nbsp;&nbsp;</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodgetDecodeOption">
+                <h1><b>getDecodeOption</b></h1>
+                <p class="linenumber">line 240</p>
+                <div class="signature">
+                    <code>bool getDecodeOption(int $code)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたデコード用オプションが ON かどうかを調べます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 指定されたオプションが ON の場合は true, それ以外は false</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">int&nbsp;&nbsp;</td>
+                            <td><b>$code</b>&nbsp;&nbsp;</td>
+                            <td>オプション (定義されている定数)</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodgetEncodeOption">
+                <h1><b>getEncodeOption</b></h1>
+                <p class="linenumber">line 229</p>
+                <div class="signature">
+                    <code>bool getEncodeOption(int $code)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定されたエンコード用オプションが ON かどうかを調べます.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : 指定されたオプションが ON の場合は true, それ以外は false</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">int&nbsp;&nbsp;</td>
+                            <td><b>$code</b>&nbsp;&nbsp;</td>
+                            <td>オプション (定義されている定数)</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Thu, 24 Dec 2015 19:18:40 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DF.html">DF</a></li>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a>
+                <ul>
+                    <li><a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+                    <li><a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+                    <li><a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></li>
+            <li><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></li>
+            <li><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></li>
+            <li><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></li>
+            <li><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DF/_Peach---DF---Base64Codec.php.html">Base64Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Codec.php.html">Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---CodecChain.php.html">CodecChain.php</a></li>
+            <li><a href="../DF/_Peach---DF---JsonCodec.php.html">JsonCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---SerializationCodec.php.html">SerializationCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Utf8Codec.php.html">Utf8Codec.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>複数の Codec を連結させる</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DF</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DF.html">class tree: DF</a></li>
+            <li><a href="../elementindex_DF.html">index: DF</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>複数の Codec を連結させる</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../DF/tutorial_DF.chain.pkg.html#DF.chain.about">CodecChain の概要</a></li>
+                <li><a href="../DF/tutorial_DF.chain.pkg.html#DF.chain.example">CodecChain の適用例</a></li>
+                <li><a href="../DF/tutorial_DF.chain.pkg.html#DF.chain.prepend_append">さらに別の Codec を追加で連結させる</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="DF.chain.about"><h1>CodecChain の概要</h1><p>例えばとある値を JSON に変換した後それを Base64 エンコードするといった具合に,
+                    複数のエンコード処理を連続して施す場合に役立つのが
+                    <a href="../DF/Peach_DF_CodecChain.html">CodecChain</a> というクラスです.
+                    CodecChain を利用することで, 複数の Codec を連結させて 1 つの Codec として扱うことができます.</p></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DF.chain.example"><h1>CodecChain の適用例</h1><p>冒頭にあげたような JSON 化と Base64 エンコードを組み合わせた CodecChain を例として作成します.
+                    この Codec は以下のような挙動を行います.</p>
+                <ul><li>encode: 任意の値を JSON エンコードし, その結果を Base64 でエンコードした結果を返す</li>
+                    <li>decode: 与えられた Base64 文字列をデコードし, その結果を JSON としてデコードする</li></ul>
+                <p>これを実現するコードは以下の通りです.</p>
+                <p>CodecChain クラスのコンストラクタには「エンコードする順番」通りに
+                    Codec オブジェクトを指定します.
+                    今回の場合は
+                    第 1 引数に <a href="../DF/Peach_DF_JsonCodec.html">JsonCodec</a>,
+                    第 2 引数に <a href="../DF/Peach_DF_Base64Codec.html">Base64Codec</a> オブジェクトとなります.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-comm">//&nbsp;$jsonCodec:&nbsp;任意の値と&nbsp;JSON&nbsp;の相互変換を行う</span></div></li>
+        <li><div class="src-line"><span class="src-var">$encodeOptions&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRETTY_PRINT&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">PRESERVE_ZERO_FRACTION&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">UNESCAPED_UNICODE&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$decodeOptions&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">OBJECT_AS_ARRAY&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">::</span><span class="src-id">BIGINT_AS_STRING&nbsp;</span>=&gt;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$jsonCodec&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></span><span class="src-sym">(</span><span class="src-var">$encodeOptions</span><span class="src-sym">,&nbsp;</span><span class="src-var">$decodeOptions</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;$base64Codec:&nbsp;Json&nbsp;と&nbsp;Base64&nbsp;の相互変換を行う</span></div></li>
+        <li><div class="src-line"><span class="src-var">$base64Codec&nbsp;</span>=&nbsp;<span class="src-id"><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></span><span class="src-sym">::</span><a href="../DF/Peach_DF_Base64Codec.html#methodgetInstance">getInstance</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;任意の値を,&nbsp;JSON&nbsp;を経由して&nbsp;Base64&nbsp;に変換する&nbsp;(またはその逆を行う)&nbsp;Codec</span></div></li>
+        <li><div class="src-line"><span class="src-var">$chain&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></span><span class="src-sym">(</span><span class="src-var">$jsonCodec</span><span class="src-sym">,&nbsp;</span><span class="src-var">$base64Codec</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-var">$data&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;foo&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">2.0</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;bar&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-num">3.14</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">&quot;baz&quot;&nbsp;</span>=&gt;&nbsp;<span class="src-str">&quot;テスト&quot;</span><span class="src-sym">,</span></div></li>
+        <li><div class="src-line"><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;配列を,&nbsp;JSON&nbsp;を経由して&nbsp;Base64&nbsp;に変換</span></div></li>
+        <li><div class="src-line"><span class="src-var">$encoded&nbsp;</span>=&nbsp;<span class="src-var">$chain</span><span class="src-sym">-&gt;</span><span class="src-id">encode</span><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-str">&quot;encode:&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-id">PHP_EOL</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$encoded</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">//&nbsp;Base64&nbsp;文字列を,&nbsp;JSON&nbsp;を経由して配列に変換</span></div></li>
+        <li><div class="src-line">echo&nbsp;<span class="src-str">&quot;decode:&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-id">PHP_EOL</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$decoded&nbsp;</span>=&nbsp;<span class="src-var">$chain</span><span class="src-sym">-&gt;</span><span class="src-id">decode</span><span class="src-sym">(</span><span class="src-var">$encoded</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$decoded</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        </ol></div>
+                <p>このコードは以下の結果を出力します.</p>
+                <div class="src-code"><pre>
+        encode:
+        string(84) &quot;ew0KICAgICJmb28iOiAyLjAsDQogICAgImJhciI6IDMuMTQsDQogICAgImJheiI6ICLjg4bjgrnjg4giDQp9&quot;
+        decode:
+        array(3) {
+          'foo' =&gt;
+          double(2)
+          'bar' =&gt;
+          double(3.14)
+          'baz' =&gt;
+          string(9) &quot;テスト&quot;
+        }
+                    </pre></div></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DF.chain.prepend_append"><h1>さらに別の Codec を追加で連結させる</h1><p>サンプルコードでは 2 種類の Codec を連結させた例を記載しましたが,
+                    さらに別の Codec を前後に連結させることもできます.
+                    そのためのメソッドが
+                    <a href="../DF/Peach_DF_CodecChain.html#methodappend">append()</a>
+                    および
+                    <a href="../DF/Peach_DF_CodecChain.html#methodprepend">prepend()</a>
+                    です.</p>
+                <p>以下に append() および prepend() を使用したサンプルコードを挙げます.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$chain1&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">CodecChain</span><span class="src-sym">(</span><span class="src-var">$c1</span><span class="src-sym">,&nbsp;</span><span class="src-var">$c2</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$chain2&nbsp;</span>=&nbsp;<span class="src-var">$chain1</span><span class="src-sym">-&gt;</span><span class="src-id">prepend</span><span class="src-sym">(</span><span class="src-var">$c0</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;$c0,&nbsp;$c1,&nbsp;$c2&nbsp;の順に連結された&nbsp;CodecChain</span></div></li>
+        <li><div class="src-line"><span class="src-var">$chain3&nbsp;</span>=&nbsp;<span class="src-var">$chain1</span><span class="src-sym">-&gt;</span><span class="src-id">append</span><span class="src-sym">(</span><span class="src-var">$c3</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="src-comm">//&nbsp;$c1,&nbsp;$c2,&nbsp;$c3&nbsp;の順に連結された&nbsp;CodecChain</span></div></li>
+        </ol></div>
+                <p>$chain2, $chain3 に対して同様の操作でさらに別の Codec を追加することも可能です.</p></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+            <li>Next: <a href="../DT/tutorial_DT.pkg.html">時間操作モジュール DT</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Thu, 24 Dec 2015 19:18:31 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DF.html">DF</a></li>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a>
+                <ul>
+                    <li><a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+                    <li><a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+                    <li><a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></li>
+            <li><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></li>
+            <li><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></li>
+            <li><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></li>
+            <li><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DF/_Peach---DF---Base64Codec.php.html">Base64Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Codec.php.html">Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---CodecChain.php.html">CodecChain.php</a></li>
+            <li><a href="../DF/_Peach---DF---JsonCodec.php.html">JsonCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---SerializationCodec.php.html">SerializationCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Utf8Codec.php.html">Utf8Codec.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

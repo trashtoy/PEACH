@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Docs For Class Peach_DF_Utf8Codec</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DF</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DF.html">class tree: DF</a></li>
+            <li><a href="../elementindex_DF.html">index: DF</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>クラス: Peach_DF_Utf8Codec</h1>
+        <p id="src_location">定義: <code>/Peach/DF/Utf8Codec.php</code></p>
+        <div id="description">
+            <p>UTF-8 で符号化された文字列を扱う Codec です.</p>
+            <p>このクラスの decode メソッドは, UTF-8 の文字列を文字単位で分解し,  各文字の Unicode 符号点をあらわす整数の配列を返します.  encode メソッドは, 整数の配列を UTF-8 の文字列に変換します.</p><p>UTF-8 のビットパターンは以下の通りです.</p><pre> 0xxxxxxx                                               (00-7f)
+             110xxxxx 10xxxxxx                                      (c0-df)(80-bf)
+             1110xxxx 10xxxxxx 10xxxxxx                             (e0-ef)(80-bf)(80-bf)
+             11110xxx 10xxxxxx 10xxxxxx 10xxxxxx                    (f0-f7)(80-bf)(80-bf)(80-bf)
+             111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx           (f8-fb)(80-bf)(80-bf)(80-bf)(80-bf)
+             1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx  (fc-fd)(80-bf)(80-bf)(80-bf)(80-bf)(80-bf)</pre><p>RFC 3629 では 5 バイト以上のシーケンスが無効とされましたが,  このクラスは RFC 2279 に基づいて 5 バイト以上のシーケンスも受理します.  なお, このクラスはサロゲートペアを考慮しません.</p><p>引用文献: <a href="http://ja.wikipedia.org/wiki/UTF-8">UTF-8 - Wikipedia</a></p><p>このクラスは将来的に状態 (メンバ変数) を持つ可能性が高いので,  敢えて Singleton パターンにしていません.</p>
+        </div>
+        <section class="meta tags">
+            <h1>すべての実装されたインタフェース</h1>
+            <ul>
+                <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+            </ul>
+        </section>
+        <section class="meta enums">
+            <h1><a href="#class_methods">メソッド</a></h1>
+            <ul>
+                <li><a href="../DF/Peach_DF_Utf8Codec.html#methoddecode">decode</a></li>
+                <li><a href="../DF/Peach_DF_Utf8Codec.html#methodencode">encode</a></li>
+            </ul>
+        </section>
+        <section class="members" id="class_methods">
+            <h1>メソッド 詳細</h1>
+            <section class="item" id="methoddecode">
+                <h1><b>decode</b></h1>
+                <p class="linenumber">line 59</p>
+                <div class="signature">
+                    <code>array decode(string $text)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された UTF-8 の文字列を Unicode 符号点の配列に変換します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : Unicode 符号点の配列</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">string&nbsp;&nbsp;</td>
+                            <td><b>$text</b>&nbsp;&nbsp;</td>
+                            <td>UTF-8 でエンコードされた文字列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DF/Peach_DF_Codec.html#methoddecode">Peach_DF_Codec::decode()</a></dt>
+                            <dd>指定された文字列を複合し, 別のデータ形式に変換します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+            <section class="item" id="methodencode">
+                <h1><b>encode</b></h1>
+                <p class="linenumber">line 90</p>
+                <div class="signature">
+                    <code>string encode(array|int $var)</code>
+                </div>
+                <div class="docblock">
+                    <p>指定された Unicode 符号点の配列を UTF-8 文字列に変換します.</p>
+                    <p>引数には Unicode 符号点をあらわす正の整数の配列を指定してください.  配列以外の値を指定した場合は, その引数 (整数でない場合はメソッド内で整数に変換されます)  を Unicode 符号点とみなし, 1 文字分の UTF-8 文字列を返します.</p>
+                </div>
+                <section class="meta tags">
+                    <h1>Tags</h1>
+                    <ul>
+                        <li>return : UTF-8 文字列</li>
+                        <li>access : public</li>
+                    </ul>
+                </section>
+            
+                <section class="meta">
+                    <h1>引数</h1>
+                    <table>
+                        <tr>
+                            <td class="type">array|int&nbsp;&nbsp;</td>
+                            <td><b>$var</b>&nbsp;&nbsp;</td>
+                            <td>Unicode 符号点の配列</td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="appendix">
+                    <section class="meta">
+                        <h1>定義</h1>
+                        <dl>
+                            <dt><a href="../DF/Peach_DF_Codec.html#methodencode">Peach_DF_Codec::encode()</a></dt>
+                            <dd>指定された値を符号化し, 変換結果の文字列を返します.</dd>
+                        </dl>
+                    </section>
+                    <div class="top"><a href="#top">Top</a></div>
+                </div>
+            </section>
+
+        </section>
+    </article>
+    <footer>
+        <p>Documentation generated on Thu, 24 Dec 2015 19:18:41 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DF.html">DF</a></li>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a>
+                <ul>
+                    <li><a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+                    <li><a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+                    <li><a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></li>
+            <li><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></li>
+            <li><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></li>
+            <li><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></li>
+            <li><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DF/_Peach---DF---Base64Codec.php.html">Base64Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Codec.php.html">Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---CodecChain.php.html">CodecChain.php</a></li>
+            <li><a href="../DF/_Peach---DF---JsonCodec.php.html">JsonCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---SerializationCodec.php.html">SerializationCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Utf8Codec.php.html">Utf8Codec.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>

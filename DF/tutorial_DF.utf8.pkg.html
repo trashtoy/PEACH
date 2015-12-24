@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>UTF-8 文字列を取り扱う</title>
+    <link rel="stylesheet" type="text/css" href="../media/tt-style.css">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../media/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="../media/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../media/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="../media/jquery.backgroundpos.min.js"></script>
+    <script type="text/javascript" src="../media/menu.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<header>
+    <h1>DF</h1>
+    <nav>
+        <h1>Navigation</h1>
+        <ul>
+            <li><a href="../classtrees_DF.html">class tree: DF</a></li>
+            <li><a href="../elementindex_DF.html">index: DF</a></li>
+            <li><a href="../elementindex.html">all elements</a></li>
+            <li><a href="../">API home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="main">
+    <article>
+        <h1>UTF-8 文字列を取り扱う</h1>
+            <div class="ref-synopsis">Author : <span class="author">trashtoy</span></div>
+            
+        <section class="meta toc">
+            <h1>Table of Contents</h1>
+            <ul>
+                <li><a href="../DF/tutorial_DF.utf8.pkg.html#DF.utf8.about">Utf8Codec の概要</a></li>
+                <li><a href="../DF/tutorial_DF.utf8.pkg.html#DF.utf8.usage">使い方およびサンプル</a></li>
+            </ul>
+        </section>
+        
+            <!-- refsect1 --><section class="tutorial" id="DF.utf8.about"><h1>Utf8Codec の概要</h1><p>UTF-8 でエンコードされた文字列を取り扱うための Codec として
+                    <a href="../DF/Peach_DF_Utf8Codec.html">Utf8Codec</a> というクラスがあります.
+                    このクラスの encode(), decode() は以下のように振る舞います.</p>
+                <ul><li>decode: UTF-8 の文字列を文字単位で分解し, Unicode 符号点の配列を生成する</li>
+                    <li>encode: Unicode 符号点の配列から UTF-8 文字列を生成する</li></ul>
+                <p>このクラスは以下のような用途で使用されることを想定しています.</p>
+                <ul><li>Unicode 符号点と UTF-8 文字列の相互変換</li>
+                    <li>正規表現だと煩雑になりそうな, マルチバイト文字を含む文字列のバリデーション</li>
+                    <li>不正なバイト列が含まれた UTF-8 文字列の正規化 (任意の文字列をデコードした後に再度エンコードすることで可能)</li></ul></section><!-- /refsect1 -->
+            <!-- refsect1 --><section class="tutorial" id="DF.utf8.usage"><h1>使い方およびサンプル</h1><p>以下に Utf8Codec の encode() および decode() のサンプルコードを掲載します.
+                    まずは decode() を使って文字列を Unicode 符号点の配列に変換します.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$codec&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$codec</span><span class="src-sym">-&gt;</span><span class="src-id">decode</span><span class="src-sym">(</span><span class="src-str">&quot;Test&nbsp;テスト&quot;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$result</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">array(8)&nbsp;{</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[0]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(84)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[1]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(101)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[2]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(115)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[3]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(116)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[4]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(32)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[5]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(12486)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[6]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(12473)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;[7]=&gt;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;&nbsp;int(12488)</span></div></li>
+        <li><div class="src-line"><span class="src-comm">}</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div>
+                <p>次に encode() を使って Unicode 符号点の配列から文字列を生成します.
+                    以下のサンプルコードではひらがなをリストアップします.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$codec&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$source&nbsp;</span>=&nbsp;<a href="http://www.php.net/range">range</a><span class="src-sym">(</span><span class="src-num">0x3041</span><span class="src-sym">,&nbsp;</span><span class="src-num">0x3096</span><span class="src-sym">)</span><span class="src-sym">;&nbsp;</span><span class="src-comm">//&nbsp;&quot;ぁ&quot;&nbsp;から&nbsp;&quot;ゖ&quot;&nbsp;までの&nbsp;Unicode&nbsp;符号点</span></div></li>
+        <li><div class="src-line"><span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$codec</span><span class="src-sym">-&gt;</span><span class="src-id">encode</span><span class="src-sym">(</span><span class="src-var">$source</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$result</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">string(258)&nbsp;&quot;ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをんゔゕゖ&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div>
+                <p>encode() の引数には, 配列だけでなく整数を指定することも可能です.
+                    整数の場合は, 引数の Unicode 符号点を持つ 1 文字分の UTF-8 文字列を生成します.</p>
+                <div class="src-code"><ol class="src"><li><div class="src-line"><span class="src-var">$codec&nbsp;&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><span class="src-var">$result&nbsp;</span>=&nbsp;<span class="src-var">$codec</span><span class="src-sym">-&gt;</span><span class="src-id">encode</span><span class="src-sym">(</span><span class="src-num">0x3042</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line"><a href="http://www.php.net/var_dump">var_dump</a><span class="src-sym">(</span><span class="src-var">$result</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+        <li><div class="src-line">&nbsp;</div></li>
+        <li><div class="src-line"><span class="src-comm">/*</span></div></li>
+        <li><div class="src-line"><span class="src-comm">output:</span></div></li>
+        <li><div class="src-line"><span class="src-comm">string(3)&nbsp;&quot;あ&quot;</span></div></li>
+        <li><div class="src-line"><span class="src-comm">&nbsp;*/</span></div></li>
+        </ol></div></section><!-- /refsect1 -->
+        <ul class="links">
+            <li>Prev: <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a></li>
+            <li>Next: <a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+        </ul>
+    </article>
+    <footer>
+        <p>Documentation generated on Thu, 24 Dec 2015 19:18:30 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.3</a></p>
+    </footer>
+</div>
+<nav id="menu">
+    <h1>Menu</h1>
+    <section>
+        <h1>パッケージ</h1>
+        <ul>
+            <li><a href="../li_DF.html">DF</a></li>
+            <li><a href="../li_DT.html">DT</a></li>
+            <li><a href="../li_Markup.html">Markup</a></li>
+            <li><a href="../li_Util.html">Util</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>チュートリアル/マニュアル</h1>
+        <h2>Package-level</h2>
+        <ul>
+            <li>
+                <a href="../DF/tutorial_DF.pkg.html">データ変換モジュール DF</a>
+                <ul>
+                    <li><a href="../DF/tutorial_DF.utf8.pkg.html">UTF-8 文字列を取り扱う</a></li>
+                    <li><a href="../DF/tutorial_DF.json.pkg.html">JSON の入出力</a></li>
+                    <li><a href="../DF/tutorial_DF.chain.pkg.html">複数の Codec を連結させる</a></li>
+            
+                </ul>
+            </li>
+
+        </ul>
+    </section>
+    <section>
+        <h1>インタフェース</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Codec.html">Peach_DF_Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>クラス</h1>
+        <ul>
+            <li><a href="../DF/Peach_DF_Base64Codec.html">Peach_DF_Base64Codec</a></li>
+            <li><a href="../DF/Peach_DF_CodecChain.html">Peach_DF_CodecChain</a></li>
+            <li><a href="../DF/Peach_DF_JsonCodec.html">Peach_DF_JsonCodec</a></li>
+            <li><a href="../DF/Peach_DF_SerializationCodec.html">Peach_DF_SerializationCodec</a></li>
+            <li><a href="../DF/Peach_DF_Utf8Codec.html">Peach_DF_Utf8Codec</a></li>
+         </ul>
+    </section>
+    <section>
+        <h1>ファイル</h1>
+        <ul>
+            <li><a href="../DF/_Peach---DF---Base64Codec.php.html">Base64Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Codec.php.html">Codec.php</a></li>
+            <li><a href="../DF/_Peach---DF---CodecChain.php.html">CodecChain.php</a></li>
+            <li><a href="../DF/_Peach---DF---JsonCodec.php.html">JsonCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---SerializationCodec.php.html">SerializationCodec.php</a></li>
+            <li><a href="../DF/_Peach---DF---Utf8Codec.php.html">Utf8Codec.php</a></li>
+        </ul>
+    </section>
+    <div id="todolist">
+        <p><a href="../todolist.html">Todo List</a></p>
+    </div>
+</nav>
+</div>
+<script type="text/javascript">
+    var gaJsHost = (("https:" === document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-51283850-4");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
+</body>
+</html>
