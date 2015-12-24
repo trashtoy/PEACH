@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<refentry id="{@id DF.chain}">
+    <refnamediv>
+        <refname>複数の Codec を連結させる</refname>
+    </refnamediv>
+    <refsynopsisdiv>
+        Author : <author>trashtoy</author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id DF.chain.about}">
+        <title>CodecChain の概要</title>
+        <para>
+            例えばとある値を JSON に変換した後それを Base64 エンコードするといった具合に,
+            複数のエンコード処理を連続して施す場合に役立つのが
+            {@link Peach_DF_CodecChain CodecChain} というクラスです.
+            CodecChain を利用することで, 複数の Codec を連結させて 1 つの Codec として扱うことができます.
+        </para>
+    </refsect1>
+    <refsect1 id="{@id DF.chain.example}">
+        <title>CodecChain の適用例</title>
+        <para>
+            冒頭にあげたような JSON 化と Base64 エンコードを組み合わせた CodecChain を例として作成します.
+            この Codec は以下のような挙動を行います.
+        </para>
+        <itemizedlist>
+            <listitem>encode: 任意の値を JSON エンコードし, その結果を Base64 でエンコードした結果を返す</listitem>
+            <listitem>decode: 与えられた Base64 文字列をデコードし, その結果を JSON としてデコードする</listitem>
+        </itemizedlist>
+        <para>これを実現するコードは以下の通りです.</para>
+        <para>
+            CodecChain クラスのコンストラクタには「エンコードする順番」通りに
+            Codec オブジェクトを指定します.
+            今回の場合は
+            第 1 引数に {@link Peach_DF_JsonCodec JsonCodec},
+            第 2 引数に {@link Peach_DF_Base64Codec Base64Codec} オブジェクトとなります.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+// $jsonCodec: 任意の値と JSON の相互変換を行う
+$encodeOptions = array(
+    Peach_DF_JsonCodec::PRETTY_PRINT => true,
+    Peach_DF_JsonCodec::PRESERVE_ZERO_FRACTION => true,
+    Peach_DF_JsonCodec::UNESCAPED_UNICODE => true,
+);
+$decodeOptions = array(
+    Peach_DF_JsonCodec::OBJECT_AS_ARRAY => true,
+    Peach_DF_JsonCodec::BIGINT_AS_STRING => true,
+);
+$jsonCodec = new Peach_DF_JsonCodec($encodeOptions, $decodeOptions);
+
+// $base64Codec: Json と Base64 の相互変換を行う
+$base64Codec = Peach_DF_Base64Codec::getInstance();
+
+// 任意の値を, JSON を経由して Base64 に変換する (またはその逆を行う) Codec
+$chain = new Peach_DF_CodecChain($jsonCodec, $base64Codec);
+
+$data = array(
+    "foo" => 2.0,
+    "bar" => 3.14,
+    "baz" => "テスト",
+);
+
+// 配列を, JSON を経由して Base64 に変換
+$encoded = $chain->encode($data);
+echo "encode:", PHP_EOL;
+var_dump($encoded);
+
+// Base64 文字列を, JSON を経由して配列に変換
+echo "decode:", PHP_EOL;
+$decoded = $chain->decode($encoded);
+var_dump($decoded);
+            ]]>
+        </programlisting>
+        <para>このコードは以下の結果を出力します.</para>
+        <programlisting>
+            <![CDATA[
+encode:
+string(84) "ew0KICAgICJmb28iOiAyLjAsDQogICAgImJhciI6IDMuMTQsDQogICAgImJheiI6ICLjg4bjgrnjg4giDQp9"
+decode:
+array(3) {
+  'foo' =>
+  double(2)
+  'bar' =>
+  double(3.14)
+  'baz' =>
+  string(9) "テスト"
+}
+            ]]>
+        </programlisting>
+    </refsect1>
+    <refsect1 id="{@id DF.chain.prepend_append}">
+        <title>さらに別の Codec を追加で連結させる</title>
+        <para>
+            サンプルコードでは 2 種類の Codec を連結させた例を記載しましたが,
+            さらに別の Codec を前後に連結させることもできます.
+            そのためのメソッドが
+            {@link Peach_DF_CodecChain::append() append()}
+            および
+            {@link Peach_DF_CodecChain::prepend() prepend()}
+            です.
+        </para>
+        <para>
+            以下に append() および prepend() を使用したサンプルコードを挙げます.
+        </para>
+        <programlisting role="php">
+            <![CDATA[
+$chain1 = new CodecChain($c1, $c2);
+$chain2 = $chain1->prepend($c0);     // $c0, $c1, $c2 の順に連結された CodecChain
+$chain3 = $chain1->append($c3);      // $c1, $c2, $c3 の順に連結された CodecChain
+            ]]>
+        </programlisting>
+        <para>
+            $chain2, $chain3 に対して同様の操作でさらに別の Codec を追加することも可能です.
+        </para>
+    </refsect1>
+</refentry>

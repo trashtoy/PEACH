@@ -1,0 +1,16 @@
+{
+    "first" : {
+        "test01" : 0,
+        "test02" : 100,
+        "test03" : -50
+    },
+    "second" : [ 1.0, -1.5, 12.5e-7 ],
+    "third" : "hogehoge",
+    "fourth" : {
+        "test04" : {
+            "true" : true,
+            "false" : false,
+            "null" : null
+        }
+    }
+}
