@@ -46,17 +46,16 @@ class Peach_DT_Datetime extends Peach_DT_Date
     /**
      * 現在時刻の Peach_DT_Datetime オブジェクトを返します.
      * 
-     * @return Peach_DT_Datetime
+     * @param  Peach_DT_Clock $clock 現在時刻を取得するための Clock オブジェクト
+     * @return Peach_DT_Datetime     現在時刻をあらわす Datetime
      */
-    public static function now()
+    public static function now(Peach_DT_Clock $clock = null)
     {
-        $time  = time();
-        $year  = date("Y", $time);
-        $month = date("n", $time);
-        $date  = date("d", $time);
-        $hour  = date("H", $time);
-        $min   = date("i", $time);
-        return new self($year, $month, $date, $hour, $min);
+        if ($clock === null) {
+            return self::now(Peach_DT_DefaultClock::getInstance());
+        }
+        
+        return $clock->getTimestamp()->toDatetime();
     }
     
     /**
