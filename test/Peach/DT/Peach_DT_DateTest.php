@@ -7,11 +7,18 @@ require_once(__DIR__ . "/Peach_DT_AbstractTimeTest.php");
 class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
 {
     /**
+     * @var string
+     */
+    private $defaultTZ;
+    
+    /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp()
     {
+        $this->defaultTZ = date_default_timezone_get();
+        date_default_timezone_set("Asia/Tokyo");
     }
     
     /**
@@ -20,6 +27,7 @@ class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
      */
     protected function tearDown()
     {
+        date_default_timezone_set($this->defaultTZ);
     }
     
     /**
@@ -36,6 +44,21 @@ class Peach_DT_DateTest extends Peach_DT_AbstractTimeTest
         $this->assertSame(intval(date("Y", $time)), $d->get("year"));
         $this->assertSame(intval(date("n", $time)), $d->get("month"));
         $this->assertSame(intval(date("j", $time)), $d->get("date"));
+    }
+    
+    /**
+     * 任意の Clock オブジェクトを引数に指定して now() を実行した場合,
+     * その Clock があらわす日付の Date オブジェクトを返すことを確認します.
+     * 
+     * @covers Peach_DT_Date::now
+     */
+    public function testNowByClock()
+    {
+        $clock = new Peach_DT_FixedClock(1234567890);
+        $d     = Peach_DT_Date::now($clock);
+        $this->assertSame(2009, $d->get("year"));
+        $this->assertSame(2,    $d->get("month"));
+        $this->assertSame(14,   $d->get("date"));
     }
     
     /**
